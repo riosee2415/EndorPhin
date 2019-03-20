@@ -5,6 +5,34 @@
 <configuration>
 <!--     <properties resource="kr/or/ddit/config/db/db.properties" ></properties> -->
     <typeAliases>
+    	<typeAlias  alias="attitude_recordVo" type="kr.or.ddit.Attitude.model.Attitude_recordVo"/>
+    	<typeAlias  alias="attitudeVo" type="kr.or.ddit.Attitude.model.AttitudeVo"/>
+    	<typeAlias  alias="account_companyVo" type="kr.or.ddit.bank.model.Account_companyVo"/>
+    	<typeAlias  alias="account_employeeVo" type="kr.or.ddit.bank.model.Account_employeeVo"/>
+    	<typeAlias  alias="bankVo" type="kr.or.ddit.bank.model.BankVo"/>
+    	<typeAlias  alias="depositVo" type="kr.or.ddit.bank.model.DepositVo"/>
+    	<typeAlias  alias="attach_boardVo" type="kr.or.ddit.board.model.Attach_boardVo"/>
+    	<typeAlias  alias="board_detailVo" type="kr.or.ddit.board.model.Board_detailVo"/>
+    	<typeAlias  alias="board_typeVo" type="kr.or.ddit.board.model.Board_TypeVo"/>
+    	<typeAlias  alias="commentsVo" type="kr.or.ddit.board.model.CommentsVo"/>
+    	<typeAlias  alias="cardsVo" type="kr.or.ddit.company.model.CardsVo"/>
+    	<typeAlias  alias="companyVo" type="kr.or.ddit.company.model.CompanyVo"/>
+    	<typeAlias  alias="deptVo" type="kr.or.ddit.company.model.DeptVo"/>
+    	<typeAlias  alias="document_refVo" type="kr.or.ddit.document.model.Document_refVo"/>
+    	<typeAlias  alias="documentVo" type="kr.or.ddit.document.model.DocumentVo"/>
+    	<typeAlias  alias="filesVo" type="kr.or.ddit.document.model.FilesVo"/>
+    	<typeAlias  alias="annualsalaryVo" type="kr.or.ddit.employee.model.AnnualsalaryVo"/>
+    	<typeAlias  alias="annualVo" type="kr.or.ddit.employee.model.AnnualVo"/>
+    	<typeAlias  alias="employee_detailVo" type="kr.or.ddit.employee.model.Employee_detailVo"/>
+    	<typeAlias  alias="employeeVo" type="kr.or.ddit.employee.model.EmployeeVo"/>
+    	<typeAlias  alias="positionVo" type="kr.or.ddit.employee.model.PositionVo"/>
+    	<typeAlias  alias="retireVo" type="kr.or.ddit.employee.model.RetireVo"/>
+    	<typeAlias  alias="imagesVo" type="kr.or.ddit.image.model.ImagesVo"/>
+    	<typeAlias  alias="clientVo" type="kr.or.ddit.order.model.ClientVo"/>
+    	<typeAlias  alias="order_detailVo" type="kr.or.ddit.order.model.Order_detailVo"/>
+    	<typeAlias  alias="ordersVo" type="kr.or.ddit.order.model.OrdersVo"/>
+    	<typeAlias  alias="shipmentVo" type="kr.or.ddit.order.model.ShipmentVo"/>
+    	<typeAlias  alias="de_product_divVo" type="kr.or.ddit.payment.model.De_product_divVo"/>
     </typeAliases>
 <!--   <environments default="development"> -->
 <!--     <environment id="development"> -->

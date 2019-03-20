@@ -3,7 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tax_cal">
-
+	<select id="selectTax_cal" parameterType="integer" resultType="">
+		select  salescode,slipdate,supplyvalue,salesstatus
+        ,deptcode,surtax,ordercode,clientcode
+		from    tax_cal
+		where   salescode = #{salescode}
+	</select>
+	<select id=""></select>
 </mapper>
 
 

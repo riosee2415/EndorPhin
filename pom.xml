@@ -14,7 +14,7 @@
 	</repositories>
   
   <properties>
-		<java.version>1.7</java.version>
+		<java.version>1.8</java.version>
 		<spring.version>4.3.22.RELEASE</spring.version>
 		<mybatis.version>3.5.0</mybatis.version>
 		<junit.version>4.12</junit.version>

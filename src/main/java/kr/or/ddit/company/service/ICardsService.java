@@ -1,14 +1,11 @@
-package kr.or.ddit.company.dao;
+package kr.or.ddit.company.service;
 
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.stereotype.Repository;
-
 import kr.or.ddit.company.model.CardsVo;
 
-@Repository("cardsDao")
-public interface ICardsDao {
+public interface ICardsService {
 	
 	List<CardsVo> getAllCards();
 	
@@ -19,5 +16,4 @@ public interface ICardsDao {
 	int updateCards(CardsVo cardVo);
 	
 	int deleteCards(Map<String, String> map);
-	
 }

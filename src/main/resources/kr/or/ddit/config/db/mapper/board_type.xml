@@ -4,7 +4,36 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board_type">
 
-
+	<!-- 전체 게시판 전체 조회 -->
+	<select id="boardAllList" resultType="board_typeVo">
+		select boardtypecode, boardtypename, usestatus
+			from board_type
+	</select>
+	
+	<!-- 게시판 생성 -->
+	<insert id="boardInsert" parameterType="board_typeVo">
+		insert into board_type
+				(boardtypecode, boardtypename, usestatus)
+				
+				values (boardtypecode_seq.nextval, #{boardtypename}
+												 , nvl(#{usestatus, jdbcType=VARCHAR }, 'y'))
+	</insert>
+	
+	<!-- 게시판 수정 -->
+	<update id="boardUpdate" parameterType="board_typeVo">
+		update board_type
+		
+		set boardtypename=#{boardtypename}, usestatus=#{usestatus}
+		
+		where boardtypecode=#{boardtypecode}
+	</update>
+	
+	<!-- 게시판 삭제 -->
+	<delete id="boardDelete" parameterType="String">
+		delete from board_type
+				where boardtypecode=#{boardtypecode}
+	</delete>
+	
 </mapper>
 
 

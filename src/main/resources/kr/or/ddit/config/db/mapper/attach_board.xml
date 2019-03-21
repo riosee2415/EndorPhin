@@ -3,7 +3,55 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="attach_board">
-
+	
+	<!-- 첨부파일에 대한 게시글 번호 조회 -->
+	<select id="attach_boardSelect" resultType="attach_boardVo" parameterType="String">
+		select attachcode,
+			   attachname,
+			   attachrealpath,
+			   attachrealname,
+			   boardno
+			   
+		from attach_board
+		
+		where boardno = #{boardno}
+		order by attachcode
+	</select>
+	
+	<!-- 첨부파일 번호 조회 -->
+	<select id="attach_boardSelectOne" resultType="attach_boardVo" parameterType="String">
+		select attachcode,
+			   attachname,
+			   attachrealpath,
+			   attachrealname,
+			   boardno
+			   
+		from attach_board
+		
+		where a.attachcode = #{attachcode}
+	</select>
+	
+	<!-- 첨부파일 등록 -->
+	<insert id="attach_boardInsert" parameterType="attach_boardVo">
+		insert into attached_file(attachcode,
+								  attachname,
+								  attachrealpath,
+								  attachrealname,
+								  boardno)
+								  
+		    values(attachcode_seq.nextval,
+		     				 #{attachname, jdbcType=NULL},
+				 			 #{attachrealname, jdbcType=NULL},
+				 			 #{attachrealpath, jdbcType=NULL},
+				 			 #{boardno})
+	</insert>
+	
+	<!-- 첨부파일 삭제 -->
+	<delete id="attach_boardDelete" parameterType="String">
+		delete from attach_board
+		
+		 where boardno = #{boardno}
+	</delete>
 
 </mapper>
 

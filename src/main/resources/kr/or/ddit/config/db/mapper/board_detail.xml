@@ -4,7 +4,80 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board_detail">
 
-
+	<!-- 게시글 전체 조회 -->
+	<select id="postAllList" resultType="board_detailVo">
+		select boardno,
+			   title,
+			   contents,
+			   postdate,
+	    	   boardtypecode,
+			   userid
+			   
+			from board_detail
+	</select>
+	
+	<!-- 특정 게시글 조회 -->
+	<select id="postSelectOne" resultType="board_detailVo" parameterType="String">
+		select boardno,
+			   title,
+			   contents,
+			   postdate,
+			   boardtypecode,
+			   userid
+			   
+		from board_detail
+		
+		where boardno = #{boardno}
+		
+	</select>
+	
+	<!-- 게시글 수 조회 -->
+	<select id="postCnt" resultType="board_detailVo" parameterType="String">
+		select count(*)
+		
+    	from board_detail
+    	
+        where boardno = #{boardno}
+	</select>
+	
+	<!-- 게시글 등록 -->
+	<insert id="postInsert" parameterType="board_detailVo">
+		insert into board_detail
+			  (boardno,
+			   title,
+			   contents,
+			   postdate,
+			   boardtypecode,
+  			   userid)
+						 
+		values(boardno_seq.nextval,
+			   title=#{title},
+			   contents=#{contents},
+			   sysdate,
+			   boardtypecode=#{boardtypecode},
+			   userid=#{userid})
+			   
+	</insert>
+	
+	<!-- 게시글 수정 -->
+	<update id="postUpdate" parameterType="board_detailVo">
+		update board_detail
+		
+		set title=#{title},
+			contents=#{contents},
+			sysdate,
+			boardtypecode=#{boardtypecode},
+			userid=#{userid}
+			
+		where boardno = #{boardno}
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="postDelete" parameterType="String">
+ 		delete from board_detail
+ 		
+ 		where boardno = #{boardno}
+ 	</delete>
 </mapper>
 
 

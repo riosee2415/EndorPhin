@@ -4,6 +4,42 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="slip_detail">
 
+
+	<!-- 전표상세 입력 -->
+	<insert id="insertSlip_detail" parameterType="slip_detailVo">
+		insert into slip_detail
+		(slipdetailno, status, price, clientcard, slipnumber, establishcode)
+		values
+		(#{slipdetailno},#{status},#{price},#{clientcard},#{slipnumber},#{establishcode})
+
+	</insert>
+
+
+	<!-- 전표상세 전체 불러오기 -->
+	<select id="getAllSlip_detail" resultType="slip_detailVo">
+		select
+		slipdetailno, status, price, clientcard, slipnumber, establishcode
+		from slip_detail
+	</select>
+
+
+	<!-- 전표상세 선택하여 가져오기 -->
+	<select id="selectSlip_detail" resultType="slip_detailVo"
+		parameterType="String">
+		select
+		slipdetailno, status, price, clientcard, slipnumber, establishcode
+		from
+		slip_detail
+		where slipdetailno = #{slipdetailno}
+	</select>
+
+
+	<!-- 전표상세 삭제 -->
+	<delete id="deleteSlip_detail" parameterType="String">
+		delete from slip_detail
+		where slipdetailno = #{slipdetailno}
+	</delete>
+
 </mapper>
 
 

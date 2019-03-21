@@ -4,6 +4,43 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sales_detail">
 
+
+	<!-- 매입매출상세 입력 -->
+	<insert id="insertSales_detail" parameterType="sales_detailVo">
+		insert into sales_detail
+		(salesdetailcode, status, price, establishcode, salescode, jukyo)
+		values
+		(#{salesdetailcode},#{status},#{price},#{establishcode},#{salescode}
+		,#{jukyo})
+
+	</insert>
+
+
+	<!-- 매입매출상세  전체 불러오기 -->
+	<select id="getAllSales_detail" resultType="sales_detailVo">
+		select
+		salesdetailcode, status, price, establishcode, salescode, jukyo
+		from sales_detail
+	</select>
+
+
+	<!-- 매입매출상세  선택하여 가져오기 -->
+	<select id="selectSales_detail" resultType="sales_detailVo"
+		parameterType="String">
+		select
+		salesdetailcode, status, price, establishcode, salescode, jukyo
+		from
+		sales_detail
+		where salesdetailcode = #{salesdetailcode}
+	</select>
+
+
+	<!-- 매입매출상세  삭제 -->
+	<delete id="deleteSales_detail" parameterType="String">
+		delete from sales_detail
+		where salesdetailcode = #{salesdetailcode}
+	</delete>
+
 </mapper>
 
 

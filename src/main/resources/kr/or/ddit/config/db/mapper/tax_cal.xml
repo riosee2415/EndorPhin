@@ -4,6 +4,44 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tax_cal">
 
+<!-- 매입매출세금계산서 입력 -->
+	<insert id="insertTax_cal" parameterType="tax_calVo">
+		insert into tax_cal
+		(salescode, slipdate, supplyvalue, salesstatus, deptcode, surtax, ordercode, clientcode)
+		values
+		(#{salescode},sysdate,#{supplyvalue},#{salesstatus}
+		 ,#{deptcode},#{surtax},#{ordercode},#{clientcode})
+
+	</insert>
+
+
+	<!-- 매입매출세금계산서 불러오기 -->
+	<select id="getAllTax_cal" resultType="tax_calVo">
+		select
+		salescode, slipdate, supplyvalue, salesstatus, deptcode, surtax, ordercode, clientcode
+		from tax_cal
+	</select>
+
+
+	<!-- 매입매출세금계산서 선택해서 가져오기 -->
+	<select id="selectTax_cal" resultType="tax_calVo"
+		parameterType="String">
+		select
+		salescode, slipdate, supplyvalue, salesstatus, deptcode, surtax, ordercode, clientcode
+		from
+		tax_cal where salescode = #{salescode}
+	</select>
+
+
+	<!-- 매입매출세금계산서 삭제 -->
+	<delete id="deleteTax_cal" parameterType="String">
+		delete from tax_cal
+		where salescode = #{salescode}
+	</delete>
+
+
+
+
 </mapper>
 
 

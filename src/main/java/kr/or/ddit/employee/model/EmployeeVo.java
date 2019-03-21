@@ -18,7 +18,14 @@ public class EmployeeVo {
 	String relate;
 	Date joinCompany;
 	Date BirthDate;
+	String password;
 	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public String getUserId() {
 		return userId;
 	}

@@ -29,7 +29,8 @@
     <!-- needed for ContextLoaderListener -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:kr/or/ddit/config/spring/application-context.xml</param-value>
+		<param-value>classpath:kr/or/ddit/config/spring/application-context.xml
+					 classpath:kr/or/ddit/config/spring/context-datasource.xml</param-value>
 	</context-param>
 
 	<!-- Bootstraps the root web application context before servlet initialization -->

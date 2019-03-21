@@ -33,6 +33,7 @@
     	<typeAlias  alias="shipmentVo" type="kr.or.ddit.order.model.ShipmentVo"/>
     	<typeAlias  alias="de_product_divVo" type="kr.or.ddit.payment.model.De_product_divVo"/>
     	<typeAlias  alias="payment_detailVo" type="kr.or.ddit.payment.model.Payment_detailVo"/>
+    	<typeAlias  alias="payment_reportVo" type="kr.or.ddit.payment.model.Payment_reportVo"/>
     	<typeAlias  alias="paymentVo" type="kr.or.ddit.payment.model.PaymentVo"/>
     	<typeAlias  alias="productListVo" type="kr.or.ddit.product.model.ProductListVo"/>
     	<typeAlias  alias="productVo" type="kr.or.ddit.product.model.ProductVo"/>

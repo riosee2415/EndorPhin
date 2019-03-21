@@ -31,7 +31,7 @@
 	</select>	
 	
 	<!--boardno으로 가져오기  -->
-	<select id="selectComments_commentno" resultType="commentsVo" parameterType="map">
+	<select id="selectComments_boardNo" resultType="commentsVo" parameterType="map">
 		select 
 			commentNo,
 			commentTitle,

@@ -15,7 +15,7 @@
 
 
 	<!-- 퇴직자  전체 불러오기 -->
-	<select id="getAllRetire" resultType="retirelVo">
+	<select id="getAllRetire" resultType="retireVo">
 		select
 		userid, retirereason, retiresortation, retiredate
 		from retire
@@ -23,7 +23,7 @@
 
 
 	<!-- 퇴직자  선택하여 가져오기 -->
-	<select id="selectRetire" resultType="retirelVo"
+	<select id="selectRetire" resultType="retireVo"
 		parameterType="String">
 		select
 		userid, retirereason, retiresortation, retiredate

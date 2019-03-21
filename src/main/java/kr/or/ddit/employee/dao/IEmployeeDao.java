@@ -1,5 +1,7 @@
 package kr.or.ddit.employee.dao;
 
-public interface IEmployeeDao {
+import kr.or.ddit.employee.model.EmployeeVo;
 
+public interface IEmployeeDao {
+	public EmployeeVo selectEmployee(String userId);
 }

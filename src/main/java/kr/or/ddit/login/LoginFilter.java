@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import kr.or.ddit.employee.model.EmployeeVo;
 
-@WebFilter("/*")
+//@WebFilter("/*")
 public class LoginFilter implements Filter{
 
 
@@ -28,18 +28,18 @@ public class LoginFilter implements Filter{
 		HttpSession session = hsr.getSession();
 		EmployeeVo employeeVo =(EmployeeVo) session.getAttribute("employeeVo");
 		
-		// 2-1. а╓╩С ╥н╠вюн ╩Себюл╦И --> chain.doFilter хёцБ
+		// 2-1. О©╫О©╫О©╫О©╫ О©╫н╠О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫л╦О©╫ --> chain.doFilter хёО©╫О©╫
 		if(employeeVo!=null)
 			chain.doFilter(request, response);
 		
-		// 2-2. ╥н╠вюн ╩Себ╟║ ╬ф╢о╤С╦И --> ╥н╠вюн х╜╦Ию╦╥н юл╣© (/login get)
+		// 2-2. О©╫н╠О©╫О©╫О©╫ О©╫О©╫О©╫б╟О©╫ О©╫ф╢о╤О©╫О©╫ --> О©╫н╠О©╫О©╫О©╫ х╜О©╫О©╫О©╫О©╫О©╫О©╫ О©╫л╣О©╫ (/login get)
 		
-		// *** ╦П╣Г фДюлаЖ©║ ╢Кгь юШ©К гь╬ъгоЁ╙??
-		// ╪╪╪гюл гй©Дгя фДюлаЖ╤Ш, гй©Д ╬Ь╢б фДюлаЖ ╠╦╨п гй©Д
-		// ╪╪╪г ╟каУюл гй©Д╬Ь╢б ©Дц╩ (╢К╢ы╪Ж╢б ╟каУюл гй©Дгт
-		// ** login фДюлаЖ х╜╦И©Дц╩(/login get) session ╟каУюл гй©Д ╬Ью╫
-		// ** login ©Дц╩ цЁ╦╝(/login post) session ╟каУюл гй©Д ╬Ью╫
-		// ** /js/*, /css/* фЗ╢У гою╖ ╦П╣Г фдюо
+		// *** О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫ь╬О©╫О©╫оЁО©╫??
+		// О©╫О©╫О©╫О©╫О©╫О©╫ О©╫й©О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫, О©╫й©О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫й©О©╫
+		// О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫й©О©╫О©╫О©╫О©╫ О©╫О©╫ц╩ (О©╫О©╫ы╪О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫й©О©╫О©╫О©╫
+		// ** login О©╫О©╫О©╫О©╫О©╫О©╫ х╜О©╫О©╫О©╫ц╩(/login get) session О©╫О©╫О©╫О©╫О©╫О©╫ О©╫й©О©╫ О©╫О©╫О©╫О©╫
+		// ** login О©╫О©╫ц╩ цЁО©╫О©╫(/login post) session О©╫О©╫О©╫О©╫О©╫О©╫ О©╫й©О©╫ О©╫О©╫О©╫О©╫
+		// ** /js/*, /css/* О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫ О©╫О©╫О©╫О©╫
 		// ex) localhost/login
 		else{
 			String uri = hsr.getRequestURI();	// /login

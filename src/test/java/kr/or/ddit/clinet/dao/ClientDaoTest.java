@@ -1,6 +1,7 @@
 package kr.or.ddit.clinet.dao;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
@@ -34,6 +35,31 @@ public class ClientDaoTest extends LogicConfig{
 		/***Then***/
 		assertEquals(1, clientList.size());
 		
+	}
+	
+	@Test
+	public void getCodeClient() {
+		/***Given***/
+
+		/***When***/
+		List<ClientVo> clientList = clientDao.getCodeClient("1");
+		logger.debug("clientList size : {}", clientList.size());
+		
+		/***Then***/
+		assertNotNull(clientList);
+	}
+	
+	
+	@Test
+	public void getNameClient() {
+		/***Given***/
+
+		/***When***/
+		List<ClientVo> clientList = clientDao.getNameClient("청");
+		logger.debug("clientList size : {}", clientList.size());
+		
+		/***Then***/
+		assertNotNull(clientList);
 	}
 
 }

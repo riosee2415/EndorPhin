@@ -12,4 +12,8 @@
         	<put-attribute name="content" value="/WEB-INF/views/hello.jsp"/>
         </definition>
         
+        <definition name="clientview" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/client/clientview.jsp"/>
+        </definition>
+        
 </tiles-definitions>

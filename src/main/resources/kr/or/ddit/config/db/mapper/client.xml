@@ -23,6 +23,61 @@
             USESTATUS
         FROM CLIENT
 	</select>
+	
+	<!-- 
+	거래처코드로 거래처 조죄하기
+	파라미터 타입 : map
+	파라미터 key : clientCode
+	 -->
+	<select id="getCodeClient" resultType="clientVo" parameterType="map">
+        SELECT
+            CLIENTCODE, 
+            CLIENTNAME, 
+            SALESNUMBER, 
+            MANAGER, 
+            TELEPHONE, 
+            FAXNUMBER, 
+            MANAGEREMAIL, 
+            BUSINESS, 
+            PLACE, 
+            RELATE, 
+            BUSINESSTYPE, 
+            BANKNAME, 
+            ACCOUNTNUMBER, 
+            USESTATUS
+        FROM CLIENT
+        WHERE CLIENTCODE = #{clientCode}
+	</select>
+	
+	
+	
+	<!-- 
+	거래처코드로 거래처 조죄하기
+	파라미터 타입 : map
+	파라미터 key : clientName
+	 -->
+	<select id="getNameClient" resultType="clientVo" parameterType="map">
+        SELECT
+            CLIENTCODE, 
+            CLIENTNAME, 
+            SALESNUMBER, 
+            MANAGER, 
+            TELEPHONE, 
+            FAXNUMBER, 
+            MANAGEREMAIL, 
+            BUSINESS, 
+            PLACE, 
+            RELATE, 
+            BUSINESSTYPE, 
+            BANKNAME, 
+            ACCOUNTNUMBER, 
+            USESTATUS
+        FROM CLIENT
+        WHERE CLIENTNAME LIKE  '%' || #{clientName} || '%'
+	</select>
+	
+	
+	
 
 </mapper>
 

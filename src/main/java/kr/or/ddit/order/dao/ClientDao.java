@@ -1,5 +1,6 @@
 package kr.or.ddit.order.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -27,6 +28,43 @@ public class ClientDao implements IClientDao{
 		List<ClientVo> clientList = sqlSessionTemplate.selectList("client.getAllClient");
 		System.out.println(clientList.size());
 		return clientList;
+	}
+
+	
+	/**
+	* Method : getCodeClient
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : ClientCode값을 기준으로 거래처를 조회한다.
+	*/
+	@Override
+	public List<ClientVo> getCodeClient(String clientCode) {
+		HashMap map = new HashMap();
+		map.put("clientCode", clientCode);
+		List<ClientVo> clinetList = sqlSessionTemplate.selectList("client.getCodeClient", map);
+		
+		return clinetList;
+	}
+
+	
+	/**
+	* Method : getCodeClient
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : ClientName값을 기준으로 거래처를 조회한다.
+	*/
+	@Override
+	public List<ClientVo> getNameClient(String clientName) {
+		HashMap map = new HashMap();
+		map.put("clientName", clientName);
+		List<ClientVo> clinetList = sqlSessionTemplate.selectList("client.getNameClient", map);
+		
+		return clinetList;
+		
 	}
 
 }

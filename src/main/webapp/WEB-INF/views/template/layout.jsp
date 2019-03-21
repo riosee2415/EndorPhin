@@ -4,6 +4,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- Custom styles for this template -->
+<link href="${cp}/css/dashboard.css"
+	rel="stylesheet">
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<%-- 순서 중요 --%>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/temporaryFile/ddmenu/ddmenu.css" rel="stylesheet" type="text/css" />
     <script src="/temporaryFile//ddmenu/ddmenu.js" type="text/javascript"></script>
@@ -16,6 +31,9 @@
 </head>
 <body>
 	<tiles:insertAttribute name="header"/>
+	<div class="col-sm-3 col-md-2 sidebar">
+		<tiles:insertAttribute name="left"/>
+	</div>
 	<tiles:insertAttribute name="content"/>
 </body>
 </html>

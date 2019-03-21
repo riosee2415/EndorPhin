@@ -4,6 +4,44 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="receive">
 
+	<!-- 창고 입출고 이력 입력 -->
+	<insert id="insertReceive" parameterType="receiveVo">
+		insert into receive
+		(receivecode, receivedate, sortation, quantity, material,
+		 warehousecode, ordercode, productcode)
+		values
+		(#{receivecode},sysdate,#{sortation},#{quantity},#{material}
+		,#{warehousecode},#{ordercode},#{productcode})
+
+	</insert>
+
+
+	<!-- 창고 입출고 이력  전체 불러오기 -->
+	<select id="getAllReceive" resultType="receiveVo">
+		select
+		receivecode, receivedate, sortation, quantity, material,
+		 warehousecode, ordercode, productcode
+		from receive
+	</select>
+
+
+	<!-- 창고 입출고 이력 선택하여 가져오기 -->
+	<select id="selectReceive" resultType="receiveVo"
+		parameterType="String">
+		select
+		receivecode, receivedate, sortation, quantity, material,
+		 warehousecode, ordercode, productcode
+		from
+		receive where receivecode = #{receivecode}
+	</select>
+
+
+	<!-- 창고 입출고 이력  삭제 -->
+	<delete id="deleteReceive" parameterType="String">
+		delete from receive
+		where receivecode = #{receivecode}
+	</delete>
+
 </mapper>
 
 

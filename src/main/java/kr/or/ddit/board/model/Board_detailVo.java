@@ -7,14 +7,14 @@ import java.util.Date;
  * @author sanghoyun
  *
  */
-public class Board_detailVo {
+public class Board_detailVo {	//게시글
 	
-	String boardNo;
-	String title;
-	String contents;
-	Date postDate;
-	String boardTypeCode;
-	String userId;
+	String boardNo;				//게시글 번호
+	String title;				//제목
+	String contents;			//내용
+	Date postDate;				//작성일시
+	String boardTypeCode;		//게시판 분류 코드
+	String userId;				//작성자
 	
 	public String getBoardNo() {
 		return boardNo;

@@ -3,6 +3,45 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="orders">
+
+	<!-- 발주서 입력 -->
+	<insert id="insertOrders" parameterType="ordersVo">
+		insert into orders
+		(ordercode, deptcode, userid, orderprice, orderlist, duedate,
+		 paymentduedate, specialnote, clientcode, status, sortation)
+		values
+		(#{ordercode},#{deptcode},#{userid},#{orderprice}
+		,#{orderlist},sysdate,sysdate,#{specialnote},#{clientcode}
+		,#{status},#{sortation})
+
+	</insert>
+
+
+	<!-- 발주서 전체 불러오기 -->
+	<select id="getAllOrders" resultType="ordersVo">
+		select
+		ordercode, deptcode, userid, orderprice, orderlist, duedate,
+		 paymentduedate, specialnote, clientcode, status, sortation
+		from orders
+	</select>
+
+
+	<!-- 발주서 선택하여 가져오기 -->
+	<select id="selectOrders" resultType="ordersVo"
+		parameterType="map">
+		select
+		ordercode, deptcode, userid, orderprice, orderlist, duedate,
+		 paymentduedate, specialnote, clientcode, status, sortation
+		from
+		orders where ordercode = #{ordercode}
+	</select>
+
+
+	<!-- 발주서  삭제 -->
+	<delete id="deleteOrders" parameterType="map">
+		delete from orders
+		where ordercode = #{ordercode}
+	</delete>
 </mapper>
 
 

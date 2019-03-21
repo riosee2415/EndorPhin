@@ -3,6 +3,52 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="payment_detail">
+
+
+		<!-- 급여/공제 상세 입력 -->
+	<insert id="insertPayment_detail" parameterType="payment_detailVo">
+		insert into payment_detail
+		(paydetailcode, deductcode, paycode, deductpay, taxstatus, bonusstatus, usestatus)
+		values
+		(#{paydetailcode},#{deductcode},#{paycode},#{deductpay}
+		,#{taxstatus},#{bonusstatus},#{usestatus})
+
+	</insert>
+
+
+	<!-- 급여/공제 상세  전체 불러오기 -->
+	<select id="getAllPayment_detail" resultType="payment_detailVo">
+		select
+		paydetailcode, deductcode, paycode, deductpay, taxstatus, bonusstatus, usestatus
+		from payment_detail
+	</select>
+
+
+	<!-- 급여/공제 상세 선택하여 가져오기 -->
+	<select id="selectPayment_detail" resultType="payment_detailVo"
+		parameterType="map">
+		select
+		paydetailcode, deductcode, paycode, deductpay, taxstatus, bonusstatus, usestatus
+		from
+		payment_detail where paydetailcode = #{paydetailcode}
+	</select>
+
+
+	<!-- 급여/공제 상세 삭제 -->
+	<delete id="deletePayment_detail" parameterType="map">
+		delete from payment_detail
+		where paydetailcode = #{paydetailcode}
+	</delete>
+
+
+
+
+
+
+
+
+
+
 </mapper>
 
 

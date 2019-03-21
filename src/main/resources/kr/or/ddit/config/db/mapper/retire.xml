@@ -4,6 +4,41 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="retire">
 
+	<!-- 퇴직자 입력 -->
+	<insert id="insertRetire" parameterType="retireVo">
+		insert into retire
+		(userid, retirereason, retiresortation, retiredate)
+		values
+		(#{userid},#{retirereason},#{retiresortation},#{establishcode},sysdate)
+
+	</insert>
+
+
+	<!-- 퇴직자  전체 불러오기 -->
+	<select id="getAllRetire" resultType="retirelVo">
+		select
+		userid, retirereason, retiresortation, retiredate
+		from retire
+	</select>
+
+
+	<!-- 퇴직자  선택하여 가져오기 -->
+	<select id="selectRetire" resultType="retirelVo"
+		parameterType="String">
+		select
+		userid, retirereason, retiresortation, retiredate
+		from
+		retire
+		where userid = #{userid}
+	</select>
+
+
+	<!-- 퇴직자  삭제 -->
+	<delete id="deleteRetire" parameterType="String">
+		delete from retire
+		where userid = #{userid}
+	</delete>
+
 </mapper>
 
 

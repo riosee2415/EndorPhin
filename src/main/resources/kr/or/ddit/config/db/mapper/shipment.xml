@@ -11,7 +11,7 @@
 		insert into shipment
 		(shipmentcode, shipmentdate, clientcode, shipmentstatus, ordercode)
 		values
-		(#{shipmentcode},#{shipmentdate},#{clientcode},#{shipmentstatus},#{ordercode})
+		(#{shipmentcode},sysdate,#{clientcode},#{shipmentstatus},#{ordercode})
 
 	</insert>
 

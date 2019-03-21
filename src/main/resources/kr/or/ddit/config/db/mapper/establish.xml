@@ -4,6 +4,44 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="establish">
 
+	<!-- 계정과목 입력 -->
+	<insert id="insertEstablish" parameterType="establishVo">
+		insert into establish
+		(establishcode, establishnamekor, establishnameeng,
+		 status, slipstatus, clientstatus, usestatus)
+		values
+		(#{establishcode},#{establishnamekor},#{establishnameeng},#{status}
+		,#{slipstatus},#{clientstatus},#{usestatus})
+
+	</insert>
+
+
+	<!-- 계정과목 전체 불러오기 -->
+	<select id="getAllEstablish" resultType="establishVo">
+		select
+		establishcode, establishnamekor, establishnameeng,
+		 status, slipstatus, clientstatus, usestatus
+		from establish
+	</select>
+
+
+	<!-- 계정과목 선택하여 가져오기 -->
+	<select id="selectEstablish" resultType="establishVo"
+		parameterType="map">
+		select
+		establishcode, establishnamekor, establishnameeng,
+		 status, slipstatus, clientstatus, usestatus
+		from
+		establish where establishcode = #{establishcode}
+	</select>
+
+
+	<!-- 계정과목 삭제 -->
+	<delete id="deleteEstablish" parameterType="map">
+		delete from establish
+		where establishcode = #{establishcode}
+	</delete>
+
 </mapper>
 
 

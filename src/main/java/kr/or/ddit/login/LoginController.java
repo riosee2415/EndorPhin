@@ -29,7 +29,7 @@ public class LoginController {
 		//정상 로그인 한 경우
 		if(dbEmployeeVo.getUserId().equals(employeeVo.getUserId())&&
 				dbEmployeeVo.getPassword().equals(employeeVo.getPassword())){
-			session.setAttribute("userVo", dbEmployeeVo);
+			session.setAttribute("employeeVo", dbEmployeeVo);
 			return "redirect:/helloTiles";
 		}
 		else

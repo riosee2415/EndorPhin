@@ -4,6 +4,41 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="payment">
 
+	<!-- 급여 입력 -->
+	<insert id="insertPayment" parameterType="paymentVo">
+		insert into payment
+		(paycode, userid, totalwage, totalsalary, relate, payday)
+		values
+		(#{paycode},#{userid},#{totalwage}
+		,#{totalsalary},#{relate},#{payday})
+
+	</insert>
+
+
+	<!-- 급여  전체 불러오기 -->
+	<select id="getAllPayment" resultType="paymentVo">
+		select
+		paycode, userid, totalwage, totalsalary, relate, payday
+		from payment
+	</select>
+
+
+	<!-- 급여 선택하여 가져오기 -->
+	<select id="selectPayment" resultType="paymentVo"
+		parameterType="map">
+		select
+		paycode, userid, totalwage, totalsalary, relate, payday
+		from
+		payment where paycode = #{paycode}
+	</select>
+
+
+	<!-- 급여 삭제 -->
+	<delete id="deletePayment" parameterType="map">
+		delete from payment
+		where paycode = #{paycode}
+	</delete>
+
 
 </mapper>
 

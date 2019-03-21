@@ -4,6 +4,40 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="payment_report">
 
+	<!-- 급여이력 입력 -->
+	<insert id="insertPayment_report" parameterType="payment_reportVo">
+		insert into payment_report
+		(paymentreportcode, account, paycode)
+		values
+		(#{paymentreportcode},#{account},#{paycode})
+
+	</insert>
+
+
+	<!-- 급여이력  전체 불러오기 -->
+	<select id="getAllPayment_report" resultType="payment_reportVo">
+		select
+		paymentreportcode, account, paycode
+		from payment_report
+	</select>
+
+
+	<!-- 급여이력 선택하여 가져오기 -->
+	<select id="selectPayment_report" resultType="payment_reportVo"
+		parameterType="map">
+		select
+		paymentreportcode, account, paycode
+		from
+		payment_report where paymentreportcode = #{paymentreportcode}
+	</select>
+
+
+	<!-- 급여이력 삭제 -->
+	<delete id="deletePayment_report" parameterType="map">
+		delete from payment_report
+		where paymentreportcode = #{paymentreportcode}
+	</delete>
+
 </mapper>
 
 

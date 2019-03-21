@@ -4,6 +4,44 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="document">
 
+	<!-- 기안 입력 -->
+	<insert id="insertDocument" parameterType="documentVo">
+		insert into document
+		(documentnumber, title, preservation, presentdate, contents, tempsortation,
+		 completesortation, presentuser, presentdepartment)
+		values
+		(#{documentnumber},#{title},#{preservation},sysdate
+		,#{contents},#{tempsortation},#{completesortation},#{presentuser},#{presentdepartment})
+
+	</insert>
+
+
+	<!-- 기안 전체 불러오기 -->
+	<select id="getAllDocument" resultType="documentVo">
+		select
+		documentnumber, title, preservation, presentdate, contents, tempsortation,
+		 completesortation, presentuser, presentdepartment
+		from document
+	</select>
+
+
+	<!-- 기안 선택하여 가져오기 -->
+	<select id="selectDocument" resultType="documentVo"
+		parameterType="map">
+		select
+		documentnumber, title, preservation, presentdate, contents, tempsortation,
+		 completesortation, presentuser, presentdepartment
+		from
+		document where documentnumber = #{documentnumber}
+	</select>
+
+
+	<!-- 기안 삭제 -->
+	<delete id="deleteDocument" parameterType="map">
+		delete from document
+		where documentnumber = #{documentnumber}
+	</delete>
+
 
 </mapper>
 

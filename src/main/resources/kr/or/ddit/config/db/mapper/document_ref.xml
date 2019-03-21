@@ -4,6 +4,40 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="document_ref">
 
+	<!-- 기안참조 입력 -->
+	<insert id="insertDocument_ref" parameterType="document_refVo">
+		insert into document_ref
+		(referencenumber, documentnumber, userid, sortation)
+		values
+		(#{referencenumber},#{documentnumber},#{userid},#{sortation})
+
+	</insert>
+
+
+	<!-- 기안참조 전체 불러오기 -->
+	<select id="getAllDocument_ref" resultType="document_refVo">
+		select
+		referencenumber, documentnumber, userid, sortation
+		from document_ref
+	</select>
+
+
+	<!-- 기안참조 선택하여 가져오기 -->
+	<select id="selectDocument_ref" resultType="document_refVo"
+		parameterType="map">
+		select
+		referencenumber, documentnumber, userid, sortation
+		from
+		document_ref where referencenumber = #{referencenumber}
+	</select>
+
+
+	<!-- 기안참조 삭제 -->
+	<delete id="deleteDocument_ref" parameterType="map">
+		delete from document_ref
+		where referencenumber = #{referencenumber}
+	</delete>
+
 
 </mapper>
 

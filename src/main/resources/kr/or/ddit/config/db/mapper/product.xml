@@ -4,6 +4,41 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="product">
 
+	<!-- 상품 입력 -->
+	<insert id="insertProduct" parameterType="productVo">
+		insert into product
+		(productcode, productname, standard, outline, userstatus, baseprice)
+		values
+		(#{productcode},#{productname},#{standard}
+		,#{outline},#{userstatus},#{baseprice})
+
+	</insert>
+
+
+	<!-- 상품  전체 불러오기 -->
+	<select id="getAllProduct" resultType="productVo">
+		select
+		productcode, productname, standard, outline, userstatus, baseprice
+		from product
+	</select>
+
+
+	<!-- 상품 선택하여 가져오기 -->
+	<select id="selectProduct" resultType="productVo"
+		parameterType="String">
+		select
+		productcode, productname, standard, outline, userstatus, baseprice
+		from
+		product where productcode = #{productcode}
+	</select>
+
+
+	<!-- 상품 삭제 -->
+	<delete id="deleteProduct" parameterType="String">
+		delete from product
+		where productcode = #{productcode}
+	</delete>
+
 </mapper>
 
 

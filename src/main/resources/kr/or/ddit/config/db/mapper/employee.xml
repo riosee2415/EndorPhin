@@ -4,6 +4,44 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="employee">
 
+	<!-- 사원 입력 -->
+	<insert id="insertEmployee" parameterType="employeeVo">
+		insert into employee
+		(userid, usernm, deptcode, positioncode, rankcode, continuousyear,
+		 relate, joincompany, birthdate, password)
+		values
+		(#{userid},#{usernm},#{deptcode},#{positioncode}
+		,#{rankcode},#{continuousyear},#{relate},#{joincompany},sysdate,#{password})
+
+	</insert>
+
+
+	<!-- 사원 전체 불러오기 -->
+	<select id="getAllEmployee" resultType="employeeVo">
+		select
+		userid, usernm, deptcode, positioncode, rankcode, continuousyear,
+		 relate, joincompany, birthdate, password
+		from employee
+	</select>
+
+
+	<!-- 사원 선택하여 가져오기 -->
+	<select id="selectEmployee" resultType="employeeVo"
+		parameterType="map">
+		select
+		userid, usernm, deptcode, positioncode, rankcode, continuousyear,
+		 relate, joincompany, birthdate, password
+		from
+		employee where userid = #{userid}
+	</select>
+
+
+	<!-- 사원 삭제 -->
+	<delete id="deleteEmployee" parameterType="map">
+		delete from employee
+		where userid = #{userid}
+	</delete>
+
 
 </mapper>
 

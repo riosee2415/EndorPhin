@@ -3,7 +3,49 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="de_product_div">
+<!-- 급여/공제 -->
+	
+	<!--전체 불러오기  -->
+	<select id="de_product_div" resultType="De_product_divVo">
+		select
+			deductCode,
+			deductName,
+			useStatus,
+			relate
+		from de_product_div
+	</select>
 
+	<!-- 급여/공제코드로 가져오기  -->
+	<select id="selectDe_product_div" resultType="De_product_divVo" parameterType="map">
+		select 
+			deductCode,
+			deductName,
+			useStatus,
+			relate
+		from de_product_div	
+		where deductCode = #{deductCode}
+			
+	</select>	
+	
+	<!-- 급여/공제 등록 -->
+	<insert id="insertDe_product_div" parameterType="De_product_divVo">
+		insert into de_product_div
+		   (deductCode,
+			deductName,
+			useStatus,
+			relate)
+		values
+		(#{deductCode},#{deductName},#{useStatus},#{relate},
+		#{ciPath})
+
+	</insert>
+	
+	<!-- 급여/공제 삭제 -->
+	<delete id="deleteDe_product_div" parameterType="map">
+		delete from de_product_div
+		where deductCode = #{deductCode}
+	</delete>
+	
 
 </mapper>
 

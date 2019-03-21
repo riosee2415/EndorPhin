@@ -3,8 +3,67 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="comments">
+	
+	<!--전체 불러오기  -->
+	<select id="getAllcomments" resultType="commentsVo">
+		select
+			commentNo,
+			commentTitle,
+			commentContents,
+			boardNo,
+			commentDate,
+			commentUser
+		from comments
+	</select>
 
+	<!--댓글 코드로 가져오기  -->
+	<select id="selectComments_commentno" resultType="commentsVo" parameterType="map">
+		select 
+			commentNo,
+			commentTitle,
+			commentContents,
+			boardNo,
+			commentDate,
+			commentUser
+		from comments	
+		where commentNo = #{commentNo}
+			
+	</select>	
+	
+	<!--boardno으로 가져오기  -->
+	<select id="selectComments_commentno" resultType="commentsVo" parameterType="map">
+		select 
+			commentNo,
+			commentTitle,
+			commentContents,
+			boardNo,
+			commentDate,
+			commentUser
+		from comments		
+		where boardNo = #{boardNo}
+			
+	</select>	
+	
+	<!-- 댓글 등록 -->
+	<insert id="insertComments" parameterType="commentsVo">
+		insert into comments
+		  (commentNo,
+			commentTitle,
+			commentContents,
+			boardNo,
+			commentDate,
+			commentUser)
+		values
+		(#{commentNo},#{commentTitle},#{commentContents},#{boardNo},
+		#{commentDate},#{commentUser})
 
+	</insert>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteComments" parameterType="map">
+		delete from comments
+		where commentNo = #{commentNo}
+	</delete>
 </mapper>
 
 

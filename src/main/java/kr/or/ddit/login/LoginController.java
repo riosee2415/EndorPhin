@@ -1,4 +1,4 @@
-package kr.or.ddit.login;
+ package kr.or.ddit.login;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -24,9 +24,9 @@ public class LoginController {
 	
 	@RequestMapping(path="/login",method=RequestMethod.POST)
 	public String login_post(EmployeeVo employeeVo, HttpSession session){
-		//»ç¿ëÀÚ°¡ ¿äÃ»ÇÑ id¿¡ ÇØ´çÇÏ´Â ½ÇÁ¦ µ¥ÀÌÅÍ º£ÀÌ½º¿¡ ÀúÀåµÈ °ª
+		//ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ idï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		EmployeeVo dbEmployeeVo = dao.selectEmployee(employeeVo.getUserId());
-		//Á¤»ó ·Î±×ÀÎ ÇÑ °æ¿ì
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½
 		if(dbEmployeeVo.getUserId().equals(employeeVo.getUserId())&&
 				dbEmployeeVo.getPassword().equals(employeeVo.getPassword())){
 			session.setAttribute("userVo", dbEmployeeVo);
@@ -39,7 +39,7 @@ public class LoginController {
 	
 	@RequestMapping(path="/helloTiles")
 	public String helloTiles(){
-		// tiles Àû¿ëÀ» À§ÇÑ ¿¹Á¦ 
+		// tiles ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 		return "helloTiles";
 	}
 }

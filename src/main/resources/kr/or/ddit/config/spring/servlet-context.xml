@@ -9,10 +9,9 @@
 	<mvc:annotation-driven />
 	<mvc:default-servlet-handler/>
 	
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="order" value="2"/>
-		<property name="prefix" value="/WEB-INF/views/"/>
-		<property name="suffix" value=".jsp"/>
+	<bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
+		<property name="order" value="1"/>	
+		<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>		
 	</bean>
 	
 	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
@@ -23,9 +22,25 @@
 		</property>
 	</bean>
 	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="order" value="2"/>
+		<property name="prefix" value="/WEB-INF/views/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+	
 	<!--  @Cotroller만 스캔 -->
 	<context:component-scan base-package="kr.or.ddit" use-default-filters="false"> <!-- 전체에서 필요없는 부분을 제외(exclude)  -->
 	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
 	</context:component-scan>
+	
+	<!-- localeChangerInterceptor -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+				<property name="paramName" value="language"></property>
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>

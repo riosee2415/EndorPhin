@@ -41,10 +41,10 @@
     	<typeAlias  alias="assetVo" type="kr.or.ddit.slip.model.AssetVo"/>
     	<typeAlias  alias="slip_detailVo" type="kr.or.ddit.slip.model.Slip_detailVo"/>
     	<typeAlias  alias="slipVo" type="kr.or.ddit.slip.model.SlipVo"/>
-    	<typeAlias  alias="establishVo" type="kr.or.ddit.tax_cal.EstablishVo"/>
-	   	<typeAlias  alias="sales_detailVo" type="kr.or.ddit.tax_cal.Sales_detailVo"/>
-	   	<typeAlias  alias="surtaxVo" type="kr.or.ddit.tax_cal.SurtaxVo"/>
-	   	<typeAlias  alias="tax_calVo" type="kr.or.ddit.tax_cal.Tax_calVo"/>
+    	<typeAlias  alias="establishVo" type="kr.or.ddit.tax_cal.model.EstablishVo"/>
+	   	<typeAlias  alias="sales_detailVo" type="kr.or.ddit.tax_cal.model.Sales_detailVo"/>
+	   	<typeAlias  alias="surtaxVo" type="kr.or.ddit.tax_cal.model.SurtaxVo"/>
+	   	<typeAlias  alias="tax_calVo" type="kr.or.ddit.tax_cal.model.Tax_calVo"/>
     </typeAliases>
   <mappers>
   	<mapper resource="kr/or/ddit/config/db/mapper/account_company.xml"/>

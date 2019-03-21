@@ -6,7 +6,7 @@
 <!--사내정보  -->
 	
 	<!--전체 불러오기  -->
-	<select id="getAllcomments" resultType="companyVo">
+	<select id="getAllcompany" resultType="companyVo">
 		select
 			companyCode,
 			companyName,

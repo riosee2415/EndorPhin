@@ -7,14 +7,14 @@ import java.util.Date;
  * @author sanghoyun
  *
  */
-public class CommentsVo {
+public class CommentsVo {		//댓글
 
-	String commentNo;
-	String commentTitle;
-	String commentContents;
-	String boardNo;
-	Date commentDate;
-	String commentUser;
+	String commentNo;			//댓글 번호
+	String commentTitle;		//제목 
+	String commentContents;		//내용
+	String boardNo;				//게시글 번호
+	Date commentDate;			//작성 일시
+	String commentUser;			//작성자
 	
 	public String getCommentNo() {
 		return commentNo;

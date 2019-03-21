@@ -4,13 +4,13 @@ package kr.or.ddit.board.model;
  * @author sanghoyun
  *
  */
-public class Attach_boardVo {
+public class Attach_boardVo {	//게시글 첨부 파일
 	
-	String attachCode;
-	String attachName;
-	String attachRealpath;
-	String attachRealname;
-	String boardNo;
+	String attachCode;			//첨부파일 코드
+	String attachName;			//첨부파일 이름
+	String attachRealpath;		//실제경로 
+	String attachRealname;		//실제 첨부파일
+	String boardNo;				//게시글 번호
 	
 	
 	public String getAttachCode() {

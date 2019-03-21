@@ -4,11 +4,11 @@ package kr.or.ddit.board.model;
  * @author sanghoyun
  *
  */
-public class Board_TypeVo {
+public class Board_TypeVo {	//게시판 분류
 	
-	String boardTypeCode;
-	String boardTypeName;
-	String useStatus;
+	String boardTypeCode;	//게시판 분류 코드
+	String boardTypeName;	//게시판 이름
+	String useStatus;		//사용 구분
 	
 	
 	public String getBoardTypeCode() {

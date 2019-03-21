@@ -14,7 +14,7 @@ public class AnnualVo {
 	Date annualStart;
 	Date annualEnd;
 	String occurannual;
-	String userDate;
+	Date userDate;
 	
 	
 	public String getUserId() {
@@ -47,10 +47,10 @@ public class AnnualVo {
 	public void setOccurannual(String occurannual) {
 		this.occurannual = occurannual;
 	}
-	public String getUserDate() {
+	public Date getUserDate() {
 		return userDate;
 	}
-	public void setUserDate(String userDate) {
+	public void setUserDate(Date userDate) {
 		this.userDate = userDate;
 	}
 	

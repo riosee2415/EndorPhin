@@ -5,6 +5,34 @@
 <mapper namespace="attitude">
 
 
+	<!-- 근태항목 전체 가져오기 -->
+	<select id="getAllAttitude" resultType="attitudeVo">
+		SELECT
+            ATTITUDECODE, 
+            ATTITUDENAME, 
+            PAIDSTATUS, 
+            RELATE, 
+            BASEDAYS
+        FROM ATTITUDE
+	</select>
+	
+	<!-- 근태항목 데이터 추가하기 -->
+	<insert id="insertAttitude" parameterType="attitudeVo">
+		INSERT INTO ATTITUDE
+			(ATTITUDECODE, 
+             ATTITUDENAME, 
+             PAIDSTATUS, 
+             RELATE, 
+             BASEDAYS)
+    	VALUES
+    		(#{ATTITUDECODE},
+    		 #{ATTITUDENAME}, 
+    		 #{PAIDSTATUS},
+    		 #{RELATE},
+    		 #{BASEDAYS})
+	</insert>
+	
+	
 </mapper>
 
 

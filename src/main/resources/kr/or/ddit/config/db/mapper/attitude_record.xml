@@ -3,7 +3,27 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="attitude_record">
+	
+	<!-- 근태이력 데이터 가져오기 -->
+	<select id="getAllAttitude_record" resultType="attitude_recordVo">
+		SELECT
+	        USERID, 
+	        STARTDAY, 
+	        ENDDAY, 
+	        ATTITUDEMEMO, 
+	        STATUS, 
+	        STATUSNAME, 
+	        ATTITUDECODE
+	    FROM ATTITUDE_RECORD
+	</select>
 
+	<!-- 근태이력 데이터 추가하기 -->
+	<insert id="insertAttitude_record" parameterType="attitude_recordVo">
+		INSERT INTO ATTITUDE_RECORD
+	        (USERID, STARTDAY, ENDDAY, ATTITUDEMEMO, STATUS, STATUSNAME, ATTITUDECODE)
+	    VALUES
+	        (#{userId},#{STARTDAY},#{ENDDAY},#{ATTITUDEMEMO},#{STATUS},#{STATUSNAME},#{ATTITUDECODE})
+	</insert>
 
 </mapper>
 

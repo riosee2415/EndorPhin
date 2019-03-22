@@ -11,7 +11,6 @@ public class DeptVo {
 	String useStatus;
 	String parentCode;
 	String companyCode;
-	
 	public String getDeptCode() {
 		return deptCode;
 	}
@@ -48,8 +47,6 @@ public class DeptVo {
 	public void setCompanyCode(String companyCode) {
 		this.companyCode = companyCode;
 	}
-	
-	
 	
 
 }

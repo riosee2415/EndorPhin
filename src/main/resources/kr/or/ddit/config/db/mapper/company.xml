@@ -38,8 +38,8 @@
 			ceoNumber,
 			ciPath)
 		values
-		(#{companyCode},#{companyName},#{ceo},#{ceoNumber},
-		#{ciPath})
+		(#{companyCode},#{companyName},nvl(#{ceo, jdbcType=VARCHAR},null),#{ceoNumber},
+		nvl(#{ciPath, jdbcType=VARCHAR},null))
 
 	</insert>
 	

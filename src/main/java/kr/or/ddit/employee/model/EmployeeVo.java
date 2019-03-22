@@ -17,7 +17,7 @@ public class EmployeeVo {
 	String continuousYear;
 	String relate;
 	Date joinCompany;
-	Date BirthDate;
+	String BirthDate;
 	String password;
 	
 	public String getPassword() {
@@ -74,10 +74,10 @@ public class EmployeeVo {
 	public void setJoinCompany(Date joinCompany) {
 		this.joinCompany = joinCompany;
 	}
-	public Date getBirthDate() {
+	public String getBirthDate() {
 		return BirthDate;
 	}
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(String birthDate) {
 		BirthDate = birthDate;
 	}
 	

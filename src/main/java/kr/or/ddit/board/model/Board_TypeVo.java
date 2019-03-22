@@ -29,6 +29,14 @@ public class Board_TypeVo {	//게시판 분류
 	public void setUseStatus(String useStatus) {
 		this.useStatus = useStatus;
 	}
+	@Override
+	public String toString() {
+		return "Board_TypeVo [boardTypeCode=" + boardTypeCode + ", boardTypeName=" + boardTypeName + ", useStatus="
+				+ useStatus + "]";
+	}
+	
+	
+	
 	
 	
 

@@ -43,6 +43,11 @@ public class Attach_boardVo {	//게시글 첨부 파일
 	public void setBoardNo(String boardNo) {
 		this.boardNo = boardNo;
 	}
+	@Override
+	public String toString() {
+		return "Attach_boardVo [attachCode=" + attachCode + ", attachName=" + attachName + ", attachRealpath="
+				+ attachRealpath + ", attachRealname=" + attachRealname + ", boardNo=" + boardNo + "]";
+	}
 	
 	
 

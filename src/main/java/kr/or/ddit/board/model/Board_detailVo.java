@@ -52,6 +52,11 @@ public class Board_detailVo {	//게시글
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	@Override
+	public String toString() {
+		return "Board_detailVo [boardNo=" + boardNo + ", title=" + title + ", contents=" + contents + ", postDate="
+				+ postDate + ", boardTypeCode=" + boardTypeCode + ", userId=" + userId + "]";
+	}
 	
 	
 

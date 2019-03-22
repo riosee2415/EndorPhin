@@ -52,6 +52,12 @@ public class CommentsVo {		//댓글
 	public void setCommentUser(String commentUser) {
 		this.commentUser = commentUser;
 	}
+	@Override
+	public String toString() {
+		return "CommentsVo [commentNo=" + commentNo + ", commentTitle=" + commentTitle + ", commentContents="
+				+ commentContents + ", boardNo=" + boardNo + ", commentDate=" + commentDate + ", commentUser="
+				+ commentUser + "]";
+	}
 	
 	
 }

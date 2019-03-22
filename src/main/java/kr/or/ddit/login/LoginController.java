@@ -24,9 +24,7 @@ public class LoginController {
 	
 	@RequestMapping(path="/login",method=RequestMethod.POST)
 	public String login_post(EmployeeVo employeeVo, HttpSession session){
-		//����ڰ� ��û�� id�� �ش��ϴ� ���� ������ ���̽��� ����� ��
 		EmployeeVo dbEmployeeVo = dao.selectEmployee(employeeVo.getUserId());
-		//���� �α��� �� ���
 		if(dbEmployeeVo.getUserId().equals(employeeVo.getUserId())&&
 				dbEmployeeVo.getPassword().equals(employeeVo.getPassword())){
 			session.setAttribute("employeeVo", dbEmployeeVo);
@@ -39,7 +37,7 @@ public class LoginController {
 	
 	@RequestMapping(path="/helloTiles")
 	public String helloTiles(){
-		// tiles ������ ���� ���� 
+		// tiles 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙 
 		return "helloTiles";
 	}
 }

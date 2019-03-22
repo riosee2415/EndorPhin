@@ -9,7 +9,7 @@
 		insert into dept
 		(deptcode, deptname, businessname, usestatus, parentcode, companycode)
 		values
-		(#{deptcode},#{deptname},#{businessname},#{usestatus},#{parentcode},#{companycode})
+		(#{deptCode},#{deptName},nvl(#{businessName, jdbcType=VARCHAR},null),#{useStatus},nvl(#{parentCode, jdbcType=VARCHAR},null),#{companyCode})
 
 	</insert>
 

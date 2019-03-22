@@ -10,8 +10,13 @@
 		(userid, usernm, deptcode, positioncode, rankcode, continuousyear,
 		 relate, joincompany, birthdate, password)
 		values
-		(#{userid},#{usernm},#{deptcode},#{positioncode}
-		,#{rankcode},#{continuousyear},#{relate},#{joincompany},sysdate,#{password})
+		(#{userId},#{userNm},
+		nvl(#{deptCode, jdbcType=VARCHAR},null),
+		nvl(#{positionCode, jdbcType=VARCHAR},null)
+		,nvl(#{rankCode, jdbcType=VARCHAR},null),
+		nvl(#{continuousYear, jdbcType=VARCHAR},null),
+		nvl(#{relate, jdbcType=VARCHAR},null),
+		sysdate,to_date(#{birthDate},'yyyyMMdd'),nvl(#{password, jdbcType=VARCHAR},null))
 
 	</insert>
 

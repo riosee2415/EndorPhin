@@ -6,7 +6,7 @@
 <!-- 급여/공제 -->
 	
 	<!--전체 불러오기  -->
-	<select id="de_product_div" resultType="De_product_divVo">
+	<select id="getAllDe_product_div" resultType="De_product_divVo">
 		select
 			deductCode,
 			deductName,

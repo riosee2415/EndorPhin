@@ -22,4 +22,22 @@
         	<put-attribute name="content" value="/WEB-INF/views/company/cardsList.jsp"/>
         </definition>
         
+        <definition name="addPaymentView" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/employee/paymentList.jsp"/>
+        </definition>
+        
+        <definition name="paymentView" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/payment/payment.jsp"/>
+        </definition>
+        
+        
+        <definition name="employeeListTiles" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/employee/employeeList.jsp"/>
+        </definition>
+        
+        
+        <definition name="insertEmployeeTiles" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/employee/insertEmployeeForm.jsp"/>
+        </definition>
+        
 </tiles-definitions>

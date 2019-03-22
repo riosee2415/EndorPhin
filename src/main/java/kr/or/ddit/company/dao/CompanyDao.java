@@ -29,13 +29,13 @@ public class CompanyDao implements ICompanyDao{
 
 	@Override
 	public int insertCompany(CompanyVo companyVo) {
-		int insert = sqlSessionTemplate.insert("company.insertCompany");
+		int insert = sqlSessionTemplate.insert("company.insertCompany",companyVo);
 		return insert;
 	}
 
 	@Override
 	public int deleteCompany(String companycode) {
-		int delete = sqlSessionTemplate.delete("company.deleteCompany");
+		int delete = sqlSessionTemplate.delete("company.deleteCompany",companycode);
 		return delete;
 	}
 

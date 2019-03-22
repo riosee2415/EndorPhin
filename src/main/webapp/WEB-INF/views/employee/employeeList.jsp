@@ -57,24 +57,21 @@
 
 
 	<div class="container">
-	<table>
-	<tr>
-		<td><h2>사원목록</h2></td>
-	</tr>
-	<tr>
-	<td colspan="1"></td>
-		<td><h3>사원검색</h3></td>
-		<td>
-		<input type="text" class="  search-query form-control"
-				placeholder="Search" /> <span class="input-group-btn">
-				</td>
+		<table>
+			<tr>
+				<td><h2>사원목록</h2></td>
+			</tr>
+			<tr>
+				<td colspan="1"></td>
+				<td><h3>사원검색</h3></td>
+				<td><input type="text" class="  search-query form-control"
+					placeholder="Search" /> <span class="input-group-btn"></td>
 				<td>
-				<button class="btn btn-primary" type="button">
-					<span class=" glyphicon glyphicon-search"></span>
-				</button>
-			</span>
-		</td>
-		</tr>
+					<button class="btn btn-primary" type="button">
+						<span class=" glyphicon glyphicon-search"></span>
+					</button> </span>
+				</td>
+			</tr>
 		</table>
 	</div>
 
@@ -137,17 +134,58 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-					<!-- 여기부터 로직작성 -->
-						<label for="inputName">성명</label> <input type="text"
-							class="form-control" id="inputName" placeholder="이름을 입력해 주세요">
+						<!-- 여기부터 로직작성 -->
+						
+						
+						<form action="${cp}/employee/insertEmployee" method="post">
+							<label for="inputName">사원번호</label> <input type="text"
+								class="form-control" name="userId" placeholder="사원번호를 입력해 주세요">
 					</div>
 					<div class="form-group">
-						<label for="InputEmail">이메일 주소</label> <input type="email"
-							class="form-control" id="InputEmail" placeholder="이메일 주소를 입력해주세요">
+						<label for="InputEmail">사원명</label> <input type="text"
+							class="form-control" name="userNm" placeholder="사원명을 입력해주세요">
 					</div>
+					
+					
+					<div class="form-group">
+						<table>
+							<tr>
+								<td><label for="inputPassword">부서코드</label></td>
+								<td><select name="deptCode" class="form-control">
+										<option value="10">인사</option>
+										<option value="20">회계</option>
+										<option value="30">물류</option>
+								</select></td>
+							
+								<td><label for="inputPassword">직책코드</label></td>
+								<td><select name="positionCode" class="form-control">
+										<option value="5">사장</option>
+										<option value="4">부사장</option>
+										<option value="3">본부장</option>
+										<option value="2">팀장</option>
+										<option value="1">팀원</option>
+								</select></td>
+							
+								<td><label for="inputPassword">직급코드</label></td>
+								<td><select name="rankCode" class="form-control">
+										<option value="9">사장</option>
+										<option value="8">전무</option>
+										<option value="7">상무</option>
+										<option value="6">이사</option>
+										<option value="5">부장</option>
+										<option value="4">차장</option>
+										<option value="3">과장</option>
+										<option value="2">대리</option>
+										<option value="1">사원</option>
+								</select></td>
+							</tr>
+							</table>
+						</div>
+						
+
 					<div class="form-group">
 						<label for="inputPassword">비밀번호</label> <input type="password"
-							class="form-control" id="inputPassword"
+							class="form-control" id="inputPassword" name="password"
 							placeholder="비밀번호를 입력해주세요">
 					</div>
 					<div class="form-group">
@@ -155,24 +193,58 @@
 							type="password" class="form-control" id="inputPasswordCheck"
 							placeholder="비밀번호 확인을 위해 다시한번 입력 해 주세요">
 					</div>
+					
 					<div class="form-group">
-						<label for="inputMobile">휴대폰 번호</label> <input type="tel"
-							class="form-control" id="inputMobile"
-							placeholder="휴대폰번호를 입력해 주세요">
+						<label for="inputMobile">비고</label> <input type="text"
+							class="form-control" id="inputMobile" name="relate"
+							placeholder="특이사항란">
 					</div>
 					<div class="form-group">
-						<label for="inputtelNO">사무실 번호</label> <input type="tel"
-							class="form-control" id="inputtelNO" placeholder="사무실번호를 입력해 주세요">
+						<label for="inputtelNO">생년월일</label> <input type="text"
+							class="form-control" id="inputtelNO" name="BirthDate" placeholder="생년월일을 입력하세요">
 					</div>
 				</div>
+				
+				
+				
+				
 				<!-- 여기까지 -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">등록</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+					<button type="submit" class="btn btn-default">등록</button>
+					</form>
+					
+					<button type="button" class="btn btn-default">취소</button>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		
+		<script>
+		//문서로딩이 완료된 이후 이벤트 등록
+
+		$(document).ready(function() {
+			
+			 //server side 에서 비교
+			<c:if test="${msg != null}">
+			alert("${msg}");
+			</c:if> 
+			
+
+		});
+	</script>
+	
 
 
 

@@ -11,7 +11,7 @@
                     <ul class="column">
                         <li><h3>기초 정보</h3></li>
                         <li><a href="${pageContext.request.contextPath }/clientview">거래처 등록</a></li>
-                        <li><a href="#">신용카드 등록</a></li>
+                        <li><a href="${pageContext.request.contextPath }/cardsList">신용카드 등록</a></li>
                         <li><a href="#">계정과목 등록</a></li>
                         <li><a href="#">부서 등록</a></li>
                     </ul>
@@ -45,12 +45,12 @@
                     <ul class="column">
                         <li><h3>사원정보관리</h3></li>
                         <li><a href="${cp }/employee/getAllEmployee">사원등록</a></li>
-                        <li><a href="#">급여등록</a></li>
+                        <li><a href="/addPayment">급여등록</a></li>
                         <li><a href="#">퇴직자</a></li>
                     </ul>
                     <ul class="column">
                         <li><h3>급여계산 관리</h3></li>
-                        <li><a href="#">급여조정</a></li>
+                        <li><a href="/payment">급여조정</a></li>
                         <li><a href="#">급여계산</a></li>
                         <li><a href="#">급여명세서</a></li>
                         <li><a href="#">급여명세서 인쇄/발송</a></li>

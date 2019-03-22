@@ -24,9 +24,12 @@ public class EmployeeServiceTest extends LogicConfig{
 	@Test
 	public void insertEmployeeTest() {
 		EmployeeVo employeeVo = new EmployeeVo();
-		employeeVo.setUserId("5");
-		employeeVo.setUserNm("멍청이");
-		employeeVo.setBirthDate("19190101");
+		employeeVo.setUserId("70");
+		employeeVo.setUserNm("부서");
+		employeeVo.setDeptCode("10");
+		employeeVo.setPositionCode("1");
+		employeeVo.setRankCode("1");
+		employeeVo.setBirthDate("20180909");
 		int insertEmployee = employeeService.insertEmployee(employeeVo);
 		assertEquals(1, insertEmployee);
 	}

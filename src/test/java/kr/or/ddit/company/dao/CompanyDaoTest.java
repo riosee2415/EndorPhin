@@ -26,12 +26,12 @@ public class CompanyDaoTest extends LogicConfig{
 	public void selectCompanyTest() {
 		String companyCode = "1";
 		CompanyVo selectCompany = companyDao.selectCompany(companyCode);
-		assertEquals("ÁØÈ£¹°»ê", selectCompany.getCompanyName());
+		assertEquals("ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½", selectCompany.getCompanyName());
 	}
 	@Test
 	public void insertCompanyTest() {
 		CompanyVo vo = new CompanyVo();
-		vo.setCeo("ÀÓÀç¿ì");
+		vo.setCeo("ï¿½ï¿½ï¿½ï¿½ï¿½");
 		vo.setCeoNumber("01012341234");
 		vo.setCompanyCode("2");
 		int insertCompany = companyDao.insertCompany(vo);

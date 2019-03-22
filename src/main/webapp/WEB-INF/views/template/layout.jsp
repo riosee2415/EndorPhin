@@ -34,6 +34,8 @@
 	<div class="col-sm-3 col-md-2 sidebar">
 		<tiles:insertAttribute name="left"/>
 	</div>
+	<div class="col-sm-9 col-sm-offset-2 col-md-10 main">
 	<tiles:insertAttribute name="content"/>
+	</div>
 </body>
 </html>

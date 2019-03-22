@@ -1,7 +1,6 @@
 package kr.or.ddit.company.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -12,12 +11,14 @@ public interface ICardsDao {
 	
 	List<CardsVo> getAllCards();
 	
-	CardsVo selectCards(Map<String,String> map);
+	CardsVo selectCards(String cardCode);
 	
-	int insertCards(Map<String,String> map);
+	List<CardsVo> serachCards(CardsVo cardVo);
+	
+	int insertCards(CardsVo cardVo);
 	
 	int updateCards(CardsVo cardVo);
 	
-	int deleteCards(Map<String, String> map);
+	int deleteCards(String cardCode);
 	
 }

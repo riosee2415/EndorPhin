@@ -58,7 +58,7 @@
 	 -->
 	<select id="getNameClient" resultType="clientVo" parameterType="map">
         SELECT
-            CLIENTCODE, 
+            CLIENTCODE,Rca 
             CLIENTNAME, 
             SALESNUMBER, 
             MANAGER, 

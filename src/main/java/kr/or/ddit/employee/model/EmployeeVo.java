@@ -74,12 +74,22 @@ public class EmployeeVo {
 	public void setJoinCompany(Date joinCompany) {
 		this.joinCompany = joinCompany;
 	}
+	
+	
 	public String getBirthDate() {
 		return BirthDate;
 	}
 	public void setBirthDate(String birthDate) {
 		BirthDate = birthDate;
 	}
+	@Override
+	public String toString() {
+		return "EmployeeVo [userId=" + userId + ", userNm=" + userNm + ", deptCode=" + deptCode + ", positionCode="
+				+ positionCode + ", rankCode=" + rankCode + ", continuousYear=" + continuousYear + ", relate=" + relate
+				+ ", joinCompany=" + joinCompany + ", BirthDate=" + BirthDate + ", password=" + password + "]";
+	}
+	
+	
 	
 	
 

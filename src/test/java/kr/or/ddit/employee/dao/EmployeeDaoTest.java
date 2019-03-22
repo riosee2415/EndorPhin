@@ -2,6 +2,8 @@ package kr.or.ddit.employee.dao;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -20,5 +22,15 @@ public class EmployeeDaoTest extends LogicConfig{
 		
 		assertNotNull(selectEmployee);
 	}
+	
+	@Test
+	public void SelectAllEmployee() {
+		
+		
+	EmployeeVo selectEmployee = dao.selectEmployee("1");
+		assertNotNull(selectEmployee);
+		System.out.println(selectEmployee);
+	}
+	
 
 }

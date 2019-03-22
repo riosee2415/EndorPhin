@@ -10,10 +10,11 @@
 		(userid, usernm, deptcode, positioncode, rankcode, continuousyear,
 		 relate, joincompany, birthdate, password)
 		values
-		(#{userid},#{usernm},#{deptcode},#{positioncode}
-		,#{rankcode},#{continuousyear},#{relate},#{joincompany},sysdate,#{password})
+		(#{userid},#{usernm},#{deptcode,jdbcType=VARCHAR},#{positioncode,jdbcType=VARCHAR}
+		,#{rankcode,jdbcType=VARCHAR},#{continuousyear,jdbcType=VARCHAR},#{relate},sysdate,sysdate,#{password})
 
 	</insert>
+
 
 
 	<!-- 사원 전체 불러오기 -->

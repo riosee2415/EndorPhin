@@ -4,10 +4,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.or.ddit.employee.model.EmployeeVo;
 import kr.or.ddit.employee.service.IEmployeeService;
@@ -15,9 +18,10 @@ import kr.or.ddit.employee.service.IEmployeeService;
 @RequestMapping("/employee")
 @Controller
 public class EmployeeController {
-
+	private Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 	@Resource(name = "employeeService")
 	private IEmployeeService employeeService;
+	
 
 	
 	
@@ -39,9 +43,19 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(path = "/insertEmployee", method = RequestMethod.GET)
-	public String insertEmployee(Model model) {
+	public String insertEmployee_GET(Model model) {
 		
 		return "insertEmployeeTiles";
+	}
+	
+	@RequestMapping(path = "/insertEmployee", method = RequestMethod.POST)
+	public String insertEmployee_POST(Model model, EmployeeVo vo,RedirectAttributes ra) {
+		
+		int insertEmployee = employeeService.insertEmployee(vo);
+		
+		
+		ra.addFlashAttribute("msg", "정상 등록 되었습니다");
+		return "redirect:/employee/getAllEmployee";
 	}
 	
 	
@@ -53,294 +67,351 @@ public class EmployeeController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 //	
-//	@RequestMapping("/userAllList")
-//	public String userAllList(Model model) {
+//	@RequestMapping("/boardTypeList")
+//	public String boardTypeList(Model model) {
 //
-//		List<UserVO> userList = userService.getAllUser();
+//		List<BoardTypeVO> Typelist = boardService.getAllBoardType();
 //
-//		model.addAttribute("userList", userList);
-//		return "userAllListTiles";
-//		//return "user/userAllList";
-//
-//	}
-//
-//	@RequestMapping("/userPagingList")
-//	public String userPagingList(PageVO pageVo, Model model) {
-//
-//		// PageVO pageVo = new PageVO(page, pageSize);
-//
-//		Map<String, Object> resultMap = userService.selectUserPagingList(pageVo);
-//		model.addAllAttributes(resultMap);
-//
-//		model.addAttribute("pageSize", pageVo.getPageSize());
-//		model.addAttribute("page", pageVo.getPage());
-//		return "userPagingListTiles";
-//		//return "user/userPagingList";
-//
-//	}
-//	/**
-//	* Method : userPagingListAjaxView
-//	* ?��?��?�� : leemjaewoo
-//	* �?경이?�� :
-//	* @return
-//	* Method ?���? : ?��?��?�� ?��?���? 리스?�� view
-//	*/
-//	@RequestMapping("/userPagingListAjaxView")
-//	public String userPagingListAjaxView() {
-//		
-//		return "userPagingListAjaxTiles";
-//
-//	}
-//
-//	@RequestMapping(path = "/user", method = RequestMethod.GET)
-//	public String user(@RequestParam("userId") String userId, Model model) {
-//
-//		UserVO userVo = userService.selectUser(userId);
-//		model.addAttribute("uservo", userVo);
-//		return "userTiles";
-//		//return "user/user";
-//	}
-//
-//	@RequestMapping("/profileImg")
-//	public void profileImg(HttpServletRequest request, HttpServletResponse response,
-//			@RequestParam("userId") String userId) throws IOException {
-//
-//		response.setHeader("content-Disposition", "attachment; filename=profile.png");
-//		response.setContentType("image.png");
-//
-//		UserVO vo = userService.selectUser(userId);
-//		FileInputStream fis;
-//		if (vo != null && vo.getRealFilename() != null) {
-//			fis = new FileInputStream(new File(vo.getRealFilename()));
-//		} else {
-//
-//			ServletContext application = request.getServletContext();
-//			String noimgPath = application.getRealPath("/upload/noimage.jpg");
-//			fis = new FileInputStream(new File(noimgPath));
-//		}
-//
-//		ServletOutputStream sos = response.getOutputStream();
-//
-//		byte[] buff = new byte[512];
-//		int len = 0;
-//		while ((len = fis.read(buff)) > -1) {
-//			sos.write(buff);
-//		}
-//
-//		sos.close();
-//		fis.close();
+//		model.addAttribute("Typelist", Typelist);
+//		return "boardtypeListTiles";
 //
 //	}
 //
 //	/**
-//	 * Method : userForm ?��?��?�� : leemjaewoo �?경이?�� :
+//	 * Method : boardTypeProduce 작성자 : leemjaewoo 변경이력 :
 //	 * 
-//	 * @return Method ?���? : ?��?��?�� ?��록폼 ?���?
+//	 * @param model
+//	 * @return Method 설명 : 보드타입 생성
 //	 */
-//	@RequestMapping(path = "/userForm", method = RequestMethod.GET)
-//	public String userForm() {
-//		return "user/userForm";
-//	}
+//	@RequestMapping("/boardTypeProduce")
+//	public String boardTypeProduce(BoardTypeVO vo, String boardname, String select, String boardcode, String boardName,
+//			String lang, Model model, RedirectAttributes ra) {
 //
-//	@RequestMapping(path = "/userForm", method = RequestMethod.POST)
-//	public String userForm(UserVO userVo, @RequestPart("profile") MultipartFile profile, HttpSession session,
-//			Model model) throws IllegalStateException, IOException {
+//		// 게시판생성 인서트
+//		if (boardname != null && select != null) {
+//			vo.setBoard_name(boardname);
+//			vo.setBoard_activation(select);
+//			boardService.insertBoardType(vo);
 //
-//		UserVO selectUser = userService.selectUser(userVo.getUserId());
+//			// 게시판수정
+//		} else {
+//			vo.setBoard_code(boardcode);
+//			vo.setBoard_name(boardName);
+//			vo.setBoard_activation(lang);
 //
-//		// 중복체크 ?���?(?��규등�?)
-//		if (selectUser == null) {
-//			// ?��?��?�� ?��로파?�� ?��로드 ?��경우
-//
-//			String filename = "";
-//			String realFilename = "";
-//
-//			if (profile.getSize() > 0) {
-//				filename = profile.getOriginalFilename();
-//				realFilename = ("c:\\picture\\" + UUID.randomUUID().toString());
-//				profile.transferTo(new File(realFilename));
-//
-//			}
-//			userVo.setFilename(filename);
-//			userVo.setRealFilename(realFilename);
-//
-//			int cnt = 0;
-//			try {
-//				cnt = userService.insertUser(userVo);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//
-//			// ?��?��?��?�� ?���?
-//			if (cnt == 1) {
-//				session.setAttribute("msg", "?��?�� ?���? ?��?��?��?��?��");
-//				return "redirect:/user/userPagingList"; // contextPath ?��?��?��?��
-//
-//			}
-//			// ?��?��?��?�� ?��?��
-//			else {
-//
-//				return "/user/userForm";
-//			}
+//			boardService.updateboardtype(vo);
 //
 //		}
-//		// 중복체크 ?��?��
-//		else {
-//			model.addAttribute("msg", "중복체크?�� ?��?�� ?��?��?��?��.");
-//			return "/user/userForm";
-//		}
 //
+//		ra.addFlashAttribute("msg", "정상 등록 되었습니다");
+//		return "redirect:/board/boardTypeList"; // contextPath 작업필요
 //	}
 //
-//	@RequestMapping(path = "/usermodifyformcontroller", method = RequestMethod.GET)
-//	public String userModify_get(@RequestParam("userId") String userId, Model model) {
-//
-//		UserVO uservo = userService.selectUser(userId);
-//
-//		model.addAttribute("uservo", uservo);
-//
-//		return "user/userModify";
-//	}
-//
-//	@RequestMapping(path = "/usermodifyformcontroller", method = RequestMethod.POST)
-//	public String userModify_post(UserVO uservo, @RequestPart("profile") MultipartFile profile, HttpSession session,
-//			Model model, HttpServletRequest request, RedirectAttributes ra) throws IllegalStateException, IOException {
-//
-//		
-//
-//			String filename = "";
-//			String realFilename = "";
-//
-//			
-//				if(profile.getSize()>0){
-//					
-//				filename = profile.getOriginalFilename();
-//				realFilename = ("c:\\picture\\" + UUID.randomUUID().toString());
-//				profile.transferTo(new File(realFilename));
-//				}
-//
-//				uservo.setFilename(filename);
-//				uservo.setRealFilename(realFilename);
-//				
-//				//?��?��?�� 비�?번호 ?��?��?��
-//				
-//				//비�?번호 ?��?�� ?���??���?
-//				//?��?��?���? 값을 ?��?��?���? ?��??경우 => 기존 비�?번호 ?���?
-//				if(uservo.getPass().equals("")){
-//					UserVO userVoForPass = userService.selectUser(uservo.getUserId());
-//					uservo.setPass(userVoForPass.getPass());
-//				}
-//				//?��?��?���? 비�?번호�? ?���? ?��록한 경우
-//				else{
-//					uservo.setPass(KISA_SHA256.encrypt(uservo.getPass()));
-//				}
-//				
-//				
-//				
-//
-//			int cnt = 0;
-//			try {
-//				cnt = userService.updateUser(uservo);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//
-//			// ?��?��?��?�� ?���?
-//			// ?��?��?�� ?���? ?��?�� ?��?�� : ?��?��?�� ?��?�� 조회 ?��?���? ?��?��
-//			if (cnt == 1) {
-//				/*
-//				  
-//				 redirect ?��?��미터�? 보내?�� 방법
-//				1.url�? ?��?��
-//				 "redirect:/user/user?userId=" + userVo.getUserId();
-//				2.model객체?�� ?��?�� : ???��?�� ?��?��?�� ?��?��?���? ?��?��미터 �??��
-//				model.addAttrubute("userId", userVo.getUserId());
-//				 return "redirect:/user/user";
-//				3. RedirectAtrribute(ra) 객체�? ?��?��
-//				 return "redirect:/user/user";
-//				 */
-//				ra.addAttribute("userId" , uservo.getUserId());
-//				ra.addFlashAttribute("msg", "?��?�� ?���? ?��?��?��?��?��");
-//				//session.setAttribute("msg", "?��?�� ?���? ?��?��?��?��?��");
-//				//model.addAttribute("userId", uservo.getUserId());
-//				//return "redirect" + request.getContextPath() + " :/user/user"; // contextPath ?��?��?��?��
-//				return "redirect:/user/user"; // contextPath ?��?��?��?��
-//
-//			}
-//			// ?��?��?��?�� ?��?��
-//			else {
-//
-//				return "/user/userForm";
-//			}
-//
-//
-//	}
-//	
-//	
 //	/**
-//	* Method : userPagingListAjax
-//	* ?��?��?�� : leemjaewoo
-//	* �?경이?�� :
-//	* @param pageVo
-//	* @param model
-//	* @return
-//	* Method ?���? : ?��?��?�� ?��?���? 리스?�� ajax ?���?처리
-//	*/
-//	@RequestMapping("/userPagingListAjax")
-//	public String userPagingListAjax(PageVO pageVo, Model model) {
+//	 * Method : boardpagingList 작성자 : leemjaewoo 변경이력 :
+//	 * 
+//	 * @param model
+//	 * @return Method 설명 : 게시판 페이징리스트,목록
+//	 */
 //
-//		// PageVO pageVo = new PageVO(page, pageSize);
+//	@RequestMapping("/boardpagingList")
+//	public String boardpagingList(PageVO pageVo, Model model, HttpServletRequest request) {
 //
-//		Map<String, Object> resultMap = userService.selectUserPagingList(pageVo);
+//		if (request.getParameter("board_code") != null) {
+//			String board_code = request.getParameter("board_code");
+//			request.getSession().setAttribute("boardcode", board_code);
+//		}
+//
+//		String boardcodeGet = (String) request.getSession().getAttribute("boardcode");
+//		pageVo.setPageboard_code(boardcodeGet);
+//
+//		Map<String, Object> resultMap = boardService.selectPostPagingList(pageVo);
 //		model.addAllAttributes(resultMap);
 //
 //		model.addAttribute("pageSize", pageVo.getPageSize());
 //		model.addAttribute("page", pageVo.getPage());
+//		return "boardPagingListTiles";
+//
+//	}
+//
+//	@RequestMapping(path="/boardDetail", method = {RequestMethod.GET})
+//	public String boardDetail_GET(Model model, @RequestParam("post_no") String post_no) {
+//
+//		BoardPostVO boardvo = boardService.selectPost(post_no);
+//		List<BoardCommentVO> commentvo = boardService.selectBoardComment(post_no);
+//		List<BoardFileVO> fileList = boardService.selectBoardFile(post_no);
+//
+//		model.addAttribute("boardvo", boardvo);
+//		model.addAttribute("commentvo", commentvo);
+//		model.addAttribute("fileList", fileList);
+//
+//		return "boardDetailListTiles";
+//
+//	}
+//	@RequestMapping(path="/boardDetail", method = {RequestMethod.POST})
+//	public String boardDetail_POST(Model model, @RequestParam("post_no") String post_no,
+//			@RequestParam("userid")String userid,@RequestParam("comment_contents")String comment_contents) {
 //		
-//		//userList, userCnt, pageSize, page
-//		// { userList : [ {userId : 'brown', userNm : '브라?��}... {userId : 'sally', userNm : '?���?'}]
-//		//  userCnt : "110",
-//		// pageSize : "10",
-//		// page     :  2}
 //		
-//		return "jsonView";
+//		
+//		BoardCommentVO vo = new BoardCommentVO();
+//		vo.setCommnet_contents(comment_contents);
+//		vo.setPost_no(post_no);
+//		vo.setUserid(userid);
+//		vo.setStatus("0");
+//		
+//		boardService.insertBoardComment(vo);
+//		
+//		return "redirect:/board/boardDetail?post_no=" + post_no;
+//		
+//	}
+//
+//	@RequestMapping(path = { "/boardform" }, method = { RequestMethod.GET })
+//	public String boardform_get(Model model) {
+//
+//		return "board/boardForm";
+//
+//	}
+//
+//	@RequestMapping(path = { "/boardform" }, method = { RequestMethod.POST })
+//	public String boardform_post(HttpServletRequest request, Model model, @RequestParam("postTitle") String post_title,
+//			@RequestParam("smarteditor") String smarteditor, MultipartRequest multparts, RedirectAttributes ra)
+//			throws IllegalStateException, IOException {
+//
+//		UserVO userVo = (UserVO) request.getSession().getAttribute("userVo");
+//		String boardcode = (String) request.getSession().getAttribute("boardcode");
+//		List<MultipartFile> parts = multparts.getFiles("realuploadFile");
+//
+//		List<BoardFileVO> boardFileList = new ArrayList<BoardFileVO>();
+//		String file_name = "";
+//		String file_path = "";
+//
+//		for (MultipartFile part : parts) {
+//			logger.debug("contentDisposition : {}", part.getOriginalFilename());
+//
+//			if (part.getSize() > 0) {
+//				file_name = part.getOriginalFilename();
+//				file_path = ("c:\\picture\\" + UUID.randomUUID().toString());
+//				part.transferTo(new File(file_path));
+//
+//				BoardFileVO boardFileInsertVo = new BoardFileVO();
+//				boardFileInsertVo.setUpload_name(file_name);
+//				boardFileInsertVo.setRealfilename(file_path);
+//
+//				boardFileList.add(boardFileInsertVo);
+//			}
+//
+//		}
+//
+//		BoardPostVO boardPostVO = new BoardPostVO();
+//
+//		boardPostVO.setUserid(userVo.getUserId());
+//		boardPostVO.setPost_title(post_title);
+//		boardPostVO.setPost_contents(smarteditor);
+//		boardPostVO.setBoard_code(boardcode);
+//		boardPostVO.setStatus("0");
+//
+//		int cnt = boardService.insertBoardPost(boardPostVO, boardFileList);
+//		if (cnt == 1) {
+//			ra.addFlashAttribute("msg", "정상 등록 되었습니다");
+//			return "redirect:/board/boardpagingList?board_code=" + boardcode;
+//		}
+//
+//		return "";
+//
+//	}
+//
+//	@RequestMapping(path = { "/boardEdit" }, method = { RequestMethod.GET })
+//	public String boardEdit_GET(@RequestParam String post_no, Model model) {
+//		BoardPostVO Postlist = boardService.selectPost(post_no);
+//		List<BoardFileVO> filelist = boardService.selectBoardFile(post_no);
+//
+//		model.addAttribute("Postlist", Postlist);
+//		model.addAttribute("filelist", filelist);
+//
+//		return "boardEditListTiles";
+//	}
+//
+//	@RequestMapping(path = { "/boardEdit" }, method = { RequestMethod.POST })
+//	public String boardEdit_POST(HttpServletRequest request, Model model, @RequestParam("postTitle") String post_title,
+//			@RequestParam("smarteditor") String smarteditor, MultipartRequest multparts, RedirectAttributes ra) throws IllegalStateException, IOException {
+//		String[] removeList = request.getParameterValues("removeList");
+//
+//		
+//		BoardPostVO boardpostvo = new BoardPostVO();
+//		
+//		boardpostvo.setPost_title(request.getParameter("postTitle"));
+//		boardpostvo.setPost_contents(request.getParameter("smarteditor"));
+//		boardpostvo.setPost_no(request.getParameter("post_code"));
+//		boardpostvo.setStatus("0");
+//		
+//		List<MultipartFile> parts = multparts.getFiles("realuploadFile");
+//
+//		List<BoardFileVO> boardFileList = new ArrayList<BoardFileVO>();
+//		String file_name = "";
+//		String file_path = "";
+//
+//		for (MultipartFile part : parts) {
+//			logger.debug("contentDisposition : {}", part.getOriginalFilename());
+//
+//			if (part.getSize() > 0) {
+//				file_name = part.getOriginalFilename();
+//				file_path = ("c:\\picture\\" + UUID.randomUUID().toString());
+//				part.transferTo(new File(file_path));
+//
+//				BoardFileVO boardFileInsertVo = new BoardFileVO();
+//				boardFileInsertVo.setUpload_name(file_name);
+//				boardFileInsertVo.setRealfilename(file_path);
+//
+//				boardFileList.add(boardFileInsertVo);
+//			}
+//
+//		}
+//
+//
+//		int cnt = boardService.updateBoardPostFile(boardpostvo, boardFileList, removeList);
+//		if (cnt == 1) {
+//			ra.addFlashAttribute("msg", "정상 등록 되었습니다");
+//			return "redirect:/board/boardDetail?post_no=" + request.getParameter("post_code");
+//		}else{
+//			
+//			return "boardEditListTiles";
+//		}
+//	}
+//	
+//	@RequestMapping(path = { "/boardDelete" }, method = { RequestMethod.GET })
+//	public String boardDelete(Model model, @RequestParam("post_no") String post_no,HttpServletRequest request,
+//			RedirectAttributes ra) {
+//		
+//		BoardPostVO vo = new BoardPostVO();
+//		
+//		vo.setPost_title("");
+//		vo.setPost_contents("");
+//		vo.setStatus("1");
+//		vo.setPost_no(post_no);
+//		
+//		boardService.deleteBoardPost(vo);
+//		String boardcode = (String) request.getSession().getAttribute("boardcode");
+//
+//		
+//		ra.addFlashAttribute("msg", "정상 등록 되었습니다");
+//		return "redirect:/board/boardpagingList?board_code=" + boardcode;
+//
+//	}
+//	@RequestMapping(path = { "/boardDapgle" }, method = { RequestMethod.GET })
+//	public String boardDapgle_GET(Model model, @RequestParam("post_no")String post_no) {
+//		
+//		BoardPostVO postvo = boardService.selectPost(post_no);
+//		
+//		model.addAttribute("postvo",postvo);
+//		
+//		return "boardDapgleTiles";
+//		
+//	}
+//	@RequestMapping(path = { "/boardDapgle" }, method = { RequestMethod.POST })
+//	public String boardDapgle_POST(HttpServletRequest request, Model model, @RequestParam("postTitle") String post_title,
+//			@RequestParam("smarteditor") String smarteditor, MultipartRequest multparts, RedirectAttributes ra)
+//			throws IllegalStateException, IOException {
+//
+//		UserVO userVo = (UserVO) request.getSession().getAttribute("userVo");
+//		String boardcode = (String) request.getSession().getAttribute("boardcode");
+//		List<MultipartFile> parts = multparts.getFiles("realuploadFile");
+//
+//		List<BoardFileVO> boardFileList = new ArrayList<BoardFileVO>();
+//		String file_name = "";
+//		String file_path = "";
+//
+//		for (MultipartFile part : parts) {
+//			logger.debug("contentDisposition : {}", part.getOriginalFilename());
+//
+//			if (part.getSize() > 0) {
+//				file_name = part.getOriginalFilename();
+//				file_path = ("c:\\picture\\" + UUID.randomUUID().toString());
+//				part.transferTo(new File(file_path));
+//
+//				BoardFileVO boardFileInsertVo = new BoardFileVO();
+//				boardFileInsertVo.setUpload_name(file_name);
+//				boardFileInsertVo.setRealfilename(file_path);
+//
+//				boardFileList.add(boardFileInsertVo);
+//			}
+//
+//		}
+//
+//		BoardPostVO boardPostVO = new BoardPostVO();
+//
+//		boardPostVO.setUserid(userVo.getUserId());
+//		boardPostVO.setPost_title(post_title);
+//		boardPostVO.setPost_contents(smarteditor);
+//		boardPostVO.setBoard_code(boardcode);
+//		boardPostVO.setStatus("0");
+//		boardPostVO.setParentpost_no(request.getParameter("postNumber"));
+//
+//		int cnt = boardService.insertBoardPost(boardPostVO, boardFileList);
+//		if (cnt == 1) {
+//			ra.addFlashAttribute("msg", "정상 등록 되었습니다");
+//			return "redirect:/board/boardpagingList?board_code=" + boardcode;
+//		}
+//
+//		return "";
 //
 //	}
 //	
-//	@RequestMapping("/userPagingListAjaxHtml")
-//	public String userPagingListAjaxHtml(PageVO pageVo, Model model) {
-//
-//		// PageVO pageVo = new PageVO(page, pageSize);
-//
-//		Map<String, Object> resultMap = userService.selectUserPagingList(pageVo);
-//		model.addAllAttributes(resultMap);
-//		model.addAttribute("pageSize", pageVo.getPageSize());
-//		model.addAttribute("page", pageVo.getPage());
+//	@RequestMapping(path="/boardDownload", method = {RequestMethod.GET})
+//	public String boardDownload(@RequestParam("post_no") String post_no,HttpServletResponse response) throws IOException {
 //		
-//		return "user/userPagingListAjaxHtml";
+//			List<BoardFileVO> selectBoardFile = boardService.selectBoardFile(post_no);
+//		
+//		
+//			for(BoardFileVO filevo: selectBoardFile){
+//			response.setHeader("content-Disposition", "attachment; filename=\""+filevo.getUpload_name()+"\""); 
+//			response.setContentType("application/octet-stream");
+//			
+//			FileInputStream fis;
+//			fis = new FileInputStream(new File(filevo.getRealfilename()));
+//		
+//			ServletOutputStream sos = response.getOutputStream();
+//			
+//			
+//			byte[] buff = new byte[512];
+//			int len = 0;
+//			while( (len = fis.read(buff)) > -1 ) {
+//				sos.write(buff);
+//			}
+//			
+//			sos.close();
+//			fis.close();
+//			
+//			}
 //
+//
+//		return "";
 //	}
 //	
 //	
-//
-//
-//
-//
-//
-//
-//
-
+//	
+//	
+//	@RequestMapping(path = { "/commentdelete" })
+//	public String commentdelete(Model model, @RequestParam("comment_no")String comment_no,
+//			@RequestParam("post_no")String post_no) {
+//		
+//		logger.debug("comment_no : {}",comment_no);
+//		logger.debug("post_no : {}",post_no);
+//		
+//		boardService.commentdelete(comment_no);
+//		
+//		return "redirect:/board/boardDetail?post_no=" + post_no;
+//		
+//		
+//	}
+//	
+	
+	
+	
+	
+	
+	
 
 
 

@@ -9,34 +9,32 @@ import org.springframework.stereotype.Service;
 import kr.or.ddit.employee.dao.IEmployeeDao;
 import kr.or.ddit.employee.model.EmployeeVo;
 
-@Service
-public class EmployeeService implements IEmployeeService{
 
-	@Resource(name="employeeDao")
-	IEmployeeDao employeeDao;
+@Service("employeeService")
+public class EmployeeService implements IEmployeeService{
 	
+	@Resource(name="employeeDao")
+	private IEmployeeDao employeeDao;
+
 	@Override
-	public EmployeeVo selectEmployee(String userId) {
-		EmployeeVo selectEmployee = employeeDao.selectEmployee(userId);
-		return selectEmployee;
+	public List<EmployeeVo> getAllEmployee() {
+		return employeeDao.getAllEmployee();
+		
 	}
 
 	@Override
-	public int insertEmployee(EmployeeVo employeeVo) {
-		int insertEmployee = employeeDao.insertEmployee(employeeVo);
-		return insertEmployee;
+	public EmployeeVo selectEmployee(String user) {
+		return employeeDao.selectEmployee(user);
+	}
+
+	@Override
+	public int insertEmployee(EmployeeVo vo) {
+		return employeeDao.insertEmployee(vo);
 	}
 
 	@Override
 	public int deleteEmployee(String userId) {
-		int deleteEmployee = employeeDao.deleteEmployee(userId);
-		return deleteEmployee;
+		return employeeDao.deleteEmployee(userId);
 	}
-
-	@Override
-	public List<EmployeeVo> getAllEmployee() {
-		List<EmployeeVo> allEmployee = employeeDao.getAllEmployee();
-		return allEmployee;
-	}
-
+	
 }

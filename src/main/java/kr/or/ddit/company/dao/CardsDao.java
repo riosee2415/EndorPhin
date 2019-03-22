@@ -22,13 +22,13 @@ public class CardsDao implements ICardsDao{
 	}
 
 	@Override
-	public CardsVo selectCards(Map<String, String> map) {
-		return sqlSessionTemplate.selectOne("cards.selectCards", map);
+	public CardsVo selectCards(String cardCode) {
+		return sqlSessionTemplate.selectOne("cards.selectCards", cardCode);
 	}
 
 	@Override
-	public int insertCards(Map<String, String> map) {
-		return sqlSessionTemplate.insert("cards.insertCards", map);
+	public int insertCards(CardsVo cardVo) {
+		return sqlSessionTemplate.insert("cards.insertCards", cardVo);
 	}
 
 	@Override
@@ -37,9 +37,13 @@ public class CardsDao implements ICardsDao{
 	}
 
 	@Override
-	public int deleteCards(Map<String, String> map) {
-		return sqlSessionTemplate.delete("cards.deleteCards", map);
+	public int deleteCards(String cardCode) {
+		return sqlSessionTemplate.delete("cards.deleteCards", cardCode);
 	}
-	
+
+	@Override
+	public List<CardsVo> serachCards(CardsVo cardVo) {
+		return sqlSessionTemplate.selectList("cards.serachCards", cardVo);
+	}
 	
 }

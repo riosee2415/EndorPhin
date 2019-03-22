@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-cards.jsp
+	<h2>신용카드 등록</h2>
 </body>
 </html>

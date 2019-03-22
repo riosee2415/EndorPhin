@@ -11,7 +11,7 @@
                     <ul class="column">
                         <li><h3>기초 정보</h3></li>
                         <li><a href="${pageContext.request.contextPath }/clientview">거래처 등록</a></li>
-                        <li><a href="#">신용카드 등록</a></li>
+                        <li><a href="${pageContext.request.contextPath }/cardsList">신용카드 등록</a></li>
                         <li><a href="#">계정과목 등록</a></li>
                         <li><a href="#">부서 등록</a></li>
                     </ul>

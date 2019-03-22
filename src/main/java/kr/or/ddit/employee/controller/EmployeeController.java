@@ -18,12 +18,6 @@ public class EmployeeController {
 
 	@Resource(name = "employeeService")
 	private IEmployeeService employeeService;
-
-	
-	
-	
-	
-	
 	
 	
 	@RequestMapping(path = "/getAllEmployee", method = RequestMethod.GET)

@@ -77,6 +77,68 @@
 	</select>
 	
 	
+	<!-- 
+	거래처코드로 거래처 조죄하기
+	파라미터 타입 : map
+	파라미터 key : clientName
+	파라미터 key : clientCode
+	 -->
+	<select id="getBothClient" resultType="clientVo" parameterType="map">
+        SELECT
+            CLIENTCODE, 
+            CLIENTNAME, 
+            SALESNUMBER, 
+            MANAGER, 
+            TELEPHONE, 
+            FAXNUMBER, 
+            MANAGEREMAIL, 
+            BUSINESS, 
+            PLACE, 
+            RELATE, 
+            BUSINESSTYPE, 
+            BANKNAME, 
+            ACCOUNTNUMBER, 
+            USESTATUS
+        FROM CLIENT
+        WHERE CLIENTNAME LIKE  '%' || #{clientName} || '%'
+        		AND CLIENTCODE = #{clientCode}
+	</select>
+	
+	<insert id="insertClient" parameterType="clientVo">
+		INSERT INTO CLIENT
+            (CLIENTCODE, 
+            CLIENTNAME, 
+            SALESNUMBER, 
+            MANAGER, 
+            TELEPHONE, 
+            FAXNUMBER, 
+            MANAGEREMAIL, 
+            BUSINESS, 
+            PLACE, 
+            RELATE, 
+            BUSINESSTYPE, 
+            BANKNAME, 
+            ACCOUNTNUMBER, 
+            USESTATUS)	
+		VALUES
+            (
+            #{clientCode},
+            #{clientName},
+            #{salesNumber},
+            #{manager},
+            #{telephone},
+            #{faxNumber},
+            #{managerEmail},
+            #{business},
+            #{place},
+            #{relate},
+            #{businessType},
+            #{bankName},
+            #{accountNumber},
+            #{useStatus}
+            )
+            
+	</insert>
 	
 
 </mapper>

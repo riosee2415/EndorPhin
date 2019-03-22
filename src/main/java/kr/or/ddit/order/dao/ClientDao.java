@@ -67,4 +67,40 @@ public class ClientDao implements IClientDao{
 		
 	}
 
+	
+	
+	/**
+	* Method : getBothClient
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : ClientName과 ClientCode를 기준으로 거래처를 조회한다.
+	*/
+	@Override
+	public List<ClientVo> getBothClient(String clientName, String clientCode) {
+		
+		HashMap map = new HashMap();
+		map.put("clientName", clientName);
+		map.put("clientCode", clientCode);
+		List<ClientVo> clinetList = sqlSessionTemplate.selectList("client.getBothClient", map);
+		
+		return clinetList;
+	}
+
+
+	/**
+	* Method : insertClient
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param clientVo
+	* @return
+	* Method 설명 : 거래처 데이터 추가
+	*/
+	@Override
+	public int insertClient(ClientVo clientVo) {
+		int cnt = sqlSessionTemplate.insert("client.insertClient", clientVo);
+		
+		return cnt;
+	}
 }

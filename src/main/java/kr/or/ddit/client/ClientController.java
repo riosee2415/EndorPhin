@@ -44,7 +44,6 @@ public class ClientController {
 	
 	@RequestMapping(path="/seachCodeClient", method=RequestMethod.GET)
 	public String seachCodeClient(@RequestParam("cCode")String cCode, Model model) {
-		logger.debug("cCode : {}" , cCode);	
 		
 		List<ClientVo> clientList = clientService.getCodeClient(cCode);
 		model.addAttribute("clientList", clientList);
@@ -55,7 +54,6 @@ public class ClientController {
 	
 	@RequestMapping(path="/seachNameClient", method=RequestMethod.GET)
 	public String seachNameClient(@RequestParam("cName")String cName, Model model) {
-		logger.debug("cName : {}" , cName);	
 		
 		List<ClientVo> clientList = clientService.getNameClient(cName);
 		model.addAttribute("clientList", clientList);
@@ -65,12 +63,50 @@ public class ClientController {
 	
 	@RequestMapping(path="/seachBothClient", method=RequestMethod.GET)
 	public String seachBothClient(@RequestParam("BothName")String BothName
-								, @RequestParam("BothCode")String BothCode) {
+								, @RequestParam("BothCode")String BothCode
+								, Model model) {
 		
-		logger.debug("BothName : {}" , BothName);	
-		logger.debug("BothCode : {}" , BothCode);
+		List<ClientVo> clientList = clientService.getBothClient(BothName, BothCode);
+		model.addAttribute("clientList", clientList);
 		
 		return "clientview";
 	}
+	
+	@RequestMapping(path="/insertClient", method=RequestMethod.GET)
+	public String insertClient(	@RequestParam("frmClCode")String clientCode
+							, 	@RequestParam("frmClName")String clientName
+							, 	@RequestParam("frmClSalesNumber")String salesNumber
+							, 	@RequestParam("frmClManager")String manager
+							, 	@RequestParam("frmClTelephone")String telephone
+							, 	@RequestParam(name="frmClFaxNumber", defaultValue="")String faxNumber
+							, 	@RequestParam(name="frmClManagerEmail", defaultValue="")String managerEmail
+							, 	@RequestParam(name="frmClBusinessStyle", defaultValue="미정")String businessStyle
+							, 	@RequestParam(name="frmClPlace", defaultValue="미정")String place
+							, 	@RequestParam(name="frmClBusiness", defaultValue="미정")String business
+							, 	@RequestParam(name="frmClBankname", defaultValue="미정")String bankName
+							, 	@RequestParam(name="frmClAccountNumber", defaultValue="미정")String accountNumber
+							, 	@RequestParam(name="frmClRelate", defaultValue="미정")String relate) { 
+		
+		
+		
+			
+		return "redirect:/clientview";
+	}
+	
+	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

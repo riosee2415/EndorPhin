@@ -28,22 +28,23 @@
 			   
 		from attach_board
 		
-		where a.attachcode = #{attachcode}
+		where attachcode = #{attachcode}
 	</select>
 	
 	<!-- 첨부파일 등록 -->
 	<insert id="attach_boardInsert" parameterType="attach_boardVo">
-		insert into attached_file(attachcode,
-								  attachname,
-								  attachrealpath,
-								  attachrealname,
-								  boardno)
-								  
+		insert into attach_board
+					 		 (attachcode,
+							  attachname,
+							  attachrealpath,
+							  attachrealname,
+							  boardno)
+													  
 		    values(attachcode_seq.nextval,
-		     				 #{attachname, jdbcType=NULL},
-				 			 #{attachrealname, jdbcType=NULL},
-				 			 #{attachrealpath, jdbcType=NULL},
-				 			 #{boardno})
+		     				 #{attachName, jdbcType=NULL},
+				 			 #{attachRealpath, jdbcType=NULL},
+				 			 #{attachRealname, jdbcType=NULL},
+				 			 #{boardNo})
 	</insert>
 	
 	<!-- 첨부파일 삭제 -->
@@ -51,6 +52,13 @@
 		delete from attach_board
 		
 		 where boardno = #{boardno}
+	</delete>
+	
+	<!-- 특정 첨부파일만 삭제 -->
+	<delete id="attach_boardDeleteOne" parameterType="String">
+		delete from attach_board
+		
+		where attachCode = #{attachCode}
 	</delete>
 
 </mapper>

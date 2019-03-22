@@ -27,35 +27,34 @@
 			   
 		from board_detail
 		
-		where boardno = #{boardno}
+		where boardno = #{boardNo}
 		
 	</select>
 	
 	<!-- 게시글 수 조회 -->
-	<select id="postCnt" resultType="board_detailVo" parameterType="String">
+	<select id="postCnt" resultType="board_detailVo">
 		select count(*)
 		
     	from board_detail
-    	
-        where boardno = #{boardno}
 	</select>
 	
 	<!-- 게시글 등록 -->
 	<insert id="postInsert" parameterType="board_detailVo">
 		insert into board_detail
-			  (boardno,
-			   title,
-			   contents,
-			   postdate,
-			   boardtypecode,
-  			   userid)
+			  (boardno
+			  ,title
+			  ,contents
+			  ,postdate
+			  ,boardtypecode
+			  ,userid)
 						 
-		values(boardno_seq.nextval,
-			   title=#{title},
-			   contents=#{contents},
-			   sysdate,
-			   boardtypecode=#{boardtypecode},
-			   userid=#{userid})
+		values(BOARDNO_SEQ.nextval
+			  ,#{title}
+			  ,#{contents}
+			  ,sysdate
+			  ,#{boardTypeCode}
+			  ,#{userId})
+			  
 			   
 	</insert>
 	
@@ -65,18 +64,18 @@
 		
 		set title=#{title},
 			contents=#{contents},
-			sysdate,
-			boardtypecode=#{boardtypecode},
-			userid=#{userid}
+			postdate=sysdate,
+			boardtypecode=#{boardTypeCode},
+			userid=#{userId}
 			
-		where boardno = #{boardno}
+		where boardno = #{boardNo}
 	</update>
 	
 	<!-- 게시글 삭제 -->
 	<delete id="postDelete" parameterType="String">
  		delete from board_detail
  		
- 		where boardno = #{boardno}
+ 		where boardno = #{boardNo}
  	</delete>
 </mapper>
 

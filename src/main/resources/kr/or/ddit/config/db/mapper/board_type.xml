@@ -6,32 +6,31 @@
 
 	<!-- 전체 게시판 전체 조회 -->
 	<select id="boardAllList" resultType="board_typeVo">
-		select boardtypecode, boardtypename, usestatus
+		select boardTypeCode, boardTypeName, useStatus
 			from board_type
 	</select>
 	
 	<!-- 게시판 생성 -->
 	<insert id="boardInsert" parameterType="board_typeVo">
 		insert into board_type
-				(boardtypecode, boardtypename, usestatus)
+				(boardTypeCode, boardTypeName, useStatus)
 				
-				values (boardtypecode_seq.nextval, #{boardtypename}
-												 , nvl(#{usestatus, jdbcType=VARCHAR }, 'y'))
+				values (BOARDTYPECODE_SEQ.nextval, #{boardTypeName}, #{useStatus})
 	</insert>
 	
 	<!-- 게시판 수정 -->
 	<update id="boardUpdate" parameterType="board_typeVo">
 		update board_type
 		
-		set boardtypename=#{boardtypename}, usestatus=#{usestatus}
+		set boardTypeName=#{boardTypeName}, useStatus=#{useStatus}
 		
-		where boardtypecode=#{boardtypecode}
+		where boardTypeCode=#{boardTypeCode}
 	</update>
 	
 	<!-- 게시판 삭제 -->
 	<delete id="boardDelete" parameterType="String">
 		delete from board_type
-				where boardtypecode=#{boardtypecode}
+				where boardTypeCode=#{boardTypeCode}
 	</delete>
 	
 </mapper>

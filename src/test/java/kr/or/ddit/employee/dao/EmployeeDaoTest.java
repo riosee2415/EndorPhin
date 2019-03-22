@@ -1,10 +1,8 @@
 package kr.or.ddit.employee.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.annotation.Resource;
 
@@ -32,7 +30,7 @@ public class EmployeeDaoTest extends LogicConfig{
 	public void insertEmployeeTest() throws ParseException {
 		EmployeeVo employeeVo = new EmployeeVo();
 		employeeVo.setUserId("5");
-		employeeVo.setUserNm("멍청이");
+		employeeVo.setUserNm("硫띿껌�씠");
 		employeeVo.setBirthDate("19190101");
 		dao.insertEmployee(employeeVo);
 	}
@@ -40,5 +38,4 @@ public class EmployeeDaoTest extends LogicConfig{
 	public void deleteEmployeeTest() {
 		dao.deleteEmployee("5");
 	}
-
 }

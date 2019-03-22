@@ -9,5 +9,4 @@ public interface IEmployeeDao {
 	int insertEmployee(EmployeeVo employeeVo);
 	int deleteEmployee(String userId);
 	List<EmployeeVo> getAllEmployee();
-	
 }

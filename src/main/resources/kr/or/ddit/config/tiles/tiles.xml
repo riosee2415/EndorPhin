@@ -23,4 +23,13 @@
         </definition>
         
         
+        <definition name="employeeListTiles" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/employee/employeeList.jsp"/>
+        </definition>
+        
+        
+        <definition name="insertEmployeeTiles" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/employee/insertEmployeeForm.jsp"/>
+        </definition>
+        
 </tiles-definitions>

@@ -14,24 +14,23 @@ public class EmployeeDao implements IEmployeeDao{
 
 	@Resource(name="sqlSessionTemplate")
     private SqlSessionTemplate sqlSessionTemplate;
-	
+
 	@Override
-	public EmployeeVo selectEmployee(String userId) {
-		EmployeeVo employeeVo = sqlSessionTemplate.selectOne("employee.selectEmployee",userId);
-		return employeeVo;
+	public EmployeeVo selectEmployee(String user) {
+		return sqlSessionTemplate.selectOne("employee.selectEmployee", user);
 	}
 
 	@Override
-	public int insertEmployee(EmployeeVo employeeVo) {
-		int insert = sqlSessionTemplate.insert("employee.insertEmployee",employeeVo);
-		return insert;
+	public int insertEmployee(EmployeeVo vo) {
+		return sqlSessionTemplate.insert("employee.insertEmployee", vo);
 	}
 
 	@Override
 	public int deleteEmployee(String userId) {
-		int delete = sqlSessionTemplate.delete("employee.deleteEmployee",userId);
-		return delete;
+		return sqlSessionTemplate.delete("employee.deleteEmployee", userId);
 	}
+	
+
 
 	@Override
 	public List<EmployeeVo> getAllEmployee() {

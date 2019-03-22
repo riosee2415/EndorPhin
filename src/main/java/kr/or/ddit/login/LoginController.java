@@ -13,8 +13,15 @@ import kr.or.ddit.employee.model.EmployeeVo;
 @Controller
 public class LoginController {
 
+	
 	@Resource(name="employeeDao")
 	private IEmployeeDao dao;
+
+	
+	@RequestMapping(path="/")
+	public String on(){
+		return "login";
+	}
 	
 	@RequestMapping(path="/login",method=RequestMethod.GET)
 	public String login(){

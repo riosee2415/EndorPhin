@@ -50,7 +50,7 @@
                     </ul>
                     <ul class="column">
                         <li><h3>급여계산 관리</h3></li>
-                        <li><a href="#">급여조정</a></li>
+                        <li><a href="/payment">급여조정</a></li>
                         <li><a href="#">급여계산</a></li>
                         <li><a href="#">급여명세서</a></li>
                         <li><a href="#">급여명세서 인쇄/발송</a></li>

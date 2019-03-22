@@ -62,6 +62,14 @@ public class CardsController {
 		return "redirect:/cardsList";
 	}
 										  
+	@RequestMapping(path="/cardsDetail", method=RequestMethod.GET)
+	public String cardsDetail(CardsVo cardsVo, Model model, @RequestParam("cardCode") String cardCode ){
+		
+		cardsVo = cardsService.selectCards(cardCode);
+		model.addAttribute("cardsVo", cardsVo);
+	
+		return "cardsDetail";
+	}
 	
 	
 }

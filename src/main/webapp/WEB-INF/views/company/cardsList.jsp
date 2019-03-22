@@ -31,6 +31,7 @@
 					<c:forEach items="${cardsList }" var="vo">
 						<input type="hidden" class="cardCode" name="cardCode" value="${vo.cardCode }"/>
 						<tr class="cardsTr" data-cardCode="${vo.cardCode }">
+						
 							<td><input type="checkbox" name="checkRow" value="${vo.cardCode }" ></td>
 							<td>${vo.cardCode }</td>
 							<td>${vo.cardNumber }</td>
@@ -98,7 +99,7 @@
 				checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); //맨끝 콤마 지우기  
 				$("#checkRow").val(checkRow);
 				
-				alert(checkRow);
+			//	alert(checkRow);
 			
 			if(checkRow === ""){		
 				alert("삭제할 대상을 선택하세요");
@@ -106,15 +107,29 @@
 			}
  				$("#del_frm").submit();
 		}
+		
+  	   $(document).ready(function(){
+  	
+         $(".cardsTr").on("click",function(){
+              var cardCode = $(this).data("cardCode");
+          
+              $("#cardCode").val(cardCode);
+          	  $("#frm").submit();
+          });
+       });
 	</script>
 	
-	<form id="frm1" action="${pageContext.request.contextPath }/serachCards"  method="get">
+	<form id="frm1" action="${pageContext.request.contextPath }/serachCards" >
 		<input type="hidden" name="card_num" id="card_num" />
 		<input type="hidden" name="card_name" id="card_name" />
 	</form>
  	
- 	<form id="del_frm" action="${pageContext.request.contextPath }/deleteCards"  method="get">\
+ 	<form id="del_frm" action="${pageContext.request.contextPath }/deleteCards">
  		<input type="hidden" id="checkRow" name="checkRow">
+ 	</form>
+ 	
+ 	<form id="frm" action="${pageContext.request.contextPath }/cardsDetail" >
+ 		<input type="hidden" id="cardCode" name="cardCode"value="${cardCode }">
  	</form>
 </body>
 </html>

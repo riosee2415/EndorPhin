@@ -18,7 +18,11 @@
         	<put-attribute name="content" value="/WEB-INF/views/client/clientview.jsp"/>
         </definition>
         
-          <definition name="cardsList" extends="layout">
+		<definition name="cardsDetail" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/company/cardsDetail.jsp"/>
+        </definition>
+        
+         <definition name="cardsList" extends="layout">
         	<put-attribute name="content" value="/WEB-INF/views/company/cardsList.jsp"/>
         </definition>
         

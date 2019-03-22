@@ -45,7 +45,7 @@
 			memo,
 			companyCode
 		from cards
-		 where cardNumber like  '%' || #{cardNumber} || '%'
+		 where cardNumber like '%' || #{cardNumber} || '%'
 		 or cardName like '%' || #{cardName} || '%'
 	</select>
 	

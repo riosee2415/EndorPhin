@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import kr.or.ddit.order.dao.IClientDao;
 import kr.or.ddit.order.model.ClientVo;
 import kr.or.ddit.order.service.ICilentService;
 
@@ -72,22 +71,45 @@ public class ClientController {
 		return "clientview";
 	}
 	
+	
+    
+    
 	@RequestMapping(path="/insertClient", method=RequestMethod.GET)
-	public String insertClient(	@RequestParam("frmClCode")String clientCode
-							, 	@RequestParam("frmClName")String clientName
-							, 	@RequestParam("frmClSalesNumber")String salesNumber
-							, 	@RequestParam("frmClManager")String manager
-							, 	@RequestParam("frmClTelephone")String telephone
-							, 	@RequestParam(name="frmClFaxNumber", defaultValue="")String faxNumber
-							, 	@RequestParam(name="frmClManagerEmail", defaultValue="")String managerEmail
-							, 	@RequestParam(name="frmClBusinessStyle", defaultValue="미정")String businessStyle
-							, 	@RequestParam(name="frmClPlace", defaultValue="미정")String place
-							, 	@RequestParam(name="frmClBusiness", defaultValue="미정")String business
-							, 	@RequestParam(name="frmClBankname", defaultValue="미정")String bankName
-							, 	@RequestParam(name="frmClAccountNumber", defaultValue="미정")String accountNumber
-							, 	@RequestParam(name="frmClRelate", defaultValue="미정")String relate) { 
+	public String insertClient(	@RequestParam(name="frmClCode", defaultValue="9999")String clientCode
+							, 	@RequestParam(name="frmClName", defaultValue="미등록")String clientName
+							, 	@RequestParam(name="frmClSalesNumber", defaultValue="9999")String salesNumber
+							, 	@RequestParam(name="frmClManager", defaultValue="미등록")String manager
+							, 	@RequestParam(name="frmClTelephone", defaultValue="미등록")String telephone
+							, 	@RequestParam(name="frmClFaxNumber", defaultValue="9999")String faxNumber
+							, 	@RequestParam(name="frmClManagerEmail", defaultValue="미등록")String managerEmail
+							, 	@RequestParam(name="frmClBusinessType", defaultValue="미등록")String businessType
+							, 	@RequestParam(name="frmClPlace", defaultValue="미등록")String place
+							, 	@RequestParam(name="frmClBusiness", defaultValue="미등록")String business
+							, 	@RequestParam(name="frmClBankname", defaultValue="미등록")String bankName
+							, 	@RequestParam(name="frmClAccountNumber", defaultValue="9999")String accountNumber
+							, 	@RequestParam(name="frmClRelate", defaultValue="미등록")String relate
+							,	Model model) { 
 		
 		
+		logger.debug("businessType : {}" , businessType);
+		
+		ClientVo clientVo = new ClientVo();
+		
+		clientVo.setClientCode(clientCode);
+		clientVo.setClientName(clientName);
+		clientVo.setSalesNumber(salesNumber);
+		clientVo.setManager(manager);
+		clientVo.setTelephone(telephone);
+		clientVo.setFaxNumber(faxNumber);
+		clientVo.setManagerEmail(managerEmail);
+		clientVo.setBusinessType(businessType);
+		clientVo.setPlace(place);
+		clientVo.setBusiness(business);
+		clientVo.setBankName(bankName);
+		clientVo.setAccountNumber(accountNumber);
+		clientVo.setRelate(relate);
+		
+		int cnt = clientService.insertClient(clientVo);
 		
 			
 		return "redirect:/clientview";

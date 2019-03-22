@@ -82,22 +82,20 @@ public class ClientDaoTest extends LogicConfig{
 
 		/***When***/
 		ClientVo vo = new ClientVo();
-		vo.setClientCode("100");
+		
+		vo.setClientCode("102");
 		vo.setClientName("지청과");
 		vo.setSalesNumber("1231212345");
 		vo.setFaxNumber("12312312");
 		vo.setManager("지무무");
-		vo.setManagerEmail("aaaadddfff");
+		vo.setManagerEmail("asdf@ads.com");
 		vo.setTelephone("0421230101");
 		vo.setBankName("국민은행");
-		vo.setAccountNumber("01010101010101");
-		vo.setBusiness("ddd");
-		vo.setBusinessType("aaa");
-		vo.setUseStatus("1");
+		vo.setAccountNumber("4424242");
+		vo.setBusiness("도소매");
+		vo.setBusinessType("과세");
 		vo.setPlace("zzzz");
-		vo.setRelate("zzxc v");
-		
-		
+		vo.setRelate("zzxcv");
 		
 		int cnt = clientDao.insertClient(vo);
 		

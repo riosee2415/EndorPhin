@@ -54,16 +54,19 @@
 </head>
 <body>
 
+	<input type="hidden" id="failCheck" name="failCheck" value="${failCheck }"/>
+	
+
 
 	<h2>거래처 관리</h2>
 	<hr>
-	<br />
 	거래처코드 : <input name="client_code" id="client_code" type="text" />
 	거래처명 : <input name="client_name" id="client_name" type="text" />
 	<input type="button" class="btn btn-primary" id="seachBtn" value="검색" onclick="seachClientBtn()" />
 	<input type="button" class="btn btn-default" value="전체조회" onclick="location.href='${pageContext.request.contextPath }/clientview'" />
 	<br /><br />
-	<table>
+	<div class="table-responsive">
+         <table class="table table-striped">
 		<thead>
 			<tr>
 				<th>거래처코드</th>
@@ -111,6 +114,7 @@
 			</tbody>
 		</c:forEach>
 	</table>
+	</div>
 	<br />
 
 
@@ -189,8 +193,8 @@
 					
 					<div class="form-group">
 						<label for="InputEmail">사업자유형</label>
-						<input type="radio" name="clBusinessStyle" value="과세" checked="checked" /> 과세
-						<input type="radio" name="clBusinessStyle" value="면세"/> 면세
+						<input type="radio" name="clBusinessType" value="과세" checked="checked" /> 과세
+						<input type="radio" name="clBusinessType" value="면세"/> 면세
 						<input type="button" value="면세업종" data-toggle="modal" data-target="#my90sizeCenterModal"/> 
 					</div>
 					
@@ -317,7 +321,7 @@
 		<input type="hidden" id="frmClTelephone" name="frmClTelephone" />
 		<input type="hidden" id="frmClFaxNumber" name="frmClFaxNumber" />
 		<input type="hidden" id="frmClManagerEmail" name="frmClManagerEmail" />
-		<input type="hidden" id="frmClBusinessStyle" name="frmClBusinessStyle" />
+		<input type="hidden" id="frmClBusinessType" name="frmClBusinessType" />
 		<input type="hidden" id="frmClPlace" name="frmClPlace" />
 		<input type="hidden" id="frmClBusiness" name="frmClBusiness" />
 		<input type="hidden" id="frmClBankname" name="frmClBankname" />
@@ -359,7 +363,7 @@
 		var telephone		= $("#clTelephone").val();
 		var faxNumber		= $("#clFaxNumber").val();
 		var managerEmail	= $("#clManagerEmail").val();
-		var businessStyle	= $(":input:radio[name=clBusinessStyle]:checked").val();
+		var businessType	= $(":input:radio[name=clBusinessType]:checked").val();
 		var zipcode			= $("#zipcode").val();
 		var place1 			= $("#clPlace1").val();
 		var place2			= $("#clPlace2").val();
@@ -376,7 +380,7 @@
 		$("#frmClTelephone").val(telephone);
 		$("#frmClFaxNumber").val(faxNumber);
 		$("#frmClManagerEmail").val(managerEmail);
-		$("#frmClBusinessStyle").val(businessStyle);
+		$("#frmClBusinessType").val(businessType);
 		$("#frmClPlace").val(place);
 		$("#frmClBusiness").val(business);
 		$("#frmClBankname").val(bankName);

@@ -58,7 +58,7 @@
 	 -->
 	<select id="getNameClient" resultType="clientVo" parameterType="map">
         SELECT
-            CLIENTCODE,Rca 
+            CLIENTCODE,
             CLIENTNAME, 
             SALESNUMBER, 
             MANAGER, 
@@ -106,7 +106,8 @@
 	
 	<insert id="insertClient" parameterType="clientVo">
 		INSERT INTO CLIENT
-            (CLIENTCODE, 
+            (
+            CLIENTCODE, 
             CLIENTNAME, 
             SALESNUMBER, 
             MANAGER, 
@@ -119,7 +120,8 @@
             BUSINESSTYPE, 
             BANKNAME, 
             ACCOUNTNUMBER, 
-            USESTATUS)	
+            USESTATUS
+            )	
 		VALUES
             (
             #{clientCode},
@@ -135,7 +137,7 @@
             #{businessType},
             #{bankName},
             #{accountNumber},
-            #{useStatus}
+            1
             )
             
 	</insert>

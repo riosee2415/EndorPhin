@@ -15,13 +15,6 @@ public class EmployeeDao implements IEmployeeDao{
 	@Resource(name="sqlSessionTemplate")
     private SqlSessionTemplate sqlSessionTemplate;
 
-	
-	
-	@Override
-	public List<EmployeeVo> getAllEmployee() {
-		return sqlSessionTemplate.selectList("employee.getAllEmployee");
-	}
-
 	@Override
 	public EmployeeVo selectEmployee(String user) {
 		return sqlSessionTemplate.selectOne("employee.selectEmployee", user);
@@ -38,5 +31,11 @@ public class EmployeeDao implements IEmployeeDao{
 	}
 	
 
+
+	@Override
+	public List<EmployeeVo> getAllEmployee() {
+		List<EmployeeVo> selectList = sqlSessionTemplate.selectList("employee.getAllEmployee");
+		return selectList;
+	}
 
 }

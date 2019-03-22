@@ -12,9 +12,15 @@
 		values
 		(#{userid},#{usernm},#{deptcode,jdbcType=VARCHAR},#{positioncode,jdbcType=VARCHAR}
 		,#{rankcode,jdbcType=VARCHAR},#{continuousyear,jdbcType=VARCHAR},#{relate},sysdate,sysdate,#{password})
+		(#{userId},#{userNm},
+		nvl(#{deptCode, jdbcType=VARCHAR},null),
+		nvl(#{positionCode, jdbcType=VARCHAR},null)
+		,nvl(#{rankCode, jdbcType=VARCHAR},null),
+		nvl(#{continuousYear, jdbcType=VARCHAR},null),
+		nvl(#{relate, jdbcType=VARCHAR},null),
+		sysdate,to_date(#{birthDate},'yyyyMMdd'),nvl(#{password, jdbcType=VARCHAR},null))
 
 	</insert>
-
 
 
 	<!-- 사원 전체 불러오기 -->

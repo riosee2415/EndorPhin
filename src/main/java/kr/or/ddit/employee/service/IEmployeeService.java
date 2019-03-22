@@ -4,7 +4,6 @@ import java.util.List;
 
 import kr.or.ddit.employee.model.EmployeeVo;
 
-
 public interface IEmployeeService {
 	
 	//사원전체 가져오기
@@ -21,5 +20,4 @@ public interface IEmployeeService {
 	int deleteEmployee(String userId);
 	
 	
-
 }

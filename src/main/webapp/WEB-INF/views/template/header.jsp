@@ -45,7 +45,7 @@
                     <ul class="column">
                         <li><h3>사원정보관리</h3></li>
                         <li><a href="${cp }/employee/getAllEmployee">사원등록</a></li>
-                        <li><a href="#">급여등록</a></li>
+                        <li><a href="/addPayment">급여등록</a></li>
                         <li><a href="#">퇴직자</a></li>
                     </ul>
                     <ul class="column">

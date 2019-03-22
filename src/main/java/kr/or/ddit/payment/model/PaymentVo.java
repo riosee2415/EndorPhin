@@ -14,7 +14,7 @@ public class PaymentVo {
 	String totalWage;
 	String totalSalary;
 	String relate;
-	Date payDy;
+	String payDay;
 	
 	public String getPayCode() {
 		return payCode;
@@ -46,11 +46,11 @@ public class PaymentVo {
 	public void setRelate(String relate) {
 		this.relate = relate;
 	}
-	public Date getPayDy() {
-		return payDy;
+	public String getPayDay() {
+		return payDay;
 	}
-	public void setPayDy(Date payDy) {
-		this.payDy = payDy;
+	public void setPayDay(String payDay) {
+		this.payDay = payDay;
 	}
 	
 	

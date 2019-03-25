@@ -22,7 +22,7 @@
 	거래처코드 : <input name="client_code" id="client_code" type="text" />
 	거래처명 : <input name="client_name" id="client_name" type="text" />
 	<input type="button" class="btn btn-primary" id="seachBtn" value="검색" onclick="seachClientBtn()" />
-	<input type="button" class="btn btn-default" value="전체조회" onclick="location.href='${pageContext.request.contextPath }/clientview'" />
+	<input type="button" class="btn btn-primary" value="전체조회" onclick="location.href='${pageContext.request.contextPath }/clientview'" />
 	<br /><br />
 	<div class="table-responsive">
          <table class="table table-striped">
@@ -341,8 +341,8 @@
 			var faxNumber		= $("#clFaxNumber").val();
 			var managerEmail	= $("#clManagerEmail").val();
 			var businessType	= $(":input:radio[name=clBusinessType]:checked").val();
-			var zipcode			= $("#zipcode").val();
-			var place1 			= $("#clPlace1").val();
+			var zipcode			= $("#zipcode").val() +"_";
+			var place1 			= $("#clPlace1").val() +"_";
 			var place2			= $("#clPlace2").val();
 			var place 			= zipcode + place1 + place2;
 			var business		= $("#clBusiness").val();

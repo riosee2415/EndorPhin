@@ -84,4 +84,12 @@ public class ClientService implements ICilentService{
 		return clientDao.insertClient(clientVo);
 	}
 
+	@Override
+	public int updateClient(ClientVo clientVo) {
+		return clientDao.updateClient(clientVo);
+	}
+	
+	
+	
+
 }

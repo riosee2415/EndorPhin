@@ -41,7 +41,7 @@ public class ClientDao implements IClientDao{
 	*/
 	@Override
 	public List<ClientVo> getCodeClient(String clientCode) {
-		HashMap map = new HashMap();
+		HashMap<String, String>  map = new HashMap<String, String> ();
 		map.put("clientCode", clientCode);
 		List<ClientVo> clinetList = sqlSessionTemplate.selectList("client.getCodeClient", map);
 		
@@ -59,7 +59,7 @@ public class ClientDao implements IClientDao{
 	*/
 	@Override
 	public List<ClientVo> getNameClient(String clientName) {
-		HashMap map = new HashMap();
+		HashMap<String, String>  map = new HashMap<String, String> ();
 		map.put("clientName", clientName);
 		List<ClientVo> clinetList = sqlSessionTemplate.selectList("client.getNameClient", map);
 		
@@ -80,9 +80,10 @@ public class ClientDao implements IClientDao{
 	@Override
 	public List<ClientVo> getBothClient(String clientName, String clientCode) {
 		
-		HashMap map = new HashMap();
+		HashMap<String, String> map = new HashMap<String, String> ();
 		map.put("clientName", clientName);
 		map.put("clientCode", clientCode);
+		
 		List<ClientVo> clinetList = sqlSessionTemplate.selectList("client.getBothClient", map);
 		
 		return clinetList;
@@ -100,6 +101,21 @@ public class ClientDao implements IClientDao{
 	@Override
 	public int insertClient(ClientVo clientVo) {
 		int cnt = sqlSessionTemplate.insert("client.insertClient", clientVo);
+		
+		return cnt;
+	}
+
+	/**
+	* Method : updateClient
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param clientVo
+	* @return
+	* Method 설명 : 거래처 코드를 기준으로 거래처 수정하기
+	*/
+	@Override
+	public int updateClient(ClientVo clientVo) {
+		int cnt = sqlSessionTemplate.update("client.updateClient", clientVo);
 		
 		return cnt;
 	}

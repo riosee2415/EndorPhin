@@ -156,6 +156,47 @@ public class ClientController {
 		return "viewDetailClient";
 	}
 	
+	
+	@RequestMapping(path="/clientUpdate", method=RequestMethod.POST)
+	public String clientUpdate(	 @RequestParam(name="frmclientCode", defaultValue="미등록")String clientCode
+								,@RequestParam(name="frmclientName", defaultValue="미등록")String clientName
+								,@RequestParam(name="frmsalesNumber", defaultValue="미등록")String salesNumber
+								,@RequestParam(name="frmmanager", defaultValue="미등록")String manager
+								,@RequestParam(name="frmtelephone", defaultValue="미등록")String telephone
+								,@RequestParam(name="frmfaxNumber", defaultValue="미등록")String faxNumber
+								,@RequestParam(name="frmmanagerEmail", defaultValue="미등록")String managerEmail
+								,@RequestParam(name="frmbusiness", defaultValue="미등록")String business
+								,@RequestParam(name="frmplace", defaultValue="미등록")String place
+								,@RequestParam(name="frmrelate", defaultValue="미등록")String relate
+								,@RequestParam(name="frmbusinessType", defaultValue="미등록")String businessType
+								,@RequestParam(name="frmbankName", defaultValue="미등록")String bankName
+								,@RequestParam(name="frmaccountNumber", defaultValue="미등록")String accountNumber
+								,@RequestParam(name="frmuseStatus", defaultValue="미등록")String useStatus
+								) {
+		
+		ClientVo vo = new ClientVo();
+		vo.setClientCode(clientCode);
+		vo.setClientName(clientName);
+		vo.setSalesNumber(salesNumber);
+		vo.setManager(manager);
+		vo.setTelephone(telephone);
+		vo.setFaxNumber(faxNumber);
+		vo.setManagerEmail(managerEmail);
+		vo.setBusiness(businessType);
+		vo.setPlace(place);
+		vo.setRelate(relate);
+		vo.setBusinessType(businessType);
+		vo.setBankName(bankName);
+		vo.setAccountNumber(accountNumber);
+		vo.setUseStatus(useStatus);
+		
+		int cnt = clientService.updateClient(vo);
+		
+		
+			
+		return "redirect:/viewDetailClient?clientCode="+clientCode;
+	}
+	
 
 }
 

@@ -62,4 +62,15 @@ public interface IClientDao {
 	int insertClient(ClientVo clientVo);
 	
 	
+	/**
+	* Method : updateClient
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param clientVo
+	* @return
+	* Method 설명 : 거래처 코드를 기준으로 거래처 수정하기
+	*/
+	int updateClient(ClientVo clientVo);
+	
+	
 }

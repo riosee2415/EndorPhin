@@ -16,6 +16,13 @@ width : 100%;
 color : white;
 background-color: #6E6867;
 }
+
+.form-group{
+
+width: auto;
+}
+
+
 </style>
 
 
@@ -42,12 +49,16 @@ background-color: #6E6867;
 					<th>입사일</th>
 				</tr>
 			</thead>
+			
 			<tbody>
 				<c:forEach items="${allEmployee}" var="allEmployee">
 					<tr class="boardTr" data-userId="${allEmployee.userId}">
 						<td><input type="checkbox" name="check"
 							value="${allEmployee.userId}" style="width: 30px; height: 30px;"></td>
-						<td>${allEmployee.userId }</td>
+							
+            			<td><a href="${cp}/employee/detailEmployee?userId=${allEmployee.userId  }">
+         				 ${allEmployee.userId  }</a></td>
+						
 						<td>${allEmployee.userNm }</td>
 						<td>${allEmployee.deptCode }</td>
 						<td>${allEmployee.positionCode }</td>
@@ -72,6 +83,7 @@ background-color: #6E6867;
 
 </div>
 	
+	
 	<!-- 80% size Modal -->
 <div class="modal fade" id="my80sizeModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeModalLabel">
   <div class="modal-dialog modal-80size" role="document">
@@ -80,10 +92,13 @@ background-color: #6E6867;
       </div>
       <div class="modal-body">
         <div class="form-group">
-						<form action="${cp}/employee/insertEmployee" method="post">
+						<form action="${cp}/employee/insertEmployee" method="post" enctype="multipart/form-data">
 							<label for="inputName">사원번호</label> <input type="text"
-								class="form-control" name="userId" placeholder="사원번호를 입력해 주세요">
-					</div>
+								class="form-control" id="userId" name="userId" placeholder="사원번호를 입력해 주세요">
+								<input type="button" id="emplCheck" name="emplCheck" value="중복체크"/> 
+								<span id="duplicate"></span>
+								
+				</div>
 					<div class="form-group">
 						<label for="InputEmail">사원명</label> <input type="text"
 							class="form-control" name="userNm" placeholder="사원명을 입력해주세요">
@@ -146,6 +161,10 @@ background-color: #6E6867;
 						<label for="inputtelNO">생년월일</label> <input type="text"
 							class="form-control" id="inputtelNO" name="BirthDate" placeholder="생년월일을 입력하세요">
 					</div>
+					<div class="form-group">
+						<label for="inputtelNO">사진첨부</label> <button><input type="file"
+							class="form-control" name="realFilename"></button>
+					</div>
       </div>
       <div class="modal-footer">
       <button type="submit" class="btn btn-default">등록</button>
@@ -162,14 +181,45 @@ background-color: #6E6867;
 
 
 
-
-
+<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
 
 	<script>
-		//문서로딩이 완료된 이후 이벤트 등록
+	
+	
+	/*Duplication Check*/
+	$("#emplCheck").on("click", function(){
+		$.ajax({
+			url			: "${pageContext.request.contextPath }/employee/emplIdAjax" ,
+			method		: "post",
+			data		: "userId="+$("#userId").val(),
+			success		: function(userIdCode) {
+				transDupl(userIdCode);
+				
+			}
+		});
+	});
+	var duplicateCode = "";
+	
+	function transDupl(userIdCode){
+		if(userIdCode == 1){
+			insertFlag = "1";
+			duplicateCode = "<b><font color='blue'>사용가능한 사원번호 입니다. </font></b>";
+			$("#duplicate").html(duplicateCode);
+		} else if (userIdCode == 0){
+			duplicateCode = "<b><font color='red'>중복된 사원번호 가 있습니다.</font></b>";
+			$("#duplicate").html(duplicateCode);
+		} else if (userIdCode == "WS"){
+			duplicateCode = "<b><font color='red'>사원번호를 입력하세요.</font></b>";
+			$("#duplicate").html(duplicateCode);
+		}
+		
+	}
 
 		$(document).ready(function() {
+			
+		
 			
 			 //server side 에서 비교
 			<c:if test="${msg != null}">
@@ -177,7 +227,7 @@ background-color: #6E6867;
 			</c:if> 
 			
 			
-			//사용자 tr 태그 클릭시 이벤트 핸들러
+			 //사용자 tr 태그 클릭시 이벤트 핸들러
 			$("#cancleBtn").click(function() {
 
 				$('input:checkbox[name="check"]:checked').each(function() {
@@ -189,9 +239,9 @@ background-color: #6E6867;
 				
 				});
 
-			});
+			}); 
 			
-			$(".boardTr").click(function() {
+			/* $(".boardTr").click(function() {
 
 
 
@@ -202,7 +252,7 @@ background-color: #6E6867;
 				$("#userId").val(userId);
 				$("#frm2").submit();
 
-			});
+			}); */
 			
 			
 			

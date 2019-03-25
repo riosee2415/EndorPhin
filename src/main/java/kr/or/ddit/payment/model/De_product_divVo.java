@@ -10,12 +10,31 @@ public class De_product_divVo {
 	String deductName;
 	String useStatus;
 	String relate;
+	String taxStatus;
+	String bonusStatus;
 	
+	@Override
+	public String toString() {
+		return "De_product_divVo [deductCode=" + deductCode + ", deductName=" + deductName + ", useStatus=" + useStatus
+				+ ", relate=" + relate + ", taxStatus=" + taxStatus + ", bonusStatus=" + bonusStatus + "]";
+	}
 	public String getDeductCode() {
 		return deductCode;
 	}
 	public void setDeductCode(String deductCode) {
 		this.deductCode = deductCode;
+	}
+	public String getTaxStatus() {
+		return taxStatus;
+	}
+	public void setTaxStatus(String taxStatus) {
+		this.taxStatus = taxStatus;
+	}
+	public String getBonusStatus() {
+		return bonusStatus;
+	}
+	public void setBonusStatus(String bonusStatus) {
+		this.bonusStatus = bonusStatus;
 	}
 	public String getDeductName() {
 		return deductName;

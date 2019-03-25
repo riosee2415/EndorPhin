@@ -49,17 +49,21 @@
         	<put-attribute name="content" value="/WEB-INF/views/employee/employeeDetail.jsp"/>
         </definition>
         
-        
-        
-         <definition name="testTiles" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/test.jsp"/>
+        <definition name="viewDetailClient" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/client/viewDetailClient.jsp"/>
         </definition>
         
         
         
         
         
+         <definition name="testTiles" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/test.jsp"/>
+        </definition>
         
+         <definition name="addDeproductView" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/payment/deproductList.jsp"/>
+        </definition>
         
         
         

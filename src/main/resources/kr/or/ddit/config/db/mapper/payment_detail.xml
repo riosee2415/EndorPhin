@@ -8,10 +8,11 @@
 		<!-- 급여/공제 상세 입력 -->
 	<insert id="insertPayment_detail" parameterType="payment_detailVo">
 		insert into payment_detail
-		(paydetailcode, deductcode, paycode, deductpay, taxstatus, bonusstatus, usestatus)
+		(paydetailcode, deductcode, paycode, deductpay,  usestatus)
 		values
-		(#{paydetailcode},#{deductcode},#{paycode},#{deductpay}
-		,#{taxstatus},#{bonusstatus},#{usestatus})
+		(#{payDetailCode},#{deductCode},#{payCode},
+		nvl(#{deductPay, jdbcType=VARCHAR},null),
+		#{useStatus})
 
 	</insert>
 
@@ -19,7 +20,7 @@
 	<!-- 급여/공제 상세  전체 불러오기 -->
 	<select id="getAllPayment_detail" resultType="payment_detailVo">
 		select
-		paydetailcode, deductcode, paycode, deductpay, taxstatus, bonusstatus, usestatus
+		paydetailcode, deductcode, paycode, deductpay, usestatus
 		from payment_detail
 	</select>
 
@@ -28,9 +29,9 @@
 	<select id="selectPayment_detail" resultType="payment_detailVo"
 		parameterType="map">
 		select
-		paydetailcode, deductcode, paycode, deductpay, taxstatus, bonusstatus, usestatus
+		paydetailcode, deductcode, paycode, deductpay, usestatus
 		from
-		payment_detail where paydetailcode = #{paydetailcode}
+		payment_detail where paydetailcode = #{payDetailCode}
 	</select>
 
 
@@ -40,8 +41,15 @@
 		where paydetailcode = #{paydetailcode}
 	</delete>
 
-
-
+	<!-- 급여/공제 구분하여 가져오기 -->
+	<select id="selectPayment_detailStatus" resultType="payment_detailVo"
+		parameterType="map">
+		select
+		paydetailcode, deductcode, paycode, deductpay, usestatus
+		from
+		payment_detail where usestatus = #{useStatus}
+	</select>
+	
 
 
 

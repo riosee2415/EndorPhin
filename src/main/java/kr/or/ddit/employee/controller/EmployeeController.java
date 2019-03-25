@@ -1,6 +1,9 @@
 package kr.or.ddit.employee.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
@@ -11,17 +14,27 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.or.ddit.employee.model.EmployeeVo;
+import kr.or.ddit.employee.model.Employee_detailVo;
+import kr.or.ddit.employee.service.IEmployeeDetailService;
 import kr.or.ddit.employee.service.IEmployeeService;
 
 @RequestMapping("/employee")
 @Controller
 public class EmployeeController {
 	private Logger logger = LoggerFactory.getLogger(EmployeeController.class);
+	
+	
 	@Resource(name = "employeeService")
 	private IEmployeeService employeeService;
+	
+	@Resource(name = "employeeDetailService")
+	private IEmployeeDetailService employeeDetailService;
 	
 	
 	@RequestMapping(path = "/getAllEmployee", method = RequestMethod.GET)
@@ -43,10 +56,30 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(path = "/insertEmployee", method = RequestMethod.POST)
-	public String insertEmployee_POST(Model model, EmployeeVo vo,RedirectAttributes ra) {
+	public String insertEmployee_POST(Model model, EmployeeVo vo,RedirectAttributes ra,
+			MultipartRequest multparts) throws IllegalStateException, IOException {
+		employeeService.insertEmployee(vo);
 		
-		int insertEmployee = employeeService.insertEmployee(vo);
+		MultipartFile file = multparts.getFile("realFilename");
+		Employee_detailVo detailVo = new Employee_detailVo();
 		
+		String file_name = "";
+		String file_path = "";
+		
+		
+		if (file.getSize() > 0) {
+			file_name = file.getOriginalFilename();
+			file_path = ("c:\\picture\\" + UUID.randomUUID().toString());
+			file.transferTo(new File(file_path));
+			
+			detailVo.setUserId(vo.getUserId());
+			detailVo.setImg_name(file_name);
+			detailVo.setImg_path(file_path);
+
+		}
+		
+							 
+		                     employeeDetailService.insertEmployeeDetail(detailVo);
 		
 		ra.addFlashAttribute("msg", "정상 등록 되었습니다");
 		return "redirect:/employee/getAllEmployee";
@@ -67,7 +100,6 @@ public class EmployeeController {
 	@RequestMapping(path = "/detailEmployee", method = RequestMethod.GET)
 	public String detailEmployee(Model model, EmployeeVo vo,RedirectAttributes ra,
 			@RequestParam String userId) {
-		logger.debug("감자 : {}",userId);
 		
 		
 		return "employeeDetailTiles";
@@ -81,6 +113,32 @@ public class EmployeeController {
 		return "testTiles";
 	}
 	
+	
+	@RequestMapping(path="/emplIdAjax", method=RequestMethod.POST)
+	@ResponseBody
+	public String emplIdAjax(@RequestParam(name="userId", defaultValue="WS")String userId) {
+		
+		
+		List<EmployeeVo> allEmployee = employeeService.getAllEmployee();
+		String userIdCode = "1";
+		
+		for(int i = 0; i < allEmployee.size(); i++) {
+			// Duplicate Code = 0
+			if(userId.equals(allEmployee.get(i).getUserId())){
+				userIdCode = "0";
+				return userIdCode;
+				
+			// WhiteSpace Code = WS
+			} else if(userId.equals("WS")) {
+				userIdCode = "WS";
+				return userIdCode;
+			}
+		}
+		
+		return userIdCode;
+		
+		
+	}
 	
 	
 	

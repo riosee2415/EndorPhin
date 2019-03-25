@@ -5,50 +5,9 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="icon" href="../../favicon.ico">
 
-<title>Dashboard Template for Bootstrap</title>
+<title>EndoRPhin-거래처관리</title>
 
-<!-- Bootstrap core CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- Custom styles for this template -->
-<link href="<%=request.getContextPath()%> /css/dashboard.css"
-	rel="stylesheet">
-
-<link
-	href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<script src="${cp }/js/jquery-3.3.1.min.js"></script>
-
-<style>
-.modal.modal-center {
-	text-align: center;
-	z-index: 50;
-}
-
-@media screen and (min-width: 768px) {
-	.modal.modal-center:before {
-		display: inline-block;
-		vertical-align: middle;
-		content: " ";
-		height: 100%;
-	}
-}
-
-.modal-dialog.modal-center {
-	display: inline-block;
-	text-align: left;
-	vertical-align: middle;
-}
-</style>
 
 
 </head>
@@ -63,7 +22,7 @@
 	거래처코드 : <input name="client_code" id="client_code" type="text" />
 	거래처명 : <input name="client_name" id="client_name" type="text" />
 	<input type="button" class="btn btn-primary" id="seachBtn" value="검색" onclick="seachClientBtn()" />
-	<input type="button" class="btn btn-default" value="전체조회" onclick="location.href='${pageContext.request.contextPath }/clientview'" />
+	<input type="button" class="btn btn-primary" value="전체조회" onclick="location.href='${pageContext.request.contextPath }/clientview'" />
 	<br /><br />
 	<div class="table-responsive">
          <table class="table table-striped">
@@ -95,7 +54,7 @@
 									 	data-client_accountnumber="${client.accountNumber }"
 									 	data-client_usestatus="${client.useStatus }">
 					
-					<td>${client.clientCode }</td>
+					<td><a href="${pageContext.request.contextPath }/viewDetailClient?clientCode=${client.clientCode }">${client.clientCode }</a></td>
 					<td>${client.clientName }</td>
 					<td>${client.manager }</td>
 					<td>${client.businessType }</td>
@@ -166,13 +125,16 @@
 						<label for="inputName">거래처코드</label> 
 						<input type="text" id="clCode" placeholder="코드를 입력하세요"> 
 						<input type="button" id="duplCheck" name="duplCheck" value="중복체크" /> 
+						<br />
 						<span id="duplicate"></span>
 					</div>
 					
 					<div class="form-group">
 						<label for="InputEmail">상 &nbsp;&nbsp;호 &nbsp;&nbsp;명</label> 
 						<input type="text" id="clName" placeholder="거래처명을 입력하세요"> 
-						&nbsp;&nbsp;
+					</div>
+					
+					<div class="form-group">
 						<label for="InputEmail">사업자번호</label> 
 						<input type="text" id="clSalesNumber" placeholder="-을 빼고 입력하세요"> 
 					</div>
@@ -180,7 +142,9 @@
 					<div class="form-group">
 						<label for="InputEmail">대 &nbsp;&nbsp;표 &nbsp;&nbsp;자</label> 
 						<input type="text" id="clManager" placeholder="대표자를 입력하세요"> 
-						&nbsp;&nbsp;
+					</div>
+					
+					<div class="form-group">
 						<label for="InputEmail">전 화 번 호&nbsp;</label> 
 						<input type="text" id="clTelephone" placeholder="-을 빼고 입력하세요"> 
 					</div>
@@ -188,7 +152,9 @@
 					<div class="form-group">
 						<label for="InputEmail">이 &nbsp;&nbsp;메 &nbsp;&nbsp;일</label> 
 						<input type="text" id="clManagerEmail" placeholder="이메일을 입력하세요">
-						&nbsp;&nbsp; 
+					</div>
+					
+					<div class="form-group">
 						<label for="InputEmail">팩 스 번 호&nbsp;</label> 
 						<input type="text" id="clFaxNumber" placeholder="-을 빼고 입력하세요"> 
 					</div>
@@ -203,8 +169,12 @@
 					<div class="form-group">
 						<label for="InputEmail">소 &nbsp;&nbsp;재 &nbsp;&nbsp;지</label> 
 						<input style="width: 100px;" type="text" name="zipcode" id="zipcode" placeholder="우편번호"/>
-						<input type="text" style="width: 282px;" name="clPlace1" id="clPlace1" placeholder="도로명주소" />
 						<input type="button" id="zipcodeBtn" value="우편번호 검색" />
+					</div>
+					
+					<div class="form-group">
+						<label for="InputEmail">주 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</label> 
+						<input type="text" style="width: 388px;" name="clPlace1" id="clPlace1" placeholder="도로명주소" />
 					</div>
 					<div class="form-group">
 						<label for="InputEmail">상 세 주 소</label> 
@@ -219,8 +189,10 @@
 					<div class="form-group">
 						<label for="InputEmail">은 &nbsp;&nbsp;행 &nbsp;&nbsp;명</label> 
 						<input type="text" id="clBankname" placeholder="은행명을 입력하세요">
-						&nbsp;&nbsp; 
-						<label for="InputEmail">계 좌 번 호&nbsp;</label> 
+					</div>
+					
+					<div class="form-group">
+						<label for="InputEmail">계 좌 번 호</label> 
 						<input type="text" id="clAccountNumber" placeholder="-을 빼고 입력하세요"> 
 					</div>
 					
@@ -240,8 +212,6 @@
 	</div>
 	
 	
-	
-	<!-- ==================================== -->
 	
 	
 	<!-- 80%size Modal at Center -->
@@ -333,12 +303,12 @@
 	</form>
 	
 	
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-		
-	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+   <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 	<script>
+	
+	
+	
 	
 	var insertFlag = "0";
 		
@@ -371,8 +341,8 @@
 			var faxNumber		= $("#clFaxNumber").val();
 			var managerEmail	= $("#clManagerEmail").val();
 			var businessType	= $(":input:radio[name=clBusinessType]:checked").val();
-			var zipcode			= $("#zipcode").val();
-			var place1 			= $("#clPlace1").val();
+			var zipcode			= $("#zipcode").val() +"_";
+			var place1 			= $("#clPlace1").val() +"_";
 			var place2			= $("#clPlace2").val();
 			var place 			= zipcode + place1 + place2;
 			var business		= $("#clBusiness").val();

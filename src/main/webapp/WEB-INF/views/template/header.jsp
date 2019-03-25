@@ -35,7 +35,7 @@
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <h3 class="dropdown-header">기초정보</h3>
           <a class="dropdown-item" href="${pageContext.request.contextPath }/clientview">거래처등록</a>
-          <a class="dropdown-item" href="">신용카드 등록</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath }/cardsList">신용카드 등록</a>
           <a class="dropdown-item" href="">계정과목 등록</a>
           <a class="dropdown-item" href="">부서등록</a>
            <h3 class="dropdown-header">전표관리</h3>
@@ -55,7 +55,7 @@
           <h3 class="dropdown-header">기초정보</h3>
           <a class="dropdown-item" href="">직급등록</a>
           <a class="dropdown-item" href="">직책등록</a>
-          <a class="dropdown-item" href="">급여항목 등록</a>
+          <a class="dropdown-item" href="/addDeproduct">급여항목 등록</a>
           <a class="dropdown-item" href="">급여공제항목 등록</a>
            <h3 class="dropdown-header">사원정보관리</h3>
           <a class="dropdown-item" href="${cp }/employee/getAllEmployee">사원등록</a>

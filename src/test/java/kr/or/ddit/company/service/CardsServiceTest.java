@@ -1,6 +1,6 @@
 package kr.or.ddit.company.service;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -38,4 +38,20 @@ public class CardsServiceTest extends LogicConfig {
 		List<CardsVo> cardsList = cardsService.serachCards(cardsVo);
 	}
 
+	@Test
+	public void InsertCardsTest() {
+	    CardsVo cardsVo = new CardsVo();
+	    cardsVo.setCardCode("10");
+	    cardsVo.setCardName("농협카드");
+	    cardsVo.setCardNumber("123412341234");
+	    cardsVo.setCardSortation("1");
+	    cardsVo.setCompanyCode("1");
+	    cardsVo.setMemo("55");
+	    cardsVo.setStatus("1");
+	    
+	    int insertCnt = cardsService.insertCards(cardsVo);
+		assertNotNull(insertCnt);
+	    
+	}
+		
 }

@@ -16,6 +16,7 @@
   <meta name="author" content="">
 
   <title>SB Admin - Dashboard</title>
+  
 
   <!-- Custom fonts for this template-->
   <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -41,6 +42,7 @@
 	    <div id="content-wrapper">
 			<div class="container-fluid">
 
+			<!-- Contents Source -->
 			<tiles:insertAttribute name="content"/>
 
 			</div>
@@ -61,14 +63,12 @@
 	  <!-- Core plugin JavaScript-->
 	  <script src="/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 	  <!-- Page level plugin JavaScript-->
-	  <script src="/resources/vendor/chart.js/Chart.min.js"></script>
 	  <script src="/resources/vendor/datatables/jquery.dataTables.js"></script>
 	  <script src="/resources/vendor/datatables/dataTables.bootstrap4.js"></script>
 	  <!-- Custom scripts for all pages-->
 	  <script src="/resources/js/sb-admin.min.js"></script>
 	  <!-- Demo scripts for this page-->
-	  <script src="/resources/demo/datatables-demo.js"></script>
-	  <script src="/resources/demo/chart-area-demo.js"></script>
+	  <script src="/resources/js/demo/datatables-demo.js"></script>
 
 
 </body>

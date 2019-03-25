@@ -144,6 +144,18 @@ public class ClientController {
 		
 	}
 	
+	@RequestMapping(path="/viewDetailClient", method=RequestMethod.GET)
+	public String viewDetailClient(@RequestParam("clientCode")String clientCode
+								,Model model) {
+		
+		List<ClientVo> vo = clientService.getCodeClient(clientCode);
+		logger.debug("vo : {}", vo.size());
+		
+		model.addAttribute("vo", vo);
+		
+		return "viewDetailClient";
+	}
+	
 
 }
 

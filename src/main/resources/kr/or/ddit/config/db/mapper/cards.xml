@@ -20,7 +20,7 @@
 	
 	
 	<!--등록된 카드 정보 가져오기  -->
-	<select id="selectCards" resultType="cardsVo" parameterType="map">
+	<select id="selectCards" resultType="cardsVo" parameterType="cardsVo">
 		select
 			cardCode,
 			cardNumber,
@@ -33,13 +33,30 @@
 		where cardCode = #{cardCode}
 	</select>
 	
+		
+	<!--등록된 카드 정보 가져오기  -->
+	<select id="serachCards" resultType="cardsVo" parameterType="map">
+		select
+			cardCode,
+			cardNumber,
+			cardName,
+			cardSortation,
+			status,
+			memo,
+			companyCode
+		from cards
+		 where cardNumber like '%' || #{cardNumber} || '%'
+		 or cardName like '%' || #{cardName} || '%'
+	</select>
+	
 	
 	<!-- 신용카드 등록하기 -->
 	<insert id="insertCards" parameterType="cardsVo">
-		insert into cards
-		    (cardCode, cardNumber, cardName, cardSortation,status ,memo ,companyCode)
+	insert into cards
+		(cardCode, cardNumber, cardName, cardSortation,status ,memo ,companyCode)
 		values
-		    (#{cardCode}, #{cardNumber}, #{cardName}, #{cardSortation},#{status},#{memo},#{companyCode})
+		(#{cardCode}, #{cardNumber}, #{cardName},
+		#{cardSortation},#{status},#{memo},#{companyCode})
 	</insert>
 	
 	

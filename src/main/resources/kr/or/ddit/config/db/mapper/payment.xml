@@ -9,9 +9,12 @@
 		insert into payment
 		(paycode, userid, totalwage, totalsalary, relate, payday)
 		values
-		(#{paycode},#{userid},#{totalwage}
-		,#{totalsalary},#{relate},#{payday})
-
+		(#{payCode},#{userId}
+		,nvl(#{totalWage, jdbcType=VARCHAR},null)
+		,nvl(#{totalSalary, jdbcType=VARCHAR},null)
+		,nvl(#{relate, jdbcType=VARCHAR},null)
+		,to_date( nvl(#{payDay, jdbcType=VARCHAR},null),'yyyyMMdd')
+		)
 	</insert>
 
 
@@ -38,6 +41,15 @@
 		delete from payment
 		where paycode = #{paycode}
 	</delete>
+	
+	<!-- 급여 선택하여 가져오기 -->
+	<select id="getPayment_u" resultType="paymentVo"
+		parameterType="map">
+		select
+		paycode, userid, totalwage, totalsalary, relate, payday
+		from
+		payment where userid = #{userId}
+	</select>
 
 
 </mapper>

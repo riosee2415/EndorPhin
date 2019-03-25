@@ -3,6 +3,7 @@ package kr.or.ddit.board.dao;
 import java.util.List;
 
 import kr.or.ddit.board.model.Board_detailVo;
+import kr.or.ddit.board.model.PageVo;
 
 public interface IBoard_detailDao {
 
@@ -36,7 +37,7 @@ public interface IBoard_detailDao {
 	* @return
 	* Method 설명 : 게시글 수 조회
 	 */
-	List<Board_detailVo> postCnt();
+	int postCnt(String boardTypeCode);
 	
 	/**
 	 * 
@@ -70,5 +71,17 @@ public interface IBoard_detailDao {
 	* Method 설명 : 게시글 삭제
 	 */
 	int postDelete(String boardno);
+	
+	/**
+	 * 
+	* Method : selectAllPosts
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param pageVo
+	* @return
+	* Method 설명 : 게시글 페이지 조회
+	 */ 
+	List<Board_detailVo> selectPagePost(PageVo pageVo);
+
 	
 }

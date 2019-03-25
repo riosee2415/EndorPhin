@@ -100,6 +100,8 @@
           <span>그룹웨어</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+        <a class="dropdown-item" href="${pageContext.request.contextPath }/boardType">게시판</a>
+        
         </div>
       </li>
       

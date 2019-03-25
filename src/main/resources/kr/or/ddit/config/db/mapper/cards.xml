@@ -53,7 +53,7 @@
 	<!-- 신용카드 등록하기 -->
 	<insert id="insertCards" parameterType="cardsVo">
 	insert into cards
-		(cardCode, cardNumber, cardName, cardSortation,status ,memo ,companyCode)
+		(cardCode,cardNumber,cardName,cardSortation,status,memo,companyCode)
 		values
 		(#{cardCode}, #{cardNumber}, #{cardName},
 		#{cardSortation},#{status},#{memo},#{companyCode})

@@ -10,9 +10,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/main.css"/>
 </head>
 <body>
-<div class="row">
+<%@ include file="/WEB-INF/views/template/side.jsp" %>
+<div class="table-responsive">
 	<div class="col-sm-5">
-		<table>
+		<table class="table table-striped">
 			<form action="/boardType?type=create" method="post">
 				<tr id="boardType">
 					<td class="boardTable">게시판 이름</td>
@@ -28,7 +29,7 @@
 			</form>
 		</table>
 		
-		<table style="margin-top: 50px;">
+		<table class="table table-striped">
 			<c:forEach var="board" items="${boardAllList }">
 				<form action="/boardType?type=update" method="post">
 					<tr>

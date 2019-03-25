@@ -26,7 +26,7 @@
 	rel="stylesheet" id="bootstrap-css">
 <script
 	src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="${cp }/js/jquery-3.3.1.min.js"></script>
 
 <style>
 .modal.modal-center {
@@ -141,7 +141,7 @@
 	<!-- =============================================== -->
 	
 	<div class="container">
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#my80sizeCenterModal">등록</button>
+		<button type="button" id="insertB" class="btn btn-primary" data-toggle="modal" data-target="#my80sizeCenterModal">등록</button>
 	</div>
 
 
@@ -156,6 +156,7 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<h4 class="modal-title" id="myModalLabel">거래처 등록</h4>
+					<span id="head"></span>
 				</div>
 				
 				<!-- 여기부터 로직작성 -->
@@ -164,7 +165,8 @@
 					<!-- 여기부터 로직작성 -->
 						<label for="inputName">거래처코드</label> 
 						<input type="text" id="clCode" placeholder="코드를 입력하세요"> 
-						<input type="button" value="중복체크" /> 
+						<input type="button" id="duplCheck" name="duplCheck" value="중복체크" /> 
+						<span id="duplicate"></span>
 					</div>
 					
 					<div class="form-group">
@@ -337,6 +339,8 @@
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
 	<script>
+	
+	var insertFlag = "0";
 		
 				
 	$("#zipcodeBtn").on("click", function() {
@@ -356,40 +360,81 @@
      });
 	
 	$("#insertBtn").on("click", function(){
-		var clientCode 		= $("#clCode").val();
-		var clientName 		= $("#clName").val();
-		var salesNumber 	= $("#clSalesNumber").val();
-		var manager			= $("#clManager").val();
-		var telephone		= $("#clTelephone").val();
-		var faxNumber		= $("#clFaxNumber").val();
-		var managerEmail	= $("#clManagerEmail").val();
-		var businessType	= $(":input:radio[name=clBusinessType]:checked").val();
-		var zipcode			= $("#zipcode").val();
-		var place1 			= $("#clPlace1").val();
-		var place2			= $("#clPlace2").val();
-		var place 			= zipcode + place1 + place2;
-		var business		= $("#clBusiness").val();
-		var bankName		= $("#clBankname").val();
-		var accountNumber	= $("#clAccountNumber").val();
-		var relate			= $("#clRelate").val();
-
-		$("#frmClCode").val(clientCode);
-		$("#frmClName").val(clientName);
-		$("#frmClSalesNumber").val(salesNumber);
-		$("#frmClManager").val(manager);
-		$("#frmClTelephone").val(telephone);
-		$("#frmClFaxNumber").val(faxNumber);
-		$("#frmClManagerEmail").val(managerEmail);
-		$("#frmClBusinessType").val(businessType);
-		$("#frmClPlace").val(place);
-		$("#frmClBusiness").val(business);
-		$("#frmClBankname").val(bankName);
-		$("#frmClAccountNumber").val(accountNumber);
-		$("#frmClRelate").val(relate);
+		
+		if(insertFlag == 1 ){
+			
+			var clientCode 		= $("#clCode").val();
+			var clientName 		= $("#clName").val();
+			var salesNumber 	= $("#clSalesNumber").val();
+			var manager			= $("#clManager").val();
+			var telephone		= $("#clTelephone").val();
+			var faxNumber		= $("#clFaxNumber").val();
+			var managerEmail	= $("#clManagerEmail").val();
+			var businessType	= $(":input:radio[name=clBusinessType]:checked").val();
+			var zipcode			= $("#zipcode").val();
+			var place1 			= $("#clPlace1").val();
+			var place2			= $("#clPlace2").val();
+			var place 			= zipcode + place1 + place2;
+			var business		= $("#clBusiness").val();
+			var bankName		= $("#clBankname").val();
+			var accountNumber	= $("#clAccountNumber").val();
+			var relate			= $("#clRelate").val();
+	
+			$("#frmClCode").val(clientCode);
+			$("#frmClName").val(clientName);
+			$("#frmClSalesNumber").val(salesNumber);
+			$("#frmClManager").val(manager);
+			$("#frmClTelephone").val(telephone);
+			$("#frmClFaxNumber").val(faxNumber);
+			$("#frmClManagerEmail").val(managerEmail);
+			$("#frmClBusinessType").val(businessType);
+			$("#frmClPlace").val(place);
+			$("#frmClBusiness").val(business);
+			$("#frmClBankname").val(bankName);
+			$("#frmClAccountNumber").val(accountNumber);
+			$("#frmClRelate").val(relate);
+			
+			
+			$("#insertFrm").submit();
+		
+		} else if(insertFlag == 0){
+			$("#head").html("<font color='red'>거래처 코드를 입력하지 않았습니다. </font>");
+			$("#insertB").trigger("click");
+			
+		}
 		
 		
-		$("#insertFrm").submit();
 	});
+	
+	
+	/*Duplication Check*/
+	$("#duplCheck").on("click", function(){
+		
+		$.ajax({
+			url			: "${pageContext.request.contextPath }/clientDupl" ,
+			method		: "post",
+			data		: "clientCode="+$("#clCode").val(),
+			success		: function(duplicateCode) {
+				transDupl(duplicateCode);
+				
+			}
+		});
+	});
+	
+	function transDupl(duplicateCode){
+		if(duplicateCode == 1){
+			insertFlag = "1";
+			duplicateCode = "<b><font color='blue'>사용가능한 거래처코드 입니다. </font></b>";
+			$("#duplicate").html(duplicateCode);
+		} else if (duplicateCode == 0){
+			duplicateCode = "<b><font color='red'>중복된 거래처 코드가 있습니다.</font></b>";
+			$("#duplicate").html(duplicateCode);
+		} else if (duplicateCode == "WS"){
+			duplicateCode = "<b><font color='red'>거래처 코드를 입력하세요.</font></b>";
+			$("#duplicate").html(duplicateCode);
+		}
+		
+	}
 	
 	
 	

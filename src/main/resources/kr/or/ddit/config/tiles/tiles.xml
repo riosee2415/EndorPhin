@@ -61,11 +61,9 @@
         	<put-attribute name="content" value="/WEB-INF/views/test.jsp"/>
         </definition>
         
-        
-        
-        
-        
-        
+         <definition name="addDeproductView" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/payment/deproductList.jsp"/>
+        </definition>
         
         
         

@@ -1,10 +1,10 @@
-package kr.or.ddit.payment.dao;
+package kr.or.ddit.payment.service;
 
 import java.util.List;
 
 import kr.or.ddit.payment.model.Payment_detailVo;
 
-public interface IPayment_DetailDao {
+public interface IPayment_DetailService {
 	int insertPayment_detail(Payment_detailVo payment_detailVo);
 	List<Payment_detailVo> getAllPayment_detail();
 	Payment_detailVo selectPayment_detail(String payDetailCode);

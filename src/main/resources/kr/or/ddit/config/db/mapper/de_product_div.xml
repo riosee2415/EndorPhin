@@ -6,37 +6,41 @@
 <!-- 급여/공제 -->
 	
 	<!--전체 불러오기  -->
-	<select id="getAllDe_product_div" resultType="De_product_divVo">
+	<select id="getAllDe_product_div" resultType="de_product_divVo">
 		select
 			deductCode,
 			deductName,
 			useStatus,
-			relate
+			relate,
+			taxstatus, bonusstatus
 		from de_product_div
 	</select>
 
 	<!-- 급여/공제코드로 가져오기  -->
-	<select id="selectDe_product_div" resultType="De_product_divVo" parameterType="map">
+	<select id="selectDe_product_div" resultType="de_product_divVo" parameterType="map">
 		select 
 			deductCode,
 			deductName,
 			useStatus,
-			relate
+			relate,
+			taxstatus, bonusstatus
 		from de_product_div	
 		where deductCode = #{deductCode}
 			
 	</select>	
 	
 	<!-- 급여/공제 등록 -->
-	<insert id="insertDe_product_div" parameterType="De_product_divVo">
+	<insert id="insertDe_product_div" parameterType="de_product_divVo">
 		insert into de_product_div
 		   (deductCode,
 			deductName,
 			useStatus,
-			relate)
+			relate,
+			taxstatus, bonusstatus)
 		values
-		(#{deductCode},#{deductName},#{useStatus},#{relate},
-		#{ciPath})
+		(#{deductCode},#{deductName},#{useStatus},nvl(#{relate, jdbcType=VARCHAR},null),
+		nvl(#{taxStatus, jdbcType=VARCHAR},null),
+		nvl(#{bonusStatus, jdbcType=VARCHAR},null))
 
 	</insert>
 	
@@ -45,6 +49,30 @@
 		delete from de_product_div
 		where deductCode = #{deductCode}
 	</delete>
+	
+	<!-- 급여명으로 검색 -->
+	<select id="selectDeproductByNm" resultType="de_product_divVo"
+	parameterType="map">
+		select
+			deductCode,
+			deductName,
+			useStatus,
+			relate,
+			taxstatus, bonusstatus
+		from de_product_div
+		where deductName like '%'||#{deductName}||'%'
+	</select>
+	
+	<update id="updateDe_product_div" parameterType="de_product_divVo">
+		update de_product_div
+		set deductName=#{deductName}
+		, useStatus=nvl(#{useStatus, jdbcType=VARCHAR} ,useStatus)
+		, relate=nvl(#{relate, jdbcType=VARCHAR} ,relate)
+		, taxstatus=nvl(#{taxStatus, jdbcType=VARCHAR} ,taxStatus)
+		, bonusstatus=nvl(#{bonusStatus,jdbcType=VARCHAR},bonusStatus)
+		where   deductCode=#{deductCode}
+	</update>
+	
 	
 
 </mapper>

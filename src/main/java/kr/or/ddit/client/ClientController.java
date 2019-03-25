@@ -11,8 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.ddit.order.model.ClientVo;
+import kr.or.ddit.order.service.ClientService;
 import kr.or.ddit.order.service.ICilentService;
 
 @Controller()
@@ -115,6 +117,32 @@ public class ClientController {
 		return "redirect:/clientview";
 	}
 	
+	
+	@RequestMapping(path="/clientDupl", method=RequestMethod.POST)
+	@ResponseBody
+	public String clientDupl(@RequestParam(name="clientCode", defaultValue="WS")String clientCode) {
+		
+		List<ClientVo> clientList = clientService.getAllClient();
+		//Not Duplicate Code = 0
+		String duplicateCode = "1";
+		
+		for(int i = 0; i < clientList.size(); i++) {
+			// Duplicate Code = 0
+			if(clientCode.equals(clientList.get(i).getClientCode())){
+				duplicateCode = "0";
+				return duplicateCode;
+				
+			// WhiteSpace Code = WS
+			} else if(clientCode.equals("WS")) {
+				duplicateCode = "WS";
+				return duplicateCode;
+			}
+		}
+		
+		return duplicateCode;
+		
+		
+	}
 	
 
 }

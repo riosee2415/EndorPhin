@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link href="/css/left.css" rel="stylesheet"/>
+	
 
-<ul class="nav nav-sidebar">
+<!-- Sidebar -->
+    <ul class="sidebar navbar-nav">
 	<li id="account">
 		<h3>È¸°è</h3>
 		<ul>
@@ -47,7 +48,9 @@
 		</ul>
 	</li>
 </ul>
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
 	var li_check=false;
 	$("#account").on("click",function(){

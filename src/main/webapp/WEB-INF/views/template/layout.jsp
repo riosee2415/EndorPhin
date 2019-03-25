@@ -1,41 +1,75 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-<!DOCTYPE html>
-<html>
-<head>
-<!-- Bootstrap core CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<!-- Custom styles for this template -->
-<link href="${cp}/css/dashboard.css"
-	rel="stylesheet">
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<%-- 순서 중요 --%>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/temporaryFile/ddmenu/ddmenu.css" rel="stylesheet" type="text/css" />
-    <script src="/temporaryFile//ddmenu/ddmenu.js" type="text/javascript"></script>
-    <style>
-        /*The following are for this demo page only (not required for the ddmenu).*/
-        #ddmenu { background: #eee url(/temporaryFile/ddmenu/ddmenu-bg.jpg) no-repeat center 0px; padding-top:90px;}
-    </style>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>EndoRPhin</title>
+<html>
+
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>SB Admin - Dashboard</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Page level plugin CSS-->
+  <link href="${pageContext.request.contextPath}/resources/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="${pageContext.request.contextPath}/resources/css/sb-admin.css" rel="stylesheet">
+
 </head>
-<body>
+	
+	
+<body id="page-top">
+	
+
 	<tiles:insertAttribute name="header"/>
-	<div class="col-sm-3 col-md-2 sidebar">
+	<div id="wrapper">
+	
 		<tiles:insertAttribute name="left"/>
+	
+	
+	    <div id="content-wrapper">
+			<div class="container-fluid">
+
+			<tiles:insertAttribute name="content"/>
+
+			</div>
+			<!-- /.container-fluid -->
+		
+		
+			<tiles:insertAttribute name="footer"/>
+		</div>
+		<!-- /.content-wrapper -->
 	</div>
-	<div class="col-sm-9 col-sm-offset-2 col-md-10 main">
-	<tiles:insertAttribute name="content"/>
-	</div>
+	<!-- /#wrapper -->
+	
+	
+	 
+	  <!-- Bootstrap core JavaScript-->
+	  <script src="/resources/vendor/jquery/jquery.min.js"></script>
+	  <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	  <!-- Core plugin JavaScript-->
+	  <script src="/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+	  <!-- Page level plugin JavaScript-->
+	  <script src="/resources/vendor/chart.js/Chart.min.js"></script>
+	  <script src="/resources/vendor/datatables/jquery.dataTables.js"></script>
+	  <script src="/resources/vendor/datatables/dataTables.bootstrap4.js"></script>
+	  <!-- Custom scripts for all pages-->
+	  <script src="/resources/js/sb-admin.min.js"></script>
+	  <!-- Demo scripts for this page-->
+	  <script src="/resources/demo/datatables-demo.js"></script>
+	  <script src="/resources/demo/chart-area-demo.js"></script>
+
+
 </body>
 </html>

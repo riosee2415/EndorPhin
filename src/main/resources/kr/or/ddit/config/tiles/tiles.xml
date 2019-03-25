@@ -3,11 +3,12 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
         
-        <definition name="layout" template="/WEB-INF/views/template/layout.jsp">
+       <definition name="layout" template="/WEB-INF/views/template/layout.jsp">
         	<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
         	<put-attribute name="left" value="/WEB-INF/views/template/left.jsp"/>
+        	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
         	<put-attribute name="content" value=""/>
-        </definition>
+        </definition> 
         
         <definition name="helloTiles" extends="layout">
         	<put-attribute name="left" value=""/>
@@ -43,5 +44,25 @@
         <definition name="insertEmployeeTiles" extends="layout">
         	<put-attribute name="content" value="/WEB-INF/views/employee/insertEmployeeForm.jsp"/>
         </definition>
+        
+        <definition name="employeeDetailTiles" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/employee/employeeDetail.jsp"/>
+        </definition>
+        
+        
+        
+         <definition name="testTiles" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/test.jsp"/>
+        </definition>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
 </tiles-definitions>

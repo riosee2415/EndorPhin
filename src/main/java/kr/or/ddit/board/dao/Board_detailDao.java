@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.ibatis.jdbc.SQL;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.or.ddit.board.model.Board_detailVo;
+import kr.or.ddit.board.model.PageVo;
 
 @Repository("board_detailDao")
 public class Board_detailDao implements IBoard_detailDao{
@@ -54,8 +56,8 @@ public class Board_detailDao implements IBoard_detailDao{
 	* Method 설명 : 게시글 수 조회
 	 */
 	@Override
-	public List<Board_detailVo> postCnt() {
-		List<Board_detailVo> postCnt = sqlSession.selectOne("board_detail.postCnt");
+	public int postCnt(String boardTypeCode) {
+		int postCnt = sqlSession.selectOne("board_detail.postCnt", boardTypeCode);
 		return postCnt;
 	}
 
@@ -102,6 +104,21 @@ public class Board_detailDao implements IBoard_detailDao{
 	public int postDelete(String boardno) {
 		int postDelete = sqlSession.delete("board_detail.postDelete",boardno);
 		return postDelete;
+	}
+
+	/**
+	 * 
+	* Method : selectPagePost
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param pageVo
+	* @return
+	* Method 설명 : 게시글 페이지 조회
+	 */
+	@Override
+	public List<Board_detailVo> selectPagePost(PageVo pageVo) {
+		List<Board_detailVo> selectList = sqlSession.selectList("board_detail.selectPostPaingList", pageVo);
+		return selectList;
 	}
 
 	

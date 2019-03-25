@@ -66,12 +66,15 @@ public class Board_detailDaoTest extends LogicConfig {
 	@Test
 	public void postCntTest(){
 		/***Given***/
-		List<Board_detailVo> postCnt = board_datailDao.postCnt();
+		Board_detailVo board_detailVo = new Board_detailVo();
+		board_detailVo.setBoardTypeCode("7");
+		
+//		List<Board_detailVo> postCnt = board_datailDao.postCnt(boardTypeCode);
 
 		/***When***/
 		
 		/***Then***/
-		assertEquals(null, postCnt);
+//		assertEquals(null, postCnt);
 	}
 	
 	/**

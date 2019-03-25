@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.or.ddit.employee.model.EmployeeVo;
@@ -50,6 +51,38 @@ public class EmployeeController {
 		ra.addFlashAttribute("msg", "정상 등록 되었습니다");
 		return "redirect:/employee/getAllEmployee";
 	}
+	
+	@RequestMapping(path = "/deleteEmployee", method = RequestMethod.GET)
+	public String deleteEmployee(Model model, EmployeeVo vo,RedirectAttributes ra,
+			@RequestParam String delete_no) {
+		logger.debug("감자 : {}",delete_no);
+		
+		
+		ra.addFlashAttribute("msg", "정상 삭제 되었습니다");
+		employeeService.deleteEmployee(delete_no);
+		
+		return "redirect:/employee/getAllEmployee";
+	}
+	
+	@RequestMapping(path = "/detailEmployee", method = RequestMethod.GET)
+	public String detailEmployee(Model model, EmployeeVo vo,RedirectAttributes ra,
+			@RequestParam String userId) {
+		logger.debug("감자 : {}",userId);
+		
+		
+		return "employeeDetailTiles";
+	}
+	
+	
+	@RequestMapping(path = "/test", method = RequestMethod.GET)
+	public String test(Model model) {
+		
+		
+		return "testTiles";
+	}
+	
+	
+	
 	
 	
 	

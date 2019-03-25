@@ -1,100 +1,52 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="icon" href="../../favicon.ico">
-
-<title>Dashboard Template for Bootstrap</title>
-
-<!-- Bootstrap core CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<!-- Custom styles for this template -->
-<link href="<%=request.getContextPath()%> /css/dashboard.css"
-	rel="stylesheet">
-
-<link
-	href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <style>
-.modal.modal-center {
-	text-align: center;
-}
 
-@media screen and (min-width: 768px) {
-	.modal.modal-center:before {
-		display: inline-block;
-		vertical-align: middle;
-		content: " ";
-		height: 100%;
-	}
-}
+.form-horizontal{
+width : 100%;
 
-.modal-dialog.modal-center {
-	display: inline-block;
-	text-align: left;
-	vertical-align: middle;
+}
+.thead{
+color : white;
+background-color: #6E6867;
 }
 </style>
 
 
+
 </head>
 <body>
+<form class="form-horizontal">
+<div class="form-group">
+<h2><strong>ì‚¬ì›ëª©ë¡</strong></h2>
+</div>
 
-
-
-	<div class="container">
-		<table>
-			<tr>
-				<td><h2>»ç¿ø¸ñ·Ï</h2></td>
-			</tr>
-			<tr>
-				<td colspan="1"></td>
-				<td><h3>»ç¿ø°Ë»ö</h3></td>
-				<td><input type="text" class="  search-query form-control"
-					placeholder="Search" /> <span class="input-group-btn"></td>
-				<td>
-					<button class="btn btn-primary" type="button">
-						<span class=" glyphicon glyphicon-search"></span>
-					</button> </span>
-				</td>
-			</tr>
-		</table>
-	</div>
-
-	<div class="container">
-		<table class="table table-striped"
-			style="font-weight: normal; font-size: 1.3em;">
-			<thead>
+	<div class="form-group">
+		<table class="table table-striped">
+			<thead class="thead">
 				<tr>
-					<th>¼±ÅÃ</th>
-					<th>»ç¿ø¹øÈ£</th>
-					<th>»ç¿ø¸í</th>
-					<th>ºÎ¼­ÄÚµå</th>
-					<th>Á÷Ã¥ÄÚµå</th>
-					<th>Á÷±ŞÄÚµå</th>
-					<th>±Ù¼Ó³â¼ö</th>
-					<th>ºñ°í</th>
-					<th>ÀÔ»çÀÏ</th>
+					<th>ì„ íƒ</th>
+					<th>ì‚¬ì›ë²ˆí˜¸</th>
+					<th>ì‚¬ì›ëª…</th>
+					<th>ë¶€ì„œì½”ë“œ</th>
+					<th>ì§ì±…ì½”ë“œ</th>
+					<th>ì§ê¸‰ì½”ë“œ</th>
+					<th>ê·¼ì†ë…„ìˆ˜</th>
+					<th>ë¹„ê³ </th>
+					<th>ì…ì‚¬ì¼</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${allEmployee}" var="allEmployee">
-					<tr>
-						<td><input type="checkbox" style="width: 30px; height: 30px;"></td>
+					<tr class="boardTr" data-userId="${allEmployee.userId}">
+						<td><input type="checkbox" name="check"
+							value="${allEmployee.userId}" style="width: 30px; height: 30px;"></td>
 						<td>${allEmployee.userId }</td>
 						<td>${allEmployee.userNm }</td>
 						<td>${allEmployee.deptCode }</td>
@@ -109,74 +61,65 @@
 		</table>
 	</div>
 
+</form>
 
 
-	<div class="container">
-		<button type="button" class="btn btn-default" data-toggle="modal"
-			data-target="#my80sizeCenterModal">»èÁ¦</button>
-		<button type="button" class="btn btn-primary" data-toggle="modal"
-			data-target="#my80sizeCenterModal">½Å±Ôµî·Ï</button>
-	</div>
+<div class="form-group">
+	<button type="button" class="btn btn-info btn-lg" id="cancleBtn"> ì‚­ ì œ </button>
+	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#my80sizeModal">
+  ì‹ ê·œë“±ë¡
+</button>
 
-
-
-	<!-- 80%size Modal at Center -->
-	<div class="modal modal-center fade" id="my80sizeCenterModal"
-		tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
-		<div class="modal-dialog modal-80size modal-center" role="document">
-			<div class="modal-content modal-80size">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">½Å±Ôµî·Ï</h4>
-				</div>
-				<div class="modal-body">
-					<div class="form-group">
-						<!-- ¿©±âºÎÅÍ ·ÎÁ÷ÀÛ¼º -->
-						
-						
+</div>
+	
+	<!-- 80% size Modal -->
+<div class="modal fade" id="my80sizeModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeModalLabel">
+  <div class="modal-dialog modal-80size" role="document">
+    <div class="modal-content modal-80size">
+      <div class="modal-header"><h2>ì‹ ê·œ ì‚¬ì› ë“±ë¡</h2>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
 						<form action="${cp}/employee/insertEmployee" method="post">
-							<label for="inputName">»ç¿ø¹øÈ£</label> <input type="text"
-								class="form-control" name="userId" placeholder="»ç¿ø¹øÈ£¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä">
+							<label for="inputName">ì‚¬ì›ë²ˆí˜¸</label> <input type="text"
+								class="form-control" name="userId" placeholder="ì‚¬ì›ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”">
 					</div>
 					<div class="form-group">
-						<label for="InputEmail">»ç¿ø¸í</label> <input type="text"
-							class="form-control" name="userNm" placeholder="»ç¿ø¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä">
+						<label for="InputEmail">ì‚¬ì›ëª…</label> <input type="text"
+							class="form-control" name="userNm" placeholder="ì‚¬ì›ëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”">
 					</div>
 					
 					
 					<div class="form-group">
 						<table>
 							<tr>
-								<td><label for="inputPassword">ºÎ¼­ÄÚµå</label></td>
+								<td><label for="inputPassword">ë¶€ì„œì½”ë“œ</label></td>
 								<td><select name="deptCode" class="form-control">
-										<option value="10">ÀÎ»ç</option>
-										<option value="20">È¸°è</option>
-										<option value="30">¹°·ù</option>
+										<option value="10">ì¸ì‚¬</option>
+										<option value="20">íšŒê³„</option>
+										<option value="30">ë¬¼ë¥˜</option>
 								</select></td>
 							
-								<td><label for="inputPassword">Á÷Ã¥ÄÚµå</label></td>
+								<td><label for="inputPassword">ì§ì±…ì½”ë“œ</label></td>
 								<td><select name="positionCode" class="form-control">
-										<option value="5">»çÀå</option>
-										<option value="4">ºÎ»çÀå</option>
-										<option value="3">º»ºÎÀå</option>
-										<option value="2">ÆÀÀå</option>
-										<option value="1">ÆÀ¿ø</option>
+										<option value="5">ì‚¬ì¥</option>
+										<option value="4">ë¶€ì‚¬ì¥</option>
+										<option value="3">ë³¸ë¶€ì¥</option>
+										<option value="2">íŒ€ì¥</option>
+										<option value="1">íŒ€ì›</option>
 								</select></td>
 							
-								<td><label for="inputPassword">Á÷±ŞÄÚµå</label></td>
+								<td><label for="inputPassword">ì§ê¸‰ì½”ë“œ</label></td>
 								<td><select name="rankCode" class="form-control">
-										<option value="9">»çÀå</option>
-										<option value="8">Àü¹«</option>
-										<option value="7">»ó¹«</option>
-										<option value="6">ÀÌ»ç</option>
-										<option value="5">ºÎÀå</option>
-										<option value="4">Â÷Àå</option>
-										<option value="3">°úÀå</option>
-										<option value="2">´ë¸®</option>
-										<option value="1">»ç¿ø</option>
+										<option value="9">ì‚¬ì¥</option>
+										<option value="8">ì „ë¬´</option>
+										<option value="7">ìƒë¬´</option>
+										<option value="6">ì´ì‚¬</option>
+										<option value="5">ë¶€ì¥</option>
+										<option value="4">ì°¨ì¥</option>
+										<option value="3">ê³¼ì¥</option>
+										<option value="2">ëŒ€ë¦¬</option>
+										<option value="1">ì‚¬ì›</option>
 								</select></td>
 							</tr>
 							</table>
@@ -184,71 +127,106 @@
 						
 
 					<div class="form-group">
-						<label for="inputPassword">ºñ¹Ğ¹øÈ£</label> <input type="password"
+						<label for="inputPassword">ë¹„ë°€ë²ˆí˜¸</label> <input type="password"
 							class="form-control" id="inputPassword" name="password"
-							placeholder="ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä">
+							placeholder="ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”">
 					</div>
 					<div class="form-group">
-						<label for="inputPasswordCheck">ºñ¹Ğ¹øÈ£ È®ÀÎ</label> <input
+						<label for="inputPasswordCheck">ë¹„ë°€ë²ˆí˜¸ í™•ì¸</label> <input
 							type="password" class="form-control" id="inputPasswordCheck"
-							placeholder="ºñ¹Ğ¹øÈ£ È®ÀÎÀ» À§ÇØ ´Ù½ÃÇÑ¹ø ÀÔ·Â ÇØ ÁÖ¼¼¿ä">
+							placeholder="ë¹„ë°€ë²ˆí˜¸ í™•ì¸ì„ ìœ„í•´ ë‹¤ì‹œí•œë²ˆ ì…ë ¥ í•´ ì£¼ì„¸ìš”">
 					</div>
 					
 					<div class="form-group">
-						<label for="inputMobile">ºñ°í</label> <input type="text"
+						<label for="inputMobile">ë¹„ê³ </label> <input type="text"
 							class="form-control" id="inputMobile" name="relate"
-							placeholder="Æ¯ÀÌ»çÇ×¶õ">
+							placeholder="íŠ¹ì´ì‚¬í•­ë€">
 					</div>
 					<div class="form-group">
-						<label for="inputtelNO">»ı³â¿ùÀÏ</label> <input type="text"
-							class="form-control" id="inputtelNO" name="BirthDate" placeholder="»ı³â¿ùÀÏÀ» ÀÔ·ÂÇÏ¼¼¿ä">
+						<label for="inputtelNO">ìƒë…„ì›”ì¼</label> <input type="text"
+							class="form-control" id="inputtelNO" name="BirthDate" placeholder="ìƒë…„ì›”ì¼ì„ ì…ë ¥í•˜ì„¸ìš”">
 					</div>
-				</div>
-				
-				
-				
-				
-				<!-- ¿©±â±îÁö -->
-				<div class="modal-footer">
-					<button type="submit" class="btn btn-default">µî·Ï</button>
+      </div>
+      <div class="modal-footer">
+      <button type="submit" class="btn btn-default">ë“±ë¡</button>
 					</form>
-					
-					<button type="button" class="btn btn-default">Ãë¼Ò</button>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-		
-		<script>
-		//¹®¼­·ÎµùÀÌ ¿Ï·áµÈ ÀÌÈÄ ÀÌº¥Æ® µî·Ï
+        <button type="button" class="btn btn-default" data-dismiss="modal">ë‹«ê¸°</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+	<script>
+		//ë¬¸ì„œë¡œë”©ì´ ì™„ë£Œëœ ì´í›„ ì´ë²¤íŠ¸ ë“±ë¡
 
 		$(document).ready(function() {
 			
-			 //server side ¿¡¼­ ºñ±³
+			 //server side ì—ì„œ ë¹„êµ
 			<c:if test="${msg != null}">
 			alert("${msg}");
 			</c:if> 
 			
+			
+			//ì‚¬ìš©ì tr íƒœê·¸ í´ë¦­ì‹œ ì´ë²¤íŠ¸ í•¸ë“¤ëŸ¬
+			$("#cancleBtn").click(function() {
+
+				$('input:checkbox[name="check"]:checked').each(function() {
+
+	
+				var delete_no = $(this).val();
+				$("#delete_no").val(delete_no);
+				$("#frm1").submit();
+				
+				});
+
+			});
+			
+			$(".boardTr").click(function() {
+
+
+
+				var userId = $(this).data("userId");
+
+
+				//2 form
+				$("#userId").val(userId);
+				$("#frm2").submit();
+
+			});
+			
+			
+			
+			
+			
+			
+			
+			
+			
+
+	
+			
 
 		});
 	</script>
-	
 
+	<form id="frm1" action="${cp}/employee/deleteEmployee" method="get">
+		<input type="hidden" id="delete_no" name="delete_no" />
+	</form>
+
+	<form id="frm2" action="${cp}/employee/detailEmployee" method="get">
+		<input type="hidden" id="userId" name="userId" />
+	</form> 
 
 
 
 </body>
-
-</html>

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import kr.or.ddit.company.dao.ICardsDao;
 import kr.or.ddit.company.model.CardsVo;
 
-@Service
+@Service("cardsService")
 public class CardsService implements ICardsService{
 
 	@Resource(name="cardsDao")
@@ -24,14 +24,12 @@ public class CardsService implements ICardsService{
 		return cardsDao.getAllCards();
 	}
 
-	@Override
-	public CardsVo selectCards(Map<String, String> map) {
-		return cardsDao.selectCards(map);
+	public CardsVo selectCards(String cardCode) {
+		return cardsDao.selectCards(cardCode);
 	}
-
 	@Override
-	public int insertCards(Map<String, String> map) {
-		return cardsDao.insertCards(map);
+	public int insertCards(CardsVo cardVo) {
+		return cardsDao.insertCards(cardVo);
 	}
 
 	@Override
@@ -40,9 +38,13 @@ public class CardsService implements ICardsService{
 	}
 
 	@Override
-	public int deleteCards(Map<String, String> map) {
-		return cardsDao.deleteCards(map);
+	public int deleteCards(String cardCode) {
+		return cardsDao.deleteCards(cardCode);
 	}
-
+	@Override
+	public List<CardsVo> serachCards(CardsVo cardVo) {
+		return cardsDao.serachCards(cardVo);
+	}
+	
 
 }

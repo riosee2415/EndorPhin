@@ -32,10 +32,10 @@
 	</select>
 	
 	<!-- 게시글 수 조회 -->
-	<select id="postCnt" resultType="board_detailVo">
+	<select id="postCnt" resultType="Integer" parameterType="String">
 		select count(*)
-		
-    	from board_detail
+ 		from board_detail
+ 		where boardTypeCode = #{boardTypeCode}
 	</select>
 	
 	<!-- 게시글 등록 -->
@@ -77,6 +77,25 @@
  		
  		where boardno = #{boardNo}
  	</delete>
+ 	
+ 	<!-- 게시글 페이지 조회 -->
+ 	<select id ="selectPostPaingList" resultType="board_detailVo" parameterType="pageVo">
+	 	select * 
+		from
+		(
+		select a.*, rownum rn
+		from
+		(
+		
+		select board_detail.*
+		from board_detail
+		where boardTypeCode = #{boardTypeCode}
+		order by boardNo
+		) a ) a
+		
+		
+		where rn between (#{page}-1) * #{pageSize}+1 and #{page}*#{pageSize}
+ 	</select>
 </mapper>
 
 

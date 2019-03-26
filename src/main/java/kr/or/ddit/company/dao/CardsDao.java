@@ -1,5 +1,6 @@
 package kr.or.ddit.company.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.or.ddit.company.model.CardsVo;
+import kr.or.ddit.order.model.ClientVo;
 
 @Repository("cardsDao")
 public class CardsDao implements ICardsDao{
@@ -42,13 +44,19 @@ public class CardsDao implements ICardsDao{
 	}
 
 	@Override
-	public List<CardsVo> serachCards(CardsVo cardVo) {
-		return sqlSessionTemplate.selectList("cards.serachCards", cardVo);
+	public List<CardsVo> serachCards(String cardNumber, String cardName) {
+		HashMap<String, String> map = new HashMap<String, String> ();
+		map.put("cardNumber", cardNumber);
+		map.put("cardName", cardName);
+		
+		return sqlSessionTemplate.selectList("cards.serachCards", map);
 	}
 
 	@Override
 	public int upateStatusCards(CardsVo cardVo) {
 		return sqlSessionTemplate.update("cards.upateStatusCards", cardVo);
 	}
+
+
 	
 }

@@ -36,17 +36,19 @@ public class CardsController {
 		return "cardsList";
 	}
 	
+	//검색
 	@RequestMapping(path="/serachCards", method=RequestMethod.GET)
 	public String serachCards(CardsVo cardsVo, Model model, @RequestParam("card_num") String card_num,
-										   @RequestParam("card_name") String card_name){
+										@RequestParam("card_name") String card_name){
 		
-		List<CardsVo> cardsList = cardsService.serachCards(cardsVo);
+		List<CardsVo> cardsList = cardsService.serachCards(card_num, card_name);
 		model.addAttribute("cardsList",cardsList);
 		
 		return "cardsList";
 	
 	}
 	
+	//삭제 
 	@RequestMapping(path="/deleteCards", method=RequestMethod.GET)
 	public String deleteCards(Model model, @RequestParam("checkRow") String checkRow ){
 
@@ -58,7 +60,8 @@ public class CardsController {
 		
 		return "redirect:/cardsList";
 	}
-										  
+	
+	//상세보기 
 	@RequestMapping(path="/cardsDetail", method=RequestMethod.GET)
 	public String cardsDetail(CardsVo cards, Model model, @RequestParam("cardCode") String cardCode ){
 		
@@ -71,6 +74,7 @@ public class CardsController {
 		return "cardsDetail";
 	}
 	
+	//등록
 	@RequestMapping(path="/insertCards", method=RequestMethod.GET)
 	public String insertCards(CardsVo cardsVo, Model model, @RequestParam("frmcardCode") String frmcardCode 
 															,@RequestParam("frmcardSortation") String frmcardSortation
@@ -94,6 +98,7 @@ public class CardsController {
 		}
 	}
 	
+	//중복체크 
 	@RequestMapping(path="/DupleCards", method=RequestMethod.POST)
 	@ResponseBody
 	public String DuplCards(@RequestParam(name="cardCode", defaultValue="empty") String cardCode){
@@ -115,6 +120,7 @@ public class CardsController {
 		
 		return dupleCode;
 	}
+	//수정
 	@RequestMapping(path="/updateCards", method=RequestMethod.GET)
 	public String updateCards(CardsVo selCards, Model model,@RequestParam("frmcardCode") String frmcardCode
 															,@RequestParam("frmcardSortation") String frmcardSortation
@@ -144,6 +150,7 @@ public class CardsController {
 			return "redirect:/cardsDetail?cardCode="+frmcardCode;
 		}
 	}
+	//사용, 미사용 여부 
 	@RequestMapping(path="/UseCards", method=RequestMethod.GET)
 	public String UseCards(CardsVo cardVo, Model model, @RequestParam("use_status") String use_status
 														,@RequestParam("use_cardCode") String use_cardCode){

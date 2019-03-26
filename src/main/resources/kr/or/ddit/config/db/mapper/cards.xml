@@ -46,7 +46,7 @@
 			companyCode
 		from cards
 		 where cardNumber like '%' || #{cardNumber} || '%'
-		 or cardName like '%' || #{cardName} || '%'
+		 or cardName = #{cardName}
 	</select>
 	
 	

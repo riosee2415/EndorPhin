@@ -13,7 +13,7 @@ public interface ICardsDao {
 	
 	CardsVo selectCards(String cardCode);
 	
-	List<CardsVo> serachCards(CardsVo cardVo);
+	List<CardsVo> serachCards(String cardNumber, String cardName);
 	
 	int insertCards(CardsVo cardVo);
 	

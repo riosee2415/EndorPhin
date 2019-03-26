@@ -11,6 +11,7 @@
 	&nbsp 카드명  &nbsp<input name="cardName1" id="cardName1" type="text" />
 	&nbsp<input type="button" id="seachBtn" value="검색" onclick="seachBtn()" /><br>
 	<br>
+
 	<div class="table-responsive">
 		<table class="table table-striped">
 			<thead>
@@ -121,8 +122,18 @@
 		<input type="hidden" id="frmmemo" name="frmmemo" />
 	</form>
 	
-	<!-------------------------------------------->
-			
+	<!--------------검색  -------------------------->
+	<form id="frm1" action="${pageContext.request.contextPath }/serachCards" >
+		<input type="hidden" name="card_num" id="card_num" />
+		<input type="hidden" name="card_name" id="card_name" />
+	</form>
+ 	
+ 	<!--------------삭제---------------------------->
+ 	<form id="del_frm" action="${pageContext.request.contextPath }/deleteCards">
+ 		<input type="hidden" id="checkRow" name="checkRow">
+ 	</form>		
+ 	
+ 	
 	<script>
 	    /* 등록  */
 		$("#insertBtn").on("click", function(){
@@ -182,16 +193,19 @@
 	    
 		/* 검색  아직안됨 */
 		function seachBtn(){
-			var cardNumber = $("#cardNumber").val();
-			var cardName = $("#cardName").val();
+			var cardNumber = $("#cardNumber1").val();
+			var cardName   = $("#cardName1").val();
+			
+			$("#card_num").val(cardNumber);
+			$("#card_name").val(cardName);
 			
 			if(cardNumber === "" && cardName === ""){
 				alert("카드번호와 카드명을 입력하세요.");
-				$("cardNumber").focus();
+				$("card_num1").focus();
 			
 			}else if(cardName !== "" && cardNumber !== ""){
-				$("#card_num").val(cardNumber);
-				$("#card_name").val(cardName);
+				$("#cardNumber1").val(cardNumber);
+				$("#cardName1").val(cardName);
 
 				$("#frm1").submit();		
 			}
@@ -224,12 +238,5 @@
 	
 	</script>
 	
-	<form id="frm1" action="${pageContext.request.contextPath }/serachCards" >
-		<input type="hidden" name="card_num" id="card_num" />
-		<input type="hidden" name="card_name" id="card_name" />
-	</form>
- 	
- 	<form id="del_frm" action="${pageContext.request.contextPath }/deleteCards">
- 		<input type="hidden" id="checkRow" name="checkRow">
- 	</form>
+
  	

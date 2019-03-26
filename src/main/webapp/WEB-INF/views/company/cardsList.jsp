@@ -3,7 +3,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 </head>
-<body>
 <!--테이블 리스트출력  -->
 	<h2>신용카드 등록</h2>	
 	<br>
@@ -28,10 +27,9 @@
 			<tbody>
 				<c:forEach items="${cardsList }" var="vo">
 					<input type="hidden" class="cardCode" name="cardCode" value="${vo.cardCode }"/>
-					
-					<tr class="cardsTr" data-cardCode="${vo.cardCode }">
+					 <tr>
 						<td><input type="checkbox" name="checkRow" value="${vo.cardCode }" ></td>
-						<td>${vo.cardCode }</td>
+						<td><a href="${pageContext.request.contextPath}/cardsDetail?cardCode=${vo.cardCode }">${vo.cardCode }</a></td>
 						<td>${vo.cardNumber }</td>
 						<td>${vo.cardName }</td>
 						<c:choose>
@@ -52,7 +50,7 @@
 								<td><font color="red"> 미사용</font></td>
 							</c:otherwise>
 						</c:choose>
-					</tr>		
+				 	</tr>		 
 				</c:forEach>
 			</tbody>
 		</table>
@@ -78,7 +76,6 @@
 					</button>
 				</div>
 				
-				<!-- 여기부터 로직작성 -->
 				<div class="modal-body">
 					<div class="form-group">
 					<!-- 여기부터 로직작성 -->
@@ -128,7 +125,6 @@
 			
 	<script>
 	    /* 등록  */
-	    
 		$("#insertBtn").on("click", function(){
 			
 			var cardCode 		= $("#cardCode").val();
@@ -157,7 +153,7 @@
 			$("#insertFrm").submit();
 		
 	});
-	/*     /* 카드코드 중복체크 ajax */
+	    /* 카드코드 중복체크 ajax */
  	    $("#duplCheckbtn").on("click", function(){
 	    	
 	    	$.ajax({
@@ -225,17 +221,7 @@
 			}
  				$("#del_frm").submit();
 		}
-		
-		/* 상세보기로 넘어가기 */
-  	   $(document).ready(function(){
-  	
-         $(".cardsTr").on("click",function(){
-              var cardCode = $(this).data("cardCode");
-          
-              $("#cardCode").val(cardCode);
-          	  $("#detail_frm").submit();
-          });
-       });
+	
 	</script>
 	
 	<form id="frm1" action="${pageContext.request.contextPath }/serachCards" >
@@ -247,8 +233,3 @@
  		<input type="hidden" id="checkRow" name="checkRow">
  	</form>
  	
- 	<form id="detail_frm" action="${pageContext.request.contextPath }/cardsDetail" >
- 		<input type="hidden" id="cardCode" name="cardCode" >
- 	</form>
-</body>
-</html>

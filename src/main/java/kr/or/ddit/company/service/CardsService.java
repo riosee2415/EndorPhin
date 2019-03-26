@@ -45,6 +45,9 @@ public class CardsService implements ICardsService{
 	public List<CardsVo> serachCards(CardsVo cardVo) {
 		return cardsDao.serachCards(cardVo);
 	}
-	
+	@Override
+	public int upateStatusCards(CardsVo cardVo) {
+		return cardsDao.upateStatusCards(cardVo);
+	}
 
 }

@@ -19,6 +19,8 @@ public interface ICardsDao {
 	
 	int updateCards(CardsVo cardVo);
 	
+	int upateStatusCards(CardsVo cardVo);
+
 	int deleteCards(String cardCode);
 	
 }

@@ -96,6 +96,7 @@ public class PaymentController {
 	@RequestMapping(path="/addDeproduct",method=RequestMethod.POST)
 	public String addDeproduct_post(Model model,De_product_divVo de_product_divVo){
 		de_product_divService.insertDe_product_div(de_product_divVo);
+		logger.debug("selectDe_product_div:{}",de_product_divVo);
 		if(de_product_divVo.getDeprostatus().equals("1")){
 			return "redirect:/addProduct";
 		}
@@ -125,6 +126,7 @@ public class PaymentController {
 	@RequestMapping(path="/updDeduct",method=RequestMethod.GET)
 	public String updDeduct(De_product_divVo selectDe_product_div){
 		de_product_divService.updateDe_product_div(selectDe_product_div);
+		logger.debug("selectDe_product_div:{}",selectDe_product_div);
 		if(selectDe_product_div.getDeprostatus().equals("1")){
 			return "redirect:/addProduct";
 		}

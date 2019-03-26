@@ -12,7 +12,7 @@ public class EstablishVo {
 	String status;
 	String slipstatus;
 	String clientStatus;
-	String userStatus;
+	String useStatus;
 	
 	public String getEstablishCode() {
 		return establishCode;
@@ -50,11 +50,11 @@ public class EstablishVo {
 	public void setClientStatus(String clientStatus) {
 		this.clientStatus = clientStatus;
 	}
-	public String getUserStatus() {
-		return userStatus;
+	public String getUseStatus() {
+		return useStatus;
 	}
-	public void setUserStatus(String userStatus) {
-		this.userStatus = userStatus;
+	public void setUseStatus(String userStatus) {
+		this.useStatus = userStatus;
 	}
 	
 	

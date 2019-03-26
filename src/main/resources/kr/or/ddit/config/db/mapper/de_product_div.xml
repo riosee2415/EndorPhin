@@ -73,7 +73,7 @@
 			deductName,
 			useStatus,
 			relate,
-			taxstatus, bonusstatus
+			taxstatus, bonusstatus,establishcode
 		from	de_product_div
 		where	deductName like '%'||#{deductName}||'%'
 		and		deprostatus=#{deprostatus}

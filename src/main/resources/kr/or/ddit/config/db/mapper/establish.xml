@@ -10,9 +10,12 @@
 		(establishcode, establishnamekor, establishnameeng,
 		 status, slipstatus, clientstatus, usestatus)
 		values
-		(#{establishcode},#{establishnamekor},#{establishnameeng},#{status}
-		,#{slipstatus},#{clientstatus},#{usestatus})
-
+		(#{establishCode},#{establishNameKor}
+		,nvl(#{establishNameEng, jdbcType=VARCHAR},null)
+		,#{status}
+		,nvl(#{slipstatus, jdbcType=VARCHAR},null)
+		,nvl(#{clientStatus, jdbcType=VARCHAR},null)
+		,#{useStatus})
 	</insert>
 
 
@@ -32,15 +35,25 @@
 		establishcode, establishnamekor, establishnameeng,
 		 status, slipstatus, clientstatus, usestatus
 		from
-		establish where establishcode = #{establishcode}
+		establish where establishcode = #{establishCode}
 	</select>
 
 
 	<!-- 계정과목 삭제 -->
 	<delete id="deleteEstablish" parameterType="map">
 		delete from establish
-		where establishcode = #{establishcode}
+		where establishcode = #{establishCode}
 	</delete>
+	
+	<!-- 계정과목명 검색 -->
+	<select id="selectEstablishByNm" resultType="establishVo"
+	parameterType="map">
+		select
+			establishcode, establishnamekor, establishnameeng,
+		 status, slipstatus, clientstatus, usestatus
+		from	establish
+		where	establishNameKor like '%'||#{establishNameKor}||'%'
+	</select>
 
 </mapper>
 

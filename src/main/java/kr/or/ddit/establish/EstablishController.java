@@ -33,4 +33,28 @@ public class EstablishController {
 		return "establishview";
 	}
 
+	@RequestMapping("/establishAjaxHtml")
+	public String establishAjaxHtml(PageVo pageVo, Model model) {
+		
+		Map<String, Object> resultMap = establishService.selectEstablishPagingList(pageVo);
+		
+		model.addAllAttributes(resultMap);
+		model.addAttribute("pageSize", pageVo.getPageSize());
+		model.addAttribute("page", pageVo.getPage());
+		
+		return "establish/establishAjaxHtml";
+	}
+	
+	
+	@RequestMapping("/getEstablishPageList")
+	public String getEstablishPageList(PageVo pageVo, Model model) {
+		
+		Map<String, Object> resultMap = establishService.selectEstablishPagingList(pageVo);
+		model.addAllAttributes(resultMap);
+		model.addAttribute("pageSize", pageVo.getPageSize());
+		model.addAttribute("page", pageVo.getPage());
+		
+		return "establish/establishAjaxHtml";
+	}
+
 }

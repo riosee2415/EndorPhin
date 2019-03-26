@@ -88,6 +88,11 @@ public class ClientService implements ICilentService{
 	public int updateClient(ClientVo clientVo) {
 		return clientDao.updateClient(clientVo);
 	}
+
+	@Override
+	public int deleteClient(String clientCode) {
+		return clientDao.deleteClient(clientCode);
+	}
 	
 	
 	

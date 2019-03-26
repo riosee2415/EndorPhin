@@ -9,7 +9,9 @@
 		insert into payment_report
 		(paymentreportcode, account, paycode)
 		values
-		(#{paymentreportcode},#{account},#{paycode})
+		(#{paymentReportCode},
+		nvl(#{account, jdbcType=VARCHAR},null),
+		#{payCode})
 
 	</insert>
 
@@ -28,14 +30,14 @@
 		select
 		paymentreportcode, account, paycode
 		from
-		payment_report where paymentreportcode = #{paymentreportcode}
+		payment_report where paymentreportcode = #{paymentReportCode}
 	</select>
 
 
 	<!-- 급여이력 삭제 -->
 	<delete id="deletePayment_report" parameterType="map">
 		delete from payment_report
-		where paymentreportcode = #{paymentreportcode}
+		where paymentreportcode = #{paymentReportCode}
 	</delete>
 
 </mapper>

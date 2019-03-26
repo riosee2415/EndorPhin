@@ -73,4 +73,15 @@ public interface IClientDao {
 	int updateClient(ClientVo clientVo);
 	
 	
+	/**
+	* Method : deleteClient
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param clientCode
+	* @return
+	* Method 설명 : 거래처 코드를 기준으로 거래처 삭제하기
+	*/
+	int deleteClient(String clientCode);
+	
+	
 }

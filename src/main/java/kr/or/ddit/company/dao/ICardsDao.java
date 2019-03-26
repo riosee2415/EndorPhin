@@ -13,12 +13,14 @@ public interface ICardsDao {
 	
 	CardsVo selectCards(String cardCode);
 	
-	List<CardsVo> serachCards(CardsVo cardVo);
+	List<CardsVo> serachCards(String cardNumber, String cardName);
 	
 	int insertCards(CardsVo cardVo);
 	
 	int updateCards(CardsVo cardVo);
 	
+	int upateStatusCards(CardsVo cardVo);
+
 	int deleteCards(String cardCode);
 	
 }

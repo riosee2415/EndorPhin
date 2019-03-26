@@ -58,6 +58,9 @@
         	<put-attribute name="content" value="/WEB-INF/views/client/viewDetailClient.jsp"/>
         </definition>
         
+         <definition name="establishview" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/establish/establishview.jsp"/>
+        </definition>
         
         
         
@@ -66,8 +69,11 @@
         	<put-attribute name="content" value="/WEB-INF/views/test.jsp"/>
         </definition>
         
-         <definition name="addDeproductView" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/payment/deproductList.jsp"/>
+         <definition name="addProductView" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/payment/productList.jsp"/>
+        </definition>
+         <definition name="addDeductView" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/payment/deductList.jsp"/>
         </definition>
         
         

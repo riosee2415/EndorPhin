@@ -4,6 +4,11 @@
 	<h2>거래처 상세정보</h2>
 	<hr><br />
 	
+	<form id="deletefrm" action="${pageContext.request.contextPath }/deleteClient" method="get">
+		<input type="hidden" id="deleteCode" name="deleteCode" value="${vo.get(0).clientCode}" />	
+	</form>
+	
+	
 	<div style="width: 30%; float:left;">
 		<div class="table-responsive">
 	         <table class="table table-striped">
@@ -136,8 +141,7 @@
 	
 	
 	$("#deleteBtn_client").on("click", function(){
-		alert("삭제하시겠습니까? (미개발_개발예정)")
-		
+		$("#deletefrm").submit();
 	});
 
 	

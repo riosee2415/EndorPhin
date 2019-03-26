@@ -51,32 +51,58 @@ public class PaymentController {
 		return "addPaymentView";
 	}
 	
-	@RequestMapping(path="/addDeproduct",method=RequestMethod.GET)
-	public String addDeproduct(Model model,String deductName,String searchDeductName){
+	@RequestMapping(path="/addProduct",method=RequestMethod.GET)
+	public String addProduct(Model model,De_product_divVo de_product_divVo,String searchDeductName){
 		if(searchDeductName==null){
-			List<De_product_divVo> allDe_product_div = de_product_divService.getAllDe_product_div();
+			List<De_product_divVo> allDe_product_div = de_product_divService.getDe_product_div("1");
 			model.addAttribute("allDe_product_div",allDe_product_div);
 		}
 		else{
-			List<De_product_divVo> selectDeproductByNm = de_product_divService.selectDeproductByNm(searchDeductName);
+			de_product_divVo.setDeductName(searchDeductName);
+			List<De_product_divVo> selectDeproductByNm = de_product_divService.selectDeproductByNm(de_product_divVo);
 			model.addAttribute("allDe_product_div",selectDeproductByNm);
 			
 		}
-		return "addDeproductView";
+		return "addProductView";
 	}
-	@RequestMapping(path="/delDeproduct",method=RequestMethod.GET)
-	public String delDeproduct(Model model,String[] deductCode){
-		int i = 0;
-		for (String str : deductCode) {
-			i+=de_product_divService.deleteDe_product_div(str);
+	
+	@RequestMapping(path="/addDeduct",method=RequestMethod.GET)
+	public String addDeduct(Model model,De_product_divVo de_product_divVo,String searchDeductName){
+		if(searchDeductName==null){
+			List<De_product_divVo> allDe_product_div = de_product_divService.getDe_product_div("2");
+			model.addAttribute("allDe_product_div",allDe_product_div);
 		}
-		logger.debug("asdlf:{}",i);
-		return "redirect:/addDeproduct";
+		else{
+			de_product_divVo.setDeductName(searchDeductName);
+			List<De_product_divVo> selectDeproductByNm = de_product_divService.selectDeproductByNm(de_product_divVo);
+			model.addAttribute("allDe_product_div",selectDeproductByNm);
+			
+		}
+		return "addDeductView";
+	}
+	
+	@RequestMapping(path="/delDeproduct",method=RequestMethod.GET)
+	public String delDeproduct(Model model,String[] deductCode,String deprostatus){
+		for (String str : deductCode) {
+			de_product_divService.deleteDe_product_div(str);
+		}
+		if(deprostatus.equals("1")){
+			return "redirect:/addProduct";
+		}
+		else{
+			return "redirect:/addDeduct";
+		}
 	}
 	@RequestMapping(path="/addDeproduct",method=RequestMethod.POST)
 	public String addDeproduct_post(Model model,De_product_divVo de_product_divVo){
 		de_product_divService.insertDe_product_div(de_product_divVo);
-		return "redirect:/addDeproduct";
+		logger.debug("selectDe_product_div:{}",de_product_divVo);
+		if(de_product_divVo.getDeprostatus().equals("1")){
+			return "redirect:/addProduct";
+		}
+		else{
+			return "redirect:/addDeduct";
+		}
 	}
 	@RequestMapping(path="/findDeductCode",method=RequestMethod.GET)
 	@ResponseBody
@@ -100,7 +126,13 @@ public class PaymentController {
 	@RequestMapping(path="/updDeduct",method=RequestMethod.GET)
 	public String updDeduct(De_product_divVo selectDe_product_div){
 		de_product_divService.updateDe_product_div(selectDe_product_div);
-		return "redirect:/addDeproduct";
+		logger.debug("selectDe_product_div:{}",selectDe_product_div);
+		if(selectDe_product_div.getDeprostatus().equals("1")){
+			return "redirect:/addProduct";
+		}
+		else{
+			return "redirect:/addDeduct";
+		}
 	}
 	
 	

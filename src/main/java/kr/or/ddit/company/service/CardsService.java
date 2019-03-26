@@ -41,10 +41,14 @@ public class CardsService implements ICardsService{
 	public int deleteCards(String cardCode) {
 		return cardsDao.deleteCards(cardCode);
 	}
-	@Override
-	public List<CardsVo> serachCards(CardsVo cardVo) {
-		return cardsDao.serachCards(cardVo);
-	}
 	
+	@Override
+	public int upateStatusCards(CardsVo cardVo) {
+		return cardsDao.upateStatusCards(cardVo);
+	}
+	@Override
+	public List<CardsVo> serachCards(String cardNumber, String cardName) {
+		return cardsDao.serachCards(cardNumber,cardName);
+	}
 
 }

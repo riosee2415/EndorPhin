@@ -10,9 +10,12 @@
 		(establishcode, establishnamekor, establishnameeng,
 		 status, slipstatus, clientstatus, usestatus)
 		values
-		(#{establishcode},#{establishnamekor},#{establishnameeng},#{status}
-		,#{slipstatus},#{clientstatus},#{usestatus})
-
+		(#{establishCode},#{establishNameKor}
+		,nvl(#{establishNameEng, jdbcType=VARCHAR},null)
+		,#{status}
+		,nvl(#{slipstatus, jdbcType=VARCHAR},null)
+		,nvl(#{clientStatus, jdbcType=VARCHAR},null)
+		,#{useStatus})
 	</insert>
 
 
@@ -32,15 +35,45 @@
 		establishcode, establishnamekor, establishnameeng,
 		 status, slipstatus, clientstatus, usestatus
 		from
-		establish where establishcode = #{establishcode}
+		establish where establishcode = #{establishCode}
 	</select>
 
 
 	<!-- 계정과목 삭제 -->
 	<delete id="deleteEstablish" parameterType="map">
 		delete from establish
-		where establishcode = #{establishcode}
+		where establishcode = #{establishCode}
 	</delete>
+	
+	<!-- 계정과목명 검색 -->
+	<select id="selectEstablishByNm" resultType="establishVo"
+	parameterType="map">
+		select
+			establishcode, establishnamekor, establishnameeng,
+		 status, slipstatus, clientstatus, usestatus
+		from	establish
+		where	establishNameKor like '%'||#{establishNameKor}||'%'
+	</select>
+	
+	<!-- 페이징처리를 위한 조회 -->
+	<select id="selectEstablishPagingList" resultType="establishVo" parameterType="pageVo">
+		select *
+		  from
+			  (select a.*, rownum rn
+				 from
+					 (select establish.*
+						from establish
+					  order by ESTABLISHCODE) a ) a
+		 where rn between (#{page}-1)*#{pageSize}+1 and #{page}*#{pageSize}
+	</select>
+	
+	
+	
+	<!-- 전체 계정과목 수 조회 -->
+	<select id="getEstablishCnt" resultType="Integer">
+		select count(*)
+ 		  from ESTABLISH
+	</select>
 
 </mapper>
 

@@ -54,9 +54,17 @@ public class De_Product_div_ServiceTest extends LogicConfig{
 	
 	@Test
 	public void selectDeproductByNmTest() {
-		List<De_product_divVo> selectDeproductByNm = de_product_divService.selectDeproductByNm("급");
+		De_product_divVo de_product_divVo = new De_product_divVo();
+		de_product_divVo.setDeductName("급");
+		de_product_divVo.setDeprostatus("1");
+		List<De_product_divVo> selectDeproductByNm = de_product_divService.selectDeproductByNm(de_product_divVo);
 		assertEquals("기본급", selectDeproductByNm.get(0).getDeductName());
-		
+	}
+	
+	@Test
+	public void getDe_product_divTest() {
+		List<De_product_divVo> selectDeproductByNm = de_product_divService.getDe_product_div("1");
+		assertEquals("기본급", selectDeproductByNm.get(0).getDeductName());
 	}
 
 }

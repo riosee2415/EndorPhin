@@ -20,7 +20,7 @@
 	
 	
 	<!--등록된 카드 정보 가져오기  -->
-	<select id="selectCards" resultType="cardsVo" parameterType="cardsVo">
+	<select id="selectCards" resultType="cardsVo" parameterType="map">
 		select
 			cardCode,
 			cardNumber,
@@ -63,19 +63,28 @@
 	<!-- 연봉 코드를 기준으로 연봉 데이터 업데이트하기 -->
 
 	<update id="updateCards" parameterType="cardsVo">
-	update users set cardNumber=#{cardNumber},
+	update cards set 
+					 cardNumber=#{cardNumber},
              		 cardName=#{cardName},
                 	 cardSortation=#{cardSortation},
-               		 status=#{status},
-               		 memo=#{memo}
+                	 status=#{status},
+               		 memo=#{memo},
+               		 companyCode=#{companyCode}
         where cardCode=#{cardCode}
 	</update>
 	
-
+	<!--카드 사용여부  변경 -->
+	<update id="upateStatusCards" parameterType="cardsVo">
+	update cards set status=#{status} where cardCode=#{cardCode}
+	</update>
+	
 	<delete id="deleteCards" parameterType="map">
 	    delete cards
 		where cardCode=#{cardCode}
 	</delete>
+	
+	
+	
 </mapper>
 
 

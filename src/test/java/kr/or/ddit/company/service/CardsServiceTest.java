@@ -54,4 +54,29 @@ public class CardsServiceTest extends LogicConfig {
 	    
 	}
 		
+	@Test
+	public void updateCardsTest() {
+	    CardsVo cardsVo = new CardsVo();
+	    cardsVo.setCardCode("1");
+	    cardsVo.setCardName("농협카드");
+	    cardsVo.setCardNumber("45454");
+	    cardsVo.setCardSortation("1");
+	    cardsVo.setMemo("55");
+	    cardsVo.setCompanyCode("1");
+	    cardsVo.setStatus("1");
+	    
+	    int updCnt = cardsService.updateCards(cardsVo);
+		assertNotNull(updCnt);
+	    
+	}
+	@Test
+	public void updateUseTest() {
+	    CardsVo cardsVo = new CardsVo();
+	    cardsVo.setCardCode("1");
+	    cardsVo.setStatus("0");
+	    
+	    int updCnt = cardsService.upateStatusCards(cardsVo);
+		assertNotNull(updCnt);
+	    
+	}
 }

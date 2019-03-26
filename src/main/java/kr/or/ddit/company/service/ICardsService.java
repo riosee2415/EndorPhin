@@ -17,4 +17,6 @@ public interface ICardsService {
 	int updateCards(CardsVo cardVo);
 	
 	int deleteCards(String cardCode);
+	
+	int upateStatusCards(CardsVo cardVo);
 }

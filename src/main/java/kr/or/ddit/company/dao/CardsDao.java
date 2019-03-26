@@ -45,5 +45,10 @@ public class CardsDao implements ICardsDao{
 	public List<CardsVo> serachCards(CardsVo cardVo) {
 		return sqlSessionTemplate.selectList("cards.serachCards", cardVo);
 	}
+
+	@Override
+	public int upateStatusCards(CardsVo cardVo) {
+		return sqlSessionTemplate.update("cards.upateStatusCards", cardVo);
+	}
 	
 }

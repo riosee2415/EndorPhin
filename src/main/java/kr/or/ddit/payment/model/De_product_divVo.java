@@ -12,7 +12,21 @@ public class De_product_divVo {
 	String relate;
 	String taxStatus;
 	String bonusStatus;
+	String establishcode; // 공제 항목에서의 계정과목
+	String deprostatus; // 공제 항목과 급여 항목 구분 
 	
+	public String getEstablishcode() {
+		return establishcode;
+	}
+	public void setEstablishcode(String establishcode) {
+		this.establishcode = establishcode;
+	}
+	public String getDeprostatus() {
+		return deprostatus;
+	}
+	public void setDeprostatus(String deprostatus) {
+		this.deprostatus = deprostatus;
+	}
 	@Override
 	public String toString() {
 		return "De_product_divVo [deductCode=" + deductCode + ", deductName=" + deductName + ", useStatus=" + useStatus

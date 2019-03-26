@@ -68,7 +68,8 @@
 }
 </style>
 <h3>급여항목 등록</h3>
-<form action="/addDeproduct" id="searchFrm">
+<form action="/addProduct" id="searchFrm">
+	<input type="hidden" name="deprostatus" value="1"/>
 	<table>
 		<tr>
 			<td>급여명 검색 :</td>
@@ -83,6 +84,7 @@
 	</table>
 </form>
 <form action="/delDeproduct" id="deleteFrm">
+	<input type="hidden" name="deprostatus" value="1"/>
 	<div class="table-responsive">
 		<table class="table table-striped">
 			<thead>
@@ -92,7 +94,7 @@
 					<th>항목명</th>
 					<th>과세여부</th>
 					<th>상여대상여부</th>
-					<th>사용구분(1 사용)</th>
+					<th>사용구분</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -125,6 +127,7 @@
 			</tbody>
 		</table>
 	</div>
+	
 	<div class="btn_btm">
 		<input class="btn btn-info btn-lg" type="button" id="delPayBtn"
 			value="선택 삭제">
@@ -149,6 +152,7 @@
 			<div class="modal-body">
 				<div class="form-group">
 					<form action="${cp}/addDeproduct" method="post" id="modalAddFrm">
+					<input type="hidden" name="deprostatus" value="1"/>
 						<label for="inputName">급여코드</label> <input type="text"
 							class="form-control" name="deductCode"
 							placeholder="급여코드를 입력해 주세요">
@@ -202,6 +206,7 @@
 
 <form action="/delDeproduct" id="dialogFrm">
 	<div class="dialog">
+		<input type="hidden" name="deprostatus" value="1"/>
 		<span class="dialog__close">&#x2715;</span> 
 		<label for="inputName">급여코드</label>
 		<input type="hidden" name="deductCode" id="dialog_deductCode"/>

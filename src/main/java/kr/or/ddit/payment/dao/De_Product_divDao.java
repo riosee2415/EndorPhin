@@ -36,13 +36,18 @@ public class De_Product_divDao implements IDe_Product_divDao{
 	}
 
 	@Override
-	public List<De_product_divVo> selectDeproductByNm(String deductName) {
-		return sqlSessionTemplate.selectList("de_product_div.selectDeproductByNm",deductName);
+	public List<De_product_divVo> selectDeproductByNm(De_product_divVo de_product_divVo) {
+		return sqlSessionTemplate.selectList("de_product_div.selectDeproductByNm",de_product_divVo);
 	}
 
 	@Override
 	public int updateDe_product_div(De_product_divVo de_product_divVo) {
 		return sqlSessionTemplate.update("de_product_div.updateDe_product_div",de_product_divVo);
+	}
+
+	@Override
+	public List<De_product_divVo> getDe_product_div(String deprostatus) {
+		return sqlSessionTemplate.selectList("de_product_div.getDe_product_div",deprostatus);
 	}
 
 }

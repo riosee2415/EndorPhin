@@ -4,93 +4,87 @@
 	
 	
 	<h2>계정과목 관리</h2>
-	<hr>
+<hr>
 
-	<div class="table-responsive">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>사용자 아이디</th>
-								<th>사용자 이름</th>
-								<th>별명</th>
-								<th>등록일시</th>
-							</tr>
-						</thead>
-							<tbody id="establishListTbody">
-						</tbody>
-					</table>
-					
-					<form action="" method="get">
-						<button type="submit" class="btn btn-default">계정과목 등록</button>
-					</form>
-					
-					    
-					
-				<c:set var="lastPage" value="${Integer(establishCnt/pageSize + (establishCnt%pageSize > 0 ? 1 : 0))}"/>
-					
-					<nav style="text-align:center;">
-						<ul id="pagination" class="pagination">
-						</ul>
-					</nav>
-				</div>
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>계정과목코드</th>
+				<th>계정과목명(한글)</th>
+				<th>계정과목명(영어)</th>
+				<th>계정과목유형</th>
+			</tr>
+		</thead>
+		<tbody id="establishListTbody">
+		</tbody>
+	</table>
 
 
 
 
-	<script>
+	<c:set var="lastPage"
+		value="${Integer(establishCnt/pageSize + (establishCnt%pageSize > 0 ? 1 : 0))}" />
+
+	<nav style="text-align: center;">
+		<ul id="pagination" class="pagination">
+		</ul>
+	</nav>
+</div>
+
+<form action="" method="get">
+	<button type="submit" class="btn btn-default">계정과목 등록</button>
+</form>
+
+
+
+
+
+<script>
+
+
+	$("document").ready(function() {
+
+		getEstablishListHtml(1);
+
+	});
 	
-	function makePagenation(establishCnt, pageSize, page){
-		var lastPage = parseInt(establishCnt/pageSize) + (establishCnt%pageSize > 0 ? 1 : 0);
+	
+	
+	function getEstablishPageList(page){
+		$.ajax({
+			url : "${pageContext.request.contextPath }/getEstablishPageList",
+			data : "page=" + page,
+			success : function(data){
+				
+				var htmlArr = data
+				.split("================seperator================");
 
-		var html = "";
-		
-		if(page == 1) {
-			html += "<li class='disabled'>";
-			html += "	<a aria-label='Previous'>";
-			html += "		<span aria-hidden='true'>&laquo;</span>";
-			html += " 	</a>";
-			html += "</li>";
-		} else {
-			html += "<li>";
-			html += "	<a href='javascript:getUserPageList(1);' aria-label='Previous'>";
-			html += "		<span aria-hidden='true'>&laquo;</span>";
-			html += "	</a>";
-			html += "</li>";
-		}
-		
-		for(var i = 1; i <= lastPage; i++){
-			var active = "";
-			if(i == page){
-				active = "active";
+				$("#establishListTbody").html(htmlArr[0]);
+				$("#pagination").html(htmlArr[1]);
+				
 			}
-			html += "<li class='" + active + "'>";
-			html += "	<a href='javascript:getUserPageList(" + i + ");'>" + i + "</a>";
-			html += "</li>";
-		}		
-		
-		
-		
-		if(page == lastPage){
-			html += "<li class='disabled'>";
-			html += "	<a aria-label='Next'>";
-			html += "		<span aria-hidden='true'>&raquo;</span>";
-			html += "	</a>";
-			html += "</li>";
-		} else {
-			html += "<li>";
-			html += "	<a href='javascript:getUserPageList(" + lastPage + ");'>" ;
-			html += "		<span aria-hidden='true'>&raquo;</span>";
-			html += "	</a>";
-			html += "</li>";
-			
-		}
-		
-		$("#pagination").html(html);
-		
-		
+		});
 		
 	}
-	
-	
-	</script>
+		
+
+	function getEstablishListHtml(page) {
+
+		$.ajax({
+			url : "${pageContext.request.contextPath }/establishAjaxHtml",
+			data : "page=" + page,
+			success : function(data) {
+
+				var htmlArr = data
+						.split("================seperator================");
+
+				$("#establishListTbody").html(htmlArr[0]);
+				$("#pagination").html(htmlArr[1]);
+
+			}
+
+		});
+
+	}
+</script>

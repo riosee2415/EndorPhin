@@ -165,6 +165,19 @@
 	</update>
 	
 	
+	
+	<!-- 
+	거래처코드로 거래처 조죄하기
+	파라미터 타입 : map
+	파라미터 key : clientCode
+	 -->
+	<delete id="deleteClient" parameterType="map">
+	DELETE 
+	FROM Client
+	WHERE clientCode=#{clientCode}
+	</delete>
+	
+	
 
 </mapper>
 

@@ -119,4 +119,23 @@ public class ClientDao implements IClientDao{
 		
 		return cnt;
 	}
+
+
+	/**
+	* Method : deleteClient
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param clientCode
+	* @return
+	* Method 설명 : 거래처 코드를 기준으로 거래처 삭제하기
+	*/
+	@Override
+	public int deleteClient(String clientCode) {
+		HashMap<String, String> map = new HashMap<String, String> ();
+		map.put("clientCode", clientCode);
+		
+		int cnt = sqlSessionTemplate.delete("client.deleteClient", map);
+		
+		return 0;
+	}
 }

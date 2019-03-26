@@ -9,6 +9,5 @@ public interface IDeptDao {
 	int deleteDept(String deptcode);
 	List<DeptVo> getAllDept();
 	DeptVo selectDept(String deptcode);
-	
-
+	   
 }

@@ -1,11 +1,16 @@
 package kr.or.ddit.employee.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -101,6 +106,11 @@ public class EmployeeController {
 	public String detailEmployee(Model model, EmployeeVo vo,RedirectAttributes ra,
 			@RequestParam String userId) {
 		
+		EmployeeVo selectEmployee = employeeService.selectEmployee(userId);
+		Employee_detailVo selectEmployeeDetail = employeeDetailService.selectEmployeeDetail(userId);
+		
+		model.addAttribute("userVo",selectEmployee);
+		model.addAttribute("img",selectEmployeeDetail);
 		
 		return "employeeDetailTiles";
 	}
@@ -138,6 +148,40 @@ public class EmployeeController {
 		return userIdCode;
 		
 		
+	}
+	
+	
+	
+	@RequestMapping("/profileImg")
+	public void profileImg(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam("userId") String userId) throws IOException {
+
+		response.setHeader("content-Disposition", "attachment; filename=profile.png");
+		response.setContentType("image.png");
+		logger.debug("이미지서브릿 : {}",userId);
+		Employee_detailVo vo = employeeDetailService.selectEmployeeDetail(userId);
+
+		FileInputStream fis;
+		if (vo != null && vo.getImg_name() != null) {
+			fis = new FileInputStream(new File(vo.getImg_path()));
+		} else {
+
+			ServletContext application = request.getServletContext();
+			String noimgPath = application.getRealPath("/upload/noimage.jpg");
+			fis = new FileInputStream(new File(noimgPath));
+		}
+
+		ServletOutputStream sos = response.getOutputStream();
+
+		byte[] buff = new byte[512];
+		int len = 0;
+		while ((len = fis.read(buff)) > -1) {
+			sos.write(buff);
+		}
+
+		sos.close();
+		fis.close();
+
 	}
 	
 	

@@ -41,6 +41,11 @@
         </definition>
         
         
+        <definition name="positionListTiles" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/employee/positionList.jsp"/>
+        </definition>
+        
+        
         <definition name="insertEmployeeTiles" extends="layout">
         	<put-attribute name="content" value="/WEB-INF/views/employee/insertEmployeeForm.jsp"/>
         </definition>

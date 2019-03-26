@@ -1,5 +1,6 @@
 package kr.or.ddit.employee.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -17,9 +18,39 @@ public class EmployeeVo {
 	String continuousYear;
 	String relate;
 	Date joinCompany;
-	String BirthDate;
+	Date BirthDate;
 	String password;
 	
+	
+	
+	//직책/직급 이름
+	String positionname;
+	String rankname;
+	
+	//부서이름
+	String deptname;
+	
+	
+	
+	
+	public String getPositionname() {
+		return positionname;
+	}
+	public void setPositionname(String positionname) {
+		this.positionname = positionname;
+	}
+	public String getRankname() {
+		return rankname;
+	}
+	public void setRankname(String rankname) {
+		this.rankname = rankname;
+	}
+	public String getDeptname() {
+		return deptname;
+	}
+	public void setDeptname(String deptname) {
+		this.deptname = deptname;
+	}
 	public String getPassword() {
 		return password;
 	}
@@ -66,10 +97,16 @@ public class EmployeeVo {
 		return relate;
 	}
 	public void setRelate(String relate) {
+		
+		
 		this.relate = relate;
 	}
-	public Date getJoinCompany() {
-		return joinCompany;
+	public String getJoinCompany() {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+
+		return sdf.format(joinCompany);
 	}
 	public void setJoinCompany(Date joinCompany) {
 		this.joinCompany = joinCompany;
@@ -77,17 +114,21 @@ public class EmployeeVo {
 	
 	
 	public String getBirthDate() {
-		return BirthDate;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		return sdf.format(BirthDate);
 	}
-	public void setBirthDate(String birthDate) {
+	public void setBirthDate(Date birthDate) {
 		BirthDate = birthDate;
 	}
 	@Override
 	public String toString() {
 		return "EmployeeVo [userId=" + userId + ", userNm=" + userNm + ", deptCode=" + deptCode + ", positionCode="
 				+ positionCode + ", rankCode=" + rankCode + ", continuousYear=" + continuousYear + ", relate=" + relate
-				+ ", joinCompany=" + joinCompany + ", BirthDate=" + BirthDate + ", password=" + password + "]";
+				+ ", joinCompany=" + joinCompany + ", BirthDate=" + BirthDate + ", password=" + password
+				+ ", positionname=" + positionname + ", rankname=" + rankname + ", deptname=" + deptname + "]";
 	}
+	
 	
 	
 	

@@ -1,10 +1,10 @@
-package kr.or.ddit.employee.dao;
+package kr.or.ddit.employee.service;
 
 import java.util.List;
 
 import kr.or.ddit.employee.model.PositionVo;
 
-public interface IPositionDao {
+public interface IPositionService {
 	
 	public PositionVo selectPosition(String code);
 	int insertPosition(PositionVo Vo);

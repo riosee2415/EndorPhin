@@ -18,14 +18,33 @@
   <title>SB Admin - Dashboard</title>
   
 
-  <!-- Custom fonts for this template-->
+   <!-- Custom fonts for this template-->
   <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Page level plugin CSS-->
   <link href="${pageContext.request.contextPath}/resources/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="${pageContext.request.contextPath}/resources/css/sb-admin.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/css/sb-admin.css" rel="stylesheet"> 
+  
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+ integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+  crossorigin="anonymous"></script>
+
+  
+
+	<style>
+	
+	
+	.cont{
+	background-color:#8C715E;
+	
+	}
+	
+	</style>
+
+
 
 </head>
 	
@@ -39,11 +58,11 @@
 		<tiles:insertAttribute name="left"/>
 	
 	
-	    <div id="content-wrapper">
-			<div class="container-fluid">
+	    <div id="content-wrapper" class="cont">
+			<div class="container-fluid" >
 
 			<!-- Contents Source -->
-			<tiles:insertAttribute name="content"/>
+			<tiles:insertAttribute  name="content"/>
 
 			</div>
 			<!-- /.container-fluid -->

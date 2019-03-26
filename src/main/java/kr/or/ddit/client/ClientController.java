@@ -197,6 +197,15 @@ public class ClientController {
 		return "redirect:/viewDetailClient?clientCode="+clientCode;
 	}
 	
+	
+	@RequestMapping(path="deleteClient", method=RequestMethod.GET)
+	public String deleteClient(@RequestParam(name="deleteCode")String clientCode) {
+		
+		int cnt = clientService.deleteClient(clientCode);
+		
+		return "redirect:/clientview";
+	}
+	
 
 }
 

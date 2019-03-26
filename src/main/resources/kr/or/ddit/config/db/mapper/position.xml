@@ -11,11 +11,10 @@
 		insert into position
 		(positioncode, positionname, rank, usestatus, relate, positionstatus)
 		values
-		(#{positioncode},#{positionname},#{rank}
-		,#{usestatus},#{relate},#{positionstatus})
+		(#{positionCode},#{positionName},#{rank}
+		,nvl(#{useStatus, jdbcType=VARCHAR},null),nvl(#{relate, jdbcType=VARCHAR},null),#{positionStatus})
 
 	</insert>
-
 
 	<!-- 직책/직급  전체 불러오기 -->
 	<select id="getAllPosition" resultType="positionVo">

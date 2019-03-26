@@ -12,7 +12,7 @@
 			deductName,
 			useStatus,
 			relate,
-			taxstatus, bonusstatus
+			taxstatus, bonusstatus,establishcode,deprostatus
 		from de_product_div
 	</select>
 
@@ -23,9 +23,22 @@
 			deductName,
 			useStatus,
 			relate,
-			taxstatus, bonusstatus
+			taxstatus, bonusstatus,establishcode,deprostatus
 		from de_product_div	
 		where deductCode = #{deductCode}
+			
+	</select>
+		
+	<!-- 급여/공제 구분하여 가져오기  -->
+	<select id="getDe_product_div" resultType="de_product_divVo" parameterType="map">
+		select 
+			deductCode,
+			deductName,
+			useStatus,
+			relate,
+			taxstatus, bonusstatus,establishcode,deprostatus
+		from de_product_div	
+		where	deprostatus=#{deprostatus}
 			
 	</select>	
 	
@@ -36,11 +49,13 @@
 			deductName,
 			useStatus,
 			relate,
-			taxstatus, bonusstatus)
+			taxstatus, bonusstatus,establishcode,deprostatus)
 		values
 		(#{deductCode},#{deductName},#{useStatus},nvl(#{relate, jdbcType=VARCHAR},null),
-		nvl(#{taxStatus, jdbcType=VARCHAR},null),
-		nvl(#{bonusStatus, jdbcType=VARCHAR},null))
+		nvl(#{taxStatus, jdbcType=VARCHAR},null),		
+		nvl(#{bonusStatus, jdbcType=VARCHAR},null),
+		nvl(#{establishcode, jdbcType=VARCHAR},null),
+		#{deprostatus})
 
 	</insert>
 	
@@ -52,15 +67,16 @@
 	
 	<!-- 급여명으로 검색 -->
 	<select id="selectDeproductByNm" resultType="de_product_divVo"
-	parameterType="map">
+	parameterType="de_product_divVo">
 		select
 			deductCode,
 			deductName,
 			useStatus,
 			relate,
 			taxstatus, bonusstatus
-		from de_product_div
-		where deductName like '%'||#{deductName}||'%'
+		from	de_product_div
+		where	deductName like '%'||#{deductName}||'%'
+		and		deprostatus=#{deprostatus}
 	</select>
 	
 	<update id="updateDe_product_div" parameterType="de_product_divVo">
@@ -70,6 +86,7 @@
 		, relate=nvl(#{relate, jdbcType=VARCHAR} ,relate)
 		, taxstatus=nvl(#{taxStatus, jdbcType=VARCHAR} ,taxStatus)
 		, bonusstatus=nvl(#{bonusStatus,jdbcType=VARCHAR},bonusStatus)
+		, establishcode=nvl(#{establishcode,jdbcType=VARCHAR},establishcode)
 		where   deductCode=#{deductCode}
 	</update>
 	

@@ -55,8 +55,8 @@
           <h3 class="dropdown-header">기초정보</h3>
           <a class="dropdown-item" href="">직급등록</a>
           <a class="dropdown-item" href="">직책등록</a>
-          <a class="dropdown-item" href="/addDeproduct">급여항목 등록</a>
-          <a class="dropdown-item" href="">급여공제항목 등록</a>
+          <a class="dropdown-item" href="/addProduct">급여항목 등록</a>
+          <a class="dropdown-item" href="/addDeduct">급여공제항목 등록</a>
            <h3 class="dropdown-header">사원정보관리</h3>
           <a class="dropdown-item" href="${cp }/employee/getAllEmployee">사원등록</a>
           <a class="dropdown-item" href="">급여등록</a>

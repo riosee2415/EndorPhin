@@ -36,13 +36,18 @@ public class De_Product_divService implements IDe_Product_divService{
 	}
 
 	@Override
-	public List<De_product_divVo> selectDeproductByNm(String deductName) {
-		return de_product_divDao.selectDeproductByNm(deductName);
+	public List<De_product_divVo> selectDeproductByNm(De_product_divVo de_product_divVo) {
+		return de_product_divDao.selectDeproductByNm(de_product_divVo);
 	}
 
 	@Override
 	public int updateDe_product_div(De_product_divVo de_product_divVo) {
 		return de_product_divDao.updateDe_product_div(de_product_divVo);
+	}
+
+	@Override
+	public List<De_product_divVo> getDe_product_div(String deprostatus) {
+		return de_product_divDao.getDe_product_div(deprostatus);
 	}
 
 }

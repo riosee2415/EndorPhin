@@ -54,6 +54,26 @@
 		from	establish
 		where	establishNameKor like '%'||#{establishNameKor}||'%'
 	</select>
+	
+	<!-- 페이징처리를 위한 조회 -->
+	<select id="selectEstablishPagingList" resultType="establishVo" parameterType="pageVo">
+		select *
+		  from
+			  (select a.*, rownum rn
+				 from
+					 (select establish.*
+						from establish
+					  order by ESTABLISHCODE) a ) a
+		 where rn between (#{page}-1)*#{pageSize}+1 and #{page}*#{pageSize}
+	</select>
+	
+	
+	
+	<!-- 전체 계정과목 수 조회 -->
+	<select id="getEstablishCnt" resultType="Integer">
+		select count(*)
+ 		  from ESTABLISH
+	</select>
 
 </mapper>
 

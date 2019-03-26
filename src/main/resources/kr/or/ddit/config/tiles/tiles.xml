@@ -53,6 +53,9 @@
         	<put-attribute name="content" value="/WEB-INF/views/client/viewDetailClient.jsp"/>
         </definition>
         
+         <definition name="establishview" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/establish/establishview.jsp"/>
+        </definition>
         
         
         

@@ -46,6 +46,9 @@
 	   	<typeAlias  alias="sales_detailVo" type="kr.or.ddit.tax_cal.model.Sales_detailVo"/>
 	   	<typeAlias  alias="surtaxVo" type="kr.or.ddit.tax_cal.model.SurtaxVo"/>
 	   	<typeAlias  alias="tax_calVo" type="kr.or.ddit.tax_cal.model.Tax_calVo"/>
+	   	<typeAlias  alias="pageVo" type="kr.or.ddit.util.model.PageVo"/>
+	   	
+	   	
     </typeAliases>
   <mappers>
   	<mapper resource="kr/or/ddit/config/db/mapper/account_company.xml"/>

@@ -4,40 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board_detail">
 
-	<!-- 게시글 전체 조회 -->
-	<select id="postAllList" resultType="board_detailVo">
-		select boardno,
-			   title,
-			   contents,
-			   postdate,
-	    	   boardtypecode,
-			   userid
-			   
-			from board_detail
-	</select>
-	
-	<!-- 특정 게시글 조회 -->
-	<select id="postSelectOne" resultType="board_detailVo" parameterType="String">
-		select boardno,
-			   title,
-			   contents,
-			   postdate,
-			   boardtypecode,
-			   userid
-			   
-		from board_detail
-		
-		where boardno = #{boardNo}
-		
-	</select>
-	
-	<!-- 게시글 수 조회 -->
-	<select id="postCnt" resultType="Integer" parameterType="String">
-		select count(*)
- 		from board_detail
- 		where boardTypeCode = #{boardTypeCode}
-	</select>
-	
 	<!-- 게시글 등록 -->
 	<insert id="postInsert" parameterType="board_detailVo">
 		insert into board_detail
@@ -48,54 +14,77 @@
 			  ,boardtypecode
 			  ,userid)
 						 
-		values(BOARDNO_SEQ.nextval
+	    values(BOARDNO_SEQ.nextval
 			  ,#{title}
 			  ,#{contents}
 			  ,sysdate
 			  ,#{boardTypeCode}
 			  ,#{userId})
-			  
-			   
 	</insert>
 	
 	<!-- 게시글 수정 -->
 	<update id="postUpdate" parameterType="board_detailVo">
 		update board_detail
 		
-		set title=#{title},
-			contents=#{contents},
-			postdate=sysdate,
-			boardtypecode=#{boardTypeCode},
-			userid=#{userId}
-			
-		where boardno = #{boardNo}
+		   set title=#{title},
+			   contents=#{contents},
+			   postdate=sysdate,
+			   boardtypecode=#{boardTypeCode},
+			   userid=#{userId}
+				
+		 where boardno = #{boardNo}
 	</update>
+ 	
+ 	<!-- 게시글 목록 조회 -->
+ 	<select id ="selectPostList" resultType="board_detailVo" parameterType="pageVo">
+	 	select * 
+		  from
+		(select a.*, rownum rn
+		    from
+		    (select board_detail.*
+		       from board_detail
+		      where boardTypeCode = #{boardTypeCode}
+		      order by boardNo) a ) a
+ 		 where rn between (#{page}-1) * #{pageSize}+1 and #{page}*#{pageSize}
+ 	</select>
+	
+	<!-- 게시글 상세 조회 -->
+	<select id="postDetail" resultType="board_detailVo" parameterType="String">
+		select boardno,
+			   title,
+			   contents,
+			   postdate,
+			   boardtypecode,
+			   userid
+			   
+		  from board_detail
+		
+		 where boardno = #{boardNo}
+		
+	</select>
+	
+	<!-- 게시판 별 게시글 수 조회 -->
+	<select id="postCnt" resultType="Integer" parameterType="String">
+		select count(*)
+ 		  from board_detail
+ 		 where boardTypeCode = #{boardTypeCode}
+	</select>
+	
 	
 	<!-- 게시글 삭제 -->
 	<delete id="postDelete" parameterType="String">
  		delete from board_detail
- 		
- 		where boardno = #{boardNo}
+ 		 where boardno = #{boardNo}
  	</delete>
  	
- 	<!-- 게시글 페이지 조회 -->
- 	<select id ="selectPostPaingList" resultType="board_detailVo" parameterType="pageVo">
-	 	select * 
-		from
-		(
-		select a.*, rownum rn
-		from
-		(
-		
-		select board_detail.*
-		from board_detail
-		where boardTypeCode = #{boardTypeCode}
-		order by boardNo
-		) a ) a
-		
-		
-		where rn between (#{page}-1) * #{pageSize}+1 and #{page}*#{pageSize}
- 	</select>
+ 	<!-- 	게시판 별 최신 게시글 조회 -->
+	<select id="select_boardPost" resultType="postVo" parameterType="String">
+		select *
+		  from board_detail
+		 where boardno = (select max(boardno)
+		                    from board_detail
+		                   where boardTypeCode = #{boardTypeCode})
+	</select>
 </mapper>
 
 

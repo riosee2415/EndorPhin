@@ -8,58 +8,51 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import kr.or.ddit.board.dao.IAttach_boardDao;
 import kr.or.ddit.board.dao.IBoard_detailDao;
+import kr.or.ddit.board.dao.ICommentsDao;
+import kr.or.ddit.board.model.Attach_boardVo;
 import kr.or.ddit.board.model.Board_detailVo;
-import kr.or.ddit.board.model.PageVo;
+import kr.or.ddit.board.model.CommentsVo;
+import kr.or.ddit.util.model.PageVo;
 
 @Service("board_detailService")
 public class Board_detailService implements IBoard_detailService{
 
 	@Resource(name="board_detailDao")
 	private IBoard_detailDao board_detailDao;
+	
+	@Resource(name="attach_boardDao")
+	private IAttach_boardDao attach_boardDao;
+	
+	@Resource(name="commentsDao")
+	private ICommentsDao commentsDao;
 
-	/**
-	 * 
-	* Method : postAllList
-	* 작성자 : macbook
-	* 변경이력 :
-	* @return
-	* Method 설명 : 게시글 전체 출력
-	 */
-	@Override
-	public List<Board_detailVo> postAllList() {
-		List<Board_detailVo> postAllList = board_detailDao.postAllList();
-		return postAllList;
+	public Board_detailService(){
+		
 	}
 
 	/**
 	 * 
-	* Method : postSelectOne
+	* Method : postDetail
 	* 작성자 : macbook
 	* 변경이력 :
 	* @param boardNo
 	* @return
-	* Method 설명 : 특정 게시글만 출력
+	* Method 설명 : 게시글 상세 조회
 	 */
 	@Override
-	public Board_detailVo postSelectOne(String boardNo) {
-		Board_detailVo postSelectOne = board_detailDao.postSelectOne(boardNo);
-		return postSelectOne;
+	public Map<String, Object> postDetail(String boardNo) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Board_detailVo postDetail = board_detailDao.postDetail(boardNo);
+		List<Attach_boardVo> attachBoardNoSelect = attach_boardDao.attachBoardNoSelect(boardNo);
+		List<CommentsVo> selectComments_boardNo = commentsDao.selectComments_boardNo(boardNo);
+		resultMap.put("post", postDetail);
+		resultMap.put("attachList", attachBoardNoSelect);
+		resultMap.put("commentList", selectComments_boardNo);
+		return resultMap;
 	}
 
-	/**
-	 * 
-	* Method : postCnt
-	* 작성자 : macbook
-	* 변경이력 :
-	* @return
-	* Method 설명 : 게시글 수 조회
-	 */
-	@Override
-	public  int postCnt(String boardTypeCode) {
-		int postCnt = board_detailDao.postCnt(boardTypeCode);
-		return postCnt;
-	}
 
 	/**
 	 * 
@@ -71,9 +64,15 @@ public class Board_detailService implements IBoard_detailService{
 	* Method 설명 : 게시글 등록
 	 */
 	@Override
-	public int postInsert(Board_detailVo board_detailVo) {
+	public int postInsert(Board_detailVo board_detailVo, List<Attach_boardVo> attachList) {
+		int attachCnt = 0;
+		
 		int postInsert = board_detailDao.postInsert(board_detailVo);
-		return postInsert;
+		for (Attach_boardVo attach : attachList) {
+			attach_boardDao.attachInsert(attach);
+			attachCnt++;
+		}
+		return attachCnt + postInsert;
 	}
 
 	/**
@@ -86,9 +85,15 @@ public class Board_detailService implements IBoard_detailService{
 	* Method 설명 : 게시글 수정
 	 */
 	@Override
-	public int postUpdate(Board_detailVo board_detailVo) {
+	public int postUpdate(Board_detailVo board_detailVo, List<Attach_boardVo> attachList) {
+		int attachCnt = 0;
+		
 		int postUpdate = board_detailDao.postUpdate(board_detailVo);
-		return postUpdate;
+		for (Attach_boardVo attach : attachList) {
+			attach_boardDao.attachUpdate(attach);
+			attachCnt++;
+		}
+		return attachCnt + postUpdate;
 	}
 
 	/**
@@ -108,23 +113,36 @@ public class Board_detailService implements IBoard_detailService{
 
 	/**
 	 * 
-	 * Method : selectPagePost
-	 * 작성자 : macbook
-	 * 변경이력 :
-	 * @param pageVo
-	 * @return
-	 * Method 설명 : 게시글 페이지 조회
+	* Method : selectPostList
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param pageVo
+	* @return
+	* Method 설명 : 게시글 목록 조회
+	 */ 
+	@Override
+	public Map<String, Object> selectPostList(PageVo pageVo) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		List<Board_detailVo> selectPostList = board_detailDao.selectPostList(pageVo);
+		int postCnt = board_detailDao.postCnt(pageVo.getBoardTypeCode());
+		resultMap.put("postList", selectPostList);
+		resultMap.put("postCnt", postCnt);
+		return resultMap;
+	}
+
+	/**
+	 * 
+	* Method : select_latelyPost
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardTypeCode
+	* @return
+	* Method 설명 : 작성한 게시글의 최신글번호 조회
 	 */
 	@Override
-	public Map<String, Object> selectPagePost(PageVo pageVo) {
-		List<Board_detailVo> postsList = board_detailDao.selectPagePost(pageVo);
-		int postsCnt = board_detailDao.postCnt(pageVo.getBoardTypeCode());
-		
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap.put("postsList", postsList);
-		resultMap.put("postsCnt", postsCnt);
-		
-		return resultMap;
+	public Board_detailVo select_latelyPost(String boardTypeCode) {
+		Board_detailVo select_boardPost = board_detailDao.select_boardPost(boardTypeCode);
+		return select_boardPost;
 	}
 
 }

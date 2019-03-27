@@ -3,42 +3,22 @@ package kr.or.ddit.board.service;
 import java.util.List;
 import java.util.Map;
 
+import kr.or.ddit.board.model.Attach_boardVo;
 import kr.or.ddit.board.model.Board_detailVo;
-import kr.or.ddit.board.model.PageVo;
+import kr.or.ddit.util.model.PageVo;
 
 public interface IBoard_detailService {
 
 	/**
 	 * 
-	* Method : postAllList
-	* 작성자 : macbook
-	* 변경이력 :
-	* @return
-	* Method 설명 : 게시글 전체 조회
-	 */
-	List<Board_detailVo> postAllList();
-	
-	/**
-	 * 
-	* Method : postSelectOne
+	* Method : postDetail
 	* 작성자 : macbook
 	* 변경이력 :
 	* @param boardNo
 	* @return
-	* Method 설명 : 특정 게시글 조회
+	* Method 설명 : 게시글 상세 조회
 	 */
-	Board_detailVo postSelectOne(String boardNo);
-	
-	/**
-	 * 
-	* Method : postCnt
-	* 작성자 : macbook
-	* 변경이력 :
-	* @param boardNo
-	* @return
-	* Method 설명 : 게시글 수 조회
-	 */
-	int postCnt(String boardTypeCode);
+	Map<String, Object>postDetail(String boardNo);
 	
 	/**
 	 * 
@@ -49,7 +29,7 @@ public interface IBoard_detailService {
 	* @return
 	* Method 설명 : 게시글 등록
 	 */
-	int postInsert(Board_detailVo board_detailVo);
+	int postInsert(Board_detailVo board_detailVo, List<Attach_boardVo> attachList);
 	
 	/**
 	 * 
@@ -60,7 +40,7 @@ public interface IBoard_detailService {
 	* @return
 	* Method 설명 : 게시글 수정
 	 */
-	int postUpdate(Board_detailVo board_detailVo);
+	int postUpdate(Board_detailVo board_detailVo, List<Attach_boardVo> attachList);
 	
 	/**
 	 * 
@@ -75,14 +55,24 @@ public interface IBoard_detailService {
 	
 	/**
 	 * 
-	* Method : selectPagePost
+	* Method : selectPostList
 	* 작성자 : macbook
 	* 변경이력 :
 	* @param pageVo
 	* @return
-	* Method 설명 : 게시글 페이지 조회
-	 */
-	Map<String, Object> selectPagePost(PageVo pageVo);
+	* Method 설명 : 게시글 목록 조회
+	 */ 
+	Map<String, Object> selectPostList(PageVo pageVo);
 	
+	/**
+	 * 
+	* Method : select_latelyPost
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardno
+	* @return
+	* Method 설명 : 작성한 게시글의 최신글번호 조회
+	 */
+	Board_detailVo select_latelyPost(String boardTypeCode);
 	
 }

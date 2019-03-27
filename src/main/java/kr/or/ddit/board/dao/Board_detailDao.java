@@ -4,46 +4,31 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.ibatis.jdbc.SQL;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.or.ddit.board.model.Board_detailVo;
-import kr.or.ddit.board.model.PageVo;
+import kr.or.ddit.util.model.PageVo;
 
 @Repository("board_detailDao")
 public class Board_detailDao implements IBoard_detailDao{
 	
 	@Resource(name="sqlSessionTemplate")
 	private SqlSessionTemplate sqlSession;
-	
-	/**
-	 * 
-	* Method : postAllList
-	* 작성자 : macbook
-	* 변경이력 :
-	* @return
-	* Method 설명 : 게시글 전체 조회
-	 */
-	@Override
-	public List<Board_detailVo> postAllList() {
-		List<Board_detailVo> postAllList = sqlSession.selectList("board_detail.postAllList");
-		return postAllList;
-	}
 
 	/**
 	 * 
-	* Method : postSelectOne
+	* Method : postDetail
 	* 작성자 : macbook
 	* 변경이력 :
 	* @param boardNo
 	* @return
-	* Method 설명 : 특정 게시글 조회
+	* Method 설명 : 게시글 상세 조회
 	 */
 	@Override
-	public Board_detailVo postSelectOne(String boardNo) {
-		Board_detailVo postSelect = sqlSession.selectOne("board_detail.postSelectOne", boardNo);
-		return postSelect;
+	public Board_detailVo postDetail(String boardNo) {
+		Board_detailVo Board_detailVo = sqlSession.selectOne("board_detail.postDetail", boardNo);
+		return Board_detailVo;
 	}
 
 	/**
@@ -53,7 +38,7 @@ public class Board_detailDao implements IBoard_detailDao{
 	* 변경이력 :
 	* @param boardNo
 	* @return
-	* Method 설명 : 게시글 수 조회
+	* Method 설명 : 게시판 별 게시글 수 조회
 	 */
 	@Override
 	public int postCnt(String boardTypeCode) {
@@ -102,25 +87,38 @@ public class Board_detailDao implements IBoard_detailDao{
 	 */
 	@Override
 	public int postDelete(String boardno) {
-		int postDelete = sqlSession.delete("board_detail.postDelete",boardno);
+		int postDelete = sqlSession.update("board_detail.postDelete", boardno);
 		return postDelete;
 	}
 
 	/**
 	 * 
-	* Method : selectPagePost
+	* Method : selectPostList
 	* 작성자 : macbook
 	* 변경이력 :
 	* @param pageVo
 	* @return
-	* Method 설명 : 게시글 페이지 조회
-	 */
+	* Method 설명 : 게시글 목록 조회
+	 */ 
 	@Override
-	public List<Board_detailVo> selectPagePost(PageVo pageVo) {
-		List<Board_detailVo> selectList = sqlSession.selectList("board_detail.selectPostPaingList", pageVo);
-		return selectList;
+	public List<Board_detailVo> selectPostList(PageVo pageVo) {
+		List<Board_detailVo> selectPostList = sqlSession.selectList("board_detail.selectPostList", pageVo);
+		return selectPostList;
 	}
 
-	
+	/**
+	 * 
+	* Method : select_boardPost
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardTypeCode
+	* @return
+	* Method 설명 : 게시판 별 최신 게시글 조회
+	 */
+	@Override
+	public Board_detailVo select_boardPost(String boardTypeCode) {
+		Board_detailVo select_boardPost = sqlSession.selectOne("board_detail.selectPostList", boardTypeCode);
+		return select_boardPost;
+	}
 	
 }

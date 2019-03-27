@@ -20,25 +20,6 @@ public class Board_detailDaoTest extends LogicConfig {
 
 	/**
 	 * 
-	* Method : postAllListTest
-	* 작성자 : macbook
-	* 변경이력 :
-	* Method 설명 : 게시글 전체 조회
-	 */
-	@Test
-	public void postAllListTest() {
-		/***Given***/
-		List<Board_detailVo> postList = board_datailDao.postAllList();
-
-		/***When***/
-
-		/***Then***/
-		assertNotNull(postList);
-
-	}
-	
-	/**
-	 * 
 	* Method : postSelectOneTest
 	* 작성자 : macbook
 	* 변경이력 :
@@ -50,7 +31,7 @@ public class Board_detailDaoTest extends LogicConfig {
 		String boardNo = "1";
 
 		/***When***/
-		Board_detailVo postSelectOne = board_datailDao.postSelectOne(boardNo);
+		Board_detailVo postSelectOne = board_datailDao.postDetail(boardNo);
 		/***Then***/
 		assertEquals(null, postSelectOne);
 

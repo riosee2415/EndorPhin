@@ -3,30 +3,20 @@ package kr.or.ddit.board.dao;
 import java.util.List;
 
 import kr.or.ddit.board.model.Board_detailVo;
-import kr.or.ddit.board.model.PageVo;
+import kr.or.ddit.util.model.PageVo;
 
 public interface IBoard_detailDao {
 
 	/**
 	 * 
-	* Method : postAllList
-	* 작성자 : macbook
-	* 변경이력 :
-	* @return
-	* Method 설명 : 게시글 전체 조회
-	 */
-	List<Board_detailVo> postAllList();
-	
-	/**
-	 * 
-	* Method : postSelectOne
+	* Method : postDetail
 	* 작성자 : macbook
 	* 변경이력 :
 	* @param boardNo
 	* @return
-	* Method 설명 : 특정 게시글 조회
+	* Method 설명 : 게시글 상세 조회
 	 */
-	Board_detailVo postSelectOne(String boardNo);
+	Board_detailVo postDetail(String boardNo);
 	
 	/**
 	 * 
@@ -35,7 +25,7 @@ public interface IBoard_detailDao {
 	* 변경이력 :
 	* @param boardNo
 	* @return
-	* Method 설명 : 게시글 수 조회
+	* Method 설명 : 게시판 별 게시글 수 조회
 	 */
 	int postCnt(String boardTypeCode);
 	
@@ -74,14 +64,25 @@ public interface IBoard_detailDao {
 	
 	/**
 	 * 
-	* Method : selectAllPosts
+	* Method : selectPostList
 	* 작성자 : macbook
 	* 변경이력 :
 	* @param pageVo
 	* @return
-	* Method 설명 : 게시글 페이지 조회
+	* Method 설명 : 게시글 목록 조회
 	 */ 
-	List<Board_detailVo> selectPagePost(PageVo pageVo);
+	List<Board_detailVo> selectPostList(PageVo pageVo);
+	
+	/**
+	 * 
+	* Method : select_boardPost
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardTypeCode
+	* @return
+	* Method 설명 : 게시판 별 최신 게시글 조회
+	 */
+	Board_detailVo select_boardPost(String boardTypeCode);
 
 	
 }

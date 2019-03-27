@@ -37,7 +37,7 @@
           <a class="dropdown-item" href="${pageContext.request.contextPath }/clientview">거래처등록</a>
           <a class="dropdown-item" href="${pageContext.request.contextPath }/cardsList">신용카드 등록</a>
           <a class="dropdown-item" href="${pageContext.request.contextPath }/establishview">계정과목 등록</a>
-          <a class="dropdown-item" href="">부서등록</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath }/deptList">부서등록</a>
            <h3 class="dropdown-header">전표관리</h3>
           <a class="dropdown-item" href="">미승인 전표</a>
           <a class="dropdown-item" href="">일반 전표</a>

@@ -104,7 +104,7 @@
 						<td><a href="#detailLayer" class="deductDetail">${vo.deductCode }</a></td>
 						<td>${vo.deductName}</td>
 						<c:if test="${vo.establishcode!=null}">
-							<td>${vo.establishcode}</td>
+							<td>${vo.establishName}</td>
 						</c:if>
 						<c:if test="${vo.useStatus==1}">
 							<td>사용</td>

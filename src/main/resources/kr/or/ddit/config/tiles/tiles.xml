@@ -62,7 +62,9 @@
         	<put-attribute name="content" value="/WEB-INF/views/establish/establishview.jsp"/>
         </definition>
         
-        
+        <definition name="deptList" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/dept/deptList.jsp"/>
+        </definition>
         
         
          <definition name="testTiles" extends="layout">

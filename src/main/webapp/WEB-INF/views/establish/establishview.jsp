@@ -1,20 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-	
+
+<head>
+	<style type="text/css">
+		.thead{
+			color : white;
+			background-color: #6E6867;
+			}
+	</style>
+</head>
 	
 	<h2>계정과목 관리</h2>
 <hr>
+	<div>
+계정과목명  : <input id="sArea" name="sArea" type="text" />&nbsp;
+			<input id="sBtn" name="sBtn"  class="btn btn-primary" type="button" value="검색" />
+			<input id="aBtn" name="aBtn"  class="btn btn-primary" type="button" value="전체조회" />
+			<br />
+	</div>
+	<p />
 
 <div class="table-responsive">
 	<table class="table table-striped">
-		<thead>
+		<thead class="thead">
 			<tr>
 				<td><input type="checkbox" name="allCheck" id="th_allCheck" onclick="allCheck();"></td>
 				<th>계정과목코드</th>
 				<th>계정과목명(한글)</th>
 				<th>계정과목명(영어)</th>
 				<th>계정과목유형</th>
+				<th>사용가능여부</th>
 			</tr>
 		</thead>
 		<tbody id="establishListTbody">
@@ -146,8 +162,13 @@
 
 
 	$("document").ready(function() {
-
+		
+		$("#sArea").focus();
+		
+		
 		getEstablishListHtml(1);
+		
+		
 		$("#establishListTbody").on("click", ".detailView", function(){
 			$("#modalCode").val($(this).data().establishcode);
 			$("#modalNameKor").val($(this).data().establishnamekor);
@@ -172,7 +193,42 @@
 			
 		});
 		
+		
+		
 	});
+	
+	$("#sArea").keydown(function(key) {
+		if (key.keyCode == 13) {
+			$("#sBtn").click();
+		}
+
+	});
+	
+	
+	$("#aBtn").on("click", function(){
+		getEstablishListHtml(1);
+	});
+	
+	
+	
+	$("#sBtn").on("click", function(){
+		
+		
+		$.ajax({
+			url : "${pageContext.request.contextPath }/searchEstablishBtn",
+			data : "establishNameKor=" + $("#sArea").val() ,
+			success : function(data){
+				$("#sArea").val("");
+				$("#establishListTbody").html(data);
+				$("#pagination").html("");
+			}
+		});
+		
+		
+		
+	});
+	
+	
 	
 	
 	

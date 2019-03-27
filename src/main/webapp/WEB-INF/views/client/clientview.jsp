@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
+
 <head>
-<meta charset="utf-8">
-
-<title>EndoRPhin-거래처관리</title>
-
-
-
+	<style type="text/css">
+		.thead{
+			color : white;
+			background-color: #6E6867;
+			}
+	</style>
 </head>
+	
 <body>
 
 	<input type="hidden" id="failCheck" name="failCheck" value="${failCheck }"/>
@@ -26,7 +26,7 @@
 	<br /><br />
 	<div class="table-responsive">
          <table class="table table-striped">
-		<thead>
+		<thead class="thead">
 			<tr>
 				<th>거래처코드</th>
 				<th>거래처명</th>
@@ -62,7 +62,7 @@
 					<td>${client.faxNumber }</td>
 					<c:choose>
 						<c:when test="${client.useStatus == 1 }">
-							<td>거래가능</td>
+							<td><font color="blue">거래가능</font></td>
 						</c:when>
 
 						<c:otherwise>

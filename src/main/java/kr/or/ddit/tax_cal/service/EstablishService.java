@@ -28,6 +28,7 @@ public class EstablishService implements IEstablishService{
 		return establishDao.deleteEstablish(establishcode);
 	}
 
+	
 	@Override
 	public List<EstablishVo> getAllEstablish() {
 		return establishDao.getAllEstablish();
@@ -52,9 +53,29 @@ public class EstablishService implements IEstablishService{
 		return resultMap;
 	}
 
+	
+	/**
+	* Method : getEstablishCount
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @return
+	* Method 설명 : 계정과목 수량 확인
+	*/
 	@Override
 	public int getEstablishCount() {
-		
 		return establishDao.getEstablishCount();
+	}
+
+	
+	/**
+	* Method : updateEstblish
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @return
+	* Method 설명 : 계정과목 코드를 키값으로 하는 데이터수정
+	*/
+	@Override
+	public int updateEstblish(EstablishVo vo) {
+		return establishDao.updateEstblish(vo);
 	}
 }

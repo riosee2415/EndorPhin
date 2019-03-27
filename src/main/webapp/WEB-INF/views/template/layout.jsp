@@ -38,7 +38,7 @@
 	
 	
 	.cont{
-	background-color:#8C715E;
+	background-color:#ffffff;
 	
 	}
 	

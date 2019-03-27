@@ -31,4 +31,17 @@ public interface IEstablishService {
 	* Method 설명 : 계정과목 수량 확인
 	*/
 	public int getEstablishCount();
+	
+	
+	
+	/**
+	* Method : updateEstblish
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @return
+	* Method 설명 : 계정과목 코드를 키값으로 하는 데이터수정
+	*/
+	public int updateEstblish(EstablishVo vo);
+	
+	
 }

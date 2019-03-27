@@ -233,6 +233,8 @@
 				alert("삭제할 대상을 선택하세요");
 				return false;
 			}
+			
+			
  				$("#del_frm").submit();
 		}
 	

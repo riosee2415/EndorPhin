@@ -1,5 +1,6 @@
 package kr.or.ddit.establish;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -123,6 +124,17 @@ public class EstablishController {
 		int cnt = establishService.updateEstblish(vo);
 		
 		return "redirect:/establishview";
+	}
+	
+	
+	@RequestMapping("/searchEstablishBtn")
+	public String searchEstablish(EstablishVo vo, Model model) {
+		
+		List<EstablishVo> establishList = establishService.selectEstablishByNm(vo.getEstablishNameKor());
+		
+		model.addAttribute("establishList", establishList);
+		
+		return "establish/establishSearchAjax";
 	}
 
 }

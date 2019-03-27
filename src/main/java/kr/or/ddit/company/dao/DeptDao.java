@@ -17,26 +17,27 @@ public class DeptDao implements IDeptDao{
 	
 	@Override
 	public int insertDept(DeptVo deptVo) {
-		int insert = sqlSessionTemplate.insert("dept.insertDept",deptVo);
-		return insert;
+		return sqlSessionTemplate.insert("dept.insertDept",deptVo);
 	}
 
 	@Override
 	public int deleteDept(String deptcode) {
-		int delete = sqlSessionTemplate.delete("dept.deleteDept",deptcode);
-		return delete;
+		return sqlSessionTemplate.delete("dept.deleteDept",deptcode);
 	}
 
 	@Override
 	public List<DeptVo> getAllDept() {
-		List<DeptVo> selectList = sqlSessionTemplate.selectList("dept.getAllDept");
-		return selectList;
+		return sqlSessionTemplate.selectList("dept.getAllDept");
 	}
 
 	@Override
 	public DeptVo selectDept(String deptcode) {
-		DeptVo selectOne = sqlSessionTemplate.selectOne("dept.selectDept",deptcode);
-		return selectOne;
+		return sqlSessionTemplate.selectOne("dept.selectDept",deptcode);
+	}
+
+	@Override
+	public int updateDept(DeptVo deptVo) {
+		return sqlSessionTemplate.update("dept.updateDept",deptVo);
 	}
 
 }

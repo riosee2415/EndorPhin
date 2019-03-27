@@ -13,14 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.or.ddit.client.ClientController;
 import kr.or.ddit.company.model.CardsVo;
 import kr.or.ddit.company.service.ICardsService;
 
 @Controller 
 public class CardsController {
 
-	private Logger logger = LoggerFactory.getLogger(ClientController.class);
+	private Logger logger = LoggerFactory.getLogger(CardsController.class);
 
 	@Resource(name="cardsService")
 	private ICardsService cardsService;

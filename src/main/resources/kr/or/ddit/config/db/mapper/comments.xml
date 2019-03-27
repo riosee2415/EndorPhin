@@ -4,66 +4,56 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="comments">
 	
-	<!--전체 불러오기  -->
-	<select id="getAllcomments" resultType="commentsVo">
-		select
-			commentNo,
-			commentTitle,
-			commentContents,
-			boardNo,
-			commentDate,
-			commentUser
-		from comments
-	</select>
-
-	<!--댓글 코드로 가져오기  -->
-	<select id="selectComments_commentno" resultType="commentsVo" parameterType="map">
-		select 
-			commentNo,
-			commentTitle,
-			commentContents,
-			boardNo,
-			commentDate,
-			commentUser
-		from comments	
-		where commentNo = #{commentNo}
-			
-	</select>	
-	
-	<!--boardno으로 가져오기  -->
-	<select id="selectComments_boardNo" resultType="commentsVo" parameterType="map">
-		select 
-			commentNo,
-			commentTitle,
-			commentContents,
-			boardNo,
-			commentDate,
-			commentUser
-		from comments		
-		where boardNo = #{boardNo}
+	<!-- 게시글 별 댓글 조회  -->
+	<select id="selectComments_boardNo" resultType="commentsVo" parameterType="String">
+		select commentNo,
+			   commentTitle,
+			   commentContents,
+			   boardNo,
+			   commentDate,
+			   commentUser
+		  from comments		
+		 where boardNo = #{boardNo}
+		 order by commentDate desc
 			
 	</select>	
 	
 	<!-- 댓글 등록 -->
 	<insert id="insertComments" parameterType="commentsVo">
 		insert into comments
-		  (commentNo,
-			commentTitle,
-			commentContents,
-			boardNo,
-			commentDate,
-			commentUser)
+		      (
+		      commentNo,
+			  commentTitle,
+			  commentContents,
+			  boardNo,
+			  commentDate,
+			  commentUser
+			  )
 		values
-		(#{commentNo},#{commentTitle},#{commentContents},#{boardNo},
-		#{commentDate},#{commentUser})
+		      (
+		      COMMENTNO_SEQ.nextval,
+		      nvl(#{commentTitle,
+		      jdbcType=VARCHAR }, 'null'),
+		      #{commentContents},#{boardNo},
+		      sysdate,
+		      #{commentUser}
+		      )
 
 	</insert>
 	
 	<!-- 댓글 삭제 -->
-	<delete id="deleteComments" parameterType="map">
+	<delete id="deleteComments" parameterType="String">
 		delete from comments
 		where commentNo = #{commentNo}
 	</delete>
+	
+	<!-- 댓글 수정 -->
+	<update id="updateComments" parameterType="commentsVo">
+		update comments
+		   set commentcontents=#{commentcontents}
+			
+		 where commentno=#{commentno}
+	</update>
 </mapper>
 
 

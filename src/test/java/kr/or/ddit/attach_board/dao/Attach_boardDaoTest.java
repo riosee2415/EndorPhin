@@ -27,7 +27,7 @@ public class Attach_boardDaoTest extends LogicConfig{
 		/***Given***/
 		String boardno = "5";
 		/***When***/
-		attach_boardDao.attach_boardSelect(boardno);
+		attach_boardDao.attachBoardNoSelect(boardno);
 		/***Then***/
 		assertNotNull(boardno);
 	}
@@ -45,7 +45,7 @@ public class Attach_boardDaoTest extends LogicConfig{
 		String attachcode = "1";
 
 		/***When***/
-		Attach_boardVo attach_boardSelectOne = attach_boardDao.attach_boardSelectOne(attachcode);
+		Attach_boardVo attach_boardSelectOne = attach_boardDao.attachCodeSelectOne(attachcode);
 
 		/***Then***/
 		assertNotNull(attach_boardSelectOne);
@@ -68,7 +68,7 @@ public class Attach_boardDaoTest extends LogicConfig{
 		attach_boardVo.setBoardNo("6");
 		
 		/***When***/
-		int attach_boardInsert = attach_boardDao.attach_boardInsert(attach_boardVo);
+		int attach_boardInsert = attach_boardDao.attachInsert(attach_boardVo);
 		
 		/***Then***/
 		assertEquals(1, attach_boardInsert);
@@ -94,22 +94,5 @@ public class Attach_boardDaoTest extends LogicConfig{
 
 	}
 	
-	/**
-	 * 
-	* Method : attach_boardDeleteOneTest
-	* 작성자 : macbook
-	* 변경이력 :
-	* Method 설명 : 특정 파일 삭제 
-	 */
-	@Test
-	public void attach_boardDeleteOneTest(){
-		/***Given***/
-		String attachCode = "4";
-
-		/***When***/
-		int attach_boardDeleteOne = attach_boardDao.attach_boardDeleteOne(attachCode);		
-		/***Then***/
-		assertEquals(1, attach_boardDeleteOne);
-	}
 
 }

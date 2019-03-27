@@ -6,13 +6,21 @@
    	<c:forEach items="${establishList }" var="vo">
    	
    		<tr>
-   			<td>${vo.establishCode}</td>
+   			<td><input type="checkbox" name="checkRow" value="${vo.establishCode }" ></td>
+   			<td><a class="detailView" href="#esDetail"  data-establishcode="${vo.establishCode }" 
+   														data-establishnamekor="${vo.establishNameKor}" 
+   														data-establishnameeng="${vo.establishNameEng}" 
+   														data-status="${vo.status}" 
+   														data-toggle="modal">${vo.establishCode}</a></td>
    			<td>${vo.establishNameKor}</td>
    			<td>${vo.establishNameEng}</td>
    			<td>${vo.status}</td>
    		</tr>
    	
    	</c:forEach>
+   	
+   	
+   	
 
    	
 ================seperator================

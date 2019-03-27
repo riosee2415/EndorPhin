@@ -24,6 +24,18 @@ public class CardsServiceTest extends LogicConfig {
 		assertEquals(1, cardsList.size());
 	}
 
+	@Test
+	public void serachCardsTest() {
+	    CardsVo cardsVo = new CardsVo();
+	    cardsVo.setCardCode("1");
+	    cardsVo.setCardName("농협카드");
+	    cardsVo.setCardNumber("123412341234");
+	    cardsVo.setCardSortation("1");
+	    cardsVo.setCompanyCode("1");
+	    cardsVo.setMemo("55");
+	    cardsVo.setStatus("1");
+		
+	}
 
 	@Test
 	public void InsertCardsTest() {

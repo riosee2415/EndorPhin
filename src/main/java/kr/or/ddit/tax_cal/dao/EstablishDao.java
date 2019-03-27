@@ -66,4 +66,25 @@ public class EstablishDao implements IEstablishDao{
 	public int getEstablishCount() {
 		return sqlSessionTemplate.selectOne("establish.getEstablishCnt");
 	}
+
+	
+	
+	/**
+	* Method : updateEstblish
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @return
+	* Method 설명 : 계정과목 코드를 키값으로 하는 데이터수정
+	*/
+	@Override
+	public int updateEstblish(EstablishVo vo) {
+		return sqlSessionTemplate.update("establish.updateEstablish", vo);
+	}
+	
+	
+	
+	
+	
+	
 }
+

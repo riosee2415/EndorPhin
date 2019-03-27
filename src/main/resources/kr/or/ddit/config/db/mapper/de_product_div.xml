@@ -39,7 +39,6 @@
 			taxstatus, bonusstatus,establishcode,deprostatus
 		from de_product_div	
 		where	deprostatus=#{deprostatus}
-			
 	</select>	
 	
 	<!-- 급여/공제 등록 -->

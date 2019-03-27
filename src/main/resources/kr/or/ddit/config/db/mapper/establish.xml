@@ -6,17 +6,31 @@
 
 	<!-- 계정과목 입력 -->
 	<insert id="insertEstablish" parameterType="establishVo">
-		insert into establish
-		(establishcode, establishnamekor, establishnameeng,
-		 status, slipstatus, clientstatus, usestatus)
-		values
-		(#{establishCode},#{establishNameKor}
-		,nvl(#{establishNameEng, jdbcType=VARCHAR},null)
-		,#{status}
-		,nvl(#{slipstatus, jdbcType=VARCHAR},null)
-		,nvl(#{clientStatus, jdbcType=VARCHAR},null)
-		,#{useStatus})
+		INSERT INTO ESTABLISH
+			(ESTABLISHCODE, ESTABLISHNAMEKOR, ESTABLISHNAMEENG, STATUS, SLIPSTATUS, CLIENTSTATUS, USESTATUS)
+		VALUES
+			(
+			#{establishCode},
+			#{establishNameKor},
+			#{establishNameEng},
+			#{status},
+			#{slipstatus},
+			#{clientStatus},
+			#{useStatus}
+			)
+			
 	</insert>
+	
+	<update id="updateEstablish" parameterType="establishVo">
+	UPDATE ESTABLISH
+		SET ESTABLISHNAMEKOR = #{establishNameKor}, 
+		    ESTABLISHNAMEENG = #{establishNameEng}, 
+		    STATUS = #{status}, 
+		    SLIPSTATUS = #{slipstatus}, 
+		    CLIENTSTATUS = #{clientStatus}, 
+		    USESTATUS = #{useStatus}
+	WHERE ESTABLISHCODE = #{establishCode}
+	</update>
 
 
 	<!-- 계정과목 전체 불러오기 -->
@@ -44,6 +58,7 @@
 		delete from establish
 		where establishcode = #{establishCode}
 	</delete>
+	
 	
 	<!-- 계정과목명 검색 -->
 	<select id="selectEstablishByNm" resultType="establishVo"

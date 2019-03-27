@@ -16,6 +16,10 @@
   <meta name="author" content="">
 
   <title>SB Admin - Dashboard</title>
+  
+  <!-- Acoount Part Basic Style -->
+  <link type="text/css" href="${pageContext.request.contextPath }/css/accountBasic.css" rel="stylesheet" >
+  
   <!-- dialog style -->
   <link href="${pageContext.request.contextPath}/css/dialog.css" rel="stylesheet">
 

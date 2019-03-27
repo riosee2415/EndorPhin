@@ -22,6 +22,7 @@
             ACCOUNTNUMBER, 
             USESTATUS
         FROM CLIENT
+        ORDER BY CLIENTCODE ASC
 	</select>
 	
 	<!-- 

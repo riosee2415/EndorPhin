@@ -2,16 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<head>
-	<style type="text/css">
-		.thead{
-			color : white;
-			background-color: #6E6867;
-			}
-	</style>
-</head>
-	
-<body>
 
 	<input type="hidden" id="failCheck" name="failCheck" value="${failCheck }"/>
 	
@@ -24,19 +14,20 @@
 	<input type="button" class="btn btn-primary" id="seachBtn" value="검색" onclick="seachClientBtn()" />
 	<input type="button" class="btn btn-primary" value="전체조회" onclick="location.href='${pageContext.request.contextPath }/clientview'" />
 	<br /><br />
+
 	<div class="table-responsive">
-         <table class="table table-striped">
-		<thead class="thead">
-			<tr>
-				<th>거래처코드</th>
-				<th>거래처명</th>
-				<th>대표자명</th>
-				<th>사업자유형</th>
-				<th>전화번호</th>
-				<th>팩스번호</th>
-				<th>상태</th>
-			</tr>
-		</thead>
+		<table class="table table-striped">
+			<thead class="thead">
+				<tr>
+					<th>거래처코드</th>
+					<th>거래처명</th>
+					<th>대표자명</th>
+					<th>사업자유형</th>
+					<th>전화번호</th>
+					<th>팩스번호</th>
+					<th>상태</th>
+				</tr>
+			</thead>
 		<c:forEach items="${clientList }" var="client">
 			<tbody>
 				<tr class="clientTr" 	data-client_code="${client.clientCode }"
@@ -478,5 +469,3 @@
 	</form>
 	
 
-</body>
-</html>

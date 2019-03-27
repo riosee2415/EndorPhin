@@ -66,6 +66,10 @@
         	<put-attribute name="content" value="/WEB-INF/views/dept/deptList.jsp"/>
         </definition>
         
+        <definition name="slipview" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/slip/slipview.jsp"/>
+        </definition>
+        
         
          <definition name="testTiles" extends="layout">
         	<put-attribute name="content" value="/WEB-INF/views/test.jsp"/>

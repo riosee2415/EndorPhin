@@ -40,7 +40,7 @@
           <a class="dropdown-item" href="${pageContext.request.contextPath }/deptList">부서등록</a>
            <h3 class="dropdown-header">전표관리</h3>
           <a class="dropdown-item" href="">미승인 전표</a>
-          <a class="dropdown-item" href="">일반 전표</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath }/slipview">일반 전표</a>
           <a class="dropdown-item" href="">매출세금계산서 입력</a>
           <a class="dropdown-item" href="">승인전표</a>
         </div>

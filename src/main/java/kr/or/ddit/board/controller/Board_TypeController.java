@@ -3,7 +3,6 @@ package kr.or.ddit.board.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +23,7 @@ public class Board_TypeController {
 	public String boardType(Model model){
 		List<Board_TypeVo> boardAllList = board_TypeService.boardAllList();
 		model.addAttribute("boardAllList", boardAllList);
-		return "board/boardType";
+		return "boardType";
 	}
 	@RequestMapping(path="/boardType", method=RequestMethod.POST)
 	public String boardType(Board_TypeVo board_TypeVo, @RequestParam("type")String type){

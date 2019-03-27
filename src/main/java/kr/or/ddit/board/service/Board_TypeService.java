@@ -15,6 +15,10 @@ public class Board_TypeService implements IBoard_TypeService{
 	@Resource(name="board_TypeDao")
 	private IBoard_TypeDao board_TypeDao;
 
+	public Board_TypeService(){
+		
+	}
+	
 	/**
 	 * 
 	* Method : boardAllList

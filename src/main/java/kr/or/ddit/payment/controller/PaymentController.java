@@ -135,5 +135,17 @@ public class PaymentController {
 		}
 	}
 	
+	@RequestMapping(path="/addPayment",method=RequestMethod.GET)
+	public String addPaymentView(String searchPaymentName,Model model){
+		List<PaymentVo> paymentList = null ;
+		if(searchPaymentName==null){
+			paymentList=paymentService.getPaymentList();
+		}else{
+			paymentList=paymentService.getPaymentListByUserNm(searchPaymentName);
+		}
+		model.addAttribute("paymentList",paymentList);
+		return "addPaymentView";
+	}
+	
 	
 }

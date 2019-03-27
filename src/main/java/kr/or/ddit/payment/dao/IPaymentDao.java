@@ -10,4 +10,6 @@ public interface IPaymentDao {
 	PaymentVo selectPayment(String paycode);
 	int deletePayment(String paycode);
 	List<PaymentVo> getPayment_u(String userId);
+	List<PaymentVo> getPaymentList();
+	List<PaymentVo> getPaymentListByUserNm(String usernm);
 }

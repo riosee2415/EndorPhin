@@ -41,4 +41,14 @@ public class PaymentDao implements IPaymentDao{
 		return sqlSessionTemplate.selectList("payment.getPayment_u",userId);
 	}
 
+	@Override
+	public List<PaymentVo> getPaymentList() {
+		return sqlSessionTemplate.selectList("payment.getPaymentList");
+	}
+
+	@Override
+	public List<PaymentVo> getPaymentListByUserNm(String usernm) {
+		return sqlSessionTemplate.selectList("payment.getPaymentListByUserNm",usernm);
+	}
+
 }

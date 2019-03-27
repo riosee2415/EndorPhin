@@ -39,6 +39,7 @@
 		establishcode, establishnamekor, establishnameeng,
 		 status, slipstatus, clientstatus, usestatus
 		from establish
+		ORDER BY establishcode ASC
 	</select>
 
 

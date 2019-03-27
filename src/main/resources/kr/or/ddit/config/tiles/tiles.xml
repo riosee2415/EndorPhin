@@ -71,11 +71,15 @@
         	<put-attribute name="content" value="/WEB-INF/views/test.jsp"/>
         </definition>
         
-         <definition name="addProductView" extends="layout">
+         <definition name="addProductView" extends="layout">  <!-- 급여항목 등록  -->
         	<put-attribute name="content" value="/WEB-INF/views/payment/productList.jsp"/>
         </definition>
-         <definition name="addDeductView" extends="layout">
+         <definition name="addDeductView" extends="layout">  <!-- 공제항목 등록  -->
         	<put-attribute name="content" value="/WEB-INF/views/payment/deductList.jsp"/>
+        </definition>
+        
+         <definition name="addPaymentView" extends="layout">  <!-- 급여 등록  -->
+        	<put-attribute name="content" value="/WEB-INF/views/payment/addPayment.jsp"/>
         </definition>
         
         

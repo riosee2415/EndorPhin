@@ -10,4 +10,6 @@ public interface IPaymentService {
 	List<PaymentVo> getPayment_u(String userId);
 	PaymentVo selectPayment(String paycode);
 	int deletePayment(String paycode);
+	List<PaymentVo> getPaymentList();
+	List<PaymentVo> getPaymentListByUserNm(String usernm);
 }

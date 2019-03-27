@@ -59,7 +59,7 @@
           <a class="dropdown-item" href="/addDeduct">급여공제항목 등록</a>
            <h3 class="dropdown-header">사원정보관리</h3>
           <a class="dropdown-item" href="${cp }/employee/getAllEmployee">사원등록</a>
-          <a class="dropdown-item" href="">급여등록</a>
+          <a class="dropdown-item" href="/addPayment">급여등록</a>
           <a class="dropdown-item" href="">퇴직자</a>
            <h3 class="dropdown-header">급여계산관리</h3>
           <a class="dropdown-item" href="/payment">급여조정</a>

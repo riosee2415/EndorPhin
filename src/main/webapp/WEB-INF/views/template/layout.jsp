@@ -16,7 +16,8 @@
   <meta name="author" content="">
 
   <title>SB Admin - Dashboard</title>
-  
+  <!-- dialog style -->
+  <link href="${pageContext.request.contextPath}/css/dialog.css" rel="stylesheet">
 
    <!-- Custom fonts for this template-->
   <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

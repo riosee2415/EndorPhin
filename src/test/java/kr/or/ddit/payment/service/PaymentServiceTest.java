@@ -44,5 +44,15 @@ public class PaymentServiceTest extends LogicConfig{
 		List<PaymentVo> payment_u = paymentService.getPayment_u("1");
 		assertTrue(payment_u.size()>0);
 	}
+	@Test
+	public void getPaymentListTest() {
+		List<PaymentVo> allPayment = paymentService.getPaymentList();
+		assertTrue(allPayment.size()>0);
+	}
+	@Test
+	public void getPaymentListByUserNmTest() {
+		List<PaymentVo> allPayment = paymentService.getPaymentListByUserNm("호");
+		assertTrue(allPayment.size()>0);
+	}
 
 }

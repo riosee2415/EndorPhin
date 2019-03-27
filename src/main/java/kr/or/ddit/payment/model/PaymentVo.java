@@ -15,6 +15,34 @@ public class PaymentVo {
 	String totalSalary;
 	String relate;
 	String payDay;
+	String positionname; // 직급명
+	public String getPositionname() {
+		return positionname;
+	}
+	public void setPositionname(String positionname) {
+		this.positionname = positionname;
+	}
+	public String getUsernm() {
+		return usernm;
+	}
+	public void setUsernm(String usernm) {
+		this.usernm = usernm;
+	}
+	public String getDeptname() {
+		return deptname;
+	}
+	public void setDeptname(String deptname) {
+		this.deptname = deptname;
+	}
+	public String getJoincompany() {
+		return joincompany;
+	}
+	public void setJoincompany(String joincompany) {
+		this.joincompany = joincompany;
+	}
+	String usernm; //사원이름
+	String deptname; // 부서명
+	String joincompany; // 입사일
 	
 	public String getPayCode() {
 		return payCode;

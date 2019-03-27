@@ -41,4 +41,14 @@ public class PaymentService implements IPaymentService{
 		return paymentDao.getPayment_u(userId);
 	}
 
+	@Override
+	public List<PaymentVo> getPaymentList() {
+		return paymentDao.getPaymentList();
+	}
+
+	@Override
+	public List<PaymentVo> getPaymentListByUserNm(String usernm) {
+		return paymentDao.getPaymentListByUserNm(usernm);
+	}
+
 }

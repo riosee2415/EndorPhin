@@ -30,6 +30,16 @@ public class PaymentDaoTest extends LogicConfig{
 		assertTrue(allPayment.size()>0);
 	}
 	@Test
+	public void getPaymentListTest() {
+		List<PaymentVo> allPayment = paymentDao.getPaymentList();
+		assertTrue(allPayment.size()>0);
+	}
+	@Test
+	public void getPaymentListByUserNmTest() {
+		List<PaymentVo> allPayment = paymentDao.getPaymentListByUserNm("호");
+		assertTrue(allPayment.size()>0);
+	}
+	@Test
 	public void getPayment_uTest() {
 		List<PaymentVo> payment_u = paymentDao.getPayment_u("1");
 		assertTrue(payment_u.size()>0);

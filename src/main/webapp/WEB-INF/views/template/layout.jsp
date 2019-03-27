@@ -17,6 +17,7 @@
 
   <title>SB Admin - Dashboard</title>
   
+  
   <!-- Acoount Part Basic Style -->
   <link type="text/css" href="${pageContext.request.contextPath }/css/accountBasic.css" rel="stylesheet" >
   
@@ -30,16 +31,20 @@
   <link href="${pageContext.request.contextPath}/resources/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="${pageContext.request.contextPath}/resources/css/sb-admin.css" rel="stylesheet"> 
-  
-  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
- integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-  crossorigin="anonymous"></script>
+  <link href="${pageContext.request.contextPath}/resources/css/sb-admin.css" rel="stylesheet">
 
-  
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+	crossorigin="anonymous"></script>
+	
+	<!-- DATE API -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-	<style>
+<style>
 	
 	
 	.cont{
@@ -93,6 +98,18 @@
 	  <script src="/resources/js/sb-admin.min.js"></script>
 	  <!-- Demo scripts for this page-->
 	  <script src="/resources/js/demo/datatables-demo.js"></script>
+	 
+	 
+	 <!-- 충돌방지 -->
+	<script type="text/javascript">
+		jQuery.noConflict();
+		var j$ = jQuery;
+		</script>
+		
+	<script type="text/javascript" src="./js/prototype.js"></script>
+		
+		
+		
 
 
 </body>

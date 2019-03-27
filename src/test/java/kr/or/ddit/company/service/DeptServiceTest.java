@@ -1,6 +1,7 @@
-package kr.or.ddit.company.dao;
+package kr.or.ddit.company.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -13,35 +14,46 @@ import kr.or.ddit.company.model.CompanyVo;
 import kr.or.ddit.company.model.DeptVo;
 import kr.or.ddit.set.LogicConfig;
 
-public class DeptDaoTest extends LogicConfig{
+public class DeptServiceTest extends LogicConfig{
 
-	@Resource(name="deptDao")
-	IDeptDao deptDao;
+	@Resource(name="deptService")
+	IDeptService deptService;
 	
 	@Test
 	public void getAllDeptTest() {
-		List<DeptVo> allDept = deptDao.getAllDept();
+		List<DeptVo> allDept = deptService.getAllDept();
 		assertTrue(allDept.size()>0);
 	}
 	
 	@Test
 	public void selectDeptTest() {
-		DeptVo selectDept = deptDao.selectDept("1");
+		DeptVo selectDept = deptService.selectDept("1");
 		assertEquals("총무부", selectDept.getDeptName());
 	}
 	@Test
 	public void insertDeptTest() {
 		DeptVo vo = new DeptVo();
-		vo.setDeptCode("300");
+		vo.setDeptCode("311");
 		vo.setDeptName("전산팀");
 		vo.setUseStatus("1");
 		vo.setCompanyCode("1");
-		int insertDept = deptDao.insertDept(vo);
+		int insertDept = deptService.insertDept(vo);
 		assertEquals(1,insertDept);
+		assertNotNull(insertDept);
+	}
+	@Test
+	public void updDeptTest() {
+		DeptVo vo = new DeptVo();
+		vo.setDeptCode("2");
+		vo.setDeptName("전산팀");
+		vo.setCompanyCode("1");
+		int updDept = deptService.updateDept(vo);
+		assertEquals(1,updDept);
+		assertNotNull(updDept);
 	}
 	@Test
 	public void deleteDeptTest(){
-		int deleteDept = deptDao.deleteDept("3");
+		int deleteDept = deptService.deleteDept("3");
 		assertEquals(1, deleteDept);
 	}
 

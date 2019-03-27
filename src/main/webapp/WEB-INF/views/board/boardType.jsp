@@ -1,57 +1,54 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>EndoRPhin</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/css/main.css"/>
-</head>
-<body>
-<%@ include file="/WEB-INF/views/template/side.jsp" %>
-<div class="table-responsive">
-	<div class="col-sm-5">
-		<table class="table table-striped">
-			<form action="/boardType?type=create" method="post">
-				<tr id="boardType">
-					<td class="boardTable">게시판 이름</td>
-					<td class="boardTable"><input type="text" name="boardTypeName"></td>
-					<td class="boardTable">
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+
+		<h1 class="page-header">게시판 관리</h1>
+		<form action="${pageContextPath.request.contextPath }/boardType?type=create" method="post">		
+			<%-- 게시판 생성 --%>
+			<table class="table table-striped">
+				<tr>
+					<td>게시판 이름</td>
+					<td>
+						<input type="text" name="boardTypeName"/>
+					</td>
+					<td>
 						<select name="useStatus">
 							<option value="1">사용</option>
 							<option value="0">미사용</option>
 						</select>
 					</td>
-					<td class="boardTable"><input type="submit" value="생성"></td>
+					<td><button type="submit" class="btn btn-default">생성</button></td>
 				</tr>
-			</form>
-		</table>
-		
-		<table class="table table-striped">
-			<c:forEach var="board" items="${boardAllList }">
-				<form action="/boardType?type=update" method="post">
-					<tr>
-						<input type="hidden" name="boardTypeCode" value="${board.boardTypeCode}">
-						<td class="boardTable">게시판 이름</td>
-						<td class="boardTable"><input type="text" name="boardTypeName" value="${board.boardTypeName }"></td>
-						<td class="boardTable">
-							<select name="useStatus" >
-								<option value="1" 
-									<c:if test="${board.useStatus eq '1' }"> selected</c:if>>사용
-								</option>
-								<option value="0" 
-									<c:if test="${board.useStatus eq '0' }"> selected</c:if>>미사용
-								</option>
-							</select>
-						</td>
-						<td class="boardTable"><input type="submit" value="수정"></td>
-					</tr>
-				</form>
-			</c:forEach>
-		</table>
-	</div>
-</div>
-</body>
-</html>
+	        </table>
+	    </form>
+	    
+	        <%-- 게시판 수정 --%>
+	        <table class="table table-striped">
+					<c:forEach items="${boardAllList }" var="board">
+				        <form  action="${pageContextPath.request.contextPath }/boardType?type=update" method="post">
+						<input type="hidden" name="boardTypeCode" value="${board.boardTypeCode }">
+							<tr>
+								<td>게시판 이름</td>
+								<td>
+									<input type="text" name="boardTypeName" value="${board.boardTypeName }">
+								</td>
+								<td>
+									<select name="useStatus">
+										<option value="1" <c:if test="${board.useStatus eq '1' }"> selected</c:if>>사용</option>
+										<option value="0" <c:if test="${board.useStatus eq '0' }"> selected</c:if>>미사용</option>
+									</select>
+								</td>
+								<td><button type="submit" id="btn_update" class="btn btn-default">수정</button></td>
+							</tr>
+				       	</form>
+					</c:forEach>
+	        </table>
+            
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+		$(document).ready(function(){
+			//
+		});
+    </script>

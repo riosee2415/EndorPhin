@@ -1,14 +1,11 @@
-package kr.or.ddit.company.dao;
+package kr.or.ddit.company.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
 import kr.or.ddit.company.model.DeptVo;
 
-@Repository("deptDao")
-public interface IDeptDao {
-	
+public interface IDeptService {
+
 	int insertDept(DeptVo deptVo);
 	
 	int deleteDept(String deptcode);
@@ -18,5 +15,4 @@ public interface IDeptDao {
 	DeptVo selectDept(String deptcode);
 	
 	int updateDept(DeptVo deptVo);
-	   
 }

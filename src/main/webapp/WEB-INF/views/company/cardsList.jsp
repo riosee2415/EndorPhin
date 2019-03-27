@@ -2,7 +2,18 @@
     pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<head>
+
+<style>
+
+.thead{
+color : white;
+background-color: #6E6867;
+}
+
+</style>
 </head>
+
 <!--테이블 리스트출력  -->
 	<h2>신용카드 등록</h2>	
 	<br>
@@ -14,7 +25,7 @@
 
 	<div class="table-responsive">
 		<table class="table table-striped">
-			<thead>
+			<thead class="thead">
 				<tr>
 					<td><input type="checkbox" name="allCheck" id="th_allCheck" onclick="allCheck();"></td> 
 					<th>카드 코드</th>
@@ -112,7 +123,7 @@
 		</div>
 	</div>
 	
-	<!-------------------------------------------->
+	<!----------------등록, 검색, 삭제 ---------------->
 	
 	<form id="insertFrm" action="${pageContext.request.contextPath }/insertCards">
 		<input type="hidden" id="frmcardCode" name="frmcardCode" />
@@ -122,17 +133,16 @@
 		<input type="hidden" id="frmmemo" name="frmmemo" />
 	</form>
 	
-	<!--------------검색  -------------------------->
 	<form id="frm1" action="${pageContext.request.contextPath }/serachCards" >
 		<input type="hidden" name="card_num" id="card_num" />
 		<input type="hidden" name="card_name" id="card_name" />
 	</form>
  	
- 	<!--------------삭제---------------------------->
  	<form id="del_frm" action="${pageContext.request.contextPath }/deleteCards">
  		<input type="hidden" id="checkRow" name="checkRow">
  	</form>		
- 	
+ 		
+	<!-------------------------------------------->
  	
 	<script>
 	    /* 등록  */
@@ -191,7 +201,7 @@
 	    	}
 	    }  
 	    
-		/* 검색  아직안됨 */
+		/* 검색 */
 		function seachBtn(){
 			var cardNumber = $("#cardNumber1").val();
 			var cardName   = $("#cardName1").val();
@@ -211,7 +221,7 @@
 			}
 		}
 		
-		/* 전체체크 */
+		/* 전체선택 삭제 */
 		function allCheck() {
 			if ($("#th_allCheck").is(':checked')) {
 					$("input[name=checkRow]").prop("checked", true);
@@ -220,7 +230,7 @@
 				}
 			}
 
-		/* 선택체크 */
+		/* 선택삭제  */
 		function myclick() {
 			var checkRow = '';
 			$("input[name=checkRow]:checked").each(function() {

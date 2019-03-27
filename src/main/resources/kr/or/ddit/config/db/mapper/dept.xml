@@ -4,16 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dept">
 
-	<!-- 부서 입력 -->
-	<insert id="insertDept" parameterType="deptVo">
-		insert into dept
-		(deptcode, deptname, businessname, usestatus, parentcode, companycode)
-		values
-		(#{deptCode},#{deptName},nvl(#{businessName, jdbcType=VARCHAR},null),#{useStatus},nvl(#{parentCode, jdbcType=VARCHAR},null),#{companyCode})
-
-	</insert>
-
-
 	<!-- 부서 전체 불러오기 -->
 	<select id="getAllDept" resultType="deptVo">
 		select
@@ -21,6 +11,13 @@
 		from dept
 	</select>
 
+	<!-- 부서 입력 -->
+	<insert id="insertDept" parameterType="deptVo">
+		insert into dept
+		(deptcode, deptname, businessname, usestatus, parentcode, companycode)
+		values
+		(#{deptCode},#{deptName},nvl(#{businessName, jdbcType=VARCHAR},null),#{useStatus},nvl(#{parentCode, jdbcType=VARCHAR},null),#{companyCode})
+	</insert>
 
 	<!-- 부서 선택하여 가져오기 -->
 	<select id="selectDept" resultType="deptVo"
@@ -31,14 +28,18 @@
 		dept where deptcode = #{deptcode}
 	</select>
 
-
 	<!-- 부서 삭제 -->
 	<delete id="deleteDept" parameterType="map">
 		delete from dept
 		where deptcode = #{deptcode}
 	</delete>
 
-
+	<update id="updateDept" parameterType="deptVo">
+	update dept set 
+             		 deptName=#{deptName},
+               		 companyCode=#{companyCode}
+        where deptCode=#{deptCode}
+	</update>
 </mapper>
 
 

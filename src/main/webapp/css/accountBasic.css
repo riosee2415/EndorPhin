@@ -1,0 +1,10 @@
+@CHARSET "EUC-KR";
+
+.thead{
+color : white;
+background-color: #6E6867;
+}
+
+.form-group{
+width: auto;
+}

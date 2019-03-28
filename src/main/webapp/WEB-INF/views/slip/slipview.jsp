@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
     <h2>전표 관리</h2>
     <hr>
-    
     <div>
 		날짜 : <input id="sArea" name="sArea" type="text" />&nbsp;
 			<input id="sBtn" name="sBtn"  class="btn btn-primary" type="button" value="검색" />
@@ -13,7 +13,7 @@
 	</div><p />
 	
 	<div style="text-align: right;">
-		<input type="button" class="btn btn-primary" id="insertSlipBtn" name="insertSlipBtn" value="전표작성하기" />
+		<input type="button" class="btn btn-primary" id="insertSlipBtn" name="insertSlipBtn" value="전표작성" />
 	</div>
 	
 	<div id="insertArea">
@@ -81,7 +81,6 @@
 			$.ajax({
 				url : "${pageContext.request.contextPath }/getSlipInsertBtn",
 				success : function(data){
-					console.log(data);
 					$("#insertArea").html(data);
 				}
 				

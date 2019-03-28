@@ -99,7 +99,7 @@
 	  
 	  
 	  <!-- Demo scripts for this page-->
-<!-- 	  <script src="/resources/js/demo/datatables-demo.js"></script> -->
+ 	  <script src="/resources/js/demo/datatables-demo.js"></script> 
 	 
 	 
 	 <!-- 충돌방지 -->

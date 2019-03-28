@@ -26,5 +26,7 @@ public interface ISlipDao {
 	* Method 설명 : 페이징처리를 위한 쿼리 실행
 	*/
 	public List<SlipVo> selectSlipPagingList(PageVo pageVo);
+	
+	
 
 }

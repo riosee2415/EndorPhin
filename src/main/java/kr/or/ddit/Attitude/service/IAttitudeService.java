@@ -1,10 +1,10 @@
-package kr.or.ddit.Attitude.dao;
+package kr.or.ddit.Attitude.service;
 
 import java.util.List;
 
 import kr.or.ddit.Attitude.model.AttitudeVo;
 
-public interface IAttitudeDao {
+public interface IAttitudeService {
 	
 	/**
 	* Method : getAllEmployee
@@ -25,5 +25,6 @@ public interface IAttitudeDao {
 	* Method 설명 : 근태항목 인서트
 	*/
 	int insertAttitude(AttitudeVo vo);
-
+	
+	
 }

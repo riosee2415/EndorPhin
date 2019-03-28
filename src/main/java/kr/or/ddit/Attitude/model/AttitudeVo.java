@@ -13,7 +13,7 @@ public class AttitudeVo {
 	String attitudeName;
 	String paidStatus;
 	String relate;
-	Date baseDays;
+	String baseDays;
 	
 	
 	public String getAttitudeCode() {
@@ -40,13 +40,18 @@ public class AttitudeVo {
 	public void setRelate(String relate) {
 		this.relate = relate;
 	}
-	public Date getBaseDays() {
+	
+	public String getBaseDays() {
 		return baseDays;
 	}
-	public void setBaseDays(Date baseDays) {
+	public void setBaseDays(String baseDays) {
 		this.baseDays = baseDays;
 	}
-	
+	@Override
+	public String toString() {
+		return "AttitudeVo [attitudeCode=" + attitudeCode + ", attitudeName=" + attitudeName + ", paidStatus="
+				+ paidStatus + ", relate=" + relate + ", baseDays=" + baseDays + "]";
+	}
 	
 	
 	

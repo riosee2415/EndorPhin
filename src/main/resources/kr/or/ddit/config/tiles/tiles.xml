@@ -86,7 +86,10 @@
         	<put-attribute name="content" value="/WEB-INF/views/payment/addPayment.jsp"/>
         </definition>
         
-
+        
+         <definition name="AttitudeListTiles" extends="layout"> <!-- 근태 항목 출력 -->
+        	<put-attribute name="content" value="/WEB-INF/views/attitude/attitudeList.jsp"/>
+        </definition>
         
         
         

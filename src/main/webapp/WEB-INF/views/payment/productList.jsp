@@ -39,16 +39,16 @@
 							type="hidden" class="valPay"></td>
 						<td><a href="#detailLayer" class="deductDetail">${vo.deductCode }</a></td>
 						<td>${vo.deductName}</td>
-						<c:if test="${vo.taxStatus!=null}">
+						<c:if test="${vo.taxStatus==1}">
 							<td>과세 대상</td>
 						</c:if>
-						<c:if test="${vo.taxStatus==null}">
+						<c:if test="${vo.taxStatus==2}">
 							<td>과세 비대상</td>
 						</c:if>
-						<c:if test="${vo.bonusStatus!=null}">
+						<c:if test="${vo.bonusStatus==1}">
 							<td>상여 대상</td>
 						</c:if>
-						<c:if test="${vo.bonusStatus==null}">
+						<c:if test="${vo.bonusStatus==2}">
 							<td>상여 비대상</td>
 						</c:if>
 						<c:if test="${vo.useStatus==1}">
@@ -106,13 +106,13 @@
 							<td><label for="inputPassword">과세여부</label></td>
 							<td><select name="taxStatus" class="form-control">
 									<option value="1">예</option>
-									<option value="">아니오</option>
+									<option value="2">아니오</option>
 							</select></td>
 
 							<td><label for="inputPassword">상여여부</label></td>
 							<td><select name="bonusStatus" class="form-control">
 									<option value="1">예</option>
-									<option value="">아니오</option>
+									<option value="2">아니오</option>
 							</select></td>
 						</tr>
 					</table>
@@ -123,7 +123,7 @@
 					<label for="inputPassword">사용여부</label> <select name="useStatus"
 						class="form-control">
 						<option value="1">예</option>
-						<option value="">아니오</option>
+						<option value="2">아니오</option>
 					</select>
 				</div>
 			</div>
@@ -152,15 +152,15 @@
 			<label for="inputPassword">과세여부</label>
 		<select name="taxStatus" class="form-control" id="dialog_taxStatus">
 			<option value="1">예</option>
-			<option value="">아니오</option>
+			<option value="2">아니오</option>
 		</select> <label for="inputPassword">상여여부</label> <select name="bonusStatus"
 			class="form-control" id="dialog_bonusStatus">
 			<option value="1">예</option>
-			<option value="">아니오</option>
+			<option value="2">아니오</option>
 		</select> <label for="inputPassword">사용여부</label> <select name="useStatus"
 			class="form-control" id="dialog_useStatus">
 			<option value="1">예</option>
-			<option>아니오</option>
+			<option value="2">아니오</option>
 		</select>
 		<button id="updDeduct" class="dialog__action">수정</button>
 		<button id="dialog_delBtn" class="dialog__action">삭제</button>
@@ -202,6 +202,9 @@
 					$("#dialog_deductCode").val(data.deductCode);
 					$(".dialog_deductCode").html(data.deductCode);
 					$(".dialog_deductName").val(data.deductName);
+					$("#dialog_taxStatus").val(data.taxStatus);
+					$("#dialog_bonusStatus").val(data.bonusStatus);
+					$("#dialog_useStatus").val(data.useStatus);
 					if(data.taxStatus==null){
 						$("#dialog_taxStatus").val("");
 					}

@@ -83,7 +83,7 @@
          <label for="inputPassword">사용여부</label> <select name="useStatus"
          class="form-control" id="dialog_useStatus">
          <option value="1">예</option>
-         <option>아니오</option>
+         <option value="2">아니오</option>
       </select>
       <button id="updDeduct" class="dialog__action">수정</button>
       <button id="dialog_delBtn" class="dialog__action">삭제</button>

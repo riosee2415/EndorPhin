@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.or.ddit.company.model.CompanyVo;
+import kr.or.ddit.company.model.DeptVo;
 
 @Repository("companyDao")
 public class CompanyDao implements ICompanyDao{
@@ -38,5 +39,11 @@ public class CompanyDao implements ICompanyDao{
 		int delete = sqlSessionTemplate.delete("company.deleteCompany",companycode);
 		return delete;
 	}
+	
+	@Override
+	public List<CompanyVo> serachCompany(String companyName) {
+		return sqlSessionTemplate.selectList("company.serachCompany", companyName);
+	}
+
 
 }

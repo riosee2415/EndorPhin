@@ -36,10 +36,11 @@
 
 	<update id="updateDept" parameterType="deptVo">
 	update dept set 
-             		 deptName=#{deptName},
-               		 companyCode=#{companyCode}
+          		 deptName=#{deptName},
+            		 companyCode=#{companyCode}
         where deptCode=#{deptCode}
 	</update>
+	
 </mapper>
 
 

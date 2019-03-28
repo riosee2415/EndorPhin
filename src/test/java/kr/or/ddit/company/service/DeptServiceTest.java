@@ -10,7 +10,6 @@ import javax.annotation.Resource;
 
 import org.junit.Test;
 
-import kr.or.ddit.company.model.CompanyVo;
 import kr.or.ddit.company.model.DeptVo;
 import kr.or.ddit.set.LogicConfig;
 
@@ -22,6 +21,7 @@ public class DeptServiceTest extends LogicConfig{
 	@Test
 	public void getAllDeptTest() {
 		List<DeptVo> allDept = deptService.getAllDept();
+		
 		assertTrue(allDept.size()>0);
 	}
 	

@@ -39,6 +39,7 @@ public class DeptService implements IDeptService{
 	public int updateDept(DeptVo deptVo) {
 		return deptDao.updateDept(deptVo);
 	}
+
 	
 	
 }

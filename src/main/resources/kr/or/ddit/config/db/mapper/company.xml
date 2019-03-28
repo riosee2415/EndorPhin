@@ -39,7 +39,7 @@
 			ciPath)
 		values
 		(#{companyCode},#{companyName},nvl(#{ceo, jdbcType=VARCHAR},null),#{ceoNumber},
-		nvl(#{ciPath, jdbcType=VARCHAR},null))
+		nvl(#{ciPath, jdbcType=VARCHAR},null)) v 
 
 	</insert>
 	
@@ -48,6 +48,19 @@
 		delete from company
 		where companyCode = #{companyCode}
 	</delete>
+	
+	<!--검색기능-->
+	<select id="serachCompany" resultType="companyVo" parameterType="map">
+		select
+			companyCode,
+			companyName,
+			ceo,
+			ceoNumber,
+			ciPath
+		from company
+		 where companyName like '%' || #{companyName} || '%'
+	</select>
+	
 
 </mapper>
 

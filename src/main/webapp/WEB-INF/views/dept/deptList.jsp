@@ -15,18 +15,17 @@
 		<table class="table table-striped">
 			<thead class="thead">
 				<tr>
-					<td><input type="checkbox" name="allCheck" id="th_allCheck" onclick="allCheck();"></td> 
+					<th><input type="checkbox" name="allCheck" id="th_allCheck" onclick="allCheck();"></th> 
 					<th>부서코드</th>
 					<th>부서명</th>
 					<th>회사명</th>
 					<th>사용구분</th>
 					<th>비고</th>
-				</tr>
+				</tr> 
 			</thead>	
 			<tbody id="deptListTbody">
 				<c:forEach items="${deptList }" var="vo">	
-<%-- 					<input type="hidden" class="deptCode" name="deptCode" value="${vo.deptCode }"/>
- --%>					 <tr>
+					 <tr>
 						<td><input type="checkbox" name="checkRow" value="${vo.deptCode }" ></td>
 						<td><a class="detailView" href="#deptDetail" data-upd_deptcode="${vo.deptCode }" 
 																	 data-upd_deptname="${vo.deptName }"
@@ -80,12 +79,14 @@
 						<div id="dupleCode"></div>
 					</div>
 						<div class="form-group">
-						<label>부서명(*) </label> 
-						<input style="width: 388px;" type="text" name="deptName" id="deptName" placeholder="부서명을 입력하세요"> 
+						<label>부서명(*) &nbsp;&nbsp;&nbsp;</label> 
+						<input style="width: 450x;" type="text" name="deptName" id="deptName" placeholder="부서명을 입력하세요"> 
+						
 					</div>	
 					<div class="form-group">
-						<label>회사 코드 </label> 
-						<input style="width: 388px;" type="text" name="companyCode" id="companyCode" placeholder="회사코드를 입력하세요"> 
+						<label>회사 코드 &nbsp;</label> 
+						<input style="width: 200px;" type="text" name="companyCode" id="companyCode" placeholder="회사코드를 입력하세요"> 
+						<input type="button" data-toggle="modal" data-target="#my80sizeModal2" value="검색" >
 					</div>
 					
 					</div>	
@@ -96,7 +97,7 @@
 				</div>
 			</div>
 		</div>
-	<!-----------------상세보기 모달창 ---------------->	
+	<!-----------------상세보기(수정) 모달창 ---------------->	
 	
 	<div class="modal fade" id="deptDetail" role="deptDetail" aria-hidden="true"> 
    		<div class="modal-dialog">
@@ -108,7 +109,6 @@
 					</button>
 	   				<h4 class="modal-title" id="myModalLabel"></h4>
 	   			</div> 
-	   			
 	   			<div class="modal-body"> 
 	   				<div class="form-group">
 	   					<label for="InputEmail">부서코드(*)</label> 
@@ -121,6 +121,7 @@
 	   					<div class="form-group">
 	   					<label for="InputEmail">회사 코드 &nbsp;&nbsp;</label> 
 	   					<input type="text" id="upd_companyCode" name="upd_companyCode" />
+	   					<input type="button" data-toggle="modal" data-target="#my80sizeModal2" value="검색" >
 	   				</div>
 	   			<div class="modal-footer">
 	   				<c:if test="${useStatus == 0}">
@@ -136,6 +137,51 @@
    		</div> 
 	</div>
 </div>
+
+
+<!-----------------회사 코드 검색 모달창 ---------------->	
+	 	<!-- 80% size Modal -->
+<div class="modal fade" id="my80sizeModal2" tabindex="-1"
+	role="dialog" aria-labelledby="my100sizeModalLabel">
+	<div class="modal-dialog modal-80size" role="document">
+		<div class="modal-content modal-80size">
+			<div class="modal-header">
+				<h6>| 계정과목 조회</h6>
+			</div>
+			<div class="modal-body">
+				<div class="form-group"></div>
+				<table>
+					<thead>
+						<tr>
+							<th>회사명&nbsp;</th>
+							<th><input style="width: 150px;" type="text" class="form-control" id="companyName" name="companyName"></th>
+							<th><button type="button" class="btn btn-inverse" id="searchC_Btn">검색</button></th>
+						</tr>
+						
+				</table>  <br>
+				<table class="table table-sm">
+					<thead class="thead">
+						<tr>
+							<th>회사 코드</th>
+							<th>회사명</th>
+					</thead>
+					<tbody id="companyListTbody">
+						<c:forEach items="${companyList }" var="vo">
+							<tr class="companyTr" data-companycode="${vo.companyCode }"
+								onclick="companyTr()">
+								<td>${vo.companyCode}</td>
+								<td>${vo.companyName}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			  <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			  <input type="hidden" class="buttons" data-dismiss="modal" value=""/>
+			</div>
+		</div>
+	</div>
+</div>
+
 	<!---------------등록, 검색, 삭제  ---------------->
 	
 	<form id="insertFrm" action="${pageContext.request.contextPath }/insertDept">
@@ -150,10 +196,7 @@
 		<input type="hidden" id="frmcompanyCode1" name="frmcompanyCode1" />
 	</form>
 	
-	<form id="frm1" action="${pageContext.request.contextPath }/serachCards" >
-		<input type="hidden" name="card_num" id="card_num" />
-		<input type="hidden" name="card_name" id="card_name" />
-	</form>
+
  	<form id="del_frm" action="${pageContext.request.contextPath }/deleteDept">
  		<input type="hidden" id="checkRow" name="checkRow">
  	</form>		
@@ -171,6 +214,7 @@
 		$("#frmdeptName").val(deptName);
 		$("#frmcompanyCode").val(companyCode);
 		
+		
 		if($("#deptName").val().trim()==""){
 			alert("부서명을 입력하세요");
 			$("#deptName").focus();
@@ -181,10 +225,25 @@
 			$("#companyCode").focus();
 			return false;
 		} 
-		$("#insertFrm").submit();
+	 	
+	 	companyTr();
+	 	$("#insertFrm").submit();
 	
 });
 	 
+	/* 컬럼 클릭했을 때 input에 값 넣어주기  */	
+	function companyTr(){
+		
+		var companyCode1 = $(".companyTr").data("companycode");
+		
+		$("#companycode").val(companyCode1);
+		
+		$('.buttons').trigger('click');
+		
+		$("#companyCode").val($(".companyTr").data().companycode);
+		
+	}
+	
 	$("document").ready(function() {
 		
 		/* 상세보기  */
@@ -222,9 +281,28 @@
 	 	
  		$("#updateFrm").submit();
     });
-    
- });     
-	    
+});	
+    /*회사이름 검색  */
+ 	$("#searchC_Btn").on("click", function(){
+ 		if($("#companyName").val().trim()==""){
+ 			alert("회사명을 입력하세요.");
+ 			$("companyName").focus();
+ 			return flase;
+ 		}
+		$.ajax({
+    		url 	: "${pageContext.request.contextPath }/searchCompanyAjax",
+    		data 	: "companyName=" + $("#companyName").val(),
+    		success : function(data){
+    			$("#companyName").val("");
+				$("#companyListTbody").html(data);
+    			
+    		}
+    	});
+    }); 
+ 	/*  function seachBtn(){
+ 		
+ 	}  */
+	
     /* 카드코드 중복체크 ajax */
 	    $("#duplCheckbtn").on("click", function(){
     	
@@ -237,7 +315,7 @@
     		}
     	});
     }); 
-	
+    
 		var dupleCode ="";
 		
 	    function transDupl(dupleCode){
@@ -253,25 +331,13 @@
 	    	}
 	    }  
 	    
-	    /* 검색  */
-		function seachBtn(){
-			var cardNumber = $("#cardNumber1").val();
-			var cardName   = $("#cardName1").val();
-			
-			$("#card_num").val(cardNumber);
-			$("#card_name").val(cardName);
-			
-			if(cardNumber === "" && cardName === ""){
-				alert("카드번호와 카드명을 입력하세요.");
-				$("card_num1").focus();
-			
-			}else if(cardName !== "" && cardNumber !== ""){
-				$("#cardNumber1").val(cardNumber);
-				$("#cardName1").val(cardName);
-
-				$("#frm1").submit();		
+		 function allCheck() {
+			if ($("#th_allCheck").is(':checked')) {
+					$("input[name=checkRow]").prop("checked", true);
+				} else {
+					$("input[name=checkRow]").prop("checked", false);
+				}
 			}
-		} 
 		
 		/* 전체선택삭제 */
 		function allCheck() {
@@ -298,6 +364,7 @@
  				$("#del_frm").submit();
 		}
 
+	
 	</script>
 	
 

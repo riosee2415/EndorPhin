@@ -15,4 +15,6 @@ public interface IDeptService {
 	DeptVo selectDept(String deptcode);
 	
 	int updateDept(DeptVo deptVo);
+	
+
 }

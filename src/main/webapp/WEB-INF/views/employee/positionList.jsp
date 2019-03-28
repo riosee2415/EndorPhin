@@ -159,8 +159,8 @@ background-color: #6E6867;
 					<th>직급/직책 분류</th>
 				</tr>
 			</thead>
-			
-			<tbody class="tbody">
+			 
+			<tbody class="tbody" id="mytbody">
 				<c:forEach items="${allPosition}" var="allPosition">
 					<tr class="boardTr" data-userId="${allPosition.positionCode}">
 						<td><input type="checkbox" name="check"
@@ -193,7 +193,7 @@ background-color: #6E6867;
 </div>
 
 
-<!-- 80% size Modal -->
+<!-- 직급 입력하기 -->
 <div class="modal fade" id="my80sizeModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeModalLabel">
   <div class="modal-dialog modal-80size" role="document">
     <div class="modal-content modal-80size">
@@ -245,48 +245,53 @@ background-color: #6E6867;
     </div>
   </div>
 </div>
-
+<!-- 직급 입력하기 끝 -->
 
 <!-- 직급 모달창 수정하기  -->
-
-<!-- 80% size Modal -->
-<div class="modal fade" id="my80sizeModal2" tabindex="-1" role="dialog" aria-labelledby="my80sizeModalLabel">
+<div class="modal fade" id="my80sizeModal2" tabindex="-1" role="dialog" aria-labelledby="my80sizeModalLabel" style="color: black">
   <div class="modal-dialog modal-80size" role="document">
     <div class="modal-content modal-80size">
       <div class="modal-header"><h2>직급/직책 수정</h2>
       </div>
       <div class="modal-body">
         <div class="form-group">
-						<form action="${cp}/emplPosition/insertemplPosition" method="post">
-							<label for="inputName">직급/직책 코드</label> <input type="text"
-								class="form-control" id="positionCode" name="positionCode" placeholder="직급/직책 번호를 입력해 주세요">
-								<input type="button" id="emplCheck" name="emplCheck" value="중복체크"/> 
-								<span id="duplicate"></span>
+						<form action="${cp}/emplPosition/updatePosition" method="post">
+							<label for="inputName">직급/직책 코드</label> <input type="text" readonly
+								class="form-control" id="positionCodee" name="positionCode" placeholder="직급/직책 번호를 입력해 주세요">
 								
 					</div>
 					<div class="form-group">
 						<label for="InputEmail">직급/직책명</label> <input type="text"
-							class="form-control" name="positionName" placeholder="직급/직책명을 입력해주세요">
+							class="form-control" id="positionNamee" name="positionName" placeholder="직급/직책명을 입력해주세요">
 					</div>
 					
 					<div class="form-group">
 						<label for="InputEmail">순위</label> <input type="text"
-							class="form-control" name="rank" placeholder="순위를 입력해주세요">
+							class="form-control" id="ranke" name="rank" placeholder="순위를 입력해주세요">
 					</div>
+					
+					
 					
 					<div class="form-group">
 						<label for="InputEmail">비고</label> <input type="text"
-							class="form-control" name="relate" placeholder="비고란을 입력해주세요">
+							class="form-control" id="relate" name="relate" placeholder="비고란을 입력해주세요">
 					</div>
 					
 					<div class="form-group">
 						<table>
 							<tr>
 								<td><label for="inputPassword">직급/직책 분류</label></td>
-								<td><select name="positionStatus" class="form-control">
+								<td><select id="positionStatuse" name="positionStatus" class="form-control">
 										<option value="직급">직급</option>
 										<option value="직책">직책</option>
 								</select></td>
+								
+								<td><label for="inputPassword">사용 여부</label></td>
+								<td><select id="useStatuse" name="useStatus" class="form-control">
+										<option value="사용">사용</option>
+										<option value="미사용">미사용</option>
+								</select></td>
+							
 							</tr>
 							</table>
 						</div>
@@ -294,7 +299,7 @@ background-color: #6E6867;
 					
       </div>
       <div class="modal-footer">
-      <button type="submit" class="btn btn-default">등록</button>
+      <button type="submit" class="btn btn-default">수정</button>
 					</form>
         <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
       </div>
@@ -305,7 +310,7 @@ background-color: #6E6867;
 
 
 
-<!-- 직급 모달창 수정하기  -->
+<!-- 직급 모달창 수정하기 끝  -->
                         
                         
                         </p>
@@ -445,6 +450,35 @@ background-color: #6E6867;
 
 
 	<script>
+
+
+	/*직급정보 수정하기*/
+	$("#mytbody").on("click", ".boardTr", function(){
+			
+		console.log($(this).data().userid);
+		
+		$.ajax({
+			url			: "${pageContext.request.contextPath }/emplPosition/updatePosition" ,
+			method		: "get",
+			data		: "userId="+$(this).data().userid,
+			success		: function(userIdCode) {
+				 $("#positionCodee").val(userIdCode.positionCode); 
+				 $("#positionNamee").val(userIdCode.positionName);
+		         $("#ranke").val(userIdCode.rank);
+				 $("#relate").val(userIdCode.useStatus);
+				 $("#positionStatuse").val(userIdCode.relate);
+				 $("#positionStatuse").val(userIdCode.positionStatus);
+				 $("#useStatuse").val(userIdCode.useStatus);
+				 
+			} 
+		});
+	});
+	
+	
+	
+	
+	
+	
 	
 	
 	/*Duplication Check*/

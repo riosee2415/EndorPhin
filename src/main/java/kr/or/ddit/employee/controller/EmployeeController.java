@@ -185,6 +185,38 @@ public class EmployeeController {
 	}
 	
 	
+	@RequestMapping(path = "/updateEmployee", method = RequestMethod.GET)
+	@ResponseBody
+	public EmployeeVo updateEmployee_GET(String userId,RedirectAttributes ra) throws IllegalStateException, IOException {
+		logger.debug("userId : {}", userId);
+		
+		EmployeeVo selectEmpl = employeeService.selectEmployee(userId);
+		return selectEmpl;
+	}
+	
+	@RequestMapping(path = "/updateEmployee_POST", method = RequestMethod.POST)
+	public String updateEmployee_POST(EmployeeVo vo,RedirectAttributes ra) {
+		logger.debug("수정 서블릿 : {}" ,vo);
+		
+		
+		
+		employeeService.updateEmployee(vo);
+		
+		ra.addFlashAttribute("msg", "정상 수정 되었습니다");
+		return "redirect:/employee/getAllEmployee";
+	}
+	
+	
+	@RequestMapping(path = "/SearchEmployee", method = RequestMethod.GET)
+	public String SearchEmployee(Model model, String searchName) {
+		
+		
+		List<EmployeeVo> allEmployee = employeeService.SearchEmployee(searchName);
+		model.addAttribute("allEmployee",allEmployee);
+		
+		return "employeeListTiles";
+	}
+	
 	
 	
 	

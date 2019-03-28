@@ -10,13 +10,18 @@
 		(userid, usernm, deptcode, positioncode, rankcode, continuousyear,
 		 relate, joincompany, birthdate, password)
 		values
-		(#{userId},#{userNm},
+		(
+		#{userId},
+		#{userNm},
 		nvl(#{deptCode, jdbcType=VARCHAR},null),
-		nvl(#{positionCode, jdbcType=VARCHAR},null)
-		,nvl(#{rankCode, jdbcType=VARCHAR},null),
+		nvl(#{positionCode, jdbcType=VARCHAR},null),
+		nvl(#{rankCode, jdbcType=VARCHAR},null),
 		nvl(#{continuousYear, jdbcType=VARCHAR},null),
 		nvl(#{relate, jdbcType=VARCHAR},null),
-		sysdate,to_date(#{birthDate},'yyyyMMdd'),nvl(#{password, jdbcType=VARCHAR},null))
+		sysdate,
+		to_date(#{birthDate},'yyyyMMdd'),
+		nvl(#{password, jdbcType=VARCHAR},null)
+		)
 
 	</insert>
 
@@ -39,8 +44,8 @@
         d.positionname rankname,
         a.continuousyear,
         a.relate,
-        a.joincompany,
-        a.birthdate,
+        to_char(a.joincompany,'yyyy-MM-dd') joincompany,
+        to_char(a.birthdate,'yyyy-MM-dd') birthdate,
         password
       from employee a left outer join position b
       on
@@ -61,13 +66,16 @@
 		select
       a.userid,
         a.usernm,
+        a.deptcode,
+        a.positioncode,
+        a.rankcode,
         b.positionname positionname,
         c.deptname deptname,
         d.positionname rankname,
         a.continuousyear,
         a.relate,
-        a.joincompany,
-        a.birthdate,
+        to_char(a.joincompany,'yyyy-MM-dd') joincompany,
+        to_char(a.birthdate,'yyyy-MM-dd') birthdate,
         password
       from employee a left outer join position b
       on
@@ -90,6 +98,68 @@
 		delete from employee
 		where userid = #{userid}
 	</delete>
+	
+	
+			<!-- 사원 업데이트 -->
+			<update id="updateEmployee" parameterType="employeeVo">
+			update employee set
+			userNm=#{userNm},
+			deptCode=#{deptCode},
+			positionCode=#{positionCode},
+			rankCode=#{rankCode},
+			continuousyear=nvl(#{continuousYear,jdbcType=VARCHAR},continuousYear),
+			relate=nvl(#{relate,jdbcType=VARCHAR},relate),
+			joinCompany=nvl(#{joinCompany,jdbcType=VARCHAR},joinCompany),
+			birthDate=to_date(#{BirthDate},'yyyy-MM-dd'),
+			password=nvl(#{password,jdbcType=VARCHAR},password)
+			where userId=#{userId}
+			</update>
+			
+			
+			
+			
+			
+			<!-- 사원 선택하여 가져오기 -->
+	<select id="SearchEmployee" resultType="employeeVo"
+		parameterType="map">
+		select
+     	a.userid,
+        a.usernm,
+        a.deptcode,
+        a.positioncode,
+        a.rankcode,
+        b.positionname positionname,
+        c.deptname deptname,
+        d.positionname rankname,
+        a.continuousyear,
+        a.relate,
+        to_char(a.joincompany,'yyyy-MM-dd') joincompany,
+        to_char(a.birthdate,'yyyy-MM-dd') birthdate,
+        password
+      from employee a left outer join position b
+      on
+      a.positioncode = b.positioncode
+      left outer join dept c
+      on
+        a.deptcode = c.deptcode
+    left outer join position d
+        on
+        a.rankcode = d.positioncode
+		
+		 where userNm = #{usernm}
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </mapper>

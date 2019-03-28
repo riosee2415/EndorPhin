@@ -38,4 +38,15 @@ public class EmployeeDao implements IEmployeeDao{
 		return selectList;
 	}
 
+	@Override
+	public int updateEmployee(EmployeeVo employeeVo) {
+		return sqlSessionTemplate.update("employee.updateEmployee",employeeVo);
+		
+	}
+
+	@Override
+	public List<EmployeeVo> SearchEmployee(String userNm) {
+		return sqlSessionTemplate.selectList("employee.SearchEmployee",userNm);
+	}
+
 }

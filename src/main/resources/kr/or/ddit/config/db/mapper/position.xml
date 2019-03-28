@@ -39,6 +39,23 @@
 		delete from position
 		where positioncode = #{positioncode}
 	</delete>
+	
+	
+	
+		<!-- 직책/직급 업데이트 -->
+			<update id="updatePosition" parameterType="positionVo">
+			update position set
+			positionname=nvl(#{positionName,jdbcType=VARCHAR},positionName),
+			rank=nvl(#{rank,jdbcType=VARCHAR},rank),
+			usestatus=nvl(#{useStatus,jdbcType=VARCHAR},useStatus),
+			relate=nvl(#{relate,jdbcType=VARCHAR},relate),
+			positionstatus=nvl(#{positionStatus,jdbcType=VARCHAR},positionStatus)
+			where positioncode=#{positionCode}
+			</update>
+
+
+
+
 
 </mapper>
 

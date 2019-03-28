@@ -55,19 +55,21 @@ public class EmployeeServiceTest extends LogicConfig{
 	@Test
 	public void getAllEmployeeDetailTest() {
 		EmployeeVo employeeVo = new EmployeeVo();
-		employeeVo.setUserId("75");
+		employeeVo.setUserId("756");
 		employeeVo.setUserNm("부서");
-		employeeVo.setDeptCode("10");
+		/*employeeVo.setDeptCode("100");
 		employeeVo.setPositionCode("1");
-		employeeVo.setRankCode("1");
+		employeeVo.setRankCode("1");*/
+		employeeVo.setBirthDate("20180101");
+		
 		int insertEmployee = employeeService.insertEmployee(employeeVo);
 		
-		Employee_detailVo detailVo = new Employee_detailVo();
+		/*Employee_detailVo detailVo = new Employee_detailVo();
 		detailVo.setUserId("75");
 		detailVo.setImg_name("1");
 		detailVo.setImg_path("1");
 		int insertEmployeeDetail = employeeDetailService.insertEmployeeDetail(detailVo);
-		assertNotNull(insertEmployeeDetail);
+		assertNotNull(insertEmployeeDetail);*/
 		
 	}
 	
@@ -82,6 +84,35 @@ public class EmployeeServiceTest extends LogicConfig{
 	public void getAllEmployeeDateTest() {
 		 EmployeeVo selectEmployee = employeeService.selectEmployee("60");
 		logger.debug("이미지 : {}", selectEmployee.getBirthDate());
+	}
+	
+	
+	@Test
+	public void UpdateEmployeeTest() {
+		EmployeeVo employeeVo = new EmployeeVo();
+		employeeVo.setUserId("3");
+		employeeVo.setUserNm("윤상호");
+		employeeVo.setDeptCode("100");
+		employeeVo.setPositionCode("30");
+		employeeVo.setRankCode("5");
+		//employeeVo.setContinuousYear("2");
+		//employeeVo.setJoinCompany("20181111");
+		employeeVo.setBirthDate("2018-11-15");
+		
+		
+		employeeService.updateEmployee(employeeVo);
+		
+		
+	}
+	
+	
+	@Test
+	public void searchEmployeeTest() {
+		
+		List<EmployeeVo> searchEmployee = employeeService.SearchEmployee("김현기");
+		assertNotNull(searchEmployee);
+		
+		
 	}
 	
 	

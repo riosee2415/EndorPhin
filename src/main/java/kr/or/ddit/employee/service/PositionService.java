@@ -35,7 +35,11 @@ public class PositionService implements IPositionService{
 	public List<PositionVo> getAllPosition() {
 		return positionDao.getAllPosition();
 	}
-	
+
+	@Override
+	public int updatePosition(PositionVo Vo) {
+		return positionDao.updatePosition(Vo);
+	}
 	
 	
 

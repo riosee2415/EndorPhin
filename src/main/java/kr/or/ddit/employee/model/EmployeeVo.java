@@ -17,8 +17,8 @@ public class EmployeeVo {
 	String rankCode;
 	String continuousYear;
 	String relate;
-	Date joinCompany;
-	Date BirthDate;
+	String joinCompany;
+	String BirthDate;
 	String password;
 	
 	
@@ -103,22 +103,22 @@ public class EmployeeVo {
 	}
 	public String getJoinCompany() {
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 
-		return sdf.format(joinCompany);
+		return joinCompany;
 	}
-	public void setJoinCompany(Date joinCompany) {
+	public void setJoinCompany(String joinCompany) {
 		this.joinCompany = joinCompany;
 	}
 	
 	
 	public String getBirthDate() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		//SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		
-		return sdf.format(BirthDate);
+		return BirthDate;
 	}
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(String birthDate) {
 		BirthDate = birthDate;
 	}
 	@Override
@@ -128,6 +128,7 @@ public class EmployeeVo {
 				+ ", joinCompany=" + joinCompany + ", BirthDate=" + BirthDate + ", password=" + password
 				+ ", positionname=" + positionname + ", rankname=" + rankname + ", deptname=" + deptname + "]";
 	}
+	
 	
 	
 	

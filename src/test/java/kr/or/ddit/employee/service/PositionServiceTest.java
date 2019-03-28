@@ -38,6 +38,20 @@ public class PositionServiceTest extends LogicConfig{
 		 positionService.insertPosition(vo);
 	}
 	
+	@Test
+	public void updatePositionTest() {
+		PositionVo vo = new PositionVo();
+		vo.setPositionCode("1");
+		vo.setPositionName("대장");
+		vo.setRank("99");
+		vo.setUseStatus("사용");
+		vo.setPositionStatus("직책");
+		
+		positionService.updatePosition(vo);
+		
+		
+	}
+	
 	
 
 }

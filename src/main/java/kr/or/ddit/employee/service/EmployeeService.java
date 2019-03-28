@@ -37,5 +37,16 @@ public class EmployeeService implements IEmployeeService{
 	public int deleteEmployee(String userId) {
 		return employeeDao.deleteEmployee(userId);
 	}
+
+	@Override
+	public int updateEmployee(EmployeeVo vo) {
+		return employeeDao.updateEmployee(vo);
+	}
+
+	@Override
+	public List<EmployeeVo> SearchEmployee(String userNm) {
+		return employeeDao.SearchEmployee(userNm);
+		
+	}
 	
 }

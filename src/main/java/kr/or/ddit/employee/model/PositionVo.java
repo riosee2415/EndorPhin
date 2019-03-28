@@ -49,6 +49,12 @@ public class PositionVo {
 	public void setPositionStatus(String positionStatus) {
 		this.positionStatus = positionStatus;
 	}
+	@Override
+	public String toString() {
+		return "PositionVo [positionCode=" + positionCode + ", positionName=" + positionName + ", rank=" + rank
+				+ ", useStatus=" + useStatus + ", relate=" + relate + ", positionStatus=" + positionStatus + "]";
+	}
+	
 	
 	
 

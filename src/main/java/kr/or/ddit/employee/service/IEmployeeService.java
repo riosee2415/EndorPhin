@@ -6,18 +6,74 @@ import kr.or.ddit.employee.model.EmployeeVo;
 
 public interface IEmployeeService {
 	
-	//»ç¿øÀüÃ¼ °¡Á®¿À±â
+	/**
+	* Method : getAllEmployee
+	* ì‘ì„±ì : leemjaewoo
+	* ë³€ê²½ì´ë ¥ :
+	* @return
+	* Method ì„¤ëª… :
+	*/
 	List<EmployeeVo> getAllEmployee();
 	
-	//»ç¿ø ¼±ÅÃÇÏ¿© °¡Á®¿À±â
+	
+	
+	/**
+	* Method : selectEmployee
+	* ì‘ì„±ì : leemjaewoo
+	* ë³€ê²½ì´ë ¥ :
+	* @param user
+	* @return
+	* Method ì„¤ëª… :
+	*/
 	EmployeeVo selectEmployee(String user);
 
-	//»ç¿ø µî·Ï
+	
+	
+	/**
+	* Method : insertEmployee
+	* ì‘ì„±ì : leemjaewoo
+	* ë³€ê²½ì´ë ¥ :
+	* @param vo
+	* @return
+	* Method ì„¤ëª… :
+	*/
 	int insertEmployee(EmployeeVo vo);
 	
 	
-	//»ç¿ø »èÁ¦
+	
+	/**
+	* Method : updateEmployee
+	* ì‘ì„±ì : leemjaewoo
+	* ë³€ê²½ì´ë ¥ :
+	* @param vo
+	* @return
+	* Method ì„¤ëª… :
+	*/
+	int updateEmployee(EmployeeVo vo);
+	
+	
+	
+	/**
+	* Method : deleteEmployee
+	* ì‘ì„±ì : leemjaewoo
+	* ë³€ê²½ì´ë ¥ :
+	* @param userId
+	* @return
+	* Method ì„¤ëª… :
+	*/
 	int deleteEmployee(String userId);
+	
+	
+	
+	/**
+	* Method : selectEmployee
+	* ì‘ì„±ì : leemjaewoo
+	* ë³€ê²½ì´ë ¥ :
+	* @param user
+	* @return
+	* Method ì„¤ëª… : ì‚¬ì› ê²€ìƒ‰
+	*/
+	List<EmployeeVo> SearchEmployee(String userNm);
 	
 	
 }

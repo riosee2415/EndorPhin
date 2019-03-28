@@ -35,7 +35,11 @@ public class PositionDao implements IPositionDao{
 		List<PositionVo> selectList = sqlSessionTemplate.selectList("position.getAllPosition");
 		return selectList;
 	}
-	
+
+	@Override
+	public int updatePosition(PositionVo Vo) {
+		return sqlSessionTemplate.update("position.updatePosition",Vo);
+	}
 	
 	
 	

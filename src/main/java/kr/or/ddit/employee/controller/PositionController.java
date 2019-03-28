@@ -115,6 +115,34 @@ public class PositionController {
 	}
 	
 	
+
+	
+	@RequestMapping(path = "/updatePosition", method = RequestMethod.GET)
+	@ResponseBody
+	public PositionVo updatePosition_GET(String userId,RedirectAttributes ra) throws IllegalStateException, IOException {
+		
+		
+		PositionVo selectPosition = positionService.selectPosition(userId);
+		
+		return selectPosition;
+	}
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping(path = "/updatePosition", method = RequestMethod.POST)
+	public String updatePosition_POST(PositionVo vo,RedirectAttributes ra){
+		ra.addFlashAttribute("msg", "정상 수정 되었습니다");
+		positionService.updatePosition(vo);
+		
+		return "redirect:/emplPosition/getAllemplPosition";
+		
+	}
+	
+	
 	
 	
 	

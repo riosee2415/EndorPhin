@@ -46,12 +46,10 @@ public class Board_TypeServiceTest extends LogicConfig{
 	@Test
 	public void insertBoardTest(){
 		/***Given***/
-		Board_TypeVo board_TypeVo = new Board_TypeVo();
-		board_TypeVo.setBoardTypeName("공지사항");
-		board_TypeVo.setUseStatus("1");
+		String boardTypeName = "공지사항";
 		
 		/***When***/
-		int insertBoard = board_TypeService.insertBoard(board_TypeVo);
+		int insertBoard = board_TypeService.insertBoard(boardTypeName);
 
 		/***Then***/
 		assertEquals(1, insertBoard);

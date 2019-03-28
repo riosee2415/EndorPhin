@@ -54,11 +54,10 @@ public class Board_TypeDaoTest extends LogicConfig{
 		/***Given***/
 		Board_TypeVo board_TypeVo = new Board_TypeVo();
 		
-		board_TypeVo.setBoardTypeName("방명록");
-		board_TypeVo.setUseStatus("1");
+		String boardTypeName = "방명록";
 
 		/***When***/
-		int boardInsert = board_TypeDao.insertBoard(board_TypeVo);
+		int boardInsert = board_TypeDao.insertBoard(boardTypeName);
 		/***Then***/
 		assertEquals(1, boardInsert);
 

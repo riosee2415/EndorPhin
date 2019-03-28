@@ -37,6 +37,25 @@
 		delete from slip
 		where slipnumber = #{slipnumber}
 	</delete>
+	
+	<!-- 전체 전표 수 조회 -->
+	<select id="getSlipCnt" resultType="Integer">
+		select count(*)
+ 		  from SLIP
+	</select>
+	
+	
+	<!-- 페이징처리를 위한 조회 -->
+	<select id="selectSlipPagingList" resultType="slipVo" parameterType="pageVo">
+		select *
+		  from
+			  (select a.*, rownum rn
+				 from
+					 (select slip.*
+						from slip
+					  order by SLIPNUMBER) a ) a
+		 where rn between (#{page}-1)*#{pageSize}+1 and #{page}*#{pageSize}
+	</select>
 
 
 </mapper>

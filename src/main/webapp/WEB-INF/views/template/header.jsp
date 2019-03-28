@@ -37,10 +37,10 @@
           <a class="dropdown-item" href="${pageContext.request.contextPath }/clientview">거래처등록</a>
           <a class="dropdown-item" href="${pageContext.request.contextPath }/cardsList">신용카드 등록</a>
           <a class="dropdown-item" href="${pageContext.request.contextPath }/establishview">계정과목 등록</a>
-          <a class="dropdown-item" href="">부서등록</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath }/deptList">부서등록</a>
            <h3 class="dropdown-header">전표관리</h3>
           <a class="dropdown-item" href="">미승인 전표</a>
-          <a class="dropdown-item" href="">일반 전표</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath }/slipview">일반 전표</a>
           <a class="dropdown-item" href="">매출세금계산서 입력</a>
           <a class="dropdown-item" href="">승인전표</a>
         </div>
@@ -53,13 +53,13 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <h3 class="dropdown-header">기초정보</h3>
-          <a class="dropdown-item" href="">직급등록</a>
+          <a class="dropdown-item" href="${cp }/emplPosition/getAllemplPosition">직급등록</a>
           <a class="dropdown-item" href="">직책등록</a>
           <a class="dropdown-item" href="/addProduct">급여항목 등록</a>
           <a class="dropdown-item" href="/addDeduct">급여공제항목 등록</a>
            <h3 class="dropdown-header">사원정보관리</h3>
           <a class="dropdown-item" href="${cp }/employee/getAllEmployee">사원등록</a>
-          <a class="dropdown-item" href="">급여등록</a>
+          <a class="dropdown-item" href="/addPayment">급여등록</a>
           <a class="dropdown-item" href="">퇴직자</a>
            <h3 class="dropdown-header">급여계산관리</h3>
           <a class="dropdown-item" href="/payment">급여조정</a>

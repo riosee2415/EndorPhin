@@ -18,7 +18,8 @@ public class EmployeeService implements IEmployeeService{
 
 	@Override
 	public List<EmployeeVo> getAllEmployee() {
-		return employeeDao.getAllEmployee();
+		List<EmployeeVo> allEmployee = employeeDao.getAllEmployee();
+		return allEmployee;
 		
 	}
 

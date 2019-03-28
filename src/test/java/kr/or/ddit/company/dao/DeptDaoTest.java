@@ -32,7 +32,7 @@ public class DeptDaoTest extends LogicConfig{
 	@Test
 	public void insertDeptTest() {
 		DeptVo vo = new DeptVo();
-		vo.setDeptCode("3");
+		vo.setDeptCode("300");
 		vo.setDeptName("전산팀");
 		vo.setUseStatus("1");
 		vo.setCompanyCode("1");

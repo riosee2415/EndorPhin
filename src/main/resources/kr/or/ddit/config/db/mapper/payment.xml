@@ -51,6 +51,45 @@
 		payment where userid = #{userId}
 	</select>
 
+	<!-- 급여 리스트 가져오기 -->
+	<select id="getPaymentList" resultType="paymentVo">
+		select  e.userid,nvl(po.positionname,'미정') positionname,
+		        e.usernm,
+		        nvl(d.deptname,'미정') deptname,
+		        nvl(p.totalwage,0) totalwage,
+		        nvl(p.totalsalary,0) totalsalary,
+		        to_char(e.joincompany,'yyyy-MM-dd') joincompany
+		from    employee e left outer join 
+		        (select  userid,sum(totalwage) totalwage,sum(totalsalary) totalsalary
+		        from    payment
+		        group   by userid) p
+		on   e.userid=p.userid
+		left outer join position po
+		on e.positioncode=po.positioncode
+		left outer join dept d
+		on d.deptcode=e.deptcode
+	</select>
+	
+	<!-- 급여 리스트 사원명으로 검색 -->
+	<select id="getPaymentListByUserNm" resultType="paymentVo"
+	parameterType="map">
+		select  e.userid,nvl(po.positionname,'미정') positionname,
+		        e.usernm,
+		        nvl(d.deptname,'미정') deptname,
+		        nvl(p.totalwage,0) totalwage,
+		        nvl(p.totalsalary,0) totalsalary,
+		        to_char(e.joincompany,'yyyy-MM-dd') joincompany
+		from    employee e left outer join 
+		        (select  userid,sum(totalwage) totalwage,sum(totalsalary) totalsalary
+		        from    payment
+		        group   by userid) p
+		on   e.userid=p.userid
+		left outer join position po
+		on e.positioncode=po.positioncode
+		left outer join dept d
+		on d.deptcode=e.deptcode
+		where   e.usernm like '%'||#{usernm}||'%'
+	</select>
 
 </mapper>
 

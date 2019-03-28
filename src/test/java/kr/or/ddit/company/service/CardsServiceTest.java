@@ -35,7 +35,6 @@ public class CardsServiceTest extends LogicConfig {
 	    cardsVo.setMemo("55");
 	    cardsVo.setStatus("1");
 		
-		List<CardsVo> cardsList = cardsService.serachCards(cardsVo);
 	}
 
 	@Test

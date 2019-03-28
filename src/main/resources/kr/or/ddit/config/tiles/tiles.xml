@@ -41,6 +41,11 @@
         </definition>
         
         
+        <definition name="positionListTiles" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/employee/positionList.jsp"/>
+        </definition>
+        
+        
         <definition name="insertEmployeeTiles" extends="layout">
         	<put-attribute name="content" value="/WEB-INF/views/employee/insertEmployeeForm.jsp"/>
         </definition>
@@ -57,35 +62,31 @@
         	<put-attribute name="content" value="/WEB-INF/views/establish/establishview.jsp"/>
         </definition>
         
+        <definition name="deptList" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/dept/deptList.jsp"/>
+        </definition>
         
+        <definition name="slipview" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/slip/slipview.jsp"/>
+        </definition>
         
         
          <definition name="testTiles" extends="layout">
         	<put-attribute name="content" value="/WEB-INF/views/test.jsp"/>
         </definition>
         
-         <definition name="addProductView" extends="layout">
+         <definition name="addProductView" extends="layout">  <!-- 급여항목 등록  -->
         	<put-attribute name="content" value="/WEB-INF/views/payment/productList.jsp"/>
         </definition>
-         <definition name="addDeductView" extends="layout">
+         <definition name="addDeductView" extends="layout">  <!-- 공제항목 등록  -->
         	<put-attribute name="content" value="/WEB-INF/views/payment/deductList.jsp"/>
         </definition>
-        
-        <definition name="boardType" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/board/boardType.jsp"/>
+
+         <definition name="addPaymentView" extends="layout">  <!-- 급여 등록  -->
+        	<put-attribute name="content" value="/WEB-INF/views/payment/addPayment.jsp"/>
         </definition>
         
-        <definition name="test" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/board/test.jsp"/>
-        </definition>
-        
-<!--         <definition name="test1" extends="layout"> -->
-<!--         	<put-attribute name="content" value="/WEB-INF/views/board/test1.jsp"/> -->
-<!--         </definition> -->
-        
-         <definition name="postList" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/board/postList.jsp"/>
-        </definition>
+
         
         
         

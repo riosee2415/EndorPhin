@@ -5,12 +5,12 @@ package kr.or.ddit.company.model;
  *
  */
 public class DeptVo {
-	String deptCode;
-	String deptName;
-	String businessName;
-	String useStatus;
-	String parentCode;
-	String companyCode;
+	String deptCode; // 부서코드 
+	String deptName; // 부서명
+	String businessName; //사업부
+	String useStatus; //사용구분
+	String parentCode; //상위부서 코드 
+	String companyCode; // 회사코드 
 	public String getDeptCode() {
 		return deptCode;
 	}
@@ -48,5 +48,6 @@ public class DeptVo {
 		this.companyCode = companyCode;
 	}
 	
+
 
 }

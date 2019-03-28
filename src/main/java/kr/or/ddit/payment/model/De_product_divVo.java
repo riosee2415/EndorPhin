@@ -14,7 +14,14 @@ public class De_product_divVo {
 	String bonusStatus;
 	String establishcode; // 공제 항목에서의 계정과목
 	String deprostatus; // 공제 항목과 급여 항목 구분 
+	String establishName; // 계정과목명 입력을 위한 변수
 	
+	public String getEstablishName() {
+		return establishName;
+	}
+	public void setEstablishName(String establishName) {
+		this.establishName = establishName;
+	}
 	@Override
 	public String toString() {
 		return "De_product_divVo [deductCode=" + deductCode + ", deductName=" + deductName + ", useStatus=" + useStatus

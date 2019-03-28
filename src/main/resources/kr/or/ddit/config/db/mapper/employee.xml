@@ -20,24 +20,68 @@
 
 	</insert>
 
-
 	<!-- 사원 전체 불러오기 -->
-	<select id="getAllEmployee" resultType="employeeVo">
+	<!-- <select id="getAllEmployee" resultType="employeeVo">
 		select
 		userid, usernm, deptcode, positioncode, rankcode, continuousyear,
 		 relate, joincompany, birthdate, password
 		from employee
-	</select>
+	</select> -->
+	
+	
+	<!-- 사원 전체 불러오기 -->
+	 <select id="getAllEmployee" resultType="employeeVo">
+		select
+      a.userid,
+        a.usernm,
+        b.positionname positionname,
+        c.deptname deptname,
+        d.positionname rankname,
+        a.continuousyear,
+        a.relate,
+        a.joincompany,
+        a.birthdate,
+        password
+      from employee a left outer join position b
+      on
+      a.positioncode = b.positioncode
+      left outer join dept c
+      on
+        a.deptcode = c.deptcode
+    left outer join position d
+        on
+        a.rankcode = d.positioncode
+	
+	</select> 
 
 
 	<!-- 사원 선택하여 가져오기 -->
 	<select id="selectEmployee" resultType="employeeVo"
 		parameterType="map">
 		select
-		userid, usernm, deptcode, positioncode, rankcode, continuousyear,
-		 relate, joincompany, birthdate, password
-		from
-		employee where userid = #{userid}
+      a.userid,
+        a.usernm,
+        b.positionname positionname,
+        c.deptname deptname,
+        d.positionname rankname,
+        a.continuousyear,
+        a.relate,
+        a.joincompany,
+        a.birthdate,
+        password
+      from employee a left outer join position b
+      on
+      a.positioncode = b.positioncode
+      left outer join dept c
+      on
+        a.deptcode = c.deptcode
+    left outer join position d
+        on
+        a.rankcode = d.positioncode
+		
+		
+		
+		 where userid = #{userid}
 	</select>
 
 

@@ -36,8 +36,8 @@ public class Payment_DetailDao implements IPayment_DetailDao{
 	}
 
 	@Override
-	public List<Payment_detailVo> selectPayment_detailStatus(String useStatus) {
-		return sqlSessionTemplate.selectList("payment_detail.selectPayment_detailStatus",useStatus);
+	public List<Payment_detailVo> selectPayment_detailPaycode(String paycode) {
+		return sqlSessionTemplate.selectList("payment_detail.selectPayment_detailPaycode",paycode);
 	}
 
 	

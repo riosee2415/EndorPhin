@@ -44,7 +44,7 @@ public class Payment_detailDaoTest extends LogicConfig{
 	}
 	@Test
 	public void selectPayment_detailStatusTest() {
-		List<Payment_detailVo> selectPayment_detailStatus = payment_detailDao.selectPayment_detailStatus("1");
+		List<Payment_detailVo> selectPayment_detailStatus = payment_detailDao.selectPayment_detailPaycode("1");
 		assertTrue(selectPayment_detailStatus.size()>0);
 	}
 

@@ -80,6 +80,12 @@ public class PaymentVo {
 	public void setPayDay(String payDay) {
 		this.payDay = payDay;
 	}
+	@Override
+	public String toString() {
+		return "PaymentVo [payCode=" + payCode + ", userId=" + userId + ", totalWage=" + totalWage + ", totalSalary="
+				+ totalSalary + ", relate=" + relate + ", payDay=" + payDay + ", positionname=" + positionname
+				+ ", usernm=" + usernm + ", deptname=" + deptname + ", joincompany=" + joincompany + "]";
+	}
 	
 	
 

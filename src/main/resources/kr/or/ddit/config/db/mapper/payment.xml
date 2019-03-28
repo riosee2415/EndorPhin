@@ -10,13 +10,42 @@
 		(paycode, userid, totalwage, totalsalary, relate, payday)
 		values
 		(#{payCode},#{userId}
-		,nvl(#{totalWage, jdbcType=VARCHAR},null)
-		,nvl(#{totalSalary, jdbcType=VARCHAR},null)
+		,nvl((select sum(deductpay)
+							from payment_detail pd, de_product_div dpd
+							where   pd.deductcode=dpd.deductcode
+							and     dpd.deprostatus='2'
+							and     pd.paycode=#{payCode}
+							and     pd.usestatus='1'),0)
+		,nvl((select sum(deductpay)
+							from payment_detail pd, de_product_div dpd
+							where   pd.deductcode=dpd.deductcode
+							and     dpd.deprostatus='1'
+							and     pd.paycode=#{payCode}
+							and     pd.usestatus='1'),0)
 		,nvl(#{relate, jdbcType=VARCHAR},null)
 		,to_date( nvl(#{payDay, jdbcType=VARCHAR},null),'yyyyMMdd')
 		)
 	</insert>
-
+	
+	<update id="updatePayment" parameterType="paymentVo">
+		update  payment
+		set	 
+		totalwage = nvl((select sum(deductpay)
+							from payment_detail pd, de_product_div dpd
+							where   pd.deductcode=dpd.deductcode
+							and     dpd.deprostatus='2'
+							and     pd.paycode=#{payCode}
+							and     pd.usestatus='1'),0)
+		,totalsalary = nvl((select sum(deductpay)
+							from payment_detail pd, de_product_div dpd
+							where   pd.deductcode=dpd.deductcode
+							and     dpd.deprostatus='1'
+							and     pd.paycode=#{payCode}
+							and     pd.usestatus='1'),0)
+		, relate=nvl(#{relate, jdbcType=VARCHAR},relate)
+		, payday=nvl(to_date(payDay,'yyyyMMdd'),payday)
+		where   paycode = #{payCode};
+	</update>
 
 	<!-- 급여  전체 불러오기 -->
 	<select id="getAllPayment" resultType="paymentVo">
@@ -30,7 +59,8 @@
 	<select id="selectPayment" resultType="paymentVo"
 		parameterType="map">
 		select
-		paycode, userid, totalwage, totalsalary, relate, payday
+		paycode, userid, totalwage, totalsalary, relate, 
+		nvl(to_char(payday,'yyyy-MM-dd'),'미정') payday
 		from
 		payment where paycode = #{paycode}
 	</select>
@@ -46,7 +76,8 @@
 	<select id="getPayment_u" resultType="paymentVo"
 		parameterType="map">
 		select
-		paycode, userid, totalwage, totalsalary, relate, payday
+		paycode, userid, totalwage, totalsalary, relate, 
+		nvl(to_char(payday,'yyyy-MM-dd'),'미정') payday
 		from
 		payment where userid = #{userId}
 	</select>
@@ -56,8 +87,8 @@
 		select  e.userid,nvl(po.positionname,'미정') positionname,
 		        e.usernm,
 		        nvl(d.deptname,'미정') deptname,
-		        nvl(p.totalwage,0) totalwage,
 		        nvl(p.totalsalary,0) totalsalary,
+		        nvl(p.totalwage,0) totalwage,
 		        to_char(e.joincompany,'yyyy-MM-dd') joincompany
 		from    employee e left outer join 
 		        (select  userid,sum(totalwage) totalwage,sum(totalsalary) totalsalary

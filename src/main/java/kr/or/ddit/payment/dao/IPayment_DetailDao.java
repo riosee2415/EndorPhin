@@ -9,5 +9,5 @@ public interface IPayment_DetailDao {
 	List<Payment_detailVo> getAllPayment_detail();
 	Payment_detailVo selectPayment_detail(String payDetailCode);
 	int deletePayment_detail(String payDetailCode);
-	List<Payment_detailVo> selectPayment_detailStatus(String useStatus);
+	List<Payment_detailVo> selectPayment_detailPaycode(String paycode);
 }

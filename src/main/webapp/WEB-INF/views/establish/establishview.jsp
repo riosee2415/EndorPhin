@@ -376,8 +376,6 @@
 							<option value="0">사용불가</option>
 						</select>
 	   				</div>
-	   				
-	   				
 	   			</div> 
 	   			
 	   			<div class="modal-footer">

@@ -18,5 +18,14 @@ public interface ISlipService {
 	public Map<String, Object> selectSlipPagingList(PageVo pageVo);
 
 	
+	/**
+	* Method : getSlipCnt
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @return
+	* Method 설명 : 전표 수량 확인
+	*/
+	public int getSlipCnt();
+	
 	
 }

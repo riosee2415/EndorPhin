@@ -1,17 +1,172 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
+<head>
+	<style type="text/css">
+	.thead2{
+	color : white;
+	background-color: #2C1A3F;
+	text-align: center;
+	}
+	
+	</style>
+</head>
 <br />
-  	<table>
-		<tr>
-			<td>  전표번호  </td>
-			<td> <input type="text" id="insertSlipNumber" name="insertSlipNumber" value="강제입력예정" readonly ></td>
+
+	<center>
+	  	<table>
+	  		<thead class="thead2">
+				<tr>
+					<td>  전표번호 </td>
+					
+					<td>  작성일(*)  </td>
+	
+					<td>  차대변(*)  </td>
 		
-			<td>  작성일  </td>
-			<td>  일자: <input type="text" id="datepicker">    </td>
-		</tr>	  		
-  	</table>
+					<td colspan="2">  계정과목(*)  </td>
+					
+					<td>  사용부서  </td>
+		
+					<td colspan="2">  거래처/카드(*)  </td>
+				
+					<td>  메모  </td>
+					
+					<td>  금액  </td>
+
+					<td >   </td>
+					
+				</tr>
+			</thead>
+			
+			<tbody>
+					
+				<tr>
+					<td> <input style="width: 50px;" type="text" id="insertSlipNumber" name="insertSlipNumber" value="${slipNumber }" readonly ></td>
+					
+					<td> <input style="width: 100px;"  type="text" id="insertSlipDate">    </td>
+					
+					<td> 
+						<select name="status">
+							<option value="0" selected="selected">차변-</option>
+							<option value="1" >대변-</option>
+						</select>
+				   </td>
+				   <!-- Establish -->
+				   <td> <input type="text" id="searchEstablishValue" name="searchEstablishValue"/>  		</td>
+				   <td> <input type="button" id="searchEstablish_btn" value="검색" data-toggle="modal" data-target="#searchEstablish_modal"/>		</td>
+				   
+					
+					<td>
+						<select name="dept">
+						<option value="미등록" selected="selected">-------</option>
+							<c:forEach items="${deptList }" var="dept">
+							<option value="${dept.deptName }">${dept.deptName }</option>
+							</c:forEach>
+						</select>
+					</td>
+					<!-- Client -->
+					<td> <input type="text" id="searchClientValue" name="searchClientValue"/>  		</td>
+				    <td> <input type="button" id="searchClient_btn2" value="검색" data-toggle="modal" data-target="#searchClient_modal"/>	</td>
+					
+					<td> <input type="text" />  </td>
+					
+					<td> <input type="text" />  </td>
+					
+					<td >  <input type="button" value="등록">  </td>
+				</tr>
+			</tbody>
+	  	</table>
+	  		<br />
+	  		<p>
+	  	
+		  		<textarea rows="5" cols="140" readonly>
+		  		
+		  		</textarea>
+	  		</p>
+  		</center>
+  		
+  		
+  		
+  	<!-- Search Establish Modal Window  -->		
+  	<div class="modal modal-center fade" id="searchEstablish_modal" tabindex="4" role="dialog" aria-labelledby="my80sizeCenterModalLabel"> 
+	   		<div class="modal-dialog modal-80size modal-center" role="document">
+	   			 <div class="modal-content modal-80size"> 
+		   			<div class="modal-header"> 
+		   				<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+		   				<h4 class="modal-title" id="myModalLabel">계정과목 검색</h4>
+		   			</div> 
+		   			
+		   			<div class="modal-body"> 
+		   				<div class="form-group">
+		   					<label for="InputEmail">계정과과목 코드&nbsp;&nbsp;&nbsp;</label> 
+		   					<input type="text" id="searchEstablishValue2" name="searchEstablishValue2" />
+		   					<input type="button" id="searchDataBtn" name="searchDataBtn" value="검색"/>
+		   				</div>
+		   				
+		   				<div class="form-group">
+		   					<label for="InputEmail">현재선택된 코드&nbsp;&nbsp;&nbsp;</label> 
+		   					<input type="text" id="selectEstablishValue" name="selectEstablishValue" readonly/>
+		   					<button type="button" class="btn btn-primary" id="ok_btn" class="btn btn-default" data-dismiss="modal" >확인</button>
+		   				</div>
+		   				
+		   				<div id="searchDataArea">
+		   				
+		   				</div>
+		   				
+		   			</div> 
+		   			
+		   			<div class="modal-footer">
+	   				</div> 
+	   				
+	   			</div> 
+	   		</div> 
+	   </div>
+	   
+	   
+	   
+	<!-- Search Client Modal Window  -->		
+  	<div class="modal modal-center fade" id="searchClient_modal" tabindex="4" role="dialog" aria-labelledby="my80sizeCenterModalLabel"> 
+	   		<div class="modal-dialog modal-80size modal-center" role="document">
+	   			 <div class="modal-content modal-80size"> 
+		   			<div class="modal-header"> 
+		   				<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+		   				<h4 class="modal-title" id="myModalLabel">거래처 검색</h4>
+		   			</div> 
+		   			
+		   			<div class="modal-body"> 
+		   				<div class="form-group">
+		   					<label for="InputEmail">거&nbsp;&nbsp;&nbsp;래&nbsp;&nbsp;&nbsp;처&nbsp;&nbsp;&nbsp;명&nbsp;&nbsp;</label> 
+		   					<input type="text" id="searchClientValue2" name="searchClientValue2" />
+		   					<input type="button" id="searchDataBtn2" name="searchDataBtn2" value="검색"/>
+		   				</div>
+		   				
+		   				<div class="form-group">
+		   					<label for="InputEmail">선택한 거래처&nbsp;&nbsp;&nbsp;</label> 
+		   					<input type="text" id="selectClientValue" name="selectClientValue" readonly/>
+		   					<button type="button" class="btn btn-primary" id="ok_btn2" class="btn btn-default" data-dismiss="modal" >확인</button>
+		   				</div>
+		   				
+		   				<div id="searchDataArea2">
+		   				
+		   				</div>
+		   				
+		   			</div> 
+		   			
+		   			<div class="modal-footer">
+	   				</div> 
+	   				
+	   			</div> 
+	   		</div> 
+	   </div>
+  		
+  		
   	
   	 <script>
   	 
@@ -20,7 +175,7 @@
   	
         $(function() {
             //input을 datepicker로 선언
-            $("#datepicker").datepicker({
+            $("#insertSlipDate").datepicker({
                 dateFormat: 'yy-mm-dd' //Input Display Format 변경
                 ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
                 ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
@@ -44,10 +199,109 @@
         });
         
   	 });
-    </script>
+  	 
+  	 
+  	/* 계정과목 검색 기능 */
+  	$("#searchEstablishValue").keydown(function(key) {
+		if (key.keyCode == 13) {
+			$("#searchEstablish_btn").click();
+			$("#searchEstablishValue2").focus();
+		}
+  	});
+  	
+  	$("#searchEstablishValue").dblclick(function(){
+  		$("#searchEstablish_btn").click();
+		$("#searchEstablishValue2").focus();
+  	});
+  	
+  	$("#searchEstablishValue2").keydown(function(key) {
+		if (key.keyCode == 13) {
+			$("#searchDataBtn").click();
+			$("#searchEstablishValue2").focus();
+		}
+  	});
+		
+		
+  	 $("#searchEstablish_btn").on("click", function(){
+  		$("#searchEstablishValue2").val($("#searchEstablishValue").val());
+  		$("#searchDataBtn").click();
+  		$("#searchEstablishValue2").focus();
+  		$("#searchDataArea").html("");
+  		 
+  		 
+  	 });
+  	 
+  	 $("#searchDataBtn").on("click", function(){
+  		$("#searchEstablishValue2").focus();
+  		 $.ajax({
+  			url : "${pageContext.request.contextPath }/establishSearchUseSlip",
+			data : "searchEstablishValue2=" +$("#searchEstablishValue2").val(),
+			success : function(data){
+				console.log(data);
+				$("#searchDataArea").html(data);
+				$("#searchEstablishValue2").focus();
+				
+			}
+  		 });
+  		 
+  	 });
+  	 
+  	 
+  	 
+  	 
+  	 
+  	 
+  	 
+  	 
+  	 
+  	/* 거래처 검색 기능 */
+    $("#searchClientValue").keydown(function(key) {
+		if (key.keyCode == 13) {
+			$("#searchClient_btn2").click();
+			$("#searchClientValue2").focus();
+		}
+  	});
+  	
+  	$("#searchClientValue").dblclick(function(){
+  		$("#searchClient_btn2").click();
+		$("#searchClientValue2").focus();
+  	});
+  	
+  	$("#searchClientValue2").keydown(function(key) {
+		if (key.keyCode == 13) {
+			$("#searchDataBtn2").click();
+			$("#searchClientValue2").focus();
+		}
+  	});
+		
+		
+  	 $("#searchClient_btn2").on("click", function(){
+  		$("#searchClientValue2").val($("#searchClientValue").val());
+  		$("#searchDataBtn2").click();
+  		$("#searchClientValue2").focus();
+  		$("#searchDataArea2").html("");
+  		 
+  		 
+  	 });
+  	 
+  	$("#searchDataBtn2").on("click", function(){
+  		$("#searchClienthValue2").focus();
+  		 $.ajax({
+  			url : "${pageContext.request.contextPath }/ClientSearchUseSlip",
+			data : "searchClientValue2=" +$("#searchClientValue2").val(),
+			success : function(data2){
+				console.log(data2);
+				$("#searchDataArea2").html(data2);
+				$("#searchClientValue2").focus();
+				
+			}
+  		 });
+  		 
+  	 });
+    
 
 
-
+     </script>
 	
 
 	

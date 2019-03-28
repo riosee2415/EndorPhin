@@ -206,6 +206,16 @@ public class ClientController {
 		return "redirect:/clientview";
 	}
 	
+	@RequestMapping("/ClientSearchUseSlip")
+	public String ClientSearchUseSlip(@RequestParam("searchClientValue2")String searchClientValue2, Model model) {
+			
+			List<ClientVo> searchResultClient = clientService.getNameClient(searchClientValue2);
+			
+			model.addAttribute("searchResultClient", searchResultClient);
+		
+		return "slip/clientSearchAjaxHtml";
+	}
+	
 
 }
 

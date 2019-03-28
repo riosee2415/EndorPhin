@@ -35,16 +35,10 @@ public class DeptController {
 	public String deptList(Model model){
 		
 		List<DeptVo> deptList = deptService.getAllDept();
+		List<CompanyVo> companyList= companyService.getAllcompany();
+
 		model.addAttribute("deptList", deptList);
-		
-		return "deptList";
-	}
-	
-	@RequestMapping("/companyList")
-	public String companyList(Model model){
-		
-		List<CompanyVo> companyList = companyService.getAllcompany();
-		model.addAttribute("companyList ", companyList);
+		model.addAttribute("companyList", companyList);
 		
 		return "deptList";
 	}
@@ -73,16 +67,24 @@ public class DeptController {
 		deptVo.setDeptName(deptName);
 		deptVo.setUseStatus("1");
 		
-		logger.debug("-----======");
-		logger.debug("companyCode:{}",companyCode);
-		
 		int insertCnt = deptService.insertDept(deptVo);
+		
 		if(insertCnt > 0){
 			return "redirect:/deptList";
 		}else{
 			return "redirect:/deptList";
 		}
 	}
+	
+	@RequestMapping("/searchCompanyAjax")
+	public String searchCompany(@RequestParam("companyName")String companyName, Model model) {
+		
+		List<CompanyVo> companyList = companyService.serachCompany(companyName);
+		model.addAttribute("companyList", companyList);
+		
+		return "dept/companySearchAjax";
+	}
+	
 	
 	//중복체크 
 	@RequestMapping(path="/DupleDept", method=RequestMethod.POST)
@@ -125,6 +127,5 @@ public class DeptController {
 			return "redirect:/deptList";
 		}
 	}
-	
 	
 }

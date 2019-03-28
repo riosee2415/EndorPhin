@@ -18,7 +18,15 @@ public class SlipService implements ISlipService{
 
 	
 	
-	
+
+	/**
+	* Method : selectSlipPagingList
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param pageVo
+	* @return
+	* Method 설명 : 페이징처리를 위한 쿼리 실행
+	*/
 	@Override
 	public Map<String, Object> selectSlipPagingList(PageVo pageVo) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
@@ -27,6 +35,20 @@ public class SlipService implements ISlipService{
 		resultMap.put("slipCnt", slipDao.getSlipCount());
 		
 		return resultMap;
+	}
+
+
+
+	/**
+	* Method : getSlipCnt
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @return
+	* Method 설명 : 전표 수량 확인
+	*/
+	@Override
+	public int getSlipCnt() {
+		return slipDao.getSlipCount();
 	}
 
 	

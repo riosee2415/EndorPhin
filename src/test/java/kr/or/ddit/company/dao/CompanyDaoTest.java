@@ -19,7 +19,7 @@ public class CompanyDaoTest extends LogicConfig{
 	@Test
 	public void getAllcompanyTest() {
 		List<CompanyVo> allcompany = companyDao.getAllcompany();
-		assertEquals(1, allcompany.size());
+		assertEquals(3, allcompany.size());
 	}
 	
 	@Test

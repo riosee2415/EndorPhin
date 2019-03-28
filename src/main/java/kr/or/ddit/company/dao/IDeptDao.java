@@ -18,5 +18,6 @@ public interface IDeptDao {
 	DeptVo selectDept(String deptcode);
 	
 	int updateDept(DeptVo deptVo);
+	
 	   
 }

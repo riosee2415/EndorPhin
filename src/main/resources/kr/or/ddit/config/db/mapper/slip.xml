@@ -19,6 +19,7 @@
 		select
 		slipnumber, total, slipdate, departmentname, jukyo, status
 		from slip
+		order by slipnumber desc
 	</select>
 
 

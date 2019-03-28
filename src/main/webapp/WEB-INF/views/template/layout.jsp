@@ -40,9 +40,9 @@
 	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
 	crossorigin="anonymous"></script>
 	
-	<!-- DATE API -->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	
 
 <style>
 	
@@ -96,17 +96,22 @@
 	  <script src="/resources/vendor/datatables/dataTables.bootstrap4.js"></script>
 	  <!-- Custom scripts for all pages-->
 	  <script src="/resources/js/sb-admin.min.js"></script>
+	  
+	  
 	  <!-- Demo scripts for this page-->
-	  <script src="/resources/js/demo/datatables-demo.js"></script>
+<!-- 	  <script src="/resources/js/demo/datatables-demo.js"></script> -->
 	 
 	 
 	 <!-- 충돌방지 -->
+	 <!-- DATE API -->
+	 
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
 	<script type="text/javascript">
-		jQuery.noConflict();
-		var j$ = jQuery;
-		</script>
+		//jQuery.noConflict();
+		//var j$ = jQuery;
+	</script>
 		
-	<script type="text/javascript" src="./js/prototype.js"></script>
 		
 		
 		

@@ -10,7 +10,7 @@
 				<tr>
 					<td>게시판 이름</td>
 					<td>
-						<input type="text" name="boardTypeName"/>
+						<input type="text" name="boardTypeName_Insert"/>
 					</td>
 					<td>
 						<select name="useStatus">
@@ -31,7 +31,7 @@
 							<tr>
 								<td>게시판 이름</td>
 								<td>
-									<input type="text" name="boardTypeName" value="${board.boardTypeName }">
+									<input type="text" name="boardTypeName" value="${board.boardTypeName}">
 								</td>
 								<td>
 									<select name="useStatus">

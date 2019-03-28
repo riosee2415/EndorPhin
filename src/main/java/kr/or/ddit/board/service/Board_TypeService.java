@@ -44,9 +44,9 @@ public class Board_TypeService implements IBoard_TypeService{
 	* Method 설명 : 게시판 생성
 	 */
 	@Override
-	public int insertBoard(Board_TypeVo board_TypeVo) {
+	public int insertBoard(String boardTypeName) {
 		
-		int insertBoard = board_TypeDao.insertBoard(board_TypeVo);
+		int insertBoard = board_TypeDao.insertBoard(boardTypeName);
 		return insertBoard;
 	}
 
@@ -78,5 +78,20 @@ public class Board_TypeService implements IBoard_TypeService{
 	public int deleteBoard(String boardTypeCode) {
 		int deleteBoard = board_TypeDao.deleteBoard(boardTypeCode);
 		return deleteBoard;
+	}
+
+	/**
+	 * 
+	* Method : select_BoardType
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param board_name
+	* @return
+	* Method 설명 : 게시판 조회
+	 */
+	@Override
+	public Board_TypeVo select_BoardType(String board_name) {
+		Board_TypeVo select_BoardType = board_TypeDao.select_BoardType(board_name);
+		return select_BoardType;
 	}
 }

@@ -39,8 +39,8 @@ public class Board_TypeDao implements IBoard_TypeDao{
 	* Method 설명 : 게시판 생성
 	 */
 	@Override
-	public int insertBoard(Board_TypeVo board_TypeVo) {
-		int insertBoard = sqlSession.insert("board_type.boardInsert", board_TypeVo);
+	public int insertBoard(String boardTypeName) {
+		int insertBoard = sqlSession.insert("board_type.boardInsert", boardTypeName);
 		return insertBoard;
 	}
 
@@ -63,6 +63,21 @@ public class Board_TypeDao implements IBoard_TypeDao{
 	public int deleteBoard(String boardTypeCode) {
 		int deleteBoard = sqlSession.delete("board_type.boardDelete", boardTypeCode);
 		return deleteBoard;
+	}
+
+	/**
+	 * 
+	* Method : select_BoardName
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param board_name
+	* @return
+	* Method 설명 : 게시판 조회
+	 */
+	@Override
+	public Board_TypeVo select_BoardType(String board_name) {
+		Board_TypeVo select_BoardType = sqlSession.selectOne("board_type.boardUpdate", board_name);
+		return select_BoardType;
 	}
 
 	

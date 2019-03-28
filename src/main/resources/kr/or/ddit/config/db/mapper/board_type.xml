@@ -10,12 +10,19 @@
 			from board_type
 	</select>
 	
+	<!-- 게시판 조회 -->
+	<select id="select_BoardType" resultType="board_typeVo" parameterType="String">
+		select boardTypeCode, boardTypeName, useStatus
+		  from board_type
+		 where boardTypeName = #{boardTypeName}
+	</select>
+	
 	<!-- 게시판 생성 -->
-	<insert id="boardInsert" parameterType="board_typeVo">
+	<insert id="boardInsert" parameterType="String">
 		insert into board_type
 				(boardTypeCode, boardTypeName, useStatus)
 				
-				values (BOARDTYPECODE_SEQ.nextval, #{boardTypeName}, #{useStatus})
+				values (BOARDTYPECODE_SEQ.nextval, #{boardTypeName}, 1)
 	</insert>
 	
 	<!-- 게시판 수정 -->

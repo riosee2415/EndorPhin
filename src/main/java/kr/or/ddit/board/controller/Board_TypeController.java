@@ -26,10 +26,10 @@ public class Board_TypeController {
 		return "boardType";
 	}
 	@RequestMapping(path="/boardType", method=RequestMethod.POST)
-	public String boardType(Board_TypeVo board_TypeVo, @RequestParam("type")String type){
+	public String boardType(Board_TypeVo board_TypeVo, String boardTypeName, @RequestParam("type")String type){
 		
 		if(type.equals("create")){
-			board_TypeService.insertBoard(board_TypeVo);
+			board_TypeService.insertBoard(boardTypeName);
 			
 		}else if(type.equals("update")){
 			

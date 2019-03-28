@@ -36,7 +36,7 @@
           <h3 class="dropdown-header">기초정보</h3>
           <a class="dropdown-item" href="${pageContext.request.contextPath }/clientview">거래처등록</a>
           <a class="dropdown-item" href="${pageContext.request.contextPath }/cardsList">신용카드 등록</a>
-          <a class="dropdown-item" href="">계정과목 등록</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath }/establishview">계정과목 등록</a>
           <a class="dropdown-item" href="">부서등록</a>
            <h3 class="dropdown-header">전표관리</h3>
           <a class="dropdown-item" href="">미승인 전표</a>
@@ -100,8 +100,12 @@
           <span>그룹웨어</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-        <a class="dropdown-item" href="${pageContext.request.contextPath }/boardType">게시판</a>
-        
+        	<a class="dropdown-item" href="${pageContext.request.contextPath }/boardType">게시판 생성</a>
+        	<c:forEach var="board" items="${boardAllList}">
+        		<c:if test="${board.useStatus == '1'}">
+        			<a class="dropdown-item" href="<%= request.getContextPath()%>/postList?boardTypeCode=${ board.boardTypeCode }&boardTypeName=${board.boardTypeName }">${board.boardTypeName }</a>
+        		</c:if>
+        	</c:forEach>
         </div>
       </li>
       

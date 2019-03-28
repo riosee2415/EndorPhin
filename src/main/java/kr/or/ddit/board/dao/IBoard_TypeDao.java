@@ -16,6 +16,18 @@ public interface IBoard_TypeDao {
 	 */
 	List<Board_TypeVo> boardAllList();
 	
+	
+	/**
+	 * 
+	* Method : select_BoardName
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param board_name
+	* @return
+	* Method 설명 : 게시판 조회
+	 */
+	Board_TypeVo select_BoardType(String board_name);
+	
 	/**
 	 * 
 	* Method : insertBoard
@@ -25,7 +37,7 @@ public interface IBoard_TypeDao {
 	* @return
 	* Method 설명 : 게시판 생성
 	 */
-	int insertBoard(Board_TypeVo board_TypeVo);
+	int insertBoard(String boardTypeName);
 	
 	/**
 	 * 

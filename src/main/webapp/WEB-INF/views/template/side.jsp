@@ -4,7 +4,6 @@
 <div class="col-sm-3 col-md-2 sidebar">
           <br><br><br>
           <ul class="nav nav-sidebar">
-          <li>asdasd</li>
        		<c:forEach items="${boardAllList}" var="board" >
 	       			<c:if test="${board.useStatus == '1'}">
 				<li><a href="<%= request.getContextPath()%>/boardPage?boardTypeCode=${ board.boardTypeCode }">${board.boardTypeName } </a></li>

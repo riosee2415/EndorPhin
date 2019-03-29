@@ -1,5 +1,6 @@
 package kr.or.ddit.slip.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -91,10 +92,14 @@ public class SlipDao implements ISlipDao{
 	}
 
 
-
 	@Override
-	public List<SlipVo> getBetweenProd(SlipVo vo) {
-		return sqlSessionTemplate.selectList("slip.getBetweenProd",vo);
+	public List<SlipVo> getBetweenSlip(String pre_date, String post_date) {
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("pre_date", pre_date);
+		map.put("post_date", post_date);
+		
+ 		return  sqlSessionTemplate.selectList("slip.getBetweenSlip",map);
 	}
 
 }

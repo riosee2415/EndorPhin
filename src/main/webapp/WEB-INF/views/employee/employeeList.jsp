@@ -474,6 +474,7 @@ a:hover, a:focus {
 							</div>
 						</div>
 					</div>
+					</div>
 					</p>
 					<!-- 사원 모달창 수정하기 끝  -->
 

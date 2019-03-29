@@ -16,5 +16,13 @@ public interface IDeptService {
 	
 	int updateDept(DeptVo deptVo);
 	
+	List<DeptVo> serachDept_Both(String deptCode, String deptName);
+	
+	List<DeptVo> serachDept_code(String deptCode);
+	
+	List<DeptVo> serachDept_name(String deptName);
+	
+	int upateStatusDept(DeptVo deptVo);
+	
 
 }

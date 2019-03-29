@@ -39,7 +39,21 @@ public class DeptService implements IDeptService{
 	public int updateDept(DeptVo deptVo) {
 		return deptDao.updateDept(deptVo);
 	}
-
-	
+	@Override
+	public List<DeptVo> serachDept_Both(String deptCode, String deptName) {
+		return deptDao.serachDept_Both(deptCode, deptName);
+	}
+	@Override
+	public List<DeptVo> serachDept_code(String deptCode) {
+		return deptDao.serachDept_code(deptCode);
+	}
+	@Override
+	public List<DeptVo> serachDept_name(String deptName) {
+		return deptDao.serachDept_name(deptName);
+	}
+	@Override
+	public int upateStatusDept(DeptVo deptVo) {
+		return deptDao.upateStatusDept(deptVo);
+	}
 	
 }

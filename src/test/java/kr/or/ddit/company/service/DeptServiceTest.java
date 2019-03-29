@@ -51,6 +51,16 @@ public class DeptServiceTest extends LogicConfig{
 		assertEquals(1,updDept);
 		assertNotNull(updDept);
 	}
+	
+	@Test
+	public void useDeptTest() {
+		DeptVo vo = new DeptVo();
+		vo.setDeptCode("6");
+		vo.setUseStatus("0");
+		int updDept = deptService.upateStatusDept(vo);
+		assertEquals(1,updDept);
+		assertNotNull(updDept);
+	}
 	@Test
 	public void deleteDeptTest(){
 		int deleteDept = deptService.deleteDept("3");

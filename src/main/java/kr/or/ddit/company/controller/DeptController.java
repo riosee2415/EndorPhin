@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.or.ddit.company.model.CardsVo;
 import kr.or.ddit.company.model.CompanyVo;
 import kr.or.ddit.company.model.DeptVo;
 import kr.or.ddit.company.service.ICompanyService;
@@ -32,7 +33,7 @@ public class DeptController {
 	
 	
 	@RequestMapping("/deptList")
-	public String deptList(Model model){
+	public String deptList(Model model ){
 		
 		List<DeptVo> deptList = deptService.getAllDept();
 		List<CompanyVo> companyList= companyService.getAllcompany();
@@ -76,6 +77,7 @@ public class DeptController {
 		}
 	}
 	
+	//회사 이름 검색
 	@RequestMapping("/searchCompanyAjax")
 	public String searchCompany(@RequestParam("companyName")String companyName, Model model) {
 		
@@ -85,7 +87,34 @@ public class DeptController {
 		return "dept/companySearchAjax";
 	}
 	
+	// 부서 이름, 코드검색
+	@RequestMapping("/searchDept_BothAjax")
+	public String searchDept_BothAjax(@RequestParam("deptCode1") String deptCode,@RequestParam("deptName1")  String deptName,  Model model) {
 	
+		List<DeptVo> deptList = deptService.serachDept_Both(deptCode, deptName);
+		model.addAttribute("deptList", deptList);
+		
+		return "dept/searchDept_BothAjax";
+	}
+	
+	@RequestMapping("/searchDept_codeAjax")
+	public String searchDept_codeAjax(@RequestParam("deptCode1")String deptCode, Model model) {
+		
+		List<DeptVo> deptList = deptService.serachDept_code(deptCode);
+		model.addAttribute("deptList", deptList);
+		
+		return "dept/searchDept_codeAjax";
+	}
+	
+	@RequestMapping("/searchDept_NameAjax")
+	public String searchDept_NameAjax(@RequestParam("deptName1")String deptName, Model model) {
+		
+		List<DeptVo> deptList = deptService.serachDept_name(deptName);
+		model.addAttribute("deptList", deptList);
+		
+		return "dept/searchDept_NameAjax";
+	}
+
 	//중복체크 
 	@RequestMapping(path="/DupleDept", method=RequestMethod.POST)
 	@ResponseBody
@@ -127,5 +156,27 @@ public class DeptController {
 			return "redirect:/deptList";
 		}
 	}
+	
+	//사용, 미사용 여부 
+		@RequestMapping(path="/useDept", method=RequestMethod.GET)
+		public String useDept(DeptVo deptVo, Model model, @RequestParam("frm_usestatus") String frm_usestatus
+														 ,@RequestParam("frm_deptCode") String frm_deptCode){
+			
+			deptVo.setDeptCode(frm_deptCode);
+			deptVo.setUseStatus(frm_usestatus);
+			
+			logger.debug("======================");
+			logger.debug("frm_deptCode : {}" , frm_deptCode);
+			logger.debug("use_status : {}" ,frm_usestatus);
+			
+			int update = deptService.upateStatusDept(deptVo);
+			
+			if(update > 0){
+				return "redirect:/deptList";
+			}
+			else{
+				return "redirect:/deptList";
+			}
+		}
 	
 }

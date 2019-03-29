@@ -158,11 +158,6 @@ public class CardsController {
 		cardVo.setStatus(use_status);
 		int update = cardsService.upateStatusCards(cardVo);
 		
-		logger.debug("======================");
-		logger.debug("cardVo : {}" , cardVo);
-		logger.debug("use_status : {}" ,use_status);
-		
-		
 		if(update > 0){
 			return "redirect:/cardsList";
 		}

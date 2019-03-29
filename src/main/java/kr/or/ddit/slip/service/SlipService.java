@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import kr.or.ddit.slip.dao.ISlipDao;
+import kr.or.ddit.slip.model.SlipVo;
 import kr.or.ddit.util.model.PageVo;
 
 @Service("slipService")
@@ -51,6 +52,47 @@ public class SlipService implements ISlipService{
 		return slipDao.getSlipCount();
 	}
 
+
+	
+	
+	/**
+	* Method : insertSlip
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param slipVo
+	* @return
+	* Method 설명 : 전표 추가 메서드
+	*/
+	@Override
+	public int insertSlip(SlipVo slipVo) {
+		return slipDao.insertSlip(slipVo);
+				
+	}
+
+
+
+	@Override
+	public String currvalSeq() {
+		return slipDao.currvalSeq();
+	}
+
+
+	/**
+	* Method : deleteSlip
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param slipNumber
+	* @return
+	* Method 설명 : 전표 삭제
+	*/
+	@Override
+	public int deleteSlip(String slipNumber) {
+		return slipDao.deleteSlip(slipNumber);
+	}
+	
+	
+
+	
 	
 	
 	

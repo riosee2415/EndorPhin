@@ -47,4 +47,42 @@ public class SlipDao implements ISlipDao{
 		return sqlSessionTemplate.selectList("slip.selectSlipPagingList", pageVo);
 	}
 
+
+
+	/**
+	* Method : insertSlip
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param slipVo
+	* @return
+	* Method 설명 : 전표 추가 메서드
+	*/
+	@Override
+	public int insertSlip(SlipVo slipVo) {
+		return sqlSessionTemplate.insert("slip.insertSlip",slipVo);
+	}
+
+
+
+	@Override
+	public String currvalSeq() {
+		return sqlSessionTemplate.selectOne("slip.currvalSeq");
+	}
+
+
+	/**
+	* Method : deleteSlip
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param slipNumber
+	* @return
+	* Method 설명 : 전표 삭제
+	*/
+	@Override
+	public int deleteSlip(String slipNumber) {
+		return sqlSessionTemplate.delete("slip.deleteSlip", slipNumber);
+	}
+	
+	
+
 }

@@ -30,7 +30,7 @@
 <script>
 	
 	$(".establishTr").on("click", function(){
-		var establishData = $(this).data().escode + "(" +  $(this).data().esname + ")";
+		var establishData = $(this).data().escode + "_" +  $(this).data().esname ;
 		
 		$("#searchEstablishValue").val(establishData);
 		$("#selectEstablishValue").val(establishData);

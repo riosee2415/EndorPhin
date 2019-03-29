@@ -9,9 +9,15 @@
 		insert into slip
 		(slipnumber, total, slipdate, departmentname, jukyo, status)
 		values
-		(#{slipnumber},#{total},sysdate,#{departmentname},#{jukyo},#{status})
+		(client_seq.nextval,#{total},sysdate,#{departmentName},#{jukyo},#{status})
 
 	</insert>
+	
+	<!-- 시퀀스 값 불러오기 -->
+	<select id="currvalSeq" resultType="String">
+		select client_seq.currval 
+		from dual
+	</select>
 
 
 	<!-- 일반전표 전체 불러오기 -->
@@ -36,7 +42,7 @@
 	<!-- 일반전표 삭제 -->
 	<delete id="deleteSlip" parameterType="String">
 		delete from slip
-		where slipnumber = #{slipnumber}
+		where slipnumber = #{slipNumber}
 	</delete>
 	
 	<!-- 전체 전표 수 조회 -->

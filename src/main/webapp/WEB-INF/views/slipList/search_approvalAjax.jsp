@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:forEach items="${slipList }" var="vo">	
+<c:forEach items="${dateList }" var="vo">	
 	<c:if test="${vo.status == 1}"> 
 	  <tr>
 		<td><input type="checkbox" name="checkRow" value=${vo.slipNumber }></td>

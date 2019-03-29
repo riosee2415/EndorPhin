@@ -128,10 +128,11 @@
        		data 	: "before_slipDate=" + $("#before_slipDate").val() +  "&" + "after_slipDate=" + $("#after_slipDate").val(),
        		success : function(data){
        			var htmlArr = data.split("================seperator================");
+       			console.log('data', data);
        			htmlArr[0].trim();
        			//$("#deptListTbody").empty();
        			$("#deptListTbody").children().remove();
-       			console.log('htmlArr[0]'+ htmlArr[0]);
+       			console.log('htmlArr[0]', htmlArr[0]);
        			$("#deptListTbody").html(htmlArr[0]);
        			
        		/* 	alert("before_slipDate=" + $("#before_slipDate").val() +  "&" + "after_slipDate=" + $("#after_slipDate").val());

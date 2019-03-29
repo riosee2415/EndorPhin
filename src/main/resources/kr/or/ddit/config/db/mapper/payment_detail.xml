@@ -12,7 +12,7 @@
 		values
 		(#{payDetailCode},#{deductCode},#{payCode},
 		nvl(#{deductPay, jdbcType=VARCHAR},null),
-		#{useStatus})
+		nvl(#{useStatus, jdbcType=VARCHAR},null)
 
 	</insert>
 
@@ -42,12 +42,17 @@
 	</delete>
 
 	<!-- 급여/공제 구분하여 가져오기 -->
-	<select id="selectPayment_detailStatus" resultType="payment_detailVo"
+	<select id="selectPayment_detailPaycode" resultType="payment_detailVo"
 		parameterType="map">
 		select
-		paydetailcode, deductcode, paycode, deductpay, usestatus
+		paydetailcode, pd.deductcode, pd.paycode, deductpay, pd.usestatus,dpd.deprostatus
+		,to_char(p.payday,'yyyy-MM-dd') payday
 		from
-		payment_detail where usestatus = #{useStatus}
+		payment_detail pd, de_product_div dpd,payment p
+        where pd.deductcode=dpd.deductcode
+        and p.paycode=pd.paycode
+        and pd.paycode=#{paycode}
+        and pd.usestatus=1
 	</select>
 	
 

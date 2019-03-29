@@ -4,11 +4,17 @@
 
 <!--테이블 리스트출력  -->
 	<h2>부서 등록</h2>	
+	
+<!-- 	
+	<input type="button" id="testBtn" value="test"/>
+	<div id="test111"></div>
+	 -->
+	
 	<br>
 	<br>
 	부서코드 &nbsp <input name="deptCode1" id="deptCode1" type="text" />
 	&nbsp 부서명 &nbsp<input name="deptName1" id="deptName1" type="text" />
-	&nbsp<input type="button" id="seachBtn" value="검색" onclick="seachBtn()" /><br>
+	&nbsp<input type="button" id="seachBtn" value="검색" /><br>
 	<br>
 	<div class="form-group">
 	<div class="table-responsive">
@@ -64,7 +70,7 @@
 		<div class="modal-dialog modal-80size modal-center" role="document" >
 			<div class="modal-content modal-80size">
 				<div class="modal-header">
-				<label>부서등록</label>
+				<label>| 부서등록</label>
 					<button type="button" class="close" data-dismiss="modal"aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -103,6 +109,7 @@
    		<div class="modal-dialog">
    			 <div class="modal-content"> 
 	   			<div class="modal-header"> 
+	   				<label>| 부서등록</label>
 	   				<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -124,13 +131,12 @@
 	   					<input type="button" data-toggle="modal" data-target="#my80sizeModal2" value="검색" >
 	   				</div>
 	   			<div class="modal-footer">
-	   				<c:if test="${useStatus == 0}">
-						<button id="yes_Btn" name="yes_Btn" class="btn btn-default" data-dismiss="modal" value="1"  style="background: #486068; color: #ffffff">사용</button>
-					</c:if>	
-					<c:if test="${useStatus == 1}">
-						<button id="no_btn" name="no_btn"  class="btn btn-default" data-dismiss="modal" value="0" style="background: #ff8e77; color: #ffffff">미사용</button>
-					</c:if>	
+	   			
+					<button id="yes_Btn" name="yes_Btn" class="btn btn-default" data-dismiss="modal"  value="1" style="background: #486068; color: #ffffff"></button>
+	   				<!-- <input type="hidden" id="no_Btn" name="no_Btn" class="btn btn-default" data-dismiss="modal" value="0" style="background: #ff8e77; color: #ffffff"> -->
+	   				
 	   				<button type="button" id="modalUpdateBtn" class="btn btn-default" data-dismiss="modal" >수정</button>
+	   			
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
    				</div> 
    			</div> 
@@ -195,13 +201,16 @@
 		<input type="hidden" id="frmdeptName1" name="frmdeptName1" />
 		<input type="hidden" id="frmcompanyCode1" name="frmcompanyCode1" />
 	</form>
-	
 
  	<form id="del_frm" action="${pageContext.request.contextPath }/deleteDept">
  		<input type="hidden" id="checkRow" name="checkRow">
  	</form>		
+ 	
+ 	<form id="useFrm" action="${pageConext.request.contextPath }/useDept">
+		<input type="hidden"  id="frm_usestatus" name="frm_usestatus">
+		<input type="hidden"  id="frm_deptCode" name="frm_deptCode" >
+	</form>
     <!---------------------------------------------->
-	
 	<script>
     /* 등록  */
 	$("#insertBtn").on("click", function(){
@@ -252,16 +261,54 @@
 			$("#upd_deptCode").val($(this).data().upd_deptcode);
 			$("#upd_deptName").val($(this).data().upd_deptname);
 			$("#upd_companyCode").val($(this).data().upd_companycode);
-			$("#upd_useStatus").val($(this).data().upd_usestatus);
-		
+			
+			if($(this).data().upd_usestatus==1){
+				$("#yes_Btn").html("미사용");
+				
+			}
+			else if($(this).data().upd_usestatus==0){
+				$("#yes_Btn").html("사용");
+				$("#yes_btn").attr("style","background: #ff8e77; color: #ffffff");
+			}
+			
 		});
-		 
+		/* function useClick(){
+			
+			var deptcode = $("#upd_deptCode").val();
+			var target = document.querySelector('#yes_Btn');
+			if($("#yes_Btn").value == '1'){
+				target.value="1";
+			}else{
+				target.value = "0"
+			}
+			
+			$("#frm_deptCode").val(deptcode);
+			$("#frm_usestatus").val(target);
+			
+			$("#useFrm").submit();
+		} */
+		/*사용여부 수정  */
+		 $("#yes_Btn").on("click", function(){
+	
+			var deptcode = $("#upd_deptCode").val();
+			var status 	 = $("#yes_Btn").val();
+			
+			alert(deptcode);
+			alert($("#yes_Btn").val());
+	
+			$("#frm_deptCode").val(deptcode);
+			$("#frm_usestatus").val(status);
+			
+			$("#useFrm").submit();
+		});  
+		
 		/* 수정 */
 		$("#modalUpdateBtn").on("click", function(){ 
 			
 			var deptcode  	    = $("#upd_deptCode").val();
 			var deptName  	    = $("#upd_deptName").val();
 			var companyCode		= $("#upd_companyCode").val();
+			
 			
 			$("#frmdeptCode1").val(deptcode);
 			$("#frmdeptName1").val(deptName);
@@ -282,12 +329,13 @@
  		$("#updateFrm").submit();
     });
 });	
+	
     /*회사이름 검색  */
  	$("#searchC_Btn").on("click", function(){
  		if($("#companyName").val().trim()==""){
  			alert("회사명을 입력하세요.");
  			$("companyName").focus();
- 			return flase;
+ 			return false;
  		}
 		$.ajax({
     		url 	: "${pageContext.request.contextPath }/searchCompanyAjax",
@@ -299,11 +347,51 @@
     		}
     	});
     }); 
- 	/*  function seachBtn(){
- 		
- 	}  */
-	
-    /* 카드코드 중복체크 ajax */
+    
+    
+    
+ 	/* 카드 코드,이름 검색 */  
+    	
+     	$("#seachBtn").on("click", function(){
+     		if($("#deptCode1").val().trim() != "" || $("#deptName1").val().trim() !=""){
+    	 	$.ajax({
+        		url 	: "${pageContext.request.contextPath }/searchDept_BothAjax",
+        		data 	: "deptCode1=" + $("#deptCode1").val() +  "&" + "deptName1=" + $("#deptName1").val(),
+        		success : function(data){
+        			$("#deptCode1").val("");
+        			$("#deptName1").val("");
+    				$("#deptListTbody").html(data);
+        			
+        		}
+        	});
+    	 	}else if($("#deptCode1").val().trim() != "" || $("#deptName1").val().trim() == ""){
+    	 		
+    		$.ajax({
+        		url 	: "${pageContext.request.contextPath }/searchDept_codeAjax",
+        		data 	: "deptCode1=" + $("#deptCode1").val(),
+        		success : function(data){
+        			$("#deptCode1").val("");
+    				$("#deptListTbody").html(data);
+        			
+        		}
+        	});
+    		 
+    	 	}else if($("#deptCode1").val().trim() == "" || $("#deptName1").val().trim() != ""){
+    		$.ajax({
+        		url 	: "${pageContext.request.contextPath }/searchDept_NameAjax",
+        		data 	: "deptName1=" + $("#deptName1").val(),
+        		success : function(data){
+        			$("#deptName1").val("");
+    				$("#deptListTbody").html(data);
+        			
+        		}
+        	});
+    	 }
+	}); 
+        
+    
+ 	
+ 	/* 카드코드 중복체크 ajax */
 	    $("#duplCheckbtn").on("click", function(){
     	
     	$.ajax({
@@ -314,6 +402,7 @@
     			transDupl(dupleCode);
     		}
     	});
+    
     }); 
     
 		var dupleCode ="";
@@ -363,6 +452,7 @@
 			}
  				$("#del_frm").submit();
 		}
+    
 
 	
 	</script>

@@ -39,9 +39,7 @@ var modalAddCheck = false;
 					$(".dialog_deductCode").html(data.deductCode);
 					$("#dialog_deductName").val(data.deductName);
 					$("#dialogEstablishCode").val(data.establishcode);
-					if(data.useStatus==null){
-						$("#dialog_useStatus").val("");
-					}
+					$("#dialog_useStatus").val(data.useStatus);
 				}
 			});
 			e.stopPropagation()

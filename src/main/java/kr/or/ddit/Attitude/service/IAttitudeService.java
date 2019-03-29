@@ -1,14 +1,13 @@
-package kr.or.ddit.Attitude.dao;
+package kr.or.ddit.Attitude.service;
 
 import java.util.List;
 
 import kr.or.ddit.Attitude.model.AttitudeVo;
-import kr.or.ddit.employee.model.EmployeeVo;
 
-public interface IAttitudeDao {
+public interface IAttitudeService {
 	
 	/**
-	* Method : getAllEmployee
+	* Method : getAllAttitude
 	* 작성자 : leemjaewoo
 	* 변경이력 :
 	* @return
@@ -18,7 +17,7 @@ public interface IAttitudeDao {
 	
 	
 	/**
-	* Method : insertEmployee
+	* Method : insertAttitude
 	* 작성자 : leemjaewoo
 	* 변경이력 :
 	* @param vo
@@ -28,10 +27,8 @@ public interface IAttitudeDao {
 	int insertAttitude(AttitudeVo vo);
 	
 	
-	
-	
 	/**
-	* Method : deleteEmployee
+	* Method : deleteAttitude
 	* 작성자 : leemjaewoo
 	* 변경이력 :
 	* @param userId
@@ -44,7 +41,7 @@ public interface IAttitudeDao {
 	
 	
 	/**
-	* Method : updateEmployee
+	* Method : updateAttitude
 	* 작성자 : leemjaewoo
 	* 변경이력 :
 	* @param employeeVo
@@ -56,7 +53,7 @@ public interface IAttitudeDao {
 	
 	
 	/**
-	* Method : SearchEmployee
+	* Method : SearchAttitude
 	* 작성자 : leemjaewoo
 	* 변경이력 :
 	* @param userId
@@ -64,6 +61,7 @@ public interface IAttitudeDao {
 	* Method 설명 : 근태항목 검색
 	*/
 	public List<AttitudeVo> SearchAttitude(AttitudeVo code);
+	
 	
 	
 	/**
@@ -93,5 +91,11 @@ public interface IAttitudeDao {
 	
 	
 	
-
+	
+	
+	
+	
+	
+	
+	
 }

@@ -1,6 +1,8 @@
 package kr.or.ddit.payment.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import kr.or.ddit.employee.model.EmployeeVo;
 import kr.or.ddit.payment.model.De_product_divVo;
 import kr.or.ddit.payment.model.PaymentVo;
 import kr.or.ddit.payment.model.Payment_detailVo;
+import kr.or.ddit.payment.model.Payment4UpdVo;
 import kr.or.ddit.payment.service.IDe_Product_divService;
 import kr.or.ddit.payment.service.IPaymentService;
 import kr.or.ddit.payment.service.IPayment_DetailService;
@@ -43,12 +46,18 @@ public class PaymentController {
 		return "paymentView";
 	}
 	
-	@RequestMapping(path="/addPayment")
-	public String addPayment(HttpSession session,Model model){
-		EmployeeVo employeeVo = (EmployeeVo) session.getAttribute("employeeVo");
-		List<PaymentVo> payment_u = paymentService.getPayment_u(employeeVo.getUserId());
-		model.addAttribute("paymentList",payment_u);
-		return "addPaymentView";
+	@RequestMapping(path="/insertAndUpdatePayment",produces={"application/json"})
+	@ResponseBody
+	public Map<String, Object> insertAndUpdatePayment(@RequestBody Payment4UpdVo testVo){
+		paymentService.updateAndInsertPayment(testVo);
+		return getPaymentList(testVo.getUserid());
+	}
+	
+	@RequestMapping(path="/getPaymentList",method=RequestMethod.GET, produces = { "application/json" })
+	@ResponseBody
+	public Map<String, Object> getPaymentList(String userid){
+		Map<String, Object> deNmPayList = payment_detailService.getDeNmPayList(userid);
+		return deNmPayList;
 	}
 	
 	@RequestMapping(path="/addProduct",method=RequestMethod.GET)
@@ -61,7 +70,6 @@ public class PaymentController {
 			de_product_divVo.setDeductName(searchDeductName);
 			List<De_product_divVo> selectDeproductByNm = de_product_divService.selectDeproductByNm(de_product_divVo);
 			model.addAttribute("allDe_product_div",selectDeproductByNm);
-			
 		}
 		return "addProductView";
 	}
@@ -126,7 +134,6 @@ public class PaymentController {
 	@RequestMapping(path="/updDeduct",method=RequestMethod.GET)
 	public String updDeduct(De_product_divVo selectDe_product_div){
 		de_product_divService.updateDe_product_div(selectDe_product_div);
-		logger.debug("selectDe_product_div:{}",selectDe_product_div);
 		if(selectDe_product_div.getDeprostatus().equals("1")){
 			return "redirect:/addProduct";
 		}
@@ -146,6 +153,7 @@ public class PaymentController {
 		model.addAttribute("paymentList",paymentList);
 		return "addPaymentView";
 	}
+	
 	
 	
 }

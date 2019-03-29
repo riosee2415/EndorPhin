@@ -2,6 +2,7 @@ package kr.or.ddit.payment.service;
 
 import java.util.List;
 
+import kr.or.ddit.payment.model.Payment4UpdVo;
 import kr.or.ddit.payment.model.PaymentVo;
 
 public interface IPaymentService {
@@ -12,4 +13,5 @@ public interface IPaymentService {
 	int deletePayment(String paycode);
 	List<PaymentVo> getPaymentList();
 	List<PaymentVo> getPaymentListByUserNm(String usernm);
+	void updateAndInsertPayment(Payment4UpdVo payment4UpdVo);
 }

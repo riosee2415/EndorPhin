@@ -16,6 +16,16 @@ public class PaymentVo {
 	String relate;
 	String payDay;
 	String positionname; // 직급명
+	
+	public PaymentVo() {
+	}
+
+	// 입력을 위한 생성자
+	public PaymentVo(String userId, String payDay) {
+		this.userId = userId;
+		this.payDay = payDay;
+	}
+	
 	public String getPositionname() {
 		return positionname;
 	}
@@ -79,6 +89,12 @@ public class PaymentVo {
 	}
 	public void setPayDay(String payDay) {
 		this.payDay = payDay;
+	}
+	@Override
+	public String toString() {
+		return "PaymentVo [payCode=" + payCode + ", userId=" + userId + ", totalWage=" + totalWage + ", totalSalary="
+				+ totalSalary + ", relate=" + relate + ", payDay=" + payDay + ", positionname=" + positionname
+				+ ", usernm=" + usernm + ", deptname=" + deptname + ", joincompany=" + joincompany + "]";
 	}
 	
 	

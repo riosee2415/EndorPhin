@@ -1,5 +1,6 @@
 package kr.or.ddit.company.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -40,4 +41,34 @@ public class DeptDao implements IDeptDao{
 		return sqlSessionTemplate.update("dept.updateDept",deptVo);
 	}
 
+	@Override
+	public List<DeptVo> serachDept_Both(String deptCode, String deptName) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("deptCode", deptCode);
+		map.put("deptName", deptName);
+		return sqlSessionTemplate.selectList("dept.serachDept_Both", map);
+	}
+
+	@Override
+	public List<DeptVo> serachDept_code(String deptCode) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("deptCode", deptCode);
+		
+		return sqlSessionTemplate.selectList("dept.serachDept_code", map);
+	}
+
+	@Override
+	public List<DeptVo> serachDept_name(String deptName) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("deptName", deptName);
+		
+		return sqlSessionTemplate.selectList("dept.serachDept_name", map);
+	}
+
+	@Override
+	public int upateStatusDept(DeptVo deptVo) {
+		return sqlSessionTemplate.update("dept.upateStatusDept", deptVo);
+	}
+
+	
 }

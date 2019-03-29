@@ -3,6 +3,7 @@ package kr.or.ddit.payment.service;
 import static org.junit.Assert.*;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -44,8 +45,14 @@ public class Payment_detailServiceTest extends LogicConfig{
 	}
 	@Test
 	public void selectPayment_detailStatusTest() {
-		List<Payment_detailVo> selectPayment_detailStatus = payment_detailService.selectPayment_detailStatus("1");
+		List<Payment_detailVo> selectPayment_detailStatus = payment_detailService.selectPayment_detailPaycode("1");
 		assertTrue(selectPayment_detailStatus.size()>0);
+	}
+	@Test
+	public void getDeNmPayListTest() {
+		Map<String, Object> deNmPayList = payment_detailService.getDeNmPayList("1");
+		
+		assertTrue(deNmPayList.size()>0);
 	}
 
 }

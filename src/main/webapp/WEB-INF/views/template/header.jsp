@@ -67,7 +67,7 @@
           <a class="dropdown-item" href="">급여명세서</a>
           <a class="dropdown-item" href="">급여명세서 인쇄/발송</a>
             <h3 class="dropdown-header">근태관리</h3>
-          <a class="dropdown-item" href="">근태항목등록</a>
+          <a class="dropdown-item" href="${cp }/attitude/getAllAttitude">근태항목등록</a>
           <a class="dropdown-item" href="">휴가일 수 등록</a>
           <a class="dropdown-item" href="">근태 입력</a>
         </div>

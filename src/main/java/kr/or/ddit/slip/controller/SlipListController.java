@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.ddit.slip.model.SlipVo;
 import kr.or.ddit.slip.service.ISlipService;
@@ -89,6 +90,7 @@ public class SlipListController {
 		
 		List<SlipVo> dateList = slipService.getBetweenSlip(before_slipDate,after_slipDate);
 		model.addAttribute("dateList ", dateList);
+		logger.debug("dateList.size {}",dateList.size());
 		
 		model.addAllAttributes(resultMap);
 		model.addAttribute("pageSize", pageVo.getPageSize());
@@ -97,6 +99,7 @@ public class SlipListController {
 		
 		logger.debug("before_slipDate:{}",before_slipDate);
 		logger.debug("after_slipDate:{}",after_slipDate);
+		logger.debug("dateList:{}",dateList);
 		
 		return "slipList/search_approvalAjax";
 	}

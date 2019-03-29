@@ -35,7 +35,6 @@ public class SlipService implements ISlipService{
 		
 		resultMap.put("slipList", slipDao.selectSlipPagingList(pageVo));
 		resultMap.put("slipCnt", slipDao.getSlipCount());
-		
 		return resultMap;
 	}
 

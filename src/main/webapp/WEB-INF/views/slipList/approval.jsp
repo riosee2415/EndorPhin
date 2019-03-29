@@ -16,7 +16,7 @@
 			<thead class="thead">
 				<tr>
 					<th><input type="checkbox" name="allCheck" id="th_allCheck" onclick="allCheck();"></th>
-					<th>전표번호</th>
+					<th>전표번호1</th>
 					<th>전표일자</th>
 					<th>적요</th>
 					<th>전표금액</th>
@@ -127,21 +127,26 @@
        		url 	: "${pageContext.request.contextPath }/searchAjax",
        		data 	: "before_slipDate=" + $("#before_slipDate").val() +  "&" + "after_slipDate=" + $("#after_slipDate").val(),
        		success : function(data){
-       			
        			var htmlArr = data.split("================seperator================");
+       			htmlArr[0].trim();
+       			//$("#deptListTbody").empty();
+       			$("#deptListTbody").children().remove();
+       			console.log('htmlArr[0]'+ htmlArr[0]);
+       			$("#deptListTbody").html(htmlArr[0]);
        			
-       			alert("before_slipDate=" + $("#before_slipDate").val() +  "&" + "after_slipDate=" + $("#after_slipDate").val());
+       		/* 	alert("before_slipDate=" + $("#before_slipDate").val() +  "&" + "after_slipDate=" + $("#after_slipDate").val());
        			$("#before_slipDate").val("");
        			$("#after_slipDate").val("");
    				$("#deptListTbody").html(data);
    				$("#deptListTbody").html(htmlArr[0]);
- 				$("#pagination").html(htmlArr[1]);
+ 				$("#pagination").html(htmlArr[1]); */
        			
        		}
        	});
 	
 	});
  	$("document").ready(function(){
+ 		console.log('최초실행');
  		approvalPageList(1);
  	});
  	function approvalPageList(page){
@@ -150,7 +155,7 @@
  			url : "${pageContext.request.contextPath }/approvalPageList",
  			data : "page=" + page,
  			success : function(data){
- 				
+ 				console.log('ajax호출');
  				var htmlArr = data.split("================seperator================");
  				
  				$("#deptListTbody").html(htmlArr[0]);

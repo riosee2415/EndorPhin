@@ -13,8 +13,6 @@ import kr.or.ddit.util.model.PageVo;
 @Repository("slipDao")
 public class SlipDao implements ISlipDao{
 
-	
-
 	@Resource(name="sqlSessionTemplate")
     private SqlSessionTemplate sqlSessionTemplate;
 	
@@ -45,6 +43,17 @@ public class SlipDao implements ISlipDao{
 	@Override
 	public List<SlipVo> selectSlipPagingList(PageVo pageVo) {
 		return sqlSessionTemplate.selectList("slip.selectSlipPagingList", pageVo);
+	}
+
+
+	@Override
+	public int updateSlip(String status) {
+		return sqlSessionTemplate.update("slip.updateSlip", status);
+	}
+
+	@Override
+	public int updateSlip_paaprovuar(String status) {
+		return sqlSessionTemplate.update("slip.updateSlip_paaprovuar", status);
 	}
 
 }

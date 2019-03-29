@@ -27,6 +27,8 @@ public interface ISlipDao {
 	*/
 	public List<SlipVo> selectSlipPagingList(PageVo pageVo);
 	
+	public int updateSlip(String status);
 	
+	public int updateSlip_paaprovuar(String status);
 
 }

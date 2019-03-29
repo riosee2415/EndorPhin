@@ -18,14 +18,16 @@
         <definition name="clientview" extends="layout">
         	<put-attribute name="content" value="/WEB-INF/views/client/clientview.jsp"/>
         </definition>
-        
-		<definition name="cardsDetail" extends="layout">
+
+		 <!--카드등록  -->       
+		<definition name="cardsDetail" extends="layout">  
         	<put-attribute name="content" value="/WEB-INF/views/company/cardsDetail.jsp"/>
         </definition>
         
          <definition name="cardsList" extends="layout">
         	<put-attribute name="content" value="/WEB-INF/views/company/cardsList.jsp"/>
         </definition>
+        <!--  -->
         
         <definition name="addPaymentView" extends="layout">
         	<put-attribute name="content" value="/WEB-INF/views/employee/paymentList.jsp"/>
@@ -62,13 +64,18 @@
         	<put-attribute name="content" value="/WEB-INF/views/establish/establishview.jsp"/>
         </definition>
         
-        <definition name="deptList" extends="layout">
+        <definition name="deptList" extends="layout"><!--부서등록  -->
         	<put-attribute name="content" value="/WEB-INF/views/dept/deptList.jsp"/>
         </definition>
         
         <definition name="slipview" extends="layout">
         	<put-attribute name="content" value="/WEB-INF/views/slip/slipview.jsp"/>
         </definition>
+        
+        <definition name="approval" extends="layout"> <!--승인전표 -->
+        	<put-attribute name="content" value="/WEB-INF/views/slipList/approval.jsp"/>
+        </definition>
+        
         
         
          <definition name="testTiles" extends="layout">

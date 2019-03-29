@@ -42,7 +42,7 @@
 	<!-- 전체 전표 수 조회 -->
 	<select id="getSlipCnt" resultType="Integer">
 		select count(*)
- 		  from SLIP
+ 		  from slip
 	</select>
 	
 	
@@ -54,11 +54,25 @@
 				 from
 					 (select slip.*
 						from slip
-					  order by SLIPNUMBER) a ) a
+					  order by slipNumber) a ) a
 		 where rn between (#{page}-1)*#{pageSize}+1 and #{page}*#{pageSize}
 	</select>
-
-
+	
+	<!--승인-> 미사용으로 변경 -->
+	<update id="updateSlip" parameterType="String">
+	update slip 
+			set status= '0' 
+		where slipNumber=#{slipNumber}
+	</update>
+	
+	<!--미사용-> 승인으로 변경  -->
+	<update id="updateSlip_paaprovuar" parameterType="String">
+	update slip 
+			set status= '1' 
+		where slipNumber=#{slipNumber}
+	</update>
+	
+	
 </mapper>
 
 

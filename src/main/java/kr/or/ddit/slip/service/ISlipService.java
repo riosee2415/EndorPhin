@@ -2,6 +2,7 @@ package kr.or.ddit.slip.service;
 
 import java.util.Map;
 
+import kr.or.ddit.slip.model.SlipVo;
 import kr.or.ddit.util.model.PageVo;
 
 public interface ISlipService {
@@ -27,5 +28,8 @@ public interface ISlipService {
 	*/
 	public int getSlipCnt();
 	
+	public int updateSlip(String arrIdx);
 	
+	public int updateSlip_paaprovuar(String status);
+
 }

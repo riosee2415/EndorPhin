@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import kr.or.ddit.slip.dao.ISlipDao;
+import kr.or.ddit.slip.model.SlipVo;
 import kr.or.ddit.util.model.PageVo;
 
 @Service("slipService")
@@ -51,9 +52,14 @@ public class SlipService implements ISlipService{
 		return slipDao.getSlipCount();
 	}
 
-	
-	
-	
-	
+	@Override
+	public int updateSlip(String status) {
+		return slipDao.updateSlip(status);
+	}
+
+	@Override
+	public int updateSlip_paaprovuar(String status) {
+		return slipDao.updateSlip_paaprovuar(status);
+	}
 
 }

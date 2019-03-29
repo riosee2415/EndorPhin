@@ -90,6 +90,24 @@
         	<put-attribute name="content" value="/WEB-INF/views/attitude/attitudeList.jsp"/>
         </definition>
         
+         <definition name="boardType" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/board/boardType.jsp"/>
+        </definition>
+        
+        <definition name="boardDetail" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/board/boardDetail.jsp"/>
+        </definition>
+        
+        <definition name="postInsert" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/board/postInsert.jsp"/>
+        </definition>
+        
+         <definition name="postList" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/board/postList.jsp"/>
+        </definition>
+        
+        
+        
         
         
         

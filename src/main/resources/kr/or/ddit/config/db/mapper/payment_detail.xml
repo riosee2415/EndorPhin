@@ -12,7 +12,7 @@
 		values
 		(#{payDetailCode},#{deductCode},#{payCode},
 		nvl(#{deductPay, jdbcType=VARCHAR},null),
-		#{useStatus})
+		nvl(#{useStatus, jdbcType=VARCHAR},null)
 
 	</insert>
 

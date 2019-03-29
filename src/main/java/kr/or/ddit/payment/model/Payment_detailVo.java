@@ -12,6 +12,8 @@ public class Payment_detailVo {
 	String deductPay;
 	String useStatus;
 	
+	public Payment_detailVo() {
+	}
 	public String getPayDetailCode() {
 		return payDetailCode;
 	}

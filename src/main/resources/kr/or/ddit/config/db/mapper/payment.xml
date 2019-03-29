@@ -9,18 +9,18 @@
 		insert into payment
 		(paycode, userid, totalwage, totalsalary, relate, payday)
 		values
-		(#{payCode},#{userId}
+		((select max(paycode)+1 from payment),#{userId}
 		,nvl((select sum(deductpay)
 							from payment_detail pd, de_product_div dpd
 							where   pd.deductcode=dpd.deductcode
 							and     dpd.deprostatus='2'
-							and     pd.paycode=#{payCode}
+							and     pd.paycode=(select max(paycode)+1 from payment)
 							and     pd.usestatus='1'),0)
 		,nvl((select sum(deductpay)
 							from payment_detail pd, de_product_div dpd
 							where   pd.deductcode=dpd.deductcode
 							and     dpd.deprostatus='1'
-							and     pd.paycode=#{payCode}
+							and     pd.paycode=(select max(paycode)+1 from payment)
 							and     pd.usestatus='1'),0)
 		,nvl(#{relate, jdbcType=VARCHAR},null)
 		,to_date( nvl(#{payDay, jdbcType=VARCHAR},null),'yyyyMMdd')
@@ -43,7 +43,7 @@
 							and     pd.paycode=#{payCode}
 							and     pd.usestatus='1'),0)
 		, relate=nvl(#{relate, jdbcType=VARCHAR},relate)
-		, payday=nvl(to_date(payDay,'yyyyMMdd'),payday)
+		, payday=to_date( nvl(#{payDay, jdbcType=VARCHAR},payday),'yyyyMMdd')
 		where   paycode = #{payCode};
 	</update>
 
@@ -121,7 +121,11 @@
 		on d.deptcode=e.deptcode
 		where   e.usernm like '%'||#{usernm}||'%'
 	</select>
-
+	
+	<select id="getMaxPayment" resultType="String">
+		select max(paycode)
+		from payment
+	</select>
 </mapper>
 
 

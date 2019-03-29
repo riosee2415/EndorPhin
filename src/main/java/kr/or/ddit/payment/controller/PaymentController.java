@@ -1,5 +1,6 @@
 package kr.or.ddit.payment.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ import kr.or.ddit.employee.model.EmployeeVo;
 import kr.or.ddit.payment.model.De_product_divVo;
 import kr.or.ddit.payment.model.PaymentVo;
 import kr.or.ddit.payment.model.Payment_detailVo;
+import kr.or.ddit.payment.model.Payment4UpdVo;
 import kr.or.ddit.payment.service.IDe_Product_divService;
 import kr.or.ddit.payment.service.IPaymentService;
 import kr.or.ddit.payment.service.IPayment_DetailService;
@@ -44,6 +46,13 @@ public class PaymentController {
 		return "paymentView";
 	}
 	
+	@RequestMapping(path="/insertAndUpdatePayment",produces={"application/json"})
+	@ResponseBody
+	public Map<String, Object> insertAndUpdatePayment(@RequestBody Payment4UpdVo testVo){
+		paymentService.updateAndInsertPayment(testVo);
+		return getPaymentList(testVo.getUserid());
+	}
+	
 	@RequestMapping(path="/getPaymentList",method=RequestMethod.GET, produces = { "application/json" })
 	@ResponseBody
 	public Map<String, Object> getPaymentList(String userid){
@@ -61,7 +70,6 @@ public class PaymentController {
 			de_product_divVo.setDeductName(searchDeductName);
 			List<De_product_divVo> selectDeproductByNm = de_product_divService.selectDeproductByNm(de_product_divVo);
 			model.addAttribute("allDe_product_div",selectDeproductByNm);
-			
 		}
 		return "addProductView";
 	}
@@ -145,6 +153,7 @@ public class PaymentController {
 		model.addAttribute("paymentList",paymentList);
 		return "addPaymentView";
 	}
+	
 	
 	
 }

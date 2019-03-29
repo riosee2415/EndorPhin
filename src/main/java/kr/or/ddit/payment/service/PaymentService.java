@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import kr.or.ddit.payment.dao.IPaymentDao;
+import kr.or.ddit.payment.dao.IPayment_DetailDao;
+import kr.or.ddit.payment.model.Payment4UpdVo;
 import kr.or.ddit.payment.model.PaymentVo;
 
 @Service("paymentService")
@@ -14,6 +16,9 @@ public class PaymentService implements IPaymentService{
 
 	@Resource(name="paymentDao")
 	IPaymentDao paymentDao;
+	
+	@Resource(name="payment_detailDao")
+	IPayment_DetailDao payment_detailDao;
 	
 	
 	@Override
@@ -51,4 +56,10 @@ public class PaymentService implements IPaymentService{
 		return paymentDao.getPaymentListByUserNm(usernm);
 	}
 
+	@Override
+	public void updateAndInsertPayment(Payment4UpdVo payment4UpdVo) {
+		paymentDao.insertPayment(new PaymentVo( payment4UpdVo.getUserid(),payment4UpdVo.getPayday()));
+	}
+	
+	
 }

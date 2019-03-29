@@ -23,8 +23,8 @@ public class PaymentDaoTest extends LogicConfig{
 	@Test
 	public void insertPaymentTest() {
 		PaymentVo paymentVo = new PaymentVo();
-		paymentVo.setPayCode("2");
 		paymentVo.setUserId("1");
+		paymentVo.setPayDay("20180101");
 		int insertPayment = paymentDao.insertPayment(paymentVo);
 		assertEquals(1, insertPayment);
 	}

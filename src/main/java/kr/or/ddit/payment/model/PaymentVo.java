@@ -16,6 +16,16 @@ public class PaymentVo {
 	String relate;
 	String payDay;
 	String positionname; // 직급명
+	
+	public PaymentVo() {
+	}
+
+	// 입력을 위한 생성자
+	public PaymentVo(String userId, String payDay) {
+		this.userId = userId;
+		this.payDay = payDay;
+	}
+	
 	public String getPositionname() {
 		return positionname;
 	}

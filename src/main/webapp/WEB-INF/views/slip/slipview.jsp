@@ -77,6 +77,8 @@
 	var insertFlag = 0;
 	$("#insertSlipBtn").on("click", function(){
 		
+		$("#insertSlipBtn").attr("disabled", true);
+		
 		if(insertFlag === 0){
 			$.ajax({
 				url : "${pageContext.request.contextPath }/getSlipInsertBtn",

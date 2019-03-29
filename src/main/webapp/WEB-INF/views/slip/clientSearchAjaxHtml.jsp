@@ -30,7 +30,7 @@
 <script>
 	
 	$(".clientTr").on("click", function(){
-		var clientData = $(this).data().clientcode + "(" +  $(this).data().clientname + ")";
+		var clientData = $(this).data().clientcode + "_" +  $(this).data().clientname;
 		
 		$("#searchClientValue").val(clientData);
 		$("#selectClientValue").val(clientData);

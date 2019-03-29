@@ -1,6 +1,8 @@
 package kr.or.ddit.attitude.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -47,18 +49,61 @@ public class AttitudeServiceTest extends LogicConfig{
 		attitudeService.insertAttitude(vo);
 		
 	}
-
 	
 	
+	@Test
+	public void deleteAttitudeTest() {
+		
+		
+		int deleteAttitude = attitudeService.deleteAttitude("7");
+		
+		
+		
+	}
 	
 	
+	@Test
+	public void updateAttitudeTest() {
+		
 	
 	
+		AttitudeVo vo = new AttitudeVo();
+		vo.setAttitudeCode("6");
+		vo.setAttitudeName("테스트5");
+		vo.setPaidStatus("유급");
+		vo.setBaseDays("2");
+		vo.setRelate("");
+	
+	attitudeService.updateAttitude(vo);
+	}
 	
 	
+	@Test
+	public void searchAttitudeTest() {
+		
+		
+		AttitudeVo vo = new AttitudeVo();
+		vo.setAttitudeName("세");
+		List<AttitudeVo> searchAttitude = attitudeService.SearchAttitude(vo);
+		
+		for(AttitudeVo Attitude : searchAttitude){
+			logger.debug("과자 : {}",Attitude);
+			
+		}
+		
+		
+	}
 	
-	
-	
+	@Test
+	public void selectAttitudeTest() {
+		
+		
+		AttitudeVo selectAttitude = attitudeService.SelectAttitude("5");
+		
+			logger.debug("과자 : {}",selectAttitude);
+			
+		
+	}
 	
 	
 }

@@ -98,8 +98,8 @@ public class SlipService implements ISlipService{
 
 
 	@Override
-	public List<SlipVo> getBetweenProd(SlipVo vo) {
-		return slipDao.getBetweenProd(vo);
+	public List<SlipVo> getBetweenSlip(String pre_date, String post_date) {
+		return slipDao.getBetweenSlip(pre_date,post_date);
 	}
 
 }

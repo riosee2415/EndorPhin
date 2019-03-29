@@ -91,7 +91,7 @@ public interface ISlipDao {
 	* @return
 	* Method 설명 : 날짜 검색 
 	*/
-	public List<SlipVo> getBetweenProd(SlipVo vo);
+	public List<SlipVo> getBetweenSlip(String pre_date, String post_date);
 	
 	
 }

@@ -35,7 +35,7 @@
 		select
 		slipnumber, total, slipdate, departmentname, jukyo, status
 		from
-		slip where slipnumber = #{slipnumber}
+		slip where slipnumber = #{slipNumber}
 	</select>
 
 
@@ -77,6 +77,14 @@
 			set status= '1' 
 		where slipNumber=#{slipNumber}
 	</update>
+	
+	<select id="getBetweenSlip" resultType="slipVo" parameterType="map">
+	select slipnumber, total, slipdate, departmentName, jukyo, status as all_slip
+		from slip 
+		where to_date(slipDate,'yy/mm/dd') between to_date(#{pre_date},'yy/mm/dd')
+		and to_date(#{post_date},'yy/mm/dd')
+		and	departmentname = '인사'
+	</select>
 	
 	
 </mapper>

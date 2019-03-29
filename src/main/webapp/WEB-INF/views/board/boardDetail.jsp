@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<h1 class="page-header">게시글 상세화면</h1>
 <form id="frm" class="form-horizontal" role="form" >
 
 	<div class="container-fluid">
@@ -44,11 +45,11 @@
 	<div class="form-group">
 		<div class="col-sm-offset-3 col-sm-9">
 			
-			<a href="${pageContext.request.contextPath }/modifypost?boardNo=${post.boardNo }&boardTypeCode=${post.boardTypeCode }&boardTypeName=${boardTypeName }">
+			<a href="${pageContext.request.contextPath }/modifypost?boardNo=${post.boardNo }&boardTypeCode=${boardTypeCode}&boardTypeName=${boardTypeName }">
 				<button id="btn_modify" type="button" class="btn btn-default" style="display:inline;">수정</button>
 			</a>
 			
-			<a href="${pageContext.request.contextPath }/deletepost?boardNo=${post.boardNo}&boardTypeName=${boardTypeName }">
+			<a href="${pageContext.request.contextPath }/deletepost?boardNo=${post.boardNo}&boardTypeName=${boardTypeName }&boardTypeCode=${boardTypeCode }">
 				<button id="btn_delete" type="button" class="btn btn-default" style="display:inline;">삭제</button>
 			</a>
 		</div>
@@ -56,7 +57,7 @@
 	
 </form>
 
-<form id="frm_cmtInsert" class="form-horizontal" role="form" action="${cp }//writecomment" method="post">
+<form id="frm_cmtInsert" class="form-horizontal" role="form" action="${pageContext.request.contextPath }/writecomment" method="post">
 
 	<input type="hidden" id="userId" name="userId" value="${post.userId }">
 	<input type="hidden" id="boardNo" name="boardNo" value="${post.boardNo }">
@@ -75,7 +76,8 @@
 	<c:forEach items="${commentList }" var="comment">
 		<form id="frm_cmtUpdate" class="form-horizontal" role="form" action="${pageContext.request.contextPath }/deletecomment" method="post">
 			<input type="hidden" id="boardNo" name="boardNo" value="${post.boardNo }">
-			<input type="hidden" id="boardTypeName" name="boardTypeName" value="${boardTypeName }">
+			<input type="hidden" id="boardTypeName" name="boardTypeName" value="${boardTypeCode }">
+			<input type="hidden" id="boardTypeName" name="boardTypeCode" value="${boardTypeName }">
 			
 					<tr data-postNo="${comment.commentNo }">
 						<td>${comment.commentContents }</td>

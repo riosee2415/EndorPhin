@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -112,7 +113,6 @@ public class Board_detailController {
 	@RequestMapping(path="/postInsert",method=RequestMethod.POST)
 	public String postInsert(Model model, @RequestParam(value="boardTypeCode")String boardTypeCode, @RequestParam(value="boardTypeName")String boardTypeName,
 							HttpServletRequest request, MultipartRequest multipart, Board_detailVo board_detailVo) throws Exception{
-		logger.debug("board_detailVo : {}", board_detailVo);
 		HttpSession session = request.getSession();
 		EmployeeVo employeeVo = (EmployeeVo) session.getAttribute("employeeVo");
 		board_detailVo.setUserId(employeeVo.getUserId());
@@ -140,7 +140,6 @@ public class Board_detailController {
 			attachRealname = path + File.separator + UUID.randomUUID().toString();
 			attachRealpath = path;
 			
-			logger.debug("path : {}", path);
 			if (multipartFile.getSize() > 0 ) {
 				
 				multipartFile.transferTo(new File(attachRealname));
@@ -156,5 +155,31 @@ public class Board_detailController {
 		
 		board_detailService.postInsert(board_detailVo, attachList);
 		return "redirect:boardDetail?boardNo=" + board_detailVo.getBoardNo();
+	}
+	
+	@RequestMapping(path="/deletecomment",method=RequestMethod.POST)
+	public String deleteComment(String boardNo, String boardTypeName, Model model){
+		commentsService.deleteComments(boardNo);
+		model.addAttribute("boardTypeName",boardTypeName);
+		return "redirect:boardDetail?boardNo=" + boardNo;
+	}
+	
+	@RequestMapping(path="/writecomment",method=RequestMethod.POST)
+	public String writeComment(Model model,CommentsVo commentsVo ,String userId, String boardNo, String boardTypeName){
+		commentsVo.setCommentUser(userId);
+		
+		commentsService.insertComments(commentsVo);
+		model.addAttribute("boardTypeName",boardTypeName);
+		
+		return "redirect:boardDetail?boardNo=" + boardNo;
+	}
+	
+	@RequestMapping(path="/deletepost",method=RequestMethod.GET)
+	public String deletePost(Model model, String boardNo, String boardTypeName){
+		board_detailService.postDelete(boardNo);
+		model.addAttribute("boardTypeName",boardTypeName);
+//		attach_boardService.attach_boardDelete(boardNo);
+//		commentsService.deleteComments(boardNo);
+		return "redirect:postList?boardNo=" +boardNo;
 	}
 }

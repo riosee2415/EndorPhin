@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script
-	src="${pageContext.request.contextPath }/SE2/js/HuskyEZCreator.js"></script>
+<script src="${pageContext.request.contextPath }/SE2/js/HuskyEZCreator.js"></script>
 <script src="${pageContext.request.contextPath }/js/jquery-3.3.1.min.js"></script>
 <script type="text/javascript">
 var oEditors = []; // 개발되어 있는 소스에 맞추느라, 전역변수로 사용하였지만, 지역변수로 사용해도 전혀 무관 함.
@@ -25,7 +24,7 @@ $(document).ready(function() {
 	});
 
 				// 전송버튼 클릭이벤트
-				$("#savebutton").click(
+				$("#btn_write").click(
 						function() {
 							if (confirm("저장하시겠습니까?")) {
 								// id가 smarteditor인 textarea에 에디터에서 대입
@@ -52,27 +51,36 @@ $(document).ready(function() {
 		return true;
 	}
 </script>
-<form action="${pageContext.request.contextPath}/postInsert"
-	method="post" id="frm" enctype="multipart/form-data">
-	<label>제목 :&nbsp;</label>
-	<textarea rows="1" cols="100" id="title" name="title"></textarea>
-	<textarea name="smarteditor" id="smarteditor" rows="10" cols="100"
-		style="width: 766px; height: 412px;"></textarea>
-	<input type="hidden" name="board_code" id="board_code"
-		value="${board_code}"> <input type="hidden" name="board_num2"
-		id="board_num2" value="${board_num2}">
-	<c:forEach begin="1" step="1" var="i" end="${cnt}">
-		<input type="file" name="uploadFile" class="attach" />
-		<br />
-	</c:forEach>
-	<input type="hidden" name="cnt" id="cnt" value="${cnt}" />
+<h1 class="page-header">게시글 등록</h1>
+<form action="${pageContext.request.contextPath }/postInsert" id="frm" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="boardTypeCode" value="${boardTypeCode }">
+	<input type="hidden" name="boardTypeName" value="${boardTypeName }">
+
+	<div class="form-group" style="padding-left: 0px;">
+		<label for="boardtitle" class="col-sm-5 control-label" style="padding-left: 0px;">제목</label>
+		<div class="col-sm-10" style="padding-left: 0px;">
+			<input type="text" style="width: 766px" class="form-control" id="title" name="title" /><br>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="boardtitle" class="col-sm-5 control-label" style="padding-left: 0px;">내용</label>
+		<textarea name="contents" id="smarteditor" rows="10" cols="100" style="width: 766px; height: 412px;"></textarea>
+	</div>
+
+
+	<div class="col-sm-2" style="padding-left: 0px;">
+		<table>
+			<c:forEach begin="1" end="5" varStatus="attachCnt" step="1">
+				<tr>
+					<td><input type="file" name="attachFile"></td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
+
+	<div class="col-sm-2" style="padding-left:0px;">
+	   <button type="submit" class="btn btn-default" id="btn_write">글 등록</button>
+	</div>
+           
 </form>
-<form id="attachFrm"
-	action="${pageContext.request.contextPath}/fileUpload" method="get">
-	<c:if test="${cnt<5}">
-		<input type="hidden" name="cnt" value="${cnt}" />
-		<input type="submit" id="fileInputAdd" value="추가 업로드">
-		<input type="hidden" name="boardTypeCode" value="${boardTypeCode}">
-	</c:if>
-</form>
-<input type="button" id="savebutton" value="저장" />

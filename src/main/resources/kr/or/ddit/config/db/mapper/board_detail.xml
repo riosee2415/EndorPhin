@@ -6,13 +6,19 @@
 
 	<!-- 게시글 등록 -->
 	<insert id="postInsert" parameterType="board_detailVo">
+	<selectKey keyProperty="boardNo" resultType="String" order="AFTER">
+		  	select 
+		  		BOARDNO_SEQ.currval
+		  	from 
+		  		dual
+	    </selectKey>
 		insert into board_detail
-			  (boardno
+			  (boardNo
 			  ,title
 			  ,contents
-			  ,postdate
-			  ,boardtypecode
-			  ,userid)
+			  ,postDate
+			  ,boardTypeCode
+			  ,userId)
 						 
 	    values(BOARDNO_SEQ.nextval
 			  ,#{title}
@@ -59,7 +65,7 @@
 			   
 		  from board_detail
 		
-		 where boardno = #{boardNo}
+		 where boardNo = #{boardNo}
 		
 	</select>
 	
@@ -81,7 +87,7 @@
 	<select id="select_boardPost" resultType="board_detailVo" parameterType="String">
 		select *
 		  from board_detail
-		 where boardno = (select max(boardno)
+		 where boardNo = (select max(boardNo)
 		                    from board_detail
 		                   where boardTypeCode = #{boardTypeCode})
 	</select>

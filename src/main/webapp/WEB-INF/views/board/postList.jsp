@@ -6,7 +6,7 @@
 
 		<h1 class="page-header">${boardTypeName }</h1>
 		<table class="table table-striped">
-              <thead>
+              <thead class="thead">
                 <tr>
                   <th>번호</th>
                   <th>제목</th>
@@ -28,7 +28,8 @@
         </table>
          <form action="${pageContext.request.contextPath }/postInsert" method="get">
             	<input type="hidden" id="boardTypeCode" name="boardTypeCode" value="${boardTypeCode }">
-	            <button type="submit" class="btn btn-default">작성</button>
+            	<input type="hidden" id="boardTypeName" name="boardTypeName" value="${boardTypeName }">
+	            <button type="submit" class="btn btn-default">글 작성</button>
          </form>
          
           <c:set var="lastPage" value="${Integer(postCnt/pageSize + (postCnt%pageSize > 0 ? 1 : 0)) }"/>

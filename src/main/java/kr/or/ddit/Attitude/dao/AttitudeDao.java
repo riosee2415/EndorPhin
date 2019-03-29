@@ -32,7 +32,28 @@ public class AttitudeDao implements IAttitudeDao{
 		
 	}
 
+	@Override
+	public int deleteAttitude(String code) {
+		return sqlSessionTemplate.delete("attitude.deleteAttitude",code);
+	}
+
+	@Override
+	public int updateAttitude(AttitudeVo Vo) {
+		return sqlSessionTemplate.update("attitude.updateAttitude",Vo);
+	}
+
+	@Override
+	public List<AttitudeVo> SearchAttitude(AttitudeVo code) {
+		return sqlSessionTemplate.selectList("attitude.SearchAttitude",code);
+	}
+
+	@Override
+	public AttitudeVo SelectAttitude(String code) {
+		return sqlSessionTemplate.selectOne("attitude.SelectAttitude",code);
+	}
+
 }
+
 
 
 

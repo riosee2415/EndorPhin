@@ -30,7 +30,33 @@ public class AttitudeService implements IAttitudeService{
 		return attitudeDao.insertAttitude(vo);
 	}
 
-	
+
+
+	@Override
+	public int deleteAttitude(String code) {
+		return attitudeDao.deleteAttitude(code);
+	}
+
+
+
+	@Override
+	public int updateAttitude(AttitudeVo Vo) {
+		return attitudeDao.updateAttitude(Vo);
+	}
+
+
+	@Override
+	public List<AttitudeVo> SearchAttitude(AttitudeVo code) {
+		return attitudeDao.SearchAttitude(code);
+	}
+
+
+
+	@Override
+	public AttitudeVo SelectAttitude(String code) {
+		return attitudeDao.SelectAttitude(code);
+	}
+
 	
 	
 	

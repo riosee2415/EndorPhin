@@ -39,13 +39,15 @@ select {
 				<table class="table table-striped">
 					<thead class="thead">
 						<tr>
-
-							<th>근태명 <input type="text">
-							<button style="background-color: #6E6867;" class="btn btn-info">검색</button>
-
+							<form action="${cp}/attitude/searchAttitude">
+							<th>근태명 <input type="text" name="search">
+							<button type="submit" style="background-color: #6E6867;" class="btn btn-info">검색</button>
 							</th>
+							</form>
+							</tr>
 					</thead>
 				</table>
+
 
 			</div>
 		</div>
@@ -67,7 +69,7 @@ select {
 								<th>비고</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="mytbody">
 							<c:forEach items="${allAttitude}" var="allAttitude">
 								<tr class="boardTr" data-userId="${allAttitude.attitudeCode}">
 									<td><input type="checkbox" name="check"
@@ -75,7 +77,7 @@ select {
 										style="width: 30px; height: 30px;"></td>
 
 									<td><button type="button" class="btn btn-default"
-											data-toggle="modal" data-target="#attitudeInsert">${allAttitude.attitudeCode }</button></td>
+											data-toggle="modal" data-target="#attitudeEdit">${allAttitude.attitudeCode }</button></td>
 									<td>${allAttitude.attitudeName }</td>
 									<td>${allAttitude.paidStatus }</td>
 									<td>${allAttitude.baseDays }</td>
@@ -93,7 +95,7 @@ select {
 		<div class="container">
 			<div class="row">
 
-				<button style="background-color: #6E6867;" class="btn btn-info">근태항목삭제</button>
+				<button style="background-color: #6E6867;" class="btn btn-info" id="cancleBtn">근태항목삭제</button>
 				
 				
 				
@@ -105,82 +107,120 @@ select {
 		
 		
 		<!--  근태 항목 등록 모달창 실행  -->
-<div class="modal fade" id="attitudeInsert" tabindex="-1" role="dialog" aria-labelledby="my80sizeModalLabel" style="color: black">
-  <div class="modal-dialog modal-80size" role="document">
-    <div class="modal-content modal-80size">
-      <div class="modal-header"><h2>근태항목 등록</h2>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-						<form action="${cp}/attitude/insertAttitude" method="get">
-							<label for="inputName">근태 코드</label> <input type="text" 
-								class="form-control" id="attitudeCodeE" name="attitudeCode" placeholder="근태코드를 입력해 주세요">
-								
-					</div>
-					<div class="form-group">
-						<label for="InputEmail">근태명</label> <input type="text"
-							class="form-control" id="attitudeNameE" name="attitudeName" placeholder="근태명을 입력해주세요">
-					</div>
-					
-					
-					<div class="form-group">
-						<table>
-							<tr>
-								<td><label for="inputPassword">유/무급 분류</label></td>
-								<td><select id="paidStatusE" name="paidStatus" class="form-control">
-										<option value="유급">유급</option>
-										<option value="무급">무급</option>
-								</select></td>
-							
-							</tr>
-							</table>
-						</div>
-						
-						<div class="form-group">
-						<label for="InputEmail">기준일수</label> <input type="text"
-							class="form-control" id="baseDaysE" name="baseDays" placeholder="기준일수를 입력해주세요">
-					</div>
-						
-						
-						<div class="form-group">
-						<label for="InputEmail">비고</label> <input type="text"
-							class="form-control" id="relateE" name="relate" placeholder="비고란을 입력해주세요">
-					</div>
-					
-					
-      </div>
-      <div class="modal-footer">
-      <button type="submit" class="btn btn-default">등록</button>
-					</form>
-        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-      </div>
-    </div>
-  </div>
-</div>
+			<%@ include file="attitudeInsert.jsp"%>
+		
+		<!--  근태 항목 등록 모달창 종료  -->
+		
+		<!--  근태 항목 등록 모달창 실행  -->
+			<%@ include file="attitudeEdit.jsp"%>
 		
 		<!--  근태 항목 등록 모달창 종료  -->
 		
 		
 		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		
+	<script>
+	
+	
+	
+	/*근테정보 수정하기*/
+	$("#mytbody").on("click", ".boardTr", function(){
+			
+		console.log($(this).data().userid);
+		
+		$.ajax({
+			url			: "${pageContext.request.contextPath }/attitude/updateAttitude" ,
+			method		: "get",
+			data		: "userId="+$(this).data().userid,
+			success		: function(searchAttitude) {
+				 $("#attitudeCodeE").val(searchAttitude.attitudeCode); 
+				 $("#attitudeNameE").val(searchAttitude.attitudeName);
+		         $("#paidStatusE").val(searchAttitude.paidStatus);
+				 $("#baseDaysE").val(searchAttitude.baseDays);
+				 $("#relateE").val(searchAttitude.relate);
+				 
+			} 
+		});
+	});
+	
+	
+	
+	/*코드중복체크*/
+	$("#emplCheck").on("click", function(){
+		$.ajax({
+			url			: "${pageContext.request.contextPath }/attitude/AttitudeIdAjax" ,
+			method		: "post",
+			data		: "userId="+$("#attitudeCode").val(),
+			success		: function(userIdCode) {
+				transDupl(userIdCode);
+				
+			}
+		});
+	});
+	var duplicateCode = "";
+	
+	function transDupl(userIdCode){
+		if(userIdCode == 1){
+			insertFlag = "1";
+			duplicateCode = "<b><font color='blue'>사용가능한 직책/직급 코드 입니다. </font></b>";
+			$("#duplicate").html(duplicateCode);
+		} else if (userIdCode == 0){
+			duplicateCode = "<b><font color='red'>중복된 직책/직급 코드 가 있습니다.</font></b>";
+			$("#duplicate").html(duplicateCode);
+		} else if (userIdCode == "WS"){
+			duplicateCode = "<b><font color='red'>직책/직급 코드를 입력하세요.</font></b>";
+			$("#duplicate").html(duplicateCode);
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	$(document).ready(function() {
 		
 		
+		 //server side 에서 비교
+		<c:if test="${msg != null}">
+		alert("${msg}");
+		</c:if> 
 		
 		
+		 //사용자 tr 태그 클릭시 이벤트 핸들러
+		$("#cancleBtn").click(function() {
+
+			$('input:checkbox[name="check"]:checked').each(function() {
+
+
+			var delete_no = $(this).val();
+			$("#delete_no").val(delete_no);
+			$("#frm").submit();
+			
+			});
+
+		}); 
 		
 		
+
 		
+
+	});
+	
+	
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	</script>
+	
+	
+	<form id="frm" action="${cp}/attitude/deleteAttitude" method="get">
+		<input type="hidden" id="delete_no" name="delete_no" />
+	</form>
 		
 		
 		

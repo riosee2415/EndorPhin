@@ -1,6 +1,7 @@
 package kr.or.ddit.slip.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -60,6 +61,45 @@ public class SlipService implements ISlipService{
 	@Override
 	public int updateSlip_paaprovuar(String status) {
 		return slipDao.updateSlip_paaprovuar(status);
+	}
+	
+	/**
+	* Method : insertSlip
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param slipVo
+	* @return
+	* Method 설명 : 전표 추가 메서드
+	*/
+	@Override
+	public int insertSlip(SlipVo slipVo) {
+		return slipDao.insertSlip(slipVo);
+				
+	}
+
+	@Override
+	public String currvalSeq() {
+		return slipDao.currvalSeq();
+	}
+
+
+	/**
+	* Method : deleteSlip
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param slipNumber
+	* @return
+	* Method 설명 : 전표 삭제
+	*/
+	@Override
+	public int deleteSlip(String slipNumber) {
+		return slipDao.deleteSlip(slipNumber);
+	}
+
+
+	@Override
+	public List<SlipVo> getBetweenProd(SlipVo vo) {
+		return slipDao.getBetweenProd(vo);
 	}
 
 }

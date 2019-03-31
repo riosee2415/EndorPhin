@@ -111,13 +111,13 @@
 	</div>
 </div>
 
- <!-- second modal -->
+ <!-- second modal (상세 등록 화면) -->
     <div class="modal" id="myModal4" data-backdrop="static" aria-hidden="true" style="display: none; z-index: 1080;">
     	<div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h4 class="modal-title" id="secondModalTitle"></h4>
-              <button id="secondClose1" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <button id="secondAddClose1" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div><div class="container"></div>
             <div class="modal-body">
             	<h3>작성일</h3><input type="text" id="datepicker">
@@ -136,8 +136,41 @@
             	</div>
             </div>
             <div class="modal-footer">
-              <a href="#" data-dismiss="modal" class="btn" id="secondClose">Close</a>
-              <a href="#" class="btn" id="secondModalSave">Save changes</a>
+              <a href="#" data-dismiss="modal" class="btn" id="secondAddClose">Close</a>
+              <a href="#" class="btn" id="secondModalAddSave">등록</a>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+ <!-- second modal (상세 수정 화면) -->
+    <div class="modal" id="myModal3" data-backdrop="static" aria-hidden="true" style="display: none; z-index: 1080;">
+    	<div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="secondModalTitle"></h4>
+              <button id="secondUpdClose1" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div><div class="container"></div>
+            <div class="modal-body">
+            	<h3>작성일</h3><input type="text" id="datepicker1">
+            	<div style="overflow:scroll; width:450px; height:200px;">
+	            	<table>
+	            		<thead>
+	            			<tr>
+	            				<th>항목코드</th>
+	            				<th>항목명</th>
+	            				<th>금액</th>
+	            			</tr>
+	            		</thead>
+	            		<tbody id="secondModalTbody">
+	            		</tbody>
+	            	</table>
+            	</div>
+            </div>
+            <div class="modal-footer">
+              <a href="#" data-dismiss="modal" class="btn" id="secondUpdClose">Close</a>
+              <a href="#" class="btn" id="secondModalUpd">수정</a>
+              <a href="#" class="btn" id="secondModalDel">삭제</a>
             </div>
           </div>
         </div>
@@ -161,13 +194,15 @@
 	})
 	$("#modalAddDeduct").click(function(){
 		$("#secondModalTitle").html("공제");
+		console.log("공제")
 		secondModalDataInput(deproductList,2);
 	})
 	
-	$("#secondModalSave").click(function(){
+	
+	$("#secondModalAddSave").click(function(){
 		secondModalEvent();
-		$("#secondClose").click();
-		$("#secondClose1").click();
+		$("#secondAddClose").click();
+		$("#secondAddClose1").click();
 	})
 	
 	function secondModalEvent(){
@@ -199,7 +234,7 @@
 					decdPayList : decdPayList
 				}),
 				success : function(data) {
-// 					dataInput(data);
+					dataInput(data);
 				}
 			})
 			
@@ -220,10 +255,41 @@
 			success : function(data) {
 				dataInput(data);
 				deproductList=data.divList;
+				secondMethodInput();
 			}
 		});
 	})
+	
+	function secondDetailUpd(){
+		$.ajax({
+			method : "get",
+			url : "/getPaymentList",
+			data : "userid=" + $(this).html(),
+			success : function(data) {
+				dataInput(data);
+				deproductList=data.divList;
+				secondMethodInput();
+			}
+		});
+	}
+	
+	function secondMethodInput(){
+		$(".modalUpdProduct").click(function(){
+			$('#datepicker1').datepicker('setDate', $(this).html());
+		})
+		
+		$(".modalUpdDeduct").click(function(){
+			$('#datepicker1').datepicker('setDate', $(this).html());
+		})
+	}
+	
 	$(document).ready(function(){
+		$("#datepicker1").datepicker({dateFormat: 'yy-mm-dd'
+										,showOn: "both"   
+							            ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif"
+							            	,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+							                ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
+                						,buttonImageOnly: true});
 	});
 	
 	
@@ -273,45 +339,51 @@
 			}
 				deductName.set(data.divList[i].deductCode,0);
 		}
+		
 		$("#firModalProductThead").append("<th>총급여액</th>");
 		$("#firModalDeductThead").append("<th>총공제액</th>");
 		
 		if(data.hasOwnProperty('paymentList')){
 			
 			for (var i = 0; i < data.paymentList.length; i++) {
-				var deductNameTemp = deductName;
 				$("#firModalDeductTbody").append("<tr>");
 				$("#firModalProductTbody").append("<tr>");
-				$("#firModalDeductTbody").append("<td><a href='#'>"+data.paymentList[i].payDay+"</a></td>");
-				$("#firModalProductTbody").append("<td><a href='#'>"+data.paymentList[i].payDay+"</a></td>");
-				for (var a = 0; a < data.paymentList.length; a++) {
-					if(data.paymentDetailList[a]!=null&&
+				$("#firModalDeductTbody").append("<td><a data-toggle=\'modal\' data-payCd=\'"+
+												data.paymentList[i].payCode+"\' href=\'#myModal3\' class=\'modalUpdDeduct\'>"
+												+data.paymentList[i].payDay+"</a></td>");
+				$("#firModalProductTbody").append("<td><a data-toggle=\'modal\' data-payCd=\'"+
+												data.paymentList[i].payCode+"\' href=\'#myModal3\' class=\'modalUpdProduct\'>"
+												+data.paymentList[i].payDay+"</a></td>");
+				for (var a = 1; a <= data.paymentList.length; a++) {
+					if(data.paymentDetailList[a]!=null &
 							data.paymentDetailList[a][0].payCode==data.paymentList[i].payCode){
-						deductNameTemp=setDNT(data,deductNameTemp,a);
+						deductName=setDNT(data,deductName,a);
 					}
 				}	
 				
 				
 				for (var j = 0; j < data.divList.length; j++) {
 					if(data.divList[j].deprostatus==1){
-						$("#firModalProductTbody").append("<td>"+deductNameTemp.get(data.divList[j].deductCode)+"</td>");
+						$("#firModalProductTbody").append("<td>"+deductName.get(data.divList[j].deductCode)+"</td>");
 					}
 					else{
-						$("#firModalDeductTbody").append("<td>"+deductNameTemp.get(data.divList[j].deductCode)+"</td>");
+						$("#firModalDeductTbody").append("<td>"+deductName.get(data.divList[j].deductCode)+"</td>");
 					}
 				}
+				$("#firModalProductTbody").append("<td>"+data.paymentList[i].totalSalary+"</td>");
+				$("#firModalDeductTbody").append("<td>"+data.paymentList[i].totalWage+"</td>");
+				
 				$("#firModalDeductTbody").append("</tr>");
 				$("#firModalProductTbody").append("</tr>");
 			}
 		}
-		
 	}
-	function setDNT(data,deductNameTemp,a){
+	function setDNT(data,deductName,a){
 		
 		for (var i = 0; i < data.paymentDetailList[a].length; i++) {
-			deductNameTemp.set(data.paymentDetailList[a][i].deductCode,data.paymentDetailList[a][i].deductPay);
+			deductName.set(data.paymentDetailList[a][i].deductCode,data.paymentDetailList[a][i].deductPay);
 		}
-		return deductNameTemp;
+		return deductName;
 	}
 </script>
 <script type="text/javascript" src="/js/datepicker.js"></script>

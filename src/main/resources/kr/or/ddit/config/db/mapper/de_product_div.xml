@@ -24,8 +24,8 @@
 			useStatus,
 			relate,
 			taxstatus, bonusstatus,establishcode,deprostatus
-		from de_product_div	
-		where deductCode = #{deductCode}
+			from de_product_div	
+			where deductCode = #{deductCode}
 			
 	</select>
 		

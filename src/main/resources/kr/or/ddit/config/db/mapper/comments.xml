@@ -34,7 +34,8 @@
 		      COMMENTNO_SEQ.nextval,
 		      nvl(#{commentTitle,
 		      jdbcType=VARCHAR }, 'null'),
-		      #{commentContents},#{boardNo},
+		      #{commentContents},
+		      #{boardNo},
 		      sysdate,
 		      #{commentUser}
 		      )
@@ -44,7 +45,7 @@
 	<!-- 댓글 삭제 -->
 	<delete id="deleteComments" parameterType="String">
 		delete from comments
-		where commentNo = #{commentNo}
+		where boardNo = #{boardNo}
 	</delete>
 	
 	<!-- 댓글 수정 -->
@@ -52,7 +53,7 @@
 		update comments
 		   set commentcontents=#{commentcontents}
 			
-		 where commentno=#{commentno}
+		 where commentno=#{commentNo}
 	</update>
 </mapper>
 

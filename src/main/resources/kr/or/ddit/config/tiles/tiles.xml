@@ -18,14 +18,16 @@
         <definition name="clientview" extends="layout">
         	<put-attribute name="content" value="/WEB-INF/views/client/clientview.jsp"/>
         </definition>
-        
-		<definition name="cardsDetail" extends="layout">
+
+		 <!--카드등록  -->       
+		<definition name="cardsDetail" extends="layout">  
         	<put-attribute name="content" value="/WEB-INF/views/company/cardsDetail.jsp"/>
         </definition>
         
          <definition name="cardsList" extends="layout">
         	<put-attribute name="content" value="/WEB-INF/views/company/cardsList.jsp"/>
         </definition>
+        <!--  -->
         
         <definition name="addPaymentView" extends="layout">
         	<put-attribute name="content" value="/WEB-INF/views/employee/paymentList.jsp"/>
@@ -62,12 +64,20 @@
         	<put-attribute name="content" value="/WEB-INF/views/establish/establishview.jsp"/>
         </definition>
         
-        <definition name="deptList" extends="layout">
+        <definition name="deptList" extends="layout"><!--부서등록  -->
         	<put-attribute name="content" value="/WEB-INF/views/dept/deptList.jsp"/>
         </definition>
         
         <definition name="slipview" extends="layout">
         	<put-attribute name="content" value="/WEB-INF/views/slip/slipview.jsp"/>
+        </definition>
+        
+        <definition name="approval" extends="layout"> <!--승인전표 -->
+        	<put-attribute name="content" value="/WEB-INF/views/slipList/approval.jsp"/>
+        </definition>
+        
+          <definition name="paaprovuar" extends="layout"> <!--승인전표 -->
+        	<put-attribute name="content" value="/WEB-INF/views/slipList/paaprovuar.jsp"/>
         </definition>
         
         
@@ -86,10 +96,27 @@
         	<put-attribute name="content" value="/WEB-INF/views/payment/addPayment.jsp"/>
         </definition>
         
-        
          <definition name="AttitudeListTiles" extends="layout"> <!-- 근태 항목 출력 -->
         	<put-attribute name="content" value="/WEB-INF/views/attitude/attitudeList.jsp"/>
         </definition>
+        
+         <definition name="boardType" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/board/boardType.jsp"/>
+        </definition>
+        
+        <definition name="boardDetail" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/board/boardDetail.jsp"/>
+        </definition>
+        
+        <definition name="postInsert" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/board/postInsert.jsp"/>
+        </definition>
+        
+         <definition name="postList" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/board/postList.jsp"/>
+        </definition>
+        
+        
         
         
         <definition name="Attitude_recordListTiles" extends="layout"> <!-- 근태 이력 출력 -->

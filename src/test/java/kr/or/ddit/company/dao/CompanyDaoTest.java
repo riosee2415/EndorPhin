@@ -26,14 +26,14 @@ public class CompanyDaoTest extends LogicConfig{
 	public void selectCompanyTest() {
 		String companyCode = "1";
 		CompanyVo selectCompany = companyDao.selectCompany(companyCode);
-		assertEquals("��ȣ����", selectCompany.getCompanyName());
+		assertEquals("준호물산", selectCompany.getCompanyName());
 	}
 	@Test
 	public void insertCompanyTest() {
 		CompanyVo vo = new CompanyVo();
-		vo.setCeo("�����");
+		vo.setCeo("재우물산");
 		vo.setCeoNumber("01012341234");
-		vo.setCompanyCode("2");
+		vo.setCompanyCode("4");
 		int insertCompany = companyDao.insertCompany(vo);
 		assertEquals(1,insertCompany);
 	}

@@ -86,7 +86,7 @@
 					</div>
 						<div class="form-group">
 						<label>부서명(*) &nbsp;&nbsp;&nbsp;</label> 
-						<input style="width: 450x;" type="text" name="deptName" id="deptName" placeholder="부서명을 입력하세요"> 
+						<input style="width: 180px;" type="text" name="deptName" id="deptName" placeholder="부서명을 입력하세요"> 
 						
 					</div>	
 					<div class="form-group">
@@ -352,43 +352,42 @@
     
  	/* 카드 코드,이름 검색 */  
     	
-     	$("#seachBtn").on("click", function(){
-     		if($("#deptCode1").val().trim() != "" || $("#deptName1").val().trim() !=""){
-    	 	$.ajax({
-        		url 	: "${pageContext.request.contextPath }/searchDept_BothAjax",
-        		data 	: "deptCode1=" + $("#deptCode1").val() +  "&" + "deptName1=" + $("#deptName1").val(),
-        		success : function(data){
-        			$("#deptCode1").val("");
-        			$("#deptName1").val("");
-    				$("#deptListTbody").html(data);
-        			
-        		}
-        	});
-    	 	}else if($("#deptCode1").val().trim() != "" || $("#deptName1").val().trim() == ""){
-    	 		
-    		$.ajax({
-        		url 	: "${pageContext.request.contextPath }/searchDept_codeAjax",
-        		data 	: "deptCode1=" + $("#deptCode1").val(),
-        		success : function(data){
-        			$("#deptCode1").val("");
-    				$("#deptListTbody").html(data);
-        			
-        		}
-        	});
-    		 
-    	 	}else if($("#deptCode1").val().trim() == "" || $("#deptName1").val().trim() != ""){
-    		$.ajax({
-        		url 	: "${pageContext.request.contextPath }/searchDept_NameAjax",
-        		data 	: "deptName1=" + $("#deptName1").val(),
-        		success : function(data){
-        			$("#deptName1").val("");
-    				$("#deptListTbody").html(data);
-        			
-        		}
-        	});
-    	 }
-	}); 
-        
+    	$("#seachBtn").on("click", function(){
+    		if($("#deptCode1").val().trim() != "" || $("#deptName1").val().trim() !=""){
+   	 	$.ajax({
+       		url 	: "${pageContext.request.contextPath }/searchDept_BothAjax",
+       		data 	: "deptCode1=" + $("#deptCode1").val() +  "&" + "deptName1=" + $("#deptName1").val(),
+       		success : function(data){
+       			$("#deptCode1").val("");
+       			$("#deptName1").val("");
+   				$("#deptListTbody").html(data);
+       			
+       		}
+       	});
+   	 	}else if($("#deptCode1").val().trim() != "" || $("#deptName1").val().trim() == ""){
+   	 		
+   		$.ajax({
+       		url 	: "${pageContext.request.contextPath }/searchDept_codeAjax",
+       		data 	: "deptCode1=" + $("#deptCode1").val(),
+       		success : function(data){
+       			$("#deptCode1").val("");
+   				$("#deptListTbody").html(data);
+       			
+       		}
+       	});
+   		 
+   	 	}else if($("#deptCode1").val().trim() == "" || $("#deptName1").val().trim() != ""){
+   		$.ajax({
+       		url 	: "${pageContext.request.contextPath }/searchDept_NameAjax",
+       		data 	: "deptName1=" + $("#deptName1").val(),
+       		success : function(data){
+       			$("#deptName1").val("");
+   				$("#deptListTbody").html(data);
+       			
+       		}
+       	});
+   	 }
+}); 
     
  	
  	/* 카드코드 중복체크 ajax */

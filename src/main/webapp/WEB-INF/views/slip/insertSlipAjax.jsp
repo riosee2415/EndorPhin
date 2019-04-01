@@ -13,6 +13,7 @@
 	</style>
 </head>
 <br />
+<input id="currval" type="hidden" value="${currval }" />
 
 	<center>
 	  	<table>
@@ -48,8 +49,8 @@
 					
 					<td> 
 						<select name="status">
-							<option value="0" selected="selected">차변-</option>
-							<option value="1" >대변-</option>
+							<option value="0" selected="selected">차변</option>
+							<option value="1" >대변</option>
 						</select>
 				   </td>
 				   <!-- Establish -->
@@ -59,31 +60,35 @@
 					
 					<td>
 						<select name="dept">
-						<option value="미등록" selected="selected">-------</option>
-							<c:forEach items="${deptList }" var="dept">
-							<option value="${dept.deptName }">${dept.deptName }</option>
-							</c:forEach>
+							<option value="미등록" selected="selected">-------</option>
+								<c:forEach items="${deptList }" var="dept">
+									<option value="${dept.deptName }">${dept.deptName }</option>
+								</c:forEach>
 						</select>
 					</td>
 					<!-- Client -->
 					<td> <input type="text" id="searchClientValue" name="searchClientValue"/>  		</td>
 				    <td> <input type="button" id="searchClient_btn2" value="검색" data-toggle="modal" data-target="#searchClient_modal"/>	</td>
 					
-					<td> <input type="text" />  </td>
+					<td> <input id="juckyo" name="juckyo" type="text" />  </td>
 					
-					<td> <input type="text" />  </td>
+					<td> <input id="searchPriceValue" type="text" />  </td>
 					
-					<td >  <input type="button" value="등록">  </td>
+					<td> <input id="temporaryAddition" name="temporaryAddition" type="button" value="등록">  </td>
 				</tr>
 			</tbody>
 	  	</table>
 	  		<br />
-	  		<p>
 	  	
-		  		<textarea rows="5" cols="140" readonly>
+		  		<div id="temporaryArea">
 		  		
-		  		</textarea>
-	  		</p>
+		  		</div>
+		  		
+		  		<br />
+		  		
+		  		<div id="cancleBtn_onlySlip">
+		  			<input type="button" class="btn btn-primary" id="cancleOnlySlip" name="cancleOnlySlip" value="작성취소" />
+		  		</div>
   		</center>
   		
   		
@@ -195,7 +200,7 @@
             });                    
             
             //초기값을 오늘 날짜로 설정
-            $('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)            
+            $('#insertSlipDate').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)            
         });
         
   	 });
@@ -299,6 +304,84 @@
   		 
   	 });
     
+  	var detailNo  = 1;
+  	
+  	$("#temporaryAddition").on("click", function(){
+  		
+  		$("#cancleOnlySlip").attr("disabled", true);
+  		/*Validation*/
+
+  		
+  		/*Insert Source*/
+  		var insertSlipNumber		= $("#insertSlipNumber").val();
+  		var insertSelectSlipStatus 	= $("select[name=status]").val();
+  		var insertEstablish			= $("#searchEstablishValue").val();
+  		var insertClientCard		= $("#searchClientValue").val();
+  		var insertPrice				= $("#searchPriceValue").val();
+  		var currval					= $("#currval").val();
+  		var insertSlipDate			= $("#insertSlipDate").val();
+  		var insertDept				= $("select[name=dept]").val();
+  		var juckyo					= $("#juckyo").val();
+  		
+  		$.ajax({
+  			url : "${pageContext.request.contextPath }/insertDetailSlip",
+  			data : "slipDetailNo=" + detailNo + "&status=" + insertSelectSlipStatus + "&price=" + insertPrice + "&clientCard=" + insertClientCard + "&slipNumber=" + insertSlipNumber + "&establishCode=" + insertEstablish + "&currval=" + currval +"&insertSlipDate=" + insertSlipDate + "&insertDept=" + insertDept + "&juckyo=" + juckyo,
+  			success : function(data){
+  				console.log(data);
+  				
+  				$("#temporaryArea").html(data);
+  				
+  			}
+  			
+  		});
+  		
+  		
+  		detailNo++;
+  		
+  	});
+  	
+  	
+  	$(document).keydown(function (e) {
+  	     
+        if (e.which === 116) {
+            if (typeof event == "object") {
+                event.keyCode = 0;
+            }
+            return false;
+        } else if (e.which === 82 && e.ctrlKey) {
+            return false;
+        }
+}); 
+
+  	
+  	$("#cancleOnlySlip").on("click", function(){
+		var answer = confirm("입력하신 전표 데이터가 삭제됩니다. 취소하시겠습니까?");
+		
+		// 확인버튼
+		if(answer){
+			$.ajax({
+				url : "${pageContext.request.contextPath }/cancleOnlySlip",
+				data : "slipNumber=" + $("#currval").val() ,
+				success : function(data){
+					alert("전표입력 정상 취소");
+				$("#insertArea").html("");
+				insertFlag = 0;		
+					
+				}
+				
+			});
+			
+				
+			
+			
+			
+			$("#insertSlipBtn").attr("disabled", false);
+		// 취소버튼 (동작 없음)
+		} else if(!answer){
+			
+		}
+  		
+  	});
 
 
      </script>

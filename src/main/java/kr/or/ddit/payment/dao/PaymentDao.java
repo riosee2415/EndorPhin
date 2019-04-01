@@ -51,4 +51,14 @@ public class PaymentDao implements IPaymentDao{
 		return sqlSessionTemplate.selectList("payment.getPaymentListByUserNm",usernm);
 	}
 
+	@Override
+	public String getMaxPayment() {
+		return sqlSessionTemplate.selectOne("payment.getMaxPayment");
+	}
+
+	@Override
+	public int updatePayment(PaymentVo paymentVo) {
+		return sqlSessionTemplate.update("payment.updatePayment",paymentVo);
+	}
+
 }

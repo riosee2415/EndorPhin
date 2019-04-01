@@ -10,7 +10,7 @@ public class SlipVo {
 	
 	String slipNumber;    //전표 번호
 	String total;		  //총금액
-	 Date slipDate;		  // 전표일
+	Date slipDate;		  // 전표일
 	String departmentName; //부서명
 	String jukyo; 			//적요
 	String status;		   //승인여부 

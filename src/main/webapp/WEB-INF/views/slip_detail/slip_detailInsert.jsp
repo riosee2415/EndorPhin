@@ -5,6 +5,9 @@
 
 
 <input type="hidden" id="currval" value="${currval }" />
+<input type="hidden" id="slipDate" value="${slipDate }" />
+<input type="hidden" id="insertDept" value="${insertDept }" />
+<input type="hidden" id="juckyo" value="${juckyo }" />
 
 <table>
 	<thead>
@@ -37,38 +40,92 @@
 			
 			<c:choose>
 				<c:when test="${list.status  == 0 }">
-					<td><input style="width: 70px;" type="text" value="${list.price }"/></td>
+					<td><input class="left" style="width: 70px;" type="text" value="${list.price }"/></td>
 					<td><input style="width: 70px;" type="text" value=""/></td>
 				</c:when>
 
 				<c:otherwise>
 					<td><input style="width: 70px;" type="text" value=""/></td>
-					<td><input style="width: 70px;" type="text" value="${list.price }"/></td>
+					<td><input class="right" style="width: 70px;" type="text" value="${list.price }"/></td>
 				</c:otherwise>
 			</c:choose>
-			
-			
 		</tr>
 	</c:forEach>
-	
 </table>
+<br />
+<span id="sumLeftText">차변합계 : </span><input type="text" id="sumLeftValue" name="sumLeftValue" readonly>
+<span id="sumRightText">대변합계 : </span><input type="text" id="sumRightValue" name="sumRightValue" readonly>
+
+<br /><br />
 
 <input id="saveSlip" class="btn btn-primary" type="button" value="전표저장" />
 <input id="cancleSlip" class="btn btn-primary" type="button" value="취소" />
 
 
 <script>
-	$("#saveSlip").on("click",function(){
-		$("#insertSlipBtn").attr("disabled", false);
+	
+	var sumLeft = 0;
+	var sumright = 0;
+	
+	$(document).ready(function(){
+		
+		$('.left').each(function(){ 
+			  var text =+ $(this).val(); 
+			  sumLeft = parseInt(sumLeft) + parseInt(text);
+			 
+			});
+		 $("#sumLeftValue").val(sumLeft);
+		 
+
+		$('.right').each(function(){ 
+			  var text =+ $(this).val(); 
+			  sumright = parseInt(sumright) + parseInt(text);
+			 
+			});
+		 $("#sumRightValue").val(sumright);
 	});
 	
 	
 	
 	
 	
+	
+	
+	
+
+	$("#saveSlip").on("click", function(){
+		$("#insertSlipBtn").attr("disabled", false);
+		
+		var sumLeftValue = $("#sumLeftValue").val();
+		var sumRightValue = $("#sumRightValue").val();
+		
+		if(sumLeftValue != sumRightValue){
+			alert("차변과 대변의 금액이 다릅니다. 분개내용을 확인해주세요.");
+			return;
+		}
+		
+		$.ajax({
+			url : "${pageContext.request.contextPath }/finalSaveSlip",
+			data : "slipNumber=" + $("#currval").val() + "&total=" + sumLeftValue + "&slipDate=" + $("#slipDate").val() + "&insertDept=" + $("#insertDept").val() + "&juckyo=" +$("#juckyo").val(),
+			success : function(data){
+				
+				
+				
+				alert("전표가 정상적으로 작성되었습니다.");
+				$("#insertArea").html("");
+				insertFlag = 0;
+				
+			}
+				
+		
+		});
+	});
+
+	
+	
 	$("#cancleSlip").on("click",function(){
 		
-		var answer = confirm("입력하던 전표가 삭제됩니다. 취소하시겠습니까?");
+		var answer = confirm("입력하신 전표 데이터가 삭제됩니다. 취소하시겠습니까?");
 		
 		// 확인버튼
 		if(answer){

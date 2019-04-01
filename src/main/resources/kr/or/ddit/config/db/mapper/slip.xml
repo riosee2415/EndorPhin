@@ -64,6 +64,18 @@
 		 where rn between (#{page}-1)*#{pageSize}+1 and #{page}*#{pageSize}
 	</select>
 	
+	<update id="finalSaveSlip" parameterType="slipVo">
+		UPDATE SLIP
+			SET STATUS = '0',
+				TOTAL = #{total },
+				SLIPDATE = #{slipDate },
+				DEPARTMENTNAME = #{departmentName },
+				JUKYO = #{jukyo }
+			WHERE SLIPNUMBER = #{slipNumber }
+	
+	</update>
+	
+	
 	<!--승인-> 미사용으로 변경 -->
 	<update id="updateSlip" parameterType="String">
 	update slip 
@@ -78,6 +90,8 @@
 		where slipNumber=#{slipNumber}
 	</update>
 	
+	
+	<!-- 날짜검색 승인 상태만 출력  -->
 	<select id="getBetweenSlip" resultType="slipVo" parameterType="map">
 	select slipnumber, total, slipdate, departmentName, jukyo, status as all_slip
 		from slip 
@@ -86,7 +100,7 @@
 		and status= '1' 
 	</select>
 	
-	<!--상태가  0일때만 출력 -->
+	<!-- 날짜검색 미승인 상태만 출력  -->
 	<select id="getBetweenSlip_zero" resultType="slipVo" parameterType="map">
 	select slipnumber, total, slipdate, departmentName, jukyo, status as all_slip
 		from slip 
@@ -94,6 +108,7 @@
 		and to_date(#{post_date},'yy/mm/dd')
 		and status= '0' 
 	</select>
+	
 </mapper>
 
 

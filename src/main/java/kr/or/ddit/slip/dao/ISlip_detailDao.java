@@ -38,5 +38,17 @@ public interface ISlip_detailDao {
 	* Method 설명 : 전표번호로 전표 삭제
 	*/
 	public int deleteSlip_detail(String slipNumber);
+	
+	
+	/**
+	* Method : getDistanguishAccount
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param slipNumber
+	* @param status
+	* @return
+	* Method 설명 : 차/ 대변 합계 구하기 (0 : 차 / 1 : 대)
+	*/
+	public int getDistanguishAccount(String slipNumber, String status);
 
 }

@@ -29,6 +29,17 @@
 		FROM SLIP_DETAIL
 		WHERE SLIPNUMBER = #{slipNumber}
 	</delete>
+	
+	<!-- 차/대변 합계금액 구하기 -->
+	<select id="getDistanguishAccount" parameterType="map" resultType="Integer">
+		SELECT 
+			sum(price)
+		FROM SLIP_DETAIL
+		WHERE SLIPNUMBER = #{slipNumber}
+			AND STATUS = #{status}
+	</select>
+	
+	
 </mapper>
 
 

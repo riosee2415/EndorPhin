@@ -60,17 +60,17 @@
 					
 					<td>
 						<select name="dept">
-						<option value="미등록" selected="selected">-------</option>
-							<c:forEach items="${deptList }" var="dept">
-							<option value="${dept.deptName }">${dept.deptName }</option>
-							</c:forEach>
+							<option value="미등록" selected="selected">-------</option>
+								<c:forEach items="${deptList }" var="dept">
+									<option value="${dept.deptName }">${dept.deptName }</option>
+								</c:forEach>
 						</select>
 					</td>
 					<!-- Client -->
 					<td> <input type="text" id="searchClientValue" name="searchClientValue"/>  		</td>
 				    <td> <input type="button" id="searchClient_btn2" value="검색" data-toggle="modal" data-target="#searchClient_modal"/>	</td>
 					
-					<td> <input type="text" />  </td>
+					<td> <input id="juckyo" name="juckyo" type="text" />  </td>
 					
 					<td> <input id="searchPriceValue" type="text" />  </td>
 					
@@ -82,6 +82,12 @@
 	  	
 		  		<div id="temporaryArea">
 		  		
+		  		</div>
+		  		
+		  		<br />
+		  		
+		  		<div id="cancleBtn_onlySlip">
+		  			<input type="button" class="btn btn-primary" id="cancleOnlySlip" name="cancleOnlySlip" value="작성취소" />
 		  		</div>
   		</center>
   		
@@ -302,6 +308,7 @@
   	
   	$("#temporaryAddition").on("click", function(){
   		
+  		$("#cancleOnlySlip").attr("disabled", true);
   		/*Validation*/
 
   		
@@ -312,10 +319,13 @@
   		var insertClientCard		= $("#searchClientValue").val();
   		var insertPrice				= $("#searchPriceValue").val();
   		var currval					= $("#currval").val();
+  		var insertSlipDate			= $("#insertSlipDate").val();
+  		var insertDept				= $("select[name=dept]").val();
+  		var juckyo					= $("#juckyo").val();
   		
   		$.ajax({
   			url : "${pageContext.request.contextPath }/insertDetailSlip",
-  			data : "slipDetailNo=" + detailNo + "&status=" + insertSelectSlipStatus + "&price=" + insertPrice + "&clientCard=" + insertClientCard + "&slipNumber=" + insertSlipNumber + "&establishCode=" + insertEstablish + "&currval=" + currval,
+  			data : "slipDetailNo=" + detailNo + "&status=" + insertSelectSlipStatus + "&price=" + insertPrice + "&clientCard=" + insertClientCard + "&slipNumber=" + insertSlipNumber + "&establishCode=" + insertEstablish + "&currval=" + currval +"&insertSlipDate=" + insertSlipDate + "&insertDept=" + insertDept + "&juckyo=" + juckyo,
   			success : function(data){
   				console.log(data);
   				
@@ -343,6 +353,35 @@
         }
 }); 
 
+  	
+  	$("#cancleOnlySlip").on("click", function(){
+		var answer = confirm("입력하신 전표 데이터가 삭제됩니다. 취소하시겠습니까?");
+		
+		// 확인버튼
+		if(answer){
+			$.ajax({
+				url : "${pageContext.request.contextPath }/cancleOnlySlip",
+				data : "slipNumber=" + $("#currval").val() ,
+				success : function(data){
+					alert("전표입력 정상 취소");
+				$("#insertArea").html("");
+				insertFlag = 0;		
+					
+				}
+				
+			});
+			
+				
+			
+			
+			
+			$("#insertSlipBtn").attr("disabled", false);
+		// 취소버튼 (동작 없음)
+		} else if(!answer){
+			
+		}
+  		
+  	});
 
 
      </script>

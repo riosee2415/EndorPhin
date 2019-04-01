@@ -57,4 +57,18 @@ public class Slip_detailService implements ISlip_detailService{
 		return slip_detailDao.deleteSlip_detail(slipNumber);
 	}
 
+	/**
+	* Method : getDistanguishAccount
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param slipNumber
+	* @param status
+	* @return
+	* Method 설명 : 차/ 대변 합계 구하기 (0 : 차 / 1 : 대)
+	*/
+	@Override
+	public int getDistanguishAccount(String slipNumber, String status) {
+		return slip_detailDao.getDistanguishAccount(slipNumber, status);
+	}
+
 }

@@ -1,5 +1,8 @@
 package kr.or.ddit.slip.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.ddit.company.model.DeptVo;
 import kr.or.ddit.company.service.IDeptService;
@@ -98,6 +102,41 @@ public class SlipController {
 			model.addAttribute("searchResultData", searchResultData);
 			
 		return "slip/slipSearchAjaxHtml";
+	}
+	
+	
+	@RequestMapping("/cancleOnlySlip")
+	@ResponseBody
+	public String cancleOnlySlip(@RequestParam("slipNumber")String slipNumber) {
+		slipService.deleteSlip(slipNumber);
+		return "전표입력 정상취소";
+	}
+	
+	@RequestMapping("/finalSaveSlip")
+	@ResponseBody
+	public String finalSaveSlip(@RequestParam("slipNumber")String slipNumber
+							,	@RequestParam("total")String total
+							,	@RequestParam("slipDate")String slipDate
+							,	@RequestParam("insertDept")String dept
+							,	@RequestParam("juckyo")String juckyo) {
+		
+		SlipVo slipVo = new SlipVo();
+		slipVo.setSlipNumber(slipNumber);
+		slipVo.setTotal(total);
+		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
+		Date date = null;
+		try {
+			date = sdf.parse(slipDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		slipVo.setSlipDate(date);
+		slipVo.setDepartmentName(dept);
+		slipVo.setJukyo(juckyo);
+		
+		slipService.finalSaveSlip(slipVo);
+		
+		return "";
 	}
 	
 	

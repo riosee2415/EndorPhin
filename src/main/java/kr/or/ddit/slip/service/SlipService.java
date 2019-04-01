@@ -101,4 +101,11 @@ public class SlipService implements ISlipService{
 		return slipDao.getBetweenSlip(pre_date,post_date);
 	}
 
+
+
+	@Override
+	public int finalSaveSlip(SlipVo slipVo) {
+		return slipDao.finalSaveSlip(slipVo);
+	}
+
 }

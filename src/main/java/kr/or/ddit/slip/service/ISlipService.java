@@ -76,4 +76,14 @@ public interface ISlipService {
 	*/
 	public List<SlipVo> getBetweenSlip(String pre_date, String post_date);
 	
+	/**
+	* Method : finalSaveSlip
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param slipVo
+	* @return
+	* Method 설명 : 전표저장 버튼으로 인한 임시전표 -> 최종전표 수정
+	*/
+	public int finalSaveSlip(SlipVo slipVo);
+	
 }

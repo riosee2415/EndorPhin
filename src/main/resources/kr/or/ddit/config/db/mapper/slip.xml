@@ -86,6 +86,17 @@
 		and	departmentname = '인사'
 	</select>
 	
+	<update id="finalSaveSlip" parameterType="slipVo">
+		UPDATE SLIP
+			SET STATUS = '0',
+				TOTAL = #{total },
+				SLIPDATE = #{slipDate },
+				DEPARTMENTNAME = #{departmentName },
+				JUKYO = #{jukyo }
+			WHERE SLIPNUMBER = #{slipNumber }
+	
+	</update>
+	
 	
 </mapper>
 

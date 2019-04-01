@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.or.ddit.slip.model.SlipVo;
 import kr.or.ddit.slip.model.Slip_detailVo;
 import kr.or.ddit.slip.service.ISlipService;
 import kr.or.ddit.slip.service.ISlip_detailService;
@@ -36,7 +37,10 @@ public class Slip_detailController {
 								,	@RequestParam(name="slipNumber")String  slipNumber
 								,	@RequestParam(name="establishCode")String  establishCode
 								,	@RequestParam(name="currval")String  currval
+								,	@RequestParam(name="insertSlipDate")String  insertSlipDate
+								,	@RequestParam(name="insertDept", defaultValue="미등록")String  insertDept
 								,	Model model) {
+		
 		
 		
 		
@@ -57,8 +61,13 @@ public class Slip_detailController {
 		
 		List<Slip_detailVo> slip_detailList = slip_detailService.getSlip_detailBySlipNumber(currval);
 		
+		
+		
 		model.addAttribute("slip_detailList", slip_detailList);
 		model.addAttribute("currval", currval);
+		model.addAttribute("slipDate", insertSlipDate);
+		model.addAttribute("insertDept", insertDept);
+		
 
 		
 		return "slip_detail/slip_detailInsert";

@@ -1,6 +1,8 @@
 package kr.or.ddit.slip.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -61,5 +63,29 @@ public class Slip_detailDao implements ISlip_detailDao{
 	public int deleteSlip_detail(String slipNumber) {
 		return sqlSessionTemplate.delete("slipdetail.deleteSlip_detail", slipNumber);
 	}
+
+
+	/**
+	* Method : getDistanguishAccount
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param slipNumber
+	* @param status
+	* @return
+	* Method 설명 : 차/대변 합계 구하기
+	*/
+	@Override
+	public int getDistanguishAccount(String slipNumber, String status) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("slipNumber", slipNumber);
+		map.put("status", status);
+		
+		return sqlSessionTemplate.selectOne("slipdetail.getDistanguishAccount", map);
+	}
+	
+	
+	
+	
+	
 
 }

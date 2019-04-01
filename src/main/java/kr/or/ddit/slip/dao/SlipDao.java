@@ -102,4 +102,11 @@ public class SlipDao implements ISlipDao{
  		return  sqlSessionTemplate.selectList("slip.getBetweenSlip",map);
 	}
 
+
+
+	@Override
+	public int finalSaveSlip(SlipVo slipVo) {
+		return sqlSessionTemplate.update("slip.finalSaveSlip", slipVo);
+	}
+
 }

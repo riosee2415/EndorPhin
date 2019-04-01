@@ -4,6 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="payment">
 
+	<!-- 개월 차이 구하기 같은 월에 급여 이력이 있으면 등록 못하게 하기 위함 -->
+	<select id="searchPaymentDupl" resultType="String"> 
+		select	to_char(payday,'yyyy-MM-dd')
+		from	payment
+		where   payday between trunc(to_date(#{payDay}),'MM') and last_day(to_date(#{payDay}))
+	</select>
+
 	<!-- 급여 입력 -->
 	<insert id="insertPayment" parameterType="paymentVo">
 		insert into payment

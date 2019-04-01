@@ -5,8 +5,26 @@ import java.util.List;
 public class Payment4UpdVo {
 	private String userid;
 	private String payday;
+	private String payCode;
+	private String deprostatus;
 	private List<String> decdMap;
 	private List<String> decdPayList;
+	
+	
+	public String getDeprostatus() {
+		return deprostatus;
+	}
+	public void setDeprostatus(String deprostatus) {
+		this.deprostatus = deprostatus;
+	}
+	
+	
+	public String getPayCode() {
+		return payCode;
+	}
+	public void setPayCode(String payCode) {
+		this.payCode = payCode;
+	}
 	
 	public List<String> getDecdPayList() {
 		return decdPayList;
@@ -34,7 +52,8 @@ public class Payment4UpdVo {
 	}
 	@Override
 	public String toString() {
-		return "TestVo [userid=" + userid + ", payday=" + payday + ", decdMap=" + decdMap + "]";
+		return "Payment4UpdVo [userid=" + userid + ", payday=" + payday + ", payCode=" + payCode + ", deprostatus="
+				+ deprostatus + ", decdMap=" + decdMap + ", decdPayList=" + decdPayList + "]";
 	}
 	
 }

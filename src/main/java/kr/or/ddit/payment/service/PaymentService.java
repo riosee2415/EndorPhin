@@ -10,6 +10,7 @@ import kr.or.ddit.payment.dao.IPaymentDao;
 import kr.or.ddit.payment.dao.IPayment_DetailDao;
 import kr.or.ddit.payment.model.Payment4UpdVo;
 import kr.or.ddit.payment.model.PaymentVo;
+import kr.or.ddit.payment.model.Payment_detailVo;
 
 @Service("paymentService")
 public class PaymentService implements IPaymentService{
@@ -59,6 +60,8 @@ public class PaymentService implements IPaymentService{
 	@Override
 	public void updateAndInsertPayment(Payment4UpdVo payment4UpdVo) {
 		paymentDao.insertPayment(new PaymentVo( payment4UpdVo.getUserid(),payment4UpdVo.getPayday()));
+		
+
 	}
 	
 	

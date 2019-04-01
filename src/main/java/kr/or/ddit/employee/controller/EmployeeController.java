@@ -216,15 +216,17 @@ public class EmployeeController {
 		
 		return "employeeListTiles";
 	}
+
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	@RequestMapping(path="/getAllEmployeeAjax", method=RequestMethod.GET)
+	@ResponseBody
+	public List<EmployeeVo> getAllEmployeeAjax(Model model) {
+		
+		logger.debug("한미");
+		
+		return employeeService.getAllEmployee();
+		
+	}
 	
 	
 //	

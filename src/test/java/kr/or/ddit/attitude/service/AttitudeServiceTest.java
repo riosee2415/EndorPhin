@@ -11,7 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.or.ddit.Attitude.model.AttitudeVo;
+import kr.or.ddit.Attitude.model.Attitude_recordVo;
 import kr.or.ddit.Attitude.service.IAttitudeService;
+import kr.or.ddit.Attitude.service.IAttitude_recordService;
 import kr.or.ddit.set.LogicConfig;
 
 public class AttitudeServiceTest extends LogicConfig{
@@ -21,6 +23,9 @@ public class AttitudeServiceTest extends LogicConfig{
 	
 	@Resource(name="attitudeService")
 	private IAttitudeService attitudeService;
+	
+	@Resource(name = "attitude_recordService")
+	private IAttitude_recordService attitude_recordService;
 	
 	@Test
 	public void allAttitudeTest() {
@@ -104,6 +109,22 @@ public class AttitudeServiceTest extends LogicConfig{
 			
 		
 	}
+	
+	@Test
+	public void selectAttitude_recordTest() {
+		
+		
+		List<Attitude_recordVo> allAttitude_records = attitude_recordService.getAllAttitude_record();
+		
+		for(Attitude_recordVo allAttitude_record : allAttitude_records){
+			
+			logger.debug("호랑이 : {}",allAttitude_record);
+		}
+		
+		
+	}
+	
+	
 	
 	
 }

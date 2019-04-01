@@ -5,7 +5,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <head>
-
+	  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
 
 
 <style>
@@ -562,6 +562,7 @@ background-color: #6E6867;
 
 		});
 	</script>
+	
 
 	<form id="frm1" action="${cp}/emplPosition/detailEmplPosition" method="get">
 		<input type="hidden" id="delete_no" name="delete_no" />

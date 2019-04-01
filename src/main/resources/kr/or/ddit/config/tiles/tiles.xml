@@ -92,6 +92,15 @@
         </definition>
         
         
+        <definition name="Attitude_recordListTiles" extends="layout"> <!-- 근태 이력 출력 -->
+        	<put-attribute name="content" value="/WEB-INF/views/attitudeRecord/attitudeRecordList.jsp"/>
+        </definition>
+        
+        
+        
+        
+        
+        
         
         
 </tiles-definitions>

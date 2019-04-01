@@ -7,11 +7,11 @@
 	<c:if test="${vo.status == 1}"> 
 	  <tr>
 		<td><input type="checkbox" name="checkRow" value=${vo.slipNumber }></td>
-		<td><a class="detailView" href="#deptDetail" data-slipnumber="${vo.slipNumber }" 
-													 data-slipdate="${vo.slipDate }" 
-													 data-jukyo="${vo.jukyo }"
-													 data-total="${vo.total }"
-													 data-departmentname="${vo.departmentName }"
+		<td><a class="detailView1" href="#approvalDetail" data-detail_slipnumber="${vo.slipNumber }" 
+													 data-detail_slipdate_d="${vo.slipDate }" 
+													 data-detail_jukyo="${vo.jukyo }"
+													 data-detail_total="${vo.total }"
+													 data-detail_departmentname="${vo.departmentName }"
 													 data-toggle="modal">${vo.slipNumber}</a></td>
 													
 		<td><fmt:formatDate value="${vo.slipDate }" pattern="yyyy-MM-dd"/></td>

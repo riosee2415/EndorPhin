@@ -3,19 +3,25 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-
-<c:forEach items="${dateList00 }" var="vo1">
-		<tr>
-			<td> ${vo1.slipNumber }</td>
-			<td><fmt:formatDate value="${vo1.slipDate }" pattern="yyyy-MM-dd"/></td>
-			<td> ${vo1.jukyo }</td>
-			<td> ${vo1.total }</td>
-			<td> ${vo1.departmentName }</td>
-		</tr>
+<c:forEach items="${dateList }" var="vo">
+		 <tr>
+		<td><input type="checkbox" name="checkRow" value=${vo.slipNumber }></td>
+		<td><a class="detailView1" href="#approvalDetail" data-detail_slipnumber="${vo.slipNumber }" 
+													 data-detail_slipdate_d="${vo.slipDate }" 
+													 data-detail_jukyo="${vo.jukyo }"
+													 data-detail_total="${vo.total }"
+													 data-detail_departmentname="${vo.departmentName }"
+													 data-toggle="modal">${vo.slipNumber}</a></td>
+													
+		<td><fmt:formatDate value="${vo.slipDate }" pattern="yyyy-MM-dd"/></td>
+		<td>${vo.jukyo }</td>
+		<td>${vo.total }</td>
+		<td>${vo.departmentName }</td>
+		</tr>	
 </c:forEach>
 
 ================seperator================
-
+<%-- 
 <c:set var="lastPage" value="${Integer(slipCnt/pageSize + (slipCnt%pageSize > 0 ? 1 : 0))}" />
 
 
@@ -30,7 +36,7 @@
 				</li>
 			</c:when>	
 		<c:otherwise>
-			<li><a href="${pageContext.request.contextPath }/approval" aria-label="Previous"></a>
+			<li><a href="${pageContext.request.contextPath }/searchAjax" aria-label="Previous"></a>
 				<span aria-hidden="true">&laquo;</span>
 			</li>
 		</c:otherwise>		
@@ -43,7 +49,7 @@
 			 </c:if>
 			 
 			 <li class="${active }">
-			 	<a href="javascript:searchAjax(${i})">${i}</a>
+			 	<a href="javascript:approvalPageList(${i})">${i}</a>
 			 </li>
 		</c:forEach>
 	<c:choose>
@@ -54,10 +60,10 @@
 			 </a></li>
 		</c:when>
 		<c:otherwise>
-			<li><a href="javascript:searchAjax(${lastPage })" aria-label="Next">
+			<li><a href="javascript:approvalPageList(${lastPage })" aria-label="Next">
 				<span aria-hidden="true">&raquo;</span>
 			</a></li>
 		</c:otherwise>
 	</c:choose>
 </ul>
-</nav>
+</nav> --%>

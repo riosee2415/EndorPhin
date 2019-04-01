@@ -86,7 +86,7 @@
 					</div>
 						<div class="form-group">
 						<label>부서명(*) &nbsp;&nbsp;&nbsp;</label> 
-						<input style="width: 450x;" type="text" name="deptName" id="deptName" placeholder="부서명을 입력하세요"> 
+						<input style="width: 180px;" type="text" name="deptName" id="deptName" placeholder="부서명을 입력하세요"> 
 						
 					</div>	
 					<div class="form-group">

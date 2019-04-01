@@ -1,7 +1,6 @@
 package kr.or.ddit.slip.model;
 
 import java.util.Date;
-
 /**
  * 
  * @author sanghoyun

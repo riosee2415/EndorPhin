@@ -88,9 +88,9 @@ public class SlipListController {
 		
 		Map<String,Object> resultMap = slipService.selectSlipPagingList(pageVo);
 		
-		List<SlipVo> dateList = slipService.getBetweenSlip(before_slipDate,after_slipDate);
-		model.addAttribute("dateList ", dateList);
-		logger.debug("dateList.size {}",dateList.size());
+		List<SlipVo> dateList00 = slipService.getBetweenSlip(before_slipDate,after_slipDate);
+		model.addAttribute("dateList00", dateList00);
+		logger.debug("dateList00.size:{}", dateList00.size());
 		
 		model.addAllAttributes(resultMap);
 		model.addAttribute("pageSize", pageVo.getPageSize());
@@ -99,7 +99,6 @@ public class SlipListController {
 		
 		logger.debug("before_slipDate:{}",before_slipDate);
 		logger.debug("after_slipDate:{}",after_slipDate);
-		logger.debug("dateList:{}",dateList);
 		
 		return "slipList/search_approvalAjax";
 	}

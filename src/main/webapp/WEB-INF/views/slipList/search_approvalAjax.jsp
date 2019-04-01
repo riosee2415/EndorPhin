@@ -3,26 +3,18 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:forEach items="${dateList }" var="vo">	
-	<c:if test="${vo.status == 1}"> 
-	  <tr>
-		<td><input type="checkbox" name="checkRow" value=${vo.slipNumber }></td>
-		<td><a class="detailView" href="#deptDetail" data-slipnumber="${vo.slipNumber }" 
-													 data-slipdate="${vo.slipDate }" 
-													 data-jukyo="${vo.jukyo }"
-													 data-total="${vo.total }"
-													 data-departmentname="${vo.departmentName }"
-													 data-toggle="modal">${vo.slipNumber}</a></td>
-													
-		<td><fmt:formatDate value="${vo.slipDate }" pattern="yyyy-MM-dd"/></td>
-		<td>${vo.jukyo }</td>
-		<td>${vo.total }</td>
-		<td>${vo.departmentName }</td>
-		</tr>	
-	</c:if>
+
+<c:forEach items="${dateList00 }" var="vo1">
+		<tr>
+			<td> ${vo1.slipNumber }</td>
+			<td><fmt:formatDate value="${vo1.slipDate }" pattern="yyyy-MM-dd"/></td>
+			<td> ${vo1.jukyo }</td>
+			<td> ${vo1.total }</td>
+			<td> ${vo1.departmentName }</td>
+		</tr>
 </c:forEach>
 
-================seperator================ 
+================seperator================
 
 <c:set var="lastPage" value="${Integer(slipCnt/pageSize + (slipCnt%pageSize > 0 ? 1 : 0))}" />
 

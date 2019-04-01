@@ -8,11 +8,10 @@
 		<!-- 급여/공제 상세 입력 -->
 	<insert id="insertPayment_detail" parameterType="payment_detailVo">
 		insert into payment_detail
-		(paydetailcode, deductcode, paycode, deductpay,  usestatus)
+		(paydetailcode, deductcode, paycode, deductpay)
 		values
 		(#{payDetailCode},#{deductCode},#{payCode},
-		nvl(#{deductPay, jdbcType=VARCHAR},null),
-		nvl(#{useStatus, jdbcType=VARCHAR},null)
+		nvl(#{deductPay, jdbcType=VARCHAR},null))
 
 	</insert>
 
@@ -20,7 +19,7 @@
 	<!-- 급여/공제 상세  전체 불러오기 -->
 	<select id="getAllPayment_detail" resultType="payment_detailVo">
 		select
-		paydetailcode, deductcode, paycode, deductpay, usestatus
+		paydetailcode, deductcode, paycode, deductpay
 		from payment_detail
 	</select>
 
@@ -29,7 +28,7 @@
 	<select id="selectPayment_detail" resultType="payment_detailVo"
 		parameterType="map">
 		select
-		paydetailcode, deductcode, paycode, deductpay, usestatus
+		paydetailcode, deductcode, paycode, deductpay
 		from
 		payment_detail where paydetailcode = #{payDetailCode}
 	</select>
@@ -45,14 +44,13 @@
 	<select id="selectPayment_detailPaycode" resultType="payment_detailVo"
 		parameterType="map">
 		select
-		paydetailcode, pd.deductcode, pd.paycode, deductpay, pd.usestatus,dpd.deprostatus
+		paydetailcode, pd.deductcode, pd.paycode, deductpay,dpd.deprostatus
 		,to_char(p.payday,'yyyy-MM-dd') payday
 		from
 		payment_detail pd, de_product_div dpd,payment p
         where pd.deductcode=dpd.deductcode
         and p.paycode=pd.paycode
         and pd.paycode=#{paycode}
-        and pd.usestatus=1
 	</select>
 	
 

@@ -13,6 +13,7 @@
 	</style>
 </head>
 <br />
+<input id="currval" type="hidden" value="${currval }" />
 
 	<center>
 	  	<table>
@@ -48,8 +49,8 @@
 					
 					<td> 
 						<select name="status">
-							<option value="0" selected="selected">차변-</option>
-							<option value="1" >대변-</option>
+							<option value="0" selected="selected">차변</option>
+							<option value="1" >대변</option>
 						</select>
 				   </td>
 				   <!-- Establish -->
@@ -71,19 +72,17 @@
 					
 					<td> <input type="text" />  </td>
 					
-					<td> <input type="text" />  </td>
+					<td> <input id="searchPriceValue" type="text" />  </td>
 					
-					<td >  <input type="button" value="등록">  </td>
+					<td> <input id="temporaryAddition" name="temporaryAddition" type="button" value="등록">  </td>
 				</tr>
 			</tbody>
 	  	</table>
 	  		<br />
-	  		<p>
 	  	
-		  		<textarea rows="5" cols="140" readonly>
+		  		<div id="temporaryArea">
 		  		
-		  		</textarea>
-	  		</p>
+		  		</div>
   		</center>
   		
   		
@@ -195,7 +194,7 @@
             });                    
             
             //초기값을 오늘 날짜로 설정
-            $('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)            
+            $('#insertSlipDate').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)            
         });
         
   	 });
@@ -299,6 +298,51 @@
   		 
   	 });
     
+  	var detailNo  = 1;
+  	
+  	$("#temporaryAddition").on("click", function(){
+  		
+  		/*Validation*/
+
+  		
+  		/*Insert Source*/
+  		var insertSlipNumber		= $("#insertSlipNumber").val();
+  		var insertSelectSlipStatus 	= $("select[name=status]").val();
+  		var insertEstablish			= $("#searchEstablishValue").val();
+  		var insertClientCard		= $("#searchClientValue").val();
+  		var insertPrice				= $("#searchPriceValue").val();
+  		var currval					= $("#currval").val();
+  		
+  		$.ajax({
+  			url : "${pageContext.request.contextPath }/insertDetailSlip",
+  			data : "slipDetailNo=" + detailNo + "&status=" + insertSelectSlipStatus + "&price=" + insertPrice + "&clientCard=" + insertClientCard + "&slipNumber=" + insertSlipNumber + "&establishCode=" + insertEstablish + "&currval=" + currval,
+  			success : function(data){
+  				console.log(data);
+  				
+  				$("#temporaryArea").html(data);
+  				
+  			}
+  			
+  		});
+  		
+  		
+  		detailNo++;
+  		
+  	});
+  	
+  	
+  	$(document).keydown(function (e) {
+  	     
+        if (e.which === 116) {
+            if (typeof event == "object") {
+                event.keyCode = 0;
+            }
+            return false;
+        } else if (e.which === 82 && e.ctrlKey) {
+            return false;
+        }
+}); 
+
 
 
      </script>

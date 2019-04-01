@@ -18,7 +18,7 @@
    		  		   #{attachName, jdbcType=NULL},
 	 			   #{attachRealpath, jdbcType=NULL},
 	 			   #{attachRealname, jdbcType=NULL},
-	 	  		   #{boardNo}
+	 	  		   nvl(#{boardNo, jdbcType=VARCHAR}, BOARDNO_SEQ.currval)
 	 	  		   )
 	</insert>
 	
@@ -62,7 +62,7 @@
 	<delete id="attach_boardDelete" parameterType="String">
 		delete from attach_board
 		
-		 where boardno = #{boardno}
+		 where attachcode = #{attachcode}
 	</delete>
 	
 </mapper>

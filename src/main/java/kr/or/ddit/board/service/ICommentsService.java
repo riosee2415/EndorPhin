@@ -37,7 +37,7 @@ public interface ICommentsService {
 	* @return
 	* Method 설명 : 댓글 삭제
 	 */
-	int deleteComments(String commentNo);
+	int deleteComments(String boardNo);
 	
 	/**
 	 * 

@@ -44,6 +44,13 @@ public class Payment_detailVo {
 	public void setUseStatus(String useStatus) {
 		this.useStatus = useStatus;
 	}
+	public Payment_detailVo(String payDetailCode, String deductCode, String payCode, String deductPay) {
+		super();
+		this.payDetailCode = payDetailCode;
+		this.deductCode = deductCode;
+		this.payCode = payCode;
+		this.deductPay = deductPay;
+	}
 	
 	
 

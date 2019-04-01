@@ -43,6 +43,7 @@
 	
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	
+	
 
 <style>
 	
@@ -102,11 +103,13 @@
  	  <script src="/resources/js/demo/datatables-demo.js"></script> 
 	 
 	 
-	 <!-- 충돌방지 -->
+
 	 <!-- DATE API -->
-	 
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
+	 <!-- Dialog Box -->
+
+	 <!-- 충돌방지 -->	
 	<script type="text/javascript">
 		//jQuery.noConflict();
 		//var j$ = jQuery;

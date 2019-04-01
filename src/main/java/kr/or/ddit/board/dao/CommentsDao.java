@@ -55,8 +55,8 @@ public class CommentsDao implements ICommentsDao{
 	* Method 설명 : 댓글 삭제
 	 */
 	@Override
-	public int deleteComments(String commentNo) {
-		int deleteComments = sqlSession.delete("comments.deleteComments", commentNo);
+	public int deleteComments(String boardNo) {
+		int deleteComments = sqlSession.delete("comments.deleteComments", boardNo);
 		return deleteComments;
 	}
 

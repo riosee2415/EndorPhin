@@ -59,8 +59,8 @@ public class CommentsService implements ICommentsService{
 	* Method 설명 : 댓글 삭제
 	 */
 	@Override
-	public int deleteComments(String commentNo) {
-		int deleteComments = commentsDao.deleteComments(commentNo);
+	public int deleteComments(String boardNo) {
+		int deleteComments = commentsDao.deleteComments(boardNo);
 		return deleteComments;
 	}
 

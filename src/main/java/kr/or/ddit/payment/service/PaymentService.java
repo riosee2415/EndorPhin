@@ -60,8 +60,14 @@ public class PaymentService implements IPaymentService{
 	@Override
 	public void updateAndInsertPayment(Payment4UpdVo payment4UpdVo) {
 		paymentDao.insertPayment(new PaymentVo( payment4UpdVo.getUserid(),payment4UpdVo.getPayday()));
-		
-
+		String maxPayment = paymentDao.getMaxPayment();
+		for (int i = 0; i < payment4UpdVo.getDecdPayList().size(); i++) {
+			payment_detailDao.insertPayment_detail(new Payment_detailVo(""+(i+1), 
+					payment4UpdVo.getDecdMap().get(i), maxPayment, payment4UpdVo.getDecdPayList().get(i)));
+		}
+		PaymentVo paymentVo = new PaymentVo();
+		paymentVo.setPayCode(maxPayment);
+		paymentDao.updatePayment(paymentVo);
 	}
 	
 	

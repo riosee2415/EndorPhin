@@ -158,25 +158,25 @@ public class DeptController {
 	}
 	
 	//사용, 미사용 여부 
-		@RequestMapping(path="/useDept", method=RequestMethod.GET)
-		public String useDept(DeptVo deptVo, Model model, @RequestParam("frm_usestatus") String frm_usestatus
-														 ,@RequestParam("frm_deptCode") String frm_deptCode){
-			
-			deptVo.setDeptCode(frm_deptCode);
-			deptVo.setUseStatus(frm_usestatus);
-			
-			logger.debug("======================");
-			logger.debug("frm_deptCode : {}" , frm_deptCode);
-			logger.debug("use_status : {}" ,frm_usestatus);
-			
-			int update = deptService.upateStatusDept(deptVo);
-			
-			if(update > 0){
-				return "redirect:/deptList";
-			}
-			else{
-				return "redirect:/deptList";
-			}
+	@RequestMapping(path="/useDept", method=RequestMethod.GET)
+	public String useDept(DeptVo deptVo, Model model, @RequestParam("frm_usestatus") String frm_usestatus
+													 ,@RequestParam("frm_deptCode") String frm_deptCode){
+		
+		deptVo.setDeptCode(frm_deptCode);
+		deptVo.setUseStatus(frm_usestatus);
+		
+		logger.debug("======================");
+		logger.debug("frm_deptCode : {}" , frm_deptCode);
+		logger.debug("use_status : {}" ,frm_usestatus);
+		
+		int update = deptService.upateStatusDept(deptVo);
+		
+		if(update > 0){
+			return "redirect:/deptList";
 		}
+		else{
+			return "redirect:/deptList";
+		}
+	}
 	
 }

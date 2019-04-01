@@ -90,6 +90,7 @@
   	<mapper resource="kr/or/ddit/config/db/mapper/sales_detail.xml"/>
   	<mapper resource="kr/or/ddit/config/db/mapper/shipment.xml"/>
   	<mapper resource="kr/or/ddit/config/db/mapper/slip.xml"/>
+  	<mapper resource="kr/or/ddit/config/db/mapper/slip_detail.xml"/>
   	<mapper resource="kr/or/ddit/config/db/mapper/surtax.xml"/>
   	<mapper resource="kr/or/ddit/config/db/mapper/tax_cal.xml"/>
   	<mapper resource="kr/or/ddit/config/db/mapper/warehouse.xml"/>

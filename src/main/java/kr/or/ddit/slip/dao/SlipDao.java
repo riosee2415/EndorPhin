@@ -102,4 +102,15 @@ public class SlipDao implements ISlipDao{
  		return  sqlSessionTemplate.selectList("slip.getBetweenSlip",map);
 	}
 
+
+
+	@Override
+	public List<SlipVo> getBetweenSlip_zero(String pre_date, String post_date) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("pre_date", pre_date);
+		map.put("post_date", post_date);
+		
+ 		return  sqlSessionTemplate.selectList("slip.getBetweenSlip_zero",map);
+	}
+
 }

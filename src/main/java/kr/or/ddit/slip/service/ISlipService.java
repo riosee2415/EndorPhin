@@ -76,4 +76,6 @@ public interface ISlipService {
 	*/
 	public List<SlipVo> getBetweenSlip(String pre_date, String post_date);
 	
+	public List<SlipVo> getBetweenSlip_zero(String pre_date, String post_date);
+	
 }

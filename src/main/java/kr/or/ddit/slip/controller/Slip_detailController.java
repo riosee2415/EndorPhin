@@ -99,6 +99,16 @@ public class Slip_detailController {
 		return "slip_detail/modalDetailView";
 	}
 	
+	@RequestMapping("/deleteSlip_detail_one")
+	@ResponseBody
+	public String deleteSlip_detail_one(@RequestParam("slipNumber")String slipNumber
+									,	@RequestParam("detailNum")String detailNum) {
+		
+			slip_detailService.deleteSlip_detail_one(slipNumber, detailNum);
+		
+		return "상세전표 1개가 삭제되었습니다.";
+	}
+	
 	
 	
 	

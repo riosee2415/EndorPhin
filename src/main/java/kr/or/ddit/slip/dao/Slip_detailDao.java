@@ -82,6 +82,19 @@ public class Slip_detailDao implements ISlip_detailDao{
 		
 		return sqlSessionTemplate.selectList("slipdetail.getDistanguishAccount", map);
 	}
+
+
+	@Override
+	public int deleteSlip_detail_one(String slipNumber, String slipDetailNo) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("slipNumber", slipNumber);
+		map.put("slipDetailNo", slipDetailNo);
+		
+		return sqlSessionTemplate.delete("slipdetail.deleteSlip_detail_one", map);
+	}
+	
+	
+	
 	
 	
 	

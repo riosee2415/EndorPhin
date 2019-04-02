@@ -1,5 +1,6 @@
 package kr.or.ddit.attitude.service;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.or.ddit.Attitude.model.AttitudeVo;
+import kr.or.ddit.Attitude.model.Attitude_recordVo;
 import kr.or.ddit.Attitude.service.IAttitudeService;
+import kr.or.ddit.Attitude.service.IAttitude_recordService;
 import kr.or.ddit.set.LogicConfig;
 
 public class AttitudeServiceTest extends LogicConfig{
@@ -21,6 +24,9 @@ public class AttitudeServiceTest extends LogicConfig{
 	
 	@Resource(name="attitudeService")
 	private IAttitudeService attitudeService;
+	
+	@Resource(name = "attitude_recordService")
+	private IAttitude_recordService attitude_recordService;
 	
 	@Test
 	public void allAttitudeTest() {
@@ -104,6 +110,95 @@ public class AttitudeServiceTest extends LogicConfig{
 			
 		
 	}
+	
+	@Test
+	public void selectAttitude_recordTest() {
+		
+		
+		List<Attitude_recordVo> allAttitude_records = attitude_recordService.getAllAttitude_record();
+		
+		for(Attitude_recordVo allAttitude_record : allAttitude_records){
+			
+			logger.debug("호랑이 : {}",allAttitude_record);
+		}
+		
+		
+	}
+	
+	
+	@Test
+	public void insertAttitude_recordTest() {
+		
+		Attitude_recordVo vo = new Attitude_recordVo();
+		
+		vo.setUserid("2");
+		vo.setStartday("2018-01-01");
+		vo.setEndday("2018-01-02");
+		vo.setStatus("승인");
+		vo.setAttitudememo("테스트");
+		vo.setAttitudecode("1");
+		
+		
+		attitude_recordService.insertAttitude_record(vo);
+		
+		
+	}
+	
+	
+	
+	
+	
+	@Test
+	public void test() {
+		
+		
+		
+		
+		Attitude_recordVo vo = new Attitude_recordVo();
+		
+		vo.setUserid("2,65,3");
+		vo.setStartday("2018-05-01");
+		vo.setEndday("2018-05-02");
+		vo.setStatus("승인");
+		vo.setAttitudememo("11일휴가");
+		vo.setAttitudecode("1");
+		
+			String[] temp =  vo.getUserid().split(",");
+		
+		
+		Attitude_recordVo userVo = new Attitude_recordVo();
+		
+		
+		for (int i = 0; i < temp.length; i++) {
+			userVo.setUserid(temp[i]);
+			userVo.setStartday(vo.getStartday());
+			userVo.setEndday(vo.getEndday());
+			userVo.setStatus("승인");
+			userVo.setAttitudememo(vo.getAttitudememo());
+			userVo.setAttitudecode(vo.getAttitudecode());
+			
+			attitude_recordService.insertAttitude_record(userVo);
+			
+			
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

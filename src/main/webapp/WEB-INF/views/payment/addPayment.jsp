@@ -34,6 +34,8 @@
 			<tr class="payTr" data-userid="${vo.userId }">
 				<td><a href="#detailLayer" data-toggle="modal"
 			data-target="#my80sizeModal" class="paymentDetail">${vo.userId }</a></td>
+				<c:set var="totalSalarysum" value="${totalSalarysum+vo.totalSalary}"/>
+				<c:set var="totalWagesum" value="${totalWagesum+vo.totalWage}"/>
 				<td>${vo.positionname}</td>
 				<td>${vo.usernm}</td>
 				<td>${vo.deptname}</td>
@@ -43,6 +45,15 @@
 			</tr>
 		</c:forEach>
 	</tbody>
+	<tfoot align="center" >
+		<tr>
+			<td>계</td>
+			<td>총 급여 : </td>
+			<td colspan="2">${totalSalarysum}</td>
+			<td>총 공제 :</td>
+			<td colspan="2">${totalWagesum}</td>
+		</tr>
+	</tfoot>
 </table>
 
 <!-- 80% size Modal  등록 모달 창-->
@@ -106,7 +117,6 @@
 						<a data-toggle="modal" href="#myModal4" class="btn btn-primary" id="modalAddDeduct">공제 등록</a>
 				</div>
 			</div>
-				
 		</div>
 	</div>
 </div>

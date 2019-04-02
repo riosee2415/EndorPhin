@@ -71,4 +71,10 @@ public class Slip_detailService implements ISlip_detailService{
 		return slip_detailDao.getDistanguishAccount(slipNumber, status);
 	}
 
+
+	@Override
+	public int deleteSlip_detail_one(String slipNumber, String slipDetailNo) {
+		return slip_detailDao.deleteSlip_detail_one(slipNumber, slipDetailNo);
+	}
+
 }

@@ -23,7 +23,7 @@
 		WHERE SLIPNUMBER = #{slipNumber}
 	</select>
 
-	
+	<!-- 상세전표삭제하기 -->
 	<delete id="deleteSlip_detail" parameterType="String">
 		DELETE 
 		FROM SLIP_DETAIL
@@ -37,6 +37,15 @@
 		FROM SLIP_DETAIL
 		WHERE SLIPNUMBER = #{slipNumber}
 	</select>
+	
+	<!-- 상세전표삭제하기 : 전표번호 + 전표상세번호 -->
+	<delete id="deleteSlip_detail_one" parameterType="map">
+		DELETE 
+		FROM SLIP_DETAIL
+		WHERE SLIPNUMBER = #{slipNumber}
+			AND SLIPDETAILNO = #{slipDetailNo}
+	</delete>
+	
 	
 	
 </mapper>

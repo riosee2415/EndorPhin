@@ -56,7 +56,6 @@
 			
 			
 			
-			
 			<!-- 근태항목 선택하여 가져오기 -->
 	<select id="SearchAttitude" resultType="attitudeVo"
 		parameterType="attitudeVo">

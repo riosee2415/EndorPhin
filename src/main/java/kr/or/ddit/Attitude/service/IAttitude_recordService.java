@@ -1,10 +1,11 @@
-package kr.or.ddit.Attitude.dao;
+package kr.or.ddit.Attitude.service;
 
 import java.util.List;
 
+import kr.or.ddit.Attitude.model.AttitudeVo;
 import kr.or.ddit.Attitude.model.Attitude_recordVo;
 
-public interface IAttitude_recordDao {
+public interface IAttitude_recordService {
 	
 	/**
 	* Method : getAllAttitude
@@ -73,5 +74,29 @@ public interface IAttitude_recordDao {
 	* Method 설명 : 선택 이력 가져오기
 	*/
 	public Attitude_recordVo SelectAttitude_record(String code);
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

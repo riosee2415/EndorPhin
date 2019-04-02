@@ -50,5 +50,18 @@ public interface ISlip_detailDao {
 	* Method 설명 : 차/ 대변 합계 구하기 (0 : 차 / 1 : 대)
 	*/
 	public List<Slip_detailVo> getDistanguishAccount(String slipNumber, String status);
+	
+	
+	
+	/**
+	* Method : deleteSlip_detail_one
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param slipNumber
+	* @param slipDetailNo
+	* @return
+	* Method 설명 : 전표번호, 전표상세번호로 전표 하나 삭제하기
+	*/
+	public int deleteSlip_detail_one(String slipNumber, String slipDetailNo);
 
 }

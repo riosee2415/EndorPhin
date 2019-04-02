@@ -1,6 +1,7 @@
 package kr.or.ddit.payment.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -68,7 +69,7 @@ public class PaymentService implements IPaymentService{
 
 	@Override
 	public boolean updateAndInsertPayment(Payment4UpdVo payment4UpdVo) {
-		String searchPaymentDupl = paymentDao.searchPaymentDupl(payment4UpdVo.getPayday());
+		String searchPaymentDupl = paymentDao.searchPaymentDupl(new PaymentVo(payment4UpdVo.getUserid(),payment4UpdVo.getPayday()));
 		if(searchPaymentDupl==null){
 			paymentDao.insertPayment(new PaymentVo( payment4UpdVo.getUserid(),payment4UpdVo.getPayday()));
 			String maxPayment = paymentDao.getMaxPayment();
@@ -102,6 +103,16 @@ public class PaymentService implements IPaymentService{
 		paymentVo.setPayCode(payment4UpdVo.getPayCode());
 		paymentVo.setPayDay(payment4UpdVo.getPayday());
 		paymentDao.updatePayment(paymentVo);
+	}
+
+	@Override
+	public List<PaymentVo> selectTotalSalaryByDay(String payDay) {
+		return paymentDao.selectTotalSalaryByDay(payDay);
+	}
+
+	@Override
+	public List<PaymentVo> selectPersonalPaymentList(Map<String, Object> payDay) {
+		return paymentDao.selectPersonalPaymentList(payDay);
 	}
 	
 	

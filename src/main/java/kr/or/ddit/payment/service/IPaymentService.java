@@ -1,6 +1,7 @@
 package kr.or.ddit.payment.service;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.or.ddit.payment.model.Payment4UpdVo;
 import kr.or.ddit.payment.model.PaymentVo;
@@ -15,4 +16,6 @@ public interface IPaymentService {
 	List<PaymentVo> getPaymentListByUserNm(String usernm);
 	boolean updateAndInsertPayment(Payment4UpdVo payment4UpdVo);
 	void updatePaymentDetailAjax(Payment4UpdVo payment4UpdVo);
+	List<PaymentVo> selectTotalSalaryByDay(String payDay);
+	List<PaymentVo> selectPersonalPaymentList(Map<String, Object> payDay);
 }

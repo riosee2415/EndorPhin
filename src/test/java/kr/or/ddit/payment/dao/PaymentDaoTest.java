@@ -2,7 +2,9 @@ package kr.or.ddit.payment.dao;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -22,7 +24,7 @@ public class PaymentDaoTest extends LogicConfig{
 	
 	@Test
 	public void searchPaymentDupl(){
-		String searchPaymentDupl = paymentDao.searchPaymentDupl("20190311");
+		String searchPaymentDupl = paymentDao.searchPaymentDupl(new PaymentVo("1","20190311"));
 		logger.debug("asdfljnsadf:{}",searchPaymentDupl);
 	}
 	
@@ -66,6 +68,19 @@ public class PaymentDaoTest extends LogicConfig{
 	public void deletePaymentTest() {
 		int deletePayment = paymentDao.deletePayment("2");
 		assertEquals(1, deletePayment);
+	}
+	@Test
+	public void selectTotalSalaryByDayTest() {
+		List<PaymentVo> selectTotalSalaryByDay = paymentDao.selectTotalSalaryByDay("201903");
+		assertTrue(selectTotalSalaryByDay.size()>0);
+	}
+	@Test
+	public void selectPersonalPaymentListTest() {
+		Map<String, Object> payDay=new HashMap<>();
+		payDay.put("paydayTo", "2019-03-15");
+		payDay.put("paydayFrom", "2019-04-02");
+		List<PaymentVo> selectTotalSalaryByDay = paymentDao.selectPersonalPaymentList(payDay);
+		logger.debug("asdfkasdf:{}",selectTotalSalaryByDay.size());
 	}
 
 }

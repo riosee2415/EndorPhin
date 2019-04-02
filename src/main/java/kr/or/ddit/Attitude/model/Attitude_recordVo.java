@@ -9,38 +9,47 @@ import java.util.Date;
  */
 public class Attitude_recordVo {
 	
-	String userId;
-	Date startDay;
-	Date endDay;
-	String attitudeMemo;
-	String status;
-	String statusName;
-	String attitudeCode;
+	String userid; //사원번호
+	String startday; //휴가시작일
+	String endday;  //휴가종료일
+	String attitudememo ;//특이사항 메모
+	String status;  //승인여부
+	String statusname;
+	String attitudecode; //근태코드
+	String days; //일수
 	
 	
-	public String getUserId() {
-		return userId;
+	
+	
+	
+	//조인 컬럼
+	String usernm; //사원명
+	String deptname; //부서명
+	String attitudename; //근태명
+	String basedays; //일수
+	public String getUserid() {
+		return userid;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
-	public Date getStartDay() {
-		return startDay;
+	public String getStartday() {
+		return startday;
 	}
-	public void setStartDay(Date startDay) {
-		this.startDay = startDay;
+	public void setStartday(String startday) {
+		this.startday = startday;
 	}
-	public Date getEndDay() {
-		return endDay;
+	public String getEndday() {
+		return endday;
 	}
-	public void setEndDay(Date endDay) {
-		this.endDay = endDay;
+	public void setEndday(String endday) {
+		this.endday = endday;
 	}
-	public String getAttitudeMemo() {
-		return attitudeMemo;
+	public String getAttitudememo() {
+		return attitudememo;
 	}
-	public void setAttitudeMemo(String attitudeMemo) {
-		this.attitudeMemo = attitudeMemo;
+	public void setAttitudememo(String attitudememo) {
+		this.attitudememo = attitudememo;
 	}
 	public String getStatus() {
 		return status;
@@ -48,17 +57,55 @@ public class Attitude_recordVo {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public String getStatusName() {
-		return statusName;
+	public String getStatusname() {
+		return statusname;
 	}
-	public void setStatusName(String statusName) {
-		this.statusName = statusName;
+	public void setStatusname(String statusname) {
+		this.statusname = statusname;
 	}
-	public String getAttitudeCode() {
-		return attitudeCode;
+	public String getAttitudecode() {
+		return attitudecode;
 	}
-	public void setAttitudeCode(String attitudeCode) {
-		this.attitudeCode = attitudeCode;
+	public void setAttitudecode(String attitudecode) {
+		this.attitudecode = attitudecode;
+	}
+	public String getUsernm() {
+		return usernm;
+	}
+	public void setUsernm(String usernm) {
+		this.usernm = usernm;
+	}
+	public String getDeptname() {
+		return deptname;
+	}
+	public void setDeptname(String deptname) {
+		this.deptname = deptname;
+	}
+	public String getAttitudename() {
+		return attitudename;
+	}
+	public void setAttitudename(String attitudename) {
+		this.attitudename = attitudename;
+	}
+	public String getBasedays() {
+		return basedays;
+	}
+	public void setBasedays(String basedays) {
+		this.basedays = basedays;
+	}
+	
+	public String getDays() {
+		return days;
+	}
+	public void setDays(String days) {
+		this.days = days;
+	}
+	@Override
+	public String toString() {
+		return "Attitude_recordVo [userid=" + userid + ", startday=" + startday + ", endday=" + endday
+				+ ", attitudememo=" + attitudememo + ", status=" + status + ", statusname=" + statusname
+				+ ", attitudecode=" + attitudecode + ", usernm=" + usernm + ", deptname=" + deptname + ", attitudename="
+				+ attitudename + ", basedays=" + basedays + "]";
 	}
 	
 	

@@ -12,7 +12,7 @@
 
     
     
-    <ul class="navbar-nav ml-auto ml-md-10" style="font-size: 1.5em">
+    <ul class="navbar-nav ml-auto ml-md-10" style="font-size: 1.3em">
     
      <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -43,6 +43,10 @@
           <a class="dropdown-item" href="${pageContext.request.contextPath }/slipview">일반 전표</a>
           <a class="dropdown-item" href="">매출세금계산서 입력</a>
           <a class="dropdown-item" href="${pageContext.request.contextPath }/approval">승인전표</a>
+            <h3 class="dropdown-header">고정자산</h3>
+            <a class="dropdown-item" href="${pageContext.request.contextPath }/purchaseAsset">고정자산 등록</a>
+            <a class="dropdown-item" href="${pageContext.request.contextPath }/sellAsset">고정자산 매각</a>
+            <a class="dropdown-item" href="${pageContext.request.contextPath }/useAsset">감가상각비</a>
         </div>
       </li>
       

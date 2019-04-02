@@ -2,7 +2,6 @@ package kr.or.ddit.company.dao;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -10,7 +9,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.or.ddit.company.model.CardsVo;
-import kr.or.ddit.order.model.ClientVo;
 
 @Repository("cardsDao")
 public class CardsDao implements ICardsDao{

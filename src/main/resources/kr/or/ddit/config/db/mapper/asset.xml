@@ -6,10 +6,10 @@
 
 	<!-- 자산 조회하기 -->
 	<select id="getAllAsset" resultType="assetVo">
-		SELECT
+        SELECT
 	        ASSETCODE, 
 	        ASSETNAME, 
-	        ACQUISITIONDATE, 
+	        acquisitionDate, 
 	        ACCOUNTNAME, 
 	        CLIENTNAME, 
 	        SANGGAKWAY, 
@@ -20,7 +20,8 @@
 	        JUKYO, 
 	        UNITPRICE, 
 	        QUANTITY, 
-	        COMPANYCODE
+	        COMPANYCODE,
+	        sanggakCode
 	    FROM ASSET
 	</select>
 	
@@ -28,12 +29,31 @@
 	<!-- 자산 추가하기 -->
 	<insert id="insertAsset" parameterType="assetVo">
 		INSERT INTO ASSET
-        (ASSETCODE, ASSETNAME, ACQUISITIONDATE, ACCOUNTNAME, CLIENTNAME, SANGGAKWAY, ACQUISITIONPRICE, SLIPNUMBER, RESIDUALVALUE, UNIT, JUKYO, UNITPRICE, QUANTITY, COMPANYCODE)
-    VALUES
-        (#{assetCode},#{assetName},#{acquistionDate},#{accountName},#{clientName},#{sanggakWay},#{acquistionPrice},#{slipNumber},#{residualvalue},#{unit},#{juckyo},#{unitPrice},#{quantity},#{companyCode})
-	</insert>
+        (ASSETCODE, ASSETNAME, ACQUISITIONDATE, ACCOUNTNAME, CLIENTNAME, SANGGAKWAY, acquisitionPrice, 
+          RESIDUALVALUE, UNIT, JUKYO, UNITPRICE, QUANTITY,sanggakCode)
+   		 VALUES
+        (#{assetCode},#{assetName},#{acquisitionDate},#{accountName},#{clientName},#{sanggakWay},
+        #{acquisitionPrice},#{residualvalue},#{unit},#{jukyo},#{unitPrice},#{quantity},#{sanggakCode})
+	
+	</insert>               
 
-
+	<update id="updateAsset" parameterType="assetVo">
+		 update asset set 
+					assetName  = #{assetName},
+					acquisitionDate = #{acquisitionDate},
+					accountName = #{accountName},
+					clientName = #{clientName},
+					sanggakWay  = #{sanggakWay},
+					acquisitionPrice = #{acquisitionPrice},
+					slipNumber = #{slipNumber},
+					residualvalue = #{residualvalue},
+					unit = #{unit},
+					jukyo = #{jukyo},
+					unitPrice = #{unitPrice},
+					quantity = #{quantity},
+					sanggakCode = #{sanggakCode}
+		     where  assetCode = #{assetCode}
+	</update>
 </mapper>
 
 

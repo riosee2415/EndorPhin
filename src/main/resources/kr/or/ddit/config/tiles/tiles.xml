@@ -120,6 +120,9 @@
         	<put-attribute name="content" value="/WEB-INF/views/board/postUpdate.jsp"/>
         </definition>
         
+        <definition name="freeboardTest" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/board/freeboardTest.jsp"/>
+        </definition>
         
         
         

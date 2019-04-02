@@ -1,13 +1,10 @@
-package kr.or.ddit.slip.dao;
+package kr.or.ddit.slip.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
 import kr.or.ddit.slip.model.AssetVo;
 
-@Repository("assetDao")
-public interface IAssetDao {
+public interface IAssetService {
 
 	List<AssetVo> getAllAsset();
 	

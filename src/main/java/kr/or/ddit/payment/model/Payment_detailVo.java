@@ -6,19 +6,18 @@ package kr.or.ddit.payment.model;
  */
 public class Payment_detailVo {
 	
-	String payDetailCode;
 	String deductCode;
 	String payCode;
 	String deductPay;
-	String useStatus;
+	String deprostatus;
 	
+	public String getDeprostatus() {
+		return deprostatus;
+	}
+	public void setDeprostatus(String deprostatus) {
+		this.deprostatus = deprostatus;
+	}
 	public Payment_detailVo() {
-	}
-	public String getPayDetailCode() {
-		return payDetailCode;
-	}
-	public void setPayDetailCode(String payDetailCode) {
-		this.payDetailCode = payDetailCode;
 	}
 	public String getDeductCode() {
 		return deductCode;
@@ -38,18 +37,20 @@ public class Payment_detailVo {
 	public void setDeductPay(String deductPay) {
 		this.deductPay = deductPay;
 	}
-	public String getUseStatus() {
-		return useStatus;
-	}
-	public void setUseStatus(String useStatus) {
-		this.useStatus = useStatus;
-	}
-	public Payment_detailVo(String payDetailCode, String deductCode, String payCode, String deductPay) {
-		super();
-		this.payDetailCode = payDetailCode;
+	public Payment_detailVo(String deductCode, String payCode, String deductPay) {
 		this.deductCode = deductCode;
 		this.payCode = payCode;
 		this.deductPay = deductPay;
+	}
+	public Payment_detailVo(String deductCode, String payCode) {
+		this.deductCode = deductCode;
+		this.payCode = payCode;
+	}
+	public Payment_detailVo(String deductCode, String payCode, String deductPay, String deprostatus) {
+		this.deductCode = deductCode;
+		this.payCode = payCode;
+		this.deductPay = deductPay;
+		this.deprostatus = deprostatus;
 	}
 	
 	

@@ -6,8 +6,8 @@
 	<h2>승인 전표 </h2>	
 	<br>
 	<br>
-	전표일자 &nbsp<input name="before_slipDate" id="before_slipDate" type="text" value="19/03/13" />
-	- &nbsp<input name="after_slipDate" id="after_slipDate" type="text" value="19/03/15"/>
+	전표일자 &nbsp<input name="before_slipDate" id="before_slipDate" type="text" />
+	- &nbsp<input name="after_slipDate" id="after_slipDate" type="text"/>
 	&nbsp<input type="button" id="serachBtn" value="검색" /><br>
 	<br>
 <div class="form-group">
@@ -16,11 +16,11 @@
 			<thead class="thead">
 				<tr>
 					<th><input type="checkbox" name="allCheck" id="th_allCheck" onclick="allCheck();"></th>
-					<th>전표번호1</th>
+					<th>전표번호</th>
 					<th>전표일자</th>
 					<th>적요</th>
 					<th>전표금액</th>
-					<th>전표유형</th>
+					<th>사용부서</th>
 				</tr>
 			</thead>
 			<tbody id="deptListTbody">
@@ -41,16 +41,15 @@
 	
 	<div class="modal-footer">
 		<button name="upd_btn"  id="upd_btn" type="button" value="0" onclick="myclick()">승인 취소 </button>
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#my80sizeCenterModal">등록</button>
 	</div>
 			
 	<!-----------------상세보기  모달창 ---------------->	
 	
-	<div class="modal fade" id="deptDetail" role="deptDetail" aria-hidden="true"> 
+	<div class="modal fade" id="approvalDetail" role="approvalDetail" aria-hidden="true"> 
    		<div class="modal-dialog">
    			 <div class="modal-content"> 
 	   			<div class="modal-header"> 
-	   				<label>| 부서등록</label>
+	   				<label>| 승인상세보기</label>
 	   				<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -59,24 +58,27 @@
 	   			</div> 
 	   			<div class="modal-body"> 
 	   				<div class="form-group">
-	   					<label for="InputEmail">부서코드(*)</label> 
-	   					<input type="text" id="upd_deptCode" name="upd_deptCode" readonly>
+	   					<label for="InputEmail">전표번호</label> 
+	   					<input type="text" style="width: 200px;" id="slipnumber_d" name="slipnumber_d" readonly>
 	   				</div>
-	   					<div class="form-group">
-	   					<label for="InputEmail">부서명 (*)&nbsp;&nbsp;</label> 
-	   					<input type="text" name="upd_deptName" id="upd_deptName"  > 
+	   				<div class="form-group">
+	   					<label for="InputEmail">전표일자</label> 
+	   					<input type="text" style="width: 250px;" name="slipdate_d" id="slipdate_d"  > 
 	   				</div>
-	   					<div class="form-group">
-	   					<label for="InputEmail">회사 코드 &nbsp;&nbsp;</label> 
-	   					<input type="text" id="upd_companyCode" name="upd_companyCode" />
-	   					<input type="button" data-toggle="modal" data-target="#my80sizeModal2" value="검색" >
+	   				<div class="form-group">
+	   					<label for="InputEmail">적요&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+	   					<input type="text" style="width: 250px;" id="jukyo_d" name="jukyo_d" />
 	   				</div>
-	   			<div class="modal-footer">
-	   			
-					<button id="yes_Btn" name="yes_Btn" class="btn btn-default" data-dismiss="modal"  value="1" style="background: #486068; color: #ffffff"></button>
-	   				<!-- <input type="hidden" id="no_Btn" name="no_Btn" class="btn btn-default" data-dismiss="modal" value="0" style="background: #ff8e77; color: #ffffff"> -->
+	   				<div class="form-group">
+	   					<label for="InputEmail">전표금액</label> 
+	   					<input type="text" style="width: 250px;" name="total_d" id="total_d"  > 
+	   				</div>
+	   				<div class="form-group">
+	   					<label for="InputEmail">전표유형</label> 
+	   					<input type="text" style="width: 250px;" name="departmentname_d" id="departmentname_d"  > 
+	   				</div>
 	   				
-	   				<button type="button" id="modalUpdateBtn" class="btn btn-default" data-dismiss="modal" >수정</button>
+	   			<div class="modal-footer">
 	   			
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
    				</div> 
@@ -98,28 +100,6 @@
 	
     <!---------------------------------------------->
 	<script>
-    
-	$("document").ready(function() {
-		
-		/* 상세보기  */
-		$(".detailView").on("click", function(){
-			
-			$("#upd_deptCode").val($(this).data().upd_deptcode);
-			$("#upd_deptName").val($(this).data().upd_deptname);
-			$("#upd_companyCode").val($(this).data().upd_companycode);
-			
-			if($(this).data().upd_usestatus==1){
-				$("#yes_Btn").html("미사용");
-				
-			}
-			else if($(this).data().upd_usestatus==0){
-				$("#yes_Btn").html("사용");
-				$("#yes_btn").attr("style","background: #ff8e77; color: #ffffff");
-			}
-			
-		});
-	});
-    
  
 	$("#serachBtn").on("click", function(){
 		
@@ -128,23 +108,18 @@
        		data 	: "before_slipDate=" + $("#before_slipDate").val() +  "&" + "after_slipDate=" + $("#after_slipDate").val(),
        		success : function(data){
        			console.log(data);
+       			
        			var htmlArr = data.split("================seperator================");
+       			
        			$("#deptListTbody").html("");
        			$("#deptListTbody").html(htmlArr[0]);
-       			
-       		/* 	alert("before_slipDate=" + $("#before_slipDate").val() +  "&" + "after_slipDate=" + $("#after_slipDate").val());
-       			$("#before_slipDate").val("");
-       			$("#after_slipDate").val("");
-   				$("#deptListTbody").html(data);
-   				$("#deptListTbody").html(htmlArr[0]);
- 				$("#pagination").html(htmlArr[1]); */
-       			
+       			$("#pagination").html("");
+       			$("#pagination").html(htmlArr[1]);
        		}
        	});
-	
 	});
- 	$("document").ready(function(){
- 		console.log('최초실행');
+ 	
+	$("document").ready(function(){
  		approvalPageList(1);
  	});
  	function approvalPageList(page){
@@ -153,17 +128,14 @@
  			url : "${pageContext.request.contextPath }/approvalPageList",
  			data : "page=" + page,
  			success : function(data){
- 				console.log('ajax호출');
  				var htmlArr = data.split("================seperator================");
- 				
  				$("#deptListTbody").html(htmlArr[0]);
  				$("#pagination").html(htmlArr[1]);
  			}
  		});
  	}
- 	
 
-	/* 전체선택 삭제 */
+	/* 전체선택 */
 	function allCheck() {
 		if ($("#th_allCheck").is(':checked')) {
 				$("input[name=checkRow]").prop("checked", true);
@@ -189,7 +161,18 @@
 		
 		$("#update_frm").submit();
 	}
-
+	 $("document").ready(function() {
+			/* 상세보기  */
+			$("#deptListTbody").on("click", ".detailView1", function(){
+				
+				$("#slipnumber_d").val($(this).data().detail_slipnumber);
+				$("#slipdate_d").val($(this).data().detail_slipdate_d);
+				$("#jukyo_d").val($(this).data().detail_jukyo);
+				$("#total_d").val($(this).data().detail_total);
+				$("#departmentname_d").val($(this).data().detail_departmentname);
+				
+			});
+	 	});
 	 
  	 $("document").ready(function(){
  	
@@ -243,6 +226,8 @@
            $('#after_slipDate').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)            
        });
  	 });
+ 	
+ 	
 	</script>
 	
 

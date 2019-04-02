@@ -14,4 +14,5 @@ public interface IPaymentDao {
 	List<PaymentVo> getPaymentList();
 	List<PaymentVo> getPaymentListByUserNm(String usernm);
 	String getMaxPayment();
+	String searchPaymentDupl(String payDay);
 }

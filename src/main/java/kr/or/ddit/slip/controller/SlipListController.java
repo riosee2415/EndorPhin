@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.ddit.slip.model.SlipVo;
 import kr.or.ddit.slip.service.ISlipService;
@@ -71,8 +70,6 @@ public class SlipListController {
 
 		String[] arrIdx = checkRow.toString().split(",");
 	
-		   logger.debug("arrIdx:: : {}", arrIdx);
-	    
         for (int i=0; i<arrIdx.length; i++) {
         	
 		    int updCnt = slipService.updateSlip(arrIdx[i]);
@@ -84,23 +81,38 @@ public class SlipListController {
 	//날짜 검색
 	@RequestMapping("/searchAjax")
 	public String search_Date(SlipVo slipVo, @RequestParam("before_slipDate")String before_slipDate,
-											@RequestParam("after_slipDate")String after_slipDate, Model model, PageVo pageVo) {
+										 	 @RequestParam("after_slipDate")String after_slipDate, Model model,PageVo pageVo) {
 		
 		Map<String,Object> resultMap = slipService.selectSlipPagingList(pageVo);
 		
-		List<SlipVo> dateList00 = slipService.getBetweenSlip(before_slipDate,after_slipDate);
-		model.addAttribute("dateList00", dateList00);
-		logger.debug("dateList00.size:{}", dateList00.size());
+		List<SlipVo> dateList = slipService.getBetweenSlip(before_slipDate,after_slipDate);
+		model.addAttribute("dateList", dateList);
 		
 		model.addAllAttributes(resultMap);
 		model.addAttribute("pageSize", pageVo.getPageSize());
 		model.addAttribute("page", pageVo.getPage());
 		
-		
-		logger.debug("before_slipDate:{}",before_slipDate);
-		logger.debug("after_slipDate:{}",after_slipDate);
-		
 		return "slipList/search_approvalAjax";
+	}
+	
+	//날짜 검색
+	@RequestMapping("/searchAjax_p")
+	public String search_DateP(SlipVo slipVo, @RequestParam("before_slipDate")String before_slipDate,
+											@RequestParam("after_slipDate")String after_slipDate, Model model, PageVo pageVo) {
+		
+		Map<String,Object> resultMap = slipService.selectSlipPagingList(pageVo);
+		
+		List<SlipVo> dateList = slipService.getBetweenSlip_zero(before_slipDate,after_slipDate);
+		model.addAttribute("dateList_p", dateList);
+		
+		model.addAllAttributes(resultMap);
+		model.addAttribute("pageSize", pageVo.getPageSize());
+		model.addAttribute("page", pageVo.getPage());
+		
+		logger.debug("dateList_p : {} " , dateList);
+		logger.debug("dateList_p.size : {} " , dateList.size());
+		
+		return "slipList/search_paaprovuarAjax";
 	}
 	
 }

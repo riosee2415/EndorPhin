@@ -11,7 +11,7 @@
 		<div class="col-md-10" style="width: 100%">
 			<div class="form-group">
 				<h2>
-					<strong><i class="fa fa-calculator"></i> 급여계산</strong>
+					<strong><i class="fa fa-calculator"></i>연도별 급여 조회</strong>
 				</h2>
 			</div>
 			<form action="/paymentCal" method="get">
@@ -92,7 +92,7 @@
 
 <script>
 	$(document).ready(function(){
-		for (var i = -3; i < 3; i++) {
+		for (var i = -5; i < 3; i++) {
 			$("select[name=paydayYear]").append("<option value="+(new Date().getFullYear()+i)+">"
 					+(new Date().getFullYear()+i)+"년</option>")
 		}

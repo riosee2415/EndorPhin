@@ -41,6 +41,12 @@ public class PaymentController {
 	@Resource(name="payment_detailService")
 	IPayment_DetailService payment_detailService;
 	
+	@RequestMapping(path="/paymentPersonal",method=RequestMethod.GET)
+	public String paymentPersonal(){
+		
+		return "paymentPersonal";
+	}
+	
 	@RequestMapping(path="/paymentCal",method=RequestMethod.GET)
 	public String paymentCal(Model model,String paydayYear,String paydayMonth){
 		String payDay = paydayYear+paydayMonth;

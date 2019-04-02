@@ -101,6 +101,12 @@
         	<put-attribute name="content" value="/WEB-INF/views/payment/paymentCal.jsp"/>
         </definition>
         
+        <definition name="paymentPersonal" extends="layout"> <!-- 개인별 급여 조회  항목 -->
+        	<put-attribute name="content" value="/WEB-INF/views/payment/paymentPersonal.jsp"/>
+        </definition>
+        
+        
+        
          <definition name="AttitudeListTiles" extends="layout"> <!-- 근태 항목 출력 -->
         	<put-attribute name="content" value="/WEB-INF/views/attitude/attitudeList.jsp"/>
         </definition>

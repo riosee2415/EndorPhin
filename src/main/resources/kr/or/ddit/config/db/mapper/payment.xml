@@ -142,6 +142,17 @@
 	    </if>
 		group by to_char(payday,'yyyy-MM')
 	</select>
+	
+	<select id="selectPersonalPaymentList" parameterType="map">
+		select u.userid, u.usernm, p.payday,d.deptname
+        ,totalsalary,totalwage,
+        totalsalary-totalwage resultpay
+		from employee u,payment p,dept d
+		where   u.userid=p.userid
+		and     d.deptcode=u.deptcode
+		and     payday between to_date(#{paydayTo})
+		                and to_date(#{paydayFrom})
+	</select>
 </mapper>
 
 

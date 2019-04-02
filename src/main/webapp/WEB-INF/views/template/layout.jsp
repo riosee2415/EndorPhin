@@ -33,6 +33,9 @@
   <!-- Custom styles for this template-->
   <link href="${pageContext.request.contextPath}/resources/css/sb-admin.css" rel="stylesheet">
 
+  <!-- font-awesome CSS -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <script

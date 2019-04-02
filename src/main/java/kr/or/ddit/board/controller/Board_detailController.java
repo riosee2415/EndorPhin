@@ -1,6 +1,8 @@
 package kr.or.ddit.board.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -8,15 +10,15 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +28,7 @@ import org.springframework.web.multipart.MultipartRequest;
 import kr.or.ddit.board.model.Attach_boardVo;
 import kr.or.ddit.board.model.Board_detailVo;
 import kr.or.ddit.board.model.CommentsVo;
+import kr.or.ddit.board.service.Attach_boardService;
 import kr.or.ddit.board.service.IAttach_boardService;
 import kr.or.ddit.board.service.IBoard_TypeService;
 import kr.or.ddit.board.service.IBoard_detailService;
@@ -36,6 +39,8 @@ import kr.or.ddit.util.model.PageVo;
 
 @Controller
 public class Board_detailController {
+	
+	private static final String UPLOAD_PATH = "/Users/macbook/picture";
 	
 	private static final Logger logger = LoggerFactory.getLogger(Board_detailController.class);
 
@@ -86,7 +91,7 @@ public class Board_detailController {
 	* Method 설명 : 게시글 상세 조회
 	 */
 	@RequestMapping(path="/boardDetail",method=RequestMethod.GET)
-	public String boardDetail(Model model, Board_detailVo board_detailVo, String boardNo, String boardTypeName, String boardTypeCode){
+	public String boardDetail(Model model, String boardNo, String boardTypeName, String boardTypeCode){
 		
 		Map<String, Object> resultMap = board_detailService.postDetail(boardNo);
 		
@@ -175,11 +180,112 @@ public class Board_detailController {
 	}
 	
 	@RequestMapping(path="/deletepost",method=RequestMethod.GET)
-	public String deletePost(Model model, String boardNo, String boardTypeName){
+	public String deletePost(Model model, String boardNo, String boardTypeName, String boardTypeCode){
 		board_detailService.postDelete(boardNo);
+		Map<String, Object> resultMap = board_detailService.postDetail(boardNo);
+		Board_detailVo postVo = (Board_detailVo) resultMap.get("post");
+		
 		model.addAttribute("boardTypeName",boardTypeName);
-//		attach_boardService.attach_boardDelete(boardNo);
-//		commentsService.deleteComments(boardNo);
-		return "redirect:postList?boardNo=" +boardNo;
+		return "redirect:/postList?boardTypeCode="+boardTypeCode;
 	}
+	
+	@RequestMapping(path="/postUpdate",method=RequestMethod.GET)
+	public String postUpdate(Model model, String boardNo, String boardTypeName,
+			  					String boardTypeCode, Board_detailVo board_detailVo){
+		
+		Map<String, Object> resultMap = board_detailService.postDetail(boardNo);
+		
+		Board_detailVo post = (Board_detailVo) resultMap.get("post");
+		List<Attach_boardVo> attachList = (List<Attach_boardVo>) resultMap.get("attachList");
+		List<CommentsVo> commentList = (List<CommentsVo>) resultMap.get("commentList");
+		
+		
+		model.addAllAttributes(resultMap);
+		model.addAttribute("post", post);
+		model.addAttribute("attachList", attachList);
+		model.addAttribute("commentList", commentList);
+		model.addAttribute("boardTypeCode", boardTypeCode);
+		model.addAttribute("boardTypeName", boardTypeName);
+		model.addAttribute("boardNo", boardNo);
+		
+		return "postUpdate";
+	}
+	@RequestMapping(path="/postUpdate",method=RequestMethod.POST)
+	public String postUpdate(Model model,Board_detailVo board_detailVo,String attachCode, String boardNo, String boardTypeName,
+								String boardTypeCode, HttpServletRequest request,MultipartRequest multipart) throws Exception{
+		
+		
+		
+		if(attachCode != null){
+			attach_boardService.attach_boardDelete(attachCode);
+		}
+		
+		List<Attach_boardVo> attachList =  new ArrayList<>();
+		List<MultipartFile> attachFile = multipart.getFiles("attachFile");
+		
+		String attachName = "";
+		String attachRealname = "";
+		String attachRealpath = "";
+		
+		for (MultipartFile multipartFile : attachFile) {
+			
+			if(!multipartFile.getName().equals("attachFile")){
+				continue;
+			}
+			ServletContext application = request.getServletContext();
+			String path = application.getRealPath("/upload");
+			
+			attachName = multipartFile.getOriginalFilename();
+			attachRealname = UPLOAD_PATH + File.separator + UUID.randomUUID().toString();
+			attachRealpath = path;
+			
+			if (multipartFile.getSize() > 0 ) {
+				
+				multipartFile.transferTo(new File(attachRealname));
+				
+				Attach_boardVo attachVo = new Attach_boardVo();
+				attachVo.setAttachCode(attachCode);
+				attachVo.setAttachName(attachName);
+				attachVo.setAttachRealname(path + File.separator + attachRealname);
+				attachVo.setAttachRealpath(attachRealpath);
+				
+				attachList.add(attachVo);
+			}
+		}
+		
+		model.addAttribute("boardTypeCode", boardTypeCode);
+		model.addAttribute("boardTypeName", boardTypeName);
+		
+		int postUpdate = board_detailService.postUpdate(board_detailVo, attachList);
+		if(postUpdate > 0){
+			return "redirect:boardDetail?boardNo=" + boardNo;
+		}
+		
+		return "redirect:boardDetail?boardNo=" + boardNo;
+	}
+	
+	@RequestMapping(path="/attachDownload")
+	public void attachDownload(String attachCode, HttpServletResponse resp) throws IOException{
+//		  resp.setCharacterEncoding("UTF-8");
+//	      resp.setContentType("application/octet-stream");
+	      
+	      Attach_boardVo attachVo = attach_boardService.attachCodeSelectOne(attachCode);
+	      String attach_name = new String(attachVo.getAttachName().getBytes("UTF-8"), "ISO-8859-1");
+	      
+	      FileInputStream fis = new FileInputStream(new File(attachVo.getAttachRealname()));
+	      resp.setHeader("Content-Disposition", "attachment; filename=\"" + attach_name + "\"");
+	      
+	      ServletOutputStream sos = resp.getOutputStream();
+	      byte[] buff = new byte[512];
+	      int len = 0;
+	      
+	      while((len = fis.read(buff)) > -1){
+	    	  sos.write(buff);
+	      }
+	      
+	      sos.close();
+	      fis.close();
+	}
+	
 }
+

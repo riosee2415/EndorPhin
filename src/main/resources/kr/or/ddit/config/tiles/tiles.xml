@@ -10,8 +10,6 @@
         	<put-attribute name="content" value=""/>
         </definition> 
         
-        
-        
         <definition name="helloTiles" extends="layout">
         	<put-attribute name="left" value=""/>
         	<put-attribute name="content" value="/WEB-INF/views/hello.jsp"/>
@@ -31,17 +29,14 @@
         </definition>
         <!--  -->
         
-        <definition name="addPaymentView" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/employee/paymentList.jsp"/>
-        </definition>
-        
-        <definition name="paymentView" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/payment/payment.jsp"/>
-        </definition>
         
         
         <definition name="employeeListTiles" extends="layout">
         	<put-attribute name="content" value="/WEB-INF/views/employee/employeeList.jsp"/>
+        </definition>
+        
+        <definition name="taxcallview" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/taxcal/taxcalview.jsp"/>
         </definition>
         
         
@@ -87,6 +82,11 @@
         	<put-attribute name="content" value="/WEB-INF/views/test.jsp"/>
         </definition>
         
+        
+        <definition name="paymentAdjustView" extends="layout"> <!-- 급여 조정 항목 -->
+        	<put-attribute name="content" value="/WEB-INF/views/payment/paymentAdjust.jsp"/>
+        </definition>
+        
          <definition name="addProductView" extends="layout">  <!-- 급여항목 등록  -->
         	<put-attribute name="content" value="/WEB-INF/views/payment/productList.jsp"/>
         </definition>
@@ -97,10 +97,24 @@
          <definition name="addPaymentView" extends="layout">  <!-- 급여 등록  -->
         	<put-attribute name="content" value="/WEB-INF/views/payment/addPayment.jsp"/>
         </definition>
+         <definition name="paymentCal" extends="layout"> <!-- 급여 계산 항목 -->
+        	<put-attribute name="content" value="/WEB-INF/views/payment/paymentCal.jsp"/>
+        </definition>
+        
+        <definition name="paymentPersonal" extends="layout"> <!-- 개인별 급여 조회  항목 -->
+        	<put-attribute name="content" value="/WEB-INF/views/payment/paymentPersonal.jsp"/>
+        </definition>
+        
+        
         
          <definition name="AttitudeListTiles" extends="layout"> <!-- 근태 항목 출력 -->
         	<put-attribute name="content" value="/WEB-INF/views/attitude/attitudeList.jsp"/>
         </definition>
+        
+         <definition name="purchaseAsset" extends="layout"><!--고정자산 등록  -->
+        	<put-attribute name="content" value="/WEB-INF/views/asset/asset.jsp"/>
+        </definition>
+        
         
          <definition name="boardType" extends="layout">
         	<put-attribute name="content" value="/WEB-INF/views/board/boardType.jsp"/>
@@ -118,18 +132,11 @@
         	<put-attribute name="content" value="/WEB-INF/views/board/postList.jsp"/>
         </definition>
         
-        
-        
-        
+         <definition name="postUpdate" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/board/postUpdate.jsp"/>
+        </definition>
         <definition name="Attitude_recordListTiles" extends="layout"> <!-- 근태 이력 출력 -->
         	<put-attribute name="content" value="/WEB-INF/views/attitudeRecord/attitudeRecordList.jsp"/>
         </definition>
-        
-        
-        
-        
-        
-        
-        
         
 </tiles-definitions>

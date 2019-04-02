@@ -88,9 +88,9 @@
 </div>
 
 
-	<!---------------½ÂÀÎ---------------->
+	<!------------------------½ÂÀÎ---------------------->
 
- 	<form id="update_frm" action="${pageContext.request.contextPath }/updateSlip">
+ 	<form id="update_frm" action="${pageContext.request.contextPath }/updateSlip_paaprovuar">
  		<input type="hidden" id="checkRow" name="checkRow">
  	</form>		
 
@@ -115,7 +115,7 @@
 			});
 	 	});
 	 
- 
+ /* ³¯Â¥ °Ë»ö */
 	$("#serachBtn").on("click", function(){
 		
    	 	$.ajax({

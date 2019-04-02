@@ -43,13 +43,13 @@ public class Payment_DetailService implements IPayment_DetailService{
 	}
 
 	@Override
-	public Payment_detailVo selectPayment_detail(String payDetailCode) {
-		return payment_detailDao.selectPayment_detail(payDetailCode);
+	public Payment_detailVo selectPayment_detail(Payment_detailVo payment_detailVo) {
+		return payment_detailDao.selectPayment_detail(payment_detailVo);
 	}
 
 	@Override
-	public int deletePayment_detail(String payDetailCode) {
-		return payment_detailDao.deletePayment_detail(payDetailCode);
+	public int deletePayment_detail(Payment_detailVo payment_detailVo) {
+		return payment_detailDao.deletePayment_detail(payment_detailVo);
 	}
 
 	@Override
@@ -66,13 +66,30 @@ public class Payment_DetailService implements IPayment_DetailService{
 			Map<String,List<Payment_detailVo>> list = new HashMap<>();
 			for (int i = 0; i < payment_u.size(); i++) {
 				List<Payment_detailVo> selectPayment_detailPaycode = payment_detailDao.selectPayment_detailPaycode(payment_u.get(i).getPayCode());
-				list.put(payment_u.get(i).getPayCode(),selectPayment_detailPaycode);
+				list.put(i+"",selectPayment_detailPaycode);
 			}
 			map.put("paymentDetailList", list);
 		}
 		List<De_product_divVo> allDe_product_div = de_product_divDao.getAllDe_product_div();
 		map.put("divList", allDe_product_div);
 		return map;
+	}
+	
+	@Override
+	public Map<String, Object> getPayDetail(String paycode) {
+		PaymentVo selectPayment = paymentDao.selectPayment(paycode);
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("paymentVo", selectPayment);
+		
+		List<Payment_detailVo> selectPayment_detailPaycode = payment_detailDao.selectPayment_detailPaycode(paycode);
+		map.put("paymentDetailList", selectPayment_detailPaycode);
+		
+		
+		List<De_product_divVo> allDe_product_div = de_product_divDao.getAllDe_product_div();
+		map.put("divList", allDe_product_div);
+		return map;
+		
 	}
 	
 

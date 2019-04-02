@@ -34,6 +34,8 @@
 			<tr class="payTr" data-userid="${vo.userId }">
 				<td><a href="#detailLayer" data-toggle="modal"
 			data-target="#my80sizeModal" class="paymentDetail">${vo.userId }</a></td>
+				<c:set var="totalSalarysum" value="${totalSalarysum+vo.totalSalary}"/>
+				<c:set var="totalWagesum" value="${totalWagesum+vo.totalWage}"/>
 				<td>${vo.positionname}</td>
 				<td>${vo.usernm}</td>
 				<td>${vo.deptname}</td>
@@ -43,6 +45,15 @@
 			</tr>
 		</c:forEach>
 	</tbody>
+	<tfoot align="center" >
+		<tr>
+			<td>계</td>
+			<td>총 급여 : </td>
+			<td colspan="2">${totalSalarysum}</td>
+			<td>총 공제 :</td>
+			<td colspan="2">${totalWagesum}</td>
+		</tr>
+	</tfoot>
 </table>
 
 <!-- 80% size Modal  등록 모달 창-->
@@ -106,7 +117,6 @@
 						<a data-toggle="modal" href="#myModal4" class="btn btn-primary" id="modalAddDeduct">공제 등록</a>
 				</div>
 			</div>
-				
 		</div>
 	</div>
 </div>
@@ -162,7 +172,7 @@
 	            				<th>금액</th>
 	            			</tr>
 	            		</thead>
-	            		<tbody id="secondModalTbody">
+	            		<tbody id="secondModalUpdTbody">
 	            		</tbody>
 	            	</table>
             	</div>
@@ -190,19 +200,46 @@
 	
 	$("#modalAddProduct").click(function(){
 		$("#secondModalTitle").html("급여");
-		secondModalDataInput(deproductList,1);
+		$("#secondModalUpdTbody").empty();
+		secondModalDataInput(deproductList,1,$("#secondModalTbody"));
 	})
 	$("#modalAddDeduct").click(function(){
 		$("#secondModalTitle").html("공제");
-		console.log("공제")
-		secondModalDataInput(deproductList,2);
+		$("#secondModalUpdTbody").empty();
+		secondModalDataInput(deproductList,2,$("#secondModalTbody"));
 	})
+	
+	function secondAddClose(){
+		$("#secondUpdClose").click();
+		$("#secondUpdClose1").click();
+		
+		$("#secondAddClose").click();
+		$("#secondAddClose1").click();
+	};
 	
 	
 	$("#secondModalAddSave").click(function(){
 		secondModalEvent();
-		$("#secondAddClose").click();
-		$("#secondAddClose1").click();
+		secondAddClose();
+	});
+	
+	$("#secondModalUpd").click(function(){
+		secondModalUpdEvent();
+		secondAddClose();
+	});
+	
+	$("#secondModalDel").click(function(){
+		$.ajax({
+			method : "post",
+			url : "/deletePayment",
+			data : {paycode : $(this).val(),
+					userid : $(".modalUserInfo").eq(0).val()
+			},
+			success : function(data) {
+				dataInput(data);
+			}
+		});
+		secondAddClose();
 	})
 	
 	function secondModalEvent(){
@@ -216,6 +253,7 @@
 			tempList.push(paydate);
 			var decdList = new Array();
 			var decdPayList = new Array();
+			
 			$(".secondMoney").each(function(){
 				if(parseInt($(this).val())>0){
 					decdList.push($(this).data('decd'));
@@ -234,6 +272,9 @@
 					decdPayList : decdPayList
 				}),
 				success : function(data) {
+					if(data.msg==false){
+						alert("해당 월에 지급한 내역이 있어 등록되지 않았습니다.");
+					}
 					dataInput(data);
 				}
 			})
@@ -241,6 +282,47 @@
 		}
 		else{
 			alert("값이 입력되지않아 취소되었습니다.");
+		}
+	}
+	
+	function secondModalUpdEvent(){
+		var check = confirm('수정하시겠습니까?');
+		if(check){
+			var dateSplit = $("#datepicker1").val().split('-');
+			var tempList = new Array();
+			var paydate = dateSplit[0]+dateSplit[1]+dateSplit[2];
+			var userId = $(".modalUserInfo").val();
+			tempList.push(userId);
+			tempList.push(paydate);
+			var decdList = new Array();
+			var decdPayList = new Array();
+			$(".secondMoney").each(function(){
+				if(parseInt($(this).val())>0){
+					decdList.push($(this).data('decd'));
+					decdPayList.push($(this).val());
+				}
+			});
+			
+			$.ajax({
+				method : "post",
+				url : "/updatePaymentDetailAjax",
+				contentType: "application/json; charset=UTF-8",	
+				data : JSON.stringify({
+					userid : userId,
+					payday : paydate,
+					payCode : $('#secondModalDel').val(),
+					deprostatus : $('#secondModalUpd').data('deprostatus'),
+					decdMap : decdList,
+					decdPayList : decdPayList
+				}),
+				success : function(data) {
+					if(data.msg==false){
+						alert("해당 월에 지급한 내역이 있어 등록되지 않았습니다.");
+					}
+					dataInput(data);
+				}
+			})
+			
 		}
 	}
 	$(".paymentDetail").click(function(){
@@ -255,31 +337,48 @@
 			success : function(data) {
 				dataInput(data);
 				deproductList=data.divList;
-				secondMethodInput();
 			}
 		});
 	})
 	
-	function secondDetailUpd(){
+	function secondDetailUpd(modalUpd,deprostatus){
+		$("#secondModalDel").val(modalUpd);
 		$.ajax({
 			method : "get",
 			url : "/getPaymentList",
-			data : "userid=" + $(this).html(),
+			data : "payCode=" + modalUpd,
 			success : function(data) {
-				dataInput(data);
-				deproductList=data.divList;
-				secondMethodInput();
+				console.log(data);
+				secondModalDataInput(deproductList,deprostatus,$("#secondModalUpdTbody"));
+				secondDetailInit(data,deprostatus);
 			}
 		});
 	}
+	function secondDetailInit(data,deprostatus){
+		$("#secondModalTbody").empty();
+		$(".secondMoney").each(function(){
+			for (var i = 0; i < data.paymentDetailList.length; i++) {
+				if(data.paymentDetailList[i].deductCode==$(this).data('decd')){
+					$(this).val(data.paymentDetailList[i].deductPay);
+				}
+			}
+			$('#totalMoney').val(parseInt($('#totalMoney').val())+parseInt($(this).val()));
+		});
+	}
+	
 	
 	function secondMethodInput(){
 		$(".modalUpdProduct").click(function(){
 			$('#datepicker1').datepicker('setDate', $(this).html());
+			
+			$('#secondModalUpd').data('deprostatus',1);
+			secondDetailUpd($(this).data('paycd'),1);
 		})
 		
 		$(".modalUpdDeduct").click(function(){
 			$('#datepicker1').datepicker('setDate', $(this).html());
+			$('#secondModalUpd').data('deprostatus',2);
+			secondDetailUpd($(this).data('paycd'),2);
 		})
 	}
 	
@@ -293,32 +392,37 @@
 	});
 	
 	
-	function secondModalDataInput(deproductList,deprostatus){
-		$("#secondModalTbody").html("");
+	function secondModalDataInput(deproductList,deprostatus,modalSelect){
+		modalSelect.empty();
 		for (var i = 0; i < deproductList.length; i++) {
 			if(deproductList[i].deprostatus==1){
-				$("#secondModalTbody").append("<tr class=\'secondProductAdd\'>");
+				modalSelect.append("<tr class=\'secondProductAdd\'>");
 			}
 			else if(deproductList[i].deprostatus==2){
-				$("#secondModalTbody").append("<tr class=\'secondDeductAdd\'>");
+				modalSelect.append("<tr class=\'secondDeductAdd\'>");
 			}
 			if(deproductList[i].deprostatus==deprostatus){
-				$("#secondModalTbody").append("<td>"+deproductList[i].deductCode+"</td>");
-				$("#secondModalTbody").append("<td>"+deproductList[i].deductName+"</td>");
-				$("#secondModalTbody").append("<td>"+"<input data-decd=\'"+deproductList[i].deductCode+"\' value=0 type=\'text\' class=\'secondMoney\'/>"
+				modalSelect.append("<td>"+deproductList[i].deductCode+"</td>");
+				modalSelect.append("<td>"+deproductList[i].deductName+"</td>");
+				modalSelect.append("<td>"+"<input data-decd=\'"+deproductList[i].deductCode+"\' value=0 type=\'text\' class=\'secondMoney\'/>"
 												+"</td>");
 			}
-				$("#secondModalTbody").append("</tr>");
+			modalSelect.append("</tr>");
 		}	
-		$("#secondModalTbody").append("<tr><td></td><td>총금액</td><td>"+
+		modalSelect.append("<tr><td></td><td>총금액</td><td>"+
 				"<input type=\'text\' value=0 readonly=\'readonly\' id='totalMoney'/></td></tr>");
 		
 		$(".secondMoney").on("change",function(){
 			$('#totalMoney').val(parseInt(0));
 			$(".secondMoney").each(function(){
-				$('#totalMoney').val(parseInt($('#totalMoney').val())+parseInt($(this).val()));
+				if(jQuery.isNumeric($(this).val())){
+					$('#totalMoney').val(parseInt($('#totalMoney').val())+parseInt($(this).val()));
+				}else{
+					alert('input number');
+					$(this).val("0");
+				}
 			})
-		})
+		});
 	}
 	
 	function dataInput(data){
@@ -331,6 +435,7 @@
 		$("#firModalProductThead").append("<th>급여일</th>");
 		$("#firModalDeductThead").append("<th>공제일</th>");
 		for(var i=0;i<data.divList.length;i++){
+			deductName.set(data.divList[i].deductCode,0);
 			if(data.divList[i].deprostatus==1){
 				$("#firModalProductThead").append("<th>"+data.divList[i].deductName+"</th>");
 			}
@@ -354,9 +459,11 @@
 				$("#firModalProductTbody").append("<td><a data-toggle=\'modal\' data-payCd=\'"+
 												data.paymentList[i].payCode+"\' href=\'#myModal3\' class=\'modalUpdProduct\'>"
 												+data.paymentList[i].payDay+"</a></td>");
-				for (var a = 1; a <= data.paymentList.length; a++) {
-					if(data.paymentDetailList[a]!=null &
-							data.paymentDetailList[a][0].payCode==data.paymentList[i].payCode){
+				for (var a = 0; a < data.paymentList.length; a++) {
+					if(data.paymentDetailList[a].length==0){
+						break;
+					}
+					else if(data.paymentDetailList[a][0].payCode==data.paymentList[i].payCode){
 						deductName=setDNT(data,deductName,a);
 					}
 				}	
@@ -370,6 +477,10 @@
 						$("#firModalDeductTbody").append("<td>"+deductName.get(data.divList[j].deductCode)+"</td>");
 					}
 				}
+				deductName = new Map();
+				for(var a=0;a<data.divList.length;a++){
+					deductName.set(data.divList[a].deductCode,0);
+				}
 				$("#firModalProductTbody").append("<td>"+data.paymentList[i].totalSalary+"</td>");
 				$("#firModalDeductTbody").append("<td>"+data.paymentList[i].totalWage+"</td>");
 				
@@ -377,6 +488,7 @@
 				$("#firModalProductTbody").append("</tr>");
 			}
 		}
+		secondMethodInput();
 	}
 	function setDNT(data,deductName,a){
 		

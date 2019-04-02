@@ -41,22 +41,69 @@ public class PaymentController {
 	@Resource(name="payment_detailService")
 	IPayment_DetailService payment_detailService;
 	
-	@RequestMapping(path="/payment")
-	public String paymentList(){
-		return "paymentView";
+	@RequestMapping(path="/paymentPersonal",method=RequestMethod.GET)
+	public String paymentPersonal(){
+		
+		return "paymentPersonal";
+	}
+	
+	@RequestMapping(path="/paymentCal",method=RequestMethod.GET)
+	public String paymentCal(Model model,String paydayYear,String paydayMonth){
+		String payDay = paydayYear+paydayMonth;
+		List<PaymentVo> selectTotalSalaryByDay;
+		logger.debug("asdfasdkfjn:{}",payDay);
+		if(paydayYear==null)
+			selectTotalSalaryByDay=paymentService.selectTotalSalaryByDay(null);
+		else
+			selectTotalSalaryByDay=paymentService.selectTotalSalaryByDay(payDay);
+		
+		model.addAttribute("paymentList",selectTotalSalaryByDay);
+		return "paymentCal";
+	}
+	
+	@RequestMapping(path="/paymentAdjust")
+	public String paymentAdjust(){
+		return "paymentAdjustView";
+	}
+	
+	@RequestMapping(path="/deletePayment",produces = { "application/json" })
+	@ResponseBody
+	public Map<String,Object> deletePayment(String paycode, String userid){
+		logger.debug("asdfasdf:{}",paycode);
+		paymentService.deletePayment(paycode);
+		return getPaymentList(userid,null);
+	}
+	
+	@RequestMapping(path="/updatePaymentDetailAjax",produces={"application/json"})
+	@ResponseBody
+	public Map<String,Object> updatePaymentDetailAjax(@RequestBody Payment4UpdVo testVo){
+		
+		paymentService.updatePaymentDetailAjax(testVo);
+		Map<String, Object> paymentList = getPaymentList(testVo.getUserid(),null);
+		return paymentList;
 	}
 	
 	@RequestMapping(path="/insertAndUpdatePayment",produces={"application/json"})
 	@ResponseBody
 	public Map<String, Object> insertAndUpdatePayment(@RequestBody Payment4UpdVo testVo){
-		paymentService.updateAndInsertPayment(testVo);
-		return getPaymentList(testVo.getUserid());
+		boolean updateAndInsertPayment = paymentService.updateAndInsertPayment(testVo);
+		Map<String, Object> paymentList = getPaymentList(testVo.getUserid(),null);
+		paymentList.put("msg", updateAndInsertPayment);
+		return paymentList;
 	}
 	
 	@RequestMapping(path="/getPaymentList",method=RequestMethod.GET, produces = { "application/json" })
 	@ResponseBody
-	public Map<String, Object> getPaymentList(String userid){
-		Map<String, Object> deNmPayList = payment_detailService.getDeNmPayList(userid);
+	public Map<String, Object> getPaymentList(String userid,String payCode){
+		Map<String, Object> deNmPayList = null;
+		if(userid!=null){
+			deNmPayList = payment_detailService.getDeNmPayList(userid);
+		}
+		else{
+			deNmPayList = payment_detailService.getPayDetail(payCode);
+			logger.debug("asdasdasdasdhaha:{}",deNmPayList.get("paymentVo"));
+		}
+		
 		return deNmPayList;
 	}
 	

@@ -61,4 +61,15 @@ public class PaymentDao implements IPaymentDao{
 		return sqlSessionTemplate.update("payment.updatePayment",paymentVo);
 	}
 
+	@Override
+	public String searchPaymentDupl(PaymentVo paymentVo) {
+		return sqlSessionTemplate.selectOne("payment.searchPaymentDupl",paymentVo);
+		
+	}
+
+	@Override
+	public List<PaymentVo> selectTotalSalaryByDay(String payDay) {
+		return sqlSessionTemplate.selectList("payment.selectTotalSalaryByDay",payDay);
+	}
+
 }

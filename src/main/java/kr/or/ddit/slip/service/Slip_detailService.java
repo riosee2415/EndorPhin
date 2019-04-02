@@ -67,8 +67,14 @@ public class Slip_detailService implements ISlip_detailService{
 	* Method 설명 : 차/ 대변 합계 구하기 (0 : 차 / 1 : 대)
 	*/
 	@Override
-	public int getDistanguishAccount(String slipNumber, String status) {
+	public List<Slip_detailVo> getDistanguishAccount(String slipNumber, String status) {
 		return slip_detailDao.getDistanguishAccount(slipNumber, status);
+	}
+
+
+	@Override
+	public int deleteSlip_detail_one(String slipNumber, String slipDetailNo) {
+		return slip_detailDao.deleteSlip_detail_one(slipNumber, slipDetailNo);
 	}
 
 }

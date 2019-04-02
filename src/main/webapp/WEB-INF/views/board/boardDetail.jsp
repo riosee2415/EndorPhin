@@ -5,7 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <h1 class="page-header">게시글 상세화면</h1>
-<form id="frm" class="form-horizontal" role="form" >
+<form id="frm" class="form-horizontal" role="form" enctype="multipart/form-data">
 
 	<div class="container-fluid">
 		<label class="col-sm-3 control-label">제목</label>
@@ -37,7 +37,7 @@
 		<label class="col-sm-3 control-label">파일</label>
 		<div class="col-sm-9">
 			<c:forEach items="${attachList }" var="attach">
-				<a href="/fileDownload?attachCode=${attach.attachCode }">${attach.attachName }</a>
+				<a href="/attachDownload?attachCode=${attach.attachCode }">${attach.attachName }</a>
 			</c:forEach>
 		</div>
 	</div>
@@ -45,7 +45,7 @@
 	<div class="form-group">
 		<div class="col-sm-offset-3 col-sm-9">
 			
-			<a href="${pageContext.request.contextPath }/modifypost?boardNo=${post.boardNo }&boardTypeCode=${boardTypeCode}&boardTypeName=${boardTypeName }">
+			<a href="${pageContext.request.contextPath }/postUpdate?boardNo=${post.boardNo }&boardTypeCode=${boardTypeCode}&boardTypeName=${boardTypeName }">
 				<button id="btn_modify" type="button" class="btn btn-default" style="display:inline;">수정</button>
 			</a>
 			
@@ -76,8 +76,8 @@
 	<c:forEach items="${commentList }" var="comment">
 		<form id="frm_cmtUpdate" class="form-horizontal" role="form" action="${pageContext.request.contextPath }/deletecomment" method="post">
 			<input type="hidden" id="boardNo" name="boardNo" value="${post.boardNo }">
-			<input type="hidden" id="boardTypeName" name="boardTypeName" value="${boardTypeCode }">
-			<input type="hidden" id="boardTypeName" name="boardTypeCode" value="${boardTypeName }">
+			<input type="hidden" id="boardTypeName" name="boardTypeCode" value="${boardTypeCode }">
+			<input type="hidden" id="boardTypeName" name="boardTypeName" value="${boardTypeName }">
 			
 					<tr data-postNo="${comment.commentNo }">
 						<td>${comment.commentContents }</td>

@@ -13,5 +13,7 @@ public interface IPaymentService {
 	int deletePayment(String paycode);
 	List<PaymentVo> getPaymentList();
 	List<PaymentVo> getPaymentListByUserNm(String usernm);
-	void updateAndInsertPayment(Payment4UpdVo payment4UpdVo);
+	boolean updateAndInsertPayment(Payment4UpdVo payment4UpdVo);
+	void updatePaymentDetailAjax(Payment4UpdVo payment4UpdVo);
+	List<PaymentVo> selectTotalSalaryByDay(String payDay);
 }

@@ -65,17 +65,39 @@ public class SlipListController {
 		return "slipList/paaprovuarAjaxHtml";
 	}
 	
+	//승인->승인 취소 
 	@RequestMapping("/updateSlip")
 	public String updateSlip(Model model, @RequestParam("checkRow") String checkRow ){
-
+		
+		int updCnt = 0;
+		 
 		String[] arrIdx = checkRow.toString().split(",");
 	
         for (int i=0; i<arrIdx.length; i++) {
         	
-		    int updCnt = slipService.updateSlip(arrIdx[i]);
+        	updCnt = slipService.updateSlip(arrIdx[i]);
 		}
+		if(updCnt > 0){
+			return "approval";
+		}
+		return "approval";
+	}
+	//미승인->승인
+	@RequestMapping("/updateSlip_paaprovuar")
+	public String updateSlip_paaprovuar(Model model, @RequestParam("checkRow") String checkRow ){
 		
-		return "redirect:/approval";
+		int updCnt = 0;
+		 
+		String[] arrIdx = checkRow.toString().split(",");
+	
+        for (int i=0; i<arrIdx.length; i++) {
+        	
+        	updCnt = slipService.updateSlip_paaprovuar(arrIdx[i]);
+		}
+		if(updCnt > 0){
+			return "redirect:/paaprovuar";
+		}
+		return "redirect:/paaprovuar";
 	}
 	
 	//날짜 검색

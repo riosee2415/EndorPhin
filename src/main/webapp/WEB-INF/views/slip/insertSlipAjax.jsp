@@ -308,6 +308,7 @@
   	
   	$("#temporaryAddition").on("click", function(){
   		
+  		
   		$("#cancleOnlySlip").attr("disabled", true);
   		/*Validation*/
 
@@ -328,7 +329,6 @@
   			data : "slipDetailNo=" + detailNo + "&status=" + insertSelectSlipStatus + "&price=" + insertPrice + "&clientCard=" + insertClientCard + "&slipNumber=" + insertSlipNumber + "&establishCode=" + insertEstablish + "&currval=" + currval +"&insertSlipDate=" + insertSlipDate + "&insertDept=" + insertDept + "&juckyo=" + juckyo,
   			success : function(data){
   				console.log(data);
-  				
   				$("#temporaryArea").html(data);
   				
   			}
@@ -337,6 +337,10 @@
   		
   		
   		detailNo++;
+  		
+  		// 입력영역 값 초기화
+  		$("#searchEstablishValue").val("");
+  		$("#searchClientValue").val("");
   		
   	});
   	

@@ -92,6 +92,7 @@ public class SlipDao implements ISlipDao {
 		map.put("post_date", post_date);
 		
  		return  sqlSessionTemplate.selectList("slip.getBetweenSlip_zero",map);
+	}
 
 	public int finalSaveSlip(SlipVo slipVo) {
 		return sqlSessionTemplate.update("slip.finalSaveSlip", slipVo);

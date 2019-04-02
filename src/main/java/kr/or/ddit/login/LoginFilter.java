@@ -11,6 +11,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,18 +23,11 @@ import kr.or.ddit.employee.model.EmployeeVo;
 //@WebFilter("/*")
 public class LoginFilter implements Filter{
 
-	@Resource(name="board_TypeService")
-	private IBoard_TypeService board_TypeService;
-
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest hsr = (HttpServletRequest) request;
 		HttpServletResponse hsresp = (HttpServletResponse) response;
-		
-		ServletContext application = hsr.getServletContext();
-		List<Board_TypeVo> boardList = board_TypeService.boardAllList();
-		application.setAttribute("boardList", boardList);
 		
 		HttpSession session = hsr.getSession();
 		EmployeeVo employeeVo =(EmployeeVo) session.getAttribute("employeeVo");

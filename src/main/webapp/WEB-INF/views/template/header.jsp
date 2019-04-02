@@ -62,8 +62,8 @@
           <a class="dropdown-item" href="/addPayment">급여등록</a>
           <a class="dropdown-item" href="">퇴직자</a>
            <h3 class="dropdown-header">급여계산관리</h3>
-          <a class="dropdown-item" href="/payment">급여조정</a>
-          <a class="dropdown-item" href="">급여계산</a>
+          <a class="dropdown-item" href="/paymentAdjust">급여조정</a>
+          <a class="dropdown-item" href="/paymentCal">급여계산</a>
           <a class="dropdown-item" href="">급여명세서</a>
           <a class="dropdown-item" href="">급여명세서 인쇄/발송</a>
             <h3 class="dropdown-header">근태관리</h3>

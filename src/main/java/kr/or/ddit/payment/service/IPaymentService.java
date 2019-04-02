@@ -15,4 +15,5 @@ public interface IPaymentService {
 	List<PaymentVo> getPaymentListByUserNm(String usernm);
 	boolean updateAndInsertPayment(Payment4UpdVo payment4UpdVo);
 	void updatePaymentDetailAjax(Payment4UpdVo payment4UpdVo);
+	List<PaymentVo> selectTotalSalaryByDay(String payDay);
 }

@@ -72,15 +72,15 @@ public class Slip_detailDao implements ISlip_detailDao{
 	* @param slipNumber
 	* @param status
 	* @return
-	* Method 설명 : 차/대변 합계 구하기
+	* Method 설명 : 차/대변 구하기
 	*/
 	@Override
-	public int getDistanguishAccount(String slipNumber, String status) {
+	public List<Slip_detailVo> getDistanguishAccount(String slipNumber, String status) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("slipNumber", slipNumber);
 		map.put("status", status);
 		
-		return sqlSessionTemplate.selectOne("slipdetail.getDistanguishAccount", map);
+		return sqlSessionTemplate.selectList("slipdetail.getDistanguishAccount", map);
 	}
 	
 	

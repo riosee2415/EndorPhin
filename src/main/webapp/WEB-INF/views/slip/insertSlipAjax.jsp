@@ -308,6 +308,7 @@
   	
   	$("#temporaryAddition").on("click", function(){
   		
+  		
   		$("#cancleOnlySlip").attr("disabled", true);
   		/*Validation*/
 
@@ -337,6 +338,10 @@
   		
   		
   		detailNo++;
+  		
+  		// 입력영역 값 초기화
+  		$("#searchEstablishValue").val("");
+  		$("#searchClientValue").val("");
   		
   	});
   	

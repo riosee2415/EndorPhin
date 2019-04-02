@@ -14,7 +14,7 @@
 					<strong><i class="fa fa-calculator"></i>개인별 급여 현황</strong>
 				</h2>
 			</div>
-			<form action="/paymentCal" method="get">
+			<form action="/paymentPersonal" method="get">
 				<table class="table table-striped">
 					<thead class="thead">
 						<tr>
@@ -27,8 +27,8 @@
 							<div>
 								<label >사원명</label>
 								<input type="text" id="searchUserIdInput" readonly="readonly"/>
-								<a href="#myModal3" data-toggle="modal" style="color:white">
-									<i class="fa fa-users" onclick="searchUser()" style="font-size:25"></i>
+								<a href="#" data-toggle="modal" style="color:white" id="myModal3In">
+									<i class="fa fa-users" style="font-size:25"></i>
 								</a>
 							</div>
 						</th>
@@ -60,11 +60,18 @@
 						</tr>
 					</thead>
 					<tbody id="mainPaymentListTbody">
+						<c:forEach items="${selectPersonalPaymentList}" var="vo">
+							<tr>
+								<td>${vo.userId }</td>
+								<td>${vo.usernm }</td>
+								<td>${vo.payDay }</td>
+								<td>${vo.deptname }</td>
+								<td>${vo.totalSalary }</td>
+								<td>${vo.totalWage }</td>
+								<td>${vo.totalSalary-vo.totalWage }</td>
+							</tr>
+						</c:forEach>
 					</tbody>
-					<tfoot align="center">
-						<tr>
-						</tr>
-					</tfoot>
 				</table>
 			</div>
 		</div>
@@ -77,7 +84,7 @@
 <!-- 			class="btn btn-info">신규등록</button> -->
 	</div>
 </div>
-<div class="modal fade" id="myModal3">
+<div class="modal fade" id="myModal3" tabindex="-1" >
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -97,13 +104,19 @@
 							</tr>
 						</thead>
 						<tbody id="modalUserTbody">
+							<c:forEach items="${employeeList }" var="vo">
+								<tr class="modalUserIdTr">
+									<td>${vo.userId}</td>
+									<td>${vo.userNm}</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>
 			</div>
 			<div class="modal-footer">
 <!-- 				<a href="#" class="btn">신규 등록</a>  -->
-				<a href="#" data-dismiss="modal" class="btn" id="searchModalClose">Close</a>
+				<a href="" data-dismiss="modal" class="btn" id="searchModalClose" aria-hidden="true">Close</a>
 			</div>
 		</div>
 	</div>
@@ -128,6 +141,17 @@
 		$("#datepickerTo").datepicker('setDate','today-1M');
 		$("#datepickerFrom").datepicker('setDate','today');
 	});
+	$("#myModal3In").click(function(){
+		$("#myModal3").modal("show");
+	});
+	$(".modalUserIdTr").on('click',function(){
+		$("#searchUserIdInput").val($(this).find('td').eq(1).html());
+				
+		$("#myModal3").modal("hide");
+	});
+	
+	
+	
 
 </script>
 

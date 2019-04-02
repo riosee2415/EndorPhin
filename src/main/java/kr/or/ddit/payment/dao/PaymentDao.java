@@ -1,6 +1,7 @@
 package kr.or.ddit.payment.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -70,6 +71,11 @@ public class PaymentDao implements IPaymentDao{
 	@Override
 	public List<PaymentVo> selectTotalSalaryByDay(String payDay) {
 		return sqlSessionTemplate.selectList("payment.selectTotalSalaryByDay",payDay);
+	}
+
+	@Override
+	public List<PaymentVo> selectPersonalPaymentList(Map<String, Object> payDay) {
+		return sqlSessionTemplate.selectList("payment.selectPersonalPaymentList",payDay);
 	}
 
 }

@@ -1,7 +1,5 @@
 package kr.or.ddit.payment.model;
 
-import java.util.Date;
-
 /**
  * 
  * @author sanghoyun
@@ -17,9 +15,11 @@ public class PaymentVo {
 	String payDay;
 	String positionname; // 직급명
 	
+	String usernm; //사원이름
+	String deptname; // 부서명
+	String joincompany; // 입사일
 	public PaymentVo() {
 	}
-
 	// 입력을 위한 생성자
 	public PaymentVo(String userId, String payDay) {
 		this.userId = userId;
@@ -50,9 +50,7 @@ public class PaymentVo {
 	public void setJoincompany(String joincompany) {
 		this.joincompany = joincompany;
 	}
-	String usernm; //사원이름
-	String deptname; // 부서명
-	String joincompany; // 입사일
+	
 	
 	public String getPayCode() {
 		return payCode;

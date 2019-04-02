@@ -1,5 +1,6 @@
 package kr.or.ddit.payment.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.ddit.employee.model.EmployeeVo;
+import kr.or.ddit.employee.service.IEmployeeService;
 import kr.or.ddit.payment.model.De_product_divVo;
 import kr.or.ddit.payment.model.PaymentVo;
 import kr.or.ddit.payment.model.Payment_detailVo;
@@ -32,6 +34,9 @@ public class PaymentController {
 
 	private Logger logger = LoggerFactory.getLogger(PaymentController.class);
 	
+	@Resource(name="employeeService")
+	IEmployeeService employeeService;
+	
 	@Resource(name="paymentService")
 	IPaymentService paymentService;
 	
@@ -42,7 +47,20 @@ public class PaymentController {
 	IPayment_DetailService payment_detailService;
 	
 	@RequestMapping(path="/paymentPersonal",method=RequestMethod.GET)
-	public String paymentPersonal(){
+	public String paymentPersonal(String userid, String paydayTo,String paydayFrom,Model model){
+		model.addAttribute("employeeList",employeeService.getAllEmployee());
+		List<PaymentVo> selectPersonalPaymentList;
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("paydayTo", paydayTo);
+		map.put("paydayFrom", paydayFrom);
+		
+		if(userid==null){
+			map.put("userid", userid);
+		}
+		
+		selectPersonalPaymentList = paymentService.selectPersonalPaymentList(map);
+		model.addAttribute("selectPersonalPaymentList",selectPersonalPaymentList);
 		
 		return "paymentPersonal";
 	}

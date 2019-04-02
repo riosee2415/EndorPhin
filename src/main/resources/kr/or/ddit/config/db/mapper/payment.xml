@@ -143,15 +143,23 @@
 		group by to_char(payday,'yyyy-MM')
 	</select>
 	
-	<select id="selectPersonalPaymentList" parameterType="map">
-		select u.userid, u.usernm, p.payday,d.deptname
-        ,totalsalary,totalwage,
-        totalsalary-totalwage resultpay
+	<select id="selectPersonalPaymentList" parameterType="map" resultType="paymentVo">
+		select u.userid, u.usernm, to_char(p.payday,'yyyy-MM-dd') payday,d.deptname
+        ,totalsalary,totalwage
 		from employee u,payment p,dept d
 		where   u.userid=p.userid
 		and     d.deptcode=u.deptcode
+		<if test="paydayTo!=null">
 		and     payday between to_date(#{paydayTo})
 		                and to_date(#{paydayFrom})
+        </if>
+        <if test="paydayTo==null">
+        and     payday between add_months(sysdate,-1)
+		                and sysdate
+        </if>
+		<if test="userid!=null">
+		and		p.userid like '%'||#{userid}||'%'
+		</if>
 	</select>
 </mapper>
 

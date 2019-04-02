@@ -1,6 +1,7 @@
 package kr.or.ddit.payment.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -107,6 +108,11 @@ public class PaymentService implements IPaymentService{
 	@Override
 	public List<PaymentVo> selectTotalSalaryByDay(String payDay) {
 		return paymentDao.selectTotalSalaryByDay(payDay);
+	}
+
+	@Override
+	public List<PaymentVo> selectPersonalPaymentList(Map<String, Object> payDay) {
+		return paymentDao.selectPersonalPaymentList(payDay);
 	}
 	
 	

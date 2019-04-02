@@ -1,6 +1,7 @@
 package kr.or.ddit.payment.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.or.ddit.payment.model.PaymentVo;
 
@@ -16,4 +17,5 @@ public interface IPaymentDao {
 	String getMaxPayment();
 	String searchPaymentDupl(PaymentVo paymentVo);
 	List<PaymentVo> selectTotalSalaryByDay(String payDay);
+	List<PaymentVo> selectPersonalPaymentList(Map<String, Object> payDay);
 }

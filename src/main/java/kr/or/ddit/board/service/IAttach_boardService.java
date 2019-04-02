@@ -37,5 +37,5 @@ public interface IAttach_boardService {
 	* @return
 	* Method 설명 : 첨부파일 삭제
 	 */
-	int attach_boardDelete(String boardno);
+	int attach_boardDelete(String attachCode);
 }

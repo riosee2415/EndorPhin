@@ -20,10 +20,8 @@ public class Payment_detailServiceTest extends LogicConfig{
 	@Test
 	public void insertPayment_detailTest() {
 		Payment_detailVo payment_detailVo= new Payment_detailVo();
-		payment_detailVo.setPayDetailCode("2");
-		payment_detailVo.setDeductCode("1");
-		payment_detailVo.setPayCode("1");
-		payment_detailVo.setUseStatus("1");
+		payment_detailVo.setDeductCode("3");
+		payment_detailVo.setPayCode("2");
 		payment_detailVo.setDeductPay("2000000");
 		int insertPayment_detail = payment_detailService.insertPayment_detail(payment_detailVo);
 		assertEquals(1, insertPayment_detail);
@@ -35,12 +33,12 @@ public class Payment_detailServiceTest extends LogicConfig{
 	}
 	@Test
 	public void selectPayment_detailTest() {
-		Payment_detailVo selectPayment_detail = payment_detailService.selectPayment_detail("1");
+		Payment_detailVo selectPayment_detail = payment_detailService.selectPayment_detail(new Payment_detailVo("3","1"));
 		assertNotNull(selectPayment_detail);
 	}
 	@Test
 	public void deletePayment_detailTest() {
-		int deletePayment_detail = payment_detailService.deletePayment_detail("2");
+		int deletePayment_detail = payment_detailService.deletePayment_detail(new Payment_detailVo("3","2"));
 		assertEquals(1, deletePayment_detail);
 	}
 	@Test

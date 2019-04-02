@@ -85,4 +85,21 @@ public class Slip_detailController {
 		
 		return "입력중이던 전표가 삭제되었습니다.";
 	}
+	
+	
+	@RequestMapping("/getSlip_detailData")
+	public String getSlip_detailData(	@RequestParam("slipNumber")String slipNumber
+									,	Model model){
+			
+		List<Slip_detailVo> data = slip_detailService.getDistanguishAccount(slipNumber, "1");
+		
+		
+		model.addAttribute("data", data);
+
+		return "slip_detail/modalDetailView";
+	}
+	
+	
+	
+	
 }

@@ -21,6 +21,12 @@ public class PaymentDaoTest extends LogicConfig{
 	IPaymentDao paymentDao;
 	
 	@Test
+	public void searchPaymentDupl(){
+		String searchPaymentDupl = paymentDao.searchPaymentDupl("20190311");
+		logger.debug("asdfljnsadf:{}",searchPaymentDupl);
+	}
+	
+	@Test
 	public void insertPaymentTest() {
 		PaymentVo paymentVo = new PaymentVo();
 		paymentVo.setUserId("1");

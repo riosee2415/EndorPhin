@@ -26,18 +26,24 @@ public class Payment_DetailDao implements IPayment_DetailDao{
 	}
 
 	@Override
-	public Payment_detailVo selectPayment_detail(String payDetailCode) {
-		return sqlSessionTemplate.selectOne("payment_detail.selectPayment_detail",payDetailCode);
+	public Payment_detailVo selectPayment_detail(Payment_detailVo payment_detailVo) {
+		return sqlSessionTemplate.selectOne("payment_detail.selectPayment_detail",payment_detailVo);
 	}
 
 	@Override
-	public int deletePayment_detail(String payDetailCode) {
-		return sqlSessionTemplate.delete("payment_detail.deletePayment_detail",payDetailCode);
+	public int deletePayment_detail(Payment_detailVo payment_detailVo) {
+		return sqlSessionTemplate.delete("payment_detail.deletePayment_detail",payment_detailVo);
 	}
 
 	@Override
 	public List<Payment_detailVo> selectPayment_detailPaycode(String paycode) {
 		return sqlSessionTemplate.selectList("payment_detail.selectPayment_detailPaycode",paycode);
+	}
+
+	@Override
+	public int updatePayment_detail(Payment_detailVo payment_detailVo) {
+		return sqlSessionTemplate.update("payment_detail.updatePayment_detail",payment_detailVo);
+		
 	}
 
 	

@@ -5,12 +5,6 @@
 
     <h2>전표 관리</h2>
     <hr>
-    <div>
-		날짜 : <input id="sArea" name="sArea" type="text" />&nbsp;
-			<input id="sBtn" name="sBtn"  class="btn btn-primary" type="button" value="검색" />
-			<input id="aBtn" name="aBtn"  class="btn btn-primary" type="button" value="전체조회" />
-			<br />
-	</div><p />
 	
 	<div style="text-align: right;">
 		<input type="button" class="btn btn-primary" id="insertSlipBtn" name="insertSlipBtn" value="전표작성" />
@@ -47,6 +41,58 @@
 		</ul>
 	</nav>
 </div>
+
+
+
+
+<!-- 상세보기 모달 -->
+	<!-- Search Establish Modal Window  -->		
+  	<div class="modal modal-center fade" id="detailSlipView" tabindex="4" role="dialog" aria-labelledby="my80sizeCenterModalLabel"> 
+	   		<div class="modal-dialog modal-80size modal-center" role="document">
+	   			 <div class="modal-content modal-80size"> 
+		   			<div class="modal-header"> 
+		   				<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+		   				<h4 class="modal-title" id="myModalLabel">전표상세</h4>
+		   			</div> 
+		   			
+		   			<div class="modal-body">
+		   				<div class="form-group">
+		   					<label>전표번호</label> 
+		   					<input style="width: 50px;" type="text" id="modal_detail_slipNumber" readonly/>
+		   				</div>
+		   			 
+		   				<div class="form-group">
+		   					<label for="InputEmail">분개내역&nbsp;&nbsp;&nbsp;</label> 
+		   					<table>
+		   						<thead>
+		   							<tr>
+		   								<td>상세번호</td>
+		   								<td>계정과목</td>
+		   								<td>거래처</td>
+		   								<td>차변</td>
+		   								<td>대변</td>
+		   							</tr>
+		   						</thead>
+		   						<tbody id="detailBody">
+		   						
+		   						</tbody>
+		   					</table>
+		   				</div>
+		   				
+		   				
+		   			</div> 
+		   			
+		   			<div class="modal-footer">
+	   				</div> 
+	   				
+	   			</div> 
+	   		</div> 
+	   </div>
+	   
+	   
 
 
 

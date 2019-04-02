@@ -7,9 +7,9 @@
    	<c:forEach items="${slipList }" var="vo">
    	
 
-   		<tr>
+   		<tr class="detail_data">
    			<td><input type="checkbox" name="checkRow" value="${vo.slipNumber }" ></td>
-   			<td><a class="detailView" href="#esDetail" data-toggle="modal">${vo.slipNumber}</a></td>
+   			<td><a class="detailView" href="#detailSlipView" data-toggle="modal">${vo.slipNumber}</a></td>
    			<td><fmt:formatNumber value="${vo.total}" pattern="#,###" /></td>
    			<td><fmt:formatDate value="${vo.slipDate}" pattern="yyyy/MM/dd" /></td>
    			<td>${vo.departmentName}</td>
@@ -28,6 +28,33 @@
    	</c:forEach>
    	
    	
+   		
+  
+	<script type="text/javascript">
+		
+		$(".detailView").on("click", function(){
+			$("#detailBody").html("");			
+			
+			// 상세모달 창 전표번호 값 전달
+			var detail_slipNumber = $(this).text();
+			$("#modal_detail_slipNumber").val(detail_slipNumber);
+			
+			$.ajax({
+				url : "${pageContext.request.contextPath }/getSlip_detailData",
+				data : "slipNumber=" + detail_slipNumber,
+				success : function(data){
+					
+					$("#detailBody").html(data);					
+					
+				}
+			});
+			
+			
+			
+			
+		});
+		
+	</script>
    	
 
    	

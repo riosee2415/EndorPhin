@@ -59,8 +59,8 @@ public class Attach_boardService implements IAttach_boardService{
 	* Method 설명 : 첨부파일 삭제
 	 */
 	@Override
-	public int attach_boardDelete(String boardno) {
-		int attach_boardDelete = attach_boardDao.attach_boardDelete(boardno);
+	public int attach_boardDelete(String attachCode) {
+		int attach_boardDelete = attach_boardDao.attach_boardDelete(attachCode);
 		return attach_boardDelete;
 	}
 

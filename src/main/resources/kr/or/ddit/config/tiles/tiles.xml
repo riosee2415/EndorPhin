@@ -117,6 +117,9 @@
         	<put-attribute name="content" value="/WEB-INF/views/board/postList.jsp"/>
         </definition>
         
+         <definition name="postUpdate" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/board/postUpdate.jsp"/>
+        </definition>
         
         
         

@@ -9,13 +9,13 @@
 		insert into slip
 		(slipnumber, total, slipdate, departmentname, jukyo, status)
 		values
-		(client_seq.nextval,#{total},sysdate,#{departmentName},#{jukyo},#{status})
+		(slip_seq.nextval,#{total},sysdate,#{departmentName},#{jukyo},#{status})
 
 	</insert>
 	
 	<!-- 시퀀스 값 불러오기 -->
 	<select id="currvalSeq" resultType="String">
-		select client_seq.currval 
+		select slip_seq.currval 
 		from dual
 	</select>
 

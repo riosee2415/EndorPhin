@@ -41,7 +41,7 @@
            <h3 class="dropdown-header">전표관리</h3>
           <a class="dropdown-item" href="${pageContext.request.contextPath }/paaprovuar">미승인 전표</a>
           <a class="dropdown-item" href="${pageContext.request.contextPath }/slipview">일반 전표</a>
-          <a class="dropdown-item" href="">매출세금계산서 입력</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath }/taxcallview">매출세금계산서 입력</a>
           <a class="dropdown-item" href="${pageContext.request.contextPath }/approval">승인전표</a>
             <h3 class="dropdown-header">고정자산</h3>
             <a class="dropdown-item" href="${pageContext.request.contextPath }/purchaseAsset">고정자산 등록</a>

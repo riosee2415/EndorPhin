@@ -5,9 +5,14 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-<!DOCTYPE html>
-<html>
-<head>
+
+
+ <!-- Bootstrap core CSS -->
+<!--    <link id="attitude" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet"> -->
+
+<link id="attitude" href="/css/bootstrap2.css" rel="stylesheet"> 
+
+
 
 <style>
 select {
@@ -29,13 +34,15 @@ margin-left: 30px !important;
 vertical-align: middle !important;
  }
  
+ #attitude{
+     display: inline-block;
+ }
+ 
+ 
+ 
 </style>
 
-</head>
 
-
-
-<body>
 
 	<div class="container">
 		<div class="row">
@@ -43,7 +50,7 @@ vertical-align: middle !important;
 
 				<div class="form-group">
 					<h2>
-						<strong><i class="fa fa-book"></i> 근태 입력</strong>
+						<strong><i class="fa fa-book"></i> 근태 입력11111</strong>
 					</h2>
 				</div>
 
@@ -59,7 +66,7 @@ vertical-align: middle !important;
 							<td>근태명 <input type="text" name="search">
 							<button type="submit" style="background-color: #6E6867;" class="btn btn-info">검색</button>
 							</td>
-							<td id="tdtd"><input type="text" id="startDate" class="startDate"/></td>
+							<td><input type="text" id="startDate" class="startDate"/></td>
 							<td><h2><strong> ~ </strong></h2></td>
 							<td><input type="text" id="endDate"/> </td>
 							</form>
@@ -86,6 +93,7 @@ vertical-align: middle !important;
 					<table class="table table-striped" style="text-align: center;" border="1">
 						<thead class="thead" >
 							<tr >
+								<th  rowspan="2">체크</th>
 								<th  rowspan="2">사번</th>
 								<th  rowspan="2">사원명</th>
 								<th  rowspan="2">부서명</th>
@@ -112,10 +120,11 @@ vertical-align: middle !important;
 											data-toggle="modal" data-target="#attitudeEdit">${allAttitude_record.userid }</button></td>
 									<td>${allAttitude_record.usernm }</td>
 									<td>${allAttitude_record.deptname }</td>
+									<td>${allAttitude_record.attitudecode }</td>
 									<td>${allAttitude_record.attitudename }</td>
 									<td>${allAttitude_record.startday }</td>
 									<td>${allAttitude_record.endday }</td>
-									<td>${allAttitude_record.basedays }</td>
+									<td>${allAttitude_record.days }</td>
 									<td>${allAttitude_record.attitudememo }</td>
 								</tr>
 							</c:forEach>
@@ -125,6 +134,7 @@ vertical-align: middle !important;
 				</div>
 			</div>
 		</div>
+		
 		
 		
 		<div class="container">
@@ -152,6 +162,11 @@ vertical-align: middle !important;
 		
 		
 		
+			<%@ include file="emplLoading.jsp"%>
+		
+		
+		
+		
 		
 		<!--  근태 항목 등록 모달창 실행  -->
 			<%@ include file="attitudeRecordEdit.jsp"%>
@@ -165,8 +180,23 @@ vertical-align: middle !important;
 
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script>
+	
+	$(document).ready(function() {
+		
+		 //server side 에서 비교
+		<c:if test="${msg != null}">
+		alert("${msg}");
+		</c:if> 
+
+		
+	
+	});
+	
+	
+	
+	
+	
 	$(function() {
         $("#startDate").datepicker(   // inputbox 의 id 가 startDate 이겠죠.
                 {dateFormat:'yy/mm/dd' // 만약 2011년 4월 29일 선택하면  inputbox 에 '2011/04/29' 로표시
@@ -193,7 +223,5 @@ vertical-align: middle !important;
 	
 	</script>
 	
+   
 	
-	
-</body>
-

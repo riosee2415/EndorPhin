@@ -13,6 +13,7 @@
         c.attitudename,
         to_char(b.startday,'yyyy-MM-dd') startday,
         to_char(b.endday,'yyyy-MM-dd') endday,
+        trunc(b.endday-b.startday+1) days,
         c.basedays ,
         b.attitudememo
 	    from employee a, attitude_record b, attitude c, dept d
@@ -28,15 +29,14 @@
 		insert into attitude_record
 			(userid, startday, endday, attitudememo, status, statusname, attitudecode)
     	values
-    		(#{userId},
-    		 #{startDay}, 
-    		 #{endDay},
-    		 #{attitudeMemo},
+    		(#{userid},
+    		 #{startday}, 
+    		 #{endday},
+    		 #{attitudememo},
     		 #{status},
-    		 #{statusName},
-    		 #{attitudeCode})
+    		 nvl(#{statusname, jdbcType=VARCHAR},null),
+    		 #{attitudecode})
 	</insert>
-	
 	
 	
 		<!-- 근태항목 삭제 -->

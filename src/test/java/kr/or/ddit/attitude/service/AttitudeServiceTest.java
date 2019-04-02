@@ -1,5 +1,6 @@
 package kr.or.ddit.attitude.service;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -123,6 +124,79 @@ public class AttitudeServiceTest extends LogicConfig{
 		
 		
 	}
+	
+	
+	@Test
+	public void insertAttitude_recordTest() {
+		
+		Attitude_recordVo vo = new Attitude_recordVo();
+		
+		vo.setUserid("2");
+		vo.setStartday("2018-01-01");
+		vo.setEndday("2018-01-02");
+		vo.setStatus("승인");
+		vo.setAttitudememo("테스트");
+		vo.setAttitudecode("1");
+		
+		
+		attitude_recordService.insertAttitude_record(vo);
+		
+		
+	}
+	
+	
+	
+	
+	
+	@Test
+	public void test() {
+		
+		
+		
+		
+		Attitude_recordVo vo = new Attitude_recordVo();
+		
+		vo.setUserid("2,65,3");
+		vo.setStartday("2018-05-01");
+		vo.setEndday("2018-05-02");
+		vo.setStatus("승인");
+		vo.setAttitudememo("11일휴가");
+		vo.setAttitudecode("1");
+		
+			String[] temp =  vo.getUserid().split(",");
+		
+		
+		Attitude_recordVo userVo = new Attitude_recordVo();
+		
+		
+		for (int i = 0; i < temp.length; i++) {
+			userVo.setUserid(temp[i]);
+			userVo.setStartday(vo.getStartday());
+			userVo.setEndday(vo.getEndday());
+			userVo.setStatus("승인");
+			userVo.setAttitudememo(vo.getAttitudememo());
+			userVo.setAttitudecode(vo.getAttitudecode());
+			
+			attitude_recordService.insertAttitude_record(userVo);
+			
+			
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

@@ -61,9 +61,9 @@
 					<div class="col-1-0">
 
 
-						<button type="button" id="emplLoadingCheck"
-							class="btn btn-secondary btn-lg">선택</button>
-
+						<button type="button"  id="emplLoadingCheck" 
+							class="btn btn-secondary btn-lg" data-dismiss="modal">선택</button>
+							
 					</div>
 				</div>
 
@@ -72,7 +72,7 @@
 
             </div>
             <div class="modal-footer">
-              <a href="#" data-dismiss="modal" class="btn">Close</a>
+              <a href="#"  data-dismiss="modal" class="btn">Close</a>
               <a href="#" class="btn btn-primary">Save changes</a>
             </div>
           </div>
@@ -86,11 +86,12 @@
 			
 			
 			
+			
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
 
 
-$("#attitudeInsert").on("click", function(){
+$("#attitudeRecordInsert").on("click", function(){
 			console.log("클릭");
 
 	//사원 전체 불러오기
@@ -117,7 +118,7 @@ function makeUserList(allEmployee) {
 		html += "<tr class='userTr' data-userid='"+ user.userId+ "'>";
 		html += "<td> <input type='checkbox' name='check'  value=' "+ user.userId+"' /></td>";
 		
-		html += "	<td>"+ user.userId +"</td>";
+		html += "	<td >"+ user.userId +"</td>";
 		html += "	<td>"+ user.userNm +"</td>";
 		html += "	<td>"+user.deptname+"</td>";
 		html += "</tr>";
@@ -126,13 +127,51 @@ function makeUserList(allEmployee) {
 	
 }
 
+
+function recordUserList(allAttitude_recordInsert) {
+	var html = "";
+	
+	
+		for (var i = 0; i < allAttitude_recordInsert.length; i++) {
+				
+		var user = allAttitude_recordInsert[i];
+		html += "<tr>";
+		html += "	<td>"+ user.userId +"</td>";
+		html += "	<td>"+ user.userNm +"</td>";
+		html += "	<input type='hidden' name='userid' value='" + user.userId + "'>";
+		html += "	<td>"+user.deptname+"</td>";
+		html += "	<td><input type='text' name='attitudememo'/></td>";
+		html += "</tr>";
+	}
+	$("#recordUserList").html(html);
+	
+}
+
 //사용자 tr 태그 클릭시 이벤트 핸들러
 $("#emplLoadingCheck").click(function() {
+	
+	var checked = new Array();
+	
 	 $('input:checkbox[name="check"]:checked').each(function() {
-		 $("#frmInsert").append("<input type=\'hidden\' name=\'check_no\' value=\''"+$(this).val()+"\'' />")
+		 
+		 checked.push($(this).val());
+		 
 	}); 
 	 
-	$("#frmInsert").submit();
+	 
+	 $.ajax({
+			url			: "${cp}/attitudeRecord/attitudeRecordInsert" ,
+			method		: "get",
+			traditional : true,
+			data		: "userId="+checked,
+			success		: function(data) {
+				
+				
+				console.log("케익 :" + data);
+				
+				recordUserList(data);
+			} 
+		}); 
 	 
 	
 	});
@@ -147,8 +186,4 @@ $(document).on('hidden.bs.modal', function (event) {
 
 });
 
-
 </script>
-
-	<form id="frmInsert" action="${cp}/attitudeRecord/attitudeRecordInsert" method="get">
-	</form>

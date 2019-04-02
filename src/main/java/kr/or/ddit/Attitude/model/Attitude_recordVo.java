@@ -9,13 +9,17 @@ import java.util.Date;
  */
 public class Attitude_recordVo {
 	
-	String userid;
-	String startday;
-	String endday;
-	String attitudememo;
-	String status;
+	String userid; //사원번호
+	String startday; //휴가시작일
+	String endday;  //휴가종료일
+	String attitudememo ;//특이사항 메모
+	String status;  //승인여부
 	String statusname;
-	String attitudecode;
+	String attitudecode; //근태코드
+	String days; //일수
+	
+	
+	
 	
 	
 	//조인 컬럼
@@ -88,6 +92,13 @@ public class Attitude_recordVo {
 	}
 	public void setBasedays(String basedays) {
 		this.basedays = basedays;
+	}
+	
+	public String getDays() {
+		return days;
+	}
+	public void setDays(String days) {
+		this.days = days;
 	}
 	@Override
 	public String toString() {

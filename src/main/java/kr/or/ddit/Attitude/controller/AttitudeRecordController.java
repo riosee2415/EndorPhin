@@ -11,9 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.or.ddit.Attitude.model.Attitude_recordVo;
 import kr.or.ddit.Attitude.service.IAttitude_recordService;
+import kr.or.ddit.employee.model.EmployeeVo;
+import kr.or.ddit.employee.service.IEmployeeService;
 
 @RequestMapping("/attitudeRecord")
 @Controller
@@ -24,6 +28,8 @@ public class AttitudeRecordController {
 	@Resource(name = "attitude_recordService")
 	private IAttitude_recordService attitude_recordService;
 	
+	@Resource(name = "employeeService")
+	private IEmployeeService employeeService;
 	
 	
 	
@@ -33,6 +39,7 @@ public class AttitudeRecordController {
 		
 		List<Attitude_recordVo> allAttitude_record = attitude_recordService.getAllAttitude_record();
 		
+		
 		model.addAttribute("allAttitude_record",allAttitude_record);
 		
 		return "Attitude_recordListTiles";
@@ -41,43 +48,60 @@ public class AttitudeRecordController {
 	
 	
 	@RequestMapping(path = "/attitudeRecordInsert", method = RequestMethod.GET)
-	public String attitudeRecordInsert(Model model, String[] check_no) {
+	@ResponseBody
+	public List<EmployeeVo> attitudeRecordInsert_GET(Model model, String[] userId) {
+		
 		
 		
 		List<String> check = new  ArrayList<String>();
 		
 		
-		
-		List<Attitude_recordVo> allAttitude_recordInsert = new  ArrayList<Attitude_recordVo>();
-		
+		List<EmployeeVo> allAttitude_recordInsert = new  ArrayList<EmployeeVo>();
 		
 		
-		for(String chk : check_no){
+		for(String chk : userId){
 			check.add(chk);
+			EmployeeVo selectEmployee = employeeService.selectEmployee(chk);
+			allAttitude_recordInsert.add(selectEmployee);
 		}
 		
-		List<Attitude_recordVo> allAttitude_record = attitude_recordService.getAllAttitude_record();
 		
-		for (int i = 0; i < allAttitude_record.size(); i++) {
-			if(allAttitude_record.get(i).getUserid().equals(check.get(i))){
-				
-				allAttitude_recordInsert.add(allAttitude_record.get(i));
-				
-				
-			}
 			
-		}
 		
-		model.addAttribute("allAttitude_recordInsert",allAttitude_recordInsert);
-		
-		return "Attitude_recordListTiles";
+		return allAttitude_recordInsert;
 	
 	
 	}
 	
 	
-	
-	
+	@RequestMapping(path = "/attitudeRecordInsert", method = RequestMethod.POST)
+	public String attitudeRecordInsert_POST(Model model, Attitude_recordVo vo ,RedirectAttributes ra) {
+		
+		
+		String[] tempUser =  vo.getUserid().split(",");
+		String[] tempMemo =  vo.getAttitudememo().split(",");
+		
+		
+		
+		Attitude_recordVo userVo = new Attitude_recordVo();
+		
+		
+		for (int i = 0; i < tempUser.length; i++) {
+			userVo.setUserid(tempUser[i]);
+			userVo.setStartday(vo.getStartday());
+			userVo.setEndday(vo.getEndday());
+			userVo.setStatus("승인");
+			userVo.setAttitudememo(tempMemo[i]);
+			userVo.setAttitudecode(vo.getAttitudecode());
+			
+			attitude_recordService.insertAttitude_record(userVo);
+			
+		}
+			
+			ra.addFlashAttribute("msg", "정상 등록 되었습니다");
+			return "redirect:/attitudeRecord/getAllattitudeRecord";
+		
+	}
 	
 	
 	

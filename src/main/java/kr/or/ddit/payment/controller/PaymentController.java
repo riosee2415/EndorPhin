@@ -41,9 +41,23 @@ public class PaymentController {
 	@Resource(name="payment_detailService")
 	IPayment_DetailService payment_detailService;
 	
-	@RequestMapping(path="/payment")
-	public String paymentList(){
-		return "paymentView";
+	@RequestMapping(path="/paymentCal",method=RequestMethod.GET)
+	public String paymentCal(Model model,String paydayYear,String paydayMonth){
+		String payDay = paydayYear+paydayMonth;
+		List<PaymentVo> selectTotalSalaryByDay;
+		logger.debug("asdfasdkfjn:{}",payDay);
+		if(paydayYear==null)
+			selectTotalSalaryByDay=paymentService.selectTotalSalaryByDay(null);
+		else
+			selectTotalSalaryByDay=paymentService.selectTotalSalaryByDay(payDay);
+		
+		model.addAttribute("paymentList",selectTotalSalaryByDay);
+		return "paymentCal";
+	}
+	
+	@RequestMapping(path="/paymentAdjust")
+	public String paymentAdjust(){
+		return "paymentAdjustView";
 	}
 	
 	@RequestMapping(path="/deletePayment",produces = { "application/json" })
@@ -58,7 +72,6 @@ public class PaymentController {
 	@ResponseBody
 	public Map<String,Object> updatePaymentDetailAjax(@RequestBody Payment4UpdVo testVo){
 		
-		logger.debug("teljksandfkjasdf : {}",testVo);
 		paymentService.updatePaymentDetailAjax(testVo);
 		Map<String, Object> paymentList = getPaymentList(testVo.getUserid(),null);
 		return paymentList;
@@ -67,7 +80,6 @@ public class PaymentController {
 	@RequestMapping(path="/insertAndUpdatePayment",produces={"application/json"})
 	@ResponseBody
 	public Map<String, Object> insertAndUpdatePayment(@RequestBody Payment4UpdVo testVo){
-		logger.debug("teljksandfkjasdf123987y123 : {}",testVo);
 		boolean updateAndInsertPayment = paymentService.updateAndInsertPayment(testVo);
 		Map<String, Object> paymentList = getPaymentList(testVo.getUserid(),null);
 		paymentList.put("msg", updateAndInsertPayment);

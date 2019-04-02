@@ -329,7 +329,6 @@
   			data : "slipDetailNo=" + detailNo + "&status=" + insertSelectSlipStatus + "&price=" + insertPrice + "&clientCard=" + insertClientCard + "&slipNumber=" + insertSlipNumber + "&establishCode=" + insertEstablish + "&currval=" + currval +"&insertSlipDate=" + insertSlipDate + "&insertDept=" + insertDept + "&juckyo=" + juckyo,
   			success : function(data){
   				console.log(data);
-  				
   				$("#temporaryArea").html(data);
   				
   			}

@@ -142,6 +142,7 @@
     <form id="frm" action="${pageContext.request.contextPath}/boardDetail" method="get">
   	  <input type="hidden" id="boardNo" name="boardNo" />
   	  <input type="hidden" id="boardTypeName" name="boardTypeName" value="${boardTypeName }">
+  	  <input type="hidden" id="boardTypeName" name="boardTypeCode" value="${boardTypeCode }">
     </form>
           
               

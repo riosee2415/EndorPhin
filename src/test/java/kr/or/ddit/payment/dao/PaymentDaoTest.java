@@ -22,7 +22,7 @@ public class PaymentDaoTest extends LogicConfig{
 	
 	@Test
 	public void searchPaymentDupl(){
-		String searchPaymentDupl = paymentDao.searchPaymentDupl("20190311");
+		String searchPaymentDupl = paymentDao.searchPaymentDupl(new PaymentVo("1","20190311"));
 		logger.debug("asdfljnsadf:{}",searchPaymentDupl);
 	}
 	
@@ -66,6 +66,11 @@ public class PaymentDaoTest extends LogicConfig{
 	public void deletePaymentTest() {
 		int deletePayment = paymentDao.deletePayment("2");
 		assertEquals(1, deletePayment);
+	}
+	@Test
+	public void selectTotalSalaryByDay() {
+		List<PaymentVo> selectTotalSalaryByDay = paymentDao.selectTotalSalaryByDay("201903");
+		assertTrue(selectTotalSalaryByDay.size()>0);
 	}
 
 }

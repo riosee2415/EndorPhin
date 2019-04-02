@@ -84,8 +84,8 @@ public class Attach_boardDao implements IAttach_boardDao{
 	* Method 설명 : 첨부파일 삭제
 	 */
 	@Override
-	public int attach_boardDelete(String boardno) {
-		int attach_boardDelete = sqlSession.update("attach_board.attach_boardDelete", boardno);
+	public int attach_boardDelete(String attachCode) {
+		int attach_boardDelete = sqlSession.delete("attach_board.attach_boardDelete", attachCode);
 		return attach_boardDelete;
 	}
 	

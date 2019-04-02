@@ -25,10 +25,10 @@
 	<!-- 	파일정보 수정 -->
 	<update id="attachUpdate" parameterType="attach_boardVo">
 		update attach_board
-		   set attachname = #{attachname},
-		   	   attachrealpath = #{attachrealpath},
-			   attachrealname = #{attachrealname}
-		 where attachcode = #{attachcode}
+		   set attachName = #{attachName},
+		   	   attachRealpath = #{attachRealpath},
+			   attachRealname = #{attachRealname}
+		 where attachCode = #{attachCode}
 	</update>
 	
 	<!-- 게시글 번호 별 첨부파일 조회 -->
@@ -41,8 +41,8 @@
 			   
 		  from attach_board
 		
-		 where boardno = #{boardno}
-		 order by attachcode
+		 where boardno = #{boardNo}
+		 order by attachCode
 	</select>
 	
 	<!-- 첨부파일 번호 조회 -->
@@ -55,14 +55,14 @@
 			   
 		  from attach_board
 		
-		 where attachcode = #{attachcode}
+		 where attachCode = #{attachCode}
 	</select>
 	
 	<!-- 첨부파일 삭제 -->
 	<delete id="attach_boardDelete" parameterType="String">
 		delete from attach_board
 		
-		 where attachcode = #{attachcode}
+		 where attachCode = #{attachCode}
 	</delete>
 	
 </mapper>

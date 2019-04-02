@@ -15,7 +15,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin - Dashboard</title>
+  <title>EndoRPhin</title>
   
   
   <!-- Acoount Part Basic Style -->

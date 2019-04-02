@@ -34,9 +34,7 @@
 		
 		   set title=#{title},
 			   contents=#{contents},
-			   postdate=sysdate,
-			   boardtypecode=#{boardTypeCode},
-			   userid=#{userId}
+			   postdate=sysdate
 				
 		 where boardno = #{boardNo}
 	</update>

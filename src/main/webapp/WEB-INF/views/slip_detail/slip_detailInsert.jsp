@@ -22,8 +22,8 @@
 	</thead>
 	
 	<c:forEach items="${slip_detailList }" var="list">
-		<tr>
-			<td><input style="width: 50px;" type="text" value="000${list.slipDetailNo }"/></td>
+		<tr class="inertTemporaryData" data-detailnumber="${list.slipDetailNo }">
+			<td><input id="detailNum" style="width: 50px;" type="text" value="000${list.slipDetailNo }"/></td>
 			
 			<c:choose>
 				<c:when test="${list.status  == 0 }">
@@ -35,8 +35,8 @@
 				</c:otherwise>
 			</c:choose>
 			
-			<td><input style="width: 70px;" type="text" value="${list.establishCode }"/></td>
-			<td><input style="width: 120px;" type="text" value="${list.clientCard }"/></td>
+				<td><input style="width: 70px;" type="text" value="${list.establishCode }"/></td>
+				<td><input style="width: 120px;" type="text" value="${list.clientCard }"/></td>
 			
 			<c:choose>
 				<c:when test="${list.status  == 0 }">
@@ -49,6 +49,8 @@
 					<td><input class="right" style="width: 70px;" type="text" value="${list.price }"/></td>
 				</c:otherwise>
 			</c:choose>
+				<!-- 입력중인 전표 하나만 수정하기 -->
+					<td><input type="button" class="cancleOne" name="cancleOne" value="취소"/></td>
 		</tr>
 	</c:forEach>
 </table>
@@ -154,7 +156,39 @@
 		
 		
 		
-	});	
+	});
+	
+	
+	// 입력중인 상세전표 하나 삭제하기
+	$(".cancleOne").on("click", function(){
+		var slipNum = $("#currval").val();
+		var detailNum = $(".inertTemporaryData").data("detailnumber");
+		
+		var tr = $(this).parent().parent();
+		
+		tr.children().eq(0).html("");
+		tr.children().eq(1).html("");
+		tr.children().eq(2).html("");
+		tr.children().eq(3).html("");
+		tr.children().eq(4).html("");
+		tr.children().eq(5).html("");
+		
+		$(this).parent().html("");
+		
+		
+		
+		$.ajax({
+			url : "${pageContext.request.contextPath }/deleteSlip_detail_one",
+			data : "slipNumber=" + slipNum  + "&detailNum=" + detailNum,
+			success : function(data){
+				
+				
+			}
+			
+		});
+		
+		
+	});
 	
 	
 </script>

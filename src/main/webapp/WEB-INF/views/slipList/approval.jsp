@@ -100,25 +100,8 @@
 	
     <!---------------------------------------------->
 	<script>
- 
-	$("#serachBtn").on("click", function(){
-		
-   	 	$.ajax({
-       		url 	: "${pageContext.request.contextPath }/searchAjax",
-       		data 	: "before_slipDate=" + $("#before_slipDate").val() +  "&" + "after_slipDate=" + $("#after_slipDate").val(),
-       		success : function(data){
-       			console.log(data);
-       			
-       			var htmlArr = data.split("================seperator================");
-       			
-       			$("#deptListTbody").html("");
-       			$("#deptListTbody").html(htmlArr[0]);
-       			$("#pagination").html("");
-       			$("#pagination").html(htmlArr[1]);
-       		}
-       	});
-	});
  	
+	/* 페이징 ajax */
 	$("document").ready(function(){
  		approvalPageList(1);
  	});
@@ -161,8 +144,10 @@
 		
 		$("#update_frm").submit();
 	}
+	
+	/* 상세보기  */
 	 $("document").ready(function() {
-			/* 상세보기  */
+			
 			$("#deptListTbody").on("click", ".detailView1", function(){
 				
 				$("#slipnumber_d").val($(this).data().detail_slipnumber);
@@ -174,6 +159,8 @@
 			});
 	 	});
 	 
+	
+	/* 날짜  */
  	 $("document").ready(function(){
  	
        $(function() {
@@ -227,7 +214,23 @@
        });
  	 });
  	
- 	
+ 	/* 날짜검색*/ 
+ 	$("#serachBtn").on("click", function(){
+   	 	$.ajax({
+       		url 	: "${pageContext.request.contextPath }/searchAjax",
+       		data 	: "before_slipDate=" + $("#before_slipDate").val() +  "&" + "after_slipDate=" + $("#after_slipDate").val(),
+       		success : function(data){
+       			console.log(data);
+       			
+       			var htmlArr = data.split("================seperator================");
+       			
+       			$("#deptListTbody").html("");
+       			$("#deptListTbody").html(htmlArr[0]);
+       			$("#pagination").html("");
+       			$("#pagination").html(htmlArr[1]);
+        	}
+        });
+ 	});
 	</script>
 	
 

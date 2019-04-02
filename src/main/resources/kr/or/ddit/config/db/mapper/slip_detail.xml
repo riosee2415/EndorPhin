@@ -30,13 +30,12 @@
 		WHERE SLIPNUMBER = #{slipNumber}
 	</delete>
 	
-	<!-- 차/대변 합계금액 구하기 -->
-	<select id="getDistanguishAccount" parameterType="map" resultType="Integer">
+	<!-- 차/대 데이터 구하기 -->
+	<select id="getDistanguishAccount" parameterType="map" resultType="slip_detailVo">
 		SELECT 
-			sum(price)
+			SLIPDETAILNO, STATUS, PRICE, CLIENTCARD, SLIPNUMBER, ESTABLISHCODE
 		FROM SLIP_DETAIL
 		WHERE SLIPNUMBER = #{slipNumber}
-			AND STATUS = #{status}
 	</select>
 	
 	

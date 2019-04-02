@@ -50,7 +50,7 @@ public interface ISlip_detailService {
 	* @return
 	* Method 설명 : 차/ 대변 합계 구하기 (0 : 차 / 1 : 대)
 	*/
-	public int getDistanguishAccount(String slipNumber, String status);
+	public List<Slip_detailVo> getDistanguishAccount(String slipNumber, String status);
 	
 	
 	

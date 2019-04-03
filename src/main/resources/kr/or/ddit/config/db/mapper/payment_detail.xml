@@ -71,6 +71,7 @@
         where pd.deductcode=dpd.deductcode
         and p.paycode=pd.paycode
         and pd.paycode=#{paycode}
+        order by paycode,deductcode
 	</select>
 	
 

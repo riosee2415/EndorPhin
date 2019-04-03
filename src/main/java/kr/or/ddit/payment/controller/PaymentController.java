@@ -46,6 +46,12 @@ public class PaymentController {
 	@Resource(name="payment_detailService")
 	IPayment_DetailService payment_detailService;
 	
+	@RequestMapping(path="/searchUserNmToPayment",produces = { "application/json" })
+	@ResponseBody
+	public List<EmployeeVo> searchUserNmToPayment(String usernm){
+		return employeeService.selectUserByNm(usernm);
+	}
+	
 	@RequestMapping(path="/paymentPersonal",method=RequestMethod.GET)
 	public String paymentPersonal(String userid, String paydayTo,String paydayFrom,Model model){
 		model.addAttribute("employeeList",employeeService.getAllEmployee());
@@ -54,10 +60,7 @@ public class PaymentController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("paydayTo", paydayTo);
 		map.put("paydayFrom", paydayFrom);
-		
-		if(userid==null){
-			map.put("userid", userid);
-		}
+		map.put("userid", userid);
 		
 		selectPersonalPaymentList = paymentService.selectPersonalPaymentList(map);
 		model.addAttribute("selectPersonalPaymentList",selectPersonalPaymentList);
@@ -110,6 +113,12 @@ public class PaymentController {
 		return paymentList;
 	}
 	
+	@RequestMapping(path="/getPaymentListPersonal",method=RequestMethod.GET, produces = { "application/json" })
+	@ResponseBody
+	public Map<String, Object> getPaymentListPersonal(String userid,String payday){
+		String payCode = paymentService.paycodeByIdnDay(new PaymentVo(userid, payday));
+		return payment_detailService.getPayDetail(payCode);
+	}
 	@RequestMapping(path="/getPaymentList",method=RequestMethod.GET, produces = { "application/json" })
 	@ResponseBody
 	public Map<String, Object> getPaymentList(String userid,String payCode){
@@ -119,7 +128,6 @@ public class PaymentController {
 		}
 		else{
 			deNmPayList = payment_detailService.getPayDetail(payCode);
-			logger.debug("asdasdasdasdhaha:{}",deNmPayList.get("paymentVo"));
 		}
 		
 		return deNmPayList;
@@ -169,7 +177,6 @@ public class PaymentController {
 	@RequestMapping(path="/addDeproduct",method=RequestMethod.POST)
 	public String addDeproduct_post(Model model,De_product_divVo de_product_divVo){
 		de_product_divService.insertDe_product_div(de_product_divVo);
-		logger.debug("selectDe_product_div:{}",de_product_divVo);
 		if(de_product_divVo.getDeprostatus().equals("1")){
 			return "redirect:/addProduct";
 		}
@@ -180,7 +187,6 @@ public class PaymentController {
 	@RequestMapping(path="/findDeductCode",method=RequestMethod.GET)
 	@ResponseBody
 	public String findDeductCode(Model model,String deductCode){
-		logger.debug("deductCode: {}",deductCode);
 		De_product_divVo selectDe_product_div = de_product_divService.selectDe_product_div(deductCode);
 		if (selectDe_product_div==null) {
 			return "1"; // 중복 x

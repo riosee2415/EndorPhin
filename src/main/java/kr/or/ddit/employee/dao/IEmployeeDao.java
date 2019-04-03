@@ -14,6 +14,16 @@ public interface IEmployeeDao {
 	* Method 설명 : 사원 선택하여 가져오기
 	*/
 	public EmployeeVo selectEmployee(String userId);
+	
+	/**
+	* Method : selectUserByNm
+	* 작성자 : PC04
+	* 변경이력 :
+	* @param usernm
+	* @return
+	* Method 설명 : 사원이름으로 검색
+	*/
+	public List<EmployeeVo> selectUserByNm(String usernm);
 	/**
 	* Method : insertEmployee
 	* 작성자 : leemjaewoo

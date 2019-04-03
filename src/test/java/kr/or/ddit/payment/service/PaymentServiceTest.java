@@ -7,12 +7,16 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import kr.or.ddit.payment.model.PaymentVo;
 import kr.or.ddit.set.LogicConfig;
 
 public class PaymentServiceTest extends LogicConfig{
 
+	private Logger logger = LoggerFactory.getLogger(PaymentServiceTest.class);
+	
 	@Resource(name="paymentService")
 	IPaymentService paymentService;
 
@@ -54,5 +58,10 @@ public class PaymentServiceTest extends LogicConfig{
 		List<PaymentVo> allPayment = paymentService.getPaymentListByUserNm("호");
 		assertTrue(allPayment.size()>0);
 	}
-
+	@Test
+	public void paycodeByIdnDayTest() {
+		PaymentVo paymentVo = new PaymentVo("1", "2019-04-02");
+		String paycodeByIdnDay = paymentService.paycodeByIdnDay(paymentVo);
+		logger.debug("asdfsadf:{}",paycodeByIdnDay);
+	}
 }

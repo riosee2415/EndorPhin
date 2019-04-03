@@ -143,6 +143,7 @@
 		group by to_char(payday,'yyyy-MM')
 	</select>
 	
+	<!-- 날짜 기간별과 유저 아이디로 검색 -->
 	<select id="selectPersonalPaymentList" parameterType="map" resultType="paymentVo">
 		select u.userid, u.usernm, to_char(p.payday,'yyyy-MM-dd') payday,d.deptname
         ,totalsalary,totalwage
@@ -158,8 +159,16 @@
 		                and sysdate
         </if>
 		<if test="userid!=null">
-		and		p.userid like '%'||#{userid}||'%'
+		and		u.usernm like '%'||#{userid}||'%'
 		</if>
+	</select>
+	
+	<!-- 사원번호와 날짜로  급여번호를 가져옴-->
+	<select id="paycodeByIdnDay" parameterType="paymentVo" resultType="String">
+		select  paycode
+		from    payment
+		where   userid =#{userId}
+		and     payday like to_date(#{payDay})
 	</select>
 </mapper>
 

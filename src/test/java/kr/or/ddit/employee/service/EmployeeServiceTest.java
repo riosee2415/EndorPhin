@@ -51,6 +51,11 @@ public class EmployeeServiceTest extends LogicConfig{
 		assertTrue(allEmployee.size()>0);
 	}
 	
+	@Test
+	public void selectUserByNmtest() {
+		List<EmployeeVo> selectUserByNm = employeeService.selectUserByNm("호");
+		assertNotNull(selectUserByNm);
+	}	
 	
 	@Test
 	public void getAllEmployeeDetailTest() {

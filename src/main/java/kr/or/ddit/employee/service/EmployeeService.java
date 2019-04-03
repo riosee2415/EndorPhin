@@ -48,5 +48,10 @@ public class EmployeeService implements IEmployeeService{
 		return employeeDao.SearchEmployee(userNm);
 		
 	}
+
+	@Override
+	public List<EmployeeVo> selectUserByNm(String usernm) {
+		return employeeDao.selectUserByNm(usernm);
+	}
 	
 }

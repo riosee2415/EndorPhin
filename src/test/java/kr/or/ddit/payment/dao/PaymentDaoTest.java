@@ -82,5 +82,11 @@ public class PaymentDaoTest extends LogicConfig{
 		List<PaymentVo> selectTotalSalaryByDay = paymentDao.selectPersonalPaymentList(payDay);
 		logger.debug("asdfkasdf:{}",selectTotalSalaryByDay.size());
 	}
+	@Test
+	public void paycodeByIdnDayTest() {
+		PaymentVo paymentVo = new PaymentVo("1", "2019-04-02");
+		String paycodeByIdnDay = paymentDao.paycodeByIdnDay(paymentVo);
+		logger.debug("asdfsadf:{}",paycodeByIdnDay);
+	}
 
 }

@@ -49,4 +49,9 @@ public class EmployeeDao implements IEmployeeDao{
 		return sqlSessionTemplate.selectList("employee.SearchEmployee",userNm);
 	}
 
+	@Override
+	public List<EmployeeVo> selectUserByNm(String usernm) {
+		return sqlSessionTemplate.selectList("employee.selectUserByNm", usernm);
+	}
+
 }

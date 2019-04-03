@@ -18,4 +18,5 @@ public interface IPaymentService {
 	void updatePaymentDetailAjax(Payment4UpdVo payment4UpdVo);
 	List<PaymentVo> selectTotalSalaryByDay(String payDay);
 	List<PaymentVo> selectPersonalPaymentList(Map<String, Object> payDay);
+	String paycodeByIdnDay(PaymentVo paymentVo);
 }

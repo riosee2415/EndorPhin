@@ -52,6 +52,10 @@ public class PaymentController {
 		return employeeService.selectUserByNm(usernm);
 	}
 	
+	@RequestMapping(path="/paymentYear",method=RequestMethod.GET)
+	public String paymentYear(){
+		return "paymentYear";
+	}
 	@RequestMapping(path="/paymentPersonal",method=RequestMethod.GET)
 	public String paymentPersonal(String userid, String paydayTo,String paydayFrom,Model model){
 		model.addAttribute("employeeList",employeeService.getAllEmployee());

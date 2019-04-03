@@ -83,6 +83,15 @@ public class PaymentDaoTest extends LogicConfig{
 		logger.debug("asdfkasdf:{}",selectTotalSalaryByDay.size());
 	}
 	@Test
+	public void selectYearPaymentListDetailTest() {
+		Map<String, Object> payDay=new HashMap<>();
+		payDay.put("userid", "1");
+		payDay.put("paydayYear", "2019");
+		List<PaymentVo> selectYearPaymentListDetail = paymentDao.selectYearPaymentListDetail(payDay);
+		logger.debug("asdfkhb:{}",selectYearPaymentListDetail.size());
+		
+	}
+	@Test
 	public void paycodeByIdnDayTest() {
 		PaymentVo paymentVo = new PaymentVo("1", "2019-04-02");
 		String paycodeByIdnDay = paymentDao.paycodeByIdnDay(paymentVo);

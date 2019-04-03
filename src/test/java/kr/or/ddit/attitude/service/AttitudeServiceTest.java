@@ -245,6 +245,35 @@ public class AttitudeServiceTest extends LogicConfig{
 		
 	}
 	
+	@Test
+	public void selectTest() {
+		Attitude_recordVo vo = new Attitude_recordVo();
+		vo.setUserid("3");
+		vo.setStartday("2019-03-28");
+		
+		Attitude_recordVo selectAttitude_record = attitude_recordService.SelectAttitude_record(vo);
+		
+		
+		logger.debug("하나 {}",selectAttitude_record);
+	}
+	
+	
+	@Test
+	public void updateTest() {
+		Attitude_recordVo vo = new Attitude_recordVo();
+		vo.setUserid("3");
+		vo.setStartday("2019-04-28");
+		vo.setAfterStartday("2015-02-02");
+		vo.setEndday("2015-06-06");
+		vo.setStatus("승인");
+		vo.setAttitudecode("2");
+		
+		
+		int updateAttitude_record = attitude_recordService.updateAttitude_record(vo);
+		
+		
+	}
+	
 	
 	
 	

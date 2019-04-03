@@ -17,6 +17,7 @@ public class Attitude_recordVo {
 	String statusname;
 	String attitudecode; //근태코드
 	String days; //일수
+	String afterStartday; //업뎃 시작날짜
 	
 	
 	
@@ -99,6 +100,15 @@ public class Attitude_recordVo {
 	}
 	public void setDays(String days) {
 		this.days = days;
+	}
+	
+	
+	
+	public String getAfterStartday() {
+		return afterStartday;
+	}
+	public void setAfterStartday(String afterStartday) {
+		this.afterStartday = afterStartday;
 	}
 	@Override
 	public String toString() {

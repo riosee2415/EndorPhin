@@ -44,7 +44,7 @@ public class Attitude_recordService implements IAttitude_recordService{
 	}
 
 	@Override
-	public Attitude_recordVo SelectAttitude_record(String code) {
+	public Attitude_recordVo SelectAttitude_record(Attitude_recordVo code) {
 		return attitude_recordDao.SelectAttitude_record(code);
 	}
 

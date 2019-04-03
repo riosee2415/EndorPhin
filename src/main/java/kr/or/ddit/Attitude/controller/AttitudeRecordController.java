@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -161,6 +163,45 @@ public class AttitudeRecordController {
 	
 	
 	
+	@RequestMapping(path = "/attitudeRecordUpdate", method = RequestMethod.GET)
+	@ResponseBody
+	public Attitude_recordVo attitudeRecordUpdate_GET(Model model,String userid, String startday) {
+		
+		Attitude_recordVo vo = new Attitude_recordVo();
+		vo.setUserid(userid);
+		vo.setStartday(startday);
+		
+		Attitude_recordVo selectAttitude_record = attitude_recordService.SelectAttitude_record(vo);
+		
+		
+		return selectAttitude_record;
+	
+	}
+	
+	
+	
+	
+	
+	@RequestMapping(path = "/attitudeRecordUpdate", method = RequestMethod.POST)
+	public String attitudeRecordUpdate_POST(Model model,Attitude_recordVo vo,RedirectAttributes ra) {
+		
+		vo.setStatus("승인");
+		
+		System.out.println("기존 날짜 :" + vo.getStartday());
+		System.out.println("변경 날짜 :" +vo.getAfterStartday());
+		
+		attitude_recordService.updateAttitude_record(vo);
+		
+		ra.addFlashAttribute("msg", "정상 수정 되었습니다");
+		return "redirect:/attitudeRecord/getAllattitudeRecord";
+		
+	}
+	
+	
+	
+	
+	
+	
 	
 	/*@RequestMapping(path = "/insertAttitude", method = RequestMethod.GET)
 	public String insertAttitude(Model model, AttitudeVo vo,RedirectAttributes ra) {
@@ -171,7 +212,6 @@ public class AttitudeRecordController {
 		ra.addFlashAttribute("msg", "정상 등록 되었습니다");
 		return "redirect:/attitude/getAllAttitude";
 	}
-	
 	
 	
 	

@@ -43,7 +43,7 @@ public class Attitude_recordDao implements IAttitude_recordDao{
 	}
 
 	@Override
-	public Attitude_recordVo SelectAttitude_record(String code) {
+	public Attitude_recordVo SelectAttitude_record(Attitude_recordVo code) {
 		return sqlSessionTemplate.selectOne("attitude_record.SelectAttitude_record",code);
 	}
 

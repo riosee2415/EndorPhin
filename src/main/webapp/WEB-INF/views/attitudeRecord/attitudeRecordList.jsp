@@ -107,9 +107,9 @@ vertical-align: middle !important;
 								<td>까지</td>
 							</tr>
 						</thead>
-					 <tbody id="mytbody">
+					 <tbody id="mytbodyRecord">
 							<c:forEach items="${allAttitude_record}" var="allAttitude_record">
-								<tr class="boardTr" data-userId="${allAttitude_record.userid}">
+								<tr class="boardTr" data-userId="${allAttitude_record.userid}" data-startday="${allAttitude_record.startday}">
 									<td><input type="checkbox" name="check"
 										style="width: 30px; height: 30px;"></td>
 
@@ -174,9 +174,38 @@ vertical-align: middle !important;
         </div>
     
 
-
+                                                                           
 
 	<script>
+	
+	/*사원정보 수정하기*/
+	$("#mytbodyRecord").on("click", ".boardTr", function(){
+		                                            
+	 	  $.ajax({
+			url			: "${cp }/attitudeRecord/attitudeRecordUpdate" ,
+			method		: "get",
+			traditional : true,
+			data		: {
+				userid : encodeURI($(this).data().userid),
+				startday : encodeURI($(this).data().startday)
+				
+			},
+			success		: function(selectAttitude_record) {
+				 $("#attitudecodeRecordEdit").val(selectAttitude_record.attitudecode); 
+				 $("#startDateInsertRecordEdit").val(selectAttitude_record.startday);
+				 $("#afterStartdayInsertRecordEdit").val(selectAttitude_record.startday);
+		         $("#endDateInsertRecordEdit").val(selectAttitude_record.endday);
+				 $("#basedaysRecordEdit").val(selectAttitude_record.days);
+				 $("#attitudememoRecordEdit").val(selectAttitude_record.attitudememo);
+				 $("#useridInsertRecordEdit").val(selectAttitude_record.userid);
+				 
+				 
+			} 
+		}); 
+	});
+	                        
+	                                                                                                     
+	                                                          
 	
 	$(document).ready(function() {
 		

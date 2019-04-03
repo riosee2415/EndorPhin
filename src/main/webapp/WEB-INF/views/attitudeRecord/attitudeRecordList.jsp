@@ -27,7 +27,7 @@ margin-left: 30px !important;
 
 }
 
- img.ui-datepicker-trigger{ width: 30px; margin-bottom: 5px; }
+  img.ui-datepicker-trigger{ width: 30px; margin-bottom: 5px; }
  
  th{
  
@@ -50,25 +50,24 @@ vertical-align: middle !important;
 
 				<div class="form-group">
 					<h2>
-						<strong><i class="fa fa-book"></i> 근태 입력11111</strong>
+						<strong><i class="fa fa-book"></i> 근태 입력</strong>
 					</h2>
 				</div>
 
 
-
-
+                                            
 
 
 				<table class="table table-striped">
 					<thead class="thead">
-						<tr class="tablespa">
-							<form action="${cp}/attitude/searchAttitude">
-							<td>근태명 <input type="text" name="search">
+						<tr class="tablespa" >
+							<form action="${cp}/attitudeRecord/SearchattitudeRecord">
+							<td>근태명 <input type="text" name="search" style="color: black">
 							<button type="submit" style="background-color: #6E6867;" class="btn btn-info">검색</button>
 							</td>
-							<td><input type="text" id="startDate" class="startDate"/></td>
+							<td><input style="color: black" type="text" id="startDate" name="startDate" class="startDate"/></td>
 							<td><h2><strong> ~ </strong></h2></td>
-							<td><input type="text" id="endDate"/> </td>
+							<td><input style="color: black" type="text" id="endDate" name="endDate"/> </td>
 							</form>
 						</tr>
 					</thead>
@@ -78,7 +77,6 @@ vertical-align: middle !important;
 		</div>
 	</div>
 	
-
 
 
 <!--  목록 출력 -->
@@ -109,11 +107,10 @@ vertical-align: middle !important;
 								<td>까지</td>
 							</tr>
 						</thead>
-					 <tbody id="mytbody">
+					 <tbody id="mytbodyRecord">
 							<c:forEach items="${allAttitude_record}" var="allAttitude_record">
-								<tr class="boardTr" data-userId="${allAttitude_record.userid}">
+								<tr class="boardTr" data-userId="${allAttitude_record.userid}" data-startday="${allAttitude_record.startday}">
 									<td><input type="checkbox" name="check"
-										value="${allAttitude_record.userid}"
 										style="width: 30px; height: 30px;"></td>
 
 									<td><button type="button" class="btn btn-default"
@@ -134,7 +131,6 @@ vertical-align: middle !important;
 				</div>
 			</div>
 		</div>
-		
 		
 		
 		<div class="container">
@@ -178,9 +174,38 @@ vertical-align: middle !important;
         </div>
     
 
-
+                                                                           
 
 	<script>
+	
+	/*사원정보 수정하기*/
+	$("#mytbodyRecord").on("click", ".boardTr", function(){
+		                                            
+	 	  $.ajax({
+			url			: "${cp }/attitudeRecord/attitudeRecordUpdate" ,
+			method		: "get",
+			traditional : true,
+			data		: {
+				userid : encodeURI($(this).data().userid),
+				startday : encodeURI($(this).data().startday)
+				
+			},
+			success		: function(selectAttitude_record) {
+				 $("#attitudecodeRecordEdit").val(selectAttitude_record.attitudecode); 
+				 $("#startDateInsertRecordEdit").val(selectAttitude_record.startday);
+				 $("#afterStartdayInsertRecordEdit").val(selectAttitude_record.startday);
+		         $("#endDateInsertRecordEdit").val(selectAttitude_record.endday);
+				 $("#basedaysRecordEdit").val(selectAttitude_record.days);
+				 $("#attitudememoRecordEdit").val(selectAttitude_record.attitudememo);
+				 $("#useridInsertRecordEdit").val(selectAttitude_record.userid);
+				 
+				 
+			} 
+		}); 
+	});
+	                        
+	                                                                                                     
+	                                                          
 	
 	$(document).ready(function() {
 		
@@ -190,16 +215,31 @@ vertical-align: middle !important;
 		</c:if> 
 
 		
-	
-	});
-	
+	  });
 	
 	
-	
+	//사용자 tr 태그 클릭시 이벤트 핸들러
+	$("#cancleBtn").click(function() {
+		var delete_no = new Array();
+		$('input:checkbox[name="check"]:checked').each(function() {
+			
+			
+		delete_no.push($(this).parents('tr').data('userid')); // 유저 아이디
+		delete_no.push($(this).parents('td').siblings('td').eq(5).html()); // 시작날짜                        
+                                                                                                                                                                                                                                     
+		                                                                          
+		
+		$("#delete_no").val(delete_no);
+		$("#attRecordfrm").submit();
+		});
+		});
+
+		
+		
 	
 	$(function() {
         $("#startDate").datepicker(   // inputbox 의 id 가 startDate 이겠죠.
-                {dateFormat:'yy/mm/dd' // 만약 2011년 4월 29일 선택하면  inputbox 에 '2011/04/29' 로표시
+                {dateFormat:'yy-mm-dd' // 만약 2011년 4월 29일 선택하면  inputbox 에 '2011/04/29' 로표시
                  , showOn: 'button' // 우측에 달력 icon 을 보인다.
                  , buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif"  // 우측 달력 icon 의 이미지 패스 
                  , buttonImageOnly: true //  inputbox 뒤에 달력icon만 표시한다. ('...' 표시생략)
@@ -208,7 +248,7 @@ vertical-align: middle !important;
                  ,showButtonPanel: true // 하단 today, done  버튼기능 추가 표시 (기본은 false)
                });
 
-        $("#endDate").datepicker({dateFormat:'yy/mm/dd',showOn: 'button'
+        $("#endDate").datepicker({dateFormat:'yy-mm-dd',showOn: 'button'
                 , buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif", buttonImageOnly: true
                 , changeMonth: true,changeYear: true,showButtonPanel: true});
         
@@ -217,11 +257,15 @@ vertical-align: middle !important;
         $('#startDate').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)  
         $('#endDate').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)  
 
-    });
-    
-	
+  
+	});
+	                     
 	
 	</script>
 	
+	
+	<form id="attRecordfrm" action="${cp}/attitudeRecord/deleteAttitudeRecord" method="get">
+	<input type="hidden" id="delete_no" name="delete_no" />
+	</form>
    
 	

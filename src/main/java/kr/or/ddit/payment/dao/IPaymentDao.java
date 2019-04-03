@@ -18,4 +18,6 @@ public interface IPaymentDao {
 	String searchPaymentDupl(PaymentVo paymentVo);
 	List<PaymentVo> selectTotalSalaryByDay(String payDay);
 	List<PaymentVo> selectPersonalPaymentList(Map<String, Object> payDay);
+	List<PaymentVo> selectYearPaymentList(Map<String, Object> payDay);
+	String paycodeByIdnDay(PaymentVo paymentVo);
 }

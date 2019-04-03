@@ -77,5 +77,15 @@ public class PaymentDao implements IPaymentDao{
 	public List<PaymentVo> selectPersonalPaymentList(Map<String, Object> payDay) {
 		return sqlSessionTemplate.selectList("payment.selectPersonalPaymentList",payDay);
 	}
+	@Override
+	public List<PaymentVo> selectYearPaymentList(Map<String, Object> payDay) {
+		return sqlSessionTemplate.selectList("payment.selectYearPaymentList",payDay);
+	}
+
+	@Override
+	public String paycodeByIdnDay(PaymentVo paymentVo) {
+		return sqlSessionTemplate.selectOne("payment.paycodeByIdnDay",paymentVo);
+	}
+
 
 }

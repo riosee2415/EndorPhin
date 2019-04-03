@@ -148,8 +148,14 @@
 		
 		 where userNm = #{usernm}
 	</select>
-
-
+	
+	<!-- 사원 이름으로 검색 -->
+	<select id="selectUserByNm" resultType="employeeVo" parameterType="map">
+		select  userid,usernm,deptcode,positioncode,rankcode,continuousyear,relate
+        ,joincompany,birthdate,password
+		from    employee
+		where   usernm like '%' ||#{usernm} ||'%'
+	</select>
 
 
 

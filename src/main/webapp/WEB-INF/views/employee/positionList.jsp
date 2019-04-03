@@ -20,7 +20,7 @@ background-color: #6E6867;
 }
 
 .tbody{
-color : white;
+color : black;
 }
 
 .form-group{

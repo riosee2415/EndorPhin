@@ -66,11 +66,13 @@
           <a class="dropdown-item" href="">급여계산</a>
           <a class="dropdown-item" href="">급여명세서</a>
           <a class="dropdown-item" href="">급여명세서 인쇄/발송</a>
-            <h3 class="dropdown-header">근태관리</h3>
-          <a class="dropdown-item" href="${cp }/attitude/getAllAttitude">근태항목등록</a>
-          <a class="dropdown-item" href="">휴가일 수 등록</a>
-          <a class="dropdown-item" href="">근태 입력</a>
-        </div>
+		  <a class="dropdown-item" href="${pageContext.request.contextPath }/taxcallview">매출세금계산서 입력</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath }/approval">승인전표</a>
+            <h3 class="dropdown-header">고정자산</h3>
+            <a class="dropdown-item" href="${pageContext.request.contextPath }/purchaseAsset">고정자산 등록</a>
+            <a class="dropdown-item" href="${pageContext.request.contextPath }/sellAsset">고정자산 매각</a>
+            <a class="dropdown-item" href="${pageContext.request.contextPath }/useAsset">감가상각비</a>
+        
       </li>
       
       

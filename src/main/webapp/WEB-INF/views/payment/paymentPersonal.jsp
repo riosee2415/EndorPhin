@@ -26,7 +26,7 @@
 						<th>
 							<div>
 								<label >사원명</label>
-								<input type="text" id="searchUserIdInput" readonly="readonly"/>
+								<input type="text" name="userid" id="searchUserIdInput" placeholder="사원 선택 " readonly="readonly"/>
 								<a href="#" data-toggle="modal" style="color:white" id="myModal3In">
 									<i class="fa fa-users" style="font-size:25"></i>
 								</a>
@@ -61,10 +61,11 @@
 					</thead>
 					<tbody id="mainPaymentListTbody">
 						<c:forEach items="${selectPersonalPaymentList}" var="vo">
-							<tr>
+							<tr class="mainPaymentListTr">
 								<td>${vo.userId }</td>
 								<td>${vo.usernm }</td>
-								<td>${vo.payDay }</td>
+								<td><a href="#" data-userid='${vo.userId}' data-toggle="modal" class='myModal3In'
+										style="color:brown">${vo.payDay}</a></td>
 								<td>${vo.deptname }</td>
 								<td>${vo.totalSalary }</td>
 								<td>${vo.totalWage }</td>
@@ -84,14 +85,22 @@
 <!-- 			class="btn btn-info">신규등록</button> -->
 	</div>
 </div>
-<div class="modal fade" id="myModal3" tabindex="-1" >
+<%@ include file="employeeSearch.jsp" %>  
+<div class="modal fade" id="myModal4" tabindex="-1" >
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<div style="margin-left: 75px;">
-					<input type="text" id="modalSearchUserId" />
-					<button style="background-color: #6E6867;" class="btn btn-info"
-						type="submit">검색</button>
+				<div>
+					<table>
+						<tr>
+							<th><label>사번</label></th>
+							<td><input style="width:50px" class="modalUserInfo" disabled="disabled"  size="12"/></td>
+							<th><label>이름</label></th>
+							<td><input style="width:100px" class="modalUserInfo" disabled="disabled"  size="12"/></td>
+							<th><label>지급일자</label></th>
+							<td><input style="width:160px" class="modalUserInfo" disabled="disabled"  size="12"/></td>
+						</tr>
+					</table>
 				</div>
 			</div>
 			<div class="modal-body">
@@ -99,28 +108,22 @@
 					<table style="border-spacing: 6px; border-collapse: separate;">
 						<thead>
 							<tr>
-								<th>사원번호</th>
-								<th>사원명</th>
+								<th>항목명</th>
+								<th>금액</th>
 							</tr>
 						</thead>
-						<tbody id="modalUserTbody">
-							<c:forEach items="${employeeList }" var="vo">
-								<tr class="modalUserIdTr">
-									<td>${vo.userId}</td>
-									<td>${vo.userNm}</td>
-								</tr>
-							</c:forEach>
+						<tbody id="modalPaymentTbody">
 						</tbody>
 					</table>
 				</div>
 			</div>
 			<div class="modal-footer">
 <!-- 				<a href="#" class="btn">신규 등록</a>  -->
-				<a href="" data-dismiss="modal" class="btn" id="searchModalClose" aria-hidden="true">Close</a>
+				<a href="" data-dismiss="modal" class="btn" aria-hidden="true">Close</a>
 			</div>
 		</div>
 	</div>
-</div>
+</div>  
   
 <script>
 	$(document).ready(function(){
@@ -140,19 +143,48 @@
 		});
 		$("#datepickerTo").datepicker('setDate','today-1M');
 		$("#datepickerFrom").datepicker('setDate','today');
+		modalTrEvent();
 	});
-	$("#myModal3In").click(function(){
-		$("#myModal3").modal("show");
-	});
-	$(".modalUserIdTr").on('click',function(){
-		$("#searchUserIdInput").val($(this).find('td').eq(1).html());
-				
-		$("#myModal3").modal("hide");
+	
+	$(".myModal3In").click(function(){
+		$(".modalUserInfo").eq(2).val($(this).html());
+		for(var i=0;i<2;i++){
+			$(".modalUserInfo").eq(i).val($(this).closest(".mainPaymentListTr").children("td").eq(i).html());
+		}
+		$.ajax({
+			method : "get",
+			url : "/getPaymentListPersonal",
+			data : {payday : $(this).html(),
+					userid : $(this).data('userid')},
+			success : function(data) {
+				$("#modalPaymentTbody").html('');
+				console.log(data);
+				for (var i = 0; i < data.divList.length; i++) {
+					var detailcheck=false;
+					$("#modalPaymentTbody").append("<tr>");
+					$("#modalPaymentTbody").append("<td>"+data.divList[i].deductName+"</td>");										
+					for (var j = 0; j < data.paymentDetailList.length; j++) {
+						if(data.divList[i].deductCode==data.paymentDetailList[j].deductCode){
+							detailcheck=true;
+							$("#modalPaymentTbody").append("<td>"+data.paymentDetailList[j].deductPay+"</td>");										
+						}
+					}
+					if(detailcheck==false){
+						$("#modalPaymentTbody").append("<td>"+0+"</td>");										
+					}
+					$("#modalPaymentTbody").append("</tr>");
+				}
+				$("#modalPaymentTbody").append("<tr><td>총급여액</td><td>"+data.paymentVo.totalSalary+"</td></tr>");
+				$("#modalPaymentTbody").append("<tr><td>총공제액</td><td>"+data.paymentVo.totalWage+"</td></tr>");
+				$("#modalPaymentTbody").append("<tr><td>실지급액</td><td>"+
+						(data.paymentVo.totalSalary-data.paymentVo.totalWage)+"</td></tr>");
+			}
+		});
+		$("#myModal4").modal("show");
 	});
 	
 	
 	
 
 </script>
-
-<script type="text/javascript" src="/js/datepicker.js"></script>
+<script type="text/javascript" src="/js/employeeModalSearch.js"></script>

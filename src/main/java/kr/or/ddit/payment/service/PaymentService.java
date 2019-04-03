@@ -20,7 +20,6 @@ import kr.or.ddit.payment.model.Payment_detailVo;
 @Service("paymentService")
 public class PaymentService implements IPaymentService{
 
-	private Logger logger = LoggerFactory.getLogger(PaymentService.class);
 	
 	@Resource(name="paymentDao")
 	IPaymentDao paymentDao;
@@ -112,7 +111,15 @@ public class PaymentService implements IPaymentService{
 
 	@Override
 	public List<PaymentVo> selectPersonalPaymentList(Map<String, Object> payDay) {
+		if(payDay.get("paydayYear")!=null){
+			return paymentDao.selectYearPaymentList(payDay);
+		}
 		return paymentDao.selectPersonalPaymentList(payDay);
+	}
+
+	@Override
+	public String paycodeByIdnDay(PaymentVo paymentVo) {
+		return paymentDao.paycodeByIdnDay(paymentVo);
 	}
 	
 	

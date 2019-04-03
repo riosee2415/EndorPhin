@@ -35,7 +35,7 @@ public interface IAttitude_recordDao {
 	* @return
 	* Method 설명 : 근태이력 삭제
 	*/
-	int deleteAttitude_record(String code);
+	int deleteAttitude_record(Attitude_recordVo code);
 	
 	
 	
@@ -72,6 +72,6 @@ public interface IAttitude_recordDao {
 	* @return
 	* Method 설명 : 선택 이력 가져오기
 	*/
-	public Attitude_recordVo SelectAttitude_record(String code);
+	public Attitude_recordVo SelectAttitude_record(Attitude_recordVo code);
 
 }

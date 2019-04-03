@@ -105,6 +105,14 @@
         	<put-attribute name="content" value="/WEB-INF/views/payment/paymentPersonal.jsp"/>
         </definition>
         
+        <definition name="paymentYear" extends="layout"> <!-- 연도별 급여 조회 항목 -->
+        	<put-attribute name="content" value="/WEB-INF/views/payment/paymentYear.jsp"/>
+        </definition>
+        
+        <definition name="paymentYearDetail" extends="layout"> <!-- 연도별 급여 조회 상세 항목 -->
+        	<put-attribute name="content" value="/WEB-INF/views/payment/paymentYearDetail.jsp"/>
+        </definition>
+        
         
         
          <definition name="AttitudeListTiles" extends="layout"> <!-- 근태 항목 출력 -->

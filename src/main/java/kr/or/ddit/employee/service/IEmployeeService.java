@@ -26,6 +26,16 @@ public interface IEmployeeService {
 	* Method 설명 :
 	*/
 	EmployeeVo selectEmployee(String user);
+	
+	/**
+	* Method : selectUserByNm
+	* 작성자 : PC04
+	* 변경이력 :
+	* @param usernm
+	* @return
+	* Method 설명 : 사원이름으로 검색
+	*/
+	List<EmployeeVo> selectUserByNm(String usernm);
 
 	
 	

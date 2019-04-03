@@ -3,6 +3,7 @@ package kr.or.ddit.employee.dao;
 import static org.junit.Assert.assertNotNull;
 
 import java.text.ParseException;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -23,6 +24,11 @@ private Logger logger = LoggerFactory.getLogger(EmployeeDaoTest.class);
 		EmployeeVo selectEmployee = dao.selectEmployee("1");
 		
 		assertNotNull(selectEmployee);
+	}
+	@Test
+	public void selectUserByNmtest() {
+		List<EmployeeVo> selectUserByNm = dao.selectUserByNm("호");
+		assertNotNull(selectUserByNm);
 	}
 	@Test
 	public void getAllEmployeeTest() {

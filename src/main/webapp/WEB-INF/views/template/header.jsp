@@ -12,7 +12,7 @@
 
     
     
-    <ul class="navbar-nav ml-auto ml-md-10" style="font-size: 1.3em">
+    <ul class="navbar-nav ml-auto ml-md-10" style="font-size: 1.5em">
     
      <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -41,12 +41,8 @@
            <h3 class="dropdown-header">전표관리</h3>
           <a class="dropdown-item" href="${pageContext.request.contextPath }/paaprovuar">미승인 전표</a>
           <a class="dropdown-item" href="${pageContext.request.contextPath }/slipview">일반 전표</a>
-          <a class="dropdown-item" href="${pageContext.request.contextPath }/taxcallview">매출세금계산서 입력</a>
+          <a class="dropdown-item" href="">매출세금계산서 입력</a>
           <a class="dropdown-item" href="${pageContext.request.contextPath }/approval">승인전표</a>
-            <h3 class="dropdown-header">고정자산</h3>
-            <a class="dropdown-item" href="${pageContext.request.contextPath }/purchaseAsset">고정자산 등록</a>
-            <a class="dropdown-item" href="${pageContext.request.contextPath }/sellAsset">고정자산 매각</a>
-            <a class="dropdown-item" href="${pageContext.request.contextPath }/useAsset">감가상각비</a>
         </div>
       </li>
       
@@ -66,10 +62,11 @@
           <a class="dropdown-item" href="/addPayment">급여등록</a>
           <a class="dropdown-item" href="">퇴직자</a>
            <h3 class="dropdown-header">급여계산관리</h3>
-          <a class="dropdown-item" href="/paymentAdjust">급여조정</a>
-          <a class="dropdown-item" href="/paymentCal">급여계산</a>
+          <a class="dropdown-item" href="/payment">급여조정</a>
+          <a class="dropdown-item" href="">급여계산</a>
           <a class="dropdown-item" href="">급여명세서</a>
           <a class="dropdown-item" href="">급여명세서 인쇄/발송</a>
+<<<<<<< HEAD
           <a class="dropdown-item" href="/paymentPersonal">개인별 급여 현황</a>
           <a class="dropdown-item" href="/paymentYear">연도별 급여 조회</a>
             <h3 class="dropdown-header">근태관리</h3>
@@ -77,6 +74,15 @@
           <a class="dropdown-item" href="${cp }/attitudeRecord/getAllattitudeRecord">휴가일 수 등록</a>
           <a class="dropdown-item" href="${cp }/attitudeRecord/getAllattitudeRecord">근태 입력</a>
         </div>
+=======
+		  <a class="dropdown-item" href="${pageContext.request.contextPath }/taxcallview">매출세금계산서 입력</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath }/approval">승인전표</a>
+            <h3 class="dropdown-header">고정자산</h3>
+            <a class="dropdown-item" href="${pageContext.request.contextPath }/purchaseAsset">고정자산 등록</a>
+            <a class="dropdown-item" href="${pageContext.request.contextPath }/sellAsset">고정자산 매각</a>
+            <a class="dropdown-item" href="${pageContext.request.contextPath }/useAsset">감가상각비</a>
+        
+>>>>>>> branch 'master' of https://gitlab.com/dditEndorphin/endorphin.git
       </li>
       
       

@@ -98,10 +98,10 @@ public class Payment_DetailService implements IPayment_DetailService{
 		map.put("divList", de_product_divDao.getAllDe_product_div());
 		List<PaymentVo> selectYearPaymentListDetail = paymentDao.selectYearPaymentListDetail(paymap);
 		map.put("payList", selectYearPaymentListDetail);
-		Map<String,List<Payment_detailVo>> list = new HashMap<>();
+		List<List<Payment_detailVo>> list = new ArrayList();
 		for (int i = 0; i < selectYearPaymentListDetail.size(); i++) {
 			List<Payment_detailVo> selectPayment_detailPaycode = payment_detailDao.selectPayment_detailPaycode(selectYearPaymentListDetail.get(i).getPayCode());
-			list.put(i+"",selectPayment_detailPaycode);
+			list.add(selectPayment_detailPaycode);
 		}
 		map.put("paymentDetailList", list);
 		

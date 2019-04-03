@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
 <%@page import="kr.or.ddit.payment.model.Payment_detailVo"%>
@@ -9,10 +10,6 @@
 	rel="stylesheet">
 
 
-<% 
-	Map<Integer,List<Payment_detailVo>> paymentDetailList = (Map<Integer,List<Payment_detailVo>>)request.getAttribute("paymentDetailList");
-	
-%>
 <div class="container" style="margin-top: 50px">
 	<div class="row">
 		<div class="col-md-10" style="width: 100%">
@@ -36,25 +33,28 @@
 					<tbody id="mainPaymentListTbody">
 						<c:forEach step="1" items="${payList}" varStatus="index" var="payVo">
 							<tr>
-								<c:set var="divcheck" value="false"/>
 								<td>${payVo.userId }</td>
 								<td>${payVo.usernm }</td>
 								<td>${payVo.positionname }</td>
 								<td>${payVo.deptname }</td>
 								<td>${payVo.payDay }</td>
-								<td>${index.index}</td>
 								<c:forEach items="${divList}" var="vo">
-<%-- 									<c:forEach items="${paymentDetailList.get(index.index)}" var="pvo"> --%>
-<%-- 										<td>${vo.deductCode==pvo.deductCode }1</td> --%>
-<%-- 										<c:if test="${vo.deductCode==pvo.deductCode }"> --%>
-<%-- 											<td>${pvo.deductPay }</td> --%>
-<%-- 											<c:set var="divcheck" value="true"/> --%>
-<%-- 										</c:if> --%>
-<%-- 									</c:forEach> --%>
+									<c:set var="divcheck" value="false"/>
+									<c:forEach items="${paymentDetailList}" var="pdList">
+										<c:forEach items="${pdList}" var="pdvo">
+											<c:if test="${vo.deductCode==pdvo.deductCode and payVo.payCode==pdvo.payCode}">
+												<td>${pdvo.deductPay}</td>
+												<c:set var="divcheck" value="true"/>
+											</c:if>
+										</c:forEach>
+									</c:forEach>
 									<c:if test="${divcheck==false}">
-<!-- 										<td>0</td> -->
+										<td>0</td>
 									</c:if>
 								</c:forEach>
+								<td>${payVo.totalSalary}</td>
+								<td>${payVo.totalWage}</td>
+								<td>${payVo.totalSalary-payVo.totalWage}</td>
 							</tr>
 						</c:forEach>
 					</tbody>

@@ -21,7 +21,7 @@
     	<typeAlias  alias="documentVo" type="kr.or.ddit.document.model.DocumentVo"/>
     	<typeAlias  alias="filesVo" type="kr.or.ddit.document.model.FilesVo"/>
     	<typeAlias  alias="annualsalaryVo" type="kr.or.ddit.employee.model.AnnualsalaryVo"/>
-    	<typeAlias  alias="annualVo" type="kr.or.ddit.employee.model.AnnualVo"/>
+    	<typeAlias  alias="annualVo" type="kr.or.ddit.annual.model.AnnualVo"/>
     	<typeAlias  alias="employee_detailVo" type="kr.or.ddit.employee.model.Employee_detailVo"/>
     	<typeAlias  alias="employeeVo" type="kr.or.ddit.employee.model.EmployeeVo"/>
     	<typeAlias  alias="positionVo" type="kr.or.ddit.employee.model.PositionVo"/>

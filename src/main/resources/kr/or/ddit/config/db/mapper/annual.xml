@@ -5,36 +5,36 @@
 <mapper namespace="annual">
    
    	<!-- 연차정보 전체 가져오기 -->
-   	<select id="getAllAnnuala" resultType="annualVo">
-		SELECT
-		    USERID, 
-		    ANNUALDATE, 
-		    ANNUALSTART, 
-		    ANNUALEND, 
-		    OCCURANNUAL, 
-		    USERDATE
-		FROM ANNUAL
+   	<select id="getAllAnnual" resultType="AnnualVo">
+		select
+		    userid, 
+		    annualdate, 
+		    annualstart, 
+		    annualend, 
+		    occurannual, 
+		    userdate
+		from annual
    	</select>
 
 	<!-- 사원 아이디 별 연차정보 전체 가져오기 -->
- 	<select id="getAllAnnual" resultType="annualVo" >
-		SELECT
-		    USERID, 
-		    ANNUALDATE, 
-		    ANNUALSTART, 
-		    ANNUALEND, 
-		    OCCURANNUAL, 
-		    USERDATE
-		FROM ANNUAL
-		WHERE userId = #{userId}
+ 	<select id="selectAllAnnual" resultType="AnnualVo" >
+		select
+		    userid, 
+		    annualdate, 
+		    annualstart, 
+		    annualend, 
+		    occurannual, 
+		    userdate
+		from annual
+		where userid = #{userid}
    	</select>
    
    	<!-- 연차정보 추가하기 -->
-   	<insert id="insertAnnual" parameterType="annualVo">
-   		INSERT INTO ANNUAL
-		    (USERID, ANNUALDATE, ANNUALSTART, ANNUALEND, OCCURANNUAL, USERDATE)
-		VALUES
-		    (#{userId},#{annualDate},#{annualStart},#{annualEnd},#{occurannual},#{userDate})
+   	<insert id="insertAnnual" parameterType="AnnualVo">
+   		insert into annual
+		    (userid, annualdate, annualstart, annualend, occurannual, userdate)
+		values
+		    (#{userid},#{annualdate},#{annualstart},#{annualend},#{occurannual},#{userdate})
    	</insert>
    
    
@@ -43,9 +43,9 @@
 	파라미터 key값 	: userId
 	-->
    	<delete id="deleteAnnual" parameterType="map">
-  		DELETE 
-  		FROM ANNUAL
-  		WHERE USERID = #{userId}
+  		delete 
+  		from annual
+  		where userid = #{userid}
    	</delete>
    	
    	
@@ -54,9 +54,9 @@
 	파라미터 key값 	: occurannual, userId
 	-->
    	<update id="updateAnnual" parameterType="map">
-   		UPDATE ANNUAL
-   		SET OCCURANNUAL = #{occurannual}
-   		WHERE USERID = #{userId}
+   		update annual
+   		set occurannual = #{occurannual}
+   		where userid = #{userid}
    	</update>
    
 	

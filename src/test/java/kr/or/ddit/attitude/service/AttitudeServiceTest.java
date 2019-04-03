@@ -1,5 +1,6 @@
 package kr.or.ddit.attitude.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -165,11 +166,10 @@ public class AttitudeServiceTest extends LogicConfig{
 		
 			String[] temp =  vo.getUserid().split(",");
 		
-		
 		Attitude_recordVo userVo = new Attitude_recordVo();
 		
 		
-		for (int i = 0; i < temp.length; i++) {
+	/*	for (int i = 0; i < temp.length; i++) {
 			userVo.setUserid(temp[i]);
 			userVo.setStartday(vo.getStartday());
 			userVo.setEndday(vo.getEndday());
@@ -180,7 +180,7 @@ public class AttitudeServiceTest extends LogicConfig{
 			attitude_recordService.insertAttitude_record(userVo);
 			
 			
-		}
+		}*/
 		
 	}
 	
@@ -188,14 +188,62 @@ public class AttitudeServiceTest extends LogicConfig{
 	
 	
 	
+	@Test
+	public void searchAttitude_recordTest() {
+		
+		Attitude_recordVo vo = new Attitude_recordVo();
+		vo.setUsernm("임");
+		vo.setStartday("2018-05-01");
+		vo.setEndday("2018-05-04");
+		
+		List<Attitude_recordVo> searchAttitude_records = attitude_recordService.SearchAttitude_record(vo);
+		
+		
+		for(Attitude_recordVo searchAttitude_record : searchAttitude_records){
+			logger.debug("searchAttitude_record :{}",searchAttitude_record);
+			
+		}
+		
+	}
 	
-	
-	
-	
-	
-	
-	
-	
+	@Test
+	public void ArrayTest() {
+		
+		Attitude_recordVo vo = new Attitude_recordVo();
+		String index = "";
+		
+		String[] temps = {"3,2019-03-28,65,2018-05-24"};
+		
+		
+		for(String temp : temps){
+			
+			 index = temp;
+		}
+		
+		
+		
+		String[] deleteArray = index.split(","); 	
+		
+		System.out.println("deleteArray" + deleteArray.length);
+		
+		
+		
+		for (int i = 0; i < deleteArray.length; i+=2) {
+			vo.setUserid(deleteArray[i]);
+			vo.setStartday(deleteArray[i +1]);
+			
+			logger.debug("하나 : {}",vo.getUserid());
+			logger.debug("둘 : {}",vo.getStartday());
+			
+			
+			
+			
+			//attitude_recordService.deleteAttitude_record(vo);
+			
+		}
+		
+		
+	}
 	
 	
 	

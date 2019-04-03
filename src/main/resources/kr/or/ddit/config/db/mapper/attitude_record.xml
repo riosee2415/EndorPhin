@@ -40,9 +40,11 @@
 	
 	
 		<!-- 근태항목 삭제 -->
-		<delete id="deleteAttitude_record" parameterType="map">
+		<delete id="deleteAttitude_record" parameterType="Attitude_recordVo">
+			
 			delete from attitude_record
-			where userid = #{userId}
+			where userid = #{userid}
+			and startday like to_date(#{startday},'yyyy-MM-dd')
 		</delete>
 	
 	
@@ -86,6 +88,38 @@
        where userid=#{userId}
 	</select>
 
+			<!-- 근태항목 검색하여 가져오기 -->
+	<select id="SearchattitudeRecord" resultType="Attitude_recordVo"
+		parameterType="map">
+		
+		select  a.userid,
+        a.usernm ,
+        d.deptname,
+        c.attitudecode,
+        c.attitudename,
+        to_char(b.startday,'yyyy-MM-dd') startday,
+        to_char(b.endday,'yyyy-MM-dd') endday,
+        trunc(b.endday-b.startday+1) days,
+        c.basedays ,
+        b.attitudememo
+       	from employee a, attitude_record b, attitude c, dept d
+      	where a.userid = b.userid
+        and b.attitudecode = c.attitudecode
+        and a.deptcode = d.deptcode
+        <if test="usernm!=null">
+        	and  a.usernm like '%' ||#{usernm}||'%'
+        </if>
+        <if test="startday!=null and endday!=null">
+	        and  startday &gt;= to_date(#{startday})
+	        and  endday &lt;= to_date(#{endday})
+        </if>
+		
+		
+		
+		
+		
+		
+	</select>
 
 
 

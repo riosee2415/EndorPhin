@@ -27,10 +27,11 @@ public class Attitude_recordDao implements IAttitude_recordDao{
 	}
 
 	@Override
-	public int deleteAttitude_record(String code) {
+	public int deleteAttitude_record(Attitude_recordVo code) {
 		return sqlSessionTemplate.delete("attitude_record.deleteAttitude_record",code);
 	}
 
+	
 	@Override
 	public int updateAttitude_record(Attitude_recordVo Vo) {
 		return sqlSessionTemplate.update("attitude_record.updateAttitude_record",Vo);
@@ -38,7 +39,7 @@ public class Attitude_recordDao implements IAttitude_recordDao{
 
 	@Override
 	public List<Attitude_recordVo> SearchAttitude_record(Attitude_recordVo code) {
-		return sqlSessionTemplate.selectList("attitude_record.SearchAttitude_record",code);
+		return sqlSessionTemplate.selectList("attitude_record.SearchattitudeRecord",code);
 	}
 
 	@Override

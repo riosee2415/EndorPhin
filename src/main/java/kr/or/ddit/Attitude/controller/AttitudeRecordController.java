@@ -1,9 +1,11 @@
 package kr.or.ddit.Attitude.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -104,11 +106,55 @@ public class AttitudeRecordController {
 	}
 	
 	
+	@RequestMapping(path = "/SearchattitudeRecord", method = RequestMethod.GET)
+	public String SearchattitudeRecord(Model model, String search
+			, String startDate, String endDate) {
+		
+		
+		Attitude_recordVo Vo = new Attitude_recordVo();
+		Vo.setUsernm(search);
+		Vo.setStartday(startDate);
+		Vo.setEndday(endDate);
+		
+		
+		List<Attitude_recordVo> allAttitude_record = attitude_recordService.SearchAttitude_record(Vo);
+		
+		
+		model.addAttribute("allAttitude_record",allAttitude_record);
+		
+		return "Attitude_recordListTiles";
+	}
 	
 	
-	
-	
-	
+	@RequestMapping(path = "/deleteAttitudeRecord", method = RequestMethod.GET)
+	public String deleteAttitudeRecord(Model model,RedirectAttributes ra, HttpServletRequest req) {
+		Attitude_recordVo vo = new Attitude_recordVo();
+		String index = "";
+		
+		String[] temps = req.getParameterValues("delete_no");
+		
+		           
+		
+		for(String temp : temps){
+			
+			 index = temp;
+		}
+		
+		String[] deleteArray = index.split(","); 	
+		
+		
+		for (int i = 0; i < deleteArray.length; i+=2) {
+			vo.setUserid(deleteArray[i]);
+			vo.setStartday(deleteArray[i +1]);
+			
+			
+			attitude_recordService.deleteAttitude_record(vo);
+			
+		}
+		
+		ra.addFlashAttribute("msg", "정상 삭제 되었습니다");
+		return "redirect:/attitudeRecord/getAllattitudeRecord";
+	}
 	
 	
 	

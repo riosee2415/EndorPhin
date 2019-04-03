@@ -51,9 +51,21 @@ public class PaymentController {
 	public List<EmployeeVo> searchUserNmToPayment(String usernm){
 		return employeeService.selectUserByNm(usernm);
 	}
+	@RequestMapping(path="/paymentYearDetail",method=RequestMethod.GET)
+	public String paymentYearDetail(String userid, String paydayYear,Model model){
+		return "paymentYearDetail";
+	}
 	
 	@RequestMapping(path="/paymentYear",method=RequestMethod.GET)
-	public String paymentYear(){
+	public String paymentYear(String userid, String paydayYear,Model model){
+		model.addAttribute("employeeList",employeeService.getAllEmployee());
+		Map<String, Object> map = new HashMap<>();
+		if(paydayYear==null)
+			paydayYear="2019";
+		map.put("paydayYear", paydayYear);
+		map.put("userid", userid);
+		model.addAttribute("paydayYear", paydayYear);
+		model.addAttribute("paymentYearList", paymentService.selectPersonalPaymentList(map));
 		return "paymentYear";
 	}
 	@RequestMapping(path="/paymentPersonal",method=RequestMethod.GET)
@@ -94,7 +106,6 @@ public class PaymentController {
 	@RequestMapping(path="/deletePayment",produces = { "application/json" })
 	@ResponseBody
 	public Map<String,Object> deletePayment(String paycode, String userid){
-		logger.debug("asdfasdf:{}",paycode);
 		paymentService.deletePayment(paycode);
 		return getPaymentList(userid,null);
 	}

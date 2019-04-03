@@ -85,44 +85,7 @@
 <!-- 			class="btn btn-info">신규등록</button> -->
 	</div>
 </div>
-<div class="modal fade" id="myModal3" tabindex="-1" >
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<div style="margin-left: 75px;">
-					<input type="text" id="modalSearchUserName" placeholder="사원명 입력"/>
-					<button id="modalSearchUserBtn" 
-						style="background-color: #6E6867;" class="btn btn-info">검색</button>
-				</div>
-			</div>
-			<div class="modal-body">
-				<div style="overflow: scroll; width: 450px; height: 200px;">
-					<table style="border-spacing: 6px; border-collapse: separate;">
-						<thead>
-							<tr>
-								<th>사원번호</th>
-								<th>사원명</th>
-							</tr>
-						</thead>
-						<tbody id="modalUserTbody">
-							<c:forEach items="${employeeList }" var="vo">
-								<tr class="modalUserIdTr">
-									<td>${vo.userId}</td>
-									<td>${vo.userNm}</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-			</div>
-			<div class="modal-footer">
-<!-- 				<a href="#" class="btn">신규 등록</a>  -->
-				<a href="" data-dismiss="modal" class="btn" aria-hidden="true">Close</a>
-			</div>
-		</div>
-	</div>
-</div>
-  
+<%@ include file="employeeSearch.jsp" %>  
 <div class="modal fade" id="myModal4" tabindex="-1" >
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -219,37 +182,9 @@
 		});
 		$("#myModal4").modal("show");
 	});
-	$("#myModal3In").click(function(){
-		$("#myModal3").modal("show");
-	});
-	
-	function modalTrEvent(){
-		$(".modalUserIdTr").off('click');
-		$(".modalUserIdTr").on('click',function(){
-			$("#searchUserIdInput").val($(this).find('td').eq(1).html());
-			$("#myModal3").modal("hide");
-		});
-	}
-	$("#modalSearchUserBtn").click(function(){
-		$.ajax({
-			method : "get",
-			url : "/searchUserNmToPayment",
-			data : "usernm=" + $("#modalSearchUserName").val(),
-			success : function(data) {
-				$(".modalUserIdTr").each(function(){$(this).remove()});
-				for (var i = 0; i < data.length; i++) {
-					$("#modalUserTbody").append('<tr class=\'modalUserIdTr\'><td>'+
-												data[i].userId+'</td><td>'+
-												data[i].userNm+'</td></tr>');
-				}
-				modalTrEvent();
-			}
-		});
-	})
 	
 	
 	
 
 </script>
-
-<script type="text/javascript" src="/js/datepicker.js"></script>
+<script type="text/javascript" src="/js/employeeModalSearch.js"></script>

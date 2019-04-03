@@ -111,6 +111,9 @@ public class PaymentService implements IPaymentService{
 
 	@Override
 	public List<PaymentVo> selectPersonalPaymentList(Map<String, Object> payDay) {
+		if(payDay.get("paydayYear")!=null){
+			return paymentDao.selectYearPaymentList(payDay);
+		}
 		return paymentDao.selectPersonalPaymentList(payDay);
 	}
 

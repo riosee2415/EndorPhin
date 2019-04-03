@@ -4,9 +4,12 @@
 
 <h2>매입매출전표 관리</h2>
 <hr>
+<!-- 키 값으로 하나만 출력하기
+<c:out value="${scCode['11'] }" />
+ -->
 
 
-	<table class="table table-striped">
+<table class="table table-striped">
 		<tr>
 			<td style="width: 150px;">dd</td>
 			<td style="width: 300px;"><input type="text" /></td>
@@ -50,4 +53,33 @@
 		</ul>
 	</nav>
 </div>
+
+<b>매입코드</b> 
+<table border="1">
+	<tr> 
+		<td style="font-size: 12px;">
+			<c:forEach var="ph" items="${phCode}" varStatus="status"> 
+					<b><font color="blue">${ph.key}</font></b> = 
+					${ph.value} ||
+			</c:forEach>
+		</td> 
+	</tr> 
+</table>
+
+
+<br /> <br />
+<b>매출코드</b> <br />
+<table border="1">
+	<tr> 
+		<td style="font-size: 12px;">
+			<c:forEach var="sc" items="${scCode}" varStatus="status"> 
+					<b><font color="red">${sc.key}</font></b>  =
+					${sc.value} ||
+			</c:forEach>
+		</td> 
+	</tr> 
+</table>
+
+
+
 

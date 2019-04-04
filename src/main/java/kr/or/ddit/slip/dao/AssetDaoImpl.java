@@ -25,9 +25,15 @@ public class AssetDaoImpl implements IAssetDao{
 		return sqlSessionTemplate.insert("asset.insertAsset", assetVo);
 	}
 
+
 	@Override
 	public int updateAsset(AssetVo assetVo) {
 		return sqlSessionTemplate.update("asset.updateAsset",assetVo);
 	}
 
+	@Override
+	public int insertStatusAsset(AssetVo assetVo) {
+		return sqlSessionTemplate.insert("asset.insertStatusAsset",assetVo);
+	}
+	
 }

@@ -53,6 +53,10 @@ public class PaymentController {
 	}
 	@RequestMapping(path="/paymentYearDetail",method=RequestMethod.GET)
 	public String paymentYearDetail(String userid, String paydayYear,Model model){
+		Map<String, Object> map = new HashMap<>();
+		map.put("userid", userid);
+		map.put("paydayYear", paydayYear);
+		model.addAllAttributes(payment_detailService.getPayDetailByYear(map));
 		return "paymentYearDetail";
 	}
 	
@@ -88,7 +92,6 @@ public class PaymentController {
 	public String paymentCal(Model model,String paydayYear,String paydayMonth){
 		String payDay = paydayYear+paydayMonth;
 		List<PaymentVo> selectTotalSalaryByDay;
-		logger.debug("asdfasdkfjn:{}",payDay);
 		if(paydayYear==null)
 			selectTotalSalaryByDay=paymentService.selectTotalSalaryByDay(null);
 		else

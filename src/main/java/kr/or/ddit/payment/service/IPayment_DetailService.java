@@ -13,4 +13,5 @@ public interface IPayment_DetailService {
 	List<Payment_detailVo> selectPayment_detailPaycode(String useStatus);
 	Map<String, Object> getDeNmPayList(String userid);
 	Map<String, Object> getPayDetail(String paycode);
+	Map<String, Object> getPayDetailByYear(Map<String, Object> paymap);
 }

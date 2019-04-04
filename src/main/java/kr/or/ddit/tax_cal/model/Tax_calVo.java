@@ -17,7 +17,14 @@ public class Tax_calVo {
 	String surtax;
 	String orderCode;
 	String clientCode;
+	String sumValue;
 	
+	public String getSumValue() {
+		return sumValue;
+	}
+	public void setSumValue(String sumValue) {
+		this.sumValue = sumValue;
+	}
 	public String getSalesCode() {
 		return salesCode;
 	}

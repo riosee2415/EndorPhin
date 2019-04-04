@@ -1,10 +1,14 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Map"%>
+<%@page import="kr.or.ddit.payment.model.Payment_detailVo"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <link type="text/css"
 	href="${pageContext.request.contextPath }/css/payment_leem.css"
 	rel="stylesheet">
+
 
 <div class="container" style="margin-top: 50px">
 	<div class="row">
@@ -13,16 +17,46 @@
 				<table class="table table-striped">
 					<thead class="thead">
 						<tr>
-							<th>년도</th>
 							<th>사번</th>
 							<th>성명</th>
+							<th>직위</th>
 							<th>부서명</th>
+							<th>지급일</th>
+							<c:forEach items="${divList}" var="vo">
+								<th>${vo.deductName}</th>
+							</c:forEach>	
 							<th>총급여액</th>
 							<th>총공제액</th>
 							<th>총지급액</th>
 						</tr>
 					</thead>
 					<tbody id="mainPaymentListTbody">
+						<c:forEach step="1" items="${payList}" varStatus="index" var="payVo">
+							<tr>
+								<td>${payVo.userId }</td>
+								<td>${payVo.usernm }</td>
+								<td>${payVo.positionname }</td>
+								<td>${payVo.deptname }</td>
+								<td>${payVo.payDay }</td>
+								<c:forEach items="${divList}" var="vo">
+									<c:set var="divcheck" value="false"/>
+									<c:forEach items="${paymentDetailList}" var="pdList">
+										<c:forEach items="${pdList}" var="pdvo">
+											<c:if test="${vo.deductCode==pdvo.deductCode and payVo.payCode==pdvo.payCode}">
+												<td>${pdvo.deductPay}</td>
+												<c:set var="divcheck" value="true"/>
+											</c:if>
+										</c:forEach>
+									</c:forEach>
+									<c:if test="${divcheck==false}">
+										<td>0</td>
+									</c:if>
+								</c:forEach>
+								<td>${payVo.totalSalary}</td>
+								<td>${payVo.totalWage}</td>
+								<td>${payVo.totalSalary-payVo.totalWage}</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 					<tfoot>
 					</tfoot>
@@ -31,26 +65,4 @@
 		</div>
 	</div>
 </div>
-<%@ include file="employeeSearch.jsp" %>  
-<div class="container">
-	<div class="row">
-		<button style="margin-left: 705px; background-color: #6E6867;"
-			class="btn btn-info">신규등록</button>
-	</div>
-</div>
 
-<script>
-	$(document).ready(function(){
-		for (var i = -5; i < 3; i++) {
-			$("select[name=paydayYear]").append("<option value="+(new Date().getFullYear()+i)+">"
-					+(new Date().getFullYear()+i)+"년</option>")
-		}
-		
-		$("select[name=paydayYear]").val(${paydayYear});
-		modalTrEvent();
-	});
-	$("#myModal3In").click(function(){
-		$("#myModal3").modal("show");
-	});
-</script>
-<script type="text/javascript" src="/js/employeeModalSearch.js"></script>

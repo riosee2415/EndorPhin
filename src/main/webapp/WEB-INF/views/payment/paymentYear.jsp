@@ -52,18 +52,21 @@
 				<table class="table table-striped">
 					<thead class="thead">
 						<tr>
+							<th>년도</th>
 							<th>사번</th>
 							<th>성명</th>
-							<th>직위</th>
-							<th>부사명</th>
-							<th>지급일</th>
+							<th>부서명</th>
+							<th>총급여액</th>
+							<th>총공제액</th>
+							<th>총지급액</th>
 						</tr>
 					</thead>
 					<tbody id="mainPaymentListTbody">
 						<c:forEach items="${paymentYearList}" var="vo">
 							<tr>
 								<td>${paydayYear}</td>
-								<td><a href="/paymentYearDetail" style="color:brown;">${vo.userId}</a></td>
+								<td><a href="#" class="gotoPaymentYearDetail" data-year="${paydayYear}"
+								 style="color:brown;">${vo.userId}</a></td>
 								<td>${vo.usernm}</td>
 								<td>${vo.deptname}</td>
 								<td>${vo.totalSalary}</td>
@@ -95,8 +98,15 @@
 			class="btn btn-info">신규등록</button>
 	</div>
 </div>
+<form action="/paymentYearDetail" id="gotoDetailFrm">
+</form>
 
 <script>
+	$(".gotoPaymentYearDetail").click(function(){
+		$("#gotoDetailFrm").append("<input name=\'userid\' type=\'hidden\' value=\'"+$(this).html()+"\' />");
+		$("#gotoDetailFrm").append("<input name=\'paydayYear\' type=\'hidden\' value=\'"+$(this).data('year')+"\' />");
+		$("#gotoDetailFrm").submit();
+	});
 	$(document).ready(function(){
 		for (var i = -5; i < 3; i++) {
 			$("select[name=paydayYear]").append("<option value="+(new Date().getFullYear()+i)+">"

@@ -26,7 +26,7 @@
 						<th>
 							<div>
 								<label >사원명</label>
-								<input value="${userid}" type="text" name="userid" 
+								<input value="${userid}" type="text" name="userid" value="${userid }"
 								id="searchUserIdInput" placeholder="사원 선택 " readonly="readonly"/>
 								<a href="#" data-toggle="modal" style="color:white" id="myModal3In">
 									<i class="fa fa-users" style="font-size:25"></i>
@@ -150,9 +150,9 @@
 			$("#datepickerFrom").datepicker('setDate','today');
 		modalTrEvent();
 		
-		$("#personalFrm").append("<input type=\'hidden\' name=\'paydayTo\' value=\'"+$("#datepickerTo").val()+"\'");
-		$("#personalFrm").append("<input type=\'hidden\' name=\'paydayFrom\' value=\'"+$("#datepickerFrom").val()+"\'");
-		$("#personalFrm").append("<input type=\'hidden\' name=\'userid\' value=\'"+$("#searchUserIdInput").val()+"\'");
+		$("#personalFrm").append("<input type=\'hidden\' name=\'paydayTo\' value=\'"+$("#datepickerTo").val()+"\'>");
+		$("#personalFrm").append("<input type=\'hidden\' name=\'paydayFrom\' value=\'"+$("#datepickerFrom").val()+"\'>");
+		$("#personalFrm").append("<input type=\'hidden\' name=\'userid\' value=\'"+$("#searchUserIdInput").val()+"\'>");
 	});
 	
 	$(".myModal3In").click(function(){

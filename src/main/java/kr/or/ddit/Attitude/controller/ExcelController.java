@@ -19,6 +19,8 @@ import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -28,6 +30,8 @@ import kr.or.ddit.payment.service.IPaymentService;
 
 @Controller
 public class ExcelController {
+		
+	private Logger logger = LoggerFactory.getLogger(ExcelController.class);
 	
 	@Resource(name="paymentService")
 	IPaymentService paymentService;
@@ -38,7 +42,7 @@ public class ExcelController {
 		String[] paymentPersonal = {"사번","성명","지급일자",	"부서명","총급여액","총공제액","총지급액"};
 		
 		// 게시판 목록조회
-		
+		logger.debug("이름:{}",userid);
 		Map<String, Object> map = new HashMap<>();
 		map.put("paydayTo", paydayTo);
 		map.put("paydayFrom", paydayFrom);

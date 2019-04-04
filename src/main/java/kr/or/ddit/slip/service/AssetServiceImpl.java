@@ -26,8 +26,14 @@ public class AssetServiceImpl implements IAssetService{
 	}
 
 	@Override
+	public int insertStatusAsset(AssetVo assetVo) {
+		return assetDao.insertStatusAsset(assetVo);
+	}
+	@Override
 	public int updateAsset(AssetVo assetVo) {
 		return assetDao.updateAsset(assetVo);
 	}
+
+
 
 }

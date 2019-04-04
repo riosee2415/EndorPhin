@@ -18,7 +18,14 @@ public class Tax_calVo {
 	String orderCode;
 	String clientCode;
 	String sumValue;
+	String auto;
 	
+	public String getAuto() {
+		return auto;
+	}
+	public void setAuto(String auto) {
+		this.auto = auto;
+	}
 	public String getSumValue() {
 		return sumValue;
 	}

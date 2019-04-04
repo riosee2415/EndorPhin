@@ -16,8 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.or.ddit.order.model.ClientVo;
+import kr.or.ddit.order.service.ICilentService;
 import kr.or.ddit.slip.model.AssetVo;
 import kr.or.ddit.slip.service.IAssetService;
+import kr.or.ddit.tax_cal.model.EstablishVo;
+import kr.or.ddit.tax_cal.service.IEstablishService;
 
 @Controller
 public class AssetController {
@@ -27,13 +31,23 @@ public class AssetController {
 	@Resource(name="assetService")
 	private IAssetService assetService;
 	
+	@Resource(name="establishService")
+	private IEstablishService establishService;
+	
+	@Resource(name="clientService")
+	private ICilentService clientService;
+	
 	@RequestMapping("/purchaseAsset")
 	public String purchaseAsset(Model model){
 		
 		
 		List<AssetVo> assetList = assetService.getAllAsset();
+		List<EstablishVo> establishList = establishService.getAllEstablish();
+		List<ClientVo> clientList = clientService.getAllClient();
 		
 		model.addAttribute("assetList", assetList);
+		model.addAttribute("establishList", establishList);
+		model.addAttribute("clientList", clientList);
 		
 		return "purchaseAsset";
 	}
@@ -80,6 +94,43 @@ public class AssetController {
 			return "redirect:/purchaseAsset";
 		}
 	}
+	 
+	@RequestMapping("/insertStatusFrm")
+	public String insertStatusAsset(AssetVo assetVo, Model model, @RequestParam("assetCode") String assetCode 
+															,@RequestParam("acquisitionDate") String acquisitionDate
+															,@RequestParam("purchaseCode") String purchaseCode
+															,@RequestParam("sanggakWay") String sanggakWay
+															,@RequestParam("acquisitionPrice") String acquisitionPrice){
+		Date date = new Date();									
+		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
+		
+		try {
+			date= sdf.parse(acquisitionDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		assetVo.setAssetCode(assetCode);
+		assetVo.setAcquisitionDate(date);
+		assetVo.setPurchaseCode(purchaseCode);
+		assetVo.setSanggakWay(sanggakWay);
+		assetVo.setAcquisitionPrice(acquisitionPrice);
+		
+		logger.debug("assetCode1111 : {} ", assetCode);
+		logger.debug("date : {} ", date);
+		logger.debug("purchaseCode : {} ", purchaseCode);
+		logger.debug("sanggakWay : {} ", sanggakWay);
+		logger.debug("acquisitionPrice : {} ", acquisitionPrice);
+		
+		
+		int insertUpd = assetService.insertStatusAsset(assetVo);
+		
+		if(insertUpd > 0){
+			return "asset/insertAssetAjax";
+		}else{
+			return "asset/insertAssetAjax";
+		}
+	}
 	
 	//자산코드 중복체크 
 	
@@ -101,5 +152,22 @@ public class AssetController {
 			}
 		}
 		return dupleCode;
+	}
+	
+	@RequestMapping("establishSearch")
+	public String establishSearch(Model model,@RequestParam("establishNameKor") String establishNameKor){
+		
+		List<EstablishVo> establishList = establishService.selectEstablishByNm(establishNameKor);
+		
+		model.addAttribute("establishList", establishList);
+		
+		logger.debug("establishNameKor :::{}",establishNameKor);
+		return "asset/establishSearchAjax";
+	}
+	
+	@RequestMapping("getAssetInsertBtn")
+	public String getAssetInsertBtn(){
+		
+		return "asset/insertAssetAjax";
 	}
 }

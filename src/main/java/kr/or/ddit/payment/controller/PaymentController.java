@@ -81,7 +81,7 @@ public class PaymentController {
 		map.put("paydayTo", paydayTo);
 		map.put("paydayFrom", paydayFrom);
 		map.put("userid", userid);
-		
+		model.addAllAttributes(map);
 		selectPersonalPaymentList = paymentService.selectPersonalPaymentList(map);
 		model.addAttribute("selectPersonalPaymentList",selectPersonalPaymentList);
 		

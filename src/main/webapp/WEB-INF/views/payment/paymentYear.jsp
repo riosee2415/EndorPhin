@@ -92,12 +92,6 @@
 	</div>
 </div>
 <%@ include file="employeeSearch.jsp" %>  
-<div class="container">
-	<div class="row">
-		<button style="margin-left: 705px; background-color: #6E6867;"
-			class="btn btn-info">신규등록</button>
-	</div>
-</div>
 <form action="/paymentYearDetail" id="gotoDetailFrm">
 </form>
 

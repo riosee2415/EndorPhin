@@ -14,7 +14,7 @@
 	<div class="row">
 		<div class="col-md-10" style="width: 100%">
 			<div class="form-group">
-				<table class="table table-striped">
+				<table class="table table-striped" >
 					<thead class="thead">
 						<tr>
 							<th>사번</th>
@@ -32,7 +32,7 @@
 					</thead>
 					<tbody id="mainPaymentListTbody">
 						<c:forEach step="1" items="${payList}" varStatus="index" var="payVo">
-							<tr>
+							<tr class='mainTr'>
 								<td>${payVo.userId }</td>
 								<td>${payVo.usernm }</td>
 								<td>${payVo.positionname }</td>
@@ -59,6 +59,9 @@
 						</c:forEach>
 					</tbody>
 					<tfoot>
+						<tr id="mainPaymentListTfoot">
+							<td colspan="5" align="center">합계 :</td>
+						</tr>
 					</tfoot>
 				</table>
 			</div>
@@ -66,3 +69,22 @@
 	</div>
 </div>
 
+<script>
+	$(document).ready(function(){
+		var total=new Array();
+		$(".thead").children('tr').children('th').each(function(index,item){
+			if(index>4)
+				total.push(0);
+		});
+		$(".mainTr").each(function(){
+			$(this).children('td').each(function(index,item){
+				if(index>4){
+					total[index-5]+=parseInt($(item).html());
+				}
+			})
+		})
+		for (var i = 0; i < total.length; i++) {
+			$("#mainPaymentListTfoot").append("<td>"+total[i]+"</td>");
+		}
+	})
+</script>

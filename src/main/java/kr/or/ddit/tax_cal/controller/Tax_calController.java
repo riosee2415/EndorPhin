@@ -1,6 +1,7 @@
 package kr.or.ddit.tax_cal.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -16,6 +17,8 @@ import kr.or.ddit.company.service.IDeptService;
 import kr.or.ddit.constant.SalesCodeConstant;
 import kr.or.ddit.order.model.ClientVo;
 import kr.or.ddit.order.service.ICilentService;
+import kr.or.ddit.tax_cal.service.ITax_calService;
+import kr.or.ddit.util.model.PageVo;
 
 @Controller
 public class Tax_calController {
@@ -28,15 +31,38 @@ public class Tax_calController {
 	@Resource(name="deptService")
 	private IDeptService deptService;
 	
-	@RequestMapping(path="taxcallview", method=RequestMethod.GET)
-	public String taxcallview(Model model) {
+	@Resource(name="tax_calService")
+	private ITax_calService tax_calService;
+	
+	
+	// 최초 페이지 뷰
+	@RequestMapping(path="taxcalview", method=RequestMethod.GET)
+	public String taxcallview(PageVo pageVo, Model model) {
+		
+		Map<String, Object> resultMap = tax_calService.selecTax_calPagingList(pageVo);
+		model.addAllAttributes(resultMap);
+		model.addAttribute("pageSize", pageVo.getPageSize());
+		model.addAttribute("page", pageVo.getPage());
 		
 		model.addAttribute("scCode", SalesCodeConstant.salesCode);
 		model.addAttribute("phCode", SalesCodeConstant.purchaseCode);
 		
-		return "taxcallview";
+		return "taxcalview";
 	}
 
+	
+	
+	// ajax를 통한 페이징 뷰
+	@RequestMapping("/getTax_calPageList")
+	public String getTax_calPageList(PageVo pageVo, Model model) {
+		
+		Map<String, Object> resultMap = tax_calService.selecTax_calPagingList(pageVo);
+		model.addAllAttributes(resultMap);
+		model.addAttribute("pageSize", pageVo.getPageSize());
+		model.addAttribute("page", pageVo.getPage());
+		
+		return "taxcal/taxcalAjaxPaging";
+	}
 	
 	
 	
@@ -51,7 +77,7 @@ public class Tax_calController {
 	
 	
 	
-	
+	// Ajax를 통해 부서 데이터 가져오기
 	@RequestMapping("/findDept")
 	public String findDept(Model model) {
 		List<DeptVo> deptList = deptService.getAllDept();
@@ -61,7 +87,7 @@ public class Tax_calController {
 	}
 	
 	
-	
+	// Ajax를 통해 발주번호 데이터 가져오기 (개발예정)
 	@RequestMapping("/findOrderCode")
 	public String findOrderCode(Model model) {
 		
@@ -70,4 +96,18 @@ public class Tax_calController {
 		
 		return "taxcal/findOrderCode";
 	}
+	
+	
+	// Ajax를 통해 입력폼의 html을 로드
+	@RequestMapping("/openInsertViewArea")
+	public String openInsertViewArea() {
+		
+		return "taxcal/openInsertViewArea";
+		
+	}
+	
+	
+	
+	
+	
 }

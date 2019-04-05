@@ -147,8 +147,7 @@
 
 <!-----------------회사 코드 검색 모달창 ---------------->	
 	 	<!-- 80% size Modal -->
-<div class="modal fade" id="my80sizeModal2" tabindex="-1"
-	role="dialog" aria-labelledby="my100sizeModalLabel">
+<div class="modal fade" id="my80sizeModal2" tabindex="-1" role="dialog" aria-labelledby="my100sizeModalLabel">
 	<div class="modal-dialog modal-80size" role="document">
 		<div class="modal-content modal-80size">
 			<div class="modal-header">

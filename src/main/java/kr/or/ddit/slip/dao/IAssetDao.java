@@ -13,5 +13,7 @@ public interface IAssetDao {
 	
 	int insertAsset(AssetVo assetVo);
 	
+	int insertStatusAsset(AssetVo assetVo);
+	
 	int updateAsset(AssetVo assetVo);
 }

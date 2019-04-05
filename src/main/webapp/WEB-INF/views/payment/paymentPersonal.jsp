@@ -19,14 +19,15 @@
 					<thead class="thead">
 						<tr>
 						<th>
-							<input type="text" id="datepickerTo" name='paydayTo'>
+							<input type="text" id="datepickerTo" name='paydayTo' value="${paydayTo}">
 							&nbsp;-&nbsp;	
-							<input type="text" id="datepickerFrom" name='paydayFrom'>
+							<input type="text" id="datepickerFrom" name='paydayFrom' value="${paydayFrom}">
 						</th>
 						<th>
 							<div>
 								<label >사원명</label>
-								<input type="text" name="userid" id="searchUserIdInput" placeholder="사원 선택 " readonly="readonly"/>
+								<input value="${userid}" type="text" name="userid" value="${userid }"
+								id="searchUserIdInput" placeholder="사원 선택 " readonly="readonly"/>
 								<a href="#" data-toggle="modal" style="color:white" id="myModal3In">
 									<i class="fa fa-users" style="font-size:25"></i>
 								</a>
@@ -81,8 +82,10 @@
 
 <div class="container">
 	<div class="row">
-<!-- 		<button style="margin-left: 705px; background-color: #6E6867;" -->
-<!-- 			class="btn btn-info">신규등록</button> -->
+		<form action="/paymentPersonalExceldown" id="personalFrm">
+		<button style="margin-left: 705px; background-color: #6E6867;"
+			class="btn btn-info">Excel</button>
+		</form>
 	</div>
 </div>
 <%@ include file="employeeSearch.jsp" %>  
@@ -141,9 +144,15 @@
 	            ,minDate: "-3Y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
 	            ,maxDate: "+2Y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)        
 		});
-		$("#datepickerTo").datepicker('setDate','today-1M');
-		$("#datepickerFrom").datepicker('setDate','today');
+		if($("#datepickerTo").val()=="")
+			$("#datepickerTo").datepicker('setDate','today-1M');
+		if($("#datepickerFrom").val()=="")
+			$("#datepickerFrom").datepicker('setDate','today');
 		modalTrEvent();
+		
+		$("#personalFrm").append("<input type=\'hidden\' name=\'paydayTo\' value=\'"+$("#datepickerTo").val()+"\'>");
+		$("#personalFrm").append("<input type=\'hidden\' name=\'paydayFrom\' value=\'"+$("#datepickerFrom").val()+"\'>");
+		$("#personalFrm").append("<input type=\'hidden\' name=\'userid\' value=\'"+$("#searchUserIdInput").val()+"\'>");
 	});
 	
 	$(".myModal3In").click(function(){
@@ -182,9 +191,37 @@
 		});
 		$("#myModal4").modal("show");
 	});
+	$("#myModal3In").click(function(){
+		$("#myModal3").modal("show");
+	});
+	
+	function modalTrEvent(){
+		$(".modalUserIdTr").off('click');
+		$(".modalUserIdTr").on('click',function(){
+			$("#searchUserIdInput").val($(this).find('td').eq(1).html());
+			$("#myModal3").modal("hide");
+		});
+	}
+	$("#modalSearchUserBtn").click(function(){
+		$.ajax({
+			method : "get",
+			url : "/searchUserNmToPayment",
+			data : "usernm=" + $("#modalSearchUserName").val(),
+			success : function(data) {
+				$(".modalUserIdTr").each(function(){$(this).remove()});
+				for (var i = 0; i < data.length; i++) {
+					$("#modalUserTbody").append('<tr class=\'modalUserIdTr\'><td>'+
+												data[i].userId+'</td><td>'+
+												data[i].userNm+'</td></tr>');
+				}
+				modalTrEvent();
+			}
+		});
+	})
 	
 	
 	
 
 </script>
-<script type="text/javascript" src="/js/employeeModalSearch.js"></script>
+
+<script type="text/javascript" src="/js/datepicker.js"></script>

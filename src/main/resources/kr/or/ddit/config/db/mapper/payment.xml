@@ -184,6 +184,19 @@
 		where   userid =#{userId}
 		and     payday like to_date(#{payDay})
 	</select>
+	
+	<select id="selectYearPaymentListDetail" parameterType="map" resultType="paymentVo">
+		select u.userid, u.usernm,deptname deptname,positionname,to_char(payday,'yyyy-MM-dd') payday
+        ,totalsalary,totalwage,paycode
+		from employee u left outer join payment p
+		on   u.userid = p.userid
+		left outer join position p1
+		on   u.positioncode = p1.positioncode
+		left outer join dept d
+		on   u.deptcode=d.deptcode
+		where   to_char(payday,'yyyy')=#{paydayYear}
+		and    u.userid=#{userid}
+	</select>
 </mapper>
 
 

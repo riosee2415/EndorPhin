@@ -2,26 +2,22 @@
     pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<style>
-
-.modal-content {
-  height: auto;
-  min-height: 70%;
-  border-radius: 0;
-  width: 180%;
-  right: 100px;    
-  top:60px; 
-}
-
-</style>
-
+	
 	<h2>고정자산 등록</h2>	
 	<br>
 	<br>
-	고정자산종류 <input name="deptCode1" id="deptCode1" type="text" />
-	&nbsp<input type="button" id="seachBtn" value="찾기" />&nbsp&nbsp
-	<input type="button" id="seachBtn" value="검색" /><br>
-	<br>
+
+
+<table class="table table-striped">
+	<thead class="thead">
+	</thead>
+		<tr>
+			<td> 고정자산종류
+			<input name="deptCode1" id="deptCode1" type="text" /> &nbsp
+			<input type="button" id="seachBtn" value="검색" /></td>
+		</tr>
+</table>
+<br>
 	<div class="form-group">
 	<div class="table-responsive">
 		<table class="table table-striped">
@@ -36,13 +32,14 @@
 					<th>단위</th>
 					<th>수량</th>
 					<th>취득가액</th>
+					<th>장부반영</th>
 				</tr>
 			</thead>	
 			<tbody id="deptListTbody">
 				<c:forEach items="${assetList }" var="vo">	
 					 <tr>
 						<td><input type="checkbox" name="checkRow" value="${vo.assetCode }" ></td>
-						<td><a class="detailView" href="#deptDetail" data-upd_accountName="${vo.accountName }" 
+						<td><a class="detailView" onclick="fn_detail_tr();" href="#deptDetail1" data-upd_accountName="${vo.accountName }" 
 																	 data-upd_assetName="${vo.assetName }"
 																	 data-upd_assetName="${vo.assetName }"
 																	 data-upd_acquisitionDate="${vo.acquisitionDate }"
@@ -51,7 +48,6 @@
 																	 data-upd_acquisitionPrice="${vo.acquisitionPrice }"  
 																	 data-toggle="modal">${vo.assetCode }</a></td>
    						<c:set var = "sum" value = "${sum+vo.acquisitionPrice/1.1 }" />
-
    						<td>${vo.assetName }</td>	
    						<td>${vo.accountName }</td>								
 						<td>${vo.assetName }</td>
@@ -59,9 +55,12 @@
 						<td>${vo.unit }</td>
 						<td>${vo.quantity }</td>
 						<td>${vo.acquisitionPrice }</td>
-				 	</tr>		 
+						<td><input type="button" value="장부반영" id="applybtn" name="applybtn"/></td>
+				 	</tr>
+				 	<div id="insertArea"></div>
 				</c:forEach>
 			</tbody>
+			
 			<tfoot align="center" >
 				<tr>
 					<td colspan="2">부가세 대급금 </td>
@@ -69,21 +68,20 @@
 				</tr>
 			</tfoot>
 		</table>
+  
 	</div>
 </div>
 	<!--------------(삭제,등록) 버튼 ------------------->
 	
 	<div class="modal-footer">
-		<input name="delect_btn"  id="delect_btn" type="button" value="선택삭제" onclick="myclick()" />
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#my80sizeCenterModal">등록</button>
+		<!-- <input name="delect_btn"  id="delect_btn" type="button" value="선택삭제" onclick="myclick()" /> -->
+		<button type="button" class="btn btn-primary"  onclick="fn_detail();">등록</button>
 	</div>
 			
 	<!-------------- 등록 모달창 띄우기  ------------>
-
-	<!-- 80%size Modal at Center -->
-	<div class="modal modal-center fade" id="my80sizeCenterModal" tabindex="1" role="dialog" aria-labelledby="my80sizeCenterModalLabel" >
-		<div class="modal-dialog modal-80size modal-center" role="document" >
-			<div class="modal-content modal-80size">
+<div class="modal fade" id="my80sizeCenterModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeModalLabel">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content modal-lg">
 				<div class="modal-header">
 				<label>| 고정자산 등록</label>
 					<button type="button" class="close" data-dismiss="modal"aria-label="Close">
@@ -94,38 +92,41 @@
 					<div class="form-group">
 					<table>
 						<tr>
-							<td colspan="2"> 자산코드(*)</td>
+							<td colspan="2"> 자산코드(*)
 							<td><input type="text" id="assetCode">
-								<input type="button" value="중복체크" id="duplCheckbtn" name="duplCheckbtn"/>
-							<div id="dupleCode"></div></td> 
-							<td colspan="2">자산명(*)
-								<input type="text" id="assetName"></td> 
+							<input type="button" value="중복체크" id="duplCheckbtn" name="duplCheckbtn"/></td>
+							<td colspan="2"><div id="dupleCode"></div></td> 
 						</tr>
 						<tr>
+							<td colspan="2">자산명(*)</td>
+							<td><input type="text" id="assetName"></td> 
+						<tr>
 							<td colspan="2" > 계정과목(*)
-							<td><input type="text" id="accountName">
-								<input type="button" data-toggle="modal" data-target="#my80sizeModal2" value="검색" >&nbsp;&nbsp;</td>
-							<td colspan="2" > 취득일(*)
-								<input type="text" id="acquisitionDate" ></td> 
+							<td><input type="text" id="accountName" >
+								<input type="button" data-toggle="modal" data-target="#my80sizeModal2" value="검색"></td>
 						</tr>
 						<tr>
 							<td colspan="2" > 거래처(*)</td>
 							<td><input type="text" id="clientName">
-								<input type="button" data-toggle="modal" data-target="#my80sizeModal2" value="검색" >&nbsp;&nbsp;</td>
+								<input type="button" data-toggle="modal" data-target="#my80sizeModal3" value="검색" ></td>
 							
 						</tr>
 						<tr>
 							<td colspan="2" > 상각방법</td>
 							<td><input type="radio" name="sanggakWay" id ="sanggakWay" value="0" checked/>정액법
 								<input type="radio" name="sanggakWay" id ="sanggakWay" value="1"/>정률법<td>
-							<td colspan="2"> 감가상각계정코드(*)
-								<input type="text" id="sanggakCode">
-								<input type="button" data-toggle="modal" data-target="#my80sizeModal2" value="검색" >&nbsp;&nbsp;	</td>
+						</tr>
+						<tr>
+							<td colspan="2"> 감가상각계정코드(*)</td>
+							<td><input type="text" id="sanggakCode">
+								<input type="button" data-toggle="modal" data-target="#my80sizeModal4" value="검색" >	</td>
+							<td colspan="2" > 취득일(*) &nbsp;&nbsp;&nbsp;
+								<input type="text" id="acquisitionDate" ></td>
 						</tr>
 						<tr>
 							<td colspan="2"> 단위</td>
 							<td><input type="text" id="unit"></td> 
-							<td colspan="2">수량&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<td colspan="2"> 수량  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<input type="text" id="quantity"></td> 
 						</tr>
 						<tr>
@@ -140,9 +141,7 @@
 							<td colspan="2">잔존가치(*)
 								<input type="text" id="residualvalue"></td> 
 						</tr>
-						
 					</table>
-					
 					</div>	
 					<div class="modal-footer">
 						<button type="button" id="insertBtn" class="btn btn-default" data-dismiss="modal">등록</button>
@@ -152,93 +151,136 @@
 			</div>
 		</div>
 	</div>
-		
-	<!-----------------상세보기(수정) 모달창 ---------------->	
 	
-	<div class="modal fade" id="deptDetail" role="deptDetail" aria-hidden="true"aria-labelledby="myLargeModalLabel" tabindex="-1">
-   		<div class="modal-dialog"  role="document">
-   			 <div class="modal-content"> 
-	   			<div class="modal-header"> 
-	   				<label>| 부서등록</label>
-	   				<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-	   				<h4 class="modal-title" id="myModalLabel"></h4>
-	   			</div> 
-	   			<div class="modal-body"> 
-	   				<div class="form-group">
-	   					<label for="InputEmail">부서코드(*)</label> 
-	   					<input type="text" id="upd_accountName" name="upd_accountName" readonly>
-	   				</div>
-	   					<div class="form-group">
-	   					<label for="InputEmail">부서명 (*)&nbsp;&nbsp;</label> 
-	   					<input type="text" name="upd_assetName" id="upd_assetName"  > 
-	   				</div>
-	   					<div class="form-group">
-	   					<label for="InputEmail">회사 코드 &nbsp;&nbsp;</label> 
-	   					<input type="text" id="upd_companyCode" name="upd_companyCode" />
-	   					<input type="button" data-toggle="modal" data-target="#my80sizeModal2" value="검색" >
-	   				</div>
-	   				
-	   			<div class="modal-footer">
-	   			
-					<button id="yes_Btn" name="yes_Btn" class="btn btn-default" data-dismiss="modal"  value="1" style="background: #486068; color: #ffffff"></button>
-	   				
-	   				<button type="button" id="modalUpdateBtn" class="btn btn-default" data-dismiss="modal" >수정</button>
-	   			
-					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-   				</div> 
-   			</div> 
-   		</div> 
-	</div>
-</div>
-
 <!-----------------계정과목 검색 모달창 ---------------->	
-	 	<!-- 80% size Modal -->
-<div class="modal fade" id="my80sizeModal2" tabindex="-1"
-	role="dialog" aria-labelledby="my100sizeModalLabel">
+<div class="modal fade" id="my80sizeModal2" tabindex="-1" role="dialog" aria-labelledby="my100sizeModalLabel">
 	<div class="modal-dialog modal-80size" role="document">
 		<div class="modal-content modal-80size">
-			<div class="modal-header">
-				<h6>| 계정과목 조회</h6>
-			</div>
+          <div class="modal-header">
+			<h6>| 계정과목 조회</h6>
+			<button id="secondAddClose1" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		  </div>
 			<div class="modal-body">
-				<div class="form-group"></div>
-				<table>
-					<thead>
-						<tr>
-							<th>회사명&nbsp;</th>
-							<th><input style="width: 150px;" type="text" class="form-control" id="companyName" name="companyName"></th>
-							<th><button type="button" class="btn btn-inverse" id="searchC_Btn">검색</button></th>
-						</tr>
+			<table>
+				<thead>
+					<tr>
+						<th>계정과목명&nbsp;</th>
+						<th><input style="width: 150px;" type="text" class="form-control" id="establishNameKor" name="establishNameKor" onkeydown="Enter_Check();"></th>
+						<th><button type="button" class="btn btn-inverse" id="searchE_Btn" >검색</button></th>
+					</tr>
+			</table>  <br>
+			<div style="overflow:scroll; width:450px; height:200px;">
+			<table class="table table-sm">
+				<thead class="thead">
+					<tr>
+						<th>계정코드</th>
+						<th>중분류명</th>
+						<th>계정과목명</th>
+				</thead>
+				<tbody id="establishTbody">
+				<c:forEach items="${establishList }" var="vo">
+					<tr class="establishTr" data-establishCode="${vo.establishCode }"
+						onclick="establishTr()">
 						
-				</table>  <br>
-				<table class="table table-sm">
-					<thead class="thead">
-						<tr>
-							<th>회사 코드</th>
-							<th>회사명</th>
-					</thead>
-					<tbody id="companyListTbody">
-						<c:forEach items="${companyList }" var="vo">
-							<tr class="companyTr" data-companycode="${vo.companyCode }"
-								onclick="companyTr()">
-								<td>${vo.companyCode}</td>
-								<td>${vo.companyName}</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
+						<td>${vo.establishCode}</td>
+						<td>${vo.status}</td>
+						<td>${vo.establishNameKor}</td>
+					</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+			</div>
 			  <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 			  <input type="hidden" class="buttons" data-dismiss="modal" value=""/>
 			</div>
 		</div>
 	</div>
 </div>
+<!----------------- 거래처명 검색 모달창 ---------------->	
+  <div class="modal fade" id="my80sizeModal3" tabindex="-1" role="dialog" aria-labelledby="my100sizeModalLabel">
+	<div class="modal-dialog modal-80size" role="document">
+		<div class="modal-content modal-80size">
+          <div class="modal-header">
+			<h6>| 거래처 조회</h6>
+			<button id="secondAddClose1" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		  </div>
+			<div class="modal-body">
+			<table>
+				<thead>
+					<tr>
+						<th>거래처명&nbsp;</th>
+						<th><input style="width: 150px;" type="text" class="form-control" id="establishNameKor" name="establishNameKor"></th>
+						<th><button type="button" class="btn btn-inverse" id="searchE_Btn">검색</button></th>
+					</tr>
+			</table>  <br>
+			<div style="overflow:scroll; width:450px; height:200px;">
+			<table class="table table-sm">
+				<thead class="thead">
+					<tr>
+						<th>코드</th>
+						<th>코드명</th>
+				</thead>
+				<tbody id="establishTbody">
+				<c:forEach items="${clientList }" var="vo">
+					<tr class="establishTr" data-establishCode="${vo.clientCode }" onclick="establishTr()">
+						<td>${vo.clientCode}</td>
+						<td>${vo.clientName}</td>
+					</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+			</div>
+			  <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			</div>
+		</div>
+	</div>
+</div>
 
+
+<!----------------- 감가상각계정 검색 모달창 ---------------->	
+   <div class="modal fade" id="my80sizeModal4" tabindex="-1" role="dialog" aria-labelledby="my100sizeModalLabel">
+	<div class="modal-dialog modal-80size" role="document">
+		<div class="modal-content modal-80size">
+          <div class="modal-header">
+			<h6>| 감가상각계정 조회</h6>
+			<button id="secondAddClose1" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		  </div>
+			<div class="modal-body">
+			<table>
+				<thead>
+					<tr>
+						<th>감가상각계정명&nbsp;</th>
+						<th><input style="width: 150px;" type="text" class="form-control" id="sanggakName" name="sanggakName"></th>
+						<th><button type="button" class="btn btn-inverse" id="searchE_Btn">검색</button></th>
+					</tr>
+			</table>  <br>
+			<div style="overflow:scroll; width:450px; height:200px;">
+			<table class="table table-sm">
+				<thead class="thead">
+					<tr>
+						<th>코드</th>
+						<th>코드명</th>
+				</thead>
+				<tbody id="establishTbody">
+				<c:forEach items="${establishList }" var="vo">
+					<tr class="establishTr" data-establishCode="${vo.establishCode }"
+						onclick="establishTr()">
+						
+						<td>${vo.establishCode}</td>
+						<td>${vo.status}</td>
+						<td>${vo.establishNameKor}</td>
+					</tr>
+				</c:forEach>
+			</table>
+			</div>
+			  <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+		
 	<!---------------등록, 검색, 삭제  ---------------->
-	
 	<form id="insertFrm" action="${pageContext.request.contextPath }/insertAsset">
 		<input type="hidden" id="frmAssetCode" 		 name="frmAssetCode" />
 		<input type="hidden" id="frmAssetName" 		 name="frmAssetName" />
@@ -270,9 +312,11 @@
 		<input type="hidden"  id="frm_usestatus" name="frm_usestatus">
 		<input type="hidden"  id="frm_deptCode" name="frm_deptCode" >
 	</form>
-    <!---------------------------------------------->
+<!---------------------------------------------->
+	
 	<script>
-    /* 등록  */
+  
+	/* 등록  */
 	$("#insertBtn").on("click", function(){
 		
 		var assetCode 		 = $("#assetCode").val();
@@ -311,7 +355,6 @@
 			$("#assetCode").focus();
 			return false;
 		}
-	 
 	 	
 	 	$("#insertFrm").submit();
 	
@@ -391,54 +434,31 @@
  		$("#updateFrm").submit();
     });
 });	
-	
-    /*회사이름 검색  */
- 	$("#searchC_Btn").on("click", function(){
- 		if($("#companyName").val().trim()==""){
+
+	function Enter_Check(){
+	        // 엔터키의 코드는 13입니다.
+	    if(event.keyCode == 13){
+	    	$("#searchE_Btn").click();  // 실행할 이벤트
+	    }
+	}
+    /*계정과목 검색  */
+ 	$("#searchE_Btn").on("click", function(){
+ 		if($("#establishNameKor").val().trim()==""){
  			alert("회사명을 입력하세요.");
- 			$("companyName").focus();
+ 			$("establishNameKor").focus();
  			return false;
  		}
-		$.ajax({
-    		url 	: "${pageContext.request.contextPath }/searchCompanyAjax",
-    		data 	: "companyName=" + $("#companyName").val(),
-    		success : function(data){
-    			$("#companyName").val("");
-				$("#companyListTbody").html(data);
-    			
-    		}
-    	});
-    }); 
-    
+ 		$.ajax({
+ 			url : "${pageContext.request.contextPath }/establishSearch",
+ 			data : "establishNameKor="+$("#establishNameKor").val(),
+ 			success : function(data){
+ 				$("#establishNameKor").val("");
+ 				$("#establishTbody").html(data);
+ 			}
+  		});
+ 	});
  	
- 	/* 카드코드 중복체크 ajax */
-	    $("#duplCheckbtn").on("click", function(){
-    	
-    	$.ajax({
-    		url 	: "${pageContext.request.contextPath }/DupleAsset",
-    		method  : "post",
-    		data 	: "assetCode="+$("#assetCode").val(),
-    		success : function(dupleCode){
-    			transDupl(dupleCode);
-    		}
-    	});
-    }); 
-    
-		var dupleCode ="";
-		
-	    function transDupl(dupleCode){
-	    	if(dupleCode == "0"){
-	    		dupleCode ="<b><font color='blue'>사용가능한 카드 코드입니다.</font><br>"
-	    		$("#dupleCode").html(dupleCode);
-	    	}else if(dupleCode == "1"){
-	    		dupleCode="<b><font color='red'>중복된 자산 코드입니다.</font><br>"
-	    		$("#dupleCode").html(dupleCode);
-	    	}else if(dupleCode == "empty"){
-	    		dupleCode = "<b><font color='orange'>자산 코드를 입력하세요.</font><br>"
-	    		$("#dupleCode").html(dupleCode);
-	    	}
-	    }  
-	    
+ 
 		 function allCheck() {
 			if ($("#th_allCheck").is(':checked')) {
 					$("input[name=checkRow]").prop("checked", true);
@@ -472,7 +492,25 @@
  				$("#del_frm").submit();
 		}
     
-
+	/* 테이블 코드 클릭했을 때 */
+	
+	var insertFlag = 0;
+	function fn_detail(){
+		if (insertFlag === 0) {
+			
+			$.ajax({
+				url : "${pageContext.request.contextPath}/getAssetInsertBtn",
+				success : function(data){
+					$("#insertArea").html(data);					
+				}
+			});
+			insertFlag = 1;
+			
+		} else if(insertFlag == 1){
+			$("#insertArea").html("");
+			insertFlag = 0;
+		}
+	}
 	
 	</script>
 	

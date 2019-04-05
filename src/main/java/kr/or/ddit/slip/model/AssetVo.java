@@ -23,98 +23,114 @@ public class AssetVo {
    String quantity; // 수량   =
    String companyCode;//회사코드
    String sanggakCode; //감가상각계정코드  =
-public String getAssetCode() {
-	return assetCode;
-}
-public void setAssetCode(String assetCode) {
-	this.assetCode = assetCode;
-}
-public String getAssetName() {
-	return assetName;
-}
-public void setAssetName(String assetName) {
-	this.assetName = assetName;
-}
-public Date getAcquisitionDate() {
-	return acquisitionDate;
-}
-public void setAcquisitionDate(Date acquisitionDate) {
-	this.acquisitionDate = acquisitionDate;
-}
-public String getAccountName() {
-	return accountName;
-}
-public void setAccountName(String accountName) {
-	this.accountName = accountName;
-}
-public String getClientName() {
-	return clientName;
-}
-public void setClientName(String clientName) {
-	this.clientName = clientName;
-}
-public String getSanggakWay() {
-	return sanggakWay;
-}
-public void setSanggakWay(String sanggakWay) {
-	this.sanggakWay = sanggakWay;
-}
-public String getAcquisitionPrice() {
-	return acquisitionPrice;
-}
-public void setAcquisitionPrice(String acquisitionPrice) {
-	this.acquisitionPrice = acquisitionPrice;
-}
-public String getSlipNumber() {
-	return slipNumber;
-}
-public void setSlipNumber(String slipNumber) {
-	this.slipNumber = slipNumber;
-}
-public String getResidualvalue() {
-	return residualvalue;
-}
-public void setResidualvalue(String residualvalue) {
-	this.residualvalue = residualvalue;
-}
-public String getUnit() {
-	return unit;
-}
-public void setUnit(String unit) {
-	this.unit = unit;
-}
-public String getJukyo() {
-	return jukyo;
-}
-public void setJukyo(String jukyo) {
-	this.jukyo = jukyo;
-}
-public String getUnitPrice() {
-	return unitPrice;
-}
-public void setUnitPrice(String unitPrice) {
-	this.unitPrice = unitPrice;
-}
-public String getQuantity() {
-	return quantity;
-}
-public void setQuantity(String quantity) {
-	this.quantity = quantity;
-}
-public String getCompanyCode() {
-	return companyCode;
-}
-public void setCompanyCode(String companyCode) {
-	this.companyCode = companyCode;
-}
-public String getSanggakCode() {
-	return sanggakCode;
-}
-public void setSanggakCode(String sanggakCode) {
-	this.sanggakCode = sanggakCode;
-}
+   String depreciation; //감가상각비
+   String purchaseCode; //업무용, 업무무관코드 
    
-
-	    
+   
+	public String getAssetCode() {
+		return assetCode;
+	}
+	public void setAssetCode(String assetCode) {
+		this.assetCode = assetCode;
+	}
+	public String getAssetName() {
+		return assetName;
+	}
+	public void setAssetName(String assetName) {
+		this.assetName = assetName;
+	}
+	public Date getAcquisitionDate() {
+		return acquisitionDate;
+	}
+	public void setAcquisitionDate(Date acquisitionDate) {
+		this.acquisitionDate = acquisitionDate;
+	}
+	public String getAccountName() {
+		return accountName;
+	}
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
+	}
+	public String getClientName() {
+		return clientName;
+	}
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
+	}
+	public String getSanggakWay() {
+		return sanggakWay;
+	}
+	public void setSanggakWay(String sanggakWay) {
+		this.sanggakWay = sanggakWay;
+	}
+	public String getAcquisitionPrice() {
+		return acquisitionPrice;
+	}
+	public void setAcquisitionPrice(String acquisitionPrice) {
+		this.acquisitionPrice = acquisitionPrice;
+	}
+	public String getSlipNumber() {
+		return slipNumber;
+	}
+	public void setSlipNumber(String slipNumber) {
+		this.slipNumber = slipNumber;
+	}
+	public String getResidualvalue() {
+		return residualvalue;
+	}
+	public void setResidualvalue(String residualvalue) {
+		this.residualvalue = residualvalue;
+	}
+	public String getUnit() {
+		return unit;
+	}
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+	public String getJukyo() {
+		return jukyo;
+	}
+	public void setJukyo(String jukyo) {
+		this.jukyo = jukyo;
+	}
+	public String getUnitPrice() {
+		return unitPrice;
+	}
+	public void setUnitPrice(String unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+	public String getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(String quantity) {
+		this.quantity = quantity;
+	}
+	public String getCompanyCode() {
+		return companyCode;
+	}
+	public void setCompanyCode(String companyCode) {
+		this.companyCode = companyCode;
+	}
+	public String getSanggakCode() {
+		return sanggakCode;
+	}
+	public void setSanggakCode(String sanggakCode) {
+		this.sanggakCode = sanggakCode;
+	}
+	public String getDepreciation() {
+		return depreciation;
+	}
+	public void setDepreciation(String depreciation) {
+		this.depreciation = depreciation;
+	}
+	public String getPurchaseCode() {
+		return purchaseCode;
+	}
+	public void setPurchaseCode(String purchaseCode) {
+		this.purchaseCode = purchaseCode;
+	}
+		
+	 
+		    
   
 }

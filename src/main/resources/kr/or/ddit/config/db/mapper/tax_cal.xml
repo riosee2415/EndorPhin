@@ -7,10 +7,10 @@
 <!-- 매입매출세금계산서 입력 -->
 	<insert id="insertTax_cal" parameterType="tax_calVo">
 		insert into tax_cal
-		(salescode, slipdate, supplyvalue, salesstatus, deptcode, surtax, ordercode, clientcode)
+		(salescode, slipdate, supplyvalue, salesstatus, deptcode, surtax, ordercode, clientcode, sumvalue, auto)
 		values
 		(#{salescode},sysdate,#{supplyvalue},#{salesstatus}
-		 ,#{deptcode},#{surtax},#{ordercode},#{clientcode})
+		 ,#{deptcode},#{surtax},#{ordercode},#{clientcode}, #{sumValue}, #{auto})
 
 	</insert>
 
@@ -18,7 +18,7 @@
 	<!-- 매입매출세금계산서 불러오기 -->
 	<select id="getAllTax_cal" resultType="tax_calVo">
 		select
-		salescode, slipdate, supplyvalue, salesstatus, deptcode, surtax, ordercode, clientcode
+		salescode, slipdate, supplyvalue, salesstatus, deptcode, surtax, ordercode, clientcode, sumvalue, auto
 		from tax_cal
 	</select>
 
@@ -27,7 +27,7 @@
 	<select id="selectTax_cal" resultType="tax_calVo"
 		parameterType="String">
 		select
-		salescode, slipdate, supplyvalue, salesstatus, deptcode, surtax, ordercode, clientcode
+		salescode, slipdate, supplyvalue, salesstatus, deptcode, surtax, ordercode, clientcode, sumValue, auto
 		from
 		tax_cal where salescode = #{salescode}
 	</select>

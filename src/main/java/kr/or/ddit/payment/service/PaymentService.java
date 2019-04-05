@@ -130,22 +130,26 @@ public class PaymentService implements IPaymentService{
 			String deductCode="500"+(i+3);
 			Payment_detailVo payment_detailVo = new Payment_detailVo(deductCode,paymentVo.getPayCode());
 			float percent = Float.parseFloat(de_product_div.get(i).getRelate());
-			int tax = (int)(Math.floorDiv(totalpay, 100)*percent);
+			double tax = Math.floor((totalpay/100*percent)/10);
 			
-			payment_detailVo.setDeductPay(Integer.toString(tax));
-			if(i+3==4){
-				deductCode="500"+(i+5);
-				percent = Float.parseFloat(de_product_div.get(i+2).getRelate());
-				tax = (int)(Math.floorDiv(tax, 100)*percent);
-				
-				payment_detailVo.setDeductCode(deductCode);
-				payment_detailVo.setDeductPay(Integer.toString(tax));
-			}
-			
+			payment_detailVo.setDeductPay(Double.toString(tax*10));
 			if(payment_detailDao.selectPayment_detail(payment_detailVo)==null){
 				payment_detailDao.insertPayment_detail(payment_detailVo);
 			}else{
 				payment_detailDao.updatePayment_detail(payment_detailVo);
+			}
+			if(i+3==4){
+				deductCode="500"+(i+5);
+				percent = Float.parseFloat(de_product_div.get(i+2).getRelate());
+				tax = Math.floor(((tax*10)/100*percent)/10);
+				
+				payment_detailVo.setDeductCode(deductCode);
+				payment_detailVo.setDeductPay(Double.toString(tax*10));
+				if(payment_detailDao.selectPayment_detail(payment_detailVo)==null){
+					payment_detailDao.insertPayment_detail(payment_detailVo);
+				}else{
+					payment_detailDao.updatePayment_detail(payment_detailVo);
+				}
 			}
 		}
 		String incomeTax = paymentDao.selectincometax(Integer.toString(totalpay/1000));
@@ -155,8 +159,11 @@ public class PaymentService implements IPaymentService{
 																		,paymentVo.getPayCode());
 			if(i==0)
 				payment_detailVo.setDeductPay(incomeTax);
-			else
-				payment_detailVo.setDeductPay(Integer.toString(Integer.parseInt(incomeTax)/100*10));
+			else{
+				double floor = Math.floor((Integer.parseInt(incomeTax)/100*10)/10);
+				payment_detailVo.setDeductPay(Double.toString(floor*10));
+			}
+				
 				
 			if(payment_detailDao.selectPayment_detail(payment_detailVo)==null){
 				payment_detailDao.insertPayment_detail(payment_detailVo);

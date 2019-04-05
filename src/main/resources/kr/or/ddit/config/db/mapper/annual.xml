@@ -6,35 +6,36 @@
    
    	<!-- 연차정보 전체 가져오기 -->
    	<select id="getAllAnnual" resultType="AnnualVo">
-		select
-		    userid, 
-		    annualdate, 
-		    annualstart, 
-		    annualend, 
-		    occurannual, 
-		    userdate
-		from annual
+		 
+               select
+               	substr(to_char(b.annualdate,'yyyy-mm-dd'),1,4) year,     <!-- 해당년도 -->
+                a.userid userid,										 <!-- 사원번호 -->
+                a.usernm usernm,                                         <!-- 사원이름 -->
+                c.deptname deptname,									 <!-- 부서명 -->
+                a.continuousYear continuousYear,					     <!-- 근속년수 -->
+              	to_char(b.annualdate,'yyyy-MM-dd') annualdate,           <!-- 연차발생날짜 -->
+                b.occurannual occurannual,								 <!-- 발생연차 -->
+                b.userdate userdate,									 <!-- 사용일수 -->
+                (b.occurannual-b.userdate) residual						 <!-- 진여연차 -->
+                from employee a, annual b, dept c
+                where a.userid = b.userid
+                and a.deptcode = c.deptcode
+   	
    	</select>
 
-	<!-- 사원 아이디 별 연차정보 전체 가져오기 -->
- 	<select id="selectAllAnnual" resultType="AnnualVo" >
-		select
-		    userid, 
-		    annualdate, 
-		    annualstart, 
-		    annualend, 
-		    occurannual, 
-		    userdate
-		from annual
-		where userid = #{userid}
-   	</select>
    
    	<!-- 연차정보 추가하기 -->
    	<insert id="insertAnnual" parameterType="AnnualVo">
    		insert into annual
-		    (userid, annualdate, annualstart, annualend, occurannual, userdate)
+		    (
+		    userid,
+		    annualdate,
+		        occurannual,
+		         userdate
+		         )
+		         
 		values
-		    (#{userid},#{annualdate},#{annualstart},#{annualend},#{occurannual},#{userdate})
+		    (#{userid},to_date(#{annualdate},'yyyyMMdd'),#{occurannual},#{userdate})
    	</insert>
    
    
@@ -42,10 +43,10 @@
 	파라미터 타입 		: map 
 	파라미터 key값 	: userId
 	-->
-   	<delete id="deleteAnnual" parameterType="map">
-  		delete 
-  		from annual
+   	<delete id="deleteAnnual" parameterType="AnnualVo">
+  		delete  from annual
   		where userid = #{userid}
+        and annualdate like to_date(#{annualdate},'yyyy-mm-dd')
    	</delete>
    	
    	
@@ -58,9 +59,33 @@
    		set occurannual = #{occurannual}
    		where userid = #{userid}
    	</update>
-   
-	
-   
+   	
+   	
+   	<!-- 사원 아이디 별 연차정보 전체 가져오기 -->
+ 	<select id="SearchAnnual" resultType="AnnualVo" >
+				select
+               	substr(to_char(b.annualdate,'yyyy-mm-dd'),1,4) year,     
+                a.userid userid,										
+                a.usernm usernm,                                         
+                c.deptname deptname,									
+                a.continuousYear continuousYear,					   
+              	to_char(b.annualdate,'yyyy-MM-dd') annualdate,           
+                b.occurannual occurannual,								
+                b.userdate userdate,									
+                (b.occurannual-b.userdate) residual						
+                from employee a, annual b, dept c
+                where a.userid = b.userid
+                and a.deptcode = c.deptcode
+                
+                <if test="usernm != null">
+                and usernm like '%'||#{usernm}||'%'
+                </if>
+                 <if test="annualdate != null">
+                 and	to_char(b.annualdate,'yyyy-MM-dd') like #{annualdate}||'%'
+                 
+                 </if>
+   	
+   	</select>
    
    
 </mapper>

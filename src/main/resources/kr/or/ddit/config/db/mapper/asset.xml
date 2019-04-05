@@ -21,7 +21,9 @@
 	        UNITPRICE, 
 	        QUANTITY, 
 	        COMPANYCODE,
-	        sanggakCode
+	        sanggakCode,
+	        depreciation,
+	        purchaseCode
 	    FROM ASSET
 	</select>
 	
@@ -30,13 +32,19 @@
 	<insert id="insertAsset" parameterType="assetVo">
 		INSERT INTO ASSET
         (ASSETCODE, ASSETNAME, ACQUISITIONDATE, ACCOUNTNAME, CLIENTNAME, SANGGAKWAY, acquisitionPrice, 
-          RESIDUALVALUE, UNIT, JUKYO, UNITPRICE, QUANTITY,sanggakCode)
+          RESIDUALVALUE, UNIT, JUKYO, UNITPRICE, QUANTITY,sanggakCode,depreciation,purchaseCode)
    		 VALUES
         (#{assetCode},#{assetName},#{acquisitionDate},#{accountName},#{clientName},#{sanggakWay},
-        #{acquisitionPrice},#{residualvalue},#{unit},#{jukyo},#{unitPrice},#{quantity},#{sanggakCode})
+        #{acquisitionPrice},#{residualvalue},#{unit},#{jukyo},#{unitPrice},#{quantity},#{sanggakCode},#{depreciation},#{purchaseCode})
 	
-	</insert>               
-
+	</insert> 
+	
+	<insert id="insertStatusAsset" parameterType="assetVo">              
+     insert into asset
+        (assetCode, acquisitionDate,sanggakWay, purchaseCode,acquisitionPrice) values
+        (#{assetCode},#{acquisitionDate},#{sanggakWay},#{purchaseCode},#{acquisitionPrice}) 
+	</insert>
+	
 	<update id="updateAsset" parameterType="assetVo">
 		 update asset set 
 					assetName  = #{assetName},
@@ -51,7 +59,9 @@
 					jukyo = #{jukyo},
 					unitPrice = #{unitPrice},
 					quantity = #{quantity},
-					sanggakCode = #{sanggakCode}
+					sanggakCode = #{sanggakCode},
+					depreciation = #{depreciation},
+					purchaseCode = #{purchaseCode}
 		     where  assetCode = #{assetCode}
 	</update>
 </mapper>

@@ -31,10 +31,11 @@ public class EmployeeServiceTest extends LogicConfig{
 	@Test
 	public void insertEmployeeTest() {
 		EmployeeVo employeeVo = new EmployeeVo();
-		employeeVo.setUserId("70");
-		employeeVo.setUserNm("부서");
-		employeeVo.setDeptCode("10");
-		employeeVo.setPositionCode("1");
+		employeeVo.setUserId("1006");
+		employeeVo.setUserNm("장원영");
+		employeeVo.setDeptCode("100");
+		employeeVo.setPositionCode("30");
+		employeeVo.setBirthDate("20180101");
 		employeeVo.setRankCode("1");
 		int insertEmployee = employeeService.insertEmployee(employeeVo);
 		assertEquals(1, insertEmployee);
@@ -113,10 +114,12 @@ public class EmployeeServiceTest extends LogicConfig{
 	
 	@Test
 	public void searchEmployeeTest() {
+		EmployeeVo vo = new EmployeeVo();
+		vo.setDeptname("");
 		
-		List<EmployeeVo> searchEmployee = employeeService.SearchEmployee("김현기");
-		assertNotNull(searchEmployee);
+		List<EmployeeVo> searchEmployees = employeeService.SearchEmployee(vo);
 		
+		System.out.println(searchEmployees.size());
 		
 	}
 	

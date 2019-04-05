@@ -74,7 +74,7 @@
           <a class="dropdown-item" href="/paymentYear">연도별 급여 조회</a>
             <h3 class="dropdown-header">근태관리</h3>
           <a class="dropdown-item" href="${cp }/attitude/getAllAttitude">근태항목등록</a>
-         <a class="dropdown-item" href="${cp }/attitudeRecord/getAllattitudeRecord">휴가일 수 등록</a>
+         <a class="dropdown-item" href="${cp }/annual/getAllannual">휴가일 수 등록</a>
           <a class="dropdown-item" href="${cp }/attitudeRecord/getAllattitudeRecord">근태 입력</a>
         </div>
       </li>

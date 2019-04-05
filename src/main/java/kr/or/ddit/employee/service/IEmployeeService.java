@@ -83,7 +83,7 @@ public interface IEmployeeService {
 	* @return
 	* Method 설명 : 사원 검색
 	*/
-	List<EmployeeVo> SearchEmployee(String userNm);
+	List<EmployeeVo> SearchEmployee(EmployeeVo userNm);
 	
 	
 }

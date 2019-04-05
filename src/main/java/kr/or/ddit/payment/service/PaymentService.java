@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.ddit.payment.dao.IDe_Product_divDao;
@@ -131,6 +132,10 @@ public class PaymentService implements IPaymentService{
 			Payment_detailVo payment_detailVo = new Payment_detailVo(deductCode,paymentVo.getPayCode());
 			float percent = Float.parseFloat(de_product_div.get(i).getRelate());
 			double tax = Math.floor((totalpay/100*percent)/10);
+			if(de_product_div.get(i).getDeductName().equals("국민연금")
+					&&totalpay>4860000){
+				tax=Math.floor((4860000/100*percent)/10);
+			}
 			
 			payment_detailVo.setDeductPay(Double.toString(tax*10));
 			if(payment_detailDao.selectPayment_detail(payment_detailVo)==null){
@@ -153,6 +158,22 @@ public class PaymentService implements IPaymentService{
 			}
 		}
 		String incomeTax = paymentDao.selectincometax(Integer.toString(totalpay/1000));
+		if(incomeTax==null){
+			String selectincometax = paymentDao.selectincometax("10000");
+			int over = (totalpay/1000)-10000;
+			if(over<4000){
+				over = (int) Math.floorDiv((over/10)*(98*35),10)*10;
+			}
+			else if(over<18000){
+				over = (int) Math.floorDiv(((over-4000)/10)*(98*35),10)*10 + 1372000;
+			}
+			else{
+				over = 10000000;
+			}
+			over +=Integer.parseInt(selectincometax);
+			incomeTax = Integer.toString(over);
+		}
+
 		List<De_product_divVo> selectDeproductByNm = de_product_divDao.selectDeproductByNm(new De_product_divVo("소득세"));
 		for (int i = 0; i < selectDeproductByNm.size(); i++) {
 			Payment_detailVo payment_detailVo = new Payment_detailVo(selectDeproductByNm.get(i).getDeductCode()

@@ -574,16 +574,16 @@ $("document").ready(function(){
 		if(e.which == 13){
 			if(value == 1){
 				$("#insertSlipType").val("현금");
-				fn_openInsertViewArea();
+				fn_openInsertViewAreaLoad();
 			} else if (value == 2){
 				$("#insertSlipType").val("외상");
-				fn_openInsertViewArea();
+				fn_openInsertViewAreaLoad();
 			} else if (value == 3){
 				$("#insertSlipType").val("혼합");
-				fn_openInsertViewArea();
+				fn_openInsertViewAreaLoad();
 			} else if (value == 4){
 				$("#insertSlipType").val("카드");
-				fn_openInsertViewArea();
+				fn_openInsertViewAreaLoad();
 			} else {
 				$("#insertAuto").val("");
 			}
@@ -597,17 +597,60 @@ $("document").ready(function(){
 	
 	
 	/*입력창 오픈 : Ajax*/
-	function fn_openInsertViewArea(){
+	function fn_openInsertViewAreaLoad(){
+		
+		var slipType = $("#insertSlipType").val();
+		var salesStatus = $("#insertSalesStatus").val();
+		
 		$.ajax({
-			url : "${pageContext.request.contextPath }/openInsertViewArea",
+			url : "${pageContext.request.contextPath }/openInsertViewAreaLoad",
+			data : "slipType=" + slipType + "&salesStatus=" + salesStatus,
 			success : function(data){
-				console.log(data);
 				$("#insertViewArea").html(data);
-			}
+				fn_openInsertViewArea();
 				
+			}
 		});
 	}
 	
+	
+	
+
+	/*전표데이터 컨트롤러로 전송하는 Ajax  전표 데이터 전송 완료 , 전표상세데이터 전송 미완료 개발예정*/
+	function fn_openInsertViewArea(){
+		
+		var slipDate = $("#insertSlipDate").val();
+		var supplyValue = $("#insertSupplyValue").val();
+		var surtax = $("#insertSurTax").val();
+		var sumValue = $("#insertSumValue").val();
+		var salesStatus = $("#insertSalesStatus").val();
+		var clientName = $("#insertClient").val();
+		var deptName = $("#insertDept").val();
+		var OrderCode = $("#insertOrderCode").val();
+		var auto = $("#insertAuto").val();
+		var slipType = $("#insertSlipType").val();
+		
+		
+		$.ajax({
+			url : "${pageContext.request.contextPath }/openInsertViewArea",
+			data : 	  "slipDate=" + slipDate 
+					+ "&supplyValue=" + supplyValue 
+					+ "&surtax=" + surtax 
+					+ "&sumValue=" + sumValue
+					+ "&salesStatus=" + salesStatus
+					+ "&clientName=" + clientName
+					+ "&deptName=" + deptName
+					+ "&OrderCode=" + OrderCode
+					+ "&auto=" + auto
+					+ "&slipType=" + slipType,
+			success : function(data){
+				console.log(data);
+			}
+			
+				
+		});
+		
+	}
 	
 	
 	

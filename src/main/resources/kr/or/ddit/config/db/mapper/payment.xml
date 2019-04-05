@@ -29,6 +29,9 @@
 							and     dpd.deprostatus='1'
 							and     pd.paycode=(select max(paycode)+1 from payment)),0)
 		,nvl(#{relate, jdbcType=VARCHAR},null)
+		<if test="taxamount!=null">
+		, taxamount=#{taxamount}
+		</if>
 		,to_date( nvl(#{payDay, jdbcType=VARCHAR},null),'yyyyMMdd')
 		)
 	</insert>
@@ -137,7 +140,7 @@
 	
 	<!-- 기간별 급여의 총합을 구하기 위함 -->
 	<select id="selectTotalSalaryByDay" resultType="paymentVo" parameterType="map">
-		select sum(totalsalary-totalwage) totalsalary,to_char(payday,'yyyy-MM') payday,taxamount
+		select sum(totalsalary-totalwage) totalsalary,to_char(payday,'yyyy-MM') payday
 		from payment
 		<if test="value!=null">
 			where payday between to_date(#{payDay},'yyyyMM') 
@@ -168,7 +171,7 @@
 	<!-- 년도별 검색 -->
 	<select id="selectYearPaymentList" parameterType="map" resultType="paymentVo">
 		select u.userid, min(u.usernm) usernm,min(deptname) deptname
-	        ,sum(totalsalary) totalsalary,sum(totalwage) totalwage,taxamount
+	        ,sum(totalsalary) totalsalary,sum(totalwage) totalwage
 		from employee u left outer join payment p
 		on   u.userid=p.userid
 		left outer join dept d

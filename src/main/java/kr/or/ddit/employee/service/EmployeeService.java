@@ -44,7 +44,7 @@ public class EmployeeService implements IEmployeeService{
 	}
 
 	@Override
-	public List<EmployeeVo> SearchEmployee(String userNm) {
+	public List<EmployeeVo> SearchEmployee(EmployeeVo userNm) {
 		return employeeDao.SearchEmployee(userNm);
 		
 	}

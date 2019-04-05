@@ -97,5 +97,10 @@ public class PaymentDaoTest extends LogicConfig{
 		String paycodeByIdnDay = paymentDao.paycodeByIdnDay(paymentVo);
 		logger.debug("asdfsadf:{}",paycodeByIdnDay);
 	}
+	@Test
+	public void selectincometaxTest() {
+		String selectincometax = paymentDao.selectincometax("2500");
+		assertEquals("41630", selectincometax);
+	}
 
 }

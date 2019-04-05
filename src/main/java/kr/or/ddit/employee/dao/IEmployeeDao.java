@@ -68,7 +68,7 @@ public interface IEmployeeDao {
 	* @return
 	* Method 설명 : 사원 검색
 	*/
-	public List<EmployeeVo> SearchEmployee(String userNm);
+	public List<EmployeeVo> SearchEmployee(EmployeeVo userNm);
 	
 	
 	

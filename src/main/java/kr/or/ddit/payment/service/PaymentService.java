@@ -82,7 +82,7 @@ public class PaymentService implements IPaymentService{
 			PaymentVo paymentVo = new PaymentVo();
 			paymentVo.setPayCode(maxPayment);
 			paymentVo.setPayDay(payment4UpdVo.getPayday());
-			paymentDao.updatePayment(paymentVo);
+			withhold(paymentVo);
 			return true;
 		}
 		return false;
@@ -101,6 +101,69 @@ public class PaymentService implements IPaymentService{
 		PaymentVo paymentVo = new PaymentVo();
 		paymentVo.setPayCode(payment4UpdVo.getPayCode());
 		paymentVo.setPayDay(payment4UpdVo.getPayday());
+		withhold(paymentVo);
+	}
+
+	private void withhold(PaymentVo paymentVo) {
+		int totalpay =0;
+		List<Payment_detailVo> selectPayment_detailPaycode = payment_detailDao.selectPayment_detailPaycode(paymentVo.getPayCode());
+		for (int i = 0; i < selectPayment_detailPaycode.size(); i++) {
+			De_product_divVo selectDe_product_div = de_product_divDao.selectDe_product_div(selectPayment_detailPaycode.get(i).getDeductCode());
+			switch(selectPayment_detailPaycode.get(i).getDeductCode()){
+				case "2":
+					if(Integer.parseInt(selectPayment_detailPaycode.get(i).getDeductPay())>100000)
+						totalpay+=Integer.parseInt(selectPayment_detailPaycode.get(i).getDeductPay())-100000;
+					break;
+				case "4":
+					if(Integer.parseInt(selectPayment_detailPaycode.get(i).getDeductPay())>200000)
+						totalpay+=Integer.parseInt(selectPayment_detailPaycode.get(i).getDeductPay())-200000;
+					break;
+				default:
+						if(selectDe_product_div.getTaxStatus()!=null&&selectDe_product_div.getTaxStatus().equals("1"))
+							totalpay+=Integer.parseInt(selectPayment_detailPaycode.get(i).getDeductPay());
+					break;
+			}
+		}
+		paymentVo.setTaxamount(Integer.toString(totalpay));
+		List<De_product_divVo> de_product_div = de_product_divDao.getDe_product_div("3");
+		for (int i = 0; i < 3; i++) {
+			String deductCode="500"+(i+3);
+			Payment_detailVo payment_detailVo = new Payment_detailVo(deductCode,paymentVo.getPayCode());
+			float percent = Float.parseFloat(de_product_div.get(i).getRelate());
+			int tax = (int)(Math.floorDiv(totalpay, 100)*percent);
+			
+			payment_detailVo.setDeductPay(Integer.toString(tax));
+			if(i+3==4){
+				deductCode="500"+(i+5);
+				percent = Float.parseFloat(de_product_div.get(i+2).getRelate());
+				tax = (int)(Math.floorDiv(tax, 100)*percent);
+				
+				payment_detailVo.setDeductCode(deductCode);
+				payment_detailVo.setDeductPay(Integer.toString(tax));
+			}
+			
+			if(payment_detailDao.selectPayment_detail(payment_detailVo)==null){
+				payment_detailDao.insertPayment_detail(payment_detailVo);
+			}else{
+				payment_detailDao.updatePayment_detail(payment_detailVo);
+			}
+		}
+		String incomeTax = paymentDao.selectincometax(Integer.toString(totalpay/1000));
+		List<De_product_divVo> selectDeproductByNm = de_product_divDao.selectDeproductByNm(new De_product_divVo("소득세"));
+		for (int i = 0; i < selectDeproductByNm.size(); i++) {
+			Payment_detailVo payment_detailVo = new Payment_detailVo(selectDeproductByNm.get(i).getDeductCode()
+																		,paymentVo.getPayCode());
+			if(i==0)
+				payment_detailVo.setDeductPay(incomeTax);
+			else
+				payment_detailVo.setDeductPay(Integer.toString(Integer.parseInt(incomeTax)/100*10));
+				
+			if(payment_detailDao.selectPayment_detail(payment_detailVo)==null){
+				payment_detailDao.insertPayment_detail(payment_detailVo);
+			}else{
+				payment_detailDao.updatePayment_detail(payment_detailVo);
+			}
+		}	
 		paymentDao.updatePayment(paymentVo);
 	}
 

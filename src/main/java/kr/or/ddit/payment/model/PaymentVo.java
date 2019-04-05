@@ -13,6 +13,13 @@ public class PaymentVo {
 	String totalSalary;
 	String relate;
 	String payDay;
+	String taxamount; // 과세액
+	public String getTaxamount() {
+		return taxamount;
+	}
+	public void setTaxamount(String taxamount) {
+		this.taxamount = taxamount;
+	}
 	String positionname; // 직급명
 	
 	String usernm; //사원이름

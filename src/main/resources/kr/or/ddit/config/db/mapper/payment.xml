@@ -15,7 +15,7 @@
 	<!-- 급여 입력 -->
 	<insert id="insertPayment" parameterType="paymentVo">
 		insert into payment
-		(paycode, userid, totalwage, totalsalary, relate, payday)
+		(paycode, userid, totalwage, totalsalary, relate, payday,taxamount)
 		values
 		((select max(paycode)+1 from payment),#{userId}
 		,nvl((select sum(deductpay)

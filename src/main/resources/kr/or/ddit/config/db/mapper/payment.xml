@@ -140,7 +140,7 @@
 	
 	<!-- 기간별 급여의 총합을 구하기 위함 -->
 	<select id="selectTotalSalaryByDay" resultType="paymentVo" parameterType="map">
-		select sum(totalsalary-totalwage) totalsalary,to_char(payday,'yyyy-MM') payday
+		select sum(totalsalary) totalsalary,sum(totalwage) totalwage,to_char(payday,'yyyy-MM') payday
 		from payment
 		<if test="value!=null">
 			where payday between to_date(#{payDay},'yyyyMM') 
@@ -200,8 +200,13 @@
 		on   u.positioncode = p1.positioncode
 		left outer join dept d
 		on   u.deptcode=d.deptcode
+		<if test="userid!=null">
 		where   to_char(payday,'yyyy')=#{paydayYear}
 		and    u.userid=#{userid}
+		</if>
+		<if test="userid==null">
+		where   to_char(payday,'yyyyMM')=#{paydayYear}
+		</if>
 	</select>
 	
 	<select id="selectincometax" parameterType="map" resultType="String">

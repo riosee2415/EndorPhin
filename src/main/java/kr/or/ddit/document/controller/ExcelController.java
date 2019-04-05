@@ -1,4 +1,4 @@
-package kr.or.ddit.Attitude.controller;
+package kr.or.ddit.document.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

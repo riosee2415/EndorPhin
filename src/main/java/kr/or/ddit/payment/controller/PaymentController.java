@@ -1,5 +1,6 @@
 package kr.or.ddit.payment.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -32,8 +33,6 @@ import kr.or.ddit.payment.service.IPayment_DetailService;
 @Controller
 public class PaymentController {
 
-	private Logger logger = LoggerFactory.getLogger(PaymentController.class);
-	
 	@Resource(name="employeeService")
 	IEmployeeService employeeService;
 	
@@ -54,9 +53,14 @@ public class PaymentController {
 	@RequestMapping(path="/paymentYearDetail",method=RequestMethod.GET)
 	public String paymentYearDetail(String userid, String paydayYear,Model model){
 		Map<String, Object> map = new HashMap<>();
-		map.put("userid", userid);
+		if(userid!=null){
+			map.put("userid", userid);
+		}
 		map.put("paydayYear", paydayYear);
 		model.addAllAttributes(payment_detailService.getPayDetailByYear(map));
+		if(userid==null){
+			return "paymentCalDetail";
+		}
 		return "paymentYearDetail";
 	}
 	
@@ -91,11 +95,12 @@ public class PaymentController {
 	@RequestMapping(path="/paymentCal",method=RequestMethod.GET)
 	public String paymentCal(Model model,String paydayYear,String paydayMonth){
 		String payDay = paydayYear+paydayMonth;
+		if(paydayYear==null){
+			SimpleDateFormat sdf =new SimpleDateFormat("yyyyMM");
+			payDay = sdf.format(new Date());
+		}
 		List<PaymentVo> selectTotalSalaryByDay;
-		if(paydayYear==null)
-			selectTotalSalaryByDay=paymentService.selectTotalSalaryByDay(null);
-		else
-			selectTotalSalaryByDay=paymentService.selectTotalSalaryByDay(payDay);
+		selectTotalSalaryByDay=paymentService.selectTotalSalaryByDay(payDay);
 		
 		model.addAttribute("paymentList",selectTotalSalaryByDay);
 		return "paymentCal";

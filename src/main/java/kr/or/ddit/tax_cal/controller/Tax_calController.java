@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.ddit.company.model.DeptVo;
 import kr.or.ddit.company.service.IDeptService;
@@ -100,12 +102,46 @@ public class Tax_calController {
 	
 	// Ajax를 통해 입력폼의 html을 로드
 	@RequestMapping("/openInsertViewArea")
-	public String openInsertViewArea() {
+	@ResponseBody
+	public String openInsertViewArea(	@RequestParam(name="slipDate")String slipDate
+								,		@RequestParam(name="supplyValue")String supplyValue
+								,		@RequestParam(name="surtax")String surtax
+								,		@RequestParam(name="sumValue")String sumValue	
+								,		@RequestParam(name="salesStatus")String salesStatus	
+								,		@RequestParam(name="clientName")String clientName	
+								,		@RequestParam(name="deptName", defaultValue="미등록")String deptName	
+								,		@RequestParam(name="OrderCode", defaultValue="")String OrderCode	
+								,		@RequestParam(name="auto")String auto	
+								,		@RequestParam(name="slipType")String slipType	
+			) {
 		
-		return "taxcal/openInsertViewArea";
+		
+		
+		logger.debug("slipDate : {}", slipDate);
+		logger.debug("supplyValue : {}", supplyValue);
+		logger.debug("surtax : {}", surtax);
+		logger.debug("sumValue : {}", sumValue);
+		logger.debug("salesStatus : {}", salesStatus);
+		logger.debug("clientName : {}", clientName);
+		logger.debug("deptName : {}", deptName);
+		logger.debug("OrderCode : {}", OrderCode);
+		logger.debug("auto : {}", auto);
+		logger.debug("slipType : {}", slipType);
+		
+		return "Connection";
 		
 	}
 	
+	@RequestMapping("/openInsertViewAreaLoad")
+	public String openInsertViewAreaLoad(@RequestParam("slipType")String slipType
+										,@RequestParam("salesStatus")String salesStatus, Model model) {
+			
+			model.addAttribute("slipType", slipType);
+			model.addAttribute("salesStatus", salesStatus);
+			
+		return "taxcal/openInsertViewArea";
+		
+	}
 	
 	
 	

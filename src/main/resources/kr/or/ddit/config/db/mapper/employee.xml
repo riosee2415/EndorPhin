@@ -16,7 +16,7 @@
 		nvl(#{deptCode, jdbcType=VARCHAR},null),
 		nvl(#{positionCode, jdbcType=VARCHAR},null),
 		nvl(#{rankCode, jdbcType=VARCHAR},null),
-		nvl(#{continuousYear, jdbcType=VARCHAR},null),
+		to_char(sysdate,'yyyy') -to_char(to_date(sysdate),'yyyy')+1,
 		nvl(#{relate, jdbcType=VARCHAR},null),
 		sysdate,
 		to_date(#{birthDate},'yyyyMMdd'),
@@ -36,13 +36,14 @@
 	
 	<!-- 사원 전체 불러오기 -->
 	 <select id="getAllEmployee" resultType="employeeVo">
+	 
 		select
       a.userid,
         a.usernm,
         b.positionname positionname,
         c.deptname deptname,
         d.positionname rankname,
-        a.continuousyear,
+        a.continuousYear, 
         a.relate,
         to_char(a.joincompany,'yyyy-MM-dd') joincompany,
         to_char(a.birthdate,'yyyy-MM-dd') birthdate,
@@ -56,6 +57,8 @@
     left outer join position d
         on
         a.rankcode = d.positioncode
+        
+        
 	
 	</select> 
 
@@ -118,13 +121,12 @@
 			
 			
 			
-			
 			<!-- 사원 선택하여 가져오기 -->
 	<select id="SearchEmployee" resultType="employeeVo"
-		parameterType="map">
+		parameterType="EmployeeVo">
 		select
      	a.userid,
-        a.usernm,
+        a.usernm usernm,
         a.deptcode,
         a.positioncode,
         a.rankcode,
@@ -145,8 +147,14 @@
     left outer join position d
         on
         a.rankcode = d.positioncode
-		
-		 where userNm = #{usernm}
+        <where>
+        	<if test="userNm!=null">
+    	    	 or usernm like '%'||#{userNm}||'%'
+        	</if>
+        	<if test="deptname!=null and deptname!=''">
+	        	 or deptname like '%'||#{deptname}||'%'
+        	</if>
+		</where>
 	</select>
 	
 	<!-- 사원 이름으로 검색 -->

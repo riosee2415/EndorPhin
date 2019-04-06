@@ -212,6 +212,11 @@ public class PaymentService implements IPaymentService{
 	public String paycodeByIdnDay(PaymentVo paymentVo) {
 		return paymentDao.paycodeByIdnDay(paymentVo);
 	}
+
+	@Override
+	public List<PaymentVo> selectDeptNPayment(String paydayMonth) {
+		return paymentDao.selectDeptNPayment(paydayMonth);
+	}
 	
 	
 }

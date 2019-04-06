@@ -29,10 +29,15 @@ import kr.or.ddit.payment.model.Payment4UpdVo;
 import kr.or.ddit.payment.service.IDe_Product_divService;
 import kr.or.ddit.payment.service.IPaymentService;
 import kr.or.ddit.payment.service.IPayment_DetailService;
+import kr.or.ddit.tax_cal.model.EstablishVo;
+import kr.or.ddit.tax_cal.service.IEstablishService;
 
 @Controller
 public class PaymentController {
 
+	@Resource(name="establishService")
+	IEstablishService establishService;
+	
 	@Resource(name="employeeService")
 	IEmployeeService employeeService;
 	
@@ -45,11 +50,21 @@ public class PaymentController {
 	@Resource(name="payment_detailService")
 	IPayment_DetailService payment_detailService;
 	
+	@RequestMapping(path="/getPaymentForSlip",produces = { "application/json" })
+	@ResponseBody
+	public Map<String,Object> paymentYearDetail(String paydayMonth){
+		Map<String,Object> map = new HashMap<>();
+		map.put("allEstablish", establishService.getAllEstablish());
+		map.put("deptList", paymentService.selectDeptNPayment(paydayMonth));
+		return map;
+	}
+	
 	@RequestMapping(path="/searchUserNmToPayment",produces = { "application/json" })
 	@ResponseBody
 	public List<EmployeeVo> searchUserNmToPayment(String usernm){
 		return employeeService.selectUserByNm(usernm);
 	}
+	
 	@RequestMapping(path="/paymentYearDetail",method=RequestMethod.GET)
 	public String paymentYearDetail(String userid, String paydayYear,Model model){
 		Map<String, Object> map = new HashMap<>();

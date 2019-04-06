@@ -131,6 +131,7 @@
 		$("#gotoDetailFrm").submit();
 	});
 	$("#cogInputBtn").on('click',function(){
+		$('#secondModalTbody').html(" ");
 		var paydayMonth =$("select[name=paydayYear]").val()+$("select[name=paydayMonth]").val();
 		$.ajax({
 			method : "post",
@@ -139,7 +140,20 @@
 				paydayMonth : paydayMonth
 			},
 			success : function(data) {
-				dataInput(data);
+				var establishSelect = "<select class=\'establishSelect\'>"
+				for (var i = 0; i < data.allEstablish.length; i++) {
+					establishSelect +="<option value=\'"+data.allEstablish[i].establishCode+"\'>"+data.allEstablish[i].establishNameKor+"</option>";
+				}
+				establishSelect += "</select>"
+				console.log(data.deptList);
+				for (var i = 0; i < data.deptList.length; i++) {
+					$('#secondModalTbody').append("<tr>");
+					$('#secondModalTbody').append("<td>"+data.deptList[i].deptcode+"</td>");
+					$('#secondModalTbody').append("<td>"+data.deptList[i].deptname+"</td>");
+					$('#secondModalTbody').append("<td>"+data.deptList[i].totalSalary+"</td>");
+					$('#secondModalTbody').append("<td>"+establishSelect+"</td>");
+					$('#secondModalTbody').append("</tr>");
+				}
 			}
 		});
 		$("#myModal").modal('show');

@@ -4,21 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tax_cal">
 
-<!-- 매입매출세금계산서 입력 -->
-	<insert id="insertTax_cal" parameterType="tax_calVo">
-		insert into tax_cal
-		(salescode, slipdate, supplyvalue, salesstatus, deptcode, surtax, ordercode, clientcode, sumvalue, auto)
-		values
-		(#{salescode},sysdate,#{supplyvalue},#{salesstatus}
-		 ,#{deptcode},#{surtax},#{ordercode},#{clientcode}, #{sumValue}, #{auto})
-
-	</insert>
 
 
 	<!-- 매입매출세금계산서 불러오기 -->
 	<select id="getAllTax_cal" resultType="tax_calVo">
 		select
-		salescode, slipdate, supplyvalue, salesstatus, deptcode, surtax, ordercode, clientcode, sumvalue, auto
+		salescode, slipdate, supplyvalue, salesstatus, deptcode, surtax, ordercode, clientname, sumvalue, auto, entryType
 		from tax_cal
 	</select>
 
@@ -26,8 +17,8 @@
 	<!-- 매입매출세금계산서 선택해서 가져오기 -->
 	<select id="selectTax_cal" resultType="tax_calVo"
 		parameterType="String">
-		select
-		salescode, slipdate, supplyvalue, salesstatus, deptcode, surtax, ordercode, clientcode, sumValue, auto
+		selectF
+		salescode, slipdate, supplyvalue, salesstatus, deptcode, surtax, ordercode, clientname, sumValue, auto, entryType
 		from
 		tax_cal where salescode = #{salescode}
 	</select>
@@ -38,6 +29,24 @@
 		delete from tax_cal
 		where salescode = #{salescode}
 	</delete>
+	
+	<!-- 페이징처리를 위한 조회 -->
+	<select id="selecTax_calPagingList" resultType="tax_calVo" parameterType="pageVo">
+	select *
+		  from
+			  (select a.*, rownum rn
+				 from
+					 (select tax_cal.*
+						from tax_cal
+					  order by salescode) a ) a
+		 where rn between (#{page}-1)*#{pageSize}+1 and #{page}*#{pageSize}
+	</select>
+	
+	<!-- 카운트 구하기 -->
+	<select id="getTax_calCnt" resultType="Integer">
+		select count(*)
+		from tax_cal
+	</select>
 
 
 

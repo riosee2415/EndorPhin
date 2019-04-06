@@ -11,11 +11,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.or.ddit.constant.SalesCodeConstant;
 import kr.or.ddit.order.model.ClientVo;
 import kr.or.ddit.order.service.ICilentService;
 import kr.or.ddit.slip.model.AssetVo;
@@ -117,16 +119,17 @@ public class AssetController {
 		assetVo.setAcquisitionPrice(acquisitionPrice);
 		
 		logger.debug("assetCode1111 : {} ", assetCode);
-		logger.debug("date : {} ", date);
-		logger.debug("purchaseCode : {} ", purchaseCode);
-		logger.debug("sanggakWay : {} ", sanggakWay);
-		logger.debug("acquisitionPrice : {} ", acquisitionPrice);
-		
 		
 		int insertUpd = assetService.insertStatusAsset(assetVo);
 		
-		if(insertUpd > 0){
-			return "asset/insertAssetAjax";
+		String data = assetVo.getSanggakWay();
+		
+		int sanggakWay11 = Integer.parseInt(data);
+		
+		logger.debug("data : {} ", data);
+		
+		if(sanggakWay11 == 1){
+			return "asset/straightAjax";
 		}else{
 			return "asset/insertAssetAjax";
 		}
@@ -166,8 +169,26 @@ public class AssetController {
 	}
 	
 	@RequestMapping("getAssetInsertBtn")
-	public String getAssetInsertBtn(){
-		
+	public String getAssetInsertBtn(Model model){
+	
 		return "asset/insertAssetAjax";
 	}
+
+	@RequestMapping(path="serviceLife", method=RequestMethod.GET)
+	public String serviceLife(Model model){
+
+		model.addAttribute("straight", SalesCodeConstant.straight);
+		return "asset/serviceLife";
+		
+	}
+	/*@RequestMapping("getSamgakk")
+	public String getSamgakk(Model model){
+
+		
+		
+		return "asset/getSamgakk";
+	}
+	*/
+
+	
 }

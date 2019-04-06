@@ -40,6 +40,7 @@
 			taxstatus, bonusstatus,establishcode,deprostatus
 		from de_product_div	
 		where	deprostatus=#{deprostatus}
+		order by deductcode
 	</select>	
 	
 	<!-- 급여/공제 등록 -->
@@ -76,7 +77,10 @@
 			taxstatus, bonusstatus,establishcode
 		from	de_product_div
 		where	deductName like '%'||#{deductName}||'%'
+		<if test="deprostatus!=null">
 		and		deprostatus=#{deprostatus}
+		</if>
+		order by deductname
 	</select>
 	
 	<update id="updateDe_product_div" parameterType="de_product_divVo">

@@ -76,7 +76,10 @@ public class De_product_divVo {
 	public void setRelate(String relate) {
 		this.relate = relate;
 	}
-	
-	
+	public De_product_divVo(String deductName) {
+		this.deductName = deductName;
+	}
+	public De_product_divVo() {
+	}
 
 }

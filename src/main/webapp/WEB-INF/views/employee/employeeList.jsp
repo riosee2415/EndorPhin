@@ -336,7 +336,7 @@ a:hover, a:focus {
 											<div class="form-group">
 												<label for="inputtelNO">생년월일</label> <input type="text"
 													class="form-control" id="inputtelNO" name="BirthDate"
-													placeholder="생년월일을 입력하세요">
+													placeholder="생년월일을 입력하세요 예)19951010">
 											</div>
 											<div class="form-group">
 												<label for="inputtelNO">사진첨부</label>

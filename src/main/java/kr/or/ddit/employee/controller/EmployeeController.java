@@ -65,11 +65,16 @@ public class EmployeeController {
 			MultipartRequest multparts) throws IllegalStateException, IOException {
 		employeeService.insertEmployee(vo);
 		
+		
+		
+		if(multparts != null){
+			
 		MultipartFile file = multparts.getFile("realFilename");
 		Employee_detailVo detailVo = new Employee_detailVo();
 		
 		String file_name = "";
 		String file_path = "";
+		
 		
 		
 		if (file.getSize() > 0) {
@@ -81,10 +86,10 @@ public class EmployeeController {
 			detailVo.setImg_name(file_name);
 			detailVo.setImg_path(file_path);
 
+			employeeDetailService.insertEmployeeDetail(detailVo);
 		}
 		
-							 
-		                     employeeDetailService.insertEmployeeDetail(detailVo);
+		}					 
 		
 		ra.addFlashAttribute("msg", "정상 등록 되었습니다");
 		return "redirect:/employee/getAllEmployee";
@@ -208,10 +213,18 @@ public class EmployeeController {
 	
 	
 	@RequestMapping(path = "/SearchEmployee", method = RequestMethod.GET)
-	public String SearchEmployee(Model model, String searchName) {
+	public String SearchEmployee(Model model, String searchName, String deptselect) {
+		EmployeeVo vo = new EmployeeVo();
 		
 		
-		List<EmployeeVo> allEmployee = employeeService.SearchEmployee(searchName);
+		if(searchName != null){
+		vo.setUserId(searchName);
+		}
+		
+		if(deptselect != null){
+		vo.setDeptname(deptselect);
+		}
+		List<EmployeeVo> allEmployee = employeeService.SearchEmployee(vo);
 		model.addAttribute("allEmployee",allEmployee);
 		
 		return "employeeListTiles";
@@ -227,6 +240,38 @@ public class EmployeeController {
 		return employeeService.getAllEmployee();
 		
 	}
+	
+	
+	
+	
+	
+	
+	@RequestMapping(path = "/SearchEmployeeAjax", method = RequestMethod.GET)
+	@ResponseBody
+	public List<EmployeeVo> SearchEmployeeAjax(Model model, String searchName, String deptselect) {
+		EmployeeVo vo = new EmployeeVo();
+		
+		vo.setUserId(searchName);
+		
+		vo.setDeptname(deptselect);
+		List<EmployeeVo> allEmployee = employeeService.SearchEmployee(vo);
+		
+		return allEmployee;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 //	

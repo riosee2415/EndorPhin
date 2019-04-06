@@ -72,86 +72,12 @@
 	</div>
 </div>
 	<!--------------(삭제,등록) 버튼 ------------------->
-	
+
 	<div class="modal-footer">
 		<!-- <input name="delect_btn"  id="delect_btn" type="button" value="선택삭제" onclick="myclick()" /> -->
 		<button type="button" class="btn btn-primary"  onclick="fn_detail();">등록</button>
 	</div>
-			
-	<!-------------- 등록 모달창 띄우기  ------------>
-<div class="modal fade" id="my80sizeCenterModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeModalLabel">
-	<div class="modal-dialog modal-lg" role="document">
-		<div class="modal-content modal-lg">
-				<div class="modal-header">
-				<label>| 고정자산 등록</label>
-					<button type="button" class="close" data-dismiss="modal"aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="form-group">
-					<table>
-						<tr>
-							<td colspan="2"> 자산코드(*)
-							<td><input type="text" id="assetCode">
-							<input type="button" value="중복체크" id="duplCheckbtn" name="duplCheckbtn"/></td>
-							<td colspan="2"><div id="dupleCode"></div></td> 
-						</tr>
-						<tr>
-							<td colspan="2">자산명(*)</td>
-							<td><input type="text" id="assetName"></td> 
-						<tr>
-							<td colspan="2" > 계정과목(*)
-							<td><input type="text" id="accountName" >
-								<input type="button" data-toggle="modal" data-target="#my80sizeModal2" value="검색"></td>
-						</tr>
-						<tr>
-							<td colspan="2" > 거래처(*)</td>
-							<td><input type="text" id="clientName">
-								<input type="button" data-toggle="modal" data-target="#my80sizeModal3" value="검색" ></td>
-							
-						</tr>
-						<tr>
-							<td colspan="2" > 상각방법</td>
-							<td><input type="radio" name="sanggakWay" id ="sanggakWay" value="0" checked/>정액법
-								<input type="radio" name="sanggakWay" id ="sanggakWay" value="1"/>정률법<td>
-						</tr>
-						<tr>
-							<td colspan="2"> 감가상각계정코드(*)</td>
-							<td><input type="text" id="sanggakCode">
-								<input type="button" data-toggle="modal" data-target="#my80sizeModal4" value="검색" >	</td>
-							<td colspan="2" > 취득일(*) &nbsp;&nbsp;&nbsp;
-								<input type="text" id="acquisitionDate" ></td>
-						</tr>
-						<tr>
-							<td colspan="2"> 단위</td>
-							<td><input type="text" id="unit"></td> 
-							<td colspan="2"> 수량  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<input type="text" id="quantity"></td> 
-						</tr>
-						<tr>
-							<td colspan="2"> 단가</td>
-							<td><input type="text" id="unitprice"></td> 
-							<td colspan="2">취득금액(*)
-								<input type="text" id="acquisitionPrice"></td> 
-						</tr>
-						<tr>
-							<td colspan="2">적요</td>
-							<td><input type="text" id="jukyo"></td> 
-							<td colspan="2">잔존가치(*)
-								<input type="text" id="residualvalue"></td> 
-						</tr>
-					</table>
-					</div>	
-					<div class="modal-footer">
-						<button type="button" id="insertBtn" class="btn btn-default" data-dismiss="modal">등록</button>
-						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
+
 <!-----------------계정과목 검색 모달창 ---------------->	
 <div class="modal fade" id="my80sizeModal2" tabindex="-1" role="dialog" aria-labelledby="my100sizeModalLabel">
 	<div class="modal-dialog modal-80size" role="document">
@@ -457,7 +383,6 @@
  			}
   		});
  	});
- 	
  
 		 function allCheck() {
 			if ($("#th_allCheck").is(':checked')) {

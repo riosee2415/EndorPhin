@@ -21,4 +21,6 @@ public interface IPaymentDao {
 	List<PaymentVo> selectYearPaymentList(Map<String, Object> payDay);
 	List<PaymentVo> selectYearPaymentListDetail(Map<String, Object> payDay);
 	String paycodeByIdnDay(PaymentVo paymentVo);
+	String selectincometax(String divsalary);
+	List<PaymentVo> selectDeptNPayment(String paydayMonth);
 }

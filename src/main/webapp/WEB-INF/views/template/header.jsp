@@ -41,7 +41,7 @@
            <h3 class="dropdown-header">전표관리</h3>
           <a class="dropdown-item" href="${pageContext.request.contextPath }/paaprovuar">미승인 전표</a>
           <a class="dropdown-item" href="${pageContext.request.contextPath }/slipview">일반 전표</a>
-          <a class="dropdown-item" href="${pageContext.request.contextPath }/taxcallview">매출세금계산서 입력</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath }/taxcalview">매출세금계산서 입력</a>
           <a class="dropdown-item" href="${pageContext.request.contextPath }/approval">승인전표</a>
             <h3 class="dropdown-header">고정자산</h3>
             <a class="dropdown-item" href="${pageContext.request.contextPath }/purchaseAsset">고정자산 등록</a>
@@ -67,14 +67,13 @@
           <a class="dropdown-item" href="">퇴직자</a>
            <h3 class="dropdown-header">급여계산관리</h3>
           <a class="dropdown-item" href="/paymentAdjust">급여조정</a>
-          <a class="dropdown-item" href="/paymentCal">급여계산</a>
-          <a class="dropdown-item" href="">급여명세서</a>
+          <a class="dropdown-item" href="/paymentCal">급여명세서</a>
           <a class="dropdown-item" href="">급여명세서 인쇄/발송</a>
           <a class="dropdown-item" href="/paymentPersonal">개인별 급여 현황</a>
           <a class="dropdown-item" href="/paymentYear">연도별 급여 조회</a>
             <h3 class="dropdown-header">근태관리</h3>
           <a class="dropdown-item" href="${cp }/attitude/getAllAttitude">근태항목등록</a>
-         <a class="dropdown-item" href="${cp }/attitudeRecord/getAllattitudeRecord">휴가일 수 등록</a>
+         <a class="dropdown-item" href="${cp }/annual/getAllannual">휴가일 수 등록</a>
           <a class="dropdown-item" href="${cp }/attitudeRecord/getAllattitudeRecord">근태 입력</a>
         </div>
       </li>

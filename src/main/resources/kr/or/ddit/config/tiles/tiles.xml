@@ -112,6 +112,9 @@
         <definition name="paymentYearDetail" extends="layout"> <!-- 연도별 급여 조회 상세 항목 -->
         	<put-attribute name="content" value="/WEB-INF/views/payment/paymentYearDetail.jsp"/>
         </definition>
+        <definition name="paymentCalDetail" extends="layout"> <!-- 급여 명세서 상세 항목 -->
+        	<put-attribute name="content" value="/WEB-INF/views/payment/paymentCalDetail.jsp"/>
+        </definition>
         
         
         

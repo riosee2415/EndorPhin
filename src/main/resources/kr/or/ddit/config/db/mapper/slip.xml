@@ -9,8 +9,12 @@
 		insert into slip
 		(slipnumber, total, slipdate, departmentname, jukyo, status)
 		values
-		(slip_seq.nextval,#{total},sysdate,#{departmentName},#{jukyo},#{status})
-
+		(slip_seq.nextval
+		,#{total}
+		,sysdate
+		,nvl(#{departmentName, jdbcType=VARCHAR},'미등록')
+		,nvl(#{departmentName, jdbcType=VARCHAR},'미등록')
+		,#{status})
 	</insert>
 	
 	<!-- 시퀀스 값 불러오기 -->

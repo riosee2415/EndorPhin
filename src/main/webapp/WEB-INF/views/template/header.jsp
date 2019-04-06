@@ -67,8 +67,7 @@
           <a class="dropdown-item" href="">퇴직자</a>
            <h3 class="dropdown-header">급여계산관리</h3>
           <a class="dropdown-item" href="/paymentAdjust">급여조정</a>
-          <a class="dropdown-item" href="/paymentCal">급여계산</a>
-          <a class="dropdown-item" href="">급여명세서</a>
+          <a class="dropdown-item" href="/paymentCal">급여명세서</a>
           <a class="dropdown-item" href="">급여명세서 인쇄/발송</a>
           <a class="dropdown-item" href="/paymentPersonal">개인별 급여 현황</a>
           <a class="dropdown-item" href="/paymentYear">연도별 급여 조회</a>

@@ -33,7 +33,7 @@
 		<c:forEach items="${paymentList}" var="vo">
 			<tr class="payTr" data-userid="${vo.userId }">
 				<td><a href="#detailLayer" data-toggle="modal"
-			data-target="#my80sizeModal" class="paymentDetail">${vo.userId }</a></td>
+			data-target="#my80sizeModal" class="paymentDetail">${vo.userId}</a></td>
 				<c:set var="totalSalarysum" value="${totalSalarysum+vo.totalSalary}"/>
 				<c:set var="totalWagesum" value="${totalWagesum+vo.totalWage}"/>
 				<td>${vo.positionname}</td>
@@ -45,7 +45,7 @@
 			</tr>
 		</c:forEach>
 	</tbody>
-	<tfoot align="center" >
+	<tfoot align="center">
 		<tr>
 			<td>계</td>
 			<td>총 급여 : </td>

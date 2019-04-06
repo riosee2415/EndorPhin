@@ -75,4 +75,46 @@ public interface IBoard_detailService {
 	 */
 	Board_detailVo select_latelyPost(String boardTypeCode);
 	
+	/**
+	 * 
+	* Method : selectBoardList
+	* 작성자 : macbook
+	* 변경이력 :
+	* @return
+	* Method 설명 : 게시글 리스트 조회
+	 */
+	List<Board_detailVo> selectBoardList();
+	
+	/**
+	 * 
+	* Method : insertBoard
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param param
+	* @return
+	* Method 설명 : 게시글 등록
+	 */
+	int insertBoard(Board_detailVo param);
+	
+	/**
+	 * 
+	* Method : selectBoardOne
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardNo
+	* @return
+	* Method 설명 : 게시글 상세조회
+	 */
+	Board_detailVo selectBoardOne(String boardNo);
+	
+	/**
+	 * 
+	* Method : updateBoard
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param param
+	* @return
+	* Method 설명 : 게시글 상세조회
+	 */
+	int updateBoard(Board_detailVo param);
 }

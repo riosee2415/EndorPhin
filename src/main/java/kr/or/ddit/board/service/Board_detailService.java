@@ -145,4 +145,64 @@ public class Board_detailService implements IBoard_detailService{
 		return select_boardPost;
 	}
 
+	/**
+	 * 
+	* Method : selectBoardList
+	* 작성자 : macbook
+	* 변경이력 :
+	* @return
+	* Method 설명 : 게시글 리스트 조회
+	 */
+	@Override
+	public List<Board_detailVo> selectBoardList() {
+		List<Board_detailVo> selectBoardList = board_detailDao.selectBoardList();
+		return selectBoardList;
+
+	}
+
+	/**
+	 * 
+	* Method : insertBoard
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param param
+	* @return
+	* Method 설명 : 게시글 등록
+	 */
+	@Override
+	public int insertBoard(Board_detailVo param) {
+		int insertBoard = board_detailDao.insertBoard(param);
+		return insertBoard;
+	}
+
+	/**
+	 * 
+	* Method : selectBoardOne
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardNo
+	* @return
+	* Method 설명 : 게시글 상세조회
+	 */
+	@Override
+	public Board_detailVo selectBoardOne(String boardNo) {
+		Board_detailVo selectBoardOne = board_detailDao.selectBoardOne(boardNo);
+		return selectBoardOne;
+	}
+
+	/**
+	 * 
+	* Method : updateBoard
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param param
+	* @return
+	* Method 설명 : 게시글 수정
+	 */
+	@Override
+	public int updateBoard(Board_detailVo param) {
+		int updateBoard = board_detailDao.updateBoard(param);
+		return updateBoard;
+	}
+
 }

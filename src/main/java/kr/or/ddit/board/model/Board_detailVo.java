@@ -12,7 +12,7 @@ public class Board_detailVo {	//게시글
 	String boardNo;				//게시글 번호
 	String title;				//제목
 	String contents;			//내용
-	Date postDate;				//작성일시
+	String postDate;				//작성일시
 	String boardTypeCode;		//게시판 분류 코드
 	String userId;				//작성자
 	
@@ -34,10 +34,10 @@ public class Board_detailVo {	//게시글
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public Date getPostDate() {
+	public String getPostDate() {
 		return postDate;
 	}
-	public void setPostDate(Date postDate) {
+	public void setPostDate(String postDate) {
 		this.postDate = postDate;
 	}
 	public String getBoardTypeCode() {

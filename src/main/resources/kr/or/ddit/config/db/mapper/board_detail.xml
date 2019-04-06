@@ -41,23 +41,33 @@
  	
  	<!-- 게시글 목록 조회 -->
  	<select id ="selectPostList" resultType="board_detailVo" parameterType="pageVo">
-	 	select * 
+	 	select boardNo, title, contents, postDate, boardTypeCode, userId
 		  from
-		(select a.*, rownum rn
-		    from
-		    (select board_detail.*
-		       from board_detail
-		      where boardTypeCode = #{boardTypeCode}
-		      order by boardNo) a ) a
+				(select a.boardNo boardNo, 
+				        a.title title, 
+				        a.contents contents, 
+				        to_char(a.postDate,'yyyy-MM-dd') postDate, 
+				        a.boardTypeCode boardTypeCode, 
+				        a.userId userId, rownum rn
+				    from
+				    (select boardNo, 
+				    		title, 
+				    		contents, 
+				    		postDate, 
+				    		boardTypeCode, 
+				    		userId
+				       from board_detail
+				      where boardTypeCode = #{boardTypeCode}
+				      order by boardNo desc) a ) a
  		 where rn between (#{page}-1) * #{pageSize}+1 and #{page}*#{pageSize}
  	</select>
-	
+ 	
 	<!-- 게시글 상세 조회 -->
 	<select id="postDetail" resultType="board_detailVo" parameterType="String">
 		select boardno,
 			   title,
 			   contents,
-			   postdate,
+			   to_char(postdate,'yyyy-MM-dd'),
 			   boardtypecode,
 			   userid
 			   
@@ -69,7 +79,7 @@
 	
 	<!-- 게시판 별 게시글 수 조회 -->
 	<select id="postCnt" resultType="Integer" parameterType="String">
-		select count(*)
+		select count(boardTypeCode)
  		  from board_detail
  		 where boardTypeCode = #{boardTypeCode}
 	</select>
@@ -83,12 +93,57 @@
  	
  	<!-- 	게시판 별 최신 게시글 조회 -->
 	<select id="select_boardPost" resultType="board_detailVo" parameterType="String">
-		select *
+		select boardNo, title, contents, postDate, boardTypeCode, userId
 		  from board_detail
 		 where boardNo = (select max(boardNo)
 		                    from board_detail
 		                   where boardTypeCode = #{boardTypeCode})
 	</select>
+	
+	<!-- 게시글 검색 -->
+	<select id="searchPost" resultType="board_detailVo" parameterType="board_detailVo">
+		select
+            boardNo, title, contents, postDate, boardTypeCode, userId
+        from board_detail
+        <where>
+        	<if test="contents!=null">
+    	    	 or contents like '%'||#{boardTypeCode}||'%'
+        	</if>
+        	<if test="title!=null">
+	        	 or title like '%'||#{title}||'%'
+        	</if>
+        	<if test="userId!=null">
+	        	 or userId like '%'||#{userId}||'%'
+        	</if>
+		</where>
+	</select>
+	
+	<!-- 게시글 리스트 -->
+    <select id="selectBoardList" resultType="board_detailVo" >
+        select boardNo, title, contents, to_char(postDate,'yyyy-MM-dd') postDate, boardTypeCode, userId
+          from board_detail
+         order by boardNo desc 
+    </select>
+    
+    <!-- 게시글 저장 -->
+    <insert id="insertBoard" parameterType="board_detailVo" >
+        insert into board_detail(boardNo, title, userId, contents, postDate, boardTypeCode)
+        values (BOARDNO_SEQ.nextval, #{title}, #{userId}, #{contents}, sysdate, #{boardTypeCode})
+	</insert>
+
+	<!-- 게시글 상세 조회 -->
+	<select id="selectBoardOne" resultType="board_detailVo" parameterType="String">
+        select boardNo, title, contents, to_char(postDate,'yyyy-MM-dd') postDate, boardTypeCode, userId
+          from board_detail
+         where boardNo = #{boardNo}
+    </select>
+
+	<!-- 게시글 수정 -->
+	<insert id="updateBoard" parameterType="board_detailVo" >
+        update board_detail
+		   set title=#{title}, contents=#{contents}, postdate=sysdate
+         where boardNo = #{boardNo}
+	</insert>
 </mapper>
 
 

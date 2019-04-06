@@ -120,5 +120,66 @@ public class Board_detailDao implements IBoard_detailDao{
 		Board_detailVo select_boardPost = sqlSession.selectOne("board_detail.selectPostList", boardTypeCode);
 		return select_boardPost;
 	}
+
+	/**
+	 * 
+	* Method : selectBoardList
+	* 작성자 : macbook
+	* 변경이력 :
+	* @return
+	* Method 설명 : 게시글 리스트 조회
+	 */
+	@Override
+	public List<Board_detailVo> selectBoardList() {
+		List<Board_detailVo> selectList = sqlSession.selectList("board_detail.selectBoardList");
+		 return selectList;
+
+	}
+
+	/**
+	 * 
+	* Method : insertBoard
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param param
+	* @return
+	* Method 설명 : 게시글 등록
+	 */
+	public int insertBoard(Board_detailVo param) {
+        int insertBoard = sqlSession.insert("board_detail.insertBoard", param);
+        return insertBoard;
+	}
+
+	/**
+	 * 
+	* Method : selectBoardOne
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardNo
+	* @return
+	* Method 설명 : 게시글 상세조회
+	 */
+	@Override
+	public Board_detailVo selectBoardOne(String boardNo) {
+		Board_detailVo selectBoardOne = sqlSession.selectOne("board_detail.selectBoardOne", boardNo);
+		return selectBoardOne;
+	}
+
+	/**
+	 * 
+	* Method : updateBoard
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param param
+	* @return
+	* Method 설명 : 게시글 수정
+	 */
+	@Override
+	public int updateBoard(Board_detailVo param) {
+		int updateBoard = sqlSession.update("board_detail.updateBoard", param);
+		return updateBoard;
+	}
+
+	
 	
 }

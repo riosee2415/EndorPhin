@@ -17,15 +17,15 @@ public class AssetVo {
    String acquisitionPrice; //취득금액  =
    String slipNumber; //전표번호
    String residualvalue; //잔존가치  =
-   String unit; //단위 =
+   String unit; //단위 = x
    String jukyo; //적요 =
-   String unitPrice; //단가  =
-   String quantity; // 수량   =
+   String unitPrice; //단가  x
+   String quantity; // 수량   x
    String companyCode;//회사코드
    String sanggakCode; //감가상각계정코드  =
    String depreciation; //감가상각비
    String purchaseCode; //업무용, 업무무관코드 
-   
+   String accumulated; //감가상각 누계액
    
 	public String getAssetCode() {
 		return assetCode;
@@ -129,8 +129,14 @@ public class AssetVo {
 	public void setPurchaseCode(String purchaseCode) {
 		this.purchaseCode = purchaseCode;
 	}
-		
-	 
+	public String getAccumulated() {
+		return accumulated;
+	}
+	public void setAccumulated(String accumulated) {
+		this.accumulated = accumulated;
+	}
+	   
+	   
 		    
   
 }

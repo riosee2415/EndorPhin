@@ -6,8 +6,6 @@
 	<h2>고정자산 등록</h2>	
 	<br>
 	<br>
-
-
 <table class="table table-striped">
 	<thead class="thead">
 	</thead>
@@ -29,8 +27,6 @@
 					<th>자산명</th>
 					<th>부서명</th>
 					<th>취득일</th>
-					<th>단위</th>
-					<th>수량</th>
 					<th>취득가액</th>
 					<th>장부반영</th>
 				</tr>
@@ -52,8 +48,6 @@
    						<td>${vo.accountName }</td>								
 						<td>${vo.assetName }</td>
 						<td><fmt:formatDate value="${vo.acquisitionDate  }" pattern="yyyy-MM-dd"/></td>
-						<td>${vo.unit }</td>
-						<td>${vo.quantity }</td>
 						<td>${vo.acquisitionPrice }</td>
 						<td><input type="button" value="장부반영" id="applybtn" name="applybtn"/></td>
 				 	</tr>
@@ -90,9 +84,13 @@
 			<table>
 				<thead>
 					<tr>
-						<th>계정과목명&nbsp;</th>
-						<th><input style="width: 150px;" type="text" class="form-control" id="establishNameKor" name="establishNameKor" onkeydown="Enter_Check();"></th>
-						<th><button type="button" class="btn btn-inverse" id="searchE_Btn" >검색</button></th>
+						<th>계정과목명&nbsp;
+						<input style="width: 150px;" type="text" class="form-control" id="establishNameKor" name="establishNameKor" onkeydown="Enter_Check();">
+						<button type="button" class="btn btn-inverse" id="searchE_Btn" >검색</button></th>
+					</tr>
+					<tr>
+						<th><input type="text" id="sel_account" ></th>
+						<th><button type="button" class="buttons" class="btn btn-default" data-dismiss="modal">닫기</button></th>
 					</tr>
 			</table>  <br>
 			<div style="overflow:scroll; width:450px; height:200px;">
@@ -105,9 +103,7 @@
 				</thead>
 				<tbody id="establishTbody">
 				<c:forEach items="${establishList }" var="vo">
-					<tr class="establishTr" data-establishCode="${vo.establishCode }"
-						onclick="establishTr()">
-						
+					<tr class="tr" data-establishnmkor="${vo.establishNameKor }">
 						<td>${vo.establishCode}</td>
 						<td>${vo.status}</td>
 						<td>${vo.establishNameKor}</td>
@@ -138,6 +134,10 @@
 						<th><input style="width: 150px;" type="text" class="form-control" id="establishNameKor" name="establishNameKor"></th>
 						<th><button type="button" class="btn btn-inverse" id="searchE_Btn">검색</button></th>
 					</tr>
+					<tr>
+						<th><input type="text" id="clientN" ></th>
+						<th><button type="button" class="buttons" class="btn btn-default" data-dismiss="modal">닫기</button></th>
+					</tr>
 			</table>  <br>
 			<div style="overflow:scroll; width:450px; height:200px;">
 			<table class="table table-sm">
@@ -145,10 +145,11 @@
 					<tr>
 						<th>코드</th>
 						<th>코드명</th>
+			
 				</thead>
 				<tbody id="establishTbody">
 				<c:forEach items="${clientList }" var="vo">
-					<tr class="establishTr" data-establishCode="${vo.clientCode }" onclick="establishTr()">
+					<tr class="clientTr" data-client="${vo.clientCode }" onclick="clientTr()">
 						<td>${vo.clientCode}</td>
 						<td>${vo.clientName}</td>
 					</tr>
@@ -184,13 +185,15 @@
 			<table class="table table-sm">
 				<thead class="thead">
 					<tr>
-						<th>코드</th>
-						<th>코드명</th>
+						<th>계정코드</th>
+						<th>중분류명</th>
+						<th>계정과목명</th>
+					</tr>
 				</thead>
 				<tbody id="establishTbody">
 				<c:forEach items="${establishList }" var="vo">
-					<tr class="establishTr" data-establishCode="${vo.establishCode }"
-						onclick="establishTr()">
+					<tr class="establishCodeTr" data-establishcode="${vo.establishCode }"
+						onclick="establishCodeTr();">
 						
 						<td>${vo.establishCode}</td>
 						<td>${vo.status}</td>
@@ -205,87 +208,23 @@
 	</div>
 </div>
 
-		
-	<!---------------등록, 검색, 삭제  ---------------->
-	<form id="insertFrm" action="${pageContext.request.contextPath }/insertAsset">
-		<input type="hidden" id="frmAssetCode" 		 name="frmAssetCode" />
-		<input type="hidden" id="frmAssetName" 		 name="frmAssetName" />
-		<input type="hidden" id="frmAcquisitionDate" name="frmAcquisitionDate" />
-		<input type="hidden" id="frmAccountName"  	 name="frmAccountName" />
-		<input type="hidden" id="frmClientName" 	 name="frmClientName" />
-		<input type="hidden" id="frmSanggakWay" 	 name="frmSanggakWay" />
-		<input type="hidden" id="frmAcquisitionPrice" name="frmAcquisitionPrice" />
-		
-		<input type="hidden" id="frmResidualvalue"   name="frmResidualvalue" />
-		<input type="hidden" id="frmUnit"	     	 name="frmUnit" />
-		<input type="hidden" id="frmJukyo" 		 	 name="frmJukyo" />
-		<input type="hidden" id="frmUnitprice" 		 name="frmUnitprice" />
-		<input type="hidden" id="frmQuantity" 		 name="frmQuantity" />
-		<input type="hidden" id="frmSanggakCode" 	 name="frmSanggakCode" />
-	</form>
-	
-	<form id="updateFrm" action="${pageContext.request.contextPath }/updDept">
-		<input type="hidden" id="frmdeptCode1" name="frmdeptCode1" />
-		<input type="hidden" id="frmdeptName1" name="frmdeptName1" />
-		<input type="hidden" id="frmcompanyCode1" name="frmcompanyCode1" />
-	</form>
-
- 	<form id="del_frm" action="${pageContext.request.contextPath }/deleteDept">
- 		<input type="hidden" id="checkRow" name="checkRow">
- 	</form>		
- 	
- 	<form id="useFrm" action="${pageConext.request.contextPath }/useDept">
-		<input type="hidden"  id="frm_usestatus" name="frm_usestatus">
-		<input type="hidden"  id="frm_deptCode" name="frm_deptCode" >
-	</form>
-<!---------------------------------------------->
-	
 	<script>
-  
-	/* 등록  */
-	$("#insertBtn").on("click", function(){
+
+	$(".tr").on("click", function(){
 		
-		var assetCode 		 = $("#assetCode").val();
-		var assetName  	     = $("#assetName").val();
-		var acquisitionDate  = $("#acquisitionDate").val();
-		var accountName		 = $("#accountName").val();
-		var clientName		 = $("#clientName").val();
-		var sanggakWay		 = $("#sanggakWay").val();
+		var establishnamekor = $(".tr").data("establishnmkor");
 		
-		var acquisitionPrice = $("#acquisitionPrice").val();
-		var residualvalue	 = $("#residualvalue").val();
-		var unit			 = $("#unit").val();
-		var jukyo			 = $("#jukyo").val();
-		var unitprice		 = $("#unitprice").val();
-		var quantity		 = $("#quantity").val();
-		var sanggakCode		 = $("#sanggakCode").val();
-		
-		$("#frmAssetCode").val(assetCode);
-		$("#frmAssetName").val(assetName);
-		$("#frmAcquisitionDate").val(acquisitionDate);
-		$("#frmAccountName").val(accountName);
-		$("#frmClientName").val(clientName);
-		$("#frmSanggakWay").val(sanggakWay);
-		$("#frmAcquisitionPrice").val(acquisitionPrice);
-		
-		$("#frmResidualvalue").val(residualvalue);
-		$("#frmUnit").val(unit);
-		$("#frmJukyo").val(jukyo);
-		$("#frmUnitprice").val(unitprice);
-		$("#frmQuantity").val(quantity);
-		$("#frmSanggakCode").val(sanggakCode);
-		
-		
-		if($("#assetCode").val().trim()==""){
-			alert("코드 입력하세요");
-			$("#assetCode").focus();
-			return false;
-		}
-	 	
-	 	$("#insertFrm").submit();
-	
-});
+		alert(establishnamekor);
+		$("#sel_account").val(establishnamekor);
+		$("#accountName").val(establishnamekor);
+	});
 	 
+	function clientTr(){
+		var clientName = $(".clientTr").data("client");
+		
+		$("#clientN").val(clientName);
+	}
+	
 	/* 컬럼 클릭했을 때 input에 값 넣어주기  */	
 	function companyTr(){
 		
@@ -360,7 +299,7 @@
  		$("#updateFrm").submit();
     });
 });	
-
+	
 	function Enter_Check(){
 	        // 엔터키의 코드는 13입니다.
 	    if(event.keyCode == 13){
@@ -384,41 +323,40 @@
   		});
  	});
  
-		 function allCheck() {
-			if ($("#th_allCheck").is(':checked')) {
-					$("input[name=checkRow]").prop("checked", true);
-				} else {
-					$("input[name=checkRow]").prop("checked", false);
-				}
+	 function allCheck() {
+		if ($("#th_allCheck").is(':checked')) {
+				$("input[name=checkRow]").prop("checked", true);
+			} else {
+				$("input[name=checkRow]").prop("checked", false);
 			}
-		
-		/* 전체선택삭제 */
-		function allCheck() {
-			if ($("#th_allCheck").is(':checked')) {
-					$("input[name=checkRow]").prop("checked", true);
-				} else {
-					$("input[name=checkRow]").prop("checked", false);
-				}
-			}
-
-		/* 선택삭체*/
-		function myclick() {
-			var checkRow = '';
-			$("input[name=checkRow]:checked").each(function() {
-				checkRow += $(this).val()+",";
-			});
-				checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); //맨끝 콤마 지우기  
-				$("#checkRow").val(checkRow);
-				
-			if(checkRow === ""){		
-				alert("삭제할 대상을 선택하세요");
-				return false;
-			}
- 				$("#del_frm").submit();
 		}
-    
-	/* 테이블 코드 클릭했을 때 */
 	
+	/* 전체선택삭제 */
+	function allCheck() {
+		if ($("#th_allCheck").is(':checked')) {
+				$("input[name=checkRow]").prop("checked", true);
+			} else {
+				$("input[name=checkRow]").prop("checked", false);
+			}
+		}
+
+	/* 선택삭체*/
+	function myclick() {
+		var checkRow = '';
+		$("input[name=checkRow]:checked").each(function() {
+			checkRow += $(this).val()+",";
+		});
+			checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); //맨끝 콤마 지우기  
+			$("#checkRow").val(checkRow);
+			
+		if(checkRow === ""){		
+			alert("삭제할 대상을 선택하세요");
+			return false;
+		}
+				$("#del_frm").submit();
+	}
+   
+	/* 등록 클릭했을 때 */
 	var insertFlag = 0;
 	function fn_detail(){
 		if (insertFlag === 0) {

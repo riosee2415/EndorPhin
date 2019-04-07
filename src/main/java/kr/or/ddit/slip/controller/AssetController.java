@@ -53,56 +53,52 @@ public class AssetController {
 		
 		return "purchaseAsset";
 	}
-
-	// 고정자산등록 
-	@RequestMapping("/insertAsset")
-	public String insertAsset(AssetVo assetVo, Model model, @RequestParam("frmAssetCode") String frmAssetCode 
-															,@RequestParam("frmAssetName") String frmAssetName
-															,@RequestParam("frmAcquisitionDate") String frmAcquisitionDate
-															,@RequestParam("frmAccountName") String frmAccountName
-															,@RequestParam("frmClientName") String frmClientName
-															,@RequestParam("frmSanggakWay") String frmSanggakWay
-															,@RequestParam("frmAcquisitionPrice") String frmAcquisitionPrice
-															,@RequestParam("frmResidualvalue") String frmResidualvalue
-															,@RequestParam(name="frmUnit", defaultValue="") String frmUnit
-															,@RequestParam(name="frmJukyo", defaultValue="") String frmJukyo
-															,@RequestParam(name="frmUnitprice", defaultValue="") String frmUnitprice
-															,@RequestParam(name="frmQuantity", defaultValue="") String frmQuantity
-															,@RequestParam("frmSanggakCode") String frmSanggakCode) throws ParseException{
-		Date date = new Date();									
+	@RequestMapping("/insertFrm")
+	public String insertFrm(Model model, AssetVo assetVo, String assetCode, String assetName,String date,
+										String sanggakWay,String accountName,String clientName,String acquisitionPrice,
+										String residualvalue,String jukyo,String sanggakCode,
+										String depreciation,String accumulated,String purchaseCode){
+		
+		Date acquisitionDate = new Date();									
 		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
 		
-		date= sdf.parse(frmAcquisitionDate);
-		assetVo.setAssetCode(frmAssetCode);
-		assetVo.setAssetName(frmAssetName);
-		assetVo.setAcquisitionDate(date);
-		assetVo.setAccountName(frmAccountName);
-		assetVo.setClientName(frmClientName);
-		assetVo.setSanggakWay(frmSanggakWay);
-		assetVo.setAcquisitionPrice(frmAcquisitionPrice);
-		assetVo.setResidualvalue(frmResidualvalue);
-		assetVo.setUnit(frmUnit);
-		assetVo.setJukyo(frmJukyo);
-		assetVo.setUnitPrice(frmUnitprice);
-		assetVo.setQuantity(frmQuantity);
-		assetVo.setSanggakCode(frmSanggakCode);
+		try {
+			acquisitionDate= sdf.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		assetVo.setAssetCode(assetCode);
+		assetVo.setAssetName(assetName);
+		assetVo.setAcquisitionDate(acquisitionDate);
+		assetVo.setAccountName(accountName);
+		assetVo.setClientName(clientName);
+		assetVo.setSanggakWay(sanggakWay);
+		assetVo.setAcquisitionPrice(acquisitionPrice);
+		assetVo.setResidualvalue(residualvalue);
+		assetVo.setJukyo(jukyo);
+		assetVo.setSanggakCode(sanggakCode);
+		assetVo.setDepreciation(depreciation);
+		assetVo.setPurchaseCode(purchaseCode);
+		assetVo.setAccumulated(accumulated);
+	
+		logger.debug("updAsset:---{}",accountName);
+		logger.debug("updAsset:---{}",residualvalue);
 		
-		logger.debug("assetVo : {} ",assetVo);
-		int insertUpd = assetService.insertAsset(assetVo);
 		
-		if(insertUpd > 0){
+		int updAsset = assetService.updateAsset(assetVo);
+		
+		if(updAsset > 0) {
 			return "redirect:/purchaseAsset";
-		}else{
+		}else {
 			return "redirect:/purchaseAsset";
 		}
 	}
 	 
 	@RequestMapping("/insertStatusFrm")
-	public String insertStatusAsset(AssetVo assetVo, Model model, @RequestParam("assetCode") String assetCode 
-															,@RequestParam("acquisitionDate") String acquisitionDate
-															,@RequestParam("purchaseCode") String purchaseCode
-															,@RequestParam("sanggakWay") String sanggakWay
-															,@RequestParam("acquisitionPrice") String acquisitionPrice){
+	public String insertStatusAsset(AssetVo assetVo, Model model, String assetCode,String acquisitionDate
+																,String sanggakWay,String acquisitionPrice
+																,String purchaseCode){
+															
 		Date date = new Date();									
 		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
 		
@@ -118,7 +114,6 @@ public class AssetController {
 		assetVo.setSanggakWay(sanggakWay);
 		assetVo.setAcquisitionPrice(acquisitionPrice);
 		
-		logger.debug("assetCode1111 : {} ", assetCode);
 		
 		int insertUpd = assetService.insertStatusAsset(assetVo);
 		
@@ -126,17 +121,27 @@ public class AssetController {
 		
 		int sanggakWay11 = Integer.parseInt(data);
 		
-		logger.debug("data : {} ", data);
+		model.addAttribute("acquisitionPrice",acquisitionPrice);
+		model.addAttribute("date",date);
+		model.addAttribute("assetCode",assetCode);
+		model.addAttribute("purchaseCode",purchaseCode);
+		model.addAttribute("sanggakWay",sanggakWay);
 		
-		if(sanggakWay11 == 1){
-			return "asset/straightAjax";
-		}else{
+		if(insertUpd > 0) {
+			
+			if( sanggakWay11 > 0){
+				return "asset/straightAjax";
+			}else {
+				model.addAttribute("declining", SalesCodeConstant.declining);
+				return "asset/decliningAjax";
+			}		
+		}else {
+			model.addAttribute("assetCode",assetCode);
 			return "asset/insertAssetAjax";
 		}
 	}
 	
 	//자산코드 중복체크 
-	
 	@RequestMapping(path="/DupleAsset", method=RequestMethod.POST)
 	@ResponseBody
 	public String DuplAsset(@RequestParam(name="assetCode",defaultValue="empty") String assetCode){
@@ -164,7 +169,6 @@ public class AssetController {
 		
 		model.addAttribute("establishList", establishList);
 		
-		logger.debug("establishNameKor :::{}",establishNameKor);
 		return "asset/establishSearchAjax";
 	}
 	
@@ -181,14 +185,5 @@ public class AssetController {
 		return "asset/serviceLife";
 		
 	}
-	/*@RequestMapping("getSamgakk")
-	public String getSamgakk(Model model){
-
-		
-		
-		return "asset/getSamgakk";
-	}
-	*/
-
 	
 }

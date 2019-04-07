@@ -1,12 +1,12 @@
 package kr.or.ddit.constant;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
+
 public class SalesCodeConstant {
+	
 	
 	// 매출코드
 	public static final Map<String, String> salesCode = new HashMap<String, String>();
@@ -108,77 +108,137 @@ public class SalesCodeConstant {
 		straight.put("0.017", "0.049");
 	}
 	
-	
+/*	public static final List<String> declining_list = new ArrayList<String>();
+	static {
+		Logger logger = LoggerFactory.getLogger(SalesCodeConstant.class);
+		
+		declining_list.add("0.777");
+		declining_list.add("0.632");
+		declining_list.add("0.528");
+		declining_list.add("0.451");
+		declining_list.add("0.394");
+		declining_list.add("0.349");
+		declining_list.add("0.313");
+		declining_list.add("0.284");
+		declining_list.add("0.259");
+		declining_list.add("0.239");
+		declining_list.add("0.221");
+		declining_list.add("0.206");
+		declining_list.add("0.193");
+		declining_list.add("0.182");
+		declining_list.add("0.171");
+		declining_list.add("0.162");
+		declining_list.add("0.154");
+		declining_list.add("0.146");
+		declining_list.add("0.140");
+		declining_list.add("0.133");
+		declining_list.add("0.128");
+		declining_list.add("0.123");
+		declining_list.add("0.118");
+		declining_list.add("0.113");
+		declining_list.add("0.109");
+		declining_list.add("0.106");
+		declining_list.add("0.102");
+		declining_list.add("0.099");
+		declining_list.add("0.096");
+		declining_list.add("0.093");
+		declining_list.add("0.090");
+		declining_list.add("0.090");
+		declining_list.add("0.085");
+		declining_list.add("0.085");
+		declining_list.add("0.080");
+		declining_list.add("0.078");
+		declining_list.add("0.076");
+		declining_list.add("0.074");
+		declining_list.add("0.073");
+		declining_list.add("0.071");
+		declining_list.add("0.069");
+		declining_list.add("0.068");
+		declining_list.add("0.066");
+		declining_list.add("0.065");
+		declining_list.add("0.064");
+		declining_list.add("0.062");
+		declining_list.add("0.061");
+		declining_list.add("0.060");
+		declining_list.add("0.059");
+		declining_list.add("0.059");
+		declining_list.add("0.056");
+		declining_list.add("0.055");
+		declining_list.add("0.054");
+		declining_list.add("0.054");
+		declining_list.add("0.053");
+		declining_list.add("0.052");
+		declining_list.add("0.051");
+		declining_list.add("0.050");
+		declining_list.add("0.049");
+
+		logger.debug("ddd : {} ", declining_list.get(5));
+	}*/
 	// 정률법
 	public static final Map<String, String> declining = new HashMap<String, String>();
 	static {
 		
-		declining.put("2", " ");
-		declining.put("3", " ");
-		declining.put("4", " ");
-		declining.put("5", " ");
-		declining.put("6", " ");
-		declining.put("7", " ");
-		declining.put("8", " ");
-		declining.put("9", " ");
-		declining.put("10", "");
-		
-		declining.put("11", "");
-		declining.put("12", "");
-		declining.put("13", "");
-		declining.put("14", "");
-		declining.put("15", "");
-		declining.put("16", "");
-		declining.put("17", "");
-		declining.put("18", "");
-		declining.put("19", "");
-		declining.put("20", "");
-		
-		declining.put("21", "");
-		declining.put("22", "");
-		declining.put("23", "");
-		declining.put("24", "");
-		declining.put("25", "");
-		declining.put("26", "");
-		declining.put("27", "");
-		declining.put("28", "");
-		declining.put("29", "");
-		declining.put("30", "");
-		
-		declining.put("31", "");
-		declining.put("32", "");
-		declining.put("33", "");
-		declining.put("34", "");
-		declining.put("35", "");
-		declining.put("36", "");
-		declining.put("37", "");
-		declining.put("38", "");
-		declining.put("39", "");
-		declining.put("40", "");
-		
-		declining.put("41", "");
-		declining.put("42", "");
-		declining.put("43", "");
-		declining.put("44", "");
-		declining.put("45", "");
-		declining.put("46", "");
-		declining.put("47", "");
-		declining.put("48", "");
-		declining.put("49", "");
-		declining.put("50", "");
-		
-		declining.put("51", "");
-		declining.put("52", "");
-		declining.put("53", "");
-		declining.put("54", "");
-		declining.put("55", "");
-		declining.put("56", "");
-		declining.put("57", "");
-		declining.put("58", "");
-		declining.put("59", "");
-		declining.put("60", "");
+		declining.put("2",  "0.777");
+		declining.put("3",  "0.632");
+		declining.put("4",  "0.528");
+		declining.put("5",  "0.451");
+		declining.put("6",  "0.394");
+		declining.put("7",  "0.349");
+		declining.put("8",  "0.313");
+		declining.put("9",  "0.284");
+		declining.put("10", "0.259");
+		declining.put("11", "0.239");
+		declining.put("12", "0.221");
+		declining.put("13", "0.206");
+		declining.put("14", "0.193");
+		declining.put("15", "0.182");
+		declining.put("16", "0.171");
+		declining.put("17", "0.162");
+		declining.put("18", "0.154");
+		declining.put("19", "0.146");
+		declining.put("20", "0.140");
+		declining.put("21", "0.133");
+		declining.put("22", "0.128");
+		declining.put("23", "0.123");
+		declining.put("24", "0.118");
+		declining.put("25", "0.113");
+		declining.put("26", "0.109");
+		declining.put("27", "0.106");
+		declining.put("28", "0.102");
+		declining.put("29", "0.099");
+		declining.put("30", "0.096");
+		declining.put("31", "0.093");
+		declining.put("32", "0.090");
+		declining.put("33", "0.090");
+		declining.put("34", "0.085");
+		declining.put("35", "0.085");
+		declining.put("36", "0.080");
+		declining.put("37", "0.078");
+		declining.put("38", "0.076");
+		declining.put("39", "0.074");
+		declining.put("40", "0.073");
+		declining.put("41", "0.071");
+		declining.put("42", "0.069");
+		declining.put("43", "0.068");
+		declining.put("44", "0.066");
+		declining.put("45", "0.065");
+		declining.put("46", "0.064");
+		declining.put("47", "0.062");
+		declining.put("48", "0.061");
+		declining.put("49", "0.060");
+		declining.put("50", "0.059");
+		declining.put("51", "0.059");
+		declining.put("52", "0.056");
+		declining.put("53", "0.055");
+		declining.put("54", "0.054");
+		declining.put("55", "0.054");
+		declining.put("56", "0.053");
+		declining.put("57", "0.052");
+		declining.put("58", "0.051");
+		declining.put("59", "0.050");
+		declining.put("60", "0.049");
 	}
-	
+
 	
 	 
 }

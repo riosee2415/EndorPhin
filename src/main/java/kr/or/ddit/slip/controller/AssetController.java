@@ -39,6 +39,7 @@ public class AssetController {
 	@Resource(name="clientService")
 	private ICilentService clientService;
 	
+	//리스트 출력
 	@RequestMapping("/purchaseAsset")
 	public String purchaseAsset(Model model){
 		
@@ -53,6 +54,7 @@ public class AssetController {
 		
 		return "purchaseAsset";
 	}
+	//모든 데이터 등록
 	@RequestMapping("/insertFrm")
 	public String insertFrm(Model model, AssetVo assetVo, String assetCode, String assetName,String date,
 										String sanggakWay,String accountName,String clientName,String acquisitionPrice,
@@ -94,6 +96,7 @@ public class AssetController {
 		}
 	}
 	 
+	//등록
 	@RequestMapping("/insertStatusFrm")
 	public String insertStatusAsset(AssetVo assetVo, Model model, String assetCode,String acquisitionDate
 																,String sanggakWay,String acquisitionPrice
@@ -162,6 +165,7 @@ public class AssetController {
 		return dupleCode;
 	}
 	
+	//계정검색
 	@RequestMapping("establishSearch")
 	public String establishSearch(Model model,@RequestParam("establishNameKor") String establishNameKor){
 		
@@ -172,12 +176,14 @@ public class AssetController {
 		return "asset/establishSearchAjax";
 	}
 	
+	//등록화면으로 이동
 	@RequestMapping("getAssetInsertBtn")
 	public String getAssetInsertBtn(Model model){
 	
 		return "asset/insertAssetAjax";
 	}
 
+	//내용연수표 이동
 	@RequestMapping(path="serviceLife", method=RequestMethod.GET)
 	public String serviceLife(Model model){
 
@@ -185,5 +191,10 @@ public class AssetController {
 		return "asset/serviceLife";
 		
 	}
-	
+	@RequestMapping(path="sellAsset", method=RequestMethod.GET)
+	public String sellAsset(Model model){
+
+		return "sellAsset";
+		
+	}
 }

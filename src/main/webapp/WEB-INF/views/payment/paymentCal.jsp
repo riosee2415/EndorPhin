@@ -15,7 +15,7 @@
 				</h2>
 			</div>
 			<form action="/paymentCal" method="get">
-				<table class="table table-striped">
+				<table class="table table-hover">
 					<thead class="thead">
 						<tr>
 							<th>년도 <select name="paydayYear" style="width: 200px;" >
@@ -39,7 +39,7 @@
 	<div class="row">
 		<div class="col-md-10" style="width: 100%">
 			<div class="form-group">
-				<table class="table table-striped">
+				<table class="table table-hover">
 					<thead class="thead">
 						<tr>
 							<th>년도</th>

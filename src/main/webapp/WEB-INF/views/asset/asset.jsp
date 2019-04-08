@@ -5,7 +5,7 @@
 	<h2>고정자산 등록</h2>	
 	<br>
 	<br>
-<table class="table table-striped">
+<table class="table table-hover">
 	<thead class="thead">
 	</thead>
 		<tr>
@@ -17,7 +17,7 @@
 <br>
 	<div class="form-group">
 	<div class="table-responsive">
-		<table class="table table-striped">
+		<table class="table table-hover">
 			<thead class="thead">
 				<tr>
 					<th><input type="checkbox" name="allCheck" id="th_allCheck" onclick="allCheck();"></th> 

@@ -13,6 +13,7 @@ public class PaymentVo {
 	String totalSalary;
 	String relate;
 	String payDay;
+	String deadline; // 장부반영 
 	String taxamount; // 과세액
 	String positionname; // 직급명
 	
@@ -22,6 +23,12 @@ public class PaymentVo {
 	String joincompany; // 입사일
 	
 	
+	public String getDeadline() {
+		return deadline;
+	}
+	public void setDeadline(String deadline) {
+		this.deadline = deadline;
+	}
 	public String getTaxamount() {
 		return taxamount;
 	}

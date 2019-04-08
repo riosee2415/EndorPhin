@@ -37,5 +37,6 @@ public class SlipDaoTest extends LogicConfig {
 		slipVo.setTotal("444");
 		slipVo.setStatus("0");
 		int insertSlip = slipDao.insertSlip(slipVo);
+		logger.debug("asdflkn:{}",slipVo.getSlipNumber());
 	}
 }

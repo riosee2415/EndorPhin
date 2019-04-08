@@ -140,8 +140,9 @@
 	
 	<!-- 기간별 급여의 총합을 구하기 위함 -->
 	<select id="selectTotalSalaryByDay" resultType="paymentVo" parameterType="map">
-		select sum(totalsalary) totalsalary,sum(totalwage) totalwage,to_char(payday,'yyyy-MM') payday
-		from payment
+		select sum(totalsalary) totalsalary,sum(totalwage) totalwage,to_char(payday,'yyyy-MM') payday,min(deadline) deadline
+		from payment p join payment_detail pd
+        on p.paycode = pd.paycode
 		<if test="value!=null">
 			where payday between to_date(#{payDay},'yyyyMM') 
 			    and LAST_DAY(to_date(#{payDay},'yyyyMM'))
@@ -219,11 +220,12 @@
 	
 	<!-- 부서별  -->
 	<select id="selectDeptNPayment" parameterType="map" resultType="paymentVo">
-		select d.deptcode, deptname,totalsalary,paycode
+		select d.deptcode, min(deptname) deptname,sum(totalsalary) totalsalary
 		from dept d,employee e, payment p
 		where   e.deptcode = d.deptcode
 		and     e.userid = p.userid
-		and     to_char(payday,'yyyyMM')='201904'
+		and     to_char(payday,'yyyyMM')=#{paydayMonth}
+		group by d.deptcode
 	</select>
 </mapper>
 

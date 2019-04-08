@@ -362,7 +362,6 @@
 			url : "/getPaymentList",
 			data : "payCode=" + modalUpd,
 			success : function(data) {
-				console.log(data);
 				secondModalDataInput(deproductList,deprostatus,$("#secondModalUpdTbody"));
 				secondDetailInit(data,deprostatus);
 			}

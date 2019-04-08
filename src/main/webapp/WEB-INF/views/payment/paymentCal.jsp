@@ -62,7 +62,12 @@
 								<td>${vo.totalSalary}</td>
 								<td>${vo.totalWage}</td>
 								<td>${vo.totalSalary-vo.totalWage}</td>
-								<td>아니오</td>
+								<c:if test="${vo.deadline!=null}">
+									<td class="deadlineCheck">예</td>
+								</c:if>
+								<c:if test="${vo.deadline==null}">
+									<td class="deadlineCheck">아니오</td>
+								</c:if>
 							<tr>
 						</c:forEach>
 					</tbody>
@@ -84,9 +89,9 @@
 
 <div class="container">
 	<div class="row" style="margin-left: 705px;">
-		<select>
-			<option selected="selected">회사 전체</option>
-			<option>부서별</option>
+		<select id="deptDivSel">
+			<option selected="selected" value="0">회사 전체</option>
+			<option value="1">부서별</option>
 		</select>
 		<button style="background-color: #6E6867;" data-toggle="modal"
 			class="btn btn-info" id="cogInputBtn">장부반영</button>
@@ -103,18 +108,8 @@
             <div class="modal-body">
             	<h3>전표 등록 기준</h3>
             	<div style="overflow:scroll; width:450px; height:200px;">
-	            	<table>
-	            		<thead>
-	            			<tr>
-	            				<th>부서코드</th>
-	            				<th>부서명</th>
-	            				<th>총급여액</th>
-	            				<th>계정과목명</th>
-	            			</tr>
-	            		</thead>
-	            		<tbody id="secondModalTbody">
-	            		</tbody>
-	            	</table>
+	            	<form action="/gotoSlipInput" id="gotoslipFrm" method="post">
+	            	</form>
             	</div>
             </div>
             <div class="modal-footer">
@@ -131,29 +126,47 @@
 		$("#gotoDetailFrm").submit();
 	});
 	$("#cogInputBtn").on('click',function(){
-		$('#secondModalTbody').html(" ");
+		if($(".deadlineCheck").html()=='예'){
+			alert("이미 반영되었습니다.");
+			return false;
+		}
+		$('#gotoslipFrm').html("<table><thead><tr><th>부서코드</th><th>부서명</th><th>총급여액</th><th>계정과목명</th></tr></thead><tbody id=\'secondModalTbody\'></tbody></table>");
 		var paydayMonth =$("select[name=paydayYear]").val()+$("select[name=paydayMonth]").val();
 		$.ajax({
 			method : "post",
 			url : "/getPaymentForSlip",
 			data : {
+				deptDiv : $("#deptDivSel").val(),
 				paydayMonth : paydayMonth
 			},
 			success : function(data) {
-				var establishSelect = "<select class=\'establishSelect\'>"
+				var establishSelect = "<select name=\'establishSelect\' class=\'establishSelect\'>"
 				for (var i = 0; i < data.allEstablish.length; i++) {
 					establishSelect +="<option value=\'"+data.allEstablish[i].establishCode+"\'>"+data.allEstablish[i].establishNameKor+"</option>";
 				}
 				establishSelect += "</select>"
-				console.log(data.deptList);
+				console.log(data);
 				for (var i = 0; i < data.deptList.length; i++) {
 					$('#secondModalTbody').append("<tr>");
-					$('#secondModalTbody').append("<td>"+data.deptList[i].deptcode+"</td>");
+					if(data.deptList[i].deptcode==null){
+						data.deptList[i].deptcode="999";
+						data.deptList[i].deptname="회사전체";
+					}
+					$('#secondModalTbody').append("<td>"+data.deptList[i].deptcode
+							+"<input type=\'hidden\' name=\'deptName\' value=\'"+data.deptList[i].deptname
+								+"\' />"+"</td>");
 					$('#secondModalTbody').append("<td>"+data.deptList[i].deptname+"</td>");
-					$('#secondModalTbody').append("<td>"+data.deptList[i].totalSalary+"</td>");
+					$('#secondModalTbody').append("<td>"+data.deptList[i].totalSalary
+							+"<input type=\'hidden\' name=\'totalSalary\' value=\'"+data.deptList[i].totalSalary+"\' />"+"</td>");
 					$('#secondModalTbody').append("<td>"+establishSelect+"</td>");
 					$('#secondModalTbody').append("</tr>");
 				}
+				for (var i = 0; i < data.payCodeList.length; i++) {
+					$("#gotoslipFrm").append("<input type=\'hidden\' name=\'payCode\' value=\'"+data.payCodeList[i].payCode
+							+"\' />");
+				}
+					$("#gotoslipFrm").append("<input type=\'hidden\' name=\'paydayMonth\' value=\'"+paydayMonth
+							+"\' />");
 			}
 		});
 		$("#myModal").modal('show');
@@ -178,6 +191,10 @@
 		}else
 			$("select[name=paydayMonth]").val(new Date().getMonth()+1);
 			
+		$('#secondModalAddSave').click(function(){
+			$("#gotoslipFrm").append();
+			$('#gotoslipFrm').submit();
+		})
 	});
 
 </script>

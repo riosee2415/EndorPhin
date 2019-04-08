@@ -74,7 +74,26 @@
         order by paycode,deductcode
 	</select>
 	
+	<!-- 전표입력 -->
+	<select id="selectPayment_detailSlip" parameterType="map" resultType="payment_detailVo">
+		<foreach collection="divList" item="item" index="index" open="(" close=")" separator="union all">
+			select d.deptcode, min(deptname) deptname,sum(deductpay) deductpay,min(deductcode) deductcode
+			from    dept d,employee e, payment p,payment_detail pd
+			where   e.deptcode = d.deptcode
+			and     e.userid = p.userid
+			and     p.paycode = pd.paycode
+			and     deductcode = #{item.deductCode}
+			and     to_char(payday,'yyyyMM')=#{paydayMonth}
+			group by d.deptcode
+		</foreach>
+	</select>
 
+	<!-- 전표 입력한 내역 수정 -->	
+	<update id="updateForSlip" parameterType="map">
+		update payment_detail
+		set deadline='y'
+		where paycode in (select paycode from payment where to_char(payday,'yyyyMM')=#{paydayMonth})
+	</update>
 </mapper>
 
 

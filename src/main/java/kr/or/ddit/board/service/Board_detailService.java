@@ -14,7 +14,6 @@ import kr.or.ddit.board.dao.ICommentsDao;
 import kr.or.ddit.board.model.Attach_boardVo;
 import kr.or.ddit.board.model.Board_detailVo;
 import kr.or.ddit.board.model.CommentsVo;
-import kr.or.ddit.util.model.BoardPageVo;
 import kr.or.ddit.util.model.PageVo;
 
 @Service("board_detailService")

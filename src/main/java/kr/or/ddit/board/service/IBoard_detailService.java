@@ -5,7 +5,6 @@ import java.util.Map;
 
 import kr.or.ddit.board.model.Attach_boardVo;
 import kr.or.ddit.board.model.Board_detailVo;
-import kr.or.ddit.util.model.BoardPageVo;
 import kr.or.ddit.util.model.PageVo;
 
 public interface IBoard_detailService {
@@ -95,7 +94,7 @@ public interface IBoard_detailService {
 	* 변경이력 :
 	* @param param
 	* @return
-	* Method 설명 : 게시글 등록
+	* Method 설명 : 게시글 등록 & 게시글 수정
 	 */
 	int insertBoard(Board_detailVo param);
 	
@@ -117,7 +116,7 @@ public interface IBoard_detailService {
 	* 변경이력 :
 	* @param param
 	* @return
-	* Method 설명 : 게시글 상세조회
+	* Method 설명 : 게시글 수정
 	 */
 	int updateBoard(Board_detailVo param);
 	

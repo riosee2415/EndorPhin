@@ -1,6 +1,6 @@
 package kr.or.ddit.board.model;
 
-import java.util.Date;
+import kr.or.ddit.util.etc.Utiletc;
 
 /**
  * 

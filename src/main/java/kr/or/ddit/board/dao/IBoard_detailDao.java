@@ -3,7 +3,6 @@ package kr.or.ddit.board.dao;
 import java.util.List;
 
 import kr.or.ddit.board.model.Board_detailVo;
-import kr.or.ddit.util.model.BoardPageVo;
 import kr.or.ddit.util.model.PageVo;
 
 public interface IBoard_detailDao {
@@ -103,7 +102,7 @@ public interface IBoard_detailDao {
 	* 변경이력 :
 	* @param param
 	* @return
-	* Method 설명 : 게시글 등록
+	* Method 설명 : 게시글 등록 & 게시글 수정
 	 */
 	int insertBoard(Board_detailVo param);
 	

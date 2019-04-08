@@ -3,7 +3,6 @@ package kr.or.ddit.board.dao;
 import java.util.List;
 
 import kr.or.ddit.board.model.Board_detailVo;
-import kr.or.ddit.util.model.BoardPageVo;
 import kr.or.ddit.util.model.PageVo;
 
 public interface IBoard_detailDao {

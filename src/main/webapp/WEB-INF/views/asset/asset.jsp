@@ -2,7 +2,6 @@
     pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-	
 	<h2>고정자산 등록</h2>	
 	<br>
 	<br>
@@ -34,14 +33,20 @@
 			<tbody id="deptListTbody">
 				<c:forEach items="${assetList }" var="vo">	
 					 <tr>
-						<td><input type="checkbox" name="checkRow" value="${vo.assetCode }" ></td>
-						<td><a class="detailView" onclick="fn_detail_tr();" href="#deptDetail1" data-upd_accountName="${vo.accountName }" 
-																	 data-upd_assetName="${vo.assetName }"
-																	 data-upd_assetName="${vo.assetName }"
-																	 data-upd_acquisitionDate="${vo.acquisitionDate }"
-																	 data-upd_unit="${vo.unit }"
-																	 data-upd_quantity="${vo.quantity }"
-																	 data-upd_acquisitionPrice="${vo.acquisitionPrice }"  
+						<td><input type="checkbox" name="checkRow"  value="${vo.assetCode }" ></td>
+						<td><a class="detailView" href="#deptDetail" data-assetcode="${vo.assetCode }" 
+																	 data-acquisitiondate="${vo.acquisitionDate }"
+																	 data-purchasecode="${vo.purchaseCode }"
+																	 data-sanggakway="${vo.sanggakWay }"
+																	 data-acquisitionprice="${vo.acquisitionPrice }"
+																	 data-accountname="${vo.accountName }"
+																	 data-clientname="${vo.clientName }"  
+																	 data-assetname="${vo.assetName }"
+																	 data-residualvalue="${vo.residualvalue }"
+																	 data-jukyo="${vo.jukyo }"
+																	 data-sanggakcode="${vo.sanggakCode }"
+																	 data-depreciation="${vo.depreciation }"
+																	 data-accumulated="${vo.accumulated }" 
 																	 data-toggle="modal">${vo.assetCode }</a></td>
    						<c:set var = "sum" value = "${sum+vo.acquisitionPrice/1.1 }" />
    						<td>${vo.assetName }</td>	
@@ -66,9 +71,7 @@
 	</div>
 </div>
 	<!--------------(삭제,등록) 버튼 ------------------->
-
 	<div class="modal-footer">
-		<!-- <input name="delect_btn"  id="delect_btn" type="button" value="선택삭제" onclick="myclick()" /> -->
 		<button type="button" class="btn btn-primary"  onclick="fn_detail();">등록</button>
 	</div>
 
@@ -103,7 +106,7 @@
 				</thead>
 				<tbody id="establishTbody">
 				<c:forEach items="${establishList }" var="vo">
-					<tr class="tr" data-establishnmkor="${vo.establishNameKor }">
+					<tr class="establishTr" data-establishnmkor="${vo.establishNameKor }">
 						<td>${vo.establishCode}</td>
 						<td>${vo.status}</td>
 						<td>${vo.establishNameKor}</td>
@@ -209,54 +212,8 @@
 </div>
 
 	<script>
-
-	$(".tr").on("click", function(){
-		
-		var establishnamekor = $(".tr").data("establishnmkor");
-		
-		alert(establishnamekor);
-		$("#sel_account").val(establishnamekor);
-		$("#accountName").val(establishnamekor);
-	});
-	 
-	function clientTr(){
-		var clientName = $(".clientTr").data("client");
-		
-		$("#clientN").val(clientName);
-	}
-	
-	/* 컬럼 클릭했을 때 input에 값 넣어주기  */	
-	function companyTr(){
-		
-		var companyCode1 = $(".companyTr").data("companycode");
-		
-		$("#companycode").val(companyCode1);
-		
-		$('.buttons').trigger('click');
-		
-		$("#companyCode").val($(".companyTr").data().companycode);
-		
-	}
 	
 	$("document").ready(function() {
-		
-		/* 상세보기  */
-		$(".detailView").on("click", function(){
-			
-			$("#upd_deptCode").val($(this).data().upd_deptcode);
-			$("#upd_deptName").val($(this).data().upd_deptname);
-			$("#upd_companyCode").val($(this).data().upd_companycode);
-			
-			if($(this).data().upd_usestatus==1){
-				$("#yes_Btn").html("미사용");
-				
-			}
-			else if($(this).data().upd_usestatus==0){
-				$("#yes_Btn").html("사용");
-				$("#yes_btn").attr("style","background: #ff8e77; color: #ffffff");
-			}
-			
-		});
 	
 		 $("#yes_Btn").on("click", function(){
 	
@@ -323,6 +280,21 @@
   		});
  	});
  
+     /* tr선택 */
+	$(".establishTr").on("click", function(){
+		
+		var establishnamekor = $(this).data("establishnmkor");
+		
+		$("#sel_account").val(establishnamekor);
+		$("#accountName").val(establishnamekor);
+	});
+	 
+	function clientTr(){
+		var clientName = $(this).data("client");
+		
+		$("#clientN").val(clientName);
+	}
+	
 	 function allCheck() {
 		if ($("#th_allCheck").is(':checked')) {
 				$("input[name=checkRow]").prop("checked", true);
@@ -360,13 +332,15 @@
 	var insertFlag = 0;
 	function fn_detail(){
 		if (insertFlag === 0) {
-			
+		
 			$.ajax({
 				url : "${pageContext.request.contextPath}/getAssetInsertBtn",
 				success : function(data){
-					$("#insertArea").html(data);					
+					$("#insertArea").html(data);	
+					$("#assetCode").focus();
 				}
 			});
+		
 			insertFlag = 1;
 			
 		} else if(insertFlag == 1){
@@ -375,6 +349,56 @@
 		}
 	}
 	
+	function fn_detail(){
+		if (insertFlag === 0) {
+		
+			$.ajax({
+				url : "${pageContext.request.contextPath}/getAssetInsertBtn",
+				success : function(data){
+					$("#insertArea").html(data);	
+					$("#assetCode").focus();
+				}
+			});
+		
+			insertFlag = 1;
+			
+		} else if(insertFlag == 1){
+			$("#insertArea").html("");
+			insertFlag = 0;
+		}
+	}
+	$(".detailView").on("click", function(){
+		
+		if (insertFlag === 0) {
+			
+			$.ajax({
+				url : "${pageContext.request.contextPath}/getAssetModifyBtn",
+				data : "assetCode="+ $(this).data().assetcode,
+						
+				
+				success : function(data){
+					$("#insertArea").html(data);	
+					$("#assetCode").focus();
+					$("#assetCode").val($(this).data().assetcode);
+					$("#purchaseCode").val($(this).data().purchasecode);
+					$("#sanggakWay").val($(this).data().sanggakway);
+					$("#acquisitionPrice").val($(this).data().acquisitionprice);
+					$("#acquisitionDate").val($(this).data().acquisitiondate);
+
+				}
+			});
+		
+			insertFlag = 1;
+			
+		} else if(insertFlag == 1){
+			$("#insertArea").html("");
+			insertFlag = 0;
+		}
+		
+		
+		
+	});
+
 	</script>
 	
 

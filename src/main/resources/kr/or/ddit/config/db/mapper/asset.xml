@@ -28,6 +28,32 @@
 	    FROM ASSET
 	</select>
 	
+	<!--상세화면 조회하기   -->
+	<select id="selectAsset" resultType="assetVo" parameterType="map">
+        SELECT
+	        ASSETCODE, 
+	        ASSETNAME, 
+	        acquisitionDate, 
+	        ACCOUNTNAME, 
+	        CLIENTNAME, 
+	        SANGGAKWAY, 
+	        ACQUISITIONPRICE, 
+	        SLIPNUMBER, 
+	        RESIDUALVALUE, 
+	        UNIT, 
+	        JUKYO, 
+	        UNITPRICE, 
+	        QUANTITY, 
+	        COMPANYCODE,
+	        sanggakCode,
+	        depreciation,
+	        purchaseCode,
+	        accumulated
+	    FROM ASSET
+	    WHERE ASSETCODE = #{assetCode}
+	    
+	</select>
+	
 	
 	<!-- 자산 추가하기 -->
 	<insert id="insertAsset" parameterType="assetVo">
@@ -47,6 +73,16 @@
         (assetCode, acquisitionDate,sanggakWay, purchaseCode,acquisitionPrice) values
         (#{assetCode},#{acquisitionDate},#{sanggakWay},#{purchaseCode},#{acquisitionPrice}) 
 	</insert>
+	
+	
+	<update id="updateStatusAsset" parameterType="assetVo">
+		 update asset set 
+					acquisitionDate = #{acquisitionDate},
+					sanggakWay  = #{sanggakWay},
+					acquisitionPrice = #{acquisitionPrice},
+					purchaseCode = #{purchaseCode}
+		     where  assetCode = #{assetCode}
+	</update>
 	
 	<update id="updateAsset" parameterType="assetVo">
 		 update asset set 

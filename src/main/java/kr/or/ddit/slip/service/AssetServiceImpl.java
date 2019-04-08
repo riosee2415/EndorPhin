@@ -34,6 +34,16 @@ public class AssetServiceImpl implements IAssetService{
 		return assetDao.updateAsset(assetVo);
 	}
 
+	@Override
+	public AssetVo selectAsset(String assetCode) {
+		return assetDao.selectAsset(assetCode);
+	}
+
+	@Override
+	public int updateStatusAsset(AssetVo assetVo) {
+		return assetDao.updateAsset(assetVo);
+	}
+
 
 
 }

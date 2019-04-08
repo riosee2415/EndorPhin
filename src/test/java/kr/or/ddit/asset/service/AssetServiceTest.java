@@ -1,5 +1,6 @@
 package kr.or.ddit.asset.service;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.Date;
@@ -18,16 +19,16 @@ public class AssetServiceTest extends LogicConfig{
 	private IAssetService assetService;
 	
 	@Test
-	public void assetInsert() {
+	public void assetModify() {
 		
 		AssetVo assetVo = new AssetVo();
 		Date date1 = new Date();
 	
 		
-		assetVo.setAssetCode("4444");
+		assetVo.setAssetCode("1");
 		assetVo.setAssetName("지게차");
 		assetVo.setAcquisitionDate(date1);
-		assetVo.setAccountName("1");
+		assetVo.setAccountName("5");
 		assetVo.setClientName("1");
 		assetVo.setSanggakWay("1");
 		assetVo.setAcquisitionPrice("5000");
@@ -38,7 +39,17 @@ public class AssetServiceTest extends LogicConfig{
 		assetVo.setPurchaseCode("1");
 		assetVo.setAccumulated("1");
 		
-		int insert = assetService.updateAsset(assetVo);
-		assertNotNull(insert);
+		int upd = assetService.updateAsset(assetVo);
+		assertNotNull(upd);
+	}
+	@Test
+	public void selectAssetCode() {
+		
+		AssetVo assetVo = new AssetVo();
+		String assetCode = "1";
+		assetVo.setAssetCode(assetCode);
+		
+		assetVo = assetService.selectAsset(assetCode);
+		assertEquals("1", assetCode);
 	}
 }

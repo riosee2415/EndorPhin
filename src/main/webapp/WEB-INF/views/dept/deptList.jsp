@@ -160,7 +160,12 @@
 						<tr>
 							<th>회사명&nbsp;</th>
 							<th><input style="width: 150px;" type="text" class="form-control" id="companyName" name="companyName"></th>
-							<th><button type="button" class="btn btn-inverse" id="searchC_Btn">검색</button></th>
+							<th><button type="button" class="btn btn-inverse" id="searchC_Btn">검색</button><th>
+						</tr>
+						<tr>
+							<th>선택된 회사명</th>
+							<th><input type="text" style="width: 150px;" type="text" class="form-control" id="selcompany" name="selcompany"></th>
+							<th><button type="button" class="buttons" class="btn btn-default" data-dismiss="modal">확인</button></th>
 						</tr>
 						
 				</table>  <br>
@@ -172,8 +177,8 @@
 					</thead>
 					<tbody id="companyListTbody">
 						<c:forEach items="${companyList }" var="vo">
-							<tr class="companyTr" data-companycode="${vo.companyCode }"
-								onclick="companyTr()">
+							<tr class="companyTr" data-selcompanycode="${vo.companyCode }"
+								onclick="companyTr();">
 								<td>${vo.companyCode}</td>
 								<td>${vo.companyName}</td>
 							</tr>
@@ -238,18 +243,12 @@
 	 	$("#insertFrm").submit();
 	
 });
-	 
-	/* 컬럼 클릭했을 때 input에 값 넣어주기  */	
 	function companyTr(){
-		
-		var companyCode1 = $(".companyTr").data("companycode");
-		
+		alert("dd");
+		var companyCode1 = $(this).data("selcompanycode");
+		alert(companyCode1);
+		$("#selcompany").val(companyCode1);
 		$("#companycode").val(companyCode1);
-		
-		$('.buttons').trigger('click');
-		
-		$("#companyCode").val($(".companyTr").data().companycode);
-		
 	}
 	
 	$("document").ready(function() {
@@ -346,7 +345,6 @@
     		}
     	});
     }); 
-    
     
     
  	/* 카드 코드,이름 검색 */  

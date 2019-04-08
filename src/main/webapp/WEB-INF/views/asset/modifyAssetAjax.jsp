@@ -5,27 +5,38 @@
 	<thead >
 		<tr>
 			<td colspan="2" >자산코드(*)
-			<input type="text" id="assetCode" name="assetCode" >
-				<input type="button" value="중복체크" id="duplCheckbtn" name="duplCheckbtn"/></td>
-				<td colspan="6"><div id="dupleCode"></div></td>
+			<input type="text" id="assetCode1" name="assetCode1" value="${asset.assetCode}" readonly> 
 			<td><br><br></td>
 		<tr>
 			<td colspan="2" > 취득일(*) &nbsp;&nbsp;&nbsp; 
-				<input id="acquisitionDate" name="acquisitionDate" type="text" style="width: 200px;" id="acquisitionDate" >
+				<input id="acquisitionDate1" name="acquisitionDate1" type="text" style="width: 200px;"  >
 			<td> &nbsp;&nbsp;* 유형 : 
-				<select id ="purchaseCode" name="purchaseCode">
-								<option value="51" selected="selected">51 과세매입</option>
-								<option value="54" >54 불공</option>
+				<select id ="purchaseCode1" name="purchaseCode1">
+				
+				<c:if test="${asset.purchaseCode == 51}">
+					<option value="51" selected="selected">51 과세매입</option></c:if>
+					<option value="54" ">54 불공</option>
+				<c:if test="${asset.purchaseCode == 54}">
+					<option value="51" >51 과세매입</option>
+				</c:if>	
+					
 				</select>
 			</td>
 			<td>  &nbsp;&nbsp;* 상각방법: 
-				<select id ="sanggakWay" name="sanggakWay">
-								<option value="1" selected="selected">정액법</option>
-								<option value="0" >정률법</option>
+				<select id ="sanggakWay1" name="sanggakWay1">
+				<c:if test="${asset.sanggakWay == 1}">
+					<option value="1" selected="selected">정액법</option>
+					<option value="0" >정률법</option>
+				</c:if>
+				<c:if test="${asset.sanggakWay == 0}">
+					<option value="1" >정액법</option>
+					<option value="0" selected="selected">정률법</option>
+				</c:if>
+								
 				</select>
 			</td>
 			<td colspan="2">&nbsp;&nbsp;취득금액(*)
-				<input type="text" id="acquisitionPrice" name="acquisitionPrice"></td> 
+				<input type="text" id="acquisitionPrice1" name="acquisitionPrice1" value="${asset.acquisitionPrice}"></td> 
 			<td>
 				&nbsp;&nbsp;<input type="button" id="insertBtn" name="insertBtn" value="저장">
 			</td>	
@@ -88,12 +99,13 @@ $("#acquisitionPrice").keypress(function(e){
 		});
 	}
 	$("#insertBtn").on("click", function(){
+		alert("dddd");
 		if($("#assetCode").val().trim() == "" || $("#acquisitionPrice").val().trim()==""){
 			alert("(*)은 필수 사항입니다.");
 			return false;
 		}
 		$.ajax({
-			url  : "${pageContext.request.contextPath }/insertStatusFrm",
+			url  : "${pageContext.request.contextPath }/updateStatusAsset",
 			data : "assetCode="+$("#assetCode").val() + "&"+ "acquisitionDate="+$("#acquisitionDate").val()+ 
 					"&" + "purchaseCode="+$("#purchaseCode").val() + "&" + "sanggakWay="+$("#sanggakWay").val()+ 
 					"&" + "acquisitionPrice="+$("#acquisitionPrice").val(),
@@ -144,7 +156,7 @@ $("#acquisitionPrice").keypress(function(e){
 	}  
 	$(function() {
 	    //input을 datepicker로 선언
-	    $("#acquisitionDate").datepicker({
+	    $("#acquisitionDate1").datepicker({
 	        dateFormat: 'yy/mm/dd' 
 	        ,showOtherMonths: true 
 	        ,showMonthAfterYear:true 
@@ -163,6 +175,6 @@ $("#acquisitionPrice").keypress(function(e){
 	        ,maxDate: "+1M"                
 	    });                    
 	    
-	    $('#acquisitionDate').datepicker('setDate', 'today');             
+	    $('#acquisitionDate1').datepicker('setDate', 'today');             
 	});
 </script>

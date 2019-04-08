@@ -116,6 +116,10 @@
         	<put-attribute name="content" value="/WEB-INF/views/payment/paymentCalDetail.jsp"/>
         </definition>
         
+        <definition name="paymentslipInput" extends="layout"> <!-- 급여 전표 입력 -->
+        	<put-attribute name="content" value="/WEB-INF/views/payment/paymentslipInput.jsp"/>
+        </definition>
+        
         
         
          <definition name="AttitudeListTiles" extends="layout"> <!-- 근태 항목 출력 -->

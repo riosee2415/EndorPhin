@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -83,9 +82,6 @@ public class AssetController {
 		assetVo.setPurchaseCode(purchaseCode);
 		assetVo.setAccumulated(accumulated);
 	
-		logger.debug("updAsset:---{}",accountName);
-		logger.debug("updAsset:---{}",residualvalue);
-		
 		
 		int updAsset = assetService.updateAsset(assetVo);
 		
@@ -117,7 +113,6 @@ public class AssetController {
 		assetVo.setSanggakWay(sanggakWay);
 		assetVo.setAcquisitionPrice(acquisitionPrice);
 		
-		
 		int insertUpd = assetService.insertStatusAsset(assetVo);
 		
 		String data = assetVo.getSanggakWay();
@@ -141,6 +136,53 @@ public class AssetController {
 		}else {
 			model.addAttribute("assetCode",assetCode);
 			return "asset/insertAssetAjax";
+		}
+	}
+	
+	//수정
+	@RequestMapping("/updateStatusAsset")
+	public String updateStatusAsset(AssetVo assetVo, Model model, String assetCode,String acquisitionDate
+																,String sanggakWay,String acquisitionPrice
+																,String purchaseCode){
+															
+		Date date = new Date();									
+		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
+		
+		try {
+			date= sdf.parse(acquisitionDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		assetVo.setAssetCode(assetCode);
+		assetVo.setAcquisitionDate(date);
+		assetVo.setPurchaseCode(purchaseCode);
+		assetVo.setSanggakWay(sanggakWay);
+		assetVo.setAcquisitionPrice(acquisitionPrice);
+		
+		int updAssect = assetService.updateStatusAsset(assetVo);
+		
+		String data = assetVo.getSanggakWay();
+		
+		int sanggakWay11 = Integer.parseInt(data);
+		
+		model.addAttribute("acquisitionPrice",acquisitionPrice);
+		model.addAttribute("date",date);
+		model.addAttribute("assetCode",assetCode);
+		model.addAttribute("purchaseCode",purchaseCode);
+		model.addAttribute("sanggakWay",sanggakWay);
+		
+		if(updAssect > 0) {
+			
+			if( sanggakWay11 > 0){
+				return "asset/modify_straightAjax";
+			}else {
+				model.addAttribute("declining", SalesCodeConstant.declining);
+				return "asset/modify_decliningAjax";
+			}		
+		}else {
+			model.addAttribute("assetCode",assetCode);
+			return "asset/modifyAssetAjax";
 		}
 	}
 	
@@ -182,6 +224,17 @@ public class AssetController {
 	
 		return "asset/insertAssetAjax";
 	}
+	//수정화면으로 이동 
+	@RequestMapping("getAssetModifyBtn")
+	public String getAssetModifyBtn(Model model, String assetCode, String acquisitionPrice){
+	
+		AssetVo asset = assetService.selectAsset(assetCode);
+		
+		model.addAttribute("asset", asset);
+		
+		return "asset/modifyAssetAjax";
+	}
+
 
 	//내용연수표 이동
 	@RequestMapping(path="serviceLife", method=RequestMethod.GET)

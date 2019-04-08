@@ -20,6 +20,7 @@ public class AssetDaoImpl implements IAssetDao{
 		return sqlSessionTemplate.selectList("asset.getAllAsset");
 	}
 
+	
 	@Override
 	public int insertAsset(AssetVo assetVo) {
 		return sqlSessionTemplate.insert("asset.insertAsset", assetVo);
@@ -34,6 +35,18 @@ public class AssetDaoImpl implements IAssetDao{
 	@Override
 	public int insertStatusAsset(AssetVo assetVo) {
 		return sqlSessionTemplate.insert("asset.insertStatusAsset",assetVo);
+	}
+
+
+	@Override
+	public AssetVo selectAsset(String assetCode) {
+		return sqlSessionTemplate.selectOne("asset.selectAsset",assetCode);
+	}
+
+
+	@Override
+	public int updateStatusAsset(AssetVo assetVo) {
+		return sqlSessionTemplate.update("asset.updateStatusAsset",assetVo);
 	}
 	
 }

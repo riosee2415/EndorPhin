@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.or.ddit.board.model.Board_detailVo;
+import kr.or.ddit.util.model.BoardPageVo;
 import kr.or.ddit.util.model.PageVo;
 
 @Repository("board_detailDao")
@@ -121,6 +122,7 @@ public class Board_detailDao implements IBoard_detailDao{
 		return select_boardPost;
 	}
 
+	//====================테스트======================
 	/**
 	 * 
 	* Method : selectBoardList
@@ -130,8 +132,8 @@ public class Board_detailDao implements IBoard_detailDao{
 	* Method 설명 : 게시글 리스트 조회
 	 */
 	@Override
-	public List<Board_detailVo> selectBoardList() {
-		List<Board_detailVo> selectList = sqlSession.selectList("board_detail.selectBoardList");
+	public List<Board_detailVo> selectBoardList(PageVo param) {
+		List<Board_detailVo> selectList = sqlSession.selectList("board_detail.selectBoardList", param);
 		 return selectList;
 
 	}
@@ -180,6 +182,34 @@ public class Board_detailDao implements IBoard_detailDao{
 		return updateBoard;
 	}
 
-	
+	/**
+	 * 
+	* Method : deleteBoardOne
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardNo
+	* @return
+	* Method 설명 : 게시글 삭제
+	 */
+	@Override
+	public int deleteBoardOne(String boardNo) {
+		int deleteBoardOne = sqlSession.delete("board_detail.deleteBoardOne", boardNo);
+		return deleteBoardOne;
+	}
+
+	/**
+	 * 
+	* Method : selectBoardCount
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardTypeCode
+	* @return
+	* Method 설명 : 게시판 별 게시글 전체 갯수
+	 */
+	@Override
+	public Integer selectBoardCount(String boardTypeCode) {
+		Integer selectBoardCount = sqlSession.selectOne("board_detail.selectBoardCount", boardTypeCode);
+		return selectBoardCount;
+	}
 	
 }

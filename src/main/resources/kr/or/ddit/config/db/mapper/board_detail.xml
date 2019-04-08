@@ -118,11 +118,29 @@
 		</where>
 	</select>
 	
+	<!-- ============== 테스트 ============ -->
+	
 	<!-- 게시글 리스트 -->
-    <select id="selectBoardList" resultType="board_detailVo" >
-        select boardNo, title, contents, to_char(postDate,'yyyy-MM-dd') postDate, boardTypeCode, userId
-          from board_detail
-         order by boardNo desc 
+    <select id="selectBoardList" resultType="board_detailVo" parameterType="PageVo">
+        select boardNo, title, contents, postDate, boardTypeCode, userId
+		  from
+				(select a.boardNo boardNo, 
+				        a.title title, 
+				        a.contents contents, 
+				        to_char(a.postDate,'yyyy-MM-dd') postDate, 
+				        a.boardTypeCode boardTypeCode, 
+				        a.userId userId, rownum rn
+				    from
+				    (select boardNo, 
+				    		title, 
+				    		contents, 
+				    		postDate, 
+				    		boardTypeCode, 
+				    		userId
+				       from board_detail
+				      where boardTypeCode = #{boardTypeCode}
+				      order by boardNo desc) a ) a
+        where rn between (#{page}-1) * #{pageSize}+1 and #{page}*#{pageSize}
     </select>
     
     <!-- 게시글 저장 -->
@@ -144,6 +162,20 @@
 		   set title=#{title}, contents=#{contents}, postdate=sysdate
          where boardNo = #{boardNo}
 	</insert>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteBoardOne" parameterType="String">
+ 		delete from board_detail
+ 		 where boardNo = #{boardNo}
+ 	</delete>
+ 	
+ 	<!-- 게시판 별 게시글 수 조회 -->
+ 	<select id="selectBoardCount" resultType="Integer" parameterType="String" >
+        select count(boardTypeCode)
+          from board_detail
+         where boardTypeCode = #{boardTypeCode}
+	</select>
+
 </mapper>
 
 

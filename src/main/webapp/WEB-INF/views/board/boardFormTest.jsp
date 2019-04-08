@@ -4,12 +4,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>board1</title>
+<title>board</title>
 </head>
 <body>
-    <form name="form" action="boardSave">
+	<c:set var="boardNo" value="${boardInfo.boardNo}"/>
+    <form name="form" action="boardSave" method="get">
         <table border="1" style="width:600px">
+        <c:choose>
+         <c:when test = "${boardNo eq null}">
             <caption>게시글 등록</caption>
+         </c:when>
+          <c:otherwise>
+            <caption>게시글 수정</caption>
+         </c:otherwise>
+        </c:choose>
             <colgroup>
                 <col width='15%' />
                 <col width='*%' />
@@ -17,20 +25,21 @@
             <tbody>
                 <tr>
                     <td>작성자</td> 
-                    <td><input type="text" name="userId" size="20" maxlength="20"></td> 
+                    <td><input type="text" name="userId" size="20" maxlength="20" value="${boardInfo.userId}"></td> 
                 </tr>
                 <tr>
                     <td>제목</td> 
-                    <td><input type="text" name="title" size="70" maxlength="250"></td> 
+                    <td><input type="text" name="title" size="70" maxlength="250" value="${boardInfo.title}"></td> 
                 </tr>
                 <tr>
-                    <td>내용</td> 
-                    <td><textarea name="contents" rows="5" cols="60"></textarea></td> 
+                    <td>내용</td>
+                    <td><textarea name="contents" rows="5" cols="60">${boardInfo.contents}</textarea></td> 
                 </tr>
             </tbody>
         </table>    
         <a href="#" onclick="form.submit()">저장</a>
         <input type="hidden" name="boardTypeCode" value="${boardTypeCode}">
+        <input type="hidden" name="boardNo" value="${boardInfo.boardNo}"> 
     </form>    
 </body>
 </html>

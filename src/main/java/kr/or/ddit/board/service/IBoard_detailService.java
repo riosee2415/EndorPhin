@@ -5,6 +5,7 @@ import java.util.Map;
 
 import kr.or.ddit.board.model.Attach_boardVo;
 import kr.or.ddit.board.model.Board_detailVo;
+import kr.or.ddit.util.model.BoardPageVo;
 import kr.or.ddit.util.model.PageVo;
 
 public interface IBoard_detailService {
@@ -75,6 +76,8 @@ public interface IBoard_detailService {
 	 */
 	Board_detailVo select_latelyPost(String boardTypeCode);
 	
+	
+	//=====================테스트=========================
 	/**
 	 * 
 	* Method : selectBoardList
@@ -83,7 +86,7 @@ public interface IBoard_detailService {
 	* @return
 	* Method 설명 : 게시글 리스트 조회
 	 */
-	List<Board_detailVo> selectBoardList();
+	Map<String, Object> selectBoardList(PageVo pageVo);
 	
 	/**
 	 * 
@@ -117,4 +120,26 @@ public interface IBoard_detailService {
 	* Method 설명 : 게시글 상세조회
 	 */
 	int updateBoard(Board_detailVo param);
+	
+	/**
+	 * 
+	* Method : deleteBoardOne
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardNo
+	* @return
+	* Method 설명 : 게시글 삭제
+	 */
+	int deleteBoardOne(String boardNo);
+	
+	/**
+	 * 
+	* Method : selectBoardCount
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardTypeCode
+	* @return
+	* Method 설명 : 게시판 별 게시글 전체 갯수
+	 */
+	Integer selectBoardCount(String boardTypeCode);
 }

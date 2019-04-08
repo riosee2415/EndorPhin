@@ -31,6 +31,6 @@
         </table>    
         <a href="#" onclick="history.back(-1)">돌아가기</a>
         <a href="boardDelete?boardNo=${boardInfo.boardNo}">삭제</a>
-        <a href="boardUpdate?boardNo=${boardInfo.boardNo}">수정</a>
+        <a href="boardForm?boardNo=${boardInfo.boardNo}&boardTypeCode=${boardTypeCode}">수정</a>
 </body>
 </html>

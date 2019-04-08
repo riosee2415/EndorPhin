@@ -14,6 +14,7 @@ import kr.or.ddit.board.dao.ICommentsDao;
 import kr.or.ddit.board.model.Attach_boardVo;
 import kr.or.ddit.board.model.Board_detailVo;
 import kr.or.ddit.board.model.CommentsVo;
+import kr.or.ddit.util.model.BoardPageVo;
 import kr.or.ddit.util.model.PageVo;
 
 @Service("board_detailService")
@@ -145,6 +146,8 @@ public class Board_detailService implements IBoard_detailService{
 		return select_boardPost;
 	}
 
+	//====================테스트==========================
+	
 	/**
 	 * 
 	* Method : selectBoardList
@@ -153,13 +156,31 @@ public class Board_detailService implements IBoard_detailService{
 	* @return
 	* Method 설명 : 게시글 리스트 조회
 	 */
+//	@Override
+//	public List<Board_detailVo> selectBoardList(PageVo param) {
+//		List<Board_detailVo> selectBoardList = board_detailDao.selectBoardList(param);
+//		return selectBoardList;
+//
+//	}
+	
+	/**
+	 * 
+	* Method : selectBoardList
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param pageVo
+	* @return
+	* Method 설명 : 게시글 리스트 조회
+	 */
 	@Override
-	public List<Board_detailVo> selectBoardList() {
-		List<Board_detailVo> selectBoardList = board_detailDao.selectBoardList();
-		return selectBoardList;
-
+	public Map<String, Object> selectBoardList(PageVo pageVo) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		List<Board_detailVo> selectPostList = board_detailDao.selectPostList(pageVo);
+		int postCnt = board_detailDao.postCnt(pageVo.getBoardTypeCode());
+		resultMap.put("postList", selectPostList);
+		resultMap.put("postCnt", postCnt);
+		return resultMap;
 	}
-
 	/**
 	 * 
 	* Method : insertBoard
@@ -203,6 +224,36 @@ public class Board_detailService implements IBoard_detailService{
 	public int updateBoard(Board_detailVo param) {
 		int updateBoard = board_detailDao.updateBoard(param);
 		return updateBoard;
+	}
+
+	/**
+	 * 
+	* Method : deleteBoardOne
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardNo
+	* @return
+	* Method 설명 : 게시글 삭제
+	 */
+	@Override
+	public int deleteBoardOne(String boardNo) {
+		int deleteBoardOne = board_detailDao.deleteBoardOne(boardNo);
+		return deleteBoardOne;
+	}
+
+	/**
+	 * 
+	* Method : selectBoardCount
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardTypeCode
+	* @return
+	* Method 설명 : 게시판 별 게시글 전체 갯수
+	 */
+	@Override
+	public Integer selectBoardCount(String boardTypeCode) {
+		Integer selectBoardCount = board_detailDao.selectBoardCount(boardTypeCode);
+		return selectBoardCount;
 	}
 
 }

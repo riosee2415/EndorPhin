@@ -1,6 +1,7 @@
 package kr.or.ddit.board.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -47,12 +48,19 @@ public class boardCtr {
 	* Method 설명 : 게시글 리스트 조회
 	 */
 	@RequestMapping(value = "/boardList")
-    public String boardList(Model model, PageVo param) throws Exception {
-        List<Board_detailVo> listview = board_detailService.selectBoardList();
-        
-        model.addAttribute("listview", listview);
-        model.addAttribute("boardTypeCode", param.getBoardTypeCode());
-        return "board/boardListTest";
+    public String boardList(Model model, PageVo pageVo) throws Exception {
+//        List<Board_detailVo> listview = board_detailService.selectBoardList();
+//        
+//        model.addAttribute("listview", listview);
+//        model.addAttribute("boardTypeCode", param.getBoardTypeCode());
+//        return "board/boardListTest";
+		Map<String, Object> resultMap = board_detailService.selectPostList(pageVo);
+		model.addAllAttributes(resultMap);
+		
+		model.addAttribute("pageSize", pageVo.getPageSize());
+		model.addAttribute("page", pageVo.getPage());
+		model.addAttribute("boardTypeCode", pageVo.getBoardTypeCode());
+		return "board/boardListTest";
     }
 	
 	/**
@@ -62,11 +70,18 @@ public class boardCtr {
 	* 변경이력 :
 	* @return
 	* @throws Exception
-	* Method 설명 : 게시글 상세조회
+	* Method 설명 : 게시글 작성
 	 */
 	@RequestMapping(value = "/boardForm")
-	public String boardForm(Model model,String boardTypeCode) throws Exception {
+	public String boardForm(Model model, String boardTypeCode, String boardNo) throws Exception {
+		
+        if (boardNo!=null) {
+        	Board_detailVo boardInfo = board_detailService.selectBoardOne(boardNo);
+        	model.addAttribute("boardInfo", boardInfo);
+        }
+
 		model.addAttribute("boardTypeCode", boardTypeCode);
+		logger.debug("boardTypeCode : {}",boardTypeCode);
 	    return "board/boardFormTest";
 	}
 	
@@ -78,15 +93,23 @@ public class boardCtr {
 	* @param boardInfo
 	* @return
 	* @throws Exception
-	* Method 설명 : 게시글 등록
+	* Method 설명 : 게시글 저장
 	 */
 	@RequestMapping(value = "/boardSave")
 	public String boardSave(@ModelAttribute Board_detailVo boardInfo, HttpServletRequest request, String boardTypeCode, Model model) throws Exception {
 //		HttpSession session = request.getSession();
 //		EmployeeVo employeeVo = (EmployeeVo) session.getAttribute("employeeVo");
 //		boardInfo.setUserId(employeeVo.getUserId());
+		if (boardInfo.getBoardNo() == null) {
+			board_detailService.insertBoard(boardInfo);
+			model.addAttribute("boardTypeCode", boardTypeCode);
+		} else {
+			board_detailService.updateBoard(boardInfo);
+			model.addAttribute("boardTypeCode", boardTypeCode);
+		}
+		
 		model.addAttribute("boardTypeCode", boardTypeCode);
-		board_detailService.insertBoard(boardInfo);
+		logger.debug("boardTypeCode : {}", boardTypeCode);
 	    return "redirect:/boardList";
 	}
 	
@@ -116,31 +139,38 @@ public class boardCtr {
 	
 	/**
 	 * 
-	* Method : boardUpdate
+	* Method : boardUpdateSave
 	* 작성자 : macbook
 	* 변경이력 :
-	* @param boardNo
-	* @param model
+	* @param boardInfo
 	* @return
 	* @throws Exception
-	* Method 설명 : 게시글 수정
+	* Method 설명 : 게시글 수정버튼
 	 */
-	@RequestMapping(value = "/boardUpdate")
-	public String boardUpdate(String boardNo, Model model) throws Exception {
-	        
-		Board_detailVo boardInfo = board_detailService.selectBoardOne(boardNo);
-	        
-		model.addAttribute("boardInfo", boardInfo);
-	        
-	    return "board/boardUpdateTest";
-	}
-	
 	@RequestMapping(value = "/boardUpdateSave")
-	public String board1UpdateSave(@ModelAttribute("boardInfo") Board_detailVo boardInfo) throws Exception {
+	public String board1UpdateSave(@ModelAttribute("boardInfo") Board_detailVo boardInfo, String boardTypeCode, Model model) throws Exception {
 	        
 		board_detailService.updateBoard(boardInfo);
-	        
+	    model.addAttribute(boardTypeCode);
 	    return "redirect:/boardList";
+	}
+	
+	/**
+	 * 
+	* Method : boardDelete
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param request
+	* @return
+	* @throws Exception
+	* Method 설명 : 게시글 삭제
+	 */
+	@RequestMapping(value = "/boardDelete")
+    public String boardDelete(String boardNo) throws Exception {
+     
+     board_detailService.deleteBoardOne(boardNo);
+     
+     return "redirect:/boardList";
 	}
 
 

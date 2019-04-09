@@ -707,7 +707,7 @@
 		var insertOrderCode = $("#loadOrderCode").val();
 		var insertClientName = $("#loadClientName").val();
 		var insertSumValue_check = $("#loadSumValue").val();
-		var insertAuto = $("#loadAuto").val();
+		var insertAuto = $("#loadAuto").val(); 
 		var insertEntryType = $("#loadSlipType").val();
 		
 		

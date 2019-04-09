@@ -48,5 +48,11 @@ public class AssetDaoImpl implements IAssetDao{
 	public int updateStatusAsset(AssetVo assetVo) {
 		return sqlSessionTemplate.update("asset.updateStatusAsset",assetVo);
 	}
+
+
+	@Override
+	public int deleteAsset(String assetCode) {
+		return sqlSessionTemplate.delete("asset.deleteAsset",assetCode);
+	}
 	
 }

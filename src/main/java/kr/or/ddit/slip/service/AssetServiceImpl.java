@@ -41,7 +41,12 @@ public class AssetServiceImpl implements IAssetService{
 
 	@Override
 	public int updateStatusAsset(AssetVo assetVo) {
-		return assetDao.updateAsset(assetVo);
+		return assetDao.updateStatusAsset(assetVo);
+	}
+
+	@Override
+	public int deleteAsset(String assetCode) {
+		return assetDao.deleteAsset(assetCode);
 	}
 
 

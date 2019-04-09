@@ -20,4 +20,6 @@ public interface IAssetDao {
 	AssetVo selectAsset(String assetCode);
 	
 	int updateStatusAsset(AssetVo assetVo);
+	
+	int deleteAsset(String assetCode);
 }

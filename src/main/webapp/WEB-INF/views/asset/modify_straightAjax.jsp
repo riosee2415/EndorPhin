@@ -13,51 +13,52 @@
 	</thead>
 		<tr>
 			<td colspan="2">자산명(*)</td>
-			<td><input type="text" id="assetName"></td> 
+			<td><input type="text" id="assetName" value="${asset.assetName }"></td> 
 			<tr>
 		</tr>
 		<tr>
 			<td colspan="2" > 계정과목(*)
-			<td><input type="text" id="accountName" >
+			<td><input type="text" id="accountName" value="${asset.accountName }">
 				<input type="button"  data-toggle="modal" data-target="#my80sizeModal2" value="검색" ></td>
 			
 		</tr>
 		<tr>
 			<td colspan="2" > 거래처(*)</td>
-			<td><input type="text" id="clientName">
+			<td><input type="text" id="clientName" value="${asset.clientName }">
 				<input type="button" data-toggle="modal" data-target="#my80sizeModal3" value="검색" ></td>
 			
 		</tr>
 		<tr>
 			<td colspan="2"> 감가상각계정코드(*)</td>
-			<td><input type="text" id="sanggakCode">
+			<td><input type="text" id="sanggakCode" value="${asset.sanggakCode }">
 				<input type="button" data-toggle="modal" data-target="#my80sizeModal4" value="검색" >	</td>
 				
 		</tr>
 		<tr>
 		
 			<td colspan="2">내용연수/상각률(원수) </td>
-			<td><input type="text" id="year" style="width: 50px;">
-				<input type="button" data-toggle="modal" data-target="#my80sizeModal5" value="▦">
-				<input type="text" id="calculate" style="width: 65px;">
+			<td><input type="text" id="serviceLife" style="width: 50px;" value="${asset.serviceLife }">
+				<input type="button" data-toggle="modal"class="serviceBtn" data-target="#my80sizeModal5" value="▦">
+				<input type="text" id="depreciationRate"  style="width: 65px;">
 				(&nbsp;<input type="text" id="month" style="width: 50px;">&nbsp;)
 				<input onclick="myClick();" type="button" data-toggle="modal" data-target="#my80sizeModal6" value="년수별상각율">
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2">감가상각비(*)</td>
-			<td colspan="2"><input type="text" id="depreciation"></td> 
+			<td colspan="2" >감가상각비(*)</td>
+			<td colspan="2"><input type="text" id="depreciation" ></td> 
 		</tr>
 		<tr>
 			<td colspan="2">잔존가치(*)</td>
-			<td colspan="2"><input type="text" id="residualvalue" value="0"></td> 
+			<td colspan="2"><input type="text" id="residualvalue" value="0" value="${asset.residualvalue }"></td> 
 		</tr>
 		<tr>
 			<td colspan="2"> 적요  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-			<td><input type="text" id="jukyo"></td> 
+			<td><input type="text" id="jukyo" value="${asset.jukyo }"></td> 
 		</tr>
 		<tr>
-			<td><button type="button" class="btn btn-primary" onclick="insertBtn_fn();">등록 </button></td>
+			<td><button type="button" class="btn btn-primary" onclick="delete_fn();">취소 </button>
+				<button type="button" class="btn btn-primary" onclick="insertBtn_fn();">등록 </button></td>
 		</tr>
     </table>
     
@@ -131,14 +132,14 @@
 		var cal  = 1/parseInt(data);     
 		var fixed = cal.toFixed(3);
 		
-		var acquisitionPrice = $("#acquisitionPrice").val(); 
+		var acquisitionPrice = $("#acquisitionPrice1").val(); 
 		var depreciation = acquisitionPrice/parseInt(data); 
 		
 		var depre = parseInt(depreciation);
 		depre = fn_numberWithCommas(depre);
 		
-		$("#year").val(data); 
-	 	$("#calculate").val(fixed); 
+		$("#serviceLife").val(data); 
+	 	$("#depreciationRate").val(fixed); 
 		$("#depreciation").val(depre);
 		
 		$('.buttons').trigger('click');
@@ -158,22 +159,25 @@
 		}
 		$.ajax({
 			url  : "${pageContext.request.contextPath }/insertFrm",
-			data : "assetCode="+$("#assetCode").val() + "&"+ "date="+$("#date").val()+ 
+			data : "assetCode="+$("#assetCode1").val() + "&"+ "date="+$("#date").val()+ 
 					"&" +"assetName="+$("#assetName").val()+ 
-					"&" +"sanggakWay="+$("#sanggakWay").val() +  "&"+"accountName="+$("#accountName").val()+ 
-					"&" + "clientName="+$("#clientName").val() + "&" + "acquisitionPrice="+$("#acquisitionPrice").val()+ 
+					"&" +"sanggakWay="+$("#sanggakWay1").val() +  "&"+"accountName="+$("#accountName").val()+ 
+					"&" + "clientName="+$("#clientName").val() + "&" + "acquisitionPrice="+$("#acquisitionPrice1").val()+ 
 					"&" + "residualvalue="+$("#residualvalue").val()+"&" + "jukyo="+$("#jukyo").val() + 
 					"&" + "sanggakCode="+$("#sanggakCode").val()+"&" + "depreciation="+$("#depreciation").val()+
-					"&" + "accumulated="+$("#accumulated").val()+"&" + "purchaseCode="+$("#purchaseCode").val(),
+					"&" + "accumulated="+$("#accumulated").val()+"&" + "purchaseCode="+$("#purchaseCode1").val()+
+					"&" + "serviceLife="+$("#serviceLife").val()+"&" + "depreciationRate="+$("#depreciationRate").val(),
 			
 			success : function(data){
 				$("#serviceLife_div").html("");	
 				$("#insertArea").html("");	
-				
 				alert("성공적으로 등록되었습니다.");
-				
+				location.reload();
 			}
 		});
 	}
-	
+	function delete_fn(){
+	 	 
+       	$("#insertArea").html("");	
+	}
     </script>

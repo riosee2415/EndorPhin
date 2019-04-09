@@ -38,13 +38,13 @@
 			<td colspan="2">&nbsp;&nbsp;취득금액(*)
 				<input type="text" id="acquisitionPrice1" name="acquisitionPrice1" value="${asset.acquisitionPrice}"></td> 
 			<td>
-				&nbsp;&nbsp;<input type="button" id="insertBtn" name="insertBtn" value="저장">
+				&nbsp;&nbsp;<input type="button" id="insertBtn" name="insertBtn" value="수정">
 			</td>	
 		</tr>
 	</thead>
 </table>
 <br>
-<div id="serviceLife_div"></div>
+<div id="serviceLife_div1"></div>
 
 <div class="modal modal-center fade" id="my80sizeModal6" tabindex="1" role="dialog" aria-labelledby="my80sizeCenterModalLabel" >
 		<div class="modal-dialog modal-80size modal-center" role="document" >
@@ -99,28 +99,27 @@ $("#acquisitionPrice").keypress(function(e){
 		});
 	}
 	$("#insertBtn").on("click", function(){
-		alert("dddd");
-		if($("#assetCode").val().trim() == "" || $("#acquisitionPrice").val().trim()==""){
+	 	if($("#assetCode1").val().trim() == "" || $("#acquisitionPrice1").val().trim()==""){
 			alert("(*)은 필수 사항입니다.");
 			return false;
-		}
+		} 
 		$.ajax({
 			url  : "${pageContext.request.contextPath }/updateStatusAsset",
-			data : "assetCode="+$("#assetCode").val() + "&"+ "acquisitionDate="+$("#acquisitionDate").val()+ 
-					"&" + "purchaseCode="+$("#purchaseCode").val() + "&" + "sanggakWay="+$("#sanggakWay").val()+ 
-					"&" + "acquisitionPrice="+$("#acquisitionPrice").val(),
+			data : "assetCode="+$("#assetCode1").val() + "&"+ "acquisitionDate="+$("#acquisitionDate1").val()+ 
+					"&" + "purchaseCode="+$("#purchaseCode1").val() + "&" + "sanggakWay="+$("#sanggakWay1").val()+ 
+					"&" + "acquisitionPrice="+$("#acquisitionPrice1").val(),
 			success : function(data){
-				$("#serviceLife_div").html(data);
-				$("#serviceLife_div").html(data);
+				$("#serviceLife_div1").html(data);
+				$("#serviceLife_div1").html(data);
 		
-				var date  = new Date($("#acquisitionDate").val());
+				var date  = new Date($("#acquisitionDate1").val());
 				var month = 12-date.getMonth();
 				$("#month").val(month);
+				
 		}
 		
 	});
 });
-	
 		  
 	/*원단위 콤마 변환*/
 	function fn_numberWithCommas(x) {

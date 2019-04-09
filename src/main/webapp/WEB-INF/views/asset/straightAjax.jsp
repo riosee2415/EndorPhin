@@ -7,7 +7,7 @@
 <table class="table table-sm">
 	<thead class="thead">
 		<tr>
-			<td colspan="5" width="80%">| 고정자산등록</td>
+			<td colspan="5" width="80%">| 고정자산등록    </td>
 			<td></td>
 		</tr>
 	</thead>
@@ -37,9 +37,9 @@
 		<tr>
 		
 			<td colspan="2">내용연수/상각률(원수) </td>
-			<td><input type="text" id="year" style="width: 50px;">
-				<input type="button" data-toggle="modal" data-target="#my80sizeModal5" value="▦">
-				<input type="text" id="calculate" style="width: 65px;">
+			<td><input type="text" id="serviceLife" style="width: 50px;">
+				<input type="button"  data-toggle="modal" data-target="#my80sizeModal5" value="▦">
+				<input type="text" id="depreciationRate" style="width: 65px;">
 				(&nbsp;<input type="text" id="month" style="width: 50px;">&nbsp;)
 				<input onclick="myClick();" type="button" data-toggle="modal" data-target="#my80sizeModal6" value="년수별상각율">
 			</td>
@@ -57,7 +57,9 @@
 			<td><input type="text" id="jukyo"></td> 
 		</tr>
 		<tr>
-			<td><button type="button" class="btn btn-primary" onclick="insertBtn_fn();">등록 </button></td>
+			<td><button type="button" class="btn btn-primary" onclick="delete_fn();">취소 </button>
+			<button type="button" class="btn btn-primary" onclick="insertBtn_fn();">등록 </button></td>
+			
 		</tr>
     </table>
     
@@ -125,6 +127,8 @@
 	</div>
 </div>
     <script>
+    
+
     /* depreciation 정액법 = (취득원가 - 잔존가치)/ 내용년수  */
     $(".classTr").on("click", function(){
 		var data = $(this).data("value"); /* 내용년수  */
@@ -137,8 +141,8 @@
 		var depre = parseInt(depreciation);
 		depre = fn_numberWithCommas(depre);
 		
-		$("#year").val(data); 
-	 	$("#calculate").val(fixed); 
+		$("#serviceLife").val(data); 
+	 	$("#depreciationRate").val(fixed); 
 		$("#depreciation").val(depre);
 		
 		$('.buttons').trigger('click');
@@ -164,16 +168,29 @@
 					"&" + "clientName="+$("#clientName").val() + "&" + "acquisitionPrice="+$("#acquisitionPrice").val()+ 
 					"&" + "residualvalue="+$("#residualvalue").val()+"&" + "jukyo="+$("#jukyo").val() + 
 					"&" + "sanggakCode="+$("#sanggakCode").val()+"&" + "depreciation="+$("#depreciation").val()+
-					"&" + "accumulated="+$("#accumulated").val()+"&" + "purchaseCode="+$("#purchaseCode").val(),
-			
+					"&" + "accumulated="+$("#accumulated").val()+"&" + "purchaseCode="+$("#purchaseCode").val()+
+					"&" + "serviceLife="+$("#serviceLife").val()+"&" + "depreciationRate="+$("#depreciationRate").val(),
+					
 			success : function(data){
 				$("#serviceLife_div").html("");	
 				$("#insertArea").html("");	
 				
 				alert("성공적으로 등록되었습니다.");
-				
+				location.reload();
 			}
 		});
 	}
 	
+	function delete_fn(){
+ 	$.ajax({
+		url 	: "${pageContext.request.contextPath }/deleteAsset",
+		data 	: "assetCode="+$("#assetCode").val(),
+		success : function(data){
+       	 alert("고정자산등록을 취소합니다.");
+       	 
+       	$("#insertArea").html("");	
+       	location.reload();
+		}
+	});
+}
     </script>

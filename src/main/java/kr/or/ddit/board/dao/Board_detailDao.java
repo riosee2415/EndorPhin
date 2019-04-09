@@ -120,5 +120,95 @@ public class Board_detailDao implements IBoard_detailDao{
 		Board_detailVo select_boardPost = sqlSession.selectOne("board_detail.selectPostList", boardTypeCode);
 		return select_boardPost;
 	}
+
+	//====================테스트======================
+	/**
+	 * 
+	* Method : selectBoardList
+	* 작성자 : macbook
+	* 변경이력 :
+	* @return
+	* Method 설명 : 게시글 리스트 조회
+	 */
+	@Override
+	public List<Board_detailVo> selectBoardList(PageVo param) {
+		List<Board_detailVo> selectList = sqlSession.selectList("board_detail.selectBoardList", param);
+		 return selectList;
+
+	}
+
+	/**
+	 * 
+	* Method : insertBoard
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param param
+	* @return
+	* Method 설명 : 게시글 등록
+	 */
+	public int insertBoard(Board_detailVo param) {
+        int insertBoard = sqlSession.insert("board_detail.insertBoard", param);
+        return insertBoard;
+	}
+
+	/**
+	 * 
+	* Method : selectBoardOne
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardNo
+	* @return
+	* Method 설명 : 게시글 상세조회
+	 */
+	@Override
+	public Board_detailVo selectBoardOne(String boardNo) {
+		Board_detailVo selectBoardOne = sqlSession.selectOne("board_detail.selectBoardOne", boardNo);
+		return selectBoardOne;
+	}
+
+	/**
+	 * 
+	* Method : updateBoard
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param param
+	* @return
+	* Method 설명 : 게시글 수정
+	 */
+	@Override
+	public int updateBoard(Board_detailVo param) {
+		int updateBoard = sqlSession.update("board_detail.updateBoard", param);
+		return updateBoard;
+	}
+
+	/**
+	 * 
+	* Method : deleteBoardOne
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardNo
+	* @return
+	* Method 설명 : 게시글 삭제
+	 */
+	@Override
+	public int deleteBoardOne(String boardNo) {
+		int deleteBoardOne = sqlSession.delete("board_detail.deleteBoardOne", boardNo);
+		return deleteBoardOne;
+	}
+
+	/**
+	 * 
+	* Method : selectBoardCount
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardTypeCode
+	* @return
+	* Method 설명 : 게시판 별 게시글 전체 갯수
+	 */
+	@Override
+	public Integer selectBoardCount(String boardTypeCode) {
+		Integer selectBoardCount = sqlSession.selectOne("board_detail.selectBoardCount", boardTypeCode);
+		return selectBoardCount;
+	}
 	
 }

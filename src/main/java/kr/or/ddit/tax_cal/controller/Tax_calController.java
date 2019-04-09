@@ -1,6 +1,7 @@
 package kr.or.ddit.tax_cal.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -10,12 +11,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.ddit.company.model.DeptVo;
 import kr.or.ddit.company.service.IDeptService;
 import kr.or.ddit.constant.SalesCodeConstant;
 import kr.or.ddit.order.model.ClientVo;
 import kr.or.ddit.order.service.ICilentService;
+import kr.or.ddit.tax_cal.service.ITax_calService;
+import kr.or.ddit.util.model.PageVo;
 
 @Controller
 public class Tax_calController {
@@ -28,15 +33,38 @@ public class Tax_calController {
 	@Resource(name="deptService")
 	private IDeptService deptService;
 	
-	@RequestMapping(path="taxcallview", method=RequestMethod.GET)
-	public String taxcallview(Model model) {
+	@Resource(name="tax_calService")
+	private ITax_calService tax_calService;
+	
+	
+	// 최초 페이지 뷰
+	@RequestMapping(path="taxcalview", method=RequestMethod.GET)
+	public String taxcallview(PageVo pageVo, Model model) {
+		
+		Map<String, Object> resultMap = tax_calService.selecTax_calPagingList(pageVo);
+		model.addAllAttributes(resultMap);
+		model.addAttribute("pageSize", pageVo.getPageSize());
+		model.addAttribute("page", pageVo.getPage());
 		
 		model.addAttribute("scCode", SalesCodeConstant.salesCode);
 		model.addAttribute("phCode", SalesCodeConstant.purchaseCode);
 		
-		return "taxcallview";
+		return "taxcalview";
 	}
 
+	
+	
+	// ajax를 통한 페이징 뷰
+	@RequestMapping("/getTax_calPageList")
+	public String getTax_calPageList(PageVo pageVo, Model model) {
+		
+		Map<String, Object> resultMap = tax_calService.selecTax_calPagingList(pageVo);
+		model.addAllAttributes(resultMap);
+		model.addAttribute("pageSize", pageVo.getPageSize());
+		model.addAttribute("page", pageVo.getPage());
+		
+		return "taxcal/taxcalAjaxPaging";
+	}
 	
 	
 	
@@ -51,7 +79,7 @@ public class Tax_calController {
 	
 	
 	
-	
+	// Ajax를 통해 부서 데이터 가져오기
 	@RequestMapping("/findDept")
 	public String findDept(Model model) {
 		List<DeptVo> deptList = deptService.getAllDept();
@@ -61,7 +89,7 @@ public class Tax_calController {
 	}
 	
 	
-	
+	// Ajax를 통해 발주번호 데이터 가져오기 (개발예정)
 	@RequestMapping("/findOrderCode")
 	public String findOrderCode(Model model) {
 		
@@ -70,4 +98,71 @@ public class Tax_calController {
 		
 		return "taxcal/findOrderCode";
 	}
+	
+	
+	// Ajax를 통해 입력폼의 html을 로드
+	@RequestMapping("/openInsertViewArea")
+	@ResponseBody
+	public String openInsertViewArea(	@RequestParam(name="slipDate")String slipDate
+								,		@RequestParam(name="supplyValue")String supplyValue
+								,		@RequestParam(name="surtax")String surtax
+								,		@RequestParam(name="sumValue")String sumValue	
+								,		@RequestParam(name="salesStatus")String salesStatus	
+								,		@RequestParam(name="clientName")String clientName	
+								,		@RequestParam(name="deptName", defaultValue="미등록")String deptName	
+								,		@RequestParam(name="OrderCode", defaultValue="")String OrderCode	
+								,		@RequestParam(name="auto")String auto	
+								,		@RequestParam(name="slipType")String slipType	
+			) {
+		
+		
+		
+		logger.debug("slipDate : {}", slipDate);
+		logger.debug("supplyValue : {}", supplyValue);
+		logger.debug("surtax : {}", surtax);
+		logger.debug("sumValue : {}", sumValue);
+		logger.debug("salesStatus : {}", salesStatus);
+		logger.debug("clientName : {}", clientName);
+		logger.debug("deptName : {}", deptName);
+		logger.debug("OrderCode : {}", OrderCode);
+		logger.debug("auto : {}", auto);
+		logger.debug("slipType : {}", slipType);
+		
+		return "Connection";
+		
+	}
+	
+	@RequestMapping("/openInsertViewAreaLoad")
+	public String openInsertViewAreaLoad(@RequestParam("slipType")String slipType
+										,@RequestParam("salesStatus")String salesStatus
+										,@RequestParam("supplyValue")String supplyValue
+										,@RequestParam("surtax")String surtax
+										,@RequestParam("sumValue")String sumValue
+										,@RequestParam("clientCode")String clientCode
+										,@RequestParam("clientName")String clientName
+										,@RequestParam("slipDate")String slipDate
+										,@RequestParam("deptCode")String deptCode
+										,@RequestParam("orderCode")String orderCode
+										,@RequestParam("auto")String auto
+										,Model model) {
+			
+			model.addAttribute("slipType", slipType);
+			model.addAttribute("salesStatus", salesStatus);
+			model.addAttribute("supplyValue", supplyValue);
+			model.addAttribute("surtax", surtax);
+			model.addAttribute("sumValue", sumValue);
+			model.addAttribute("clientCode", clientCode);
+			model.addAttribute("clientName", clientName);
+			model.addAttribute("slipDate", slipDate);
+			model.addAttribute("deptCode", deptCode);
+			model.addAttribute("orderCode", orderCode);
+			model.addAttribute("auto", auto);
+			
+		return "taxcal/openInsertViewArea";
+		
+	}
+	
+	
+	
+	
 }

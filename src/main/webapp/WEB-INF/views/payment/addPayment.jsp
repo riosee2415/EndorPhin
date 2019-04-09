@@ -17,7 +17,7 @@
 	</table>
 </form>
 
-<table class="table table-striped">
+<table class="table table-hover">
 	<thead>
 		<tr>
 			<th>사원번호</th>
@@ -33,7 +33,7 @@
 		<c:forEach items="${paymentList}" var="vo">
 			<tr class="payTr" data-userid="${vo.userId }">
 				<td><a href="#detailLayer" data-toggle="modal"
-			data-target="#my80sizeModal" class="paymentDetail">${vo.userId }</a></td>
+			data-target="#my80sizeModal" class="paymentDetail">${vo.userId}</a></td>
 				<c:set var="totalSalarysum" value="${totalSalarysum+vo.totalSalary}"/>
 				<c:set var="totalWagesum" value="${totalWagesum+vo.totalWage}"/>
 				<td>${vo.positionname}</td>
@@ -45,7 +45,7 @@
 			</tr>
 		</c:forEach>
 	</tbody>
-	<tfoot align="center" >
+	<tfoot align="center">
 		<tr>
 			<td>계</td>
 			<td>총 급여 : </td>
@@ -70,7 +70,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="form-group">
-					<table>
+					<table class="table table-hover" style="font-size: 5px">
 						<tr>
 							<th><label>사번</label></th>
 							<td><input class="modalUserInfo" readonly="readonly" size="12"/></td>
@@ -86,8 +86,8 @@
 				
 				<div class="form-group">
 					<label for="InputEmail">급여내역</label>
-					<div style="overflow:scroll; width:600px; height:200px;">
-						<table>
+					<div style="overflow:scroll; width:750px; height:200px;">
+						<table class="table table-hover">
 							<thead>
 								<tr id="firModalProductThead">
 								</tr>
@@ -102,8 +102,8 @@
 				
 				<div class="form-group">
 					<label for="InputEmail">공제내역</label>
-					<div style="overflow:scroll; width:600px; height:200px;">
-						<table>
+					<div style="overflow:scroll; width:750px; height:200px;">
+						<table class="table table-hover">
 							<thead>
 								<tr id="firModalDeductThead">
 									<th>공제일</th>
@@ -114,7 +114,21 @@
 							</tbody>
 						</table>
 					</div>
-						<a data-toggle="modal" href="#myModal4" class="btn btn-primary" id="modalAddDeduct">공제 등록</a>
+					<a data-toggle="modal" href="#myModal4" class="btn btn-primary" id="modalAddDeduct">공제 등록</a>
+				</div>
+				<div class="form-group">
+					<label for="InputEmail">원천징수내역</label>
+					<div style="overflow:scroll; width:750px; height:200px;">
+						<table class="table table-hover">
+							<thead>
+								<tr id="firModalWithholdThead">
+									<th>공제일</th>
+								</tr>
+							</thead>
+							<tbody id="firModalWithholdTbody">
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -132,7 +146,7 @@
             <div class="modal-body">
             	<h3>작성일</h3><input type="text" id="datepicker">
             	<div style="overflow:scroll; width:450px; height:200px;">
-	            	<table>
+	            	<table class="table table-hover">
 	            		<thead>
 	            			<tr>
 	            				<th>항목코드</th>
@@ -164,7 +178,7 @@
             <div class="modal-body">
             	<h3>작성일</h3><input type="text" id="datepicker1">
             	<div style="overflow:scroll; width:450px; height:200px;">
-	            	<table>
+	            	<table class="table table-hover">
 	            		<thead>
 	            			<tr>
 	            				<th>항목코드</th>
@@ -348,7 +362,6 @@
 			url : "/getPaymentList",
 			data : "payCode=" + modalUpd,
 			success : function(data) {
-				console.log(data);
 				secondModalDataInput(deproductList,deprostatus,$("#secondModalUpdTbody"));
 				secondDetailInit(data,deprostatus);
 			}
@@ -400,7 +413,10 @@
 			}
 			else if(deproductList[i].deprostatus==2){
 				modalSelect.append("<tr class=\'secondDeductAdd\'>");
+			}else if(deproductList[i].deprostatus==3){
+				modalSelect.append("<tr class=\'secondWithholdAdd\'>");
 			}
+			
 			if(deproductList[i].deprostatus==deprostatus){
 				modalSelect.append("<td>"+deproductList[i].deductCode+"</td>");
 				modalSelect.append("<td>"+deproductList[i].deductName+"</td>");
@@ -428,37 +444,37 @@
 	function dataInput(data){
 		var deductName = new Map();
 		
-		$("#firModalProductThead").html("");
-		$("#firModalProductTbody").html("");
-		$("#firModalDeductThead").html("");
-		$("#firModalDeductTbody").html("");
-		$("#firModalProductThead").append("<th>급여일</th>");
-		$("#firModalDeductThead").append("<th>공제일</th>");
+		$("#firModalProductThead,#firModalProductTbody,#firModalDeductThead,#firModalDeductTbody,#firModalWithholdThead,#firModalWithholdTbody").html("");
+		$("#firModalProductThead,#firModalDeductThead,#firModalWithholdThead").append("<th>급여일</th>");
 		for(var i=0;i<data.divList.length;i++){
 			deductName.set(data.divList[i].deductCode,0);
 			if(data.divList[i].deprostatus==1){
 				$("#firModalProductThead").append("<th>"+data.divList[i].deductName+"</th>");
 			}
-			else{
+			else if(data.divList[i].deprostatus==2){
 				$("#firModalDeductThead").append("<th>"+data.divList[i].deductName+"</th>");
+			}else if(data.divList[i].deprostatus==3){
+				$("#firModalWithholdThead").append("<th>"+data.divList[i].deductName+"</th>");
 			}
 				deductName.set(data.divList[i].deductCode,0);
 		}
 		
-		$("#firModalProductThead").append("<th>총급여액</th>");
-		$("#firModalDeductThead").append("<th>총공제액</th>");
+		$("#firModalProductThead").append("<th>총급여액</th><th>총 과세액</th>");
+		$("#firModalDeductThead,#firModalWithholdThead").append("<th>총공제액</th>");
 		
 		if(data.hasOwnProperty('paymentList')){
 			
 			for (var i = 0; i < data.paymentList.length; i++) {
 				$("#firModalDeductTbody").append("<tr>");
 				$("#firModalProductTbody").append("<tr>");
+				$("#firModalWithholdTbody").append("<tr>");
 				$("#firModalDeductTbody").append("<td><a data-toggle=\'modal\' data-payCd=\'"+
 												data.paymentList[i].payCode+"\' href=\'#myModal3\' class=\'modalUpdDeduct\'>"
 												+data.paymentList[i].payDay+"</a></td>");
 				$("#firModalProductTbody").append("<td><a data-toggle=\'modal\' data-payCd=\'"+
 												data.paymentList[i].payCode+"\' href=\'#myModal3\' class=\'modalUpdProduct\'>"
 												+data.paymentList[i].payDay+"</a></td>");
+				$("#firModalWithholdTbody").append("<td>"+data.paymentList[i].payDay+"</td>");
 				for (var a = 0; a < data.paymentList.length; a++) {
 					if(data.paymentDetailList[a].length==0){
 						break;
@@ -473,19 +489,21 @@
 					if(data.divList[j].deprostatus==1){
 						$("#firModalProductTbody").append("<td>"+deductName.get(data.divList[j].deductCode)+"</td>");
 					}
-					else{
+					else if(data.divList[j].deprostatus==2){
 						$("#firModalDeductTbody").append("<td>"+deductName.get(data.divList[j].deductCode)+"</td>");
-					}
+					}else if(data.divList[j].deprostatus==3){
+						$("#firModalWithholdTbody").append("<td>"+deductName.get(data.divList[j].deductCode)+"</td>");
+					} 
 				}
 				deductName = new Map();
 				for(var a=0;a<data.divList.length;a++){
 					deductName.set(data.divList[a].deductCode,0);
 				}
 				$("#firModalProductTbody").append("<td>"+data.paymentList[i].totalSalary+"</td>");
-				$("#firModalDeductTbody").append("<td>"+data.paymentList[i].totalWage+"</td>");
+				$("#firModalProductTbody").append("<td>"+data.paymentList[i].taxamount+"</td>");
+				$("#firModalDeductTbody,#firModalWithholdTbody").append("<td>"+data.paymentList[i].totalWage+"</td>");
 				
-				$("#firModalDeductTbody").append("</tr>");
-				$("#firModalProductTbody").append("</tr>");
+				$("#firModalWithholdTbody,#firModalDeductTbody,#firModalProductTbody").append("</tr>");
 			}
 		}
 		secondMethodInput();

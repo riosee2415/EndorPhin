@@ -27,6 +27,7 @@
 	<table>
 		<thead class="thead">
 			<tr style="text-align: center;">
+				<td style="width: 80px;">번호</td>
 				<td style="width: 150px;">날짜</td>
 				<td style="width: 100px;">구분</td>
 				<td style="width: 120px;">공급가액</td>
@@ -40,6 +41,7 @@
 			</tr>
 		</thead>
 		<tbody id="establishListTbody">
+		 
 		</tbody>
 	</table>
 
@@ -64,27 +66,38 @@
 				<td style="width: 100px;">공급가액</td>
 				<td style="width: 100px;">부가세</td>
 				<td style="width: 100px;">공급대가</td>
-				<td style="width: 100px;">거래처</td>
-				<td style="width: 110px;">사용부서</td>
+				<td colspan="2" style="width: 150px;">거래처</td>
+				<td colspan="2" style="width: 150px;">부서</td>
 				<td style="width: 100px;">발주번호</td>
 				<td style="width: 65px;">전자</td>
 				<td style="width: 65px;">분개</td>
 			</tr>
 		</thead>
 			<tr>
-				<td><input style="width: 100px;" type="text" /></td> <!-- 날짜 -->
+				<td><input id="insertSlipDate" style="width: 100px;" type="text" /></td> <!-- 날짜 -->
 				<td><input id="insertSalesStatus" style="width: 80px;" type="text" /></td> <!-- 구분 -->
 				<td><input id="insertSupplyValue" style="width: 100px;" type="text" readonly/></td>  <!-- 공급가액 -->
 				<td><input id="insertSurTax" style="width: 100px;" type="text" readonly/></td>  <!-- 부가세 -->
 				<td><input id="insertSumValue" style="width: 100px;" type="text" /></td>  <!-- 공급대가 -->
-				<td><input id="insertClient" style="width: 100px;" type="text" /></td> <!-- 거래처 -->
-				<td><input id="insertDept" style="width: 100px;" type="text" placeholder="미등록"/></td> <!-- 사용부서 -->
+				<td><input id="insertClientCode" style="width: 35px;" type="text" /></td> <!-- 거래처코드 -->
+				<td><input id="insertClient" style="width: 115px;" type="text" /></td> <!-- 거래처 -->
+				<td><input id="insertDeptCode" style="width: 35px;" type="text"/></td> <!-- 사용부서 -->
+				<td><input id="insertDept" style="width: 115px;" type="text" placeholder="미등록"/></td> <!-- 사용부서 -->
 				<td><input id="insertOrderCode" style="width: 100px;" type="text" /></td>  <!-- 발주번호 -->
-				<td><input id="insertAuto" style="width: 60px;" type="text" /></td> <!-- 전자 -->
-				<td><input id="insertSlipType" style="width: 60px;" type="text" /></td> <!-- 분개 -->
+				<td><input id="insertAuto" style="width: 70px;" type="text" /></td> <!-- 전자 -->
+				<td><input id="insertSlipType" style="width: 70px;" type="text" /></td> <!-- 분개 -->
 			</tr>
 </table>
 <!-- 입력 폼 끝 -->
+
+
+<p style="margin-top: 30px;" />
+
+
+<!-- 전표 세부내역 분개 창 영역 -->
+<div id="insertViewArea"></div>
+<!-- 전표 세부내역 분개 창 영역 -->
+
 
 </center>
 
@@ -289,6 +302,86 @@
 
 
 <script>
+
+
+
+
+//날짜 로드 처리 시작=========================================================================
+$("document").ready(function(){
+	$(function() {
+        //input을 datepicker로 선언
+        $("#insertSlipDate").datepicker({
+            dateFormat: 'yy/mm/dd' //Input Display Format 변경
+            ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+            ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
+            ,changeYear: true //콤보박스에서 년 선택 가능
+            ,changeMonth: true //콤보박스에서 월 선택 가능                
+            ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
+            ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+            ,buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
+            ,buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
+            ,yearSuffix: "년" //달력의 년도 부분 뒤에 붙는 텍스트
+            ,monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'] //달력의 월 부분 텍스트
+            ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip 텍스트
+            ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
+            ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 부분 Tooltip 텍스트
+            ,minDate: "-1M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+            ,maxDate: "+1M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)                
+        });                    
+        
+        //초기값을 오늘 날짜로 설정
+        $('#insertSlipDate').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)            
+    });
+});
+
+//날짜 로드 처리 끝=========================================================================
+
+
+
+
+
+
+
+
+
+// 페이징 처리 시작=========================================================================
+
+	/*페이지 로드 시 1페이지를 로드*/
+	$("document").ready(function(){
+		getTax_calPageList(1);
+		
+	});
+	
+	
+	/*페이지 로드 시 호출하는 Ajax*/
+	function getTax_calPageList(page) {
+		$.ajax({
+			url : "${pageContext.request.contextPath }/getTax_calPageList",
+			data : "page=" + page,
+			success : function(data) {
+
+				var htmlArr = data
+						.split("================seperator================");
+
+				$("#establishListTbody").html(htmlArr[0]);
+				$("#pagination").html(htmlArr[1]);
+
+			}
+		});
+	}
+
+
+
+
+
+//페이징 처리 끝=========================================================================
+
+
+
+
+
+
+
 	// Status Code Map
 	var statusCodeMap = new Map();
 	
@@ -349,6 +442,7 @@
 	$("#insertSlipType").keypress(function(e){
 		var value = $(this).val();
 		fn_setSlipType(e,value);
+		
 	});
 	
 	
@@ -482,19 +576,96 @@
 		if(e.which == 13){
 			if(value == 1){
 				$("#insertSlipType").val("현금");
+				fn_openInsertViewAreaLoad();
 			} else if (value == 2){
 				$("#insertSlipType").val("외상");
+				fn_openInsertViewAreaLoad();
 			} else if (value == 3){
 				$("#insertSlipType").val("혼합");
+				fn_openInsertViewAreaLoad();
 			} else if (value == 4){
 				$("#insertSlipType").val("카드");
+				fn_openInsertViewAreaLoad();
 			} else {
 				$("#insertAuto").val("");
 			}
 		} else {
 			// 작동 하지 않음
 		}
+		
+		
+		
 	} 
+	
+	
+	/*입력창 오픈 : Ajax*/
+	function fn_openInsertViewAreaLoad(){
+		
+		var slipType = $("#insertSlipType").val();
+		var salesStatus = $("#insertSalesStatus").val();
+		var supplyValue = $("#insertSupplyValue").val();
+		var surtax = $("#insertSurTax").val();
+		var sumValue = $("#insertSumValue").val();
+		var clientCode = $("#insertClientCode").val();
+		var clientName = $("#insertClient").val();
+		var slipDate = $("#insertSlipDate").val();
+		var deptCode = $("#insertDeptCode").val();
+		var orderCode = $("#insertOrderCode").val();
+		var auto = $("#insertAuto").val();
+		
+		
+		$.ajax({
+			url : "${pageContext.request.contextPath }/openInsertViewAreaLoad",
+			data : "slipType=" + slipType + "&salesStatus=" + salesStatus + "&supplyValue=" + supplyValue + "&surtax=" + surtax + "&sumValue=" + sumValue
+					+ "&clientCode=" + clientCode + "&clientName=" + clientName + "&slipDate=" + slipDate + "&deptCode=" + deptCode + "&orderCode=" + orderCode
+					+ "&auto=" + auto,
+			success : function(data){
+				$("#insertViewArea").html(data);
+				fn_openInsertViewArea();
+				
+			}
+		});
+	}
+	
+	
+	
+
+	/*전표데이터 컨트롤러로 전송하는 Ajax  전표 데이터 전송 완료 , 전표상세데이터 전송*/
+	function fn_openInsertViewArea(){
+		
+		var slipDate = $("#insertSlipDate").val();
+		var supplyValue = $("#insertSupplyValue").val();
+		var surtax = $("#insertSurTax").val();
+		var sumValue = $("#insertSumValue").val();
+		var salesStatus = $("#insertSalesStatus").val();
+		var clientName = $("#insertClient").val();
+		var deptName = $("#insertDept").val();
+		var OrderCode = $("#insertOrderCode").val();
+		var auto = $("#insertAuto").val();
+		var slipType = $("#insertSlipType").val();
+		
+		
+		
+		$.ajax({
+			url : "${pageContext.request.contextPath }/openInsertViewArea",
+			data : 	  "slipDate=" + slipDate 
+					+ "&supplyValue=" + supplyValue 
+					+ "&surtax=" + surtax 
+					+ "&sumValue=" + sumValue
+					+ "&salesStatus=" + salesStatus
+					+ "&clientName=" + clientName
+					+ "&deptName=" + deptName
+					+ "&OrderCode=" + OrderCode
+					+ "&auto=" + auto
+					+ "&slipType=" + slipType,
+			success : function(data){
+				console.log(data);
+			}
+			
+				
+		});
+		
+	}
 	
 	
 	

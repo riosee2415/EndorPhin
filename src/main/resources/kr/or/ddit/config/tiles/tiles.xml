@@ -144,6 +144,13 @@
         <definition name="paymentslipInput" extends="layout"> <!-- 급여 전표 입력 -->
            <put-attribute name="content" value="/WEB-INF/views/payment/paymentslipInput.jsp"/>
         </definition>
+        <definition name="paymentCalDetail" extends="layout"> <!-- 급여 명세서 상세 항목 -->
+        	<put-attribute name="content" value="/WEB-INF/views/payment/paymentCalDetail.jsp"/>
+        </definition>
+        
+        <definition name="paymentslipInput" extends="layout"> <!-- 급여 전표 입력 -->
+        	<put-attribute name="content" value="/WEB-INF/views/payment/paymentslipInput.jsp"/>
+        </definition>
         
         
         
@@ -161,6 +168,14 @@
         
          <definition name="useAsset" extends="layout"><!--감가상각비 입력-->
            <put-attribute name="content" value="/WEB-INF/views/depreciation/depreciation.jsp"/>
+        </definition>
+         
+         <definition name="sellAsset" extends="layout"><!--고정자산 매각-->
+        	<put-attribute name="content" value="/WEB-INF/views/asset/sellAsset.jsp"/>
+        </definition>
+        
+         <definition name="useAsset" extends="layout"><!--감가상각비 입력-->
+        	<put-attribute name="content" value="/WEB-INF/views/depreciation/depreciation.jsp"/>
         </definition>
         
         

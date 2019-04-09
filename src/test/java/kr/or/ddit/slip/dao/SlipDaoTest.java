@@ -31,4 +31,12 @@ public class SlipDaoTest extends LogicConfig {
 		/***Then***/
 		assertNotNull(slipList);
 	}
+	@Test
+	public void insertSlipTest() {
+		SlipVo slipVo = new SlipVo();
+		slipVo.setTotal("444");
+		slipVo.setStatus("0");
+		int insertSlip = slipDao.insertSlip(slipVo);
+		logger.debug("asdflkn:{}",slipVo.getSlipNumber());
+	}
 }

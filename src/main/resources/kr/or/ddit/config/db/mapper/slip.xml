@@ -6,11 +6,19 @@
 
 	<!-- 일반전표 입력 -->
 	<insert id="insertSlip" parameterType="slipVo">
+		<selectKey order="BEFORE" keyProperty="slipNumber" resultType="String">
+			SELECT slip_seq.nextval
+			from	dual
+		</selectKey>
 		insert into slip
 		(slipnumber, total, slipdate, departmentname, jukyo, status)
 		values
-		(slip_seq.nextval,#{total},sysdate,#{departmentName},#{jukyo},#{status})
-
+		(#{slipNumber}
+		,#{total}
+		,sysdate
+		,nvl(#{departmentName, jdbcType=VARCHAR},'미등록')
+		,nvl(#{departmentName, jdbcType=VARCHAR},'미등록')
+		,nvl(#{status,jdbcType=VARCHAR},'0'))
 	</insert>
 	
 	<!-- 시퀀스 값 불러오기 -->

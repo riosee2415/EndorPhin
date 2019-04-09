@@ -23,20 +23,49 @@
 	        COMPANYCODE,
 	        sanggakCode,
 	        depreciation,
-	        purchaseCode
+	        purchaseCode,
+	        accumulated
 	    FROM ASSET
+	</select>
+	
+	<!--상세화면 조회하기   -->
+	<select id="selectAsset" resultType="assetVo" parameterType="map">
+        SELECT
+	        ASSETCODE, 
+	        ASSETNAME, 
+	        acquisitionDate, 
+	        ACCOUNTNAME, 
+	        CLIENTNAME, 
+	        SANGGAKWAY, 
+	        ACQUISITIONPRICE, 
+	        SLIPNUMBER, 
+	        RESIDUALVALUE, 
+	        UNIT, 
+	        JUKYO, 
+	        UNITPRICE, 
+	        QUANTITY, 
+	        COMPANYCODE,
+	        sanggakCode,
+	        depreciation,
+	        purchaseCode,
+	        accumulated
+	    FROM ASSET
+	    WHERE ASSETCODE = #{assetCode}
+	    
 	</select>
 	
 	
 	<!-- 자산 추가하기 -->
 	<insert id="insertAsset" parameterType="assetVo">
-		INSERT INTO ASSET
+		INSERT overwrite  INTO ASSET
         (ASSETCODE, ASSETNAME, ACQUISITIONDATE, ACCOUNTNAME, CLIENTNAME, SANGGAKWAY, acquisitionPrice, 
-          RESIDUALVALUE, UNIT, JUKYO, UNITPRICE, QUANTITY,sanggakCode,depreciation,purchaseCode)
+          RESIDUALVALUE, JUKYO,sanggakCode,depreciation,purchaseCode,accumulated)
    		 VALUES
-        (#{assetCode},#{assetName},#{acquisitionDate},#{accountName},#{clientName},#{sanggakWay},
-        #{acquisitionPrice},#{residualvalue},#{unit},#{jukyo},#{unitPrice},#{quantity},#{sanggakCode},#{depreciation},#{purchaseCode})
-	
+        (#{assetCode},nvl(#{assetName, jdbcType=VARCHAR},null),#{acquisitionDate},#{accountName},
+         nvl(#{clientName, jdbcType=VARCHAR},null),#{sanggakWay},#{acquisitionPrice}
+        ,nvl(#{residualvalue, jdbcType=VARCHAR},null),nvl(#{jukyo, jdbcType=VARCHAR},null)
+        ,nvl(#{sanggakCode, jdbcType=VARCHAR},null),nvl(#{depreciation, jdbcType=VARCHAR},null)
+        ,nvl(#{purchaseCode, jdbcType=VARCHAR},null),nvl(#{accumulated, jdbcType=VARCHAR},null))
 	</insert> 
 	
 	<insert id="insertStatusAsset" parameterType="assetVo">              
@@ -45,22 +74,29 @@
         (#{assetCode},#{acquisitionDate},#{sanggakWay},#{purchaseCode},#{acquisitionPrice}) 
 	</insert>
 	
+	
+	<update id="updateStatusAsset" parameterType="assetVo">
+		 update asset set 
+					acquisitionDate = #{acquisitionDate},
+					sanggakWay  = #{sanggakWay},
+					acquisitionPrice = #{acquisitionPrice},
+					purchaseCode = #{purchaseCode}
+		     where  assetCode = #{assetCode}
+	</update>
+	
 	<update id="updateAsset" parameterType="assetVo">
 		 update asset set 
 					assetName  = #{assetName},
 					acquisitionDate = #{acquisitionDate},
+					sanggakWay  = #{sanggakWay},
 					accountName = #{accountName},
 					clientName = #{clientName},
-					sanggakWay  = #{sanggakWay},
 					acquisitionPrice = #{acquisitionPrice},
-					slipNumber = #{slipNumber},
 					residualvalue = #{residualvalue},
-					unit = #{unit},
 					jukyo = #{jukyo},
-					unitPrice = #{unitPrice},
-					quantity = #{quantity},
 					sanggakCode = #{sanggakCode},
 					depreciation = #{depreciation},
+					accumulated = nvl(#{accumulated, jdbcType=VARCHAR},null),
 					purchaseCode = #{purchaseCode}
 		     where  assetCode = #{assetCode}
 	</update>

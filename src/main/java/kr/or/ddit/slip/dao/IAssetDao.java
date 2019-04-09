@@ -16,4 +16,8 @@ public interface IAssetDao {
 	int insertStatusAsset(AssetVo assetVo);
 	
 	int updateAsset(AssetVo assetVo);
+	
+	AssetVo selectAsset(String assetCode);
+	
+	int updateStatusAsset(AssetVo assetVo);
 }

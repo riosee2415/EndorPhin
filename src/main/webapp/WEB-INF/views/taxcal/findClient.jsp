@@ -14,7 +14,7 @@
     	
     	<tbody>
     		<c:forEach items="${clientList }" var="client">
-    		<tr class="clientData" data-clientname="${client.clientName }">
+    		<tr class="clientData" data-clientname="${client.clientName }" data-clientcode="${client.clientCode }">
     			<td>${client.clientCode }</td>
     			<td>${client.clientName }</td>
     			<td>${client.salesNumber }</td>
@@ -30,8 +30,10 @@
     // 테이블 Tr클릭 시
     $(".clientData").click(function(){
     	var value = $(this).data("clientname");
+    	var codevalue = $(this).data("clientcode");
     	
-    	fn_clickTrAction(value);
+    	
+    	fn_clickTrAction(value, codevalue);
     });
     
     
@@ -43,9 +45,11 @@
 // function
     
     /*tr 클릭 시, valueArea영역에 값 복사하기*/
-    function fn_clickTrAction(value){
+    function fn_clickTrAction(value, codevalue){
     	$("#client_valuehArea").val(value);
     	$("#insertClient").val(value);
+    	$("#insertClientCode").val(codevalue);
+    	
     	
     }
     

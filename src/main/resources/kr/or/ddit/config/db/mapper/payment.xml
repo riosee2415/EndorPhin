@@ -15,7 +15,7 @@
 	<!-- 급여 입력 -->
 	<insert id="insertPayment" parameterType="paymentVo">
 		insert into payment
-		(paycode, userid, totalwage, totalsalary, relate, payday)
+		(paycode, userid, totalwage, totalsalary, relate, payday,taxamount)
 		values
 		((select max(paycode)+1 from payment),#{userId}
 		,nvl((select sum(deductpay)
@@ -29,6 +29,9 @@
 							and     dpd.deprostatus='1'
 							and     pd.paycode=(select max(paycode)+1 from payment)),0)
 		,nvl(#{relate, jdbcType=VARCHAR},null)
+		<if test="taxamount!=null">
+		, taxamount=#{taxamount}
+		</if>
 		,to_date( nvl(#{payDay, jdbcType=VARCHAR},null),'yyyyMMdd')
 		)
 	</insert>
@@ -39,7 +42,7 @@
 		totalwage = nvl((select sum(deductpay)
 							from payment_detail pd, de_product_div dpd
 							where   pd.deductcode=dpd.deductcode
-							and     dpd.deprostatus='2'
+							and     dpd.deprostatus &lt;&gt; '1'
 							and     pd.paycode=#{payCode}),0)
 		,totalsalary = nvl((select sum(deductpay)
 							from payment_detail pd, de_product_div dpd
@@ -48,13 +51,16 @@
 							and     pd.paycode=#{payCode}),0)
 		, relate=nvl(#{relate, jdbcType=VARCHAR},relate)
 		, payday=nvl( to_date(#{payDay, jdbcType=VARCHAR},'yyyyMMdd'),payday)
+		<if test="taxamount!=null">
+		, taxamount=#{taxamount}
+		</if>
 		where   paycode = #{payCode}
 	</update>
 
 	<!-- 급여  전체 불러오기 -->
 	<select id="getAllPayment" resultType="paymentVo">
 		select
-		paycode, userid, totalwage, totalsalary, relate, payday
+		paycode, userid, totalwage, totalsalary, relate, payday,taxamount
 		from payment
 	</select>
 
@@ -64,7 +70,7 @@
 		parameterType="map">
 		select
 		paycode, userid, totalwage, totalsalary, relate, 
-		nvl(to_char(payday,'yyyy-MM-dd'),'미정') payday
+		nvl(to_char(payday,'yyyy-MM-dd'),'미정') payday,taxamount
 		from
 		payment where paycode = #{paycode}
 	</select>
@@ -81,7 +87,7 @@
 		parameterType="map">
 		select
 		paycode, userid, totalwage, totalsalary, relate, 
-		nvl(to_char(payday,'yyyy-MM-dd'),'미정') payday
+		nvl(to_char(payday,'yyyy-MM-dd'),'미정') payday,taxamount
 		from
 		payment where userid = #{userId}
 	</select>
@@ -113,7 +119,7 @@
 		        nvl(d.deptname,'미정') deptname,
 		        nvl(p.totalwage,0) totalwage,
 		        nvl(p.totalsalary,0) totalsalary,
-		        to_char(e.joincompany,'yyyy-MM-dd') joincompany
+		        to_char(e.joincompany,'yyyy-MM-dd') joincompany,taxamount
 		from    employee e left outer join 
 		        (select  userid,sum(totalwage) totalwage,sum(totalsalary) totalsalary
 		        from    payment
@@ -134,8 +140,9 @@
 	
 	<!-- 기간별 급여의 총합을 구하기 위함 -->
 	<select id="selectTotalSalaryByDay" resultType="paymentVo" parameterType="map">
-		select sum(totalsalary-totalwage) totalsalary,to_char(payday,'yyyy-MM') payday
-		from payment
+		select sum(totalsalary) totalsalary,sum(totalwage) totalwage,to_char(payday,'yyyy-MM') payday,min(deadline) deadline
+		from payment p join payment_detail pd
+        on p.paycode = pd.paycode
 		<if test="value!=null">
 			where payday between to_date(#{payDay},'yyyyMM') 
 			    and LAST_DAY(to_date(#{payDay},'yyyyMM'))
@@ -146,7 +153,7 @@
 	<!-- 날짜 기간별과 유저 아이디로 검색 -->
 	<select id="selectPersonalPaymentList" parameterType="map" resultType="paymentVo">
 		select u.userid, u.usernm, to_char(p.payday,'yyyy-MM-dd') payday,d.deptname
-        ,totalsalary,totalwage
+        ,totalsalary,totalwage,taxamount
 		from employee u,payment p,dept d
 		where   u.userid=p.userid
 		and     d.deptcode=u.deptcode
@@ -185,17 +192,40 @@
 		and     payday like to_date(#{payDay})
 	</select>
 	
+	<!-- 연도별 급여 조회 부분 상세정보를 가져오기 위함 -->
 	<select id="selectYearPaymentListDetail" parameterType="map" resultType="paymentVo">
 		select u.userid, u.usernm,deptname deptname,positionname,to_char(payday,'yyyy-MM-dd') payday
-        ,totalsalary,totalwage,paycode
+        ,totalsalary,totalwage,paycode,taxamount
 		from employee u left outer join payment p
 		on   u.userid = p.userid
 		left outer join position p1
 		on   u.positioncode = p1.positioncode
 		left outer join dept d
 		on   u.deptcode=d.deptcode
+		<if test="userid!=null">
 		where   to_char(payday,'yyyy')=#{paydayYear}
 		and    u.userid=#{userid}
+		</if>
+		<if test="userid==null">
+		where   to_char(payday,'yyyyMM')=#{paydayYear}
+		</if>
+	</select>
+	
+	<!-- 소득세를 가져오기 위함 -->
+	<select id="selectincometax" parameterType="map" resultType="String">
+		select min(taxpay)
+		from incometax
+		where   taxafter>#{value}
+	</select>
+	
+	<!-- 부서별  -->
+	<select id="selectDeptNPayment" parameterType="map" resultType="paymentVo">
+		select d.deptcode, min(deptname) deptname,sum(totalsalary) totalsalary
+		from dept d,employee e, payment p
+		where   e.deptcode = d.deptcode
+		and     e.userid = p.userid
+		and     to_char(payday,'yyyyMM')=#{paydayMonth}
+		group by d.deptcode
 	</select>
 </mapper>
 

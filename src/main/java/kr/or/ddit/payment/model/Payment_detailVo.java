@@ -10,7 +10,21 @@ public class Payment_detailVo {
 	String payCode;
 	String deductPay;
 	String deprostatus;
+	String deptcode;
+	String deptname;
 	
+	public String getDeptcode() {
+		return deptcode;
+	}
+	public void setDeptcode(String deptcode) {
+		this.deptcode = deptcode;
+	}
+	public String getDeptname() {
+		return deptname;
+	}
+	public void setDeptname(String deptname) {
+		this.deptname = deptname;
+	}
 	public String getDeprostatus() {
 		return deprostatus;
 	}

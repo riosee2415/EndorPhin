@@ -115,11 +115,13 @@ public class EmployeeServiceTest extends LogicConfig{
 	@Test
 	public void searchEmployeeTest() {
 		EmployeeVo vo = new EmployeeVo();
-		vo.setDeptname("");
+		vo.setUserNm("임");
 		
-		List<EmployeeVo> searchEmployees = employeeService.SearchEmployee(vo);
 		
-		System.out.println(searchEmployees.size());
+		
+		List<EmployeeVo> allEmployee = employeeService.SearchEmployee(vo);
+		
+		System.out.println(allEmployee);
 		
 	}
 	

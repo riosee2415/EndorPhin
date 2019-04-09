@@ -17,6 +17,16 @@
 
   <title>EndoRPhin</title>
   
+  <!-- 차트 js 삽입 -->
+  <link href="${pageContext.request.contextPath}/resources/js/Chart.js" rel="stylesheet" type="text/css">
+  <link href="${pageContext.request.contextPath}/resources/js/Chart.LlineBar.js" rel="stylesheet" type="text/css">
+  <link href="${pageContext.request.contextPath}/resources/js/Chart.min.js" rel="stylesheet" type="text/css">
+  <link href="${pageContext.request.contextPath}/resources/js/Chart.StackedBar.js" rel="stylesheet" type="text/css">
+  <!-- 차트 js 종료 -->
+  
+  
+  
+  
   
   <!-- Acoount Part Basic Style -->
   <link type="text/css" href="${pageContext.request.contextPath }/css/accountBasic.css" rel="stylesheet" >
@@ -46,14 +56,15 @@
 	
 	
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/>
+
 	
 
 <style>
 	
 	
 	.cont{
-	background-color:#ffffff;
+	background-color:#F5F4F0;
 	
 	}
 	
@@ -68,16 +79,17 @@
 	
 
 	<tiles:insertAttribute name="header"/>
+	<tiles:insertAttribute name="menu"/>
 	<div id="wrapper">
 	
 		<tiles:insertAttribute name="left"/>
 	
 	
 	    <div id="content-wrapper" class="cont">
-			<div class="container-fluid" >
+			<!-- <div class="container-fluid" > -->
 
 			<!-- Contents Source -->
-			<tiles:insertAttribute  name="content"/>
+			<tiles:insertAttribute   name="content"/>
 
 			</div>
 			<!-- /.container-fluid -->
@@ -118,10 +130,49 @@
 		//jQuery.noConflict();
 		//var j$ = jQuery;
 	</script>
-		
-		
-		
+
+	
+<!-- javascript -->     <script src="https://d3js.org/d3.v3.min.js"></script>     <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 
 
+
+
+<!-- ERP/그룹웨어 나누기 -->
+<script>  
+	
+ if($('#erp_menu_container').length > 0){
+	$('#groupmenu').removeClass('active');
+	$('#erpmenu').removeClass('active');
+	$('#erpmenu').addClass('active');
+}else if($('#group_menu_container').length > 0){
+	$('#erpmenu').removeClass('active');
+	$('#groupmenu').removeClass('active');
+	$('#groupmenu').addClass('active'); 
+}
+ 
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+	
 </body>
 </html>

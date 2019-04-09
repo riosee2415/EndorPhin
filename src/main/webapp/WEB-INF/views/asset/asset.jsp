@@ -24,7 +24,6 @@
 					<th>자산코드</th>
 					<th>계정명</th>
 					<th>자산명</th>
-					<th>부서명</th>
 					<th>취득일</th>
 					<th>취득가액</th>
 					<th>장부반영</th>
@@ -51,7 +50,6 @@
    						<c:set var = "sum" value = "${sum+vo.acquisitionPrice/1.1 }" />
    						<td>${vo.assetName }</td>	
    						<td>${vo.accountName }</td>								
-						<td>${vo.assetName }</td>
 						<td><fmt:formatDate value="${vo.acquisitionDate  }" pattern="yyyy-MM-dd"/></td>
 						<td>${vo.acquisitionPrice }</td>
 						<td><input type="button" value="장부반영" id="applybtn" name="applybtn"/></td>
@@ -87,13 +85,14 @@
 			<table>
 				<thead>
 					<tr>
-						<th>계정과목명&nbsp;
-						<input style="width: 150px;" type="text" class="form-control" id="establishNameKor" name="establishNameKor" onkeydown="Enter_Check();">
-						<button type="button" class="btn btn-inverse" id="searchE_Btn" >검색</button></th>
+						<th>계정과목명&nbsp;&nbsp;&nbsp;
+							<input type="text" id="establishNameKor" name="establishNameKor" onkeydown="Enter_Check();">
+							<button type="button" class="btn btn-inverse" id="searchE_Btn" >검색</button></th>
 					</tr>
 					<tr>
-						<th><input type="text" id="sel_account" ></th>
-						<th><button type="button" class="buttons" class="btn btn-default" data-dismiss="modal">닫기</button></th>
+						<th>선택된 계정과목명
+							<input type="text" id="sel_account" >
+							<button type="button" class="buttons" class="btn btn-default" data-dismiss="modal">닫기</button></th>
 					</tr>
 			</table>  <br>
 			<div style="overflow:scroll; width:450px; height:200px;">
@@ -127,19 +126,20 @@
 		<div class="modal-content modal-80size">
           <div class="modal-header">
 			<h6>| 거래처 조회</h6>
-			<button id="secondAddClose1" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<button id="secondAddClose1" type="button" class="close" data-dismiss="modal" aria-hidden="true" >×</button>
 		  </div>
 			<div class="modal-body">
 			<table>
 				<thead>
 					<tr>
-						<th>거래처명&nbsp;</th>
-						<th><input style="width: 150px;" type="text" class="form-control" id="establishNameKor" name="establishNameKor"></th>
-						<th><button type="button" class="btn btn-inverse" id="searchE_Btn">검색</button></th>
+						<th>거래처명&nbsp;&nbsp;&nbsp;
+						<input  type="text" id="cName" name="cName" onkeydown="Enter_Check();">
+						<button type="button" class="btn btn-inverse" id="searchC_Btn">검색</button></th>
 					</tr>
 					<tr>
-						<th><input type="text" id="clientN" ></th>
-						<th><button type="button" class="buttons" class="btn btn-default" data-dismiss="modal">닫기</button></th>
+						<th>선택된 거래처명
+						<input type="text" id="clientN" >
+						<button type="button" class="buttons" class="btn btn-default" data-dismiss="modal">닫기</button></th>
 					</tr>
 			</table>  <br>
 			<div style="overflow:scroll; width:450px; height:200px;">
@@ -150,9 +150,9 @@
 						<th>코드명</th>
 			
 				</thead>
-				<tbody id="establishTbody">
+				<tbody id="clinetTbody">
 				<c:forEach items="${clientList }" var="vo">
-					<tr class="clientTr" data-client="${vo.clientCode }" onclick="clientTr()">
+					<tr class="clientTr" data-clientnm="${vo.clientName }">
 						<td>${vo.clientCode}</td>
 						<td>${vo.clientName}</td>
 					</tr>
@@ -179,9 +179,14 @@
 			<table>
 				<thead>
 					<tr>
-						<th>감가상각계정명&nbsp;</th>
-						<th><input style="width: 150px;" type="text" class="form-control" id="sanggakName" name="sanggakName"></th>
-						<th><button type="button" class="btn btn-inverse" id="searchE_Btn">검색</button></th>
+						<th>감가상각계정명&nbsp;&nbsp;&nbsp;
+							<input type="text" id="sanggakName" name="sanggakName" onkeydown="Enter_Check();">
+							<button type="button" class="btn btn-inverse" id="searchS_Btn" >검색</button></th>
+					</tr>
+					<tr>
+						<th>선택된 감가상각계정코드
+							<input type="text"  id="sanggakName_s" name="sanggakName_s" onkeydown="Enter_Check();">
+							<button type="button" class="buttons"class="btn btn-default" data-dismiss="modal">닫기</button></th>
 					</tr>
 			</table>  <br>
 			<div style="overflow:scroll; width:450px; height:200px;">
@@ -191,21 +196,20 @@
 						<th>계정코드</th>
 						<th>중분류명</th>
 						<th>계정과목명</th>
-					</tr>
 				</thead>
-				<tbody id="establishTbody">
+					<tbody id="sanggakTbody">
 				<c:forEach items="${establishList }" var="vo">
-					<tr class="establishCodeTr" data-establishcode="${vo.establishCode }"
-						onclick="establishCodeTr();">
-						
+					<tr class="sanggakTr" data-establishcode="${vo.establishCode }">
 						<td>${vo.establishCode}</td>
 						<td>${vo.status}</td>
 						<td>${vo.establishNameKor}</td>
 					</tr>
 				</c:forEach>
+				</tbody>
 			</table>
 			</div>
 			  <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			  <input type="hidden" class="buttons" data-dismiss="modal" value=""/>
 			</div>
 		</div>
 	</div>
@@ -228,48 +232,22 @@
 			
 			$("#useFrm").submit();
 		});  
-		
-		/* 수정 */
-		$("#modalUpdateBtn").on("click", function(){ 
-			
-			var deptcode  	    = $("#upd_deptCode").val();
-			var deptName  	    = $("#upd_deptName").val();
-			var companyCode		= $("#upd_companyCode").val();
-			
-			
-			$("#frmdeptCode1").val(deptcode);
-			$("#frmdeptName1").val(deptName);
-			$("#frmcompanyCode1").val(companyCode);
-			
-			if($("#upd_deptName").val().trim()==""){
-				alert("부서명을 입력하세요");
-				$("#upd_deptName").focus();
-				return false;
-			}
-		 	
-			if($("#upd_companyCode").val().trim()==""){
-				alert("회사코드를 선택하세요");
-				$("#upd_companyCode").focus();
-				return false;
-		}  
-	 	
- 		$("#updateFrm").submit();
-    });
-});	
+	});	
 	
 	function Enter_Check(){
 	        // 엔터키의 코드는 13입니다.
 	    if(event.keyCode == 13){
 	    	$("#searchE_Btn").click();  // 실행할 이벤트
 	    }
+	    if(event.keyCode == 13){
+	    	$("#searchC_Btn").click();  // 실행할 이벤트
+	    }
+	    if(event.keyCode == 13){
+	    	$("#searchS_Btn").click();  // 실행할 이벤트
+	    }
 	}
     /*계정과목 검색  */
  	$("#searchE_Btn").on("click", function(){
- 		if($("#establishNameKor").val().trim()==""){
- 			alert("회사명을 입력하세요.");
- 			$("establishNameKor").focus();
- 			return false;
- 		}
  		$.ajax({
  			url : "${pageContext.request.contextPath }/establishSearch",
  			data : "establishNameKor="+$("#establishNameKor").val(),
@@ -279,8 +257,31 @@
  			}
   		});
  	});
+    
+    /* 거래처검색  */
+ 	$("#searchC_Btn").on("click", function(){
+ 		$.ajax({
+ 			url : "${pageContext.request.contextPath }/clientSearch",
+ 			data : "cName="+$("#cName").val(),
+ 			success : function(data){
+ 				$("#cName").val("");
+ 				$("#clinetTbody").html(data);
+ 			}
+  		});
+ 	});
+    /* 감가상각계정 검색  */
+ 	$("#searchS_Btn").on("click", function(){
+ 		$.ajax({
+ 			url : "${pageContext.request.contextPath }/sanggakSearch",
+ 			data : "sanggakName="+$("#sanggakName").val(),
+ 			success : function(data){
+ 				$("#sanggakName").val("");
+ 				$("#sanggakTbody").html(data);
+ 			}
+  		});
+ 	});
  
-     /* tr선택 */
+     /*계정과목선택 */
 	$(".establishTr").on("click", function(){
 		
 		var establishnamekor = $(this).data("establishnmkor");
@@ -288,13 +289,23 @@
 		$("#sel_account").val(establishnamekor);
 		$("#accountName").val(establishnamekor);
 	});
-	 
-	function clientTr(){
-		var clientName = $(this).data("client");
-		
-		$("#clientN").val(clientName);
-	}
 	
+  	/*거래처선택 */
+	$(".clientTr").on("click", function() {
+		var clientName = $(this).data("clientnm");
+
+		$("#clientN").val(clientName);
+		$("#clientName").val(clientName);
+	});
+	
+ 	/*감가 상각선택 */
+ 	$(".sanggakTr").on("click", function() {
+ 		var sanggakCode = $(this).data("establishcode");
+
+ 		$("#sanggakName_s").val(sanggakCode);
+		$("#sanggakCode").val(sanggakCode);
+ 	});
+     
 	 function allCheck() {
 		if ($("#th_allCheck").is(':checked')) {
 				$("input[name=checkRow]").prop("checked", true);
@@ -332,7 +343,6 @@
 	var insertFlag = 0;
 	function fn_detail(){
 		if (insertFlag === 0) {
-		
 			$.ajax({
 				url : "${pageContext.request.contextPath}/getAssetInsertBtn",
 				success : function(data){
@@ -349,24 +359,7 @@
 		}
 	}
 	
-	function fn_detail(){
-		if (insertFlag === 0) {
-		
-			$.ajax({
-				url : "${pageContext.request.contextPath}/getAssetInsertBtn",
-				success : function(data){
-					$("#insertArea").html(data);	
-					$("#assetCode").focus();
-				}
-			});
-		
-			insertFlag = 1;
-			
-		} else if(insertFlag == 1){
-			$("#insertArea").html("");
-			insertFlag = 0;
-		}
-	}
+
 	$(".detailView").on("click", function(){
 		
 		if (insertFlag === 0) {
@@ -384,7 +377,6 @@
 					$("#sanggakWay").val($(this).data().sanggakway);
 					$("#acquisitionPrice").val($(this).data().acquisitionprice);
 					$("#acquisitionDate").val($(this).data().acquisitiondate);
-
 				}
 			});
 		

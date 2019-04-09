@@ -6,8 +6,9 @@
 	href="${pageContext.request.contextPath }/css/payment_leem.css"
 	rel="stylesheet">
 
-<div class="container">
 	<div class="row">
+		<div class="col-md-1" style="width: 100%">
+		</div>
 		<div class="col-md-10" style="width: 100%">
 			<div class="form-group">
 				<h2>
@@ -15,7 +16,7 @@
 				</h2>
 			</div>
 			<form action="/paymentPersonal" method="get">
-				<table class="table table-striped">
+				<table class="table table-hover">
 					<thead class="thead">
 						<tr>
 						<th>
@@ -41,11 +42,8 @@
 	</div>
 
 
-</div>
-
-
-<div class="container" style="margin-top: 50px">
 	<div class="row">
+		<div class="col-md-1"></div>
 		<div class="col-md-10" style="width: 100%">
 			<div class="form-group">
 				<table class="table table-striped">
@@ -78,10 +76,10 @@
 			</div>
 		</div>
 	</div>
-</div>
 
-<div class="container">
 	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
 		<form action="/paymentPersonalExceldown" id="personalFrm">
 		<button style="margin-left: 705px; background-color: #6E6867;"
 			class="btn btn-info">Excel</button>
@@ -94,7 +92,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<div>
-					<table>
+					<table class="table-hover">
 						<tr>
 							<th><label>사번</label></th>
 							<td><input style="width:50px" class="modalUserInfo" disabled="disabled"  size="12"/></td>
@@ -108,7 +106,7 @@
 			</div>
 			<div class="modal-body">
 				<div style="overflow: scroll; width: 450px; height: 200px;">
-					<table style="border-spacing: 6px; border-collapse: separate;">
+					<table class="table table-hover" style="border-spacing: 6px; border-collapse: separate;">
 						<thead>
 							<tr>
 								<th>항목명</th>

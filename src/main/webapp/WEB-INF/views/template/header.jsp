@@ -114,8 +114,6 @@
     
  a {color: #fff; text-decoration: none; outline: none}
 
- a:hover, a:active {text-decoration: none; color: white; }
-
 
 #container div .col-md-2:hover {
 	background: #4D341B;

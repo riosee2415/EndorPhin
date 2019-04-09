@@ -40,8 +40,8 @@ a:hover,a:focus{
 }
 
 .tab .nav-tabs li a{
+	
     padding: 10px 20px;
-    margin: 0 10px -1px 0;
     font-size: 17px;
     font-weight: 600;
     color: #293241;
@@ -75,14 +75,6 @@ a:hover,a:focus{
 }
 .tab .nav-tabs li.active a:before,
 .tab .nav-tabs li a:hover:before{ transform: scaleX(1); }
-.tab .tab-content{
-    padding: 10px;
-    font-size: 17px;
-    color: white;
-    line-height: 30px;
-    letter-spacing: 1px;
-    position: relative;
-}
 @media only screen and (max-width: 479px){
     .tab .nav-tabs{ border: none; }
     .tab .nav-tabs li{
@@ -127,8 +119,9 @@ background-color: #6E6867;
 </head>
 <body>
 
-<div class="container">
-    <div class="row">
+<div class="row">
+        <div class="col-md-1" style="width: 100%">
+        </div>
         <div class="col-md-10" style="width: 100%">
             <div class="tab" role="tabpanel">
                 <!-- Nav tabs -->
@@ -142,10 +135,6 @@ background-color: #6E6867;
                     <div role="tabpanel" class="tab-pane fade in active" id="Section1">
                         <p>
                         <form class="form-horizontal">
-							<div class="form-group">
-							<h2><strong>직급/직책 목록</strong></h2>
-							</div>
-
 						<div class="form-group">
 							<table class="table table-striped">
 								<thead class="thead">
@@ -270,8 +259,6 @@ background-color: #6E6867;
 							class="form-control" id="ranke" name="rank" placeholder="순위를 입력해주세요">
 					</div>
 					
-					
-					
 					<div class="form-group">
 						<label for="InputEmail">비고</label> <input type="text"
 							class="form-control" id="relate" name="relate" placeholder="비고란을 입력해주세요">
@@ -320,14 +307,12 @@ background-color: #6E6867;
                         
                         <form class="form-horizontal">
 							<div class="form-group">
-							<h2><strong>직급 목록</strong></h2>
 							</div>
 
 						<div class="form-group">
 							<table class="table table-striped">
 								<thead class="thead">
 				<tr>
-					<th>선택</th>
 					<th>직급/직책코드</th>
 					<th>직급/직책코드명</th>
 					<th>순위</th>
@@ -341,12 +326,8 @@ background-color: #6E6867;
 				<c:forEach items="${allPosition}" var="allPosition">
 				<c:if test="${allPosition.positionStatus == '직급' }">
 					<tr class="boardTr" data-userId="${allPosition.positionCode}">
-						<td><input type="checkbox" name="check"
-							value="${allPosition.positionCode}" style="width: 30px; height: 30px;"></td>
-							
             			<td><button type="button" class="btn btn-default" data-toggle="modal"
             			 data-target="#my80sizeModal2"><u>${allPosition.positionCode}</u></button></td>
- 
 						<td>${allPosition.positionName }</td>
 						<td>${allPosition.rank }</td>
 						<td>${allPosition.useStatus }</td>
@@ -360,9 +341,6 @@ background-color: #6E6867;
 	</div>
 
 </form>
-                        
-                        
-                        
                         </p>
                     </div>
                     <div role="tabpanel" class="tab-pane fade" id="Section3">
@@ -370,14 +348,12 @@ background-color: #6E6867;
                         
                         <form class="form-horizontal">
 							<div class="form-group">
-							<h2><strong>직책 목록</strong></h2>
 							</div>
 
 						<div class="form-group">
 							<table class="table table-striped">
 								<thead class="thead">
 				<tr>
-					<th>선택</th>
 					<th>직급/직책코드</th>
 					<th>직급/직책코드명</th>
 					<th>순위</th>
@@ -391,9 +367,6 @@ background-color: #6E6867;
 				<c:forEach items="${allPosition}" var="allPosition">
 				<c:if test="${allPosition.positionStatus == '직책' }">
 					<tr class="boardTr" data-userId="${allPosition.positionCode}">
-						<td><input type="checkbox" name="check"
-							value="${allPosition.positionCode}" style="width: 30px; height: 30px;"></td>
-							
             			<td><button type="button" class="btn btn-default" data-toggle="modal"
             			 data-target="#my80sizeModal2"><u>${allPosition.positionCode}</u></button></td>
  
@@ -410,46 +383,15 @@ background-color: #6E6867;
 	</div>
 
 </form>
-                        
-                        
-                        
-                        
-                        
                         </p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
-
-	<script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
 
 
 	/*직급정보 수정하기*/
@@ -473,13 +415,6 @@ background-color: #6E6867;
 			} 
 		});
 	});
-	
-	
-	
-	
-	
-	
-	
 	
 	/*Duplication Check*/
 	$("#emplCheck").on("click", function(){
@@ -554,7 +489,5 @@ background-color: #6E6867;
 	<form id="frm2" action="${cp}/employee/detailEmployee" method="get">
 		<input type="hidden" id="userId" name="userId" />
 	</form> 
-
-
 
 </body>

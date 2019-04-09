@@ -11,12 +11,12 @@
 	<hr>
 	거래처코드 : <input name="client_code" id="client_code" type="text" />
 	거래처명 : <input name="client_name" id="client_name" type="text" />
-	<input type="button" class="btn btn-primary" id="seachBtn" value="검색" onclick="seachClientBtn()" />
-	<input type="button" class="btn btn-primary" value="전체조회" onclick="location.href='${pageContext.request.contextPath }/clientview'" />
+	<input type="button" class="bttn-fill bttn-md bttn-warning" id="seachBtn" value="검색" onclick="seachClientBtn()" />
+	<input type="button" class="bttn-fill bttn-md bttn-warning" value="전체조회" onclick="location.href='${pageContext.request.contextPath }/clientview'" />
 	<br /><br />
 
 	<div class="table-responsive">
-		<table class="table table-striped">
+		<table class="table table-hover">
 			<thead class="thead">
 				<tr>
 					<th>거래처코드</th>
@@ -45,7 +45,8 @@
 									 	data-client_accountnumber="${client.accountNumber }"
 									 	data-client_usestatus="${client.useStatus }">
 					
-					<td><a href="${pageContext.request.contextPath }/viewDetailClient?clientCode=${client.clientCode }">${client.clientCode }</a></td>
+					<td><a class="bttn-stretch bttn-md bttn-warning"
+						href="${pageContext.request.contextPath }/viewDetailClient?clientCode=${client.clientCode }">${client.clientCode }</a></td>
 					<td>${client.clientName }</td>
 					<td>${client.manager }</td>
 					<td>${client.businessType }</td>

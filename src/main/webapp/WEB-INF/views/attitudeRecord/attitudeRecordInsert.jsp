@@ -13,9 +13,6 @@ width: 100px;
 
 
 </style>
-	
-
-      
       
 <div class="modal" id="myModal" aria-hidden="true" style="display: none; z-index: 1050;">
        <div class="modal-dialog modal-lg">

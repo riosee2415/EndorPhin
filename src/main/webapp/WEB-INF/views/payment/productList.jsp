@@ -5,87 +5,97 @@
 	href="${pageContext.request.contextPath }/css/payment_leem.css"
 	rel="stylesheet">
 <style>
-	.table {
-		display : table;
-		height: 80px;
-		position: relative;
-	}
-	.table td{
-		display:table-cell;
- 		vertical-align: middle !important;
-	}
+.table {
+	display: table;
+	height: 80px;
+	position: relative;
+}
+
+.table td {
+	display: table-cell;
+	vertical-align: middle !important;
+}
 </style>
-
-<h3><strong><i class="fa fa-calculator"></i>급여항목 등록</strong></h3>
-<form action="/addProduct" id="searchFrm">
-	<input type="hidden" name="deprostatus" value="1"/>
-	<table>
-		<tr>
-			<td>급여명 검색 :</td>
-			<td><div class="group">      
-			      <input type="text" class="search-query form-control"
-				id="searchPay" name="searchDeductName" placeholder="Search" />
-			    </div></td>
-			<td>
-				<button class="bttn-fill bttn-md bttn-warning" type="button" id="searchBtn">
-					<span class=" glyphicon glyphicon-search">검색</span>
-				</button>
-			</td>
-		</tr>
-	</table>
-</form>
-<form action="/delDeproduct" id="deleteFrm">
-	<input type="hidden" name="deprostatus" value="1"/>
-	<div class="table-responsive">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th><input type="checkbox" id="checkAll" /></th>
-					<th>급여코드</th>
-					<th>항목명</th>
-					<th>과세여부</th>
-					<th>상여대상여부</th>
-					<th>사용구분</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${allDe_product_div}" var="vo">
-					<tr class="payTr" data-decd="${vo.deductCode }">
-						<td><input type="checkbox" class="check" /><input
-							type="hidden" class="valPay"></td>
-						<td><a data-transition="pop" href="#detailLayer" class="bttn-stretch bttn-md bttn-warning deductDetail">${vo.deductCode }</a></td>
-						<td>${vo.deductName}</td>
-						<c:if test="${vo.taxStatus==1}">
-							<td>과세 대상</td>
-						</c:if>
-						<c:if test="${vo.taxStatus==2}">
-							<td>과세 비대상</td>
-						</c:if>
-						<c:if test="${vo.bonusStatus==1}">
-							<td>상여 대상</td>
-						</c:if>
-						<c:if test="${vo.bonusStatus==2}">
-							<td>상여 비대상</td>
-						</c:if>
-						<c:if test="${vo.useStatus==1}">
-							<td>사용</td>
-						</c:if>
-						<c:if test="${vo.useStatus==2}">
-							<td>미사용</td>
-						</c:if>
+<div class="row">
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-10">
+			<h3>
+				<strong><i class="fa fa-calculator"></i>급여항목 등록</strong>
+			</h3>
+			<form action="/addProduct" id="searchFrm">
+				<input type="hidden" name="deprostatus" value="1" />
+				<table>
+					<tr>
+						<td>급여명 검색 :</td>
+						<td><div class="group">
+								<input type="text" class="form-control"
+									id="searchPay" name="searchDeductName" placeholder="Search" />
+							</div></td>
+						<td>
+							<button class="bttn-fill bttn-md bttn-warning" type="button"
+								id="searchBtn">
+								<span class=" glyphicon glyphicon-search">검색</span>
+							</button>
+						</td>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</div>
-	<div class="btn_btm" >
-		<input class="bttn-jelly bttn-md bttn-warning" type="button" id="delPayBtn" 
-			value="선택 삭제">
-		<button type="button" class="bttn-jelly bttn-md bttn-warning" data-toggle="modal" style="margin-left: 20px"
-			data-target="#my80sizeModal">신규등록</button>
-	</div>
-</form>
-
+				</table>
+			</form>
+			<form action="/delDeproduct" id="deleteFrm">
+				<input type="hidden" name="deprostatus" value="1" />
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th><input type="checkbox" id="checkAll" /></th>
+								<th>급여코드</th>
+								<th>항목명</th>
+								<th>과세여부</th>
+								<th>상여대상여부</th>
+								<th>사용구분</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${allDe_product_div}" var="vo">
+								<tr class="payTr" data-decd="${vo.deductCode }">
+									<td><input type="checkbox" class="check" /><input
+										type="hidden" class="valPay"></td>
+									<td><a data-transition="pop" href="#detailLayer"
+										class="bttn-stretch bttn-md bttn-warning deductDetail">${vo.deductCode }</a></td>
+									<td>${vo.deductName}</td>
+									<c:if test="${vo.taxStatus==1}">
+										<td>과세 대상</td>
+									</c:if>
+									<c:if test="${vo.taxStatus==2}">
+										<td>과세 비대상</td>
+									</c:if>
+									<c:if test="${vo.bonusStatus==1}">
+										<td>상여 대상</td>
+									</c:if>
+									<c:if test="${vo.bonusStatus==2}">
+										<td>상여 비대상</td>
+									</c:if>
+									<c:if test="${vo.useStatus==1}">
+										<td>사용</td>
+									</c:if>
+									<c:if test="${vo.useStatus==2}">
+										<td>미사용</td>
+									</c:if>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+				<div class="btn_btm">
+					<input class="bttn-jelly bttn-md bttn-warning" type="button"
+						id="delPayBtn" value="선택 삭제">
+					<button type="button" class="bttn-jelly bttn-md bttn-warning"
+						data-toggle="modal" style="margin-left: 20px"
+						data-target="#my80sizeModal">신규등록</button>
+				</div>
+			</form>
+		</div>
+		</div>
 
 <!-- 80% size Modal  등록 모달 창-->
 <div class="modal fade" id="my80sizeModal" tabindex="-1" role="dialog"
@@ -102,8 +112,8 @@
 			<div class="modal-body">
 				<div class="form-group">
 					<form action="${cp}/addDeproduct" method="post" id="modalAddFrm">
-					<input type="hidden" name="deprostatus" value="1"/>
-						<label for="inputName">급여코드</label> <input type="text"
+						<input type="hidden" name="deprostatus" value="1" /> <label
+							for="inputName">급여코드</label> <input type="text"
 							class="form-control" name="deductCode"
 							placeholder="급여코드를 입력해 주세요">
 						<button type="button" class="btn btn-default"
@@ -156,15 +166,13 @@
 
 <form action="/delDeproduct" id="dialogFrm">
 	<div class="dialog">
-		<input type="hidden" name="deprostatus" value="1"/>
-		<span class="dialog__close">&#x2715;</span> 
-		<label for="inputName">급여코드</label>
-		<input type="hidden" name="deductCode" id="dialog_deductCode"/>
-		<label for="inputName" class="dialog_deductCode"></label><br/> 
-		<label for="InputEmail">급여명</label>
-		<input type="text" class="search-query form-control dialog_deductName" name="deductName"
-			placeholder="급여명을 입력해주세요"><br/>
-			<label for="inputPassword">과세여부</label>
+		<input type="hidden" name="deprostatus" value="1" /> <span
+			class="dialog__close">&#x2715;</span> <label for="inputName">급여코드</label>
+		<input type="hidden" name="deductCode" id="dialog_deductCode" /> <label
+			for="inputName" class="dialog_deductCode"></label><br /> <label
+			for="InputEmail">급여명</label> <input type="text"
+			class="search-query form-control dialog_deductName" name="deductName"
+			placeholder="급여명을 입력해주세요"><br /> <label for="inputPassword">과세여부</label>
 		<select name="taxStatus" class="form-control" id="dialog_taxStatus">
 			<option value="1">예</option>
 			<option value="2">아니오</option>
@@ -190,18 +198,13 @@
 		dialog();
 	});
 
-	$("#updDeduct").click(function(){
-		$("#dialogFrm").attr("action","/updDeduct");
+	$("#updDeduct").click(function() {
+		$("#dialogFrm").attr("action", "/updDeduct");
 	})
-	
+
 	function dialog() {
-		
-		var dialogBox = $('.dialog'), 
-		deductDetail = $('.deductDetail'), 
-		dialogClose = $('.dialog__close'), 
-		dialog_deductCode = $('.dialog_deductCode'), 
-		dialog_deductName = $('.dialog_deductName'), 
-		dialog_taxStatus = $('#dialog_taxStatus');
+
+		var dialogBox = $('.dialog'), deductDetail = $('.deductDetail'), dialogClose = $('.dialog__close'), dialog_deductCode = $('.dialog_deductCode'), dialog_deductName = $('.dialog_deductName'), dialog_taxStatus = $('#dialog_taxStatus');
 		dialog_bonusStatus = $('#dialog_bonusStatus');
 		dialog_useStatus = $('#dialog_useStatus');
 
@@ -220,13 +223,13 @@
 					$("#dialog_taxStatus").val(data.taxStatus);
 					$("#dialog_bonusStatus").val(data.bonusStatus);
 					$("#dialog_useStatus").val(data.useStatus);
-					if(data.taxStatus==null){
+					if (data.taxStatus == null) {
 						$("#dialog_taxStatus").val("");
 					}
-					if(data.bonusStatus==null){
+					if (data.bonusStatus == null) {
 						$("#dialog_bonusStatus").val("");
 					}
-					if(data.useStatus==null){
+					if (data.useStatus == null) {
 						$("#dialog_useStatus").val("");
 					}
 				}
@@ -312,7 +315,7 @@
 	$("#delPayBtn").on(
 			"click",
 			function() {
-				if($("input[class=check]:checked").length==0){
+				if ($("input[class=check]:checked").length == 0) {
 					alert("삭제할 급여항목을 선택하세요");
 					return false;
 				}

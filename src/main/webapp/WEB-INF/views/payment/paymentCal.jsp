@@ -6,9 +6,10 @@
 	href="${pageContext.request.contextPath }/css/payment_leem.css"
 	rel="stylesheet">
 
-<div class="container">
 	<div class="row">
-		<div class="col-md-10" style="width: 100%">
+		<div class="col-md-1" style="width: 100%">
+		</div>
+		<div class="col-md-5" style="width: 100%">
 			<div class="form-group">
 				<h2>
 					<strong><i class="fa fa-calculator"></i> 급여명세서</strong>
@@ -31,13 +32,10 @@
 		</div>
 	</div>
 
-
-</div>
-
-
-<div class="container" style="margin-top: 50px">
 	<div class="row">
-		<div class="col-md-10" style="width: 100%">
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-5" style="width: 100%">
 			<div class="form-group">
 				<table class="table table-hover">
 					<thead class="thead">
@@ -83,11 +81,8 @@
 			</div>
 		</div>
 	</div>
-</div>
 <form action="/paymentYearDetail" id="gotoDetailFrm">
 </form>
-
-<div class="container">
 	<div class="row" style="margin-left: 705px;">
 		<select id="deptDivSel">
 			<option selected="selected" value="0">회사 전체</option>
@@ -96,7 +91,6 @@
 		<button style="background-color: #6E6867;" data-toggle="modal"
 			class="btn btn-info" id="cogInputBtn">장부반영</button>
 	</div>
-</div>
 
 <div class="modal" id="myModal" data-backdrop="static" aria-hidden="true" style="display: none; z-index: 1080;">
     	<div class="modal-dialog">

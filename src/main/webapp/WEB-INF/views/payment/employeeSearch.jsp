@@ -13,7 +13,7 @@
 			</div>
 			<div class="modal-body">
 				<div style="overflow: scroll; width: 450px; height: 200px;">
-					<table style="border-spacing: 6px; border-collapse: separate;">
+					<table style="border-spacing: 6px; border-collapse: separate;" class="table table-hover">
 						<thead>
 							<tr>
 								<th>사원번호</th>

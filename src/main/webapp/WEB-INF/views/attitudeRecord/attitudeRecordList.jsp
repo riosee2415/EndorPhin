@@ -7,76 +7,67 @@
 
 
 
- <!-- Bootstrap core CSS -->
+<!-- Bootstrap core CSS -->
 <!--    <link id="attitude" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet"> -->
 
-<link id="attitude" href="/css/bootstrap2.css" rel="stylesheet"> 
-
-
+<link id="attitude" href="/css/bootstrap2.css" rel="stylesheet">
 
 <style>
 select {
 	width: 200px;
 }
 
-
-#tdtd{
-
-
-margin-left: 30px !important;
-
+#tdtd {
+	margin-left: 30px !important;
 }
 
-  img.ui-datepicker-trigger{ width: 30px; margin-bottom: 5px; }
- 
- th{
- 
-vertical-align: middle !important;
- }
- 
- #attitude{
-     display: inline-block;
- }
- 
- 
- 
+img.ui-datepicker-trigger {
+	width: 30px;
+	margin-bottom: 5px;
+}
+
+th {
+	vertical-align: middle !important;
+}
+
+#attitude {
+	display: inline-block;
+}
 </style>
 
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-8" style="width: 100%">
 
-
-	<div class="container">
-		<div class="row">
-			<div class="col-md-10" style="width: 100%">
-
-				<div class="form-group">
-					<h2>
-						<strong><i class="fa fa-book"></i> 근태 입력</strong>
-					</h2>
-				</div>
-
-
-                                            
-
-
-				<table class="table table-striped">
-					<thead class="thead">
-						<tr class="tablespa" >
-							<form action="${cp}/attitudeRecord/SearchattitudeRecord">
-							<td>근태명 <input type="text" name="search" style="color: black">
-							<button type="submit" style="background-color: #6E6867;" class="btn btn-info">검색</button>
-							</td>
-							<td><input style="color: black" type="text" id="startDate" name="startDate" class="startDate"/></td>
-							<td><h2><strong> ~ </strong></h2></td>
-							<td><input style="color: black" type="text" id="endDate" name="endDate"/> </td>
-							</form>
-						</tr>
-					</thead>
-				</table>
-
-			</div>
+		<div class="form-group">
+			<h2>
+				<strong><i class="fa fa-book"></i> 근태 입력</strong>
+			</h2>
 		</div>
+
+		<form action="${cp}/attitudeRecord/SearchattitudeRecord">
+			<table class="table table-striped">
+				<thead class="thead">
+					<tr>
+						<td>근태명 <input type="text" name="search" style="color: black">
+							<button type="submit" style="background-color: #6E6867;"
+								class="btn btn-info">검색</button>
+						</td>
+						<td><input style="color: black" type="text" id="startDate"
+							name="startDate" class="startDate" /></td>
+						<td><h2>
+								<strong> ~ </strong>
+							</h2></td>
+						<td><input style="color: black" type="text" id="endDate"
+							name="endDate" /></td>
+					</tr>
+				</thead>
+			</table>
+		</form>
+
 	</div>
-	
+</div>
+
 
 
 <!--  목록 출력 -->
@@ -84,99 +75,90 @@ vertical-align: middle !important;
 
 
 
-<div class="container" style="margin-top: 50px">
-		<div class="row">
-			<div class="col-md-10" style="width: 100%">
-				<div class="form-group">
-					<table class="table table-striped" style="text-align: center;" border="1">
-						<thead class="thead" >
-							<tr >
-								<th  rowspan="2">체크</th>
-								<th  rowspan="2">사번</th>
-								<th  rowspan="2">사원명</th>
-								<th  rowspan="2">부서명</th>
-								<th  colspan="2">근태항목</th>
-								<th  colspan="2">기간</th>
-								<th  rowspan="2">일수
-								<th  rowspan="2">메모</th>
-							</tr>
-							<tr>
-								<td>코드</td>
-								<td>명</td>
-								<td>부터</td>
-								<td>까지</td>
-							</tr>
-						</thead>
-					 <tbody id="mytbodyRecord">
-							<c:forEach items="${allAttitude_record}" var="allAttitude_record">
-								<tr class="boardTr" data-userId="${allAttitude_record.userid}" data-startday="${allAttitude_record.startday}">
-									<td><input type="checkbox" name="check"
-										style="width: 30px; height: 30px;"></td>
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-8" style="width: 100%">
+		<div class="form-group">
+			<table class="table table-striped" style="text-align: center;"
+				border="1">
+				<thead class="thead">
+					<tr>
+						<th rowspan="2">체크</th>
+						<th rowspan="2">사번</th>
+						<th rowspan="2">사원명</th>
+						<th rowspan="2">부서명</th>
+						<th colspan="2">근태항목</th>
+						<th colspan="2">기간</th>
+						<th rowspan="2">일수
+						<th rowspan="2">메모</th>
+					</tr>
+					<tr>
+						<td>코드</td>
+						<td>명</td>
+						<td>부터</td>
+						<td>까지</td>
+					</tr>
+				</thead>
+				<tbody id="mytbodyRecord">
+					<c:forEach items="${allAttitude_record}" var="allAttitude_record">
+						<tr class="boardTr" data-userId="${allAttitude_record.userid}"
+							data-startday="${allAttitude_record.startday}">
+							<td><input type="checkbox" name="check"
+								style="width: 30px; height: 30px;"></td>
 
-									<td><button type="button" class="btn btn-default"
-											data-toggle="modal" data-target="#attitudeEdit">${allAttitude_record.userid }</button></td>
-									<td>${allAttitude_record.usernm }</td>
-									<td>${allAttitude_record.deptname }</td>
-									<td>${allAttitude_record.attitudecode }</td>
-									<td>${allAttitude_record.attitudename }</td>
-									<td>${allAttitude_record.startday }</td>
-									<td>${allAttitude_record.endday }</td>
-									<td>${allAttitude_record.days }</td>
-									<td>${allAttitude_record.attitudememo }</td>
-								</tr>
-							</c:forEach>
-						</tbody> 
+							<td><button type="button" class="btn btn-default"
+									data-toggle="modal" data-target="#attitudeEdit">${allAttitude_record.userid }</button></td>
+							<td>${allAttitude_record.usernm }</td>
+							<td>${allAttitude_record.deptname }</td>
+							<td>${allAttitude_record.attitudecode }</td>
+							<td>${allAttitude_record.attitudename }</td>
+							<td>${allAttitude_record.startday }</td>
+							<td>${allAttitude_record.endday }</td>
+							<td>${allAttitude_record.days }</td>
+							<td>${allAttitude_record.attitudememo }</td>
+						</tr>
+					</c:forEach>
+				</tbody>
 
-					</table>
-				</div>
-			</div>
+			</table>
 		</div>
-		
-		
-		<div class="container">
-			<div class="row">
-
-				<button style="background-color: #6E6867;" class="btn btn-info" id="cancleBtn">근태이력삭제</button>
-				
-					
-					 <a style="margin-left: 705px;" data-toggle="modal" href="#myModal" class="btn btn-primary">신규등록</a>
-			</div>
-		</div>
-
-
-
-		<!--  근태 항목 등록 모달창 실행  -->
-		
-		<div class="contain_box">
-      <div class="container">
- 
-		
-		
-		
-			<%@ include file="attitudeRecordInsert.jsp"%>
-		<!--  근태 항목 등록 모달창 종료  -->
-		
-		
-		
-			<%@ include file="emplLoading.jsp"%>
-		
-		
-		
-		
-		
-		<!--  근태 항목 등록 모달창 실행  -->
-			<%@ include file="attitudeRecordEdit.jsp"%>
-		<!--  근태 항목 등록 모달창 종료  -->
-
-
+	</div>
 </div>
-          </div>
-        </div>
-    
 
-                                                                           
 
-	<script>
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-7">
+		<button style="background-color: #6E6867;" class="btn btn-info"
+			id="cancleBtn">근태이력삭제</button>
+	</div>
+	<a data-toggle="modal" href="#myModal"
+		class="btn btn-primary">신규등록</a>
+</div>
+
+
+
+<!--  근태 항목 등록 모달창 실행  -->
+
+<div class="contain_box">
+	<div class="container">
+
+		<%@ include file="attitudeRecordInsert.jsp"%>
+		<!--  근태 항목 등록 모달창 종료  -->
+
+		<%@ include file="emplLoading.jsp"%>
+
+		<!--  근태 항목 등록 모달창 실행  -->
+		<%@ include file="attitudeRecordEdit.jsp"%>
+		<!--  근태 항목 등록 모달창 종료  -->
+
+	</div>
+</div>
+
+
+
+
+<script>
 	
 	/*사원정보 수정하기*/
 	$("#mytbodyRecord").on("click", ".boardTr", function(){
@@ -204,7 +186,6 @@ vertical-align: middle !important;
 		}); 
 	});
 	                        
-	                       사원  <input id=                                                                             
 	                                                          
 	
 	$(document).ready(function() {
@@ -262,10 +243,10 @@ vertical-align: middle !important;
 	                     
 	
 	</script>
-	
-	
-	<form id="attRecordfrm" action="${cp}/attitudeRecord/deleteAttitudeRecord" method="get">
+
+
+<form id="attRecordfrm"
+	action="${cp}/attitudeRecord/deleteAttitudeRecord" method="get">
 	<input type="hidden" id="delete_no" name="delete_no" />
-	</form>
-   
-	
+</form>
+

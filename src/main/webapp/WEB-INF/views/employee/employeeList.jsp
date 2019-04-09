@@ -113,7 +113,6 @@ a:hover, a:focus {
 	border-color: black;
 }
 
-
 .modal-dialog.modal-80size {
 	width: 200% !important;
 	height: auto !important;
@@ -142,232 +141,218 @@ a:hover, a:focus {
 </head>
 <body>
 
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12" style="width: 100%">
-				<div class="tab" role="tabpanel">
-					<!-- Nav tabs -->
-					<ul class="nav nav-tabs" role="tablist">
-						<li role="presentation" class="active"><a id="frmTap"
-							href="#Section1" aria-controls="home" role="tab"
-							data-toggle="tab">사원 목록</a></li>
-						<li role="presentation"><a href="#Section2"
-							aria-controls="profile" role="tab" data-toggle="tab"> 인 사 </a></li>
-						<li role="presentation"><a href="#Section3"
-							aria-controls="messages" role="tab" data-toggle="tab"> 회 계 </a></li>
-						<li role="presentation"><a href="#Section4"
-							aria-controls="messages" role="tab" data-toggle="tab"> 물 류 </a></li>
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10" style="width: 100%">
+			<div class="tab" role="tabpanel">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a id="frmTap"
+						href="#Section1" aria-controls="home" role="tab" data-toggle="tab">사원
+							목록</a></li>
+					<li role="presentation"><a href="#Section2"
+						aria-controls="profile" role="tab" data-toggle="tab"> 인 사 </a></li>
+					<li role="presentation"><a href="#Section3"
+						aria-controls="messages" role="tab" data-toggle="tab"> 회 계 </a></li>
+					<li role="presentation"><a href="#Section4"
+						aria-controls="messages" role="tab" data-toggle="tab"> 물 류 </a></li>
 
 
 
-					</ul>
+				</ul>
 
-					<!-- Tab panes -->
-					<div class="tab-content tabs">
-						<div role="tabpanel" class="tab-pane fade in active" id="Section1">
-							<p>
-							<form class="form-horizontal">
-								<div class="form-group">
-									<h2>
-										<strong>사원목록</strong>
-									</h2>
-								</div>
-
-								<div class="form-group">
-									<table class="table table-striped">
-										<thead class="thead">
-											<tr>
-												<th>선택</th>
-												<th>사원번호</th>
-												<th>사원명</th>
-												<th>부서명</th>
-												<th>직책명</th>
-												<th>직급명</th>
-												<th>근속년수</th>
-												<th>비고</th>
-												<th>입사일</th>
-												<th>생년월일</th>
-											</tr>
-										</thead>
-
-
-
-										<tbody id="mytbody">
-											<c:forEach items="${allEmployee}" var="allEmployee">
-												<tr>
-													<td><input type="checkbox" name="check"
-														value="${allEmployee.userId}"
-														style="width: 30px; height: 30px;"></td>
-
-													<td class="boardTr" data-userid="${allEmployee.userId}"><button
-															type="button" class="btn btn-default" data-toggle="modal"
-															data-target="#my80sizeModal2">
-															<u>${allEmployee.userId }</u>
-														</button></td>
-
-													<td>${allEmployee.userNm }</td>
-													<td>${allEmployee.deptname }</td>
-													<td>${allEmployee.positionname }</td>
-													<td>${allEmployee.rankname }</td>
-													<td>${allEmployee.continuousYear }</td>
-													<td>${allEmployee.relate }</td>
-													<td>${allEmployee.joinCompany }</td>
-													<td>${allEmployee.birthDate }</td>
-												</tr>
-											</c:forEach>
-										</tbody>
-									</table>
-								</div>
-
-							</form>
-
+				<!-- Tab panes -->
+				<div class="tab-content tabs">
+					<div role="tabpanel" class="tab-pane fade in active" id="Section1">
+						<p>
+						<form class="form-horizontal">
 							<div class="form-group">
-							<table>
+								<table class="table table-striped">
+									<thead class="thead">
 										<tr>
-										<td>
-								<button style="background-color: #6E6867 !important;" type="button" class="btn btn-primary btn-lg" id="cancleBtn">삭
-									제</button>
-								<button style="background-color: #6E6867 !important;" type="button" class="btn btn-primary btn-lg" data-toggle="modal"
-									data-target="#my80sizeModal">신규등록</button>
-										</td>
-													<td>
-								<form action="${cp}/employee/SearchEmployee" id="searchFrm">
-											</td>
-											<td style="padding-left: 600px"><input type="text" class="search-query form-control"
-												id="searchPay" name="searchName" placeholder="사원명을 검색하시오" /></td>
-											<td>
-												<button class="btn btn-info" type="submit" id="searchBtn">
-													<span class=" glyphicon glyphicon-search">검색</span>
-												</button>
-											</td>
+											<th>선택</th>
+											<th>사원번호</th>
+											<th>사원명</th>
+											<th>부서명</th>
+											<th>직책명</th>
+											<th>직급명</th>
+											<th>근속년수</th>
+											<th>비고</th>
+											<th>입사일</th>
+											<th>생년월일</th>
 										</tr>
-								</form>
-									</table>
+									</thead>
+
+									<tbody id="mytbody">
+										<c:forEach items="${allEmployee}" var="allEmployee">
+											<tr>
+												<td><input type="checkbox" name="check"
+													value="${allEmployee.userId}"
+													style="width: 30px; height: 30px;"></td>
+
+												<td class="boardTr" data-userid="${allEmployee.userId}"><button
+														type="button" class="btn btn-default" data-toggle="modal"
+														data-target="#my80sizeModal2">
+														<u>${allEmployee.userId }</u>
+													</button></td>
+
+												<td>${allEmployee.userNm }</td>
+												<td>${allEmployee.deptname }</td>
+												<td>${allEmployee.positionname }</td>
+												<td>${allEmployee.rankname }</td>
+												<td>${allEmployee.continuousYear }</td>
+												<td>${allEmployee.relate }</td>
+												<td>${allEmployee.joinCompany }</td>
+												<td>${allEmployee.birthDate }</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
 							</div>
 
+						</form>
 
-							<!-- 신규 사원 등록 -->
-							<div class="modal fade" id="my80sizeModal" tabindex="-1"
-								role="dialog" aria-labelledby="my80sizeModalLabel">
-								<div class="modal-dialog modal-80size" role="document">
-									<div class="modal-content modal-80size">
-										<div class="modal-header" style="color: black">
-											<strong><h2>신규 사원 등록</h2></strong>
+						<div class="form-group">
+							<table>
+								<tr>
+									<td>
+										<button style="background-color: #6E6867 !important;"
+											type="button" class="btn btn-primary btn-lg" id="cancleBtn">삭
+											제</button>
+										<button style="background-color: #6E6867 !important;"
+											type="button" class="btn btn-primary btn-lg"
+											data-toggle="modal" data-target="#my80sizeModal">신규등록</button>
+									</td>
+									<td>
+										<form action="${cp}/employee/SearchEmployee" id="searchFrm">
+									</td>
+									<td style="padding-left: 600px"><input type="text"
+										class="search-query form-control" id="searchPay"
+										name="searchName" placeholder="사원명을 검색하시오" /></td>
+									<td>
+										<button class="btn btn-info" type="submit" id="searchBtn">
+											<span class=" glyphicon glyphicon-search">검색</span>
+										</button>
+									</td>
+								</tr>
+								</form>
+							</table>
+						</div>
+
+						<!-- 신규 사원 등록 -->
+						<div class="modal fade" id="my80sizeModal" tabindex="-1"
+							role="dialog" aria-labelledby="my80sizeModalLabel">
+							<div class="modal-dialog modal-80size" role="document">
+								<div class="modal-content modal-80size">
+									<div class="modal-header" style="color: black">
+										<strong><h2>신규 사원 등록</h2></strong>
+									</div>
+									<div class="modal-body">
+										<div class="form-group">
+											<form action="${cp}/employee/insertEmployee" method="post"
+												enctype="multipart/form-data">
+												<label for="inputName">사원번호</label> <input type="text"
+													class="form-control" id="userId" name="userId"
+													placeholder="사원번호를 입력해 주세요"> <input type="button"
+													id="emplCheck" name="emplCheck" value="중복체크" /> <span
+													id="duplicate"></span>
 										</div>
-										<div class="modal-body">
-											<div class="form-group">
-												<form action="${cp}/employee/insertEmployee" method="post"
-													enctype="multipart/form-data">
-													<label for="inputName">사원번호</label> <input type="text"
-														class="form-control" id="userId" name="userId"
-														placeholder="사원번호를 입력해 주세요"> <input type="button"
-														id="emplCheck" name="emplCheck" value="중복체크" /> <span
-														id="duplicate"></span>
-											</div>
-											<div class="form-group">
-												<label for="InputEmail">사원명</label> <input type="text"
-													class="form-control" name="userNm"
-													placeholder="사원명을 입력해주세요">
-											</div>
-
-
-											<div class="form-group">
-												<table>
-													<tr>
-														<td><label for="inputPassword">부서코드</label></td>
-														<td><select name="deptCode" class="form-control">
-																<option value="100">인사</option>
-																<option value="200">회계</option>
-																<option value="300">물류</option>
-														</select></td>
-
-														<td><label for="inputPassword">직책코드</label></td>
-														<td><select name="positionCode" class="form-control">
-																<option value="60">사장</option>
-																<option value="50">부사장</option>
-																<option value="40">본부장</option>
-																<option value="30">팀장</option>
-																<option value="10">파트장</option>
-																<option value="10">팀원</option>
-														</select></td>
-
-														<td><label for="inputPassword">직급코드</label></td>
-														<td><select name="rankCode" class="form-control">
-																<option value="8">전무</option>
-																<option value="7">상무</option>
-																<option value="6">이사</option>
-																<option value="5">부장</option>
-																<option value="4">차장</option>
-																<option value="3">과장</option>
-																<option value="2">대리</option>
-																<option value="1">사원</option>
-														</select></td>
-													</tr>
-												</table>
-											</div>
-
-
-											<div class="form-group">
-												<label for="inputPassword">비밀번호</label> <input
-													type="password" class="form-control" id="inputPassword"
-													name="password" placeholder="비밀번호를 입력해주세요">
-											</div>
-											<div class="form-group">
-												<label for="inputPasswordCheck">비밀번호 확인</label> <input
-													type="password" class="form-control"
-													id="inputPasswordCheck"
-													placeholder="비밀번호 확인을 위해 다시한번 입력 해 주세요">
-											</div>
-
-											<div class="form-group">
-												<label for="inputMobile">비고</label> <input type="text"
-													class="form-control" id="inputMobile" name="relate"
-													placeholder="특이사항란">
-											</div>
-											<div class="form-group">
-												<label for="inputtelNO">생년월일</label> <input type="text"
-													class="form-control" id="inputtelNO" name="BirthDate"
-													placeholder="생년월일을 입력하세요 예)19951010">
-											</div>
-											<div class="form-group">
-												<label for="inputtelNO">사진첨부</label>
-												<button>
-													<input type="file" class="form-control" name="realFilename">
-												</button>
-											</div>
+										<div class="form-group">
+											<label for="InputEmail">사원명</label> <input type="text"
+												class="form-control" name="userNm" placeholder="사원명을 입력해주세요">
 										</div>
-										<div class="modal-footer">
-											<button type="submit" class="btn btn-default">등록</button>
-											</form>
-											<button type="button" class="btn btn-default"
-												data-dismiss="modal">닫기</button>
+
+										<div class="form-group">
+											<table>
+												<tr>
+													<td><label for="inputPassword">부서코드</label></td>
+													<td><select name="deptCode" class="form-control">
+															<option value="100">인사</option>
+															<option value="200">회계</option>
+															<option value="300">물류</option>
+													</select></td>
+
+													<td><label for="inputPassword">직책코드</label></td>
+													<td><select name="positionCode" class="form-control">
+															<option value="60">사장</option>
+															<option value="50">부사장</option>
+															<option value="40">본부장</option>
+															<option value="30">팀장</option>
+															<option value="10">파트장</option>
+															<option value="10">팀원</option>
+													</select></td>
+
+													<td><label for="inputPassword">직급코드</label></td>
+													<td><select name="rankCode" class="form-control">
+															<option value="8">전무</option>
+															<option value="7">상무</option>
+															<option value="6">이사</option>
+															<option value="5">부장</option>
+															<option value="4">차장</option>
+															<option value="3">과장</option>
+															<option value="2">대리</option>
+															<option value="1">사원</option>
+													</select></td>
+												</tr>
+											</table>
 										</div>
+
+										<div class="form-group">
+											<label for="inputPassword">비밀번호</label> <input
+												type="password" class="form-control" id="inputPassword"
+												name="password" placeholder="비밀번호를 입력해주세요">
+										</div>
+										<div class="form-group">
+											<label for="inputPasswordCheck">비밀번호 확인</label> <input
+												type="password" class="form-control" id="inputPasswordCheck"
+												placeholder="비밀번호 확인을 위해 다시한번 입력 해 주세요">
+										</div>
+
+										<div class="form-group">
+											<label for="inputMobile">비고</label> <input type="text"
+												class="form-control" id="inputMobile" name="relate"
+												placeholder="특이사항란">
+										</div>
+										<div class="form-group">
+											<label for="inputtelNO">생년월일</label> <input type="text"
+												class="form-control" id="inputtelNO" name="BirthDate"
+												placeholder="생년월일을 입력하세요 예)19951010">
+										</div>
+										<div class="form-group">
+											<label for="inputtelNO">사진첨부</label>
+											<button>
+												<input type="file" class="form-control" name="realFilename">
+											</button>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="submit" class="btn btn-default">등록</button>
+										</form>
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">닫기</button>
 									</div>
 								</div>
 							</div>
-							<!-- 신규 사원 등록 끝 -->
+						</div>
+						<!-- 신규 사원 등록 끝 -->
 
+						<!-- 사원 정보 수정하기  -->
+						<div class="modal fade" id="my80sizeModal2" tabindex="-1"
+							role="dialog" aria-labelledby="my80sizeModalLabel"
+							style="color: black">
+							<div class="modal-dialog modal-80size" role="document">
+								<div class="modal-content modal-80size">
+									<div class="modal-header">
+										<strong><h2>사원 조회/수정</h2></strong>
+									</div>
+									<div class="modal-body">
+										<form action="${cp}/employee/updateEmployee_POST"
+											method="post">
 
-
-
-							<!-- 사원 정보 수정하기  -->
-							<div class="modal fade" id="my80sizeModal2" tabindex="-1"
-								role="dialog" aria-labelledby="my80sizeModalLabel"
-								style="color: black">
-								<div class="modal-dialog modal-80size" role="document">
-									<div class="modal-content modal-80size">
-										<div class="modal-header">
-											<strong><h2>사원 조회/수정</h2></strong>
-										</div>
-										<div class="modal-body">
-											<form action="${cp}/employee/updateEmployee_POST"
-												method="post">
-
-
-												<div class="form-group">
-													<label for="inputName">사원번호</label> <input type="text"
-														class="form-control" id="userIde" name="userId"
-														placeholder="사원번호를 입력해 주세요" readonly>
+											<div class="form-group">
+												<label for="inputName">사원번호</label> <input type="text"
+													class="form-control" id="userIde" name="userId"
+													placeholder="사원번호를 입력해 주세요" readonly>
 
 
 
@@ -376,9 +361,6 @@ a:hover, a:focus {
 														class="form-control" name="userNm" id="userNme"
 														placeholder="사원명을 입력해주세요">
 												</div>
-
-
-
 
 												<div class="form-group">
 													<table>
@@ -417,10 +399,6 @@ a:hover, a:focus {
 														</tr>
 													</table>
 												</div>
-
-
-
-
 												<div class="form-group">
 													<label for="inputPassword">비밀번호</label> <input
 														type="password" class="form-control" id="inputPassworde"
@@ -453,272 +431,170 @@ a:hover, a:focus {
 
 												<div class="modal-footer">
 													<button type="submit" class="btn btn-default">수정</button>
-											</form>
+										</form>
 
 
 
-											<button type="button" class="btn btn-default"
-												data-dismiss="modal">닫기</button>
-										</div>
+										<button type="button" class="btn btn-default"
+											data-dismiss="modal">닫기</button>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					</div>
-					</p>
-					<!-- 사원 모달창 수정하기 끝  -->
-
-
-
-
-
-
-
-
-
-					<!-- Section2 시작-->
-					<div role="tabpanel" class="tab-pane fade" id="Section2">
-						<p>
-						<form class="form-horizontal">
-							<div class="form-group">
-								<h2>
-									<strong>사원목록</strong>
-								</h2>
-							</div>
-
-							<div class="form-group">
-								<table class="table table-striped">
-									<thead class="thead">
-										<tr>
-											<th>선택</th>
-											<th>사원번호</th>
-											<th>사원명</th>
-											<th>부서명</th>
-											<th>직책명</th>
-											<th>직급명</th>
-											<th>근속년수</th>
-											<th>비고</th>
-											<th>입사일</th>
-											<th>생년월일</th>
-										</tr>
-									</thead>
-
-
-
-									<tbody id="mytbody">
-										<c:forEach items="${allEmployee}" var="allEmployee">
-											<c:if test="${allEmployee.deptname == '인사' }">
-												<tr>
-													<td><input type="checkbox" name="check"
-														value="${allEmployee.userId}"
-														style="width: 30px; height: 30px;"></td>
-
-													<td class="boardTr" data-userid="${allEmployee.userId}"><button
-															type="button" class="btn btn-default" data-toggle="modal"
-															data-target="#my80sizeModal2">
-															<u>${allEmployee.userId }</u>
-														</button></td>
-
-													<td>${allEmployee.userNm }</td>
-													<td>${allEmployee.deptname }</td>
-													<td>${allEmployee.positionname }</td>
-													<td>${allEmployee.rankname }</td>
-													<td>${allEmployee.continuousYear }</td>
-													<td>${allEmployee.relate }</td>
-													<td>${allEmployee.joinCompany }</td>
-													<td>${allEmployee.birthDate }</td>
-												</tr>
-											</c:if>
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
-
-						</form>
-
-
-
-
-
-
-
-
-
-
-
-
-						</p>
-					</div>
-					<!-- Section2 끝-->
-
-
-
-
-
-
-					<!-- Section3 시작-->
-					<div role="tabpanel" class="tab-pane fade" id="Section3">
-						<p>
-						<form class="form-horizontal">
-							<div class="form-group">
-								<h2>
-									<strong>사원목록</strong>
-								</h2>
-							</div>
-
-							<div class="form-group">
-								<table class="table table-striped">
-									<thead class="thead">
-										<tr>
-											<th>선택</th>
-											<th>사원번호</th>
-											<th>사원명</th>
-											<th>부서명</th>
-											<th>직책명</th>
-											<th>직급명</th>
-											<th>근속년수</th>
-											<th>비고</th>
-											<th>입사일</th>
-											<th>생년월일</th>
-										</tr>
-									</thead>
-
-
-
-									<tbody id="mytbody">
-										<c:forEach items="${allEmployee}" var="allEmployee">
-											<c:if test="${allEmployee.deptname == '회계' }">
-												<tr>
-													<td><input type="checkbox" name="check"
-														value="${allEmployee.userId}"
-														style="width: 30px; height: 30px;"></td>
-
-													<td class="boardTr" data-userid="${allEmployee.userId}"><button
-															type="button" class="btn btn-default" data-toggle="modal"
-															data-target="#my80sizeModal2">
-															<u>${allEmployee.userId }</u>
-														</button></td>
-
-													<td>${allEmployee.userNm }</td>
-													<td>${allEmployee.deptname }</td>
-													<td>${allEmployee.positionname }</td>
-													<td>${allEmployee.rankname }</td>
-													<td>${allEmployee.continuousYear }</td>
-													<td>${allEmployee.relate }</td>
-													<td>${allEmployee.joinCompany }</td>
-													<td>${allEmployee.birthDate }</td>
-												</tr>
-											</c:if>
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
-
-						</form>
-
-
-
-
-
-
-
-
-
-
-
-
-						</p>
-					</div>
-					<!-- Section3 끝-->
-					
-					
-					
-						<!-- Section4 시작-->
-					<div role="tabpanel" class="tab-pane fade" id="Section4">
-						<p>
-						<form class="form-horizontal">
-							<div class="form-group">
-								<h2>
-									<strong>사원목록</strong>
-								</h2>
-							</div>
-
-							<div class="form-group">
-								<table class="table table-striped">
-									<thead class="thead">
-										<tr>
-											<th>선택</th>
-											<th>사원번호</th>
-											<th>사원명</th>
-											<th>부서명</th>
-											<th>직책명</th>
-											<th>직급명</th>
-											<th>근속년수</th>
-											<th>비고</th>
-											<th>입사일</th>
-											<th>생년월일</th>
-										</tr>
-									</thead>
-
-
-
-									<tbody id="mytbody">
-										<c:forEach items="${allEmployee}" var="allEmployee">
-											<c:if test="${allEmployee.deptname == '물류' }">
-												<tr>
-													<td><input type="checkbox" name="check"
-														value="${allEmployee.userId}"
-														style="width: 30px; height: 30px;"></td>
-
-													<td class="boardTr" data-userid="${allEmployee.userId}"><button
-															type="button" class="btn btn-default" data-toggle="modal"
-															data-target="#my80sizeModal2">
-															<u>${allEmployee.userId }</u>
-														</button></td>
-
-													<td>${allEmployee.userNm }</td>
-													<td>${allEmployee.deptname }</td>
-													<td>${allEmployee.positionname }</td>
-													<td>${allEmployee.rankname }</td>
-													<td>${allEmployee.continuousYear }</td>
-													<td>${allEmployee.relate }</td>
-													<td>${allEmployee.joinCompany }</td>
-													<td>${allEmployee.birthDate }</td>
-												</tr>
-											</c:if>
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
-
-						</form>
-
-
-
-
-
-
-
-
-
-
-
-
-						</p>
-					</div>
-					<!-- Section4 끝-->
-
-
-
-
-
-
-
-
-
-
 				</div>
+			</div>
+			</p>
+			<!-- 사원 모달창 수정하기 끝  -->
+			<!-- Section2 시작-->
+			<div role="tabpanel" class="tab-pane fade" id="Section2">
+				<p>
+				<form class="form-horizontal">
+					<div class="form-group">
+						<table class="table table-striped">
+							<thead class="thead">
+								<tr>
+									<th>사원번호</th>
+									<th>사원명</th>
+									<th>부서명</th>
+									<th>직책명</th>
+									<th>직급명</th>
+									<th>근속년수</th>
+									<th>비고</th>
+									<th>입사일</th>
+									<th>생년월일</th>
+								</tr>
+							</thead>
+
+							<tbody id="mytbody">
+								<c:forEach items="${allEmployee}" var="allEmployee">
+									<c:if test="${allEmployee.deptname == '인사' }">
+										<tr>
+											<td class="boardTr" data-userid="${allEmployee.userId}"><button
+													type="button" class="btn btn-default" data-toggle="modal"
+													data-target="#my80sizeModal2">
+													<u>${allEmployee.userId }</u>
+												</button></td>
+
+											<td>${allEmployee.userNm }</td>
+											<td>${allEmployee.deptname }</td>
+											<td>${allEmployee.positionname }</td>
+											<td>${allEmployee.rankname }</td>
+											<td>${allEmployee.continuousYear }</td>
+											<td>${allEmployee.relate }</td>
+											<td>${allEmployee.joinCompany }</td>
+											<td>${allEmployee.birthDate }</td>
+										</tr>
+									</c:if>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+
+				</form>
+				</p>
+			</div>
+			<!-- Section2 끝-->
+
+			<!-- Section3 시작-->
+			<div role="tabpanel" class="tab-pane fade" id="Section3">
+				<p>
+				<form class="form-horizontal">
+
+					<div class="form-group">
+						<table class="table table-striped">
+							<thead class="thead">
+								<tr>
+									<th>사원번호</th>
+									<th>사원명</th>
+									<th>부서명</th>
+									<th>직책명</th>
+									<th>직급명</th>
+									<th>근속년수</th>
+									<th>비고</th>
+									<th>입사일</th>
+									<th>생년월일</th>
+								</tr>
+							</thead>
+
+
+
+							<tbody id="mytbody">
+								<c:forEach items="${allEmployee}" var="allEmployee">
+									<c:if test="${allEmployee.deptname == '회계' }">
+										<tr>
+											<td class="boardTr" data-userid="${allEmployee.userId}"><button
+													type="button" class="btn btn-default" data-toggle="modal"
+													data-target="#my80sizeModal2">
+													<u>${allEmployee.userId }</u>
+												</button></td>
+
+											<td>${allEmployee.userNm }</td>
+											<td>${allEmployee.deptname }</td>
+											<td>${allEmployee.positionname }</td>
+											<td>${allEmployee.rankname }</td>
+											<td>${allEmployee.continuousYear }</td>
+											<td>${allEmployee.relate }</td>
+											<td>${allEmployee.joinCompany }</td>
+											<td>${allEmployee.birthDate }</td>
+										</tr>
+									</c:if>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+
+				</form>
+				</p>
+			</div>
+			<!-- Section3 끝-->
+
+			<!-- Section4 시작-->
+			<div role="tabpanel" class="tab-pane fade" id="Section4">
+				<p>
+				<form class="form-horizontal">
+					<div class="form-group">
+						<table class="table table-striped">
+							<thead class="thead">
+								<tr>
+									<th>사원번호</th>
+									<th>사원명</th>
+									<th>부서명</th>
+									<th>직책명</th>
+									<th>직급명</th>
+									<th>근속년수</th>
+									<th>비고</th>
+									<th>입사일</th>
+									<th>생년월일</th>
+								</tr>
+							</thead>
+
+							<tbody id="mytbody">
+								<c:forEach items="${allEmployee}" var="allEmployee">
+									<c:if test="${allEmployee.deptname == '물류' }">
+										<tr>
+											<td class="boardTr" data-userid="${allEmployee.userId}"><button
+													type="button" class="btn btn-default" data-toggle="modal"
+													data-target="#my80sizeModal2">
+													<u>${allEmployee.userId }</u>
+												</button></td>
+
+											<td>${allEmployee.userNm }</td>
+											<td>${allEmployee.deptname }</td>
+											<td>${allEmployee.positionname }</td>
+											<td>${allEmployee.rankname }</td>
+											<td>${allEmployee.continuousYear }</td>
+											<td>${allEmployee.relate }</td>
+											<td>${allEmployee.joinCompany }</td>
+											<td>${allEmployee.birthDate }</td>
+										</tr>
+									</c:if>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</form>
+				</p>
 			</div>
 		</div>
 	</div>

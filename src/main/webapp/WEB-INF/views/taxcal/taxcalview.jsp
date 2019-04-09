@@ -66,8 +66,8 @@
 				<td style="width: 100px;">공급가액</td>
 				<td style="width: 100px;">부가세</td>
 				<td style="width: 100px;">공급대가</td>
-				<td style="width: 100px;">거래처</td>
-				<td style="width: 110px;">사용부서</td>
+				<td colspan="2" style="width: 150px;">거래처</td>
+				<td colspan="2" style="width: 150px;">부서</td>
 				<td style="width: 100px;">발주번호</td>
 				<td style="width: 65px;">전자</td>
 				<td style="width: 65px;">분개</td>
@@ -79,8 +79,10 @@
 				<td><input id="insertSupplyValue" style="width: 100px;" type="text" readonly/></td>  <!-- 공급가액 -->
 				<td><input id="insertSurTax" style="width: 100px;" type="text" readonly/></td>  <!-- 부가세 -->
 				<td><input id="insertSumValue" style="width: 100px;" type="text" /></td>  <!-- 공급대가 -->
-				<td><input id="insertClient" style="width: 100px;" type="text" /></td> <!-- 거래처 -->
-				<td><input id="insertDept" style="width: 110px;" type="text" placeholder="미등록"/></td> <!-- 사용부서 -->
+				<td><input id="insertClientCode" style="width: 35px;" type="text" /></td> <!-- 거래처코드 -->
+				<td><input id="insertClient" style="width: 115px;" type="text" /></td> <!-- 거래처 -->
+				<td><input id="insertDeptCode" style="width: 35px;" type="text"/></td> <!-- 사용부서 -->
+				<td><input id="insertDept" style="width: 115px;" type="text" placeholder="미등록"/></td> <!-- 사용부서 -->
 				<td><input id="insertOrderCode" style="width: 100px;" type="text" /></td>  <!-- 발주번호 -->
 				<td><input id="insertAuto" style="width: 70px;" type="text" /></td> <!-- 전자 -->
 				<td><input id="insertSlipType" style="width: 70px;" type="text" /></td> <!-- 분개 -->
@@ -601,10 +603,22 @@ $("document").ready(function(){
 		
 		var slipType = $("#insertSlipType").val();
 		var salesStatus = $("#insertSalesStatus").val();
+		var supplyValue = $("#insertSupplyValue").val();
+		var surtax = $("#insertSurTax").val();
+		var sumValue = $("#insertSumValue").val();
+		var clientCode = $("#insertClientCode").val();
+		var clientName = $("#insertClient").val();
+		var slipDate = $("#insertSlipDate").val();
+		var deptCode = $("#insertDeptCode").val();
+		var orderCode = $("#insertOrderCode").val();
+		var auto = $("#insertAuto").val();
+		
 		
 		$.ajax({
 			url : "${pageContext.request.contextPath }/openInsertViewAreaLoad",
-			data : "slipType=" + slipType + "&salesStatus=" + salesStatus,
+			data : "slipType=" + slipType + "&salesStatus=" + salesStatus + "&supplyValue=" + supplyValue + "&surtax=" + surtax + "&sumValue=" + sumValue
+					+ "&clientCode=" + clientCode + "&clientName=" + clientName + "&slipDate=" + slipDate + "&deptCode=" + deptCode + "&orderCode=" + orderCode
+					+ "&auto=" + auto,
 			success : function(data){
 				$("#insertViewArea").html(data);
 				fn_openInsertViewArea();
@@ -616,7 +630,7 @@ $("document").ready(function(){
 	
 	
 
-	/*전표데이터 컨트롤러로 전송하는 Ajax  전표 데이터 전송 완료 , 전표상세데이터 전송 미완료 개발예정*/
+	/*전표데이터 컨트롤러로 전송하는 Ajax  전표 데이터 전송 완료 , 전표상세데이터 전송*/
 	function fn_openInsertViewArea(){
 		
 		var slipDate = $("#insertSlipDate").val();
@@ -629,6 +643,7 @@ $("document").ready(function(){
 		var OrderCode = $("#insertOrderCode").val();
 		var auto = $("#insertAuto").val();
 		var slipType = $("#insertSlipType").val();
+		
 		
 		
 		$.ajax({

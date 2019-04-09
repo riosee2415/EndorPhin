@@ -9,7 +9,7 @@
 			<td><input type="text" class="search-query form-control"
 				id="searchPay" name="searchPaymentName" placeholder="Search" /></td>
 			<td>
-				<button class="btn btn-primary" type="button" id="searchBtn">
+				<button class="bttn-fill bttn-md bttn-warning" type="button" id="searchBtn">
 					<span class=" glyphicon glyphicon-search">검색</span>
 				</button>
 			</td>
@@ -33,7 +33,7 @@
 		<c:forEach items="${paymentList}" var="vo">
 			<tr class="payTr" data-userid="${vo.userId }">
 				<td><a href="#detailLayer" data-toggle="modal"
-			data-target="#my80sizeModal" class="paymentDetail">${vo.userId}</a></td>
+			data-target="#my80sizeModal" class="bttn-stretch bttn-md bttn-warning paymentDetail">${vo.userId}</a></td>
 				<c:set var="totalSalarysum" value="${totalSalarysum+vo.totalSalary}"/>
 				<c:set var="totalWagesum" value="${totalWagesum+vo.totalWage}"/>
 				<td>${vo.positionname}</td>
@@ -97,7 +97,7 @@
 							</tbody>
 						</table>
 					</div>					
-						<a data-toggle="modal" href="#myModal4" class="btn btn-primary" id="modalAddProduct">급여 등록</a>
+						<a data-toggle="modal" href="#myModal4" class="bttn-simple bttn-warning" id="modalAddProduct">급여 등록</a>
 				</div>
 				
 				<div class="form-group">
@@ -114,7 +114,7 @@
 							</tbody>
 						</table>
 					</div>
-					<a data-toggle="modal" href="#myModal4" class="btn btn-primary" id="modalAddDeduct">공제 등록</a>
+					<a data-toggle="modal" href="#myModal4" class="bttn-simple bttn-warning" id="modalAddDeduct">공제 등록</a>
 				</div>
 				<div class="form-group">
 					<label for="InputEmail">원천징수내역</label>
@@ -469,10 +469,10 @@
 				$("#firModalProductTbody").append("<tr>");
 				$("#firModalWithholdTbody").append("<tr>");
 				$("#firModalDeductTbody").append("<td><a data-toggle=\'modal\' data-payCd=\'"+
-												data.paymentList[i].payCode+"\' href=\'#myModal3\' class=\'modalUpdDeduct\'>"
+												data.paymentList[i].payCode+"\' href=\'#myModal3\' class=\'bttn-md bttn-warning modalUpdDeduct\'>"
 												+data.paymentList[i].payDay+"</a></td>");
 				$("#firModalProductTbody").append("<td><a data-toggle=\'modal\' data-payCd=\'"+
-												data.paymentList[i].payCode+"\' href=\'#myModal3\' class=\'modalUpdProduct\'>"
+												data.paymentList[i].payCode+"\' href=\'#myModal3\' class=\'bttn-md bttn-warning modalUpdProduct\'>"
 												+data.paymentList[i].payDay+"</a></td>");
 				$("#firModalWithholdTbody").append("<td>"+data.paymentList[i].payDay+"</td>");
 				for (var a = 0; a < data.paymentList.length; a++) {

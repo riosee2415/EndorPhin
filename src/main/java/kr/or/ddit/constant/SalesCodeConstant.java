@@ -12,8 +12,8 @@ public class SalesCodeConstant {
 	public static final Map<String, String> salesCode = new HashMap<String, String>();
 	static {
 		salesCode.put("11", "과세매출");
-		salesCode.put("12", "영세율");
-		salesCode.put("13", "계산서");
+		salesCode.put("12", "영세율매출");
+		salesCode.put("13", "계산서매출");
 		salesCode.put("14", "과세무증빙");
 		salesCode.put("15", "간이과세");
 		salesCode.put("16", "수출L/C");

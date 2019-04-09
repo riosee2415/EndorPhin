@@ -98,11 +98,16 @@ public class EmployeeController {
 	@RequestMapping(path = "/deleteEmployee", method = RequestMethod.GET)
 	public String deleteEmployee(Model model, EmployeeVo vo,RedirectAttributes ra,
 			@RequestParam String delete_no) {
-		logger.debug("감자 : {}",delete_no);
 		
+		
+		String[] index = delete_no.split(",");
+		
+		for (int i = 0; i < index.length; i++) {
+			employeeService.deleteEmployee(index[i]);
+			
+		}
 		
 		ra.addFlashAttribute("msg", "정상 삭제 되었습니다");
-		employeeService.deleteEmployee(delete_no);
 		
 		return "redirect:/employee/getAllEmployee";
 	}
@@ -216,15 +221,14 @@ public class EmployeeController {
 	public String SearchEmployee(Model model, String searchName, String deptselect) {
 		EmployeeVo vo = new EmployeeVo();
 		
-		
-		if(searchName != null){
 		vo.setUserId(searchName);
-		}
 		
-		if(deptselect != null){
 		vo.setDeptname(deptselect);
-		}
+		
+		
 		List<EmployeeVo> allEmployee = employeeService.SearchEmployee(vo);
+		
+		
 		model.addAttribute("allEmployee",allEmployee);
 		
 		return "employeeListTiles";
@@ -235,7 +239,6 @@ public class EmployeeController {
 	@ResponseBody
 	public List<EmployeeVo> getAllEmployeeAjax(Model model) {
 		
-		logger.debug("한미");
 		
 		return employeeService.getAllEmployee();
 		
@@ -258,6 +261,7 @@ public class EmployeeController {
 		
 		return allEmployee;
 	}
+	
 	
 	
 	

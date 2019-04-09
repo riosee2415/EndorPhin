@@ -113,14 +113,6 @@ a:hover, a:focus {
 	border-color: black;
 }
 
-.btnform {
-	size: 5em;
-	color: white;
-	background-color: #6E6867;
-	border-width: 3px;
-	border-style: inset;
-	border-color: black;
-}
 
 .modal-dialog.modal-80size {
 	width: 200% !important;
@@ -229,14 +221,13 @@ a:hover, a:focus {
 
 							</form>
 
-
 							<div class="form-group">
 							<table>
 										<tr>
 										<td>
-								<button type="button" class="btnform" id="cancleBtn">삭
+								<button style="background-color: #6E6867 !important;" type="button" class="btn btn-primary btn-lg" id="cancleBtn">삭
 									제</button>
-								<button type="button" class="btnform" data-toggle="modal"
+								<button style="background-color: #6E6867 !important;" type="button" class="btn btn-primary btn-lg" data-toggle="modal"
 									data-target="#my80sizeModal">신규등록</button>
 										</td>
 													<td>
@@ -812,12 +803,12 @@ a:hover, a:focus {
 			
 			 //사용자 tr 태그 클릭시 이벤트 핸들러
 			$("#cancleBtn").click(function() {
+				var implArray = new Array();
 
 				$('input:checkbox[name="check"]:checked').each(function() {
-
+					implArray.push($(this).val());
 	
-				var delete_no = $(this).val();
-				$("#delete_no").val(delete_no);
+				$("#delete_no").val(implArray);
 				$("#frm1").submit();
 				
 				});

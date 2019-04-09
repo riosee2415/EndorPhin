@@ -194,7 +194,7 @@ background-color: #6E6867;
 
 
 <!-- 직급 입력하기 -->
-<div class="modal fade" id="my80sizeModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeModalLabel">
+<div class="modal fade" id="my80sizeModal" tabindex="-1" role="dialog" aria-labelledby="my80sizeModalLabel" style="z-index: 1050">
   <div class="modal-dialog modal-80size" role="document">
     <div class="modal-content modal-80size">
       <div class="modal-header"><h2>직급/직책 등록</h2>
@@ -248,7 +248,7 @@ background-color: #6E6867;
 <!-- 직급 입력하기 끝 -->
 
 <!-- 직급 모달창 수정하기  -->
-<div class="modal fade" id="my80sizeModal2" tabindex="-1" role="dialog" aria-labelledby="my80sizeModalLabel" style="color: black">
+<div class="modal fade" id="my80sizeModal2" tabindex="-1" role="dialog" aria-labelledby="my80sizeModalLabel" style="color: black; z-index: 1050">
   <div class="modal-dialog modal-80size" role="document">
     <div class="modal-content modal-80size">
       <div class="modal-header"><h2>직급/직책 수정</h2>
@@ -523,48 +523,31 @@ background-color: #6E6867;
 			
 			 //사용자 tr 태그 클릭시 이벤트 핸들러
 			$("#cancleBtn").click(function() {
-
+				
+				var positionArray = new Array();
+				
+				
+				
 				$('input:checkbox[name="check"]:checked').each(function() {
 
-	
-				var delete_no = $(this).val();
-				$("#delete_no").val(delete_no);
+					positionArray.push($(this).val());
+					
+					
+				$("#delete_no").val(positionArray);
 				$("#frm1").submit();
 				
 				});
 
 			}); 
 			
-			/* $(".boardTr").click(function() {
-
-
-
-				var userId = $(this).data("userId");
-
-
-				//2 form
-				$("#userId").val(userId);
-				$("#frm2").submit();
-
-			}); */
 			
-			
-			
-			
-			
-			
-			
-			
-			
-
-	
 			
 
 		});
 	</script>
 	
 
-	<form id="frm1" action="${cp}/emplPosition/detailEmplPosition" method="get">
+	<form id="frm1" action="${cp}/emplPosition/delteEmplPosition" method="get">
 		<input type="hidden" id="delete_no" name="delete_no" />
 	</form>
 

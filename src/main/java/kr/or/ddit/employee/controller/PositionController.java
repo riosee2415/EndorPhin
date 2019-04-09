@@ -102,14 +102,19 @@ public class PositionController {
 		
 	}
 	
-	
-	@RequestMapping(path = "/detailEmplPosition", method = RequestMethod.GET)
+	@RequestMapping(path = "/delteEmplPosition", method = RequestMethod.GET)
 	public String deleteEmployee(Model model, EmployeeVo vo,RedirectAttributes ra,
 			@RequestParam String delete_no) {
 		
 		
+		String[] index = delete_no.split(",");
+		
+		for (int i = 0; i < index.length; i++) {
+			positionService.deletePosition(index[i]);
+			
+		}
+		
 		ra.addFlashAttribute("msg", "정상 삭제 되었습니다");
-		positionService.deletePosition(delete_no);
 		
 		return "redirect:/emplPosition/getAllemplPosition";
 	}

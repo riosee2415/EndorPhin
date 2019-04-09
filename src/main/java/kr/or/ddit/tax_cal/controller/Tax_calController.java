@@ -134,10 +134,29 @@ public class Tax_calController {
 	
 	@RequestMapping("/openInsertViewAreaLoad")
 	public String openInsertViewAreaLoad(@RequestParam("slipType")String slipType
-										,@RequestParam("salesStatus")String salesStatus, Model model) {
+										,@RequestParam("salesStatus")String salesStatus
+										,@RequestParam("supplyValue")String supplyValue
+										,@RequestParam("surtax")String surtax
+										,@RequestParam("sumValue")String sumValue
+										,@RequestParam("clientCode")String clientCode
+										,@RequestParam("clientName")String clientName
+										,@RequestParam("slipDate")String slipDate
+										,@RequestParam("deptCode")String deptCode
+										,@RequestParam("orderCode")String orderCode
+										,@RequestParam("auto")String auto
+										,Model model) {
 			
 			model.addAttribute("slipType", slipType);
 			model.addAttribute("salesStatus", salesStatus);
+			model.addAttribute("supplyValue", supplyValue);
+			model.addAttribute("surtax", surtax);
+			model.addAttribute("sumValue", sumValue);
+			model.addAttribute("clientCode", clientCode);
+			model.addAttribute("clientName", clientName);
+			model.addAttribute("slipDate", slipDate);
+			model.addAttribute("deptCode", deptCode);
+			model.addAttribute("orderCode", orderCode);
+			model.addAttribute("auto", auto);
 			
 		return "taxcal/openInsertViewArea";
 		

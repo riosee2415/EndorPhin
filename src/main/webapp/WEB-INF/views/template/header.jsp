@@ -105,20 +105,9 @@
           <span>그룹웨어</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-           <a class="dropdown-item" href="${pageContext.request.contextPath }/boardType">게시판 생성</a>
-           <a class="dropdown-item" href="${pageContext.request.contextPath }postList?boardTypeCode=5&boardTypeName=방명록">방명록</a>
-           <a class="dropdown-item" href="${pageContext.request.contextPath }/free?boardTypeCode=5&boardTypeName=방명록">테스트</a>
-           <c:forEach var="board" items="${boardAllList}">
-              <c:if test="${board.useStatus == '1'}">
-                 <a class="dropdown-item" href="<%= request.getContextPath()%>/postList?boardTypeCode=${ board.boardTypeCode }&boardTypeName=${board.boardTypeName }">${board.boardTypeName }</a>
-              </c:if>
-           </c:forEach>
+           <a class="dropdown-item" href="${pageContext.request.contextPath }/boardList?boardTypeCode=5">자유게시판</a>
         </div>
       </li>
-      
-      
-    
-    
     </ul>
     
     

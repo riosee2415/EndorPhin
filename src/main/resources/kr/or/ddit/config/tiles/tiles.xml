@@ -172,6 +172,17 @@
         	<put-attribute name="content" value="/WEB-INF/views/annual/annualList.jsp"/>
         </definition>
         
+        <definition name="boardList" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/board/boardListTest.jsp"/>
+        </definition>
+        
+        <definition name="boardForm" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/board/boardFormTest.jsp"/>
+        </definition>
+        
+        <definition name="boardRead" extends="layout">
+        	<put-attribute name="content" value="/WEB-INF/views/board/boardReadTest.jsp"/>
+        </definition>
         
         
         

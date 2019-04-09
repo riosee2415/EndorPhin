@@ -98,12 +98,11 @@ cursor: pointer;
 	<div class="row headermenu">
                       
 
-
 		<div class="col-md-2 headFont">
 			<a class="header" href="${cp }/helloTiles"> <img alt=""
-				src="${cp }/upload/erp1.jpg" style="height: 50px; width: 220px" /></a>
+				src="${cp }/upload/erpblack.jpg" style="width: 235px; height: 70px;" /></a>
 		</div>
-
+                                               
 
 		<div id="erpmenu" class="col-md-2">
 			<a class="header" href="${cp }/helloTiles">E R P</a>

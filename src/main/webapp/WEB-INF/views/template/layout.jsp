@@ -98,7 +98,6 @@
 			<tiles:insertAttribute name="footer"/>
 		</div>
 		<!-- /.content-wrapper -->
-	</div>
 	<!-- /#wrapper -->
 	
 	

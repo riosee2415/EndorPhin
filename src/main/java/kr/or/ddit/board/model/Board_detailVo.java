@@ -1,7 +1,5 @@
 package kr.or.ddit.board.model;
 
-import kr.or.ddit.util.etc.Utiletc;
-
 /**
  * 
  * @author sanghoyun

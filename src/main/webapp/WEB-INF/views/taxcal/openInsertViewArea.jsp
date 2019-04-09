@@ -698,6 +698,7 @@
 	/* 전표 등록 코드 */
 	function fn_insertTax_calAndDetail(){
 		
+		
 		var insertSlipDate = $("#loadSlipDate").val();
 		var insertSupplyValue = $("#loadSupplyValue").val();
 		var insertSalesStatus = $("#loadSalesStatus").val();
@@ -705,34 +706,36 @@
 		var insertSurtax = $("#loadSurtax").val();
 		var insertOrderCode = $("#loadOrderCode").val();
 		var insertClientName = $("#loadClientName").val();
-		var insertSumValue = $("#loadSumValue").val();
-		var insertAuto = $("#loadAuto").val();
+		var insertSumValue_check = $("#loadSumValue").val();
+		var insertAuto = $("#loadAuto").val(); 
 		var insertEntryType = $("#loadSlipType").val();
 		
-		// Test Logo Print Start ===========================================
-		console.log("--------------------------------");
-		console.log("날짜 : " + insertSlipDate);
-		console.log("공급가액 : " + insertSupplyValue);
-		console.log("과세구분 : " + insertSalesStatus);
-		console.log("부서코드 : " + insertDeptCode);
-		console.log("부가세 : " + insertSurtax);
-		console.log("발주번호 : " + insertOrderCode);
-		console.log("거래처이름 : " + insertClientName);
-		console.log("공급대가 : " + insertSumValue);
-		console.log("전자여부 : " + insertAuto);
-		console.log("분개여부 : " + insertEntryType);
-		// Test Logo Print End=== ===========================================
 		
 		
-		var insertFlag = 0;
+		
+		/*tax_cal Insert Query  실행 후, Location을 통해 redirect를 하는 Ajax*/
+		$.ajax({
+			url : "${pageContext.request.contextPath }/inesrtTax_calAjax",
+			data : "insertSlipDate=" + insertSlipDate
+				 + "&insertSupplyValue=" + insertSupplyValue
+				 + "&insertSalesStatus=" + insertSalesStatus
+				 + "&insertDeptCode=" + insertDeptCode
+				 + "&insertSurtax=" + insertSurtax
+				 + "&insertOrderCode=" + insertOrderCode
+				 + "&insertClientName=" + insertClientName
+				 + "&insertSumValue=" + insertSumValue_check
+				 + "&insertAuto=" + insertAuto
+				 + "&insertEntryType=" + insertEntryType,
+			success : function(data){
+				location.reload();
+				
+				console.log(data);
+			}
+		});
+		
 			
 		
 	}
 
 </script>
-
-
-<!-- input hidden insert Area Start-->
-	<input type="hidden" value=""/>
-<!-- input hidden insert Area End-->
 

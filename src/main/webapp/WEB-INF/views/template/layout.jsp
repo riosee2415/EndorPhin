@@ -17,6 +17,10 @@
 
   <title>EndoRPhin</title>
   
+  <!-- 버튼 css 삽입 -->
+  <link type="text/css" href="${pageContext.request.contextPath }/css/bttn.css" rel="stylesheet" >
+  
+  
   <!-- 차트 js 삽입 -->
   <link href="${pageContext.request.contextPath}/resources/js/Chart.js" rel="stylesheet" type="text/css">
   <link href="${pageContext.request.contextPath}/resources/js/Chart.LlineBar.js" rel="stylesheet" type="text/css">

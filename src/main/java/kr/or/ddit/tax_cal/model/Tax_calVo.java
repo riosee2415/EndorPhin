@@ -23,9 +23,29 @@ public class Tax_calVo {
 	String auto;			// 전자여부
 	String entryType;		// 분개유형
 	
+	String nSupplyValue;	// 포멧팅 안된 공급가액
+	String nSurtax;			// 포멧팅 안된  부가세
+	String nSumValue;		// 포멧팅 안된 공급대가
 	
 	
-	
+	public String getnSupplyValue() {
+		return nSupplyValue;
+	}
+	public void setnSupplyValue(String nSupplyValue) {
+		this.nSupplyValue = nSupplyValue;
+	}
+	public String getnSurtax() {
+		return nSurtax;
+	}
+	public void setnSurtax(String nSurtax) {
+		this.nSurtax = nSurtax;
+	}
+	public String getnSumValue() {
+		return nSumValue;
+	}
+	public void setnSumValue(String nSumValue) {
+		this.nSumValue = nSumValue;
+	}
 	DecimalFormat df = new DecimalFormat("#,###");
 	
 	

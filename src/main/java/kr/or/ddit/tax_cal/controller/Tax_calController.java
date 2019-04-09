@@ -1,5 +1,8 @@
 package kr.or.ddit.tax_cal.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +22,7 @@ import kr.or.ddit.company.service.IDeptService;
 import kr.or.ddit.constant.SalesCodeConstant;
 import kr.or.ddit.order.model.ClientVo;
 import kr.or.ddit.order.service.ICilentService;
+import kr.or.ddit.tax_cal.model.Tax_calVo;
 import kr.or.ddit.tax_cal.service.ITax_calService;
 import kr.or.ddit.util.model.PageVo;
 
@@ -160,6 +164,54 @@ public class Tax_calController {
 			
 		return "taxcal/openInsertViewArea";
 		
+	}
+	
+	
+	@RequestMapping("/inesrtTax_calAjax")
+	@ResponseBody
+	public String inesrtTax_calAjax(	@RequestParam(name="insertSlipDate")String SlipDate
+									,	@RequestParam(name="insertSupplyValue") String supplyValue
+									,	@RequestParam(name="insertSalesStatus") String salesStatus
+									,	@RequestParam(name="insertDeptCode", defaultValue="미등록") String deptCode
+									,	@RequestParam(name="insertSurtax", defaultValue="0") String surtax
+									,	@RequestParam(name="insertOrderCode", defaultValue="0") String orderCode
+									,	@RequestParam(name="insertClientName", defaultValue="미등록") String clientName
+									,	@RequestParam(name="insertSumValue") String sumValue
+									,	@RequestParam(name="insertAuto", defaultValue="여") String auto
+									,	@RequestParam(name="insertEntryType", defaultValue="미등록") String entryType
+	) throws ParseException{
+		
+		
+		// 문자열 수정 : databases format으로 변경
+		sumValue = sumValue.replace(",", "");
+		supplyValue = supplyValue.replace(",", "");
+		surtax = surtax.replace(",", "");
+		
+		SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd");
+		Date date = df.parse(SlipDate);
+		
+		String salesCode = tax_calService.getTax_seqNextval();
+		
+		
+		Tax_calVo tax_calVo = new Tax_calVo();
+		
+		tax_calVo.setSalesCode(salesCode);
+		tax_calVo.setSlipDate(date);
+		tax_calVo.setSalesStatus(salesStatus);
+		tax_calVo.setDeptCode(deptCode);
+		tax_calVo.setOrderCode(orderCode);
+		tax_calVo.setClientName(clientName);
+		tax_calVo.setAuto(auto);
+		tax_calVo.setEntryType(entryType);
+		tax_calVo.setnSumValue(sumValue);
+		tax_calVo.setnSupplyValue(supplyValue);
+		tax_calVo.setnSurtax(surtax);
+		
+		
+		tax_calService.insertTax_cal(tax_calVo);
+		
+		
+		return salesCode;
 	}
 	
 	

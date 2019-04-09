@@ -252,13 +252,6 @@
   	 });
   	 
   	 
-  	 
-  	 
-  	 
-  	 
-  	 
-  	 
-  	 
   	/* 거래처 검색 기능 */
     $("#searchClientValue").keydown(function(key) {
 		if (key.keyCode == 13) {

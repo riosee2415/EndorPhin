@@ -27,4 +27,24 @@ public interface ITax_calDao {
 	*/
 	public int getTax_calCnt();
 
+	
+	/**
+	* Method : insertTax_cal
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param tax_calVo
+	* @return
+	* Method 설명 : 매입매출전표 데이터 추가
+	*/
+	public int insertTax_cal(Tax_calVo tax_calVo);
+	
+	
+	/**
+	* Method : getTax_seqNextval
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @return  
+	* Method 설명 : 시퀀스 값 가져오기
+	*/
+	public String getTax_seqNextval();
 }

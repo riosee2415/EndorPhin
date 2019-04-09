@@ -1,17 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link type="text/css"
+	href="${pageContext.request.contextPath }/css/payment_leem.css"
+	rel="stylesheet">
+<style>
+	.table {
+		display : table;
+		height: 80px;
+		position: relative;
+	}
+	.table td{
+		display:table-cell;
+ 		vertical-align: middle !important;
+	}
+</style>
 
-<h3>급여항목 등록</h3>
+<h3><strong><i class="fa fa-calculator"></i>급여항목 등록</strong></h3>
 <form action="/addProduct" id="searchFrm">
 	<input type="hidden" name="deprostatus" value="1"/>
 	<table>
 		<tr>
 			<td>급여명 검색 :</td>
-			<td><input type="text" class="search-query form-control"
-				id="searchPay" name="searchDeductName" placeholder="Search" /></td>
+			<td><div class="group">      
+			      <input type="text" class="search-query form-control"
+				id="searchPay" name="searchDeductName" placeholder="Search" />
+			    </div></td>
 			<td>
-				<button class="btn btn-primary" type="button" id="searchBtn">
+				<button class="bttn-fill bttn-md bttn-warning" type="button" id="searchBtn">
 					<span class=" glyphicon glyphicon-search">검색</span>
 				</button>
 			</td>
@@ -21,7 +37,7 @@
 <form action="/delDeproduct" id="deleteFrm">
 	<input type="hidden" name="deprostatus" value="1"/>
 	<div class="table-responsive">
-		<table class="table table-striped">
+		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th><input type="checkbox" id="checkAll" /></th>
@@ -37,7 +53,7 @@
 					<tr class="payTr" data-decd="${vo.deductCode }">
 						<td><input type="checkbox" class="check" /><input
 							type="hidden" class="valPay"></td>
-						<td><a href="#detailLayer" class="deductDetail">${vo.deductCode }</a></td>
+						<td><a data-transition="pop" href="#detailLayer" class="bttn-stretch bttn-md bttn-warning deductDetail">${vo.deductCode }</a></td>
 						<td>${vo.deductName}</td>
 						<c:if test="${vo.taxStatus==1}">
 							<td>과세 대상</td>
@@ -62,11 +78,10 @@
 			</tbody>
 		</table>
 	</div>
-	
-	<div class="btn_btm">
-		<input class="btn btn-info btn-lg" type="button" id="delPayBtn"
+	<div class="btn_btm" >
+		<input class="bttn-jelly bttn-md bttn-warning" type="button" id="delPayBtn" 
 			value="선택 삭제">
-		<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+		<button type="button" class="bttn-jelly bttn-md bttn-warning" data-toggle="modal" style="margin-left: 20px"
 			data-target="#my80sizeModal">신규등록</button>
 	</div>
 </form>
@@ -147,7 +162,7 @@
 		<input type="hidden" name="deductCode" id="dialog_deductCode"/>
 		<label for="inputName" class="dialog_deductCode"></label><br/> 
 		<label for="InputEmail">급여명</label>
-		<input type="text" class="dialog_deductName" name="deductName"
+		<input type="text" class="search-query form-control dialog_deductName" name="deductName"
 			placeholder="급여명을 입력해주세요"><br/>
 			<label for="inputPassword">과세여부</label>
 		<select name="taxStatus" class="form-control" id="dialog_taxStatus">
@@ -162,8 +177,8 @@
 			<option value="1">예</option>
 			<option value="2">아니오</option>
 		</select>
-		<button id="updDeduct" class="dialog__action">수정</button>
-		<button id="dialog_delBtn" class="dialog__action">삭제</button>
+		<button id="updDeduct" class="btn btn-default dialog__action">수정</button>
+		<button id="dialog_delBtn" class="btn btn-default dialog__action">삭제</button>
 	</div>
 </form>
 
@@ -297,6 +312,10 @@
 	$("#delPayBtn").on(
 			"click",
 			function() {
+				if($("input[class=check]:checked").length==0){
+					alert("삭제할 급여항목을 선택하세요");
+					return false;
+				}
 				$("input[class=check]:checked").each(
 						function() {
 							$(this).siblings(".valPay").attr("value",

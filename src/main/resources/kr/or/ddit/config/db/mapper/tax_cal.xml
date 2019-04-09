@@ -49,6 +49,20 @@
 	</select>
 
 
+	<select id="getTax_seqNextval" resultType="String">
+		select 
+       		 tax_seq.nextval
+  		 from dual
+	</select>
+
+
+	<insert id="insertTax_cal" parameterType="tax_calVo">
+		insert into tax_cal
+  			 (SALESCODE, SLIPDATE, SUPPLYVALUE, SALESSTATUS, DEPTCODE, SURTAX, ORDERCODE, CLIENTNAME, SUMVALUE, AUTO, ENTRYTYPE)
+		VALUES
+		     (#{salesCode}, #{slipDate}, #{nSupplyValue}, #{salesStatus}, #{deptCode}, #{nSurtax}, #{orderCode}, #{clientName}, #{nSumValue}, #{auto}, #{entryType})
+	</insert>
+
 
 
 </mapper>

@@ -6,7 +6,7 @@
 <table class="table table-sm">
 	<thead class="thead">
 		<tr>
-			<td colspan="5" width="80%">| 고정자산등록</td>
+			<td colspan="5" width="80%">| 고정자산등록   *F5사용불가</td>
 			<td></td>
 		</tr>
 	</thead>
@@ -34,9 +34,9 @@
 		</tr>
 		<tr>
 		<td colspan="2">내용연수/상각률(원수) </td>
-			<td><input type="text" id="year" style="width: 50px;">
+			<td><input type="text" id="serviceLife" style="width: 50px;">
 				<input type="button" data-toggle="modal" data-target="#my80sizeModal5" value="▦">
-			<input type="text" id="calculate" name="calculate" style="width: 65px;" >
+			<input type="text" id="depreciationRate" name="depreciationRate" style="width: 65px;" >
 				(&nbsp;<input type="text" id="month" style="width: 50px;">&nbsp;)
 				<input onclick="myClick();" type="button" data-toggle="modal" data-target="#my80sizeModal6" value="년수별상각율">
 			</td>
@@ -58,7 +58,8 @@
 			<td><input type="text" id="jukyo" name="jukyo"></td> 
 		</tr>
 		<tr>
-			<td><button type="button" class="btn btn-primary" onclick="insertBtn_fn();">등록 </button></td>
+			<td><button type="button" class="btn btn-primary" onclick="delete_fn();">취소 </button>
+			<button type="button" class="btn btn-primary" onclick="insertBtn_fn();">등록 </button></td>
 		</tr>
     </table>
     
@@ -127,14 +128,14 @@
     <script>
 	var statusCodeMap = new Map();
 	
-    $("#calculate").keypress(function(e){
+    $("#depreciationRate").keypress(function(e){
     	fn_calSet(e);
 	});
     
 	function fn_calSet(e){
 		if(e.which == 13){
 		
-		$("#calculate").val(statusCodeMap.get($("#calculate").val()));
+		$("#depreciationRate").val(statusCodeMap.get($("#depreciationRate").val()));
 		
 	}
 }
@@ -147,20 +148,20 @@
 		var tweenty = 0.221;
 		
 		if(data === 5){
-			$("#calculate").val(five);
+			$("#depreciationRate").val(five);
 		}
 		if(data === 20){
-			$("#calculate").val(twenty);
+			$("#depreciationRate").val(twenty);
 		}
 		if(data === 40){
-			$("#calculate").val(forty);
+			$("#depreciationRate").val(forty);
 		}
 		if(data === 12){
-			$("#calculate").val(five);
+			$("#depreciationRate").val(five);
 		}
 		
 		var acquisitionPrice  = $("#acquisitionPrice").val();
-		var cal 			  = $("#calculate").val();
+		var cal 			  = $("#depreciationRate").val();
 		var accumulated 	  = acquisitionPrice*cal /* 감가상각누계액 */
 		var depreciation 	  = (acquisitionPrice-accumulated)*cal; /*정률법 = 감가상각비 계산 (취득원가-감가상각누계액) x 상각률 */
 		var depre			  = parseInt(depreciation);
@@ -170,7 +171,7 @@
 		accumulated_parse = fn_numberWithCommas(accumulated_parse);
 		
 		$("#accumulated").val(accumulated_parse);
-		$("#year").val(data); 
+		$("#serviceLife").val(data); 
 		$("#depreciation").val(depre);
 		
 		
@@ -199,15 +200,29 @@
 				"&" + "clientName="+$("#clientName").val() + "&" + "acquisitionPrice="+$("#acquisitionPrice").val()+ 
 				"&" + "residualvalue="+$("#residualvalue").val()+"&" + "jukyo="+$("#jukyo").val() + 
 				"&" + "sanggakCode="+$("#sanggakCode").val()+"&" + "depreciation="+$("#depreciation").val()+
-				"&" + "accumulated="+$("#accumulated").val()+"&" + "purchaseCode="+$("#purchaseCode").val(),
+				"&" + "accumulated="+$("#accumulated").val()+"&" + "purchaseCode="+$("#purchaseCode").val()+
+				"&" + "serviceLife="+$("#serviceLife").val()+"&" + "depreciationRate="+$("#depreciationRate").val(),
 				
 		success : function(data){
 			$("#serviceLife_div").html("");	
 			$("#insertArea").html("");	
 			
 			alert("성공적으로 등록되었습니다.");
-			
+			location.reload();
 		}
 	});
 }
+	
+	function delete_fn(){
+	 	$.ajax({
+			url 	: "${pageContext.request.contextPath }/deleteAsset",
+			data 	: "assetCode="+$("#assetCode").val(),
+			success : function(data){
+	       	 alert("고정자산등록을 취소합니다.");
+	       	 
+	       	$("#insertArea").html("");	
+	       	location.reload();
+			}
+		});
+	}
     </script>

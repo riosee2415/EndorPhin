@@ -4,157 +4,197 @@
 <tiles-definitions>
         
        <definition name="layout" template="/WEB-INF/views/template/layout.jsp">
-        	<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
-        	<put-attribute name="left" value="/WEB-INF/views/template/left.jsp"/>
-        	<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
-        	<put-attribute name="content" value=""/>
+           <put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
+           <put-attribute name="menu" value="/WEB-INF/views/template/erpmenu.jsp"/>
+           <put-attribute name="left" value="/WEB-INF/views/template/left.jsp"/>
+           <put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
+           <put-attribute name="content" value=""/>
         </definition> 
         
+        
+        
+        <definition name="layout_groupware" template="/WEB-INF/views/template/layout.jsp">
+           <put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
+           <put-attribute name="menu" value="/WEB-INF/views/template/groupmenu.jsp"/>
+           <put-attribute name="left" value="/WEB-INF/views/template/left.jsp"/>
+           <put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
+           <put-attribute name="content" value=""/>
+        </definition> 
+        
+        
+        
+        
         <definition name="helloTiles" extends="layout">
-        	<put-attribute name="left" value=""/>
-        	<put-attribute name="content" value="/WEB-INF/views/hello.jsp"/>
+           <put-attribute name="left" value=""/>
+           <put-attribute name="content" value="/WEB-INF/views/template/erpcontents.jsp"/>
         </definition>
         
+        <definition name="groupwareTiles" extends="layout_groupware">
+           <put-attribute name="left" value=""/>
+           <put-attribute name="content" value="/WEB-INF/views/template/groupcontents.jsp"/>
+        </definition>
+        
+        
+        
+        
+        
+        
+        
         <definition name="clientview" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/client/clientview.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/client/clientview.jsp"/>
         </definition>
 
-		 <!--카드등록  -->       
-		<definition name="cardsDetail" extends="layout">  
-        	<put-attribute name="content" value="/WEB-INF/views/company/cardsDetail.jsp"/>
+       <!--카드등록  -->       
+      <definition name="cardsDetail" extends="layout">  
+           <put-attribute name="content" value="/WEB-INF/views/company/cardsDetail.jsp"/>
         </definition>
         
          <definition name="cardsList" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/company/cardsList.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/company/cardsList.jsp"/>
         </definition>
         <!--  -->
         
         
         
         <definition name="employeeListTiles" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/employee/employeeList.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/employee/employeeList.jsp"/>
         </definition>
         
-        <definition name="taxcallview" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/taxcal/taxcalview.jsp"/>
+        <definition name="taxcalview" extends="layout">
+           <put-attribute name="content" value="/WEB-INF/views/taxcal/taxcalview.jsp"/>
         </definition>
         
         
         <definition name="positionListTiles" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/employee/positionList.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/employee/positionList.jsp"/>
         </definition>
         
         
         <definition name="insertEmployeeTiles" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/employee/insertEmployeeForm.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/employee/insertEmployeeForm.jsp"/>
         </definition>
         
         <definition name="employeeDetailTiles" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/employee/employeeDetail.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/employee/employeeDetail.jsp"/>
         </definition>
         
         <definition name="viewDetailClient" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/client/viewDetailClient.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/client/viewDetailClient.jsp"/>
         </definition>
         
          <definition name="establishview" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/establish/establishview.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/establish/establishview.jsp"/>
         </definition>
         
         <definition name="deptList" extends="layout"><!--부서등록  -->
-        	<put-attribute name="content" value="/WEB-INF/views/dept/deptList.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/dept/deptList.jsp"/>
         </definition>
         
         <definition name="slipview" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/slip/slipview.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/slip/slipview.jsp"/>
         </definition>
         
         <definition name="approval" extends="layout"> <!--승인전표 -->
-        	<put-attribute name="content" value="/WEB-INF/views/slipList/approval.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/slipList/approval.jsp"/>
         </definition>
         
           <definition name="paaprovuar" extends="layout"> <!--승인전표 -->
-        	<put-attribute name="content" value="/WEB-INF/views/slipList/paaprovuar.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/slipList/paaprovuar.jsp"/>
         </definition>
         
         
          <definition name="testTiles" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/test.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/test.jsp"/>
         </definition>
         
         
         <definition name="paymentAdjustView" extends="layout"> <!-- 급여 조정 항목 -->
-        	<put-attribute name="content" value="/WEB-INF/views/payment/paymentAdjust.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/payment/paymentAdjust.jsp"/>
         </definition>
         
          <definition name="addProductView" extends="layout">  <!-- 급여항목 등록  -->
-        	<put-attribute name="content" value="/WEB-INF/views/payment/productList.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/payment/productList.jsp"/>
         </definition>
          <definition name="addDeductView" extends="layout">  <!-- 공제항목 등록  -->
-        	<put-attribute name="content" value="/WEB-INF/views/payment/deductList.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/payment/deductList.jsp"/>
         </definition>
 
          <definition name="addPaymentView" extends="layout">  <!-- 급여 등록  -->
-        	<put-attribute name="content" value="/WEB-INF/views/payment/addPayment.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/payment/addPayment.jsp"/>
         </definition>
          <definition name="paymentCal" extends="layout"> <!-- 급여 계산 항목 -->
-        	<put-attribute name="content" value="/WEB-INF/views/payment/paymentCal.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/payment/paymentCal.jsp"/>
         </definition>
         
         <definition name="paymentPersonal" extends="layout"> <!-- 개인별 급여 조회  항목 -->
-        	<put-attribute name="content" value="/WEB-INF/views/payment/paymentPersonal.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/payment/paymentPersonal.jsp"/>
         </definition>
         
         <definition name="paymentYear" extends="layout"> <!-- 연도별 급여 조회 항목 -->
-        	<put-attribute name="content" value="/WEB-INF/views/payment/paymentYear.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/payment/paymentYear.jsp"/>
         </definition>
         
         <definition name="paymentYearDetail" extends="layout"> <!-- 연도별 급여 조회 상세 항목 -->
-        	<put-attribute name="content" value="/WEB-INF/views/payment/paymentYearDetail.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/payment/paymentYearDetail.jsp"/>
+        </definition>
+        <definition name="paymentCalDetail" extends="layout"> <!-- 급여 명세서 상세 항목 -->
+           <put-attribute name="content" value="/WEB-INF/views/payment/paymentCalDetail.jsp"/>
+        </definition>
+        
+        <definition name="paymentslipInput" extends="layout"> <!-- 급여 전표 입력 -->
+           <put-attribute name="content" value="/WEB-INF/views/payment/paymentslipInput.jsp"/>
         </definition>
         
         
         
          <definition name="AttitudeListTiles" extends="layout"> <!-- 근태 항목 출력 -->
-        	<put-attribute name="content" value="/WEB-INF/views/attitude/attitudeList.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/attitude/attitudeList.jsp"/>
         </definition>
         
          <definition name="purchaseAsset" extends="layout"><!--고정자산 등록  -->
-        	<put-attribute name="content" value="/WEB-INF/views/asset/asset.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/asset/asset.jsp"/>
+        </definition>
+         
+         <definition name="sellAsset" extends="layout"><!--고정자산 매각-->
+           <put-attribute name="content" value="/WEB-INF/views/asset/sellAsset.jsp"/>
+        </definition>
+        
+         <definition name="useAsset" extends="layout"><!--감가상각비 입력-->
+           <put-attribute name="content" value="/WEB-INF/views/depreciation/depreciation.jsp"/>
         </definition>
         
         
          <definition name="boardType" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/board/boardType.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/board/boardType.jsp"/>
         </definition>
         
         <definition name="boardDetail" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/board/boardDetail.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/board/boardDetail.jsp"/>
         </definition>
         
         <definition name="postInsert" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/board/postInsert.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/board/postInsert.jsp"/>
         </definition>
         
          <definition name="postList" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/board/postList.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/board/postList.jsp"/>
         </definition>
         
          <definition name="postUpdate" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/board/postUpdate.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/board/postUpdate.jsp"/>
         </definition>
         
         <definition name="Attitude_recordListTiles" extends="layout"> <!-- 근태 이력 출력 -->
-        	<put-attribute name="content" value="/WEB-INF/views/attitudeRecord/attitudeRecordList.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/attitudeRecord/attitudeRecordList.jsp"/>
         </definition>
         
          <definition name="freeboardTest" extends="layout">
-        	<put-attribute name="content" value="/WEB-INF/views/board/freeboardTest.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/board/freeboardTest.jsp"/>
         </definition>
         
         
          <definition name="AnnualListTiles" extends="layout">   <!-- 휴가 일수 등록 -->
-        	<put-attribute name="content" value="/WEB-INF/views/annual/annualList.jsp"/>
+           <put-attribute name="content" value="/WEB-INF/views/annual/annualList.jsp"/>
         </definition>
         
         

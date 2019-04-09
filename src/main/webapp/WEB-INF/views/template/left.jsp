@@ -1,55 +1,192 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-	
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
+
+<style>
+
+
+#left {
+
+
+}
+
+
+</style>
+
+
+
+
+
+
 
 <!-- Sidebar -->
-    <ul class="sidebar navbar-nav">
+<div  class="col-md-2">
+
+<ul id="left" class="sidebar navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Pages</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+          <h6 class="dropdown-header">Login Screens:</h6>
+          <a class="dropdown-item" href="login.html">Login</a>
+          <a class="dropdown-item" href="register.html">Register</a>
+          <a class="dropdown-item" href="forgot-password.html">Forgot Password</a>
+          <div class="dropdown-divider"></div>
+          <h6 class="dropdown-header">Other Pages:</h6>
+          <a class="dropdown-item" href="404.html">404 Page</a>
+          <a class="dropdown-item" href="blank.html">Blank Page</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="charts.html">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Charts</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="tables.html">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Tables</span></a>
+      </li>
+    </ul>
+     
+ 
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <ul class="sidebar navbar-nav">
 	<li id="account">
-		<h3>È¸°è</h3>
+		<h3>íšŒê³„</h3>
 		<ul>
 			<li>
-				<span>±âÃÊÁ¤º¸</span>
+				<span>ê¸°ì´ˆì •ë³´</span>
 				<ul  style="display:none">
-					<li><a href="">°Å·¡Ã³ µî·Ï</a></li>
-					<li><a href="">½Å¿ëÄ«µå µî·Ï</a></li>
-					<li><a href="">°èÁ¤°ú¸ñ µî·Ï</a></li>
-					<li><a href="">ºÎ¼­ µî·Ï</a></li>
+					<li><a href="">ê±°ëž˜ì²˜ ë“±ë¡</a></li>
+					<li><a href="">ì‹ ìš©ì¹´ë“œ ë“±ë¡</a></li>
+					<li><a href="">ê³„ì •ê³¼ëª© ë“±ë¡</a></li>
+					<li><a href="">ë¶€ì„œ ë“±ë¡</a></li>
 				</ul>
 			</li>
 		</ul>
 	</li>
 	<li id="humanResource">
-		<h3>ÀÎ»ç</h3>
+		<h3>ì¸ì‚¬</h3>
 		<ul>
 			<li>
-				<span>±âÃÊÁ¤º¸</span>
+				<span>ê¸°ì´ˆì •ë³´</span>
 				<ul  style="display:none">
-					<li><a href="">°Å·¡Ã³ µî·Ï</a></li>
-					<li><a href="">½Å¿ëÄ«µå µî·Ï</a></li>
-					<li><a href="">°èÁ¤°ú¸ñ µî·Ï</a></li>
-					<li><a href="">ºÎ¼­ µî·Ï</a></li>
+					<li><a href="">ê±°ëž˜ì²˜ ë“±ë¡</a></li>
+					<li><a href="">ì‹ ìš©ì¹´ë“œ ë“±ë¡</a></li>
+					<li><a href="">ê³„ì •ê³¼ëª© ë“±ë¡</a></li>
+					<li><a href="">ë¶€ì„œ ë“±ë¡</a></li>
 				</ul>
 			</li>
 		</ul>
 	</li>
 	<li id="distribution">
-		<h3>¹°·ù/ÀÚÀç</h3>
+		<h3>ë¬¼ë¥˜/ìžìž¬</h3>
 		<ul>
 			<li>
-				<span>±âÃÊÁ¤º¸</span>
+				<span>ê¸°ì´ˆì •ë³´</span>
 				<ul  style="display:none">
-					<li><a href="">°Å·¡Ã³ µî·Ï</a></li>
-					<li><a href="">½Å¿ëÄ«µå µî·Ï</a></li>
-					<li><a href="">°èÁ¤°ú¸ñ µî·Ï</a></li>
-					<li><a href="">ºÎ¼­ µî·Ï</a></li>
+					<li><a href="">ê±°ëž˜ì²˜ ë“±ë¡</a></li>
+					<li><a href="">ì‹ ìš©ì¹´ë“œ ë“±ë¡</a></li>
+					<li><a href="">ê³„ì •ê³¼ëª© ë“±ë¡</a></li>
+					<li><a href="">ë¶€ì„œ ë“±ë¡</a></li>
 				</ul>
 			</li>
 		</ul>
 	</li>
-</ul>
+</ul> -->
 
-<script>
+
+
+
+
+
+
+
+<!-- <script>
 	var li_check=false;
 	$("#account").on("click",function(){
 		console.log("haha");
@@ -90,5 +227,5 @@
 			li_check=true;
 		}
 	})
-</script>
+</script> -->
 

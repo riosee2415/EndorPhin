@@ -65,7 +65,7 @@
 						<c:forEach items="${paymentYearList}" var="vo">
 							<tr>
 								<td>${paydayYear}</td>
-								<td><a href="#" class="gotoPaymentYearDetail" data-year="${paydayYear}"
+								<td><a href="#" class="gotoPaymentYearDetail" data-transition=“slide” data-year="${paydayYear}"
 								 style="color:brown;">${vo.userId}</a></td>
 								<td>${vo.usernm}</td>
 								<td>${vo.deptname}</td>

@@ -18,13 +18,13 @@
 				<table class="table table-hover">
 					<thead class="thead">
 						<tr>
-							<th>년도 <select name="paydayYear" style="width: 200px;" >
+							<th>년도 <select class="search-query form-control" name="paydayYear" style="width: 200px;" >
 							</select></th>
-							<th>월 <select name="paydayMonth" style="width: 200px;">
+							<th>월 <select class="search-query form-control" name="paydayMonth" style="width: 200px;">
 							</select>
 	
 							</th>
-							<th><button type="submit">검색</button></th>
+							<th><button class="bttn-fill bttn-md bttn-warning" type="submit">검색</button></th>
 					</thead>
 				</table>
 			</form>
@@ -47,7 +47,7 @@
 							<th>총급여액</th>
 							<th>총공제액</th>
 							<th>총지급액</th>
-							<th>장부반영</th> <!-- 테이블 확인 필요 -->
+							<th>장부반영</th>
 						</tr>
 					</thead>
 					<tbody id="mainPaymentListTbody">
@@ -56,7 +56,7 @@
 								<c:set var="totalSalarySum" value="${totalSalarySum+vo.totalSalary}"/>
 								<c:set var="totalWageSum" value="${totalWageSum+vo.totalWage}"/>
 								<c:set var="totalResult" value="${totalResult+vo.totalSalary-vo.totalWage}"/>
-								<td><a href="#" class="gotoDetail" data-year="${fn:split(vo.payDay,'-')[0]}${fn:split(vo.payDay,'-')[1]}">
+								<td><a href="#" class="bttn-stretch bttn-md bttn-warning gotoDetail" data-year="${fn:split(vo.payDay,'-')[0]}${fn:split(vo.payDay,'-')[1]}">
 								${fn:split(vo.payDay,'-')[0]}</a></td>
 								<td>${fn:split(vo.payDay,'-')[1]}</td>
 								<td>${vo.totalSalary}</td>

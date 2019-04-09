@@ -19,7 +19,7 @@
 			<td style="width: 130px;">대변</td>
 		</tr>
 	</thead>
-	
+	 
 	<tbody id="tbody">
 		<tr>
 			<td><input id="detail_slipStatus1" style="width: 80px;" type="text" /></td>

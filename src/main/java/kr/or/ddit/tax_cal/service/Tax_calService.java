@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import kr.or.ddit.tax_cal.dao.ITax_calDao;
+import kr.or.ddit.tax_cal.model.Tax_calVo;
 import kr.or.ddit.util.model.PageVo;
 
 @Service("tax_calService")
@@ -25,6 +26,16 @@ public class Tax_calService implements ITax_calService{
 		resultMap.put("tax_calCnt", tax_calDao.getTax_calCnt());
 		
 		return resultMap;
+	}
+
+	@Override
+	public int insertTax_cal(Tax_calVo tax_calVo) {
+		return tax_calDao.insertTax_cal(tax_calVo);
+	}
+
+	@Override
+	public String getTax_seqNextval() {
+		return tax_calDao.getTax_seqNextval();
 	}
 
 }

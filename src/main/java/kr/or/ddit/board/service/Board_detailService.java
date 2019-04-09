@@ -145,4 +145,114 @@ public class Board_detailService implements IBoard_detailService{
 		return select_boardPost;
 	}
 
+	//====================테스트==========================
+	
+	/**
+	 * 
+	* Method : selectBoardList
+	* 작성자 : macbook
+	* 변경이력 :
+	* @return
+	* Method 설명 : 게시글 리스트 조회
+	 */
+//	@Override
+//	public List<Board_detailVo> selectBoardList(PageVo param) {
+//		List<Board_detailVo> selectBoardList = board_detailDao.selectBoardList(param);
+//		return selectBoardList;
+//
+//	}
+	
+	/**
+	 * 
+	* Method : selectBoardList
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param pageVo
+	* @return
+	* Method 설명 : 게시글 리스트 조회
+	 */
+	@Override
+	public Map<String, Object> selectBoardList(PageVo pageVo) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		List<Board_detailVo> selectPostList = board_detailDao.selectPostList(pageVo);
+		int postCnt = board_detailDao.postCnt(pageVo.getBoardTypeCode());
+		resultMap.put("postList", selectPostList);
+		resultMap.put("postCnt", postCnt);
+		return resultMap;
+	}
+	/**
+	 * 
+	* Method : insertBoard
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param param
+	* @return
+	* Method 설명 : 게시글 등록
+	 */
+	@Override
+	public int insertBoard(Board_detailVo param) {
+		int insertBoard = board_detailDao.insertBoard(param);
+		return insertBoard;
+	}
+
+	/**
+	 * 
+	* Method : selectBoardOne
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardNo
+	* @return
+	* Method 설명 : 게시글 상세조회
+	 */
+	@Override
+	public Board_detailVo selectBoardOne(String boardNo) {
+		Board_detailVo selectBoardOne = board_detailDao.selectBoardOne(boardNo);
+		return selectBoardOne;
+	}
+
+	/**
+	 * 
+	* Method : updateBoard
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param param
+	* @return
+	* Method 설명 : 게시글 수정
+	 */
+	@Override
+	public int updateBoard(Board_detailVo param) {
+		int updateBoard = board_detailDao.updateBoard(param);
+		return updateBoard;
+	}
+
+	/**
+	 * 
+	* Method : deleteBoardOne
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardNo
+	* @return
+	* Method 설명 : 게시글 삭제
+	 */
+	@Override
+	public int deleteBoardOne(String boardNo) {
+		int deleteBoardOne = board_detailDao.deleteBoardOne(boardNo);
+		return deleteBoardOne;
+	}
+
+	/**
+	 * 
+	* Method : selectBoardCount
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardTypeCode
+	* @return
+	* Method 설명 : 게시판 별 게시글 전체 갯수
+	 */
+	@Override
+	public Integer selectBoardCount(String boardTypeCode) {
+		Integer selectBoardCount = board_detailDao.selectBoardCount(boardTypeCode);
+		return selectBoardCount;
+	}
+
 }

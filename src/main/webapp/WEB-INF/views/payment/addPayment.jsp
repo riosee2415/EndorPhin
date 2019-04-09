@@ -17,7 +17,7 @@
 	</table>
 </form>
 
-<table class="table table-striped">
+<table class="table table-hover">
 	<thead>
 		<tr>
 			<th>사원번호</th>
@@ -33,7 +33,7 @@
 		<c:forEach items="${paymentList}" var="vo">
 			<tr class="payTr" data-userid="${vo.userId }">
 				<td><a href="#detailLayer" data-toggle="modal"
-			data-target="#my80sizeModal" class="paymentDetail">${vo.userId }</a></td>
+			data-target="#my80sizeModal" class="paymentDetail">${vo.userId}</a></td>
 				<c:set var="totalSalarysum" value="${totalSalarysum+vo.totalSalary}"/>
 				<c:set var="totalWagesum" value="${totalWagesum+vo.totalWage}"/>
 				<td>${vo.positionname}</td>
@@ -45,7 +45,7 @@
 			</tr>
 		</c:forEach>
 	</tbody>
-	<tfoot align="center" >
+	<tfoot align="center">
 		<tr>
 			<td>계</td>
 			<td>총 급여 : </td>
@@ -70,7 +70,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="form-group">
-					<table>
+					<table class="table table-hover" style="font-size: 5px">
 						<tr>
 							<th><label>사번</label></th>
 							<td><input class="modalUserInfo" readonly="readonly" size="12"/></td>
@@ -86,8 +86,8 @@
 				
 				<div class="form-group">
 					<label for="InputEmail">급여내역</label>
-					<div style="overflow:scroll; width:600px; height:200px;">
-						<table>
+					<div style="overflow:scroll; width:750px; height:200px;">
+						<table class="table table-hover">
 							<thead>
 								<tr id="firModalProductThead">
 								</tr>
@@ -102,8 +102,8 @@
 				
 				<div class="form-group">
 					<label for="InputEmail">공제내역</label>
-					<div style="overflow:scroll; width:600px; height:200px;">
-						<table>
+					<div style="overflow:scroll; width:750px; height:200px;">
+						<table class="table table-hover">
 							<thead>
 								<tr id="firModalDeductThead">
 									<th>공제일</th>
@@ -118,8 +118,8 @@
 				</div>
 				<div class="form-group">
 					<label for="InputEmail">원천징수내역</label>
-					<div style="overflow:scroll; width:600px; height:200px;">
-						<table>
+					<div style="overflow:scroll; width:750px; height:200px;">
+						<table class="table table-hover">
 							<thead>
 								<tr id="firModalWithholdThead">
 									<th>공제일</th>
@@ -146,7 +146,7 @@
             <div class="modal-body">
             	<h3>작성일</h3><input type="text" id="datepicker">
             	<div style="overflow:scroll; width:450px; height:200px;">
-	            	<table>
+	            	<table class="table table-hover">
 	            		<thead>
 	            			<tr>
 	            				<th>항목코드</th>
@@ -178,7 +178,7 @@
             <div class="modal-body">
             	<h3>작성일</h3><input type="text" id="datepicker1">
             	<div style="overflow:scroll; width:450px; height:200px;">
-	            	<table>
+	            	<table class="table table-hover">
 	            		<thead>
 	            			<tr>
 	            				<th>항목코드</th>
@@ -362,7 +362,6 @@
 			url : "/getPaymentList",
 			data : "payCode=" + modalUpd,
 			success : function(data) {
-				console.log(data);
 				secondModalDataInput(deproductList,deprostatus,$("#secondModalUpdTbody"));
 				secondDetailInit(data,deprostatus);
 			}

@@ -2,7 +2,10 @@ package kr.or.ddit.payment.dao;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -10,6 +13,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.or.ddit.payment.model.De_product_divVo;
 import kr.or.ddit.payment.model.Payment_detailVo;
 import kr.or.ddit.set.LogicConfig;
 
@@ -19,6 +23,9 @@ public class Payment_detailDaoTest extends LogicConfig{
 	
 	@Resource(name="payment_detailDao")
 	IPayment_DetailDao payment_detailDao;
+	
+	@Resource(name="de_product_divDao")
+	IDe_Product_divDao de_product_divDao;
 	
 	@Test
 	public void insertPayment_detailTest() {
@@ -48,6 +55,19 @@ public class Payment_detailDaoTest extends LogicConfig{
 	public void selectPayment_detailStatusTest() {
 		List<Payment_detailVo> selectPayment_detailStatus = payment_detailDao.selectPayment_detailPaycode("1");
 		assertTrue(selectPayment_detailStatus.size()>0);
+	}
+	@Test
+	public void selectPayment_detailSlipTest() {
+		List<De_product_divVo> divList = new ArrayList<>();
+		divList.addAll(de_product_divDao.getDe_product_div("2"));
+		divList.addAll(de_product_divDao.getDe_product_div("3"));
+		Map<String, Object> paymap = new HashMap<>();
+		paymap.put("divList", divList);
+		paymap.put("paydayMonth", "201904");
+		List<Payment_detailVo> selectPayment_detailSlip = payment_detailDao.selectPayment_detailSlip(paymap);
+		for (Payment_detailVo payment_detailVo : selectPayment_detailSlip) {
+			logger.debug("결과:{}",payment_detailVo);
+		}
 	}
 
 }

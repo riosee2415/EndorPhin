@@ -49,6 +49,16 @@ public class Slip_detailVo {
 	public void setEstablishCode(String establishCode) {
 		this.establishCode = establishCode;
 	}
+	public Slip_detailVo() {
+	}
+	public Slip_detailVo(String slipDetailNo, String status, String price, String clientCard, String slipNumber,
+			String establishCode) {
+		this.slipDetailNo = slipDetailNo;
+		this.status = status;
+		this.price = price;
+		this.clientCard = clientCard;
+		this.slipNumber = slipNumber;
+		this.establishCode = establishCode;
+	}
 	
-
 }

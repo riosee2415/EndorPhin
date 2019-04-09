@@ -1,6 +1,7 @@
 package kr.or.ddit.payment.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -44,6 +45,16 @@ public class Payment_DetailDao implements IPayment_DetailDao{
 	public int updatePayment_detail(Payment_detailVo payment_detailVo) {
 		return sqlSessionTemplate.update("payment_detail.updatePayment_detail",payment_detailVo);
 		
+	}
+
+	@Override
+	public List<Payment_detailVo> selectPayment_detailSlip(Map<String, Object> map) {
+		return sqlSessionTemplate.selectList("payment_detail.selectPayment_detailSlip",map);
+	}
+
+	@Override
+	public int updateForSlip(String paydayMonth) {
+		return sqlSessionTemplate.update("payment_detail.updateForSlip",paydayMonth);
 	}
 
 	

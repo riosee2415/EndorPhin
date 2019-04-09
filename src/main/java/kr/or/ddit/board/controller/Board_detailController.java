@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 
+import kr.or.ddit.Attitude.model.AttitudeVo;
 import kr.or.ddit.board.model.Attach_boardVo;
 import kr.or.ddit.board.model.Board_detailVo;
 import kr.or.ddit.board.model.CommentsVo;
@@ -58,7 +59,7 @@ public class Board_detailController {
 	
 	/**
 	 * 
-	* Method : boardDetail
+	* Method : postList
 	* 작성자 : macbook
 	* 변경이력 :
 	* @param pageVo
@@ -285,6 +286,19 @@ public class Board_detailController {
 	      
 	      sos.close();
 	      fis.close();
+	}
+	
+	@RequestMapping(path="/free")
+	public String free(PageVo pageVo, Model model, String boardTypeName){
+		Map<String, Object> resultMap = board_detailService.selectPostList(pageVo);
+		model.addAllAttributes(resultMap);
+		
+		
+		model.addAttribute("pageSize", pageVo.getPageSize());
+		model.addAttribute("page", pageVo.getPage());
+		model.addAttribute("boardTypeCode", pageVo.getBoardTypeCode());
+		model.addAttribute("boardTypeName", boardTypeName);
+		return "freeboardTest";
 	}
 	
 }

@@ -13,18 +13,34 @@ public class PaymentVo {
 	String totalSalary;
 	String relate;
 	String payDay;
+	String deadline; // 장부반영 
 	String taxamount; // 과세액
+	String positionname; // 직급명
+	
+	String usernm; //사원이름
+	String deptcode; // 부서명
+	String deptname; // 부서명
+	String joincompany; // 입사일
+	
+	
+	public String getDeadline() {
+		return deadline;
+	}
+	public void setDeadline(String deadline) {
+		this.deadline = deadline;
+	}
 	public String getTaxamount() {
 		return taxamount;
 	}
 	public void setTaxamount(String taxamount) {
 		this.taxamount = taxamount;
 	}
-	String positionname; // 직급명
-	
-	String usernm; //사원이름
-	String deptname; // 부서명
-	String joincompany; // 입사일
+	public String getDeptcode() {
+		return deptcode;
+	}
+	public void setDeptcode(String deptcode) {
+		this.deptcode = deptcode;
+	}
 	public PaymentVo() {
 	}
 	// 입력을 위한 생성자

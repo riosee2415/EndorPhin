@@ -1,5 +1,6 @@
 package kr.or.ddit.payment.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -212,6 +213,17 @@ public class PaymentService implements IPaymentService{
 	public String paycodeByIdnDay(PaymentVo paymentVo) {
 		return paymentDao.paycodeByIdnDay(paymentVo);
 	}
-	
-	
+
+	@Override
+	public List<PaymentVo> selectDeptNPayment(String paydayMonth) {
+		return paymentDao.selectDeptNPayment(paydayMonth);
+	}
+
+
+	@Override
+	public List<PaymentVo> selectYearPaymentListDetail(String paydayMonth) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("paydayYear", paydayMonth);
+		return paymentDao.selectYearPaymentListDetail(map);
+	}
 }

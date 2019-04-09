@@ -97,5 +97,10 @@ public class PaymentDao implements IPaymentDao{
 		return sqlSessionTemplate.selectOne("payment.selectincometax",divsalary);
 	}
 
+	@Override
+	public List<PaymentVo> selectDeptNPayment(String paydayMonth) {
+		return sqlSessionTemplate.selectList("payment.selectDeptNPayment",paydayMonth);
+	}
+
 
 }

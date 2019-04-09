@@ -34,7 +34,7 @@ select {
 				</div>
 
 
-				<table class="table table-striped">
+				<table class="table table-hover">
 					<thead class="thead">
 						<tr>
 							<form action="${cp}/attitude/searchAttitude">
@@ -72,7 +72,7 @@ select {
 		<div class="row">
 			<div class="col-md-12" style="width: 100%;">
 				<div class="form-group">
-					<table class="table table-striped" style="text-align: center;">
+					<table class="table table-hover" style="text-align: center;">
 						<thead class="thead">
 							<tr>
 								<th>체크</th>

@@ -84,5 +84,70 @@ public interface IBoard_detailDao {
 	 */
 	Board_detailVo select_boardPost(String boardTypeCode);
 
+	//===================테스트==========================
+	/**
+	 * 
+	* Method : selectBoardList
+	* 작성자 : macbook
+	* 변경이력 :
+	* @return
+	* Method 설명 : 게시글 리스트 조회
+	 */
+	List<Board_detailVo> selectBoardList(PageVo param);
+	
+	/**
+	 * 
+	* Method : insertBoard
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param param
+	* @return
+	* Method 설명 : 게시글 등록 & 게시글 수정
+	 */
+	int insertBoard(Board_detailVo param);
+	
+	/**
+	 * 
+	* Method : selectBoardOne
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardNo
+	* @return
+	* Method 설명 : 게시글 상세조회
+	 */
+	Board_detailVo selectBoardOne(String boardNo); 
+	
+	/**
+	 * 
+	* Method : updateBoard
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param param
+	* @return
+	* Method 설명 : 게시글 수정
+	 */
+	int updateBoard(Board_detailVo param);
+	
+	/**
+	 * 
+	* Method : deleteBoardOne
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardNo
+	* @return
+	* Method 설명 : 게시글 삭제
+	 */
+	int deleteBoardOne(String boardNo);
+	
+	/**
+	 * 
+	* Method : selectBoardCount
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardTypeCode
+	* @return
+	* Method 설명 : 게시판 별 게시글 전체 갯수
+	 */
+	Integer selectBoardCount(String boardTypeCode);
 	
 }

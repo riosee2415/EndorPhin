@@ -18,15 +18,15 @@
 </style>
 
 
-
+ 
 
 
 
 
 <!-- Sidebar -->
-<div  class="col-md-2">
+<div  class="col-md-2" style="padding: 0 !important;">
 
-<ul id="left" class="sidebar navbar-nav">
+<ul id="left" class="sidebar navbar-nav" style="width: 100%!important;">
       <li class="nav-item active">
         <a class="nav-link" href="index.html">
           <i class="fas fa-fw fa-tachometer-alt"></i>

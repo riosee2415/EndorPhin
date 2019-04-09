@@ -58,7 +58,8 @@ public class AssetController {
 	public String insertFrm(Model model, AssetVo assetVo, String assetCode, String assetName,String date,
 										String sanggakWay,String accountName,String clientName,String acquisitionPrice,
 										String residualvalue,String jukyo,String sanggakCode,
-										String depreciation,String accumulated,String purchaseCode){
+										String depreciation,String accumulated,String purchaseCode,
+										String serviceLife ,String depreciationRate){
 		
 		Date acquisitionDate = new Date();									
 		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
@@ -81,8 +82,9 @@ public class AssetController {
 		assetVo.setDepreciation(depreciation);
 		assetVo.setPurchaseCode(purchaseCode);
 		assetVo.setAccumulated(accumulated);
+		assetVo.setServiceLife(serviceLife);
+		assetVo.setDepreciationRate(depreciationRate);
 	
-		
 		int updAsset = assetService.updateAsset(assetVo);
 		
 		if(updAsset > 0) {
@@ -139,7 +141,7 @@ public class AssetController {
 		}
 	}
 	
-	//수정
+	//부분 수정
 	@RequestMapping("/updateStatusAsset")
 	public String updateStatusAsset(AssetVo assetVo, Model model, String assetCode,String acquisitionDate
 																,String sanggakWay,String acquisitionPrice
@@ -171,13 +173,18 @@ public class AssetController {
 		model.addAttribute("assetCode",assetCode);
 		model.addAttribute("purchaseCode",purchaseCode);
 		model.addAttribute("sanggakWay",sanggakWay);
+	
+		AssetVo asset = assetService.selectAsset(assetCode); //상세보기 
 		
+	
 		if(updAssect > 0) {
 			
 			if( sanggakWay11 > 0){
+				model.addAttribute("asset", asset);
 				return "asset/modify_straightAjax";
 			}else {
 				model.addAttribute("declining", SalesCodeConstant.declining);
+				model.addAttribute("asset", asset);
 				return "asset/modify_decliningAjax";
 			}		
 		}else {
@@ -217,13 +224,33 @@ public class AssetController {
 		
 		return "asset/establishSearchAjax";
 	}
+	//거래처 검색
+	@RequestMapping(path="/clientSearch", method=RequestMethod.GET)
+	public String clientSearch(String cName, Model model) {
+		
+		List<ClientVo> clientList = clientService.getNameClient(cName);
+		model.addAttribute("clientList", clientList);
+		
+		return "asset/clientSearchAjax";
+	}
 	
+	//감가상각계정 검색 
+	@RequestMapping("sanggakSearch")
+	public String sanggakSearch(Model model,String sanggakName){
+		
+		List<EstablishVo> establishList = establishService.selectEstablishByNm(sanggakName);
+		
+		model.addAttribute("establishList", establishList);
+		
+		return "asset/sanggakSearchAjax";
+	}
 	//등록화면으로 이동
 	@RequestMapping("getAssetInsertBtn")
 	public String getAssetInsertBtn(Model model){
 	
 		return "asset/insertAssetAjax";
 	}
+	
 	//수정화면으로 이동 
 	@RequestMapping("getAssetModifyBtn")
 	public String getAssetModifyBtn(Model model, String assetCode, String acquisitionPrice){
@@ -244,10 +271,24 @@ public class AssetController {
 		return "asset/serviceLife";
 		
 	}
+	
+	//삭제 
+	@RequestMapping(path="deleteAsset", method=RequestMethod.GET)
+	public String deleteAsset(Model model , String assetCode){
+		
+		assetService.deleteAsset(assetCode);
+		
+		return "purchaseAsset";
+		
+	}
+	
+	//매각
 	@RequestMapping(path="sellAsset", method=RequestMethod.GET)
 	public String sellAsset(Model model){
 
 		return "sellAsset";
 		
 	}
+	
+	
 }

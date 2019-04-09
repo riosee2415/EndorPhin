@@ -16,15 +16,15 @@
 	        ACQUISITIONPRICE, 
 	        SLIPNUMBER, 
 	        RESIDUALVALUE, 
-	        UNIT, 
 	        JUKYO, 
-	        UNITPRICE, 
 	        QUANTITY, 
 	        COMPANYCODE,
 	        sanggakCode,
 	        depreciation,
 	        purchaseCode,
-	        accumulated
+	        accumulated,
+	        serviceLife,
+	        depreciationRate
 	    FROM ASSET
 	</select>
 	
@@ -40,15 +40,15 @@
 	        ACQUISITIONPRICE, 
 	        SLIPNUMBER, 
 	        RESIDUALVALUE, 
-	        UNIT, 
 	        JUKYO, 
-	        UNITPRICE, 
 	        QUANTITY, 
 	        COMPANYCODE,
 	        sanggakCode,
 	        depreciation,
 	        purchaseCode,
-	        accumulated
+	        accumulated,
+	        serviceLife,
+	        depreciationRate
 	    FROM ASSET
 	    WHERE ASSETCODE = #{assetCode}
 	    
@@ -59,13 +59,13 @@
 	<insert id="insertAsset" parameterType="assetVo">
 		INSERT overwrite  INTO ASSET
         (ASSETCODE, ASSETNAME, ACQUISITIONDATE, ACCOUNTNAME, CLIENTNAME, SANGGAKWAY, acquisitionPrice, 
-          RESIDUALVALUE, JUKYO,sanggakCode,depreciation,purchaseCode,accumulated)
+          RESIDUALVALUE, JUKYO,sanggakCode,depreciation,purchaseCode,accumulated,serviceLife,depreciationRate)
    		 VALUES
         (#{assetCode},nvl(#{assetName, jdbcType=VARCHAR},null),#{acquisitionDate},#{accountName},
          nvl(#{clientName, jdbcType=VARCHAR},null),#{sanggakWay},#{acquisitionPrice}
         ,nvl(#{residualvalue, jdbcType=VARCHAR},null),nvl(#{jukyo, jdbcType=VARCHAR},null)
         ,nvl(#{sanggakCode, jdbcType=VARCHAR},null),nvl(#{depreciation, jdbcType=VARCHAR},null)
-        ,nvl(#{purchaseCode, jdbcType=VARCHAR},null),nvl(#{accumulated, jdbcType=VARCHAR},null))
+        ,nvl(#{purchaseCode, jdbcType=VARCHAR},null),nvl(#{accumulated, jdbcType=VARCHAR},null),#{serviceLife},#{depreciationRate})
 	</insert> 
 	
 	<insert id="insertStatusAsset" parameterType="assetVo">              
@@ -73,7 +73,6 @@
         (assetCode, acquisitionDate,sanggakWay, purchaseCode,acquisitionPrice) values
         (#{assetCode},#{acquisitionDate},#{sanggakWay},#{purchaseCode},#{acquisitionPrice}) 
 	</insert>
-	
 	
 	<update id="updateStatusAsset" parameterType="assetVo">
 		 update asset set 
@@ -97,9 +96,42 @@
 					sanggakCode = #{sanggakCode},
 					depreciation = #{depreciation},
 					accumulated = nvl(#{accumulated, jdbcType=VARCHAR},null),
-					purchaseCode = #{purchaseCode}
+					purchaseCode = #{purchaseCode},
+					serviceLife = #{serviceLife},
+					depreciationRate = #{depreciationRate}
 		     where  assetCode = #{assetCode}
 	</update>
+	
+	<!--  삭제 -->
+	<delete id="deleteAsset" parameterType="map">
+		delete from asset
+		where assetCode = nvl(#{assetCode, jdbcType=VARCHAR},null)
+	</delete>
+	
+		<!--이름으로 검색  -->
+	<select id="serachDept_name" resultType="deptVo" parameterType="map">
+		select
+			ASSETCODE, 
+	        ASSETNAME, 
+	        acquisitionDate, 
+	        ACCOUNTNAME, 
+	        CLIENTNAME, 
+	        SANGGAKWAY, 
+	        ACQUISITIONPRICE, 
+	        SLIPNUMBER, 
+	        RESIDUALVALUE, 
+	        JUKYO, 
+	        QUANTITY, 
+	        COMPANYCODE,
+	        sanggakCode,
+	        depreciation,
+	        purchaseCode,
+	        accumulated,
+	        serviceLife,
+	        depreciationRate
+		from dept
+		where ASSETCODE like '%' || #{ASSETCODE} || '%'
+	</select>
 </mapper>
 
 

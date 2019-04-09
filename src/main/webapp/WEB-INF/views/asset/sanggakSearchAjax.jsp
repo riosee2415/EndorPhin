@@ -3,19 +3,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:forEach items="${establishList }" var="vo">
-	<tr class="establishTr" data-establishnmkor="${vo.establishNameKor }">
+	<tr class="establishTr" data-establishcode="${vo.establishCode }">
 		<td>${vo.establishCode}</td>
 		<td>${vo.status}</td>
 		<td>${vo.establishNameKor}</td>
 	</tr>
 </c:forEach>
-
 <script>
-/*계정과목선택 */
-$(".establishTr").on("click", function() {
-	var establishnamekor = $(this).data("establishnmkor");
+	/*감가 상각선택 */
+	$(".establishTr").on("click", function() {
+		var sanggakCode = $(this).data("establishcode");
 
-	$("#sel_account").val(establishnamekor);
-	$("#accountName").val(establishnamekor);
-});
+		$("#sanggakName_s").val(sanggakCode);
+		$("#sanggakCode").val(sanggakCode);
+	});
 </script>

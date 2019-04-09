@@ -6,7 +6,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>board</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 </head>
+<style>
+/* 글 숨기 */
+.target { display: inline-block;
+		  width: 100px; white-space: nowrap;
+		  overflow: hidden; text-overflow: ellipsis;
+	 }
+
+</style>
 <body>
 <a href="boardForm?boardTypeCode=${boardTypeCode}">글쓰기</a>
                     
@@ -30,7 +39,7 @@
         <c:forEach var="listview" items="${postList}">
             <tr>
                 <td>${listview.boardNo}</td>
-                <td><a href="boardRead?boardNo=${listview.boardNo}&boardTypeCode=${boardTypeCode}">${listview.boardNo}</a></td>
+                <td><a class="target" href="boardRead?boardNo=${listview.boardNo}&boardTypeCode=${boardTypeCode}">${listview.title}</a></td>
                 <td>${listview.userId}</td>
                 <td>${listview.postDate}</td>
            </tr>
@@ -77,7 +86,7 @@
             </c:when>
             <c:otherwise>
                 <li>
-                    <a href="${pageContext.request.contextPath }/boardListt?boardTypeCode=${boardTypeCode }&page=${page-1 }" aria-label="Previous">
+                    <a href="${pageContext.request.contextPath }/boardList?boardTypeCode=${boardTypeCode }&page=${page-1 }" aria-label="Previous">
                         <span aria-hidden="true">&lt;</span>
                     </a>
                 </li>

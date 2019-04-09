@@ -1,6 +1,8 @@
 package kr.or.ddit.board.model;
 
-import java.util.Date;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * 
@@ -15,6 +17,8 @@ public class Board_detailVo {	//게시글
 	String postDate;				//작성일시
 	String boardTypeCode;		//게시판 분류 코드
 	String userId;				//작성자
+    private List<MultipartFile> uploadfile;
+
 	
 	public String getBoardNo() {
 		return boardNo;
@@ -51,6 +55,12 @@ public class Board_detailVo {	//게시글
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public List<MultipartFile> getUploadfile() {
+		return uploadfile;
+	}
+	public void setUploadfile(List<MultipartFile> uploadfile) {
+		this.uploadfile = uploadfile;
 	}
 	@Override
 	public String toString() {

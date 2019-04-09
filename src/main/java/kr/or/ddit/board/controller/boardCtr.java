@@ -100,7 +100,7 @@ public class boardCtr {
 //		HttpSession session = request.getSession();
 //		EmployeeVo employeeVo = (EmployeeVo) session.getAttribute("employeeVo");
 //		boardInfo.setUserId(employeeVo.getUserId());
-		if (boardInfo.getBoardNo() == null) {
+		if (boardInfo.getBoardNo() == null || "".equals(boardInfo.getBoardNo())) {
 			board_detailService.insertBoard(boardInfo);
 			model.addAttribute("boardTypeCode", boardTypeCode);
 		} else {
@@ -109,7 +109,6 @@ public class boardCtr {
 		}
 		
 		model.addAttribute("boardTypeCode", boardTypeCode);
-		logger.debug("boardTypeCode : {}", boardTypeCode);
 	    return "redirect:/boardList";
 	}
 	

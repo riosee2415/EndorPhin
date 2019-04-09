@@ -47,4 +47,12 @@ public class LoginController {
 		// tiles 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙 
 		return "helloTiles";
 	}
+	
+	
+	@RequestMapping(path="/groupwareTiles")
+	public String groupwareTiles(){
+		// tiles 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙 
+		return "groupwareTiles";
+	}
+	
 }

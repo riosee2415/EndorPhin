@@ -4,7 +4,7 @@ width : 100%;
 }
 .thead{
 color : white;
-background-color: #6E6867;
+background-color: #6E6867 !important;
 }
 
 .tbody{

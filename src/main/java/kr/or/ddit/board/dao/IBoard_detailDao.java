@@ -102,7 +102,7 @@ public interface IBoard_detailDao {
 	* 변경이력 :
 	* @param param
 	* @return
-	* Method 설명 : 게시글 등록
+	* Method 설명 : 게시글 등록 & 게시글 수정
 	 */
 	int insertBoard(Board_detailVo param);
 	

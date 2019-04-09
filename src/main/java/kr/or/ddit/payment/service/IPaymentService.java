@@ -20,4 +20,5 @@ public interface IPaymentService {
 	List<PaymentVo> selectPersonalPaymentList(Map<String, Object> payDay);
 	String paycodeByIdnDay(PaymentVo paymentVo);
 	List<PaymentVo> selectDeptNPayment(String paydayMonth);
+	List<PaymentVo> selectYearPaymentListDetail(String paydayMonth);
 }

@@ -6,12 +6,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Page-Enter" content="RevealTrans(Duration=4,Transition=23)">
+	<meta http-equiv="Page-Exit" content="RevealTrans(Duration=3,Transition=23)">
+	
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
-
-    <title>Signin Template for Bootstrap</title>
+    <title>login </title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
@@ -42,7 +44,7 @@
             <input id="rememberme" type="checkbox" value="remember-me"> Remember me
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="button" id="signin">Sign in</button>
+        <button data-transition="pop" class="btn btn-lg btn-primary btn-block" type="button" id="signin">Sign in</button>
       </form>
     </div>
 

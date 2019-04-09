@@ -68,6 +68,12 @@ public class SlipVo {
 	public void setPost_date(String post_date) {
 		this.post_date = post_date;
 	}
+	public SlipVo() {
+	}
+	public SlipVo(String total, String jukyo) {
+		this.total = total;
+		this.jukyo = jukyo;
+	}
 	
 	
 

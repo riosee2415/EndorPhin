@@ -21,7 +21,7 @@
 <form action="/delDeproduct" id="deleteFrm">
    <input type="hidden" name="deprostatus" value="2"/>
    <div class="table-responsive">
-      <table class="table table-striped">
+      <table class="table table-hover">
          <thead>
             <tr>
                <th><input type="checkbox" id="checkAll" /></th>

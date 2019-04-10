@@ -27,5 +27,10 @@ public class Sales_detailDao implements ISales_detailDao{
 		return sqlSessionTemplate.selectList("sales_detail.selectSales_detail", salesCode);
 	}
 
+	@Override
+	public int updateSales_detail(Sales_detailVo sales_detailVo) {
+		return sqlSessionTemplate.update("sales_detail.updateSales_detail", sales_detailVo);
+	}
+
 }
 

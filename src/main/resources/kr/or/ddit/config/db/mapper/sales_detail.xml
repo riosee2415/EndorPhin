@@ -14,6 +14,18 @@
 		,#{jukyo})
 
 	</insert>
+	
+	
+	<!-- 전표상세 수정하기 -->
+	<update id="updateSales_detail" parameterType="sales_detailVo">
+		update sales_detail
+		set	ESTABLISHCODE = #{establishCode}, 
+			JUKYO = #{jukyo}, 
+			PRICE = #{price}, 
+			STATUS = #{status}
+		WHERE SALESDETAILCODE=#{salesDetailCode}
+		
+	</update>
 
 
 	<!-- 매입매출상세  전체 불러오기 -->

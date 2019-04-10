@@ -26,6 +26,17 @@ public interface ISales_detailDao {
 	* Method 설명 : salesCode를 통해 전표상세 가져오기
 	*/
 	public List<Sales_detailVo> selectSales_detail(String salesCode);
+	
+	
+	/**
+	* Method : updateSales_detail
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param sales_detailVo
+	* @return
+	* Method 설명 : 상세전표 수정하기
+	*/
+	public int updateSales_detail(Sales_detailVo sales_detailVo);
 		
 
 }

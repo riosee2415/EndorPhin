@@ -241,4 +241,22 @@ public class Tax_calController {
 		return "taxcal/sales_detailView";
 	}
 	
+	
+	@RequestMapping("/updateSales_detail")
+	public String updateSales_detail(Sales_detailVo sales_detailVo) {
+		
+		logger.debug("salesDestailCode : {}", sales_detailVo.getSalesDetailCode());
+		logger.debug("salesDestailCode : {}", sales_detailVo.getSalesDetailCode());
+		logger.debug("salesDestailCode : {}", sales_detailVo.getSalesDetailCode());
+		logger.debug("salesDestailCode : {}", sales_detailVo.getSalesDetailCode());
+		logger.debug("salesDestailCode : {}", sales_detailVo.getSalesDetailCode());
+		logger.debug("salesDestailCode : {}", sales_detailVo.getSalesDetailCode());
+		logger.debug("salesDestailCode : {}", sales_detailVo.getSalesDetailCode());
+		
+		
+//		sales_detailService.updateSales_detail(sales_detailVo);
+		
+		return "update Data";
+	}
+	
 }

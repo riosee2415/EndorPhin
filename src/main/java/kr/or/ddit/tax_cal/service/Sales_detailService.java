@@ -25,6 +25,11 @@ public class Sales_detailService implements ISales_detailService{
 	public List<Sales_detailVo> selectSales_detail(String salesCode) {
 		return sales_detailDao.selectSales_detail(salesCode);
 	}
+
+	@Override
+	public int updateSales_detail(Sales_detailVo sales_detailVo) {
+		return sales_detailDao.updateSales_detail(sales_detailVo);
+	}
 	
 	
 }

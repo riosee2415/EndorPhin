@@ -16,7 +16,13 @@
 	</thead>
 	<tbody>
 		<c:forEach items="${sales_detailList }" var="list">
-			<tr>
+			<tr class="sales_detailTr" 	data-salescode="${list.salesCode }" 
+										data-status="${list.status }" 
+										data-establishcode="${list.establishCode }"
+										data-jukyo="${list.jukyo }"
+										data-price="${list.price }"
+										data-salesdetailcode="${list.salesDetailCode }">
+										
 				<td><input style="width: 150px;" type="text" value="${list.status }"/></td>
 				<td><input style="width: 150px;" type="text" value="${list.establishCode }"/></td>
 				<td><input style="width: 300px;" type="text" value="${list.jukyo }"/></td>
@@ -41,26 +47,80 @@
 	</tbody>
 </table>
 
+<br />
+
+<input id="updateBtn" type="button" value="수정" /> 
+<input id="closeBtn" type="button" value="닫기" /> 
+
 <script>
 
-//합계구하기, 차변 - 대변
+	// 화면 로딩 소스
+	$("document").ready(function(){
+		fn_setSum();
+	});
 
 
-$("document").ready(function(){
+	// 닫기 버튼 클릭
+	$("#closeBtn").on("click",function(){
+		fn_closeBtn();
+	});
 	
-	fn_setSum();
+	
+	// 수정 버튼 클릭
+	$("#updateBtn").on("click",function(){
+		fn_updateBtn();
+	});
+
+
+
+
+
+
+// function
+
+	/*****************************수정버튼***************************/
+	function fn_updateBtn(){
+
+		// 차변합계 대변합계 일치할 경우 수정로직 실행
+		if($("#leftSum").val() == $("#rightSum").val()){
+			var salesCode = $(".sales_detailTr").data().salescode;
+			
+			
+			
+			$(".sales_detailTr").each(function(){
+				var salaesDetailCode 	= $(this).data().salesdetailcode;
+				var status 				= $(this).data().status;
+				var establishCode		= $(this).data().establishcode;
+				var jukyo				= $(this).data().jukyo;
+				var price 				= $(this).data().price;
+				fn_updateAjax(salesCode, salaesDetailCode, status, establishCode, jukyo, price);
+			
+			});
+			
+			
+			
+		// 차변합계 대변합계 일치하지 않을 경우 에러메세지 발생
+		} else {
+			alert("차변과 대변의 금액이 일치하지 않습니다. 확인 후 수정해주세요.");
+		}
+	}
+
+
+	/*****************************취소버튼***************************/
+	function fn_closeBtn(){
+		$("#detailViewArea").html("");
+	}
 	
 	
-});
+	
 
-
-
-
-function fn_setSum(){
+	/**********************차변, 대변 합계 구하기**********************/
+	function fn_setSum(){
 	
 	var leftSum = 0;
 	var rightSum = 0;
-	
+		
+	//차변 구하기
 	$(".leftPrice").each(function(){
 		var left = $(this).val().replace(",","");
 		
@@ -68,7 +128,7 @@ function fn_setSum(){
 		fn_setSumLeftValue(leftSum);
 		
 	});
-	
+	//대변 구하기
 	$(".rightPrice").each(function(){
 		var right = $(this).val().replace(",","");
 		
@@ -76,29 +136,77 @@ function fn_setSum(){
 		fn_setSumRightValue(rightSum);
 		
 	});
-}
+	}
+	
+	
+	/********************** 세자리 단위 콤마 설정하기( 차변 )**********************/
+	function fn_setSumLeftValue(setLeftSum){
+		setLeftSum = numberWithCommas(setLeftSum);
+		$("#leftSum").val(setLeftSum);
+	}
+	
+	
+	
+	
+	
+	/********************** 세자리 단위 콤마 설정하기( 대변 )**********************/
+	function fn_setSumRightValue(setRightSum){
+		setRightSum = numberWithCommas(setRightSum);
+		$("#rightSum").val(setRightSum);
+	}
+	
+	
+	
+	
+	
+	/********************** 세자리 단위 콤마 설정하기**********************/
+	function numberWithCommas(x) {
+	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+	
+	
+	
+	
+	/********************** 상세전표 수정 Ajax**********************/
+	function fn_updateAjax(salesCode, salaesDetailCode, status, establishCode, jukyo, price){
+		$.ajax({
+			url : "${pageContext.request.contextPath }/updateSales_detail",
+			data :	"salesCode=" + salesCode
+				+	"&salaesDetailCode=" + salaesDetailCode
+				+	"&status=" + status
+				+	"&establishCode=" + establishCode
+				+	"&jukyo=" + jukyo
+				+	"&price=" + price	,
+			success : function(data){
+				
+			}
+				
+		});
+	}
 
-
-
-
-
-/* 세자리 단위 콤마*/
-function fn_setSumLeftValue(setLeftSum){
-	setLeftSum = numberWithCommas(setLeftSum);
-	$("#leftSum").val(setLeftSum);
-}
-
-/* 세자리 단위 콤마*/
-function fn_setSumRightValue(setRightSum){
-	setRightSum = numberWithCommas(setRightSum);
-	$("#rightSum").val(setRightSum);
-}
-
-/* 세자리 단위 콤마*/
-function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

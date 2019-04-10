@@ -10,7 +10,7 @@
 		insert into sales_detail
 		(salesdetailcode, status, price, establishcode, salescode, jukyo)
 		values
-		(#{salesdetailcode},#{status},#{price},#{establishcode},#{salescode}
+		(sales_detail_seq.nextval,#{status},#{price},#{establishCode},#{salesCode}
 		,#{jukyo})
 
 	</insert>

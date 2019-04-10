@@ -99,6 +99,11 @@
 <!-- 전표 세부내역 분개 창 영역 -->
 
 
+<!-- 전표 세부내역 상세보기 창 영역 -->
+<div id="detailViewArea"></div>
+<!-- 전표 세부내역 상세보기 창 영역 -->
+
+
 </center>
 
 
@@ -444,8 +449,8 @@ $("document").ready(function(){
 		fn_setSlipType(e,value);
 		
 	});
-	
-	
+
+	/********************************************/	
 	
 	
 	
@@ -592,10 +597,23 @@ $("document").ready(function(){
 		} else {
 			// 작동 하지 않음
 		}
+	}
+	
+	
+	/*상세보기. Tr 클릭 시 div 데이터 추가*/
+	function fn_salesDetailView(salesCode){
 		
-		
-		
-	} 
+		$.ajax({
+			url : "${pageContext.request.contextPath }/sales_detailView",
+			data : "salesCode=" + salesCode,
+			success : function(data){
+				
+				$("#detailViewArea").html(data);
+				
+			}
+		}); 
+	}
+	
 	
 	
 	/*입력창 오픈 : Ajax*/

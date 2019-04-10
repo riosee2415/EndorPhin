@@ -96,7 +96,7 @@
 				<h3 class="dropdown-header">조회</h3>
 				<a class="dropdown-item" href="">발주현황</a>
 				<h3 class="dropdown-header">기초정보</h3>
-				<a class="dropdown-item" href="">상품 등록</a>
+				<a class="dropdown-item" href="/productInput">상품 등록</a>
 				<h3 class="dropdown-header">자재관리</h3>
 				<a class="dropdown-item" href="">입고 입력</a>
 			</div>

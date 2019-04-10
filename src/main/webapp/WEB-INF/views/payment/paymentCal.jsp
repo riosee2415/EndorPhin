@@ -9,7 +9,7 @@
 	<div class="row">
 		<div class="col-md-1" style="width: 100%">
 		</div>
-		<div class="col-md-5" style="width: 100%">
+		<div class="col-md-8" style="width: 100%">
 			<div class="form-group">
 				<h2>
 					<strong><i class="fa fa-calculator"></i> 급여명세서</strong>
@@ -35,7 +35,7 @@
 	<div class="row">
 		<div class="col-md-1">
 		</div>
-		<div class="col-md-5" style="width: 100%">
+		<div class="col-md-8" style="width: 100%">
 			<div class="form-group">
 				<table class="table table-hover">
 					<thead class="thead">
@@ -83,7 +83,8 @@
 	</div>
 <form action="/paymentYearDetail" id="gotoDetailFrm">
 </form>
-	<div class="row" style="margin-left: 705px;">
+	<div class="row">
+		<div class="col-md-7"></div>
 		<select id="deptDivSel">
 			<option selected="selected" value="0">회사 전체</option>
 			<option value="1">부서별</option>

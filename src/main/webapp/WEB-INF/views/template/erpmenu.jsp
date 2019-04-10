@@ -42,7 +42,7 @@
 					class="dropdown-item"
 					href="${pageContext.request.contextPath }/slipview">일반 전표</a> <a
 					class="dropdown-item"
-					href="${pageContext.request.contextPath }/taxcallview">매출세금계산서
+					href="${pageContext.request.contextPath }/taxcalview">매출세금계산서
 					입력</a> <a class="dropdown-item"
 					href="${pageContext.request.contextPath }/approval">승인전표</a>
 				<h3 class="dropdown-header">고정자산</h3>

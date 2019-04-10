@@ -193,4 +193,30 @@
 		}
 	});
 }
+	
+  	$(document).keydown(function (e) {
+	     
+        if (e.which === 116) {
+            if (typeof event == "object") {
+                event.keyCode = 0;
+                var del = confirm("작업을 취소하시 겠습니까?");
+                if (del == true) {
+                	$.ajax({
+                		url 	: "${pageContext.request.contextPath }/deleteAsset",
+                		data 	: "assetCode="+$("#assetCode").val(),
+                		success : function(data){
+	                   	 alert("고정자산등록을 취소합니다.");
+	                   	$("#insertArea").html("");	
+	                   	location.reload();
+                		}
+                	});
+                } else {
+                    alert("작업을 계속진행합니다.");
+                }
+
+            }
+            return false;
+        } 
+
+	}); 
     </script>

@@ -49,6 +49,11 @@ public class AssetServiceImpl implements IAssetService{
 		return assetDao.deleteAsset(assetCode);
 	}
 
+	@Override
+	public List<AssetVo> searchAsset(String assetCode) {
+		return assetDao.searchAsset(assetCode);
+	}
+
 
 
 }

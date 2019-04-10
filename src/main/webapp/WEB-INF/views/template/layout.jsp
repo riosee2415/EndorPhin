@@ -21,6 +21,10 @@
   <link type="text/css" href="${pageContext.request.contextPath }/css/bttn.css" rel="stylesheet" >
   
   
+  <link type="text/css"
+	href="${pageContext.request.contextPath }/css/payment_leem.css"
+	rel="stylesheet">
+  
   <!-- 차트 js 삽입 -->
   <link href="${pageContext.request.contextPath}/resources/js/Chart.js" rel="stylesheet" type="text/css">
   <link href="${pageContext.request.contextPath}/resources/js/Chart.LlineBar.js" rel="stylesheet" type="text/css">

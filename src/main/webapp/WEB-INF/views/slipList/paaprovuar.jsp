@@ -2,17 +2,21 @@
     pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
 <!--테이블 리스트출력  -->
-	<h2>미승인 전표 </h2>	
-	<br>
-	<br>
-	전표일자 &nbsp<input name="before_slipDate" id="before_slipDate" type="text" />
-	- &nbsp<input name="after_slipDate" id="after_slipDate" type="text"/>
-	&nbsp<input type="button" id="serachBtn" value="검색" /><br>
-	<br>
-<div class="form-group">
-	<div class="table-responsive">
-		<table class="table table-striped">
+		<h2><i class="fa fa-calculator"></i>미승인 전표 </h2>
+		<table>
+			<tr>
+				<td><strong>전표일자</strong></td>
+				<td colspan="2"><input class="search-query form-control" name="before_slipDate" id="before_slipDate" type="text" /></td>
+				<td><h4><strong>-</strong></h4></td>
+				<td><input class="search-query form-control" name="after_slipDate" id="after_slipDate" type="text"/></td>
+				<td><input type="button" class="bttn-fill bttn-md bttn-warning" id="serachBtn" value="검색" /><br></td>
+			</tr>
+		</table>
+		<table class="table table-hover">
 			<thead class="thead">
 				<tr>
 					<th><input type="checkbox" name="allCheck" id="th_allCheck" onclick="allCheck();"></th>
@@ -35,13 +39,14 @@
 			</ul>
 		</nav>
 
-	</div>
-</div>
 <!--------------(삭제,등록) 버튼 ------------------->
 	
 	<div class="modal-footer">
-		<button name="upd_btn"  id="upd_btn" type="button" value="0" onclick="myclick()">승인</button>
+		<button name="upd_btn" class="bttn-jelly bttn-md bttn-warning" 
+			 id="upd_btn" type="button" value="0" onclick="myclick()">승인</button>
 	</div>
+	</div>
+</div>
 			
 	<!-----------------상세보기  모달창 ---------------->	
 	
@@ -79,7 +84,6 @@
 	   				</div>
 	   				
 	   			<div class="modal-footer">
-	   			
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
    				</div> 
    			</div> 
@@ -191,7 +195,6 @@
                ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
                ,changeYear: true //콤보박스에서 년 선택 가능
                ,changeMonth: true //콤보박스에서 월 선택 가능                
-               ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
                ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
                ,buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
                ,buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
@@ -216,7 +219,6 @@
                ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
                ,changeYear: true //콤보박스에서 년 선택 가능
                ,changeMonth: true //콤보박스에서 월 선택 가능                
-               ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
                ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
                ,buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
                ,buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                

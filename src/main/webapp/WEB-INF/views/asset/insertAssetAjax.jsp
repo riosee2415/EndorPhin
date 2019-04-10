@@ -88,10 +88,12 @@ $("#acquisitionPrice").keypress(function(e){
 		});
 	}
 	$("#insertBtn").on("click", function(){
+
 		if($("#assetCode").val().trim() == "" || $("#acquisitionPrice").val().trim()==""){
 			alert("(*)은 필수 사항입니다.");
 			return false;
 		}
+	
 		$.ajax({
 			url  : "${pageContext.request.contextPath }/insertStatusFrm",
 			data : "assetCode="+$("#assetCode").val() + "&"+ "acquisitionDate="+$("#acquisitionDate").val()+ 
@@ -110,7 +112,6 @@ $("#acquisitionPrice").keypress(function(e){
 		}
 	});
 });
-	
 		  
 	/*원단위 콤마 변환*/
 	function fn_numberWithCommas(x) {
@@ -139,9 +140,11 @@ $("#acquisitionPrice").keypress(function(e){
 		}else if(dupleCode == "1"){
 			dupleCode="<b><font color='red'>중복된 자산 코드입니다.</font><br>"
 			$("#dupleCode").html(dupleCode);
+			return false;
 		}else if(dupleCode == "empty"){
 			dupleCode = "<b><font color='orange'>자산 코드를 입력하세요.</font><br>"
 			$("#dupleCode").html(dupleCode);
+			return false;
 		}
 	}  
 	$(function() {
@@ -168,30 +171,6 @@ $("#acquisitionPrice").keypress(function(e){
 	    $('#acquisitionDate').datepicker('setDate', 'today');             
 	});
 	
-  	$(document).keydown(function (e) {
- 	     
-        if (e.which === 116) {
-            if (typeof event == "object") {
-                event.keyCode = 0;
-                var del = confirm("작업을 취소하시 겠습니까?");
-                if (del == true) {
-                	$.ajax({
-                		url 	: "${pageContext.request.contextPath }/deleteAsset",
-                		data 	: "assetCode="+$("#assetCode").val(),
-                		success : function(data){
-	                   	 alert("고정자산등록을 취소합니다.");
-	                   	$("#insertArea").html("");	
-	                   	location.reload();
-                		}
-                	});
-                } else {
-                    alert("작업을 계속진행합니다.");
-                }
 
-            }
-            return false;
-        } 
-
-	}); 
 
 </script>

@@ -19,4 +19,6 @@ public interface IAssetService {
 	int updateStatusAsset(AssetVo assetVo);
 
 	int deleteAsset(String assetCode);
+	
+	List<AssetVo> searchAsset (String assetCode );
 }

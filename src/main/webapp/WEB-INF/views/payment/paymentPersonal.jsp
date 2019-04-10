@@ -2,9 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<link type="text/css"
-	href="${pageContext.request.contextPath }/css/payment_leem.css"
-	rel="stylesheet">
 
 	<div class="row">
 		<div class="col-md-1" style="width: 100%">
@@ -19,22 +16,23 @@
 				<table class="table table-hover">
 					<thead class="thead">
 						<tr>
+						<th><input type="text" class="search-query form-control" 
+								id="datepickerTo" name='paydayTo' value="${paydayTo}"></th>
+							<th><h4><strong>~</strong></h4></th>	
+							<th><input type="text" class="search-query form-control" 
+								id="datepickerFrom" name='paydayFrom' value="${paydayFrom}"></th>
+						<th><label >사원명 :</label></th>
 						<th>
-							<input type="text" id="datepickerTo" name='paydayTo' value="${paydayTo}">
-							&nbsp;-&nbsp;	
-							<input type="text" id="datepickerFrom" name='paydayFrom' value="${paydayFrom}">
+							<input value="${userid}" type="text" name="userid" value="${userid }" class="form-control"
+							id="searchUserIdInput" placeholder="사원 선택 " readonly="readonly"/>
 						</th>
 						<th>
-							<div>
-								<label >사원명</label>
-								<input value="${userid}" type="text" name="userid" value="${userid }"
-								id="searchUserIdInput" placeholder="사원 선택 " readonly="readonly"/>
-								<a href="#" data-toggle="modal" style="color:white" id="myModal3In">
-									<i class="fa fa-users" style="font-size:25"></i>
-								</a>
-							</div>
+							<a href="#" data-toggle="modal" style="color:white" id="myModal3In">
+								<i class="fa fa-users" style="font-size:25"></i>
+							</a>
 						</th>
-							<th><button style="background-color: #6E6867;" class="btn btn-info" type="submit">검색</button></th>
+						<th><button style="background-color: #6E6867;" 
+								class="btn btn-info" type="submit">검색</button></th>
 					</thead>
 				</table>
 			</form>
@@ -134,7 +132,6 @@
 	             ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
 	             ,changeYear: true //콤보박스에서 년 선택 가능
 	             ,changeMonth: true //콤보박스에서 월 선택 가능                
-	             ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
 	             ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
 	             ,buttonImageOnly: true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
 	             ,buttonText: "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                

@@ -17,7 +17,6 @@
 	        SLIPNUMBER, 
 	        RESIDUALVALUE, 
 	        JUKYO, 
-	        QUANTITY, 
 	        COMPANYCODE,
 	        sanggakCode,
 	        depreciation,
@@ -41,7 +40,6 @@
 	        SLIPNUMBER, 
 	        RESIDUALVALUE, 
 	        JUKYO, 
-	        QUANTITY, 
 	        COMPANYCODE,
 	        sanggakCode,
 	        depreciation,
@@ -108,10 +106,10 @@
 		where assetCode = nvl(#{assetCode, jdbcType=VARCHAR},null)
 	</delete>
 	
-		<!--이름으로 검색  -->
-	<select id="serachDept_name" resultType="deptVo" parameterType="map">
+		<!--코드로 검색  -->
+	<select id="searchAsset" resultType="assetVo" parameterType="map">
 		select
-			ASSETCODE, 
+		 ASSETCODE, 
 	        ASSETNAME, 
 	        acquisitionDate, 
 	        ACCOUNTNAME, 
@@ -121,7 +119,6 @@
 	        SLIPNUMBER, 
 	        RESIDUALVALUE, 
 	        JUKYO, 
-	        QUANTITY, 
 	        COMPANYCODE,
 	        sanggakCode,
 	        depreciation,
@@ -129,10 +126,9 @@
 	        accumulated,
 	        serviceLife,
 	        depreciationRate
-		from dept
-		where ASSETCODE like '%' || #{ASSETCODE} || '%'
+		from asset
+		where assetCode like '%' || #{assetCode} || '%'
 	</select>
 </mapper>
-
 
 

@@ -1,5 +1,6 @@
 package kr.or.ddit.slip.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -7,6 +8,7 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import kr.or.ddit.order.model.ClientVo;
 import kr.or.ddit.slip.model.AssetVo;
 
 @Repository("assetDao")
@@ -54,5 +56,13 @@ public class AssetDaoImpl implements IAssetDao{
 	public int deleteAsset(String assetCode) {
 		return sqlSessionTemplate.delete("asset.deleteAsset",assetCode);
 	}
-	
+
+
+	@Override
+	public List<AssetVo> searchAsset(String assetCode) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("assetCode", assetCode);
+		List<AssetVo> assetList = sqlSessionTemplate.selectList("asset.searchAsset", map);
+		return assetList;
+	}
 }

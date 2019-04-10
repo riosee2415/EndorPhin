@@ -24,14 +24,14 @@
 	</select>
 
 
-	<!-- 매입매출상세  선택하여 가져오기 -->
+	<!-- 매입매출  선택하여 가져오기 -->
 	<select id="selectSales_detail" resultType="sales_detailVo"
 		parameterType="String">
 		select
-		salesdetailcode, status, price, establishcode, salescode, jukyo
+		salesDetailCode, status, price, establishCode, salesCode, jukyo
 		from
 		sales_detail
-		where salesdetailcode = #{salesdetailcode}
+		where salesCode = #{salesCode}
 	</select>
 
 

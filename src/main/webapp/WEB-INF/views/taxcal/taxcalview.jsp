@@ -56,6 +56,7 @@
 
 
 <!-- 입력 폼 시작-->
+<h4> 전표 입력</h4>
 <table>
 		<thead class="thead2">
 			<tr style="text-align: center;">

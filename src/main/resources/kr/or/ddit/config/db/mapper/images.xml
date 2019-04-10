@@ -6,12 +6,21 @@
 
 <!-- 이미지 입력 -->
 	<insert id="insertImages" parameterType="imagesVo">
+		<selectKey keyProperty="imagecode" resultType="String" order="BEFORE">
+		  	select 
+		  		IMAGES_SEQ.NEXTVAL
+		  	from 
+		  		dual
+	    </selectKey>
 		insert into images
 		(imagecode, imagename, imagerealpath, imagerealname, usename, userid)
 		values
-		(#{imagecode},#{imagename},#{imagerealpath},#{imagerealname}
-		,#{usename},#{userid})
-
+		('I'||#{imagecode}
+		,#{imageName}
+		,#{imageRealpath}
+		,#{imageRealname}
+		,nvl(#{userName, jdbcType=VARCHAR},null)
+		,nvl(#{userId, jdbcType=VARCHAR},null))
 	</insert>
 
 
@@ -29,14 +38,14 @@
 		select
 		imagecode, imagename, imagerealpath, imagerealname, usename, userid
 		from
-		images where imagecode = #{imagecode}
+		images where imagecode = #{imageCode}
 	</select>
 
 
 	<!-- 이미지 삭제 -->
 	<delete id="deleteImages" parameterType="map">
 		delete from images
-		where imagecode = #{imagecode}
+		where imagecode = #{imageCode}
 	</delete>
 	
 	

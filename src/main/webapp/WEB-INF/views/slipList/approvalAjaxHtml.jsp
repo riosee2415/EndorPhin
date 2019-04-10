@@ -7,7 +7,7 @@
 	<c:if test="${vo.status == 1}"> 
 	  <tr>
 		<td><input type="checkbox" name="checkRow" value=${vo.slipNumber }></td>
-		<td><a class="detailView1" href="#approvalDetail" data-detail_slipnumber="${vo.slipNumber }" 
+		<td><a class="bttn-stretch bttn-md bttn-warning detailView1" href="#approvalDetail" data-detail_slipnumber="${vo.slipNumber }" 
 													 data-detail_slipdate_d="${vo.slipDate }" 
 													 data-detail_jukyo="${vo.jukyo }"
 													 data-detail_total="${vo.total }"
@@ -32,13 +32,13 @@
 		<c:choose>
 			<c:when test="${page == 1 }">
 				<li class="disabled">
-					<a aria-label="Previous">
+					<a class="bttn-minimal bttn-md bttn-warning" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
 					</a>
 				</li>
 			</c:when>	
 		<c:otherwise>
-			<li><a href="${pageContext.request.contextPath }/approval" aria-label="Previous"></a>
+			<li><a class="bttn-minimal bttn-md bttn-warning" href="${pageContext.request.contextPath }/approval" aria-label="Previous"></a>
 				<span aria-hidden="true">&laquo;</span>
 			</li>
 		</c:otherwise>		
@@ -51,18 +51,18 @@
 			 </c:if>
 			 
 			 <li class="${active }">
-			 	<a href="javascript:approvalPageList(${i})">${i}</a>
+			 	<a class="bttn-minimal bttn-md bttn-warning" href="javascript:approvalPageList(${i})">${i}</a>
 			 </li>
 		</c:forEach>
 	<c:choose>
 		<c:when test="${page == lastPages }" >
 			<li class="disabled">
-			<a aria-labe="Next">
+			<a class="bttn-minimal bttn-md bttn-warning" aria-labe="Next">
 			<span aria-hidden="true">&raqua;</span>
 			 </a></li>
 		</c:when>
 		<c:otherwise>
-			<li><a href="javascript:approvalPageList(${lastPage })" aria-label="Next">
+			<li><a class="bttn-minimal bttn-md bttn-warning" href="javascript:approvalPageList(${lastPage })" aria-label="Next">
 				<span aria-hidden="true">&raquo;</span>
 			</a></li>
 		</c:otherwise>

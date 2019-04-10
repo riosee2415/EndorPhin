@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<link type="text/css"
+	href="${pageContext.request.contextPath }/css/payment_leem.css"
+	rel="stylesheet">
 
 <input type="hidden" id="failCheck" name="failCheck"
 	value="${failCheck }" />
@@ -13,12 +15,20 @@
 		<h2>
 			<i class="fa fa-calculator"></i> 거래처 관리
 		</h2>
-		거래처코드 : <input name="client_code" id="client_code" type="text" />
-		거래처명 : <input name="client_name" id="client_name" type="text" /> <input
-			type="button" class="bttn-fill bttn-md bttn-warning" id="seachBtn"
-			value="검색" onclick="seachClientBtn()" /> <input type="button"
-			class="bttn-fill bttn-md bttn-warning" value="전체조회"
-			onclick="location.href='${pageContext.request.contextPath }/clientview'" />
+		<table>
+			<tr>
+				<td><strong>거래처코드 :</strong> </td>
+				<td><input name="client_code" id="client_code" class="search-query form-control" type="text" /></td>
+				<td><strong>거래처명 :</strong></td>
+				<td> <input name="client_name" id="client_name" class="search-query form-control" type="text" /></td>
+				<td> <input
+					type="button" class="bttn-fill bttn-md bttn-warning" id="seachBtn"
+					value="검색" onclick="seachClientBtn()" /> 
+					<input type="button"
+					class="bttn-fill bttn-md bttn-warning" value="전체조회"
+					onclick="location.href='${pageContext.request.contextPath }/clientview'" /></td>
+			</tr>
+		</table>
 	</div>
 </div>
 <div class="row">
@@ -83,6 +93,8 @@
 			type="hidden" id="cBusinessType" /> <input type="hidden"
 			id="cBankname" /> <input type="hidden" id="cAccountNumber" /> <input
 			type="hidden" id="cUseStatus" />
+	<button type="button" id="insertB" class="bttn-simple bttn-warning"
+		data-toggle="modal" data-target="#my80sizeCenterModal">등록</button>
 	</div>
 </div>
 
@@ -92,10 +104,6 @@
 
 <!-- =============================================== -->
 
-<div class="container">
-	<button type="button" id="insertB" class="bttn-simple bttn-warning"
-		data-toggle="modal" data-target="#my80sizeCenterModal">등록</button>
-</div>
 
 
 <!-- 80%size Modal at Center -->

@@ -1,22 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link type="text/css"
+	href="${pageContext.request.contextPath }/css/payment_leem.css"
+	rel="stylesheet">
 
-
-
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-10">
 	
-	<h2>계정과목 관리</h2>
-<hr>
-	<div>
-계정과목명  : <input id="sArea" name="sArea" type="text" />&nbsp;
-			<input id="sBtn" name="sBtn"  class="btn btn-primary" type="button" value="검색" />
-			<input id="aBtn" name="aBtn"  class="btn btn-primary" type="button" value="전체조회" />
-			<br />
-	</div>
-	<p />
-
-<div class="table-responsive">
-	<table class="table table-striped">
+	<h2><i class="fa fa-calculator"></i>계정과목 관리</h2>
+	<table>
+	<tr>
+		<td>계정과목명  :&nbsp;</td>
+		<td><input class="search-query form-control" id="sArea" name="sArea" type="text" placeholder="Search "/></td>
+		<td><input id="sBtn" name="sBtn"  class="bttn-fill bttn-md bttn-warning" type="button" value="검색" />
+			<input id="aBtn" name="aBtn"  class="bttn-fill bttn-md bttn-warning" type="button" value="전체조회" /></td>
+	</tr>
+	</table>
+	<table class="table table-hover">
 		<thead class="thead">
 			<tr>
 				<td><input type="checkbox" name="allCheck" id="th_allCheck" onclick="allCheck();"></td>
@@ -37,17 +39,15 @@
 	<c:set var="lastPage"
 		value="${Integer(establishCnt/pageSize + (establishCnt%pageSize > 0 ? 1 : 0))}" />
 
-	<nav style="text-align: center;">
-		<ul id="pagination" class="pagination">
-		</ul>
-	</nav>
+			<nav style="text-align: center;">
+				<ul id="pagination" class="pagination">
+				</ul>
+			</nav>
+	
+			<button type="button"  class="bttn-jelly bttn-md bttn-warning" data-toggle="modal" data-target="#my80sizeCenterModal">등록</button>
+			<button type="button" id="establishDeleteBtn" class="bttn-jelly bttn-md bttn-warning" value="선택삭제" onclick="myclick()" >삭제</button>
+	</div>
 </div>
-
-<div class="container">
-	<button type="button" id="" class="btn btn-primary" data-toggle="modal" data-target="#my80sizeCenterModal">등록</button>
-	<button type="button" id="establishDeleteBtn" class="btn btn-primary" value="선택삭제" onclick="myclick()" >삭제</button>
-</div>
-
 
 
 <form id="del_frm_establish" action="${pageContext.request.contextPath }/deleteEstablish" method="get">
@@ -75,7 +75,7 @@
 					<!-- 여기부터 로직작성 -->
 						<label for="inputName">계 정 과 목 코 드&nbsp;</label> 
 						<input type="text" id="esCode" placeholder="코드를 입력하세요"> 
-						<input type="button" id="duplCheck" name="duplCheck" value="중복체크" /> 
+						<input type="button" class="btn btn-default" id="duplCheck" name="duplCheck" value="중복체크" /> 
 						<br />
 						<span id="duplicate"></span>
 					</div>

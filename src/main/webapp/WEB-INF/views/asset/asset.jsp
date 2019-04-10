@@ -9,8 +9,8 @@
 	<thead class="thead">
 	</thead>
 		<tr>
-			<td> 고정자산종류
-			<input name="deptCode1" id="deptCode1" type="text" /> &nbsp
+			<td> 고정자산등록코드
+			<input name="assetCodeS" id="assetCodeS" type="text" /> &nbsp
 			<input type="button" id="seachBtn" value="검색" /></td>
 		</tr>
 </table>
@@ -29,7 +29,7 @@
 					<th>장부반영</th>
 				</tr>
 			</thead>	
-			<tbody id="deptListTbody">
+			<tbody id="assetListTbody">
 				<c:forEach items="${assetList }" var="vo">	
 					 <tr>
 						<td><input type="checkbox" name="checkRow"  value="${vo.assetCode }" ></td>
@@ -386,10 +386,20 @@
 			$("#insertArea").html("");
 			insertFlag = 0;
 		}
+});
+	
+	$("#seachBtn").on("click",function(){
+		$.ajax({
+			url : "${pageContext.request.contextPath}/assetSearch",
+			data : "assetCodeS="+$("#assetCodeS").val(),
 		
-		
-		
+			success : function(data){
+				$("#assetCodeS").val("");
+				$("#assetListTbody").html(data);
+			}
+		});
 	});
+		
 
 	</script>
 	

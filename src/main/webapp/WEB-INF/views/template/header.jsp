@@ -115,6 +115,13 @@
  a {color: #fff; text-decoration: none; outline: none}
 
 
+#sidebarCollapse{
+
+color: #fff; text-decoration: none; outline: none
+
+}
+
+
 #container div .col-md-2:hover {
 	background: #4D341B;
 	color: #fff !important;
@@ -192,6 +199,9 @@ cursor: pointer;
 	color:#fff;
 }
 
+
+
+
 </style>
 
 <div class="container-fluid"
@@ -215,10 +225,16 @@ cursor: pointer;
 		</div>
 
 		<div class="col-md-2"></div>
-		<div class="col-md-2"></div>
 		
 		
 		
+		
+		<div class="col-md-2">
+		
+		
+		
+		
+		</div>
 		
 		<div class="col-md-2">
 		<a class="header" href="${cp }/helloTiles">	<i class="fa fa-plug "></i> Logout</a>

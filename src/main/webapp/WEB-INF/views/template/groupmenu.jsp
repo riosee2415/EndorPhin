@@ -12,10 +12,25 @@
 
 
 		<div class="col-md-2" style="background-color: #3266CC;">
-
-			<h4>
+		
+		
+		<div style=" float: left; width: 60%;">
+				<button onchange="Lmenu()" type="button" id="sidebarCollapse" class="btn btn-link">
+				<h4><i class="fas fa-align-left"></i><br><span id="Lmenu">메뉴접기</span></h4>
+				</button>
+			</div>
+		
+                       
+			
+			
+			<div style=" float: left; width: 40%;">
+				<h4>
 				<i class="fa fa-folder-open"></i> <br> 서식모음
 			</h4>
+				
+			</div>
+		
+			
 		</div>
 
 
@@ -31,7 +46,6 @@
 					href="">수신함</a>
 			</div>
 		</div>
-
 
 
 		<div class="col-md-2 cell-sys">
@@ -67,3 +81,23 @@
 
 	</div>
 </div>
+
+
+
+<script>
+
+	
+$("#Lmenu").click(function() {
+	console.log("클릭");
+
+	if($('#Lmenu').text()==("메뉴접기")){
+		
+		$('#Lmenu').text("메뉴펼치기");
+	}else {
+		$('#Lmenu').text("메뉴접기");
+	}
+	
+});
+
+
+</script>

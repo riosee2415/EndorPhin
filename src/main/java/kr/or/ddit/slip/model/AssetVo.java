@@ -18,7 +18,6 @@ public class AssetVo {
 	String slipNumber; // 전표번호
 	String residualvalue; // 잔존가치 =
 	String jukyo; // 적요 =
-	String quantity; // 수량 x
 	String companyCode;// 회사코드
 	String sanggakCode; // 감가상각계정코드 =
 	String depreciation; // 감가상각비
@@ -106,14 +105,6 @@ public class AssetVo {
 
 	public void setJukyo(String jukyo) {
 		this.jukyo = jukyo;
-	}
-
-	public String getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(String quantity) {
-		this.quantity = quantity;
 	}
 
 	public String getCompanyCode() {

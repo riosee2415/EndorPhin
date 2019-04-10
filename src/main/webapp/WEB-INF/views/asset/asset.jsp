@@ -20,7 +20,6 @@
 		<table class="table table-hover">
 			<thead class="thead">
 				<tr>
-					<th><input type="checkbox" name="allCheck" id="th_allCheck" onclick="allCheck();"></th> 
 					<th>자산코드</th>
 					<th>계정명</th>
 					<th>자산명</th>
@@ -32,7 +31,6 @@
 			<tbody id="assetListTbody">
 				<c:forEach items="${assetList }" var="vo">	
 					 <tr>
-						<td><input type="checkbox" name="checkRow"  value="${vo.assetCode }" ></td>
 						<td><a class="bttn-stretch bttn-warning detailView" href="#deptDetail" data-assetcode="${vo.assetCode }" 
 																	 data-acquisitiondate="${vo.acquisitionDate }"
 																	 data-purchasecode="${vo.purchaseCode }"
@@ -303,38 +301,7 @@
 		$("#sanggakCode").val(sanggakCode);
  	});
      
-	 function allCheck() {
-		if ($("#th_allCheck").is(':checked')) {
-				$("input[name=checkRow]").prop("checked", true);
-			} else {
-				$("input[name=checkRow]").prop("checked", false);
-			}
-		}
-	
-	/* 전체선택삭제 */
-	function allCheck() {
-		if ($("#th_allCheck").is(':checked')) {
-				$("input[name=checkRow]").prop("checked", true);
-			} else {
-				$("input[name=checkRow]").prop("checked", false);
-			}
-		}
-
-	/* 선택삭체*/
-	function myclick() {
-		var checkRow = '';
-		$("input[name=checkRow]:checked").each(function() {
-			checkRow += $(this).val()+",";
-		});
-			checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); //맨끝 콤마 지우기  
-			$("#checkRow").val(checkRow);
-			
-		if(checkRow === ""){		
-			alert("삭제할 대상을 선택하세요");
-			return false;
-		}
-				$("#del_frm").submit();
-	}
+	 
    
 	/* 등록 클릭했을 때 */
 	var insertFlag = 0;
@@ -348,12 +315,8 @@
 				}
 			});
 		
-			insertFlag = 1;
 			
-		} else if(insertFlag == 1){
-			$("#insertArea").html("");
-			insertFlag = 0;
-		}
+		} 
 	}
 	
 
@@ -376,12 +339,6 @@
 					$("#acquisitionDate").val($(this).data().acquisitiondate);
 				}
 			});
-		
-			insertFlag = 1;
-			
-		} else if(insertFlag == 1){
-			$("#insertArea").html("");
-			insertFlag = 0;
 		}
 });
 	
@@ -396,7 +353,7 @@
 			}
 		});
 	});
-		
+	
 
 	</script>
 	

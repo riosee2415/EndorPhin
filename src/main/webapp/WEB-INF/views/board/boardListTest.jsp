@@ -19,7 +19,7 @@
 <body>
 <a href="boardForm?boardTypeCode=${boardTypeCode}">글쓰기</a>
                     
-<table border="1" style="width:600px">
+<table border="1" style="width:600px" class="thead">
     <caption>게시판</caption>
     <colgroup>
         <col width='8%' />
@@ -56,84 +56,6 @@
     </c:forEach>
 </div>
 </c:if>  --%>  
-<c:set var="lastPage" value="${Integer(postCnt/pageSize + (postCnt%pageSize > 0 ? 1 : 0)) }" />
-<nav style="text-align: center">
-    <ul class="pagination">
-
-        <c:choose>
-            <c:when test="${page == 1 }">
-                <li class="disabled">
-                    <a aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-            </c:when>
-            <c:otherwise>
-                <li>
-                    <a href="${pageContext.request.contextPath }/boardList?boardTypeCode=${boardTypeCode }" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${page == 1}">
-                <li class="disabled">
-                    <a aria-label="Previous">
-                        <span aria-hidden="true">&lt;</span>
-                    </a>
-                </li>
-            </c:when>
-            <c:otherwise>
-                <li>
-                    <a href="${pageContext.request.contextPath }/boardList?boardTypeCode=${boardTypeCode }&page=${page-1 }" aria-label="Previous">
-                        <span aria-hidden="true">&lt;</span>
-                    </a>
-                </li>
-            </c:otherwise>
-        </c:choose>
-        <c:forEach begin="1" end="${lastPage }" var="i">
-            <c:set var="active" value="" />
-            <c:if test="${i == page }">
-                <c:set var="active" value="active" />
-            </c:if>
-            <li class="${active }">
-                <a href="${pageContext.request.contextPath }/boardList?boardTypeCode=${boardTypeCode }&page=${i }">${i }</a>
-            </li>
-        </c:forEach>
-
-        <c:choose>
-            <c:when test="${page == lastPage }">
-                <li class="disabled">
-                    <a aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </c:when>
-            <c:otherwise>
-                <li><a href="${pageContext.request.contextPath }/boardList?boardTypeCode=${boardTypeCode}&page=${page+1 }" aria-label="Previous">
-                        <span aria-hidden="true">&gt;</span>
-                    </a>
-                </li>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${page == lastPage }">
-                <li class="disabled">
-                    <a aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </c:when>
-            <c:otherwise>
-                <li>
-                    <a href="${pageContext.request.contextPath }/boardList?boardTypeCode=${boardTypeCode }&page=${lastPage }" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </c:otherwise>
-        </c:choose>
-    </ul>
-</nav>
+<jsp:include page="/WEB-INF/views/board/pagingforSubmit.jsp" />
 </body>
 </html>

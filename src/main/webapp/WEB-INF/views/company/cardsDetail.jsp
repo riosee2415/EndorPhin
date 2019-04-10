@@ -43,8 +43,6 @@
 				<td>
 			</tr>
 		</table>
-	</div>
-	<div class="container">
 		<button type="button" class="bttn-simple bttn-md bttn-warning"
 			onclick="history.back(-1);">뒤로가기</button>
 		<button type="button" id="" class="bttn-simple bttn-md bttn-warning"

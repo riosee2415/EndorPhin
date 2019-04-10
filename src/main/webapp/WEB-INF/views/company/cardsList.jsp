@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <style>
 
 .thead{
@@ -14,13 +13,19 @@ background-color: #6E6867;
 <div class="row">
 	<div class="col-md-1"></div>
 	<div class="col-md-10">
-		<!--테이블 리스트출력  -->
 		<h2><i class="fa fa-calculator"></i> 신용카드 등록</h2>
-		카드번호 &nbsp <input name="cardNumber1" id="cardNumber1" type="text" />
-		&nbsp 카드명 &nbsp<input name="cardName1" id="cardName1" type="text" />
-		&nbsp<input type="button" id="seachBtn" value="검색"
-			onclick="seachBtn()" /><br>
-
+		<div class="form-group">
+		<!--테이블 리스트출력  -->
+		<table>
+			<tr>
+				<td><strong>카드번호 :</strong></td>
+				<td> <input class="search-query form-control" name="cardNumber1" id="cardNumber1" type="text" /></td>
+				<td><strong>카드명 : </strong> </td>
+				<td><input class="search-query form-control" name="cardName1" id="cardName1" type="text" /></td>
+				<td><input class="bttn-fill bttn-md bttn-warning" type="button" id="seachBtn" value="검색"	onclick="seachBtn()" /><br>
+				</td>
+			</tr>
+		</table>
 		<table class="table table-striped">
 			<thead class="thead">
 				<tr>
@@ -75,6 +80,7 @@ background-color: #6E6867;
 				onclick="myclick()" />
 			<button type="button" class="bttn-jelly bttn-warning" data-toggle="modal" 
 				data-target="#my80sizeCenterModal">등록</button>
+		</div>
 		</div>
 	</div>
 </div>				

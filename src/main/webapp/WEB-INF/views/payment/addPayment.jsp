@@ -150,7 +150,7 @@
 </div>
 
 <!-- second modal (상세 등록 화면) -->
-<div class="modal" id="myModal4" data-backdrop="static"
+<div class="modal" id="myModal4" data-backdrop="static" tabindex="3"
 	aria-hidden="true" style="display: none; z-index: 1080;">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -186,7 +186,7 @@
 </div>
 
 <!-- second modal (상세 수정 화면) -->
-<div class="modal" id="myModal3" data-backdrop="static"
+<div class="modal" id="myModal3" data-backdrop="static" tabindex="3"
 	aria-hidden="true" style="display: none; z-index: 1080;">
 	<div class="modal-dialog">
 		<div class="modal-content">

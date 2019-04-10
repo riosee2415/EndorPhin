@@ -7,7 +7,7 @@
    	
    		<tr>
    			<td><input type="checkbox" name="checkRow" value="${vo.establishCode }" ></td>
-   			<td><a class="detailView" href="#esDetail"  data-establishcode="${vo.establishCode }" 
+   			<td><a class="bttn-stretch bttn-md bttn-warning detailView" href="#esDetail"  data-establishcode="${vo.establishCode }" 
    														data-establishnamekor="${vo.establishNameKor}" 
    														data-establishnameeng="${vo.establishNameEng}" 
    														data-status="${vo.status}" 

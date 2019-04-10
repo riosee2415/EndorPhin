@@ -6,7 +6,7 @@
     
    	<c:forEach items="${tax_calList }" var="vo">
    		
-   		<tr onmouseover="this.style.backgroundColor='#BDBDBD'" onmouseout="this.style.backgroundColor='#FFFFFF'" style="text-align: center;">
+   		<tr class="tax_calTr" data-salescode="${vo.salesCode }" onmouseover="this.style.backgroundColor='#BDBDBD'" onmouseout="this.style.backgroundColor='#FFFFFF'" style="text-align: center;">
    		
 			<td style="width: 80px;">${vo.salesCode }</td>
 			<td style="width: 150px;"><fmt:formatDate value="${vo.slipDate }" pattern="yy/MM/dd"/></td>
@@ -24,7 +24,12 @@
    	
    	</c:forEach>
    	
-   	
+   	<script>
+	// Tr클릭 시 액션
+	$(".tax_calTr").on("click", function(){
+		fn_salesDetailView($(this).data().salescode);
+	});
+	</script>
    	
 
    	
@@ -37,12 +42,12 @@
 
 <c:choose>
 	<c:when test="${page == 1 }">
-		<li class="disabled"><a aria-label="Previous"> <span
+		<li class="disabled"><a class="bttn-minimal bttn-warning" aria-label="Previous"> <span
 				aria-hidden="true">&laquo;</span>
 		</a></li>
 	</c:when>
 	<c:otherwise>
-		<li><a href="${pageContext.request.contextPath }/taxcalview" aria-label="Previous">
+		<li><a class="bttn-minimal bttn-warning" href="${pageContext.request.contextPath }/taxcalview" aria-label="Previous">
 				<span aria-hidden="true">&laquo;</span>
 		</a></li>
 	</c:otherwise>
@@ -54,19 +59,19 @@
 		<c:set var="active" value="active" />
 	</c:if>
 
-	<li class="${active }"><a
+	<li class="${active }"><a class="bttn-minimal bttn-warning"
 		href="javascript:getTax_calPageList(${i})">${i}</a></li>
 </c:forEach>
 
 
 <c:choose>
 	<c:when test="${page == lastPage }">
-		<li class="disabled"><a aria-label="Next"> <span
+		<li class="disabled"><a class="bttn-minimal bttn-warning" aria-label="Next"> <span
 				aria-hidden="true">&raquo;</span>
 		</a></li>
 	</c:when>
 	<c:otherwise>
-		<li><a href="javascript:getTax_calPageList(${lastPage})"
+		<li><a class="bttn-minimal bttn-warning" href="javascript:getTax_calPageList(${lastPage})"
 			aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 		</a></li>
 	</c:otherwise>

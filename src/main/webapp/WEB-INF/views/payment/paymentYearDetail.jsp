@@ -5,9 +5,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link type="text/css"
-	href="${pageContext.request.contextPath }/css/payment_leem.css"
-	rel="stylesheet">
 
 
 <div class="row">

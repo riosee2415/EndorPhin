@@ -38,8 +38,11 @@
 			<td colspan="2">&nbsp;&nbsp;취득금액(*)
 				<input type="text" id="acquisitionPrice1" name="acquisitionPrice1" value="${asset.acquisitionPrice}"></td> 
 			<td>
-				&nbsp;&nbsp;<input type="button" id="insertBtn" name="insertBtn" value="수정">
-			</td>	
+				<button class="btn btn-primary"id="insertBtn" name="insertBtn">수정</button>
+			</td>
+			<td>
+				<button class="btn btn-primary"id="closeBtn" name="closeBtn">닫기</button>
+			</td>		
 		</tr>
 	</thead>
 </table>
@@ -175,5 +178,8 @@ $("#acquisitionPrice").keypress(function(e){
 	    });                    
 	    
 	    $('#acquisitionDate1').datepicker('setDate', 'today');             
+	});
+	$("#closeBtn").on("click", function(){
+		$("#insertArea").html("");
 	});
 </script>

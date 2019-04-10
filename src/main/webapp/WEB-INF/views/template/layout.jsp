@@ -5,7 +5,28 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
-
+<style>
+  	#content-wrapper{
+	    animation: fadein 2s;
+	    -webkit-animation: fadein 2s;
+	}
+	@keyframes fadein {
+	    from {
+	        opacity:0;
+	    }
+	    to {
+	        opacity:1;
+	    }
+	}
+	@-webkit-keyframes fadein { /* Safari and Chrome */
+	    from {
+	        opacity:0;
+	    }
+	    to {
+	        opacity:1;
+	    }
+	}
+  </style>
 
 <head>
 
@@ -19,7 +40,6 @@
   
   <!-- 버튼 css 삽입 -->
   <link type="text/css" href="${pageContext.request.contextPath }/css/bttn.css" rel="stylesheet" >
-  
   
   <!-- 차트 js 삽입 -->
   <link href="${pageContext.request.contextPath}/resources/js/Chart.js" rel="stylesheet" type="text/css">

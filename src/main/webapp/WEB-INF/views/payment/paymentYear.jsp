@@ -2,9 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<link type="text/css"
-	href="${pageContext.request.contextPath }/css/payment_leem.css"
-	rel="stylesheet">
 
 <div class="row">
 	<div class="col-md-1"></div>

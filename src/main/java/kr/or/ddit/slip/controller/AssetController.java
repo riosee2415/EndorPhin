@@ -234,6 +234,18 @@ public class AssetController {
 		return "asset/clientSearchAjax";
 	}
 	
+	//고정자산 코드 검색
+	@RequestMapping(path="/assetSearch", method=RequestMethod.GET)
+	public String assetSearch(@RequestParam("assetCodeS") String assetCode, Model model) {
+		
+		List<AssetVo> assetList = assetService.searchAsset(assetCode);
+		model.addAttribute("assetList", assetList);
+		logger.debug("assetCode : {}", assetCode);
+		logger.debug("assetList : {}", assetList.size());
+		return "asset/assetSearchAjax";
+	}
+	
+	
 	//감가상각계정 검색 
 	@RequestMapping("sanggakSearch")
 	public String sanggakSearch(Model model,String sanggakName){

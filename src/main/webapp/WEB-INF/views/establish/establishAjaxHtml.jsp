@@ -7,7 +7,7 @@
    	
    		<tr>
    			<td><input type="checkbox" name="checkRow" value="${vo.establishCode }" ></td>
-   			<td><a class="detailView" href="#esDetail"  data-establishcode="${vo.establishCode }" 
+   			<td><a class="bttn-stretch bttn-md bttn-warning detailView" href="#esDetail"  data-establishcode="${vo.establishCode }" 
    														data-establishnamekor="${vo.establishNameKor}" 
    														data-establishnameeng="${vo.establishNameEng}" 
    														data-status="${vo.status}" 
@@ -41,7 +41,7 @@
 
 <c:choose>
 	<c:when test="${page == 1 }">
-		<li class="disabled"><a aria-label="Previous"> <span
+		<li class="disabled"><a class="bttn-minimal bttn-md bttn-warning" aria-label="Previous"> <span
 				aria-hidden="true">&laquo;</span>
 		</a></li>
 	</c:when>
@@ -58,19 +58,19 @@
 		<c:set var="active" value="active" />
 	</c:if>
 
-	<li class="${active }"><a
+	<li class="${active }"><a class="bttn-minimal bttn-md bttn-warning"
 		href="javascript:getEstablishPageList(${i})">${i}</a></li>
 </c:forEach>
 
 
 <c:choose>
 	<c:when test="${page == lastPage }">
-		<li class="disabled"><a aria-label="Next"> <span
+		<li class="disabled"><a class="bttn-minimal bttn-md bttn-warning" aria-label="Next"> <span
 				aria-hidden="true">&raquo;</span>
 		</a></li>
 	</c:when>
 	<c:otherwise>
-		<li><a href="javascript:getEstablishPageList(${lastPage})"
+		<li><a class="bttn-minimal bttn-md bttn-warning" href="javascript:getEstablishPageList(${lastPage})"
 			aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 		</a></li>
 	</c:otherwise>

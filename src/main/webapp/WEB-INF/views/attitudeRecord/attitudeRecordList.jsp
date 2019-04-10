@@ -49,16 +49,19 @@ th {
 			<table class="table table-striped">
 				<thead class="thead">
 					<tr>
-						<td>근태명 <input type="text" name="search" style="color: black">
-							<button type="submit" style="background-color: #6E6867;"
+						<td><h4>
+								<strong> 근태명 </strong>
+							</h4> </td>
+						<td><input type="text" name="search" style="color: black" class="form-control" placeholder="Search"></td>
+						<td><button type="submit" style="background-color: #6E6867;"
 								class="btn btn-info">검색</button>
 						</td>
-						<td><input style="color: black" type="text" id="startDate"
+						<td><input style="color: black" type="text" id="startDate" class="search-query form-control"
 							name="startDate" class="startDate" /></td>
-						<td><h2>
+						<td><h4>
 								<strong> ~ </strong>
-							</h2></td>
-						<td><input style="color: black" type="text" id="endDate"
+							</h4></td>
+						<td><input style="color: black" type="text" id="endDate" class="search-query form-control" 
 							name="endDate" /></td>
 					</tr>
 				</thead>
@@ -221,7 +224,6 @@ th {
 	$(function() {
         $("#startDate").datepicker(   // inputbox 의 id 가 startDate 이겠죠.
                 {dateFormat:'yy-mm-dd' // 만약 2011년 4월 29일 선택하면  inputbox 에 '2011/04/29' 로표시
-                 , showOn: 'button' // 우측에 달력 icon 을 보인다.
                  , buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif"  // 우측 달력 icon 의 이미지 패스 
                  , buttonImageOnly: true //  inputbox 뒤에 달력icon만 표시한다. ('...' 표시생략)
                  , changeMonth: true // 월선택 select box 표시 (기본은 false)
@@ -229,7 +231,7 @@ th {
                  ,showButtonPanel: true // 하단 today, done  버튼기능 추가 표시 (기본은 false)
                });
 
-        $("#endDate").datepicker({dateFormat:'yy-mm-dd',showOn: 'button'
+        $("#endDate").datepicker({dateFormat:'yy-mm-dd'
                 , buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif", buttonImageOnly: true
                 , changeMonth: true,changeYear: true,showButtonPanel: true});
         

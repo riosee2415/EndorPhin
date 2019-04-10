@@ -51,9 +51,9 @@
 		<div class="col-md-2 cell-sys">
 			<div class="divname">게시판</div>
 			<div class="dropdown-menu" aria-labelledby="pagesDropdown">
-			<a class="dropdown-item" href="">공지사항</a>
-			<a class="dropdown-item" href="">자유게시판</a>
-			<a class="dropdown-item" href="">Q&A게시판</a>
+			<a class="dropdown-item" href="${pageContext.request.contextPath }/boardList?boardTypeCode=7">공지사항</a>
+			<a class="dropdown-item" href="${pageContext.request.contextPath }/boardList?boardTypeCode=5">자유게시판</a>
+			<a class="dropdown-item" href="${pageContext.request.contextPath }/boardList?boardTypeCode=8">Q&A게시판</a>
 			</div>
 		</div>
 

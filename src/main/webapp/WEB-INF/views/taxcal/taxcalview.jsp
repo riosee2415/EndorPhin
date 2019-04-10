@@ -3,14 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<h2>매입매출전표 관리3</h2>
-<hr>
 
-<!-- 키 값으로 하나만 출력하기
-	<c:out value="${scCode['11'] }" />
- -->
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
+	<h2><i class="fa fa-calculator"></i>매입매출전표 관리3</h2>
 
-<center>
 <!-- 뷰 폼 시작-->
 <table class="table table-striped">
 		<tr>
@@ -24,7 +22,7 @@
 	
 	
 <div>
-	<table>
+	<table class="table table-hover" style="font-size: small;">
 		<thead class="thead">
 			<tr style="text-align: center;">
 				<td style="width: 80px;">번호</td>
@@ -99,7 +97,11 @@
 <!-- 전표 세부내역 분개 창 영역 -->
 
 
-</center>
+<!-- 전표 세부내역 상세보기 창 영역 -->
+<div id="detailViewArea"></div>
+<!-- 전표 세부내역 상세보기 창 영역 -->
+
+
 
 
 <!-- 매입매출코드 시작 -->
@@ -155,8 +157,8 @@
 </table>
 <!-- 분개유형 끝-->
 
-
-
+</div>
+</div>
 
 
 
@@ -444,8 +446,8 @@ $("document").ready(function(){
 		fn_setSlipType(e,value);
 		
 	});
-	
-	
+
+	/********************************************/	
 	
 	
 	
@@ -592,10 +594,23 @@ $("document").ready(function(){
 		} else {
 			// 작동 하지 않음
 		}
+	}
+	
+	
+	/*상세보기. Tr 클릭 시 div 데이터 추가*/
+	function fn_salesDetailView(salesCode){
 		
-		
-		
-	} 
+		$.ajax({
+			url : "${pageContext.request.contextPath }/sales_detailView",
+			data : "salesCode=" + salesCode,
+			success : function(data){
+				
+				$("#detailViewArea").html(data);
+				
+			}
+		}); 
+	}
+	
 	
 	
 	/*입력창 오픈 : Ajax*/

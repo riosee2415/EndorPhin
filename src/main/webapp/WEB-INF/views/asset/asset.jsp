@@ -2,25 +2,24 @@
     pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-	<h2>고정자산 등록</h2>	
-	<br>
-	<br>
-<table class="table table-hover">
-	<thead class="thead">
-	</thead>
-		<tr>
-			<td> 고정자산종류
-			<input name="deptCode1" id="deptCode1" type="text" /> &nbsp
-			<input type="button" id="seachBtn" value="검색" /></td>
-		</tr>
-</table>
-<br>
-	<div class="form-group">
-	<div class="table-responsive">
+
+
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
+		<h2><i class="fa fa-calculator"></i>고정자산 등록</h2>	
+		<table class="table table-hover">
+			<thead class="thead">
+			</thead>
+				<tr>
+					<td> 고정자산등록코드
+					<input name="assetCodeS" id="assetCodeS" type="text" /> &nbsp
+					<input type="button" id="seachBtn" value="검색" /></td>
+				</tr>
+		</table>
 		<table class="table table-hover">
 			<thead class="thead">
 				<tr>
-					<th><input type="checkbox" name="allCheck" id="th_allCheck" onclick="allCheck();"></th> 
 					<th>자산코드</th>
 					<th>계정명</th>
 					<th>자산명</th>
@@ -29,11 +28,10 @@
 					<th>장부반영</th>
 				</tr>
 			</thead>	
-			<tbody id="deptListTbody">
+			<tbody id="assetListTbody">
 				<c:forEach items="${assetList }" var="vo">	
 					 <tr>
-						<td><input type="checkbox" name="checkRow"  value="${vo.assetCode }" ></td>
-						<td><a class="detailView" href="#deptDetail" data-assetcode="${vo.assetCode }" 
+						<td><a class="bttn-stretch bttn-warning detailView" href="#deptDetail" data-assetcode="${vo.assetCode }" 
 																	 data-acquisitiondate="${vo.acquisitionDate }"
 																	 data-purchasecode="${vo.purchaseCode }"
 																	 data-sanggakway="${vo.sanggakWay }"
@@ -52,7 +50,7 @@
    						<td>${vo.accountName }</td>								
 						<td><fmt:formatDate value="${vo.acquisitionDate  }" pattern="yyyy-MM-dd"/></td>
 						<td>${vo.acquisitionPrice }</td>
-						<td><input type="button" value="장부반영" id="applybtn" name="applybtn"/></td>
+						<td><input class="bttn-simple bttn-warning" type="button" value="장부반영" id="applybtn" name="applybtn"/></td>
 				 	</tr>
 				 	<div id="insertArea"></div>
 				</c:forEach>
@@ -65,13 +63,10 @@
 				</tr>
 			</tfoot>
 		</table>
-  
+		<button type="button" class="bttn-jelly bttn-warning"  onclick="fn_detail();">등록</button>
 	</div>
 </div>
 	<!--------------(삭제,등록) 버튼 ------------------->
-	<div class="modal-footer">
-		<button type="button" class="btn btn-primary"  onclick="fn_detail();">등록</button>
-	</div>
 
 <!-----------------계정과목 검색 모달창 ---------------->	
 <div class="modal fade" id="my80sizeModal2" tabindex="-1" role="dialog" aria-labelledby="my100sizeModalLabel">
@@ -306,38 +301,7 @@
 		$("#sanggakCode").val(sanggakCode);
  	});
      
-	 function allCheck() {
-		if ($("#th_allCheck").is(':checked')) {
-				$("input[name=checkRow]").prop("checked", true);
-			} else {
-				$("input[name=checkRow]").prop("checked", false);
-			}
-		}
-	
-	/* 전체선택삭제 */
-	function allCheck() {
-		if ($("#th_allCheck").is(':checked')) {
-				$("input[name=checkRow]").prop("checked", true);
-			} else {
-				$("input[name=checkRow]").prop("checked", false);
-			}
-		}
-
-	/* 선택삭체*/
-	function myclick() {
-		var checkRow = '';
-		$("input[name=checkRow]:checked").each(function() {
-			checkRow += $(this).val()+",";
-		});
-			checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); //맨끝 콤마 지우기  
-			$("#checkRow").val(checkRow);
-			
-		if(checkRow === ""){		
-			alert("삭제할 대상을 선택하세요");
-			return false;
-		}
-				$("#del_frm").submit();
-	}
+	 
    
 	/* 등록 클릭했을 때 */
 	var insertFlag = 0;
@@ -351,12 +315,8 @@
 				}
 			});
 		
-			insertFlag = 1;
 			
-		} else if(insertFlag == 1){
-			$("#insertArea").html("");
-			insertFlag = 0;
-		}
+		} 
 	}
 	
 
@@ -379,17 +339,21 @@
 					$("#acquisitionDate").val($(this).data().acquisitiondate);
 				}
 			});
-		
-			insertFlag = 1;
-			
-		} else if(insertFlag == 1){
-			$("#insertArea").html("");
-			insertFlag = 0;
 		}
+});
+	
+	$("#seachBtn").on("click",function(){
+		$.ajax({
+			url : "${pageContext.request.contextPath}/assetSearch",
+			data : "assetCodeS="+$("#assetCodeS").val(),
 		
-		
-		
+			success : function(data){
+				$("#assetCodeS").val("");
+				$("#assetListTbody").html(data);
+			}
+		});
 	});
+	
 
 	</script>
 	

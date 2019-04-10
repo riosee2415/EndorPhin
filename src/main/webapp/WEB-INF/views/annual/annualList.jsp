@@ -43,8 +43,8 @@ select {
 								<option value="<%=calList.get(calList.YEAR) - 3%>"><%=calList.get(calList.YEAR) - 3%></option>
 								<option value="<%=calList.get(calList.YEAR) - 4%>"><%=calList.get(calList.YEAR) - 4%></option>
 						</select></th>
-						<th>직원명 <input id="annualName" type="text" name="search">
-							<button id="searchAnnual" type="button"
+						<th>직원명 <input id="annualName" type="text" name="search" class="form-control" placeholder="Search"></th>
+						<th><button id="searchAnnual" type="button"
 								style="background-color: #6E6867;" class="btn btn-info">검색</button>
 						</th>
 					</tr>

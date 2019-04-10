@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<head>
-
 <style>
 
 .thead{
@@ -12,22 +9,28 @@ background-color: #6E6867;
 }
 
 </style>
-</head>
 
-<!--테이블 리스트출력  -->
-	<h2>신용카드 등록</h2>	
-	<br>
-	<br>
-	카드번호 &nbsp <input name="cardNumber1" id="cardNumber1" type="text" />
-	&nbsp 카드명  &nbsp<input name="cardName1" id="cardName1" type="text" />
-	&nbsp<input type="button" id="seachBtn" value="검색" onclick="seachBtn()" /><br>
-	<br>
-
-	<div class="table-responsive">
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
+		<h2><i class="fa fa-calculator"></i> 신용카드 등록</h2>
+		<div class="form-group">
+		<!--테이블 리스트출력  -->
+		<table>
+			<tr>
+				<td><strong>카드번호 :</strong></td>
+				<td> <input class="search-query form-control" name="cardNumber1" id="cardNumber1" type="text" /></td>
+				<td><strong>카드명 : </strong> </td>
+				<td><input class="search-query form-control" name="cardName1" id="cardName1" type="text" /></td>
+				<td><input class="bttn-fill bttn-md bttn-warning" type="button" id="seachBtn" value="검색"	onclick="seachBtn()" /><br>
+				</td>
+			</tr>
+		</table>
 		<table class="table table-striped">
 			<thead class="thead">
 				<tr>
-					<td><input type="checkbox" name="allCheck" id="th_allCheck" onclick="allCheck();"></td> 
+					<td><input type="checkbox" name="allCheck" id="th_allCheck"
+						onclick="allCheck();"></td>
 					<th>카드 코드</th>
 					<th>카드번호</th>
 					<th>카드명</th>
@@ -38,10 +41,13 @@ background-color: #6E6867;
 			</thead>
 			<tbody>
 				<c:forEach items="${cardsList }" var="vo">
-					<input type="hidden" class="cardCode" name="cardCode" value="${vo.cardCode }"/>
-					 <tr>
-						<td><input type="checkbox" name="checkRow" value="${vo.cardCode }" ></td>
-						<td><a href="${pageContext.request.contextPath}/cardsDetail?cardCode=${vo.cardCode }">${vo.cardCode }</a></td>
+					<input type="hidden" class="cardCode" name="cardCode"
+						value="${vo.cardCode }" />
+					<tr>
+						<td><input type="checkbox" name="checkRow"
+							value="${vo.cardCode }"></td>
+						<td><a class="bttn-stretch bttn-md bttn-warning"
+							href="${pageContext.request.contextPath}/cardsDetail?cardCode=${vo.cardCode }">${vo.cardCode }</a></td>
 						<td>${vo.cardNumber }</td>
 						<td>${vo.cardName }</td>
 						<c:choose>
@@ -57,24 +63,27 @@ background-color: #6E6867;
 							<c:when test="${vo.status == 1}">
 								<td>사용</td>
 							</c:when>
-							
+
 							<c:otherwise>
 								<td><font color="red"> 미사용</font></td>
 							</c:otherwise>
 						</c:choose>
-				 	</tr>		 
+					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-	</div>
 
-	<!--------------(삭제,등록) 버튼 ------------------->
-	
-	<div class="modal-footer">
-		<input name="delect_btn"  id="delect_btn" type="button" value="선택삭제" onclick="myclick()" />
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#my80sizeCenterModal">등록</button>
+		<!--------------(삭제,등록) 버튼 ------------------->
+
+		<div class="modal-footer">
+			<input name="delect_btn" id="delect_btn" type="button" value="선택삭제" class="bttn-jelly bttn-warning"
+				onclick="myclick()" />
+			<button type="button" class="bttn-jelly bttn-warning" data-toggle="modal" 
+				data-target="#my80sizeCenterModal">등록</button>
+		</div>
+		</div>
 	</div>
-				
+</div>				
 	<!-------------- 신용카드 등록 모달창 띄우기  ------------>
 	
 	<!-- 80%size Modal at Center -->
@@ -93,7 +102,7 @@ background-color: #6E6867;
 					<!-- 여기부터 로직작성 -->
 						<label>신용카드코드(*)</label> 
 						<input type="text" id="cardCode" placeholder="코드를 입력하세요"> 
-						<input type="button" value="중복체크" id="duplCheckbtn" name="duplCheckbtn"/> 
+						<input type="button" value="중복체크" class="btn btn-default" id="duplCheckbtn" name="duplCheckbtn"/> 
 						<div id="dupleCode"></div>
 					</div>
 					<div class="form-group">

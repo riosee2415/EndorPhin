@@ -2,21 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
-<h2>전표 관리</h2>
-<hr>
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
+		<h2><i class="fa fa-calculator"></i>전표 관리</h2>
 
 <div style="text-align: right;">
-	<input type="button" class="btn btn-primary" id="insertSlipBtn"
+	<input type="button" class="bttn-fill bttn-warning" id="insertSlipBtn"
 		name="insertSlipBtn" value="전표작성" />
 </div>
 
 <div id="insertArea"></div>
 
-
-
-<div class="table-responsive">
-	<table class="table table-striped">
+	<table class="table table-hover">
 		<thead class="thead">
 			<tr>
 				<td><input type="checkbox" name="allCheck" id="th_allCheck"
@@ -24,7 +22,7 @@
 				<th>전표번호</th>
 				<th>분개금액</th>
 				<th>작성일</th>
-				<th>사용부서</th>
+				<th>사용부서</th> 
 				<th>메모</th>
 				<th>승인여부</th>
 			</tr>
@@ -41,7 +39,7 @@
 		</ul>
 	</nav>
 </div>
-
+</div>
 
 
 
@@ -67,7 +65,7 @@
 
 				<div class="form-group">
 					<label for="InputEmail">분개내역&nbsp;&nbsp;&nbsp;</label>
-					<table>
+					<table class="table-striped">
 						<thead>
 							<tr>
 								<td>상세번호</td>

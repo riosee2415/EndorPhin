@@ -174,9 +174,8 @@
         </definition>
         
          <definition name="useAsset" extends="layout"><!--감가상각비 입력-->
-        	<put-attribute name="content" value="/WEB-INF/views/depreciation/depreciation.jsp"/>
+        	<put-attribute name="content" value="/WEB-INF/views/asset_use/depreciation.jsp"/>
         </definition>
-        
         
          <definition name="boardType" extends="layout">
            <put-attribute name="content" value="/WEB-INF/views/board/boardType.jsp"/>

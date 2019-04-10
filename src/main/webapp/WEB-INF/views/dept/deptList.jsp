@@ -3,22 +3,16 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!--테이블 리스트출력  -->
-	<h2>부서 등록</h2>	
 	
-<!-- 	
-	<input type="button" id="testBtn" value="test"/>
-	<div id="test111"></div>
-	 -->
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-10">
+		<h2><i class="fa fa-calculator"></i> 부서 등록</h2>	
 	
-	<br>
-	<br>
-	부서코드 &nbsp <input name="deptCode1" id="deptCode1" type="text" />
-	&nbsp 부서명 &nbsp<input name="deptName1" id="deptName1" type="text" />
-	&nbsp<input type="button" id="seachBtn" value="검색" /><br>
-	<br>
-	<div class="form-group">
-	<div class="table-responsive">
-		<table class="table table-striped">
+	부서코드 &nbsp; <input name="deptCode1" id="deptCode1" type="text" />
+	&nbsp; 부서명 &nbsp;<input name="deptName1" id="deptName1" type="text" />
+	&nbsp;<input type="button" class="bttn-fill bttn-md bttn-warning" id="seachBtn" value="검색" /><br>
+		<table class="table table-hover">
 			<thead class="thead">
 				<tr>
 					<th><input type="checkbox" name="allCheck" id="th_allCheck" onclick="allCheck();"></th> 
@@ -33,7 +27,7 @@
 				<c:forEach items="${deptList }" var="vo">	
 					 <tr>
 						<td><input type="checkbox" name="checkRow" value="${vo.deptCode }" ></td>
-						<td><a class="detailView" href="#deptDetail" data-upd_deptcode="${vo.deptCode }" 
+						<td><a class="bttn-stretch bttn-md bttn-warning detailView" href="#deptDetail" data-upd_deptcode="${vo.deptCode }" 
 																	 data-upd_deptname="${vo.deptName }"
 																	 data-upd_companycode="${vo.companyCode }"
 																	 data-upd_usestatus="${vo.useStatus }"
@@ -54,14 +48,14 @@
 				</c:forEach>
 			</tbody>
 		</table>
-	</div>
-</div>
 	<!--------------(삭제,등록) 버튼 ------------------->
 	
 	<div class="modal-footer">
-		<input name="delect_btn"  id="delect_btn" type="button" value="선택삭제" onclick="myclick()" />
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#my80sizeCenterModal">등록</button>
+		<input name="delect_btn" class="bttn-jelly bttn-md bttn-warning"  id="delect_btn" type="button" value="선택삭제" onclick="myclick()" />
+		<button type="button" class="bttn-jelly bttn-md bttn-warning" data-toggle="modal" data-target="#my80sizeCenterModal">등록</button>
 	</div>
+	</div>
+</div>
 			
 	<!-------------- 등록 모달창 띄우기  ------------>
 
@@ -81,7 +75,7 @@
 					<!-- 여기부터 로직작성 -->
 						<label>부서코드(*)</label> 
 						<input type="text" id="deptCode" placeholder="코드를 입력하세요"> 
-						<input type="button" value="중복체크" id="duplCheckbtn" name="duplCheckbtn"/> 
+						<input type="button" class="btn btn-default" value="중복체크" id="duplCheckbtn" name="duplCheckbtn"/> 
 						<div id="dupleCode"></div>
 					</div>
 						<div class="form-group">
@@ -92,7 +86,7 @@
 					<div class="form-group">
 						<label>회사 코드 &nbsp;</label> 
 						<input style="width: 200px;" type="text" name="companyCode" id="companyCode" placeholder="회사코드를 입력하세요"> 
-						<input type="button" data-toggle="modal" data-target="#my80sizeModal2" value="검색" >
+						<input type="button" class="btn btn-default" data-toggle="modal" data-target="#my80sizeModal2" value="검색" >
 					</div>
 					
 					</div>	
@@ -128,7 +122,7 @@
 	   					<div class="form-group">
 	   					<label for="InputEmail">회사 코드 &nbsp;&nbsp;</label> 
 	   					<input type="text" id="upd_companyCode" name="upd_companyCode" />
-	   					<input type="button" data-toggle="modal" data-target="#my80sizeModal2" value="검색" >
+	   					<input type="button" class="btn btn-default" data-toggle="modal" data-target="#my80sizeModal2" value="검색" >
 	   				</div>
 	   			<div class="modal-footer">
 	   			

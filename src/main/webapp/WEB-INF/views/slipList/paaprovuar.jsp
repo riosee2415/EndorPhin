@@ -2,16 +2,14 @@
     pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
 <!--테이블 리스트출력  -->
-	<h2>미승인 전표 </h2>	
-	<br>
-	<br>
-	전표일자 &nbsp<input name="before_slipDate" id="before_slipDate" type="text" />
-	- &nbsp<input name="after_slipDate" id="after_slipDate" type="text"/>
-	&nbsp<input type="button" id="serachBtn" value="검색" /><br>
-	<br>
-<div class="form-group">
-	<div class="table-responsive">
+	<h2><i class="fa fa-calculator"></i>미승인 전표 </h2>	
+	전표일자 &nbsp;<input name="before_slipDate" id="before_slipDate" type="text" />
+	- &nbsp;<input name="after_slipDate" id="after_slipDate" type="text"/>
+	&nbsp;<input type="button" class="bttn-fill bttn-md bttn-warning" id="serachBtn" value="검색" /><br>
 		<table class="table table-striped">
 			<thead class="thead">
 				<tr>
@@ -35,13 +33,14 @@
 			</ul>
 		</nav>
 
-	</div>
-</div>
 <!--------------(삭제,등록) 버튼 ------------------->
 	
 	<div class="modal-footer">
-		<button name="upd_btn"  id="upd_btn" type="button" value="0" onclick="myclick()">승인</button>
+		<button name="upd_btn" class="bttn-jelly bttn-md bttn-warning" 
+			 id="upd_btn" type="button" value="0" onclick="myclick()">승인</button>
 	</div>
+	</div>
+</div>
 			
 	<!-----------------상세보기  모달창 ---------------->	
 	
@@ -79,7 +78,6 @@
 	   				</div>
 	   				
 	   			<div class="modal-footer">
-	   			
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
    				</div> 
    			</div> 

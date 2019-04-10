@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 	
-	<h2>거래처 상세정보</h2>
-	<hr><br />
+	
 	
 	<form id="deletefrm" action="${pageContext.request.contextPath }/deleteClient" method="get">
 		<input type="hidden" id="deleteCode" name="deleteCode" value="${vo.get(0).clientCode}" />	
 	</form>
 	
-	
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-10">
+		<h2><i class="fa fa-calculator"></i> 거래처 상세정보</h2>
 	<div style="width: 30%; float:left;">
 		<div class="table-responsive">
 	         <table class="table table-striped">
@@ -122,7 +124,8 @@
 		<button type="button" id="updateBtn_client" class="btn btn-primary" data-toggle="modal" data-target="#my70sizeCenterModal">수정</button>
 		<button type="button" id="deleteBtn_client" class="btn btn-primary">삭제</button>
 	</div>
-	
+	</div>
+	</div>
 	
 	
 	<script>

@@ -20,7 +20,7 @@
 	<div class="col-md-1">
 	</div>
 	<div class="col-md-10">
-		<h3>공제항목 등록</h3>
+		<h3><i class="fa fa-calculator"></i>공제항목 등록</h3>
 		<form action="/addDeduct" id="searchFrm">
 			<input type="hidden" name="deprostatus" value="2" />
 			<table>

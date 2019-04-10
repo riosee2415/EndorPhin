@@ -8,8 +8,8 @@
 <title>board1</title>
 </head>
 <body>
-        <table border="1" style="width:600px">
-            <caption>게시판 상세조회</caption>
+        <table class="table table-striped">
+           <h2><strong><i class="fas fa-pen-alt"></i>게시글 상세조회</strong></h2>
             <colgroup>
                 <col width='15%' />
                 <col width='*%' />
@@ -28,9 +28,10 @@
                     <td>${boardInfo.contents}</td> 
                 </tr>
             </tbody>
-        </table>    
-        <a href="#" onclick="history.back(-1)">돌아가기</a>
-        <a href="boardDelete?boardNo=${boardInfo.boardNo}">삭제</a>
-        <a href="boardForm?boardNo=${boardInfo.boardNo}&boardTypeCode=${boardTypeCode}">수정</a>
+        </table>
+        <br>
+        <a href="#" onclick="history.back(-1)"><button class="bttn-jelly bttn-warning">돌아가기</button></a>
+        <a href="boardDelete?boardNo=${boardInfo.boardNo}"><button class="bttn-jelly bttn-warning">삭제</button></a>
+        <a href="boardForm?boardNo=${boardInfo.boardNo}&boardTypeCode=${boardTypeCode}"><button class="bttn-jelly bttn-warning">저장</button></a>
 </body>
 </html>

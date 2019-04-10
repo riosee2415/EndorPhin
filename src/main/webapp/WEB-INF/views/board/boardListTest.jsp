@@ -17,10 +17,9 @@
 
 </style>
 <body>
-<a href="boardForm?boardTypeCode=${boardTypeCode}">글쓰기</a>
                     
-<table border="1" style="width:600px" class="thead">
-    <caption>게시판</caption>
+<table class="table table-striped">
+	<h2><strong><i class="fas fa-pen-alt"></i>게시판</strong></h2>
     <colgroup>
         <col width='8%' />
         <col width='*%' />
@@ -57,5 +56,6 @@
 </div>
 </c:if>  --%>  
 <jsp:include page="/WEB-INF/views/board/pagingforSubmit.jsp" />
+<a href="boardForm?boardTypeCode=${boardTypeCode}"><button class="bttn-jelly bttn-warning">글쓰기</button></a>
 </body>
 </html>

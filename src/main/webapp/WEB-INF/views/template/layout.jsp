@@ -100,14 +100,18 @@
 	
 	
 <body id="page-top">
-	
+	                   
 
 	<tiles:insertAttribute name="header"/>
 	<tiles:insertAttribute name="menu"/>
-	<div id="wrapper">
-	
-		<tiles:insertAttribute name="left"/>
-	
+	 <div id="wrapper"> 
+	           
+	           
+	           
+		 <tiles:insertAttribute name="left"/>
+			
+			
+			                          
 	
 	    <div id="content-wrapper" class="cont">
 			<!-- <div class="container-fluid" > -->
@@ -175,6 +179,15 @@
 	$('#groupmenu').addClass('active'); 
 }
  
+                                              
+                          
+ 
+ $(document).ready(function () {
+	    $('#sidebarCollapse').on('click', function () {
+	        $('#sidebar').toggleClass('active');
+	        $(this).toggleClass('active');
+	    });
+	});
 </script>
 
 

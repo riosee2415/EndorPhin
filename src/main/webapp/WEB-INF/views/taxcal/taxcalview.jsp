@@ -4,103 +4,104 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
-<!-- 키 값으로 하나만 출력하기
-	<c:out value="${scCode['11'] }" />
- -->
-
 <div class="row">
 	<div class="col-md-1"></div>
 	<div class="col-md-10">
-	<h2>매입매출전표 관리3</h2>
-	
-	<!-- 뷰 폼 시작-->
-	<table class="table table-striped">
-			<tr>
-				<td style="width: 150px;">ddaa24</td>
-				<td style="width: 300px;"><input type="text" /></td>
-	
-				<td style="width: 150px;">dd</td>
-				<td style="width: 300px;"><input type="text" /></td>
-			</tr>
-		</table>
-		
-		
-	<div>
-		<table class="table table-hover" style="font-size:10px;">
-			<thead class="thead">
-				<tr style="text-align: center;">
-					<td style="width: 80px;">번호</td>
-					<td style="width: 150px;">날짜</td>
-					<td style="width: 100px;">구분</td>
-					<td style="width: 120px;">공급가액</td>
-					<td style="width: 120px;">부가세</td>
-					<td style="width: 150px;">공급대가</td>
-					<td style="width: 150px;">거래처</td>
-					<td style="width: 150px;">사용부서</td>
-					<td style="width: 150px;">발주번호</td>
-					<td style="width: 80px;">전자</td>
-					<td style="width: 80px;">분개</td>
-				</tr>
-			</thead>
-			<tbody id="establishListTbody">
-			 
-			</tbody>
-		</table>
-	
-		<c:set var="lastPage"
-			value="${Integer(slipCnt/pageSize + (slipCnt%pageSize > 0 ? 1 : 0))}" />
-	
-		<nav style="text-align: center;">
-			<ul id="pagination" class="pagination">
-			</ul>
-		</nav>
-	</div>
-	<hr>
-	<!-- 뷰 폼 끝-->
-	
-	
-	<!-- 입력 폼 시작-->
-	<table>
-			<thead class="thead2">
-				<tr style="text-align: center;">
-					<td style="width: 100px;">날짜</td>
-					<td style="width: 80px;">구분</td>
-					<td style="width: 100px;">공급가액</td>
-					<td style="width: 100px;">부가세</td>
-					<td style="width: 100px;">공급대가</td>
-					<td colspan="2" style="width: 150px;">거래처</td>
-					<td colspan="2" style="width: 150px;">부서</td>
-					<td style="width: 100px;">발주번호</td>
-					<td style="width: 65px;">전자</td>
-					<td style="width: 65px;">분개</td>
-				</tr>
-			</thead>
-				<tr>
-					<td><input id="insertSlipDate" style="width: 100px;" type="text" /></td> <!-- 날짜 -->
-					<td><input id="insertSalesStatus" style="width: 80px;" type="text" /></td> <!-- 구분 -->
-					<td><input id="insertSupplyValue" style="width: 100px;" type="text" readonly/></td>  <!-- 공급가액 -->
-					<td><input id="insertSurTax" style="width: 100px;" type="text" readonly/></td>  <!-- 부가세 -->
-					<td><input id="insertSumValue" style="width: 100px;" type="text" /></td>  <!-- 공급대가 -->
-					<td><input id="insertClientCode" style="width: 35px;" type="text" /></td> <!-- 거래처코드 -->
-					<td><input id="insertClient" style="width: 115px;" type="text" /></td> <!-- 거래처 -->
-					<td><input id="insertDeptCode" style="width: 35px;" type="text"/></td> <!-- 사용부서 -->
-					<td><input id="insertDept" style="width: 115px;" type="text" placeholder="미등록"/></td> <!-- 사용부서 -->
-					<td><input id="insertOrderCode" style="width: 100px;" type="text" /></td>  <!-- 발주번호 -->
-					<td><input id="insertAuto" style="width: 70px;" type="text" /></td> <!-- 전자 -->
-					<td><input id="insertSlipType" style="width: 70px;" type="text" /></td> <!-- 분개 -->
-				</tr>
+	<h2><i class="fa fa-calculator"></i>매입매출전표 관리3</h2>
+
+<!-- 뷰 폼 시작-->
+<table class="table table-striped">
+		<tr>
+			<td style="width: 150px;">ddaa24</td>
+			<td style="width: 300px;"><input type="text" /></td>
+
+			<td style="width: 150px;">dd</td>
+			<td style="width: 300px;"><input type="text" /></td>
+		</tr>
 	</table>
-	<!-- 입력 폼 끝 -->
 	
 	
-	<p style="margin-top: 30px;" />
-	
-	
-	<!-- 전표 세부내역 분개 창 영역 -->
-	<div id="insertViewArea"></div>
-	<!-- 전표 세부내역 분개 창 영역 -->
-	
-	
+<div>
+	<table class="table table-hover" style="font-size: small;">
+		<thead class="thead">
+			<tr style="text-align: center;">
+				<td style="width: 80px;">번호</td>
+				<td style="width: 150px;">날짜</td>
+				<td style="width: 100px;">구분</td>
+				<td style="width: 120px;">공급가액</td>
+				<td style="width: 120px;">부가세</td>
+				<td style="width: 150px;">공급대가</td>
+				<td style="width: 150px;">거래처</td>
+				<td style="width: 150px;">사용부서</td>
+				<td style="width: 150px;">발주번호</td>
+				<td style="width: 80px;">전자</td>
+				<td style="width: 80px;">분개</td>
+			</tr>
+		</thead>
+		<tbody id="establishListTbody">
+		 
+		</tbody>
+	</table>
+
+	<c:set var="lastPage"
+		value="${Integer(slipCnt/pageSize + (slipCnt%pageSize > 0 ? 1 : 0))}" />
+
+	<nav style="text-align: center;">
+		<ul id="pagination" class="pagination">
+		</ul>
+	</nav>
+</div>
+<hr>
+<!-- 뷰 폼 끝-->
+
+
+<!-- 입력 폼 시작-->
+<table>
+		<thead class="thead2">
+			<tr style="text-align: center;">
+				<td style="width: 100px;">날짜</td>
+				<td style="width: 80px;">구분</td>
+				<td style="width: 100px;">공급가액</td>
+				<td style="width: 100px;">부가세</td>
+				<td style="width: 100px;">공급대가</td>
+				<td colspan="2" style="width: 150px;">거래처</td>
+				<td colspan="2" style="width: 150px;">부서</td>
+				<td style="width: 100px;">발주번호</td>
+				<td style="width: 65px;">전자</td>
+				<td style="width: 65px;">분개</td>
+			</tr>
+		</thead>
+			<tr>
+				<td><input id="insertSlipDate" style="width: 100px;" type="text" /></td> <!-- 날짜 -->
+				<td><input id="insertSalesStatus" style="width: 80px;" type="text" /></td> <!-- 구분 -->
+				<td><input id="insertSupplyValue" style="width: 100px;" type="text" readonly/></td>  <!-- 공급가액 -->
+				<td><input id="insertSurTax" style="width: 100px;" type="text" readonly/></td>  <!-- 부가세 -->
+				<td><input id="insertSumValue" style="width: 100px;" type="text" /></td>  <!-- 공급대가 -->
+				<td><input id="insertClientCode" style="width: 35px;" type="text" /></td> <!-- 거래처코드 -->
+				<td><input id="insertClient" style="width: 115px;" type="text" /></td> <!-- 거래처 -->
+				<td><input id="insertDeptCode" style="width: 35px;" type="text"/></td> <!-- 사용부서 -->
+				<td><input id="insertDept" style="width: 115px;" type="text" placeholder="미등록"/></td> <!-- 사용부서 -->
+				<td><input id="insertOrderCode" style="width: 100px;" type="text" /></td>  <!-- 발주번호 -->
+				<td><input id="insertAuto" style="width: 70px;" type="text" /></td> <!-- 전자 -->
+				<td><input id="insertSlipType" style="width: 70px;" type="text" /></td> <!-- 분개 -->
+			</tr>
+</table>
+<!-- 입력 폼 끝 -->
+
+
+<p style="margin-top: 30px;" />
+
+
+<!-- 전표 세부내역 분개 창 영역 -->
+<div id="insertViewArea"></div>
+<!-- 전표 세부내역 분개 창 영역 -->
+
+
+<!-- 전표 세부내역 상세보기 창 영역 -->
+<div id="detailViewArea"></div>
+<!-- 전표 세부내역 상세보기 창 영역 -->
+
+
 
 
 <!-- 매입매출코드 시작 -->
@@ -156,9 +157,8 @@
 </table>
 <!-- 분개유형 끝-->
 
-	</div>
 </div>
-
+</div>
 
 
 
@@ -446,8 +446,8 @@ $("document").ready(function(){
 		fn_setSlipType(e,value);
 		
 	});
-	
-	
+
+	/********************************************/	
 	
 	
 	
@@ -594,10 +594,23 @@ $("document").ready(function(){
 		} else {
 			// 작동 하지 않음
 		}
+	}
+	
+	
+	/*상세보기. Tr 클릭 시 div 데이터 추가*/
+	function fn_salesDetailView(salesCode){
 		
-		
-		
-	} 
+		$.ajax({
+			url : "${pageContext.request.contextPath }/sales_detailView",
+			data : "salesCode=" + salesCode,
+			success : function(data){
+				
+				$("#detailViewArea").html(data);
+				
+			}
+		}); 
+	}
+	
 	
 	
 	/*입력창 오픈 : Ajax*/

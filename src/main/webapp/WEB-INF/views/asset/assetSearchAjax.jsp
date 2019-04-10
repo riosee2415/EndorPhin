@@ -6,7 +6,7 @@
 <c:forEach items="${assetList }" var="vo">	
 	 <tr>
 		<td><input type="checkbox" name="checkRow"  value="${vo.assetCode }" ></td>
-		<td><a class="detailView" href="#deptDetail" data-assetcode="${vo.assetCode }" 
+		<td><a class="bttn-stretch bttn-warning detailView" href="#deptDetail" data-assetcode="${vo.assetCode }" 
 													 data-acquisitiondate="${vo.acquisitionDate }"
 													 data-purchasecode="${vo.purchaseCode }"
 													 data-sanggakway="${vo.sanggakWay }"

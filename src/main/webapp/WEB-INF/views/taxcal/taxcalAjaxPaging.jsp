@@ -6,7 +6,7 @@
     
    	<c:forEach items="${tax_calList }" var="vo">
    		
-   		<tr onmouseover="this.style.backgroundColor='#BDBDBD'" onmouseout="this.style.backgroundColor='#FFFFFF'" style="text-align: center;">
+   		<tr class="tax_calTr" data-salescode="${vo.salesCode }" onmouseover="this.style.backgroundColor='#BDBDBD'" onmouseout="this.style.backgroundColor='#FFFFFF'" style="text-align: center;">
    		
 			<td style="width: 80px;">${vo.salesCode }</td>
 			<td style="width: 150px;"><fmt:formatDate value="${vo.slipDate }" pattern="yy/MM/dd"/></td>
@@ -24,7 +24,12 @@
    	
    	</c:forEach>
    	
-   	
+   	<script>
+	// Tr클릭 시 액션
+	$(".tax_calTr").on("click", function(){
+		fn_salesDetailView($(this).data().salescode);
+	});
+	</script>
    	
 
    	

@@ -22,7 +22,9 @@ import kr.or.ddit.company.service.IDeptService;
 import kr.or.ddit.constant.SalesCodeConstant;
 import kr.or.ddit.order.model.ClientVo;
 import kr.or.ddit.order.service.ICilentService;
+import kr.or.ddit.tax_cal.model.Sales_detailVo;
 import kr.or.ddit.tax_cal.model.Tax_calVo;
+import kr.or.ddit.tax_cal.service.ISales_detailService;
 import kr.or.ddit.tax_cal.service.ITax_calService;
 import kr.or.ddit.util.model.PageVo;
 
@@ -39,6 +41,9 @@ public class Tax_calController {
 	
 	@Resource(name="tax_calService")
 	private ITax_calService tax_calService;
+	
+	@Resource(name="sales_detailService")
+	private ISales_detailService sales_detailService;
 	
 	
 	// 최초 페이지 뷰
@@ -172,7 +177,7 @@ public class Tax_calController {
 	public String inesrtTax_calAjax(	@RequestParam(name="insertSlipDate")String SlipDate
 									,	@RequestParam(name="insertSupplyValue") String supplyValue
 									,	@RequestParam(name="insertSalesStatus") String salesStatus
-									,	@RequestParam(name="insertDeptCode", defaultValue="미등록") String deptCode
+									,	@RequestParam(name="insertDeptCode", defaultValue="회사전체") String deptCode
 									,	@RequestParam(name="insertSurtax", defaultValue="0") String surtax
 									,	@RequestParam(name="insertOrderCode", defaultValue="0") String orderCode
 									,	@RequestParam(name="insertClientName", defaultValue="미등록") String clientName
@@ -207,7 +212,6 @@ public class Tax_calController {
 		tax_calVo.setnSupplyValue(supplyValue);
 		tax_calVo.setnSurtax(surtax);
 		
-		
 		tax_calService.insertTax_cal(tax_calVo);
 		
 		
@@ -215,6 +219,25 @@ public class Tax_calController {
 	}
 	
 	
+	@RequestMapping("/inesrtSales_detail")
+	@ResponseBody
+	public String inesrtSales_detail(Sales_detailVo sales_detailVo) {
+		
+		sales_detailVo.setPrice(sales_detailVo.getPrice().replace(",", ""));
+		
+		int cnt = sales_detailService.insertSales_detail(sales_detailVo);
+		
+		return "insert ajax detail sales";
+	}
 	
+	
+	@RequestMapping("/sales_detailView")
+	public String sales_detailView(@RequestParam(name="salesCode")String salesCode
+								,Model model ) {
+			
+		model.addAttribute("salesCode", salesCode);
+			
+		return "taxcal/sales_detailView";
+	}
 	
 }

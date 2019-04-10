@@ -35,7 +35,7 @@
 			<td><input id="detail_slipStatus1" style="width: 80px;" type="text" /></td>
 			<td><input id="detail_slipEstabilshCode1" style="width: 40px;" type="text" /></td>
 			<td><input id="detail_slipEstabilshName1" style="width: 130px;" type="text" /></td>
-			<td><input style="width: 170px;" type="text" /></td>
+			<td><input id="detail_jukyo1" style="width: 170px;" type="text" /></td>
 			<td><input id="detail_clientCode1" style="width: 40px;" type="text" /></td> <!-- 거래처코드 -->
 			<td><input id="detail_clientName1" style="width: 130px;" type="text" /></td><!-- 거래처이름 -->
 			<td><input id="detail_slipLeft1" style="width: 130px;" type="text" /></td>
@@ -46,7 +46,7 @@
 			<td><input id="detail_slipStatus2" style="width: 80px;" type="text" /></td>
 			<td><input id="detail_slipEstabilshCode2" style="width: 40px;" type="text" /></td>
 			<td><input id="detail_slipEstabilshName2" style="width: 130px;" type="text" /></td>
-			<td><input style="width: 170px;" type="text" /></td>
+			<td><input id="detail_jukyo2" style="width: 170px;" type="text" /></td>
 			<td><input id="detail_clientCode2" style="width: 40px;" type="text" /></td>
 			<td><input id="detail_clientName2" style="width: 130px;" type="text" /></td>
 			<td><input id="detail_slipLeft2" style="width: 130px;" type="text" /></td>
@@ -57,7 +57,7 @@
 			<td><input id="detail_slipStatus3" style="width: 80px;" type="text" /></td>
 			<td><input id="detail_slipEstabilshCode3" style="width: 40px;" type="text" /></td>
 			<td><input id="detail_slipEstabilshName3" style="width: 130px;" type="text" /></td>
-			<td><input style="width: 170px;" type="text" /></td>
+			<td><input id="detail_jukyo3" style="width: 170px;" type="text" /></td>
 			<td><input id="detail_clientCode3" style="width: 40px;" type="text" /></td>
 			<td><input id="detail_clientName3" style="width: 130px;" type="text" /></td>
 			<td><input id="detail_slipLeft3" style="width: 130px;" type="text" /></td>
@@ -710,7 +710,13 @@
 		var insertAuto = $("#loadAuto").val(); 
 		var insertEntryType = $("#loadSlipType").val();
 		
+		if(insertDeptCode == ""){
+			insertDeptCode  = "999";
+		}
 		
+		if(insertClientName == ""){
+			insertClientName  = "미등록";
+		}
 		
 		
 		/*tax_cal Insert Query  실행 후, Location을 통해 redirect를 하는 Ajax*/
@@ -727,15 +733,67 @@
 				 + "&insertAuto=" + insertAuto
 				 + "&insertEntryType=" + insertEntryType,
 			success : function(data){
-				location.reload();
 				
+				fn_insertSales_detail(data);
+			}
+		});
+	}
+	
+	
+	
+	/* 전표 상세정보 입력*/
+	function fn_insertSales_detail(data){
+		
+		
+		var status1			 	= $("#detail_slipStatus1").val();
+		var price1				= $("#detail_slipLeft1").val() + $("#detail_slipRight1").val();
+		var establishCode1 		= $("#detail_slipEstabilshName1").val();
+		var jukyo1 				= $("#detail_jukyo1").val();
+		var salesCode1			= data;
+		fn_insertQuertyPlay(status1, price1, establishCode1, jukyo1, salesCode1);
+		
+		var status2			 	= $("#detail_slipStatus2").val();
+		var price2				= $("#detail_slipLeft2").val() + $("#detail_slipRight2").val();
+		var establishCode2 		= $("#detail_slipEstabilshName2").val();
+		var jukyo2 				= $("#detail_jukyo2").val();
+		var salesCode2			= data;
+		fn_insertQuertyPlay(status2, price2, establishCode2, jukyo2, salesCode2);
+		
+		var status3			 	= $("#detail_slipStatus3").val();
+		var price3				= $("#detail_slipLeft3").val() + $("#detail_slipRight3").val();
+		var establishCode3 		= $("#detail_slipEstabilshName3").val();
+		var jukyo3 				= $("#detail_jukyo3").val();
+		var salesCode3			= data;
+		fn_insertQuertyPlay(status3, price3, establishCode3, jukyo3, salesCode3);
+		
+		
+		
+		
+		
+		
+	}
+	
+	function fn_insertQuertyPlay(status, price, establishCode, jukyo, salesCode){
+		$.ajax({
+			url : "${pageContext.request.contextPath }/inesrtSales_detail",
+			data : 	"status=" + status
+				+   "&price=" + price
+				+   "&establishCode=" + establishCode
+				+   "&jukyo=" + jukyo
+				+   "&salesCode=" + salesCode ,
+			success : function(data){
 				console.log(data);
+				
+				location.reload();
 			}
 		});
 		
-			
+		
+		
+		
 		
 	}
+	
 
 </script>
 

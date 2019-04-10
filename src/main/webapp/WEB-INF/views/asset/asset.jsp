@@ -2,21 +2,21 @@
     pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-	<h2>고정자산 등록</h2>	
-	<br>
-	<br>
-<table class="table table-hover">
-	<thead class="thead">
-	</thead>
-		<tr>
-			<td> 고정자산등록코드
-			<input name="assetCodeS" id="assetCodeS" type="text" /> &nbsp
-			<input type="button" id="seachBtn" value="검색" /></td>
-		</tr>
-</table>
-<br>
-	<div class="form-group">
-	<div class="table-responsive">
+
+
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
+		<h2><i class="fa fa-calculator"></i>고정자산 등록</h2>	
+		<table class="table table-hover">
+			<thead class="thead">
+			</thead>
+				<tr>
+					<td> 고정자산등록코드
+					<input name="assetCodeS" id="assetCodeS" type="text" /> &nbsp
+					<input type="button" id="seachBtn" value="검색" /></td>
+				</tr>
+		</table>
 		<table class="table table-hover">
 			<thead class="thead">
 				<tr>
@@ -33,7 +33,7 @@
 				<c:forEach items="${assetList }" var="vo">	
 					 <tr>
 						<td><input type="checkbox" name="checkRow"  value="${vo.assetCode }" ></td>
-						<td><a class="detailView" href="#deptDetail" data-assetcode="${vo.assetCode }" 
+						<td><a class="bttn-stretch bttn-warning detailView" href="#deptDetail" data-assetcode="${vo.assetCode }" 
 																	 data-acquisitiondate="${vo.acquisitionDate }"
 																	 data-purchasecode="${vo.purchaseCode }"
 																	 data-sanggakway="${vo.sanggakWay }"
@@ -52,7 +52,7 @@
    						<td>${vo.accountName }</td>								
 						<td><fmt:formatDate value="${vo.acquisitionDate  }" pattern="yyyy-MM-dd"/></td>
 						<td>${vo.acquisitionPrice }</td>
-						<td><input type="button" value="장부반영" id="applybtn" name="applybtn"/></td>
+						<td><input class="bttn-simple bttn-warning" type="button" value="장부반영" id="applybtn" name="applybtn"/></td>
 				 	</tr>
 				 	<div id="insertArea"></div>
 				</c:forEach>
@@ -65,13 +65,10 @@
 				</tr>
 			</tfoot>
 		</table>
-  
+		<button type="button" class="bttn-jelly bttn-warning"  onclick="fn_detail();">등록</button>
 	</div>
 </div>
 	<!--------------(삭제,등록) 버튼 ------------------->
-	<div class="modal-footer">
-		<button type="button" class="btn btn-primary"  onclick="fn_detail();">등록</button>
-	</div>
 
 <!-----------------계정과목 검색 모달창 ---------------->	
 <div class="modal fade" id="my80sizeModal2" tabindex="-1" role="dialog" aria-labelledby="my100sizeModalLabel">

@@ -6,7 +6,7 @@
 	<style type="text/css">
 	.thead2{
 	color : white;
-	background-color: #2C1A3F;
+	background-color: #997149;
 	text-align: center;
 	}
 	
@@ -87,7 +87,7 @@
 		  		<br />
 		  		
 		  		<div id="cancleBtn_onlySlip">
-		  			<input type="button" class="btn btn-primary" id="cancleOnlySlip" name="cancleOnlySlip" value="작성취소" />
+		  			<input type="button" class="bttn-simple bttn-warning" id="cancleOnlySlip" name="cancleOnlySlip" value="작성취소" />
 		  		</div>
   		</center>
   		

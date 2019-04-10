@@ -6,7 +6,7 @@
 <c:forEach items="${dateList_p }" var="vo">
 		<tr>
 			<td><input type="checkbox" name="checkRow" value=${vo.slipNumber }></td>
-			<td><a class="detailView" href="#deptDetail" data-slipnumber="${vo.slipNumber }" 
+			<td><a class="bttn-stretch bttn-md bttn-warning detailView detailView" href="#deptDetail" data-slipnumber="${vo.slipNumber }" 
 														 data-slipdate="${vo.slipDate }" 
 														 data-jukyo="${vo.jukyo }"
 														 data-total="${vo.total }"

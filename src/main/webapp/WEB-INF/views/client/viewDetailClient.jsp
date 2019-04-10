@@ -119,11 +119,9 @@
 		</table>
 	</div>
 	
-	<div class="container">
-		<button type="button" class="btn btn-primary" onclick="history.back(-1);">뒤로가기</button>
-		<button type="button" id="updateBtn_client" class="btn btn-primary" data-toggle="modal" data-target="#my70sizeCenterModal">수정</button>
-		<button type="button" id="deleteBtn_client" class="btn btn-primary">삭제</button>
-	</div>
+		<button type="button" class="bttn-simple bttn-warning" onclick="history.back(-1);">뒤로가기</button>
+		<button type="button" id="updateBtn_client" class="bttn-simple bttn-warning" data-toggle="modal" data-target="#my70sizeCenterModal">수정</button>
+		<button type="button" id="deleteBtn_client" class="bttn-simple bttn-warning">삭제</button>
 	</div>
 	</div>
 	

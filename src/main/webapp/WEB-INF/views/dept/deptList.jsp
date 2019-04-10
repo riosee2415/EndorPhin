@@ -1,17 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!--테이블 리스트출력  -->
 	
 <div class="row">
 <div class="col-md-1"></div>
 <div class="col-md-10">
 		<h2><i class="fa fa-calculator"></i> 부서 등록</h2>	
-	
-	부서코드 &nbsp; <input name="deptCode1" id="deptCode1" type="text" />
-	&nbsp; 부서명 &nbsp;<input name="deptName1" id="deptName1" type="text" />
-	&nbsp;<input type="button" class="bttn-fill bttn-md bttn-warning" id="seachBtn" value="검색" /><br>
+		<table>
+			<tr>
+				<td><strong>부서코드 :</strong></td>
+				<td><input class="search-query form-control" name="deptCode1" id="deptCode1" type="text" /></td>
+				<td><strong>부서명 :</strong></td>
+				<td><input class="search-query form-control" name="deptName1" id="deptName1" type="text" /></td>
+				<td><input type="button" class="bttn-fill bttn-md bttn-warning" id="seachBtn" value="검색" /></td>
+			</tr>
+		</table>
 		<table class="table table-hover">
 			<thead class="thead">
 				<tr>

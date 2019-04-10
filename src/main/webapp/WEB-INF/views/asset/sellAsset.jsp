@@ -3,22 +3,20 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 	
-	<h2>고정자산 매각</h2>	
-	<br>
-	<br>
-<table class="table table-striped">
-	<thead class="thead">
-	</thead>
-		<tr>
-			<td> 계정명
-			<input name="deptCode1" id="deptCode1" type="text" /> &nbsp
-			<input type="button" id="seachBtn" value="검색" /></td>
-		</tr>
-</table>
-<br>
-	<div class="form-group">
-	<div class="table-responsive">
-		<table class="table table-striped">
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
+	<h2><i class="fa fa-calculator"></i>고정자산 매각</h2>
+		<div class="container">	
+		<table class="table">
+			<tr>
+				<td><h4><strong>계정명</strong></h4></td>
+				<td colspan="3"><input class="form-control" name="deptCode1" id="deptCode1" type="text" placeholder="Search"/></td>
+				<td><input class="bttn-fill bttn-warning" type="button" id="seachBtn" value="검색" /></td>
+			</tr>
+		</table>
+		</div>
+		<table class="table table-hover">
 			<thead class="thead">
 				<tr>
 					<th><input type="checkbox" name="allCheck" id="th_allCheck" onclick="allCheck();"></th> 
@@ -62,13 +60,11 @@
 			</tfoot>
 		</table>
   
+		<button type="button" class="bttn-jelly bttn-warning"  onclick="fn_detail();">등록</button>
 	</div>
 </div>
 	<!--------------(삭제,등록) 버튼 ------------------->
 
-	<div class="modal-footer">
-		<button type="button" class="btn btn-primary"  onclick="fn_detail();">등록</button>
-	</div>
 
 <!----------------- 거래처명 검색 모달창 ---------------->	
   <div class="modal fade" id="my80sizeModal3" tabindex="-1" role="dialog" aria-labelledby="my100sizeModalLabel">

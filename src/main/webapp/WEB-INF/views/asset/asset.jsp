@@ -2,21 +2,21 @@
     pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-	<h2>고정자산 등록</h2>	
-	<br>
-	<br>
-<table class="table table-hover">
-	<thead class="thead">
-	</thead>
-		<tr>
-			<td> 고정자산등록코드
-			<input name="assetCodeS" id="assetCodeS" type="text" /> &nbsp
-			<input type="button" id="seachBtn" value="검색" /></td>
-		</tr>
-</table>
-<br>
-	<div class="form-group">
-	<div class="table-responsive">
+
+
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
+		<h2><i class="fa fa-calculator"></i>고정자산 등록</h2>	
+		<table class="table table-hover">
+			<thead class="thead">
+			</thead>
+				<tr>
+					<td> 고정자산등록코드
+					<input name="assetCodeS" id="assetCodeS" type="text" /> &nbsp
+					<input type="button" id="seachBtn" value="검색" /></td>
+				</tr>
+		</table>
 		<table class="table table-hover">
 			<thead class="thead">
 				<tr>

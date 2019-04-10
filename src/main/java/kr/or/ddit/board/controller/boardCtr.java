@@ -60,7 +60,7 @@ public class boardCtr {
 		model.addAttribute("pageSize", pageVo.getPageSize());
 		model.addAttribute("page", pageVo.getPage());
 		model.addAttribute("boardTypeCode", pageVo.getBoardTypeCode());
-		return "board/boardListTest";
+		return "boardList";
     }
 	
 	/**
@@ -82,7 +82,7 @@ public class boardCtr {
 
 		model.addAttribute("boardTypeCode", boardTypeCode);
 		logger.debug("boardTypeCode : {}",boardTypeCode);
-	    return "board/boardFormTest";
+	    return "boardForm";
 	}
 	
 	/**
@@ -133,7 +133,7 @@ public class boardCtr {
         model.addAttribute("boardInfo", boardInfo);
         model.addAttribute("boardTypeCode", boardTypeCode);
         
-        return "board/boardReadTest";
+        return "boardRead";
 	}
 	
 	/**

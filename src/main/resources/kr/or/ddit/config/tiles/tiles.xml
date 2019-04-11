@@ -25,15 +25,14 @@
         
         
         <definition name="helloTiles" extends="layout">
-           <put-attribute name="left" value=""/>
+<!--           <put-attribute name="left" value=""/>  -->
            <put-attribute name="content" value="/WEB-INF/views/template/erpcontents.jsp"/>
         </definition>
         
         <definition name="groupwareTiles" extends="layout_groupware">
-           <put-attribute name="left" value=""/>
+           <put-attribute name="left" value="/WEB-INF/views/template/left.jsp"/>
            <put-attribute name="content" value="/WEB-INF/views/template/groupcontents.jsp"/>
         </definition>
-        
         
         
         
@@ -201,6 +200,13 @@
          <definition name="AnnualListTiles" extends="layout">   <!-- 휴가 일수 등록 -->
            <put-attribute name="content" value="/WEB-INF/views/annual/annualList.jsp"/>
         </definition>
+        
+        
+         <definition name="prodInput" extends="layout">   <!-- 상품 등록 -->
+           <put-attribute name="content" value="/WEB-INF/views/product/productList.jsp"/>
+        </definition>
+        
+        
         
         <definition name="boardList" extends="layout">
         	<put-attribute name="content" value="/WEB-INF/views/board/boardListTest.jsp"/>

@@ -107,9 +107,9 @@
 			<update id="updateEmployee" parameterType="employeeVo">
 			update employee set
 			userNm=#{userNm},
-			deptCode=#{deptCode},
-			positionCode=#{positionCode},
-			rankCode=#{rankCode},
+			deptCode=nvl(#{deptCode,jdbcType=VARCHAR},deptCode),
+			positionCode=nvl(#{positionCode,jdbcType=VARCHAR},positionCode),
+			rankCode=nvl(#{rankCode,jdbcType=VARCHAR},rankCode),
 			continuousyear=nvl(#{continuousYear,jdbcType=VARCHAR},continuousYear),
 			relate=nvl(#{relate,jdbcType=VARCHAR},relate),
 			joinCompany=nvl(#{joinCompany,jdbcType=VARCHAR},joinCompany),

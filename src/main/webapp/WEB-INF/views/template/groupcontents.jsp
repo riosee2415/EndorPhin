@@ -15,12 +15,9 @@
 
 
 
-      그룹웨어 콘텐츠                     
 
 
 <div class="container-fluid">
-
-
 
 
 	<div class="row">

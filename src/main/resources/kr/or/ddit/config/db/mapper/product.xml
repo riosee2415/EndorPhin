@@ -7,34 +7,37 @@
 	<!-- 상품 입력 -->
 	<insert id="insertProduct" parameterType="productVo">
 		insert into product
-		(productcode, productname, standard, outline, userstatus, baseprice)
+		(productcode, productname, standard, outline, usestatus, baseprice)
 		values
-		(#{productcode},#{productname},#{standard}
-		,#{outline},#{userstatus},#{baseprice})
-
+		('P'||#{productCode}
+		,#{productName}
+		,#{standard}
+		,nvl(#{outLine, jdbcType=VARCHAR},null)
+		,nvl(#{usestatus, jdbcType=VARCHAR},1)
+		,#{basePrice})
 	</insert>
-
+	
 
 	<!-- 상품  전체 불러오기 -->
 	<select id="getAllProduct" resultType="productVo">
 		select
-		productcode, productname, standard, outline, userstatus, baseprice
+		productcode, productname, standard, outline, usestatus, baseprice
 		from product
 	</select>
 
 
 	<!-- 상품 선택하여 가져오기 -->
 	<select id="selectProduct" resultType="productVo"
-		parameterType="String">
+		parameterType="map">
 		select
-		productcode, productname, standard, outline, userstatus, baseprice
+		productcode, productname, standard, outline, usestatus, baseprice
 		from
-		product where productcode = #{productcode}
+		product where productcode = #{productCode}
 	</select>
 
 
 	<!-- 상품 삭제 -->
-	<delete id="deleteProduct" parameterType="String">
+	<delete id="deleteProduct" parameterType="map">
 		delete from product
 		where productcode = #{productcode}
 	</delete>

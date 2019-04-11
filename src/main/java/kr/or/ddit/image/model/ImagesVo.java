@@ -49,6 +49,13 @@ public class ImagesVo {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	public ImagesVo() {
+	}
+	public ImagesVo(String imageName, String imageRealpath, String imageRealname) {
+		this.imageName = imageName;
+		this.imageRealpath = imageRealpath;
+		this.imageRealname = imageRealname;
+	}
 	
 	
  

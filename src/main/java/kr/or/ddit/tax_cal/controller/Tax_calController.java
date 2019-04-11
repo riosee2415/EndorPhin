@@ -243,18 +243,29 @@ public class Tax_calController {
 	
 	
 	@RequestMapping("/updateSales_detail")
-	public String updateSales_detail(Sales_detailVo sales_detailVo) {
+	@ResponseBody
+	public String updateSales_detail(Sales_detailVo sales_detailVo, @RequestParam("sumPrice")String sumPrice) {
 		
-		logger.debug("salesDestailCode : {}", sales_detailVo.getSalesDetailCode());
-		logger.debug("salesDestailCode : {}", sales_detailVo.getSalesDetailCode());
-		logger.debug("salesDestailCode : {}", sales_detailVo.getSalesDetailCode());
-		logger.debug("salesDestailCode : {}", sales_detailVo.getSalesDetailCode());
-		logger.debug("salesDestailCode : {}", sales_detailVo.getSalesDetailCode());
-		logger.debug("salesDestailCode : {}", sales_detailVo.getSalesDetailCode());
-		logger.debug("salesDestailCode : {}", sales_detailVo.getSalesDetailCode());
+		sales_detailVo.setPrice(sales_detailVo.getPrice().replace(",", ""));
+		sales_detailService.updateSales_detail(sales_detailVo);
 		
 		
-//		sales_detailService.updateSales_detail(sales_detailVo);
+		
+		
+		//===================================================================
+		String updateSumValue = sumPrice.replace(",", "");
+		
+		int supplyValue = Integer.parseInt(updateSumValue);
+		supplyValue = (int) (supplyValue * 0.9);
+		int surtax = Integer.parseInt(updateSumValue) - supplyValue;
+		
+		Tax_calVo tax_calVo = new Tax_calVo();
+		tax_calVo.setSalesCode(sales_detailVo.getSalesCode());
+		tax_calVo.setnSumValue(updateSumValue);
+		tax_calVo.setnSupplyValue(supplyValue + "");
+		tax_calVo.setnSurtax(surtax + "");
+		
+		tax_calService.updateTax_cal(tax_calVo);
 		
 		return "update Data";
 	}

@@ -88,12 +88,20 @@
 			
 			
 			$(".sales_detailTr").each(function(){
-				var salaesDetailCode 	= $(this).data().salesdetailcode;
-				var status 				= $(this).data().status;
-				var establishCode		= $(this).data().establishcode;
-				var jukyo				= $(this).data().jukyo;
-				var price 				= $(this).data().price;
-				fn_updateAjax(salesCode, salaesDetailCode, status, establishCode, jukyo, price);
+				var salesDetailCode 	= $(this).data().salesdetailcode;
+				var status 				= $(this).children().eq(0).children().val();
+				var establishCode		= $(this).children().eq(1).children().val();
+				var jukyo				= $(this).children().eq(2).children().val();
+				var price 				= "";
+				
+				if(status == "차변"){
+					price = $(this).children().eq(3).children().val();
+				} else {
+					price = $(this).children().eq(4).children().val();
+				}
+				
+				console.log(salesDetailCode);
+				fn_updateAjax(salesCode, salesDetailCode, status, establishCode, jukyo, price);
 			
 			});
 			
@@ -168,17 +176,21 @@
 	
 	
 	/********************** 상세전표 수정 Ajax**********************/
-	function fn_updateAjax(salesCode, salaesDetailCode, status, establishCode, jukyo, price){
+	function fn_updateAjax(salesCode, salesDetailCode, status, establishCode, jukyo, price){
+		
+		var sumPrice = $("#leftSum").val();
+		
 		$.ajax({
 			url : "${pageContext.request.contextPath }/updateSales_detail",
 			data :	"salesCode=" + salesCode
-				+	"&salaesDetailCode=" + salaesDetailCode
+				+	"&salesDetailCode=" + salesDetailCode
 				+	"&status=" + status
 				+	"&establishCode=" + establishCode
 				+	"&jukyo=" + jukyo
-				+	"&price=" + price	,
+				+	"&price=" + price	
+				+	"&sumPrice=" + sumPrice,
 			success : function(data){
-				
+				location.reload();
 			}
 				
 		});

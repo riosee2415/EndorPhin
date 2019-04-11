@@ -52,4 +52,9 @@ public class Tax_calDao implements ITax_calDao{
 		return sqlSessionTemplate.selectOne("tax_cal.getTax_seqNextval");
 	}
 
+	@Override
+	public int updateTax_cal(Tax_calVo tax_calVo) {
+		return sqlSessionTemplate.update("tax_cal.updateTaX_cal", tax_calVo);
+	}
+
 }

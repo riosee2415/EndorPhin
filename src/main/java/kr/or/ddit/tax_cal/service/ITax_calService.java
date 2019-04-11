@@ -36,4 +36,14 @@ public interface ITax_calService {
 	* Method 설명 : 시퀀스 값 가져오기
 	*/
 	public String getTax_seqNextval();
+	
+	/**
+	* Method : updateTax_cal
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param tax_calVo
+	* @return
+	* Method 설명 : 전표내역 수정
+	*/
+	public int updateTax_cal(Tax_calVo tax_calVo);
 }

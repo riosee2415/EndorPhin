@@ -64,6 +64,15 @@
 	</insert>
 
 
+	<update id="updateTaX_cal" parameterType="tax_calVo">
+		UPDATE TAX_CAL
+		SET SUPPLYVALUE = #{nSupplyValue},
+			SURTAX = #{nSurtax},
+			SUMVALUE = #{nSumValue}
+		WHERE SALESCODE = #{salesCode}
+	
+	</update>
+
 
 </mapper>
 

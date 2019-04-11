@@ -38,4 +38,9 @@ public class Tax_calService implements ITax_calService{
 		return tax_calDao.getTax_seqNextval();
 	}
 
+	@Override
+	public int updateTax_cal(Tax_calVo tax_calVo) {
+		return tax_calDao.updateTax_cal(tax_calVo);
+	}
+
 }

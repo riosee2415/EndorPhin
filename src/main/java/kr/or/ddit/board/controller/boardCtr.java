@@ -1,5 +1,6 @@
 package kr.or.ddit.board.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.or.ddit.board.model.Board_detailVo;
 import kr.or.ddit.board.service.IAttach_boardService;
@@ -20,6 +22,7 @@ import kr.or.ddit.board.service.IBoard_TypeService;
 import kr.or.ddit.board.service.IBoard_detailService;
 import kr.or.ddit.board.service.ICommentsService;
 import kr.or.ddit.employee.model.EmployeeVo;
+import kr.or.ddit.slip.model.SlipVo;
 import kr.or.ddit.util.model.PageVo;
 
 @Controller
@@ -48,13 +51,19 @@ public class boardCtr {
 	* Method 설명 : 게시글 리스트 조회
 	 */
 	@RequestMapping(value = "/boardList")
-    public String boardList(Model model, PageVo pageVo) throws Exception {
+    public String boardList(Model model, PageVo pageVo,@RequestParam(defaultValue="title")String searchType, @RequestParam(defaultValue="")String keyword,@RequestParam(defaultValue="")String startDate, @RequestParam(defaultValue="")String endDate) throws Exception {
 //        List<Board_detailVo> listview = board_detailService.selectBoardList();
 //        
 //        model.addAttribute("listview", listview);
 //        model.addAttribute("boardTypeCode", param.getBoardTypeCode());
 //        return "board/boardListTest";
 		Map<String, Object> resultMap = board_detailService.selectPostList(pageVo);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		model.addAllAttributes(map);
 		model.addAllAttributes(resultMap);
 		
 		model.addAttribute("pageSize", pageVo.getPageSize());
@@ -165,12 +174,72 @@ public class boardCtr {
 	* Method 설명 : 게시글 삭제
 	 */
 	@RequestMapping(value = "/boardDelete")
-    public String boardDelete(String boardNo) throws Exception {
+    public String boardDelete(Model model,String boardNo,String boardTypeCode) throws Exception {
      
      board_detailService.deleteBoardOne(boardNo);
-     
+     model.addAttribute("boardTypeCode",boardTypeCode);
      return "redirect:/boardList";
 	}
 
-
+	/**
+	 * 
+	* Method : searchContents
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param model
+	* @param boardNo
+	* @param boardTypeCode
+	* @param pageVo
+	* @param startDate
+	* @param endDate
+	* @param contents
+	* @return
+	* @throws Exception
+	* Method 설명 : 검색
+	 */
+//	@RequestMapping(value = "/searchSave")
+//	public String searchContents(Model model, String boardNo, String boardTypeCode, PageVo pageVo,
+//			String startDate, String endDate, String contents) throws Exception {
+//		Map<String,Object> resultMap = board_detailService.selectBoardList(pageVo);
+//		
+//		List<Board_detailVo> contentsList = board_detailService.selectBoardcontens(startDate, endDate, contents);
+//		model.addAttribute("contentsList", contentsList);
+//		
+//		model.addAllAttributes(resultMap);
+//		model.addAttribute("pageSize", pageVo.getPageSize());
+//		model.addAttribute("page", pageVo.getPage());
+//		model.addAttribute("boardTypeCode", boardTypeCode);
+//		return "redirect:/boardList";
+//	}
+	
+//	@RequestMapping(value = "/searchSave")
+//	public String searchTitle(Model model, String boardNo, String boardTypeCode, PageVo pageVo,
+//			String startDate, String endDate,String title) throws Exception {
+//		Map<String,Object> resultMap = board_detailService.selectBoardList(pageVo);
+//		
+//		List<Board_detailVo> titleList = board_detailService.selectBoardTitle(startDate, endDate, title);
+//		model.addAttribute("titleList", titleList);
+//		
+//		model.addAllAttributes(resultMap);
+//		model.addAttribute("pageSize", pageVo.getPageSize());
+//		model.addAttribute("page", pageVo.getPage());
+//		model.addAttribute("boardTypeCode", boardTypeCode);
+//		return "redirect:/boardList";
+//	}
+	
+//	@RequestMapping(value = "/searchSave")
+//	public String searchUserId(Model model, String boardNo, String boardTypeCode, PageVo pageVo,
+//			String startDate, String endDate, String userId, String selbox) throws Exception {
+//		Map<String,Object> resultMap = board_detailService.selectBoardList(pageVo);
+//		
+//		List<Board_detailVo> userIdList = board_detailService.selectBoardUserId(startDate, endDate, userId);
+//		model.addAttribute("userIdList", userIdList);
+//		
+//		model.addAllAttributes(resultMap);
+//		model.addAttribute("pageSize", pageVo.getPageSize());
+//		model.addAttribute("page", pageVo.getPage());
+//		model.addAttribute("boardTypeCode", boardTypeCode);
+//		logger.debug("1238901231231231231--------{} {} {}",startDate,endDate, userId, selbox);
+//		return "redirect:/boardList";
+//	}
 }

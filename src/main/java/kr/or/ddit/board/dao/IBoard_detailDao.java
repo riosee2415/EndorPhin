@@ -3,6 +3,7 @@ package kr.or.ddit.board.dao;
 import java.util.List;
 
 import kr.or.ddit.board.model.Board_detailVo;
+import kr.or.ddit.slip.model.SlipVo;
 import kr.or.ddit.util.model.PageVo;
 
 public interface IBoard_detailDao {
@@ -149,5 +150,22 @@ public interface IBoard_detailDao {
 	* Method 설명 : 게시판 별 게시글 전체 갯수
 	 */
 	Integer selectBoardCount(String boardTypeCode);
+	
+	/**
+	 * 
+	* Method : getBetweenSlip
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param pre_date
+	* @param post_date
+	* @return
+	* Method 설명 : 검색
+	 */
+	public List<Board_detailVo> selectBoardTitle(String startDate, String endDate, String title);
+	public List<Board_detailVo> selectBoardUserId(String startDate, String endDate, String userId);
+	public List<Board_detailVo> selectBoardcontens(String startDate, String endDate, String contents);
+	
+	public List<Board_detailVo> listAll(String searchType, String keyword, String startDate, String endDate);
+	public int countAricle(String searchType, String keyword, String startDate, String endDate);
 	
 }

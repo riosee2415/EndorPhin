@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!--[등록화면 ]
+1. 자산코드, 취득일 , 상각방법, 정률법 ,정액법을 등록한다.
+2. 정류법과 정액법선택을 저장하고 화면을 분류함.-->
 <table>
 	<thead >
 		<tr>

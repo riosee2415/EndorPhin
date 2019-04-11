@@ -13,8 +13,8 @@
 			</thead>
 				<tr>
 					<td> 고정자산등록코드
-					<input name="assetCodeS" id="assetCodeS" type="text" /> &nbsp
-					<input type="button" id="seachBtn" value="검색" /></td>
+					<input  name="assetCodeS" id="assetCodeS"  onkeydown="Enter_Check();" /> &nbsp
+					<input type="button" id="seachBtn" value="검색" class="bttn-fill bttn-md bttn-warning" /></td>
 				</tr>
 		</table>
 		<table class="table table-hover">
@@ -66,7 +66,6 @@
 		<button type="button" class="bttn-jelly bttn-warning"  onclick="fn_detail();">등록</button>
 	</div>
 </div>
-	<!--------------(삭제,등록) 버튼 ------------------->
 
 <!-----------------계정과목 검색 모달창 ---------------->	
 <div class="modal fade" id="my80sizeModal2" tabindex="-1" role="dialog" aria-labelledby="my100sizeModalLabel">
@@ -230,15 +229,12 @@
 	});	
 	
 	function Enter_Check(){
-	        // 엔터키의 코드는 13입니다.
-	    if(event.keyCode == 13){
-	    	$("#searchE_Btn").click();  // 실행할 이벤트
-	    }
-	    if(event.keyCode == 13){
-	    	$("#searchC_Btn").click();  // 실행할 이벤트
-	    }
-	    if(event.keyCode == 13){
-	    	$("#searchS_Btn").click();  // 실행할 이벤트
+	       
+	    if(event.keyCode == 13){ // 엔터키의 코드는 13입니다.
+	    	$("#searchE_Btn").click();  
+	    	$("#searchC_Btn").click();  
+	    	$("#searchS_Btn").click();  
+	    	$("#seachBtn").click();  
 	    }
 	}
     /*계정과목 검색  */
@@ -319,7 +315,7 @@
 		} 
 	}
 	
-
+	/* 상세보기  */
 	$(".detailView").on("click", function(){
 		
 		if (insertFlag === 0) {
@@ -341,7 +337,7 @@
 			});
 		}
 });
-	
+	/*코드 검색  */
 	$("#seachBtn").on("click",function(){
 		$.ajax({
 			url : "${pageContext.request.contextPath}/assetSearch",
@@ -354,6 +350,7 @@
 		});
 	});
 	
+
 
 	</script>
 	

@@ -163,4 +163,14 @@ public class AssetVo {
 		this.depreciationRate = depreciationRate;
 	}
 
+	@Override
+	public String toString() {
+		return "AssetVo [assetCode=" + assetCode + ", assetName=" + assetName + ", acquisitionDate=" + acquisitionDate
+				+ ", accountName=" + accountName + ", clientName=" + clientName + ", sanggakWay=" + sanggakWay
+				+ ", acquisitionPrice=" + acquisitionPrice + ", slipNumber=" + slipNumber + ", residualvalue="
+				+ residualvalue + ", jukyo=" + jukyo + ", companyCode=" + companyCode + ", sanggakCode=" + sanggakCode
+				+ ", depreciation=" + depreciation + ", purchaseCode=" + purchaseCode + ", accumulated=" + accumulated
+				+ ", serviceLife=" + serviceLife + ", depreciationRate=" + depreciationRate + "]";
+	}
+	
 }

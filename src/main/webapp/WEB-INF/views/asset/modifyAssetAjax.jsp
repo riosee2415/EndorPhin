@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!--[수정화면 /상세화면]
+1. 자산코드, 취득일 , 상각방법, 정률법 ,정액법을 수정한다
+2. 정류법과 정액법선택을 저장하고 화면을 분류함.-->
 <table>
 	<thead >
 		<tr>
@@ -49,6 +52,7 @@
 <br>
 <div id="serviceLife_div1"></div>
 
+<!--내용연수 모달창  -->
 <div class="modal modal-center fade" id="my80sizeModal6" tabindex="1" role="dialog" aria-labelledby="my80sizeCenterModalLabel" >
 		<div class="modal-dialog modal-80size modal-center" role="document" >
 			<div class="modal-content modal-80size">

@@ -17,7 +17,9 @@ public class Board_detailVo {	//게시글
 	String postDate;				//작성일시
 	String boardTypeCode;		//게시판 분류 코드
 	String userId;				//작성자
-    private List<MultipartFile> uploadfile;
+	
+	String startDate;
+	String endDate;
 
 	
 	public String getBoardNo() {
@@ -56,16 +58,23 @@ public class Board_detailVo {	//게시글
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public List<MultipartFile> getUploadfile() {
-		return uploadfile;
+	public String getStartDate() {
+		return startDate;
 	}
-	public void setUploadfile(List<MultipartFile> uploadfile) {
-		this.uploadfile = uploadfile;
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+	public String getEndDate() {
+		return endDate;
+	}
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 	@Override
 	public String toString() {
 		return "Board_detailVo [boardNo=" + boardNo + ", title=" + title + ", contents=" + contents + ", postDate="
-				+ postDate + ", boardTypeCode=" + boardTypeCode + ", userId=" + userId + "]";
+				+ postDate + ", boardTypeCode=" + boardTypeCode + ", userId=" + userId + ", startDate=" + startDate
+				+ ", endDate=" + endDate + "]";
 	}
 	
 	

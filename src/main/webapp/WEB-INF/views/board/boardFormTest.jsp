@@ -9,13 +9,13 @@
 <body>
 	<c:set var="boardNo" value="${boardInfo.boardNo}"/>
     <form name="form" action="boardSave" method="post">
-        <table border="1" style="width:600px">
+        <table class="table table-striped">
         <c:choose>
          <c:when test = "${boardNo eq null}">
-            <caption>게시글 등록</caption>
+            <h2><strong><i class="fas fa-pen-alt"></i>게시글 등록</strong></h2>
          </c:when>
           <c:otherwise>
-            <caption>게시글 수정</caption>
+            <h2><strong><i class="fas fa-pen-alt"></i>게시글 수정</strong></h2>
          </c:otherwise>
         </c:choose>
             <colgroup>
@@ -23,21 +23,22 @@
                 <col width='*%' />
             </colgroup>
             <tbody>
-                <tr>
-                    <td>작성자</td> 
-                    <td><input type="text" id="userId" name="userId" size="20" maxlength="20" value="${boardInfo.userId}"></td> 
-                </tr>
+<!--                 <tr> -->
+<!--                     <td>작성자</td>  -->
+<%--                     <td><input type="text" id="userId" name="userId" size="20" maxlength="20" value="${boardInfo.userId}"></td>  --%>
+<!--                 </tr> -->
                 <tr>
                     <td>제목</td> 
                     <td><input id="title" type="text" name="title" size="70" maxlength="250" value="${boardInfo.title}"></td> 
                 </tr>
                 <tr>
                     <td>내용</td>
-                    <td><textarea id="contents" name="contents" rows="5" cols="60">${boardInfo.contents}</textarea></td> 
+                    <td><textarea id="contents" name="contents" rows="10" cols="80">${boardInfo.contents}</textarea></td> 
                 </tr>
             </tbody>
         </table>    
-        <a href="#" onclick="fn_formSubmit()">저장</a>
+        <br>
+        <a href="#" onclick="fn_formSubmit()"><button class="bttn-jelly bttn-warning">저장</button></a>
         <input type="hidden" name="boardTypeCode" value="${boardTypeCode}">
         <input type="hidden" name="boardNo" value="${boardInfo.boardNo}"> 
     </form>    

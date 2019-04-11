@@ -138,7 +138,7 @@
 				    		boardTypeCode, 
 				    		userId
 				       from board_detail
-				      where boardTypeCode = #{boardTypeCode}
+<!-- 				      where boardTypeCode = #{boardTypeCode} -->
 				      order by boardNo desc) a ) a
         where rn between (#{page}-1) * #{pageSize}+1 and #{page}*#{pageSize}
     </select>
@@ -175,7 +175,51 @@
           from board_detail
          where boardTypeCode = #{boardTypeCode}
 	</select>
-
+	
+	<!-- 제목으로 조회 -->
+	<select id="selectBoardTitle" resultType="board_detailVo" parameterType="Map">
+        select boardNo, title, contents, to_char(postDate,'yyyy-MM-dd') postDate, boardTypeCode, userId 
+        from board_detail 
+		where postDate between #{startDate}
+		and #{endDate}
+        and title like '%' || #{title} || '%'
+    </select>
+    
+    <!-- 내용으로 조회 -->
+    <select id="selectBoardContents" resultType="board_detailVo" parameterType="Map">
+        select boardNo, title, contents, to_char(postDate,'yyyy-MM-dd') postDate, boardTypeCode, userId 
+        from board_detail 
+		where postDate between #{startDate}
+		and #{endDate}
+        and contents like '%' || #{contents} || '%'
+    </select>
+    
+    <!-- 작성자로 조회 -->
+    <select id="selectBoardUserId" resultType="board_detailVo" parameterType="Map">
+        select boardNo, title, contents, to_char(postDate,'yyyy-MM-dd') postDate, boardTypeCode, userId 
+        from board_detail 
+		where postDate between #{startDate}
+		and #{endDate}
+        and userId like '%' || #{userId} || '%'
+    </select>
+    
+    <select id="listAll" resultType="board_detailVo">
+        select boardNo, title, contents, to_char(postDate,'yyyy-MM-dd') postDate, boardTypeCode, userId 
+        from board_detail 
+		<include refid="search"></include>
+    </select>
+    
+     <select id="countArticle" resultType="Integer">
+        select count(*)
+        from board_detail 
+		<include refid="search"></include>
+    </select>
+    
+    <sql id="search">
+    	where postDate between #{startDate}
+		and #{endDate}
+    	and #{searchType} like '%' || #{keyword} || '%'
+    </sql>
 </mapper>
 
 

@@ -255,4 +255,50 @@ public class Board_detailService implements IBoard_detailService{
 		return selectBoardCount;
 	}
 
+	/**
+	 * 
+	* Method : selectBoardTitle
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param startDate
+	* @param endDate
+	* @param title
+	* @return
+	* Method 설명 : 검색
+	 */
+	@Override
+	public List<Board_detailVo> selectBoardTitle(String startDate, String endDate, String title) {
+		return board_detailDao.selectBoardTitle(startDate, endDate, title);
+	}
+
+	@Override
+	public List<Board_detailVo> selectBoardUserId(String startDate, String endDate, String userId) {
+		return board_detailDao.selectBoardUserId(startDate, endDate, userId);
+	}
+
+	@Override
+	public List<Board_detailVo> selectBoardcontens(String startDate, String endDate, String contents) {
+		return board_detailDao.selectBoardcontens(startDate, endDate, contents);
+	}
+
+	/**
+	 * 
+	* Method : listAll
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param searchType
+	* @param keyword
+	* @return
+	* Method 설명 : 게시글 전체 목록 검색
+	 */
+	@Override
+	public List<Board_detailVo> listAll(String searchType, String keyword, String startDate, String endDate) {
+		return board_detailDao.listAll(searchType, keyword, startDate, endDate);
+	}
+
+	@Override
+	public int countAricle(String searchType, String keyword, String startDate, String endDate) {
+		return board_detailDao.countAricle(searchType, keyword, startDate, endDate);
+	}
+
 }

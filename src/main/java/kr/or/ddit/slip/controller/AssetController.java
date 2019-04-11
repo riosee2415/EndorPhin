@@ -22,6 +22,7 @@ import kr.or.ddit.order.model.ClientVo;
 import kr.or.ddit.order.service.ICilentService;
 import kr.or.ddit.slip.model.AssetVo;
 import kr.or.ddit.slip.service.IAssetService;
+import kr.or.ddit.slip.service.ISlipService;
 import kr.or.ddit.tax_cal.model.EstablishVo;
 import kr.or.ddit.tax_cal.service.IEstablishService;
 
@@ -39,6 +40,9 @@ public class AssetController {
 	@Resource(name="clientService")
 	private ICilentService clientService;
 	
+	@Resource(name="slipService")
+	private ISlipService slipService;
+	
 	//리스트 출력
 	@RequestMapping("/purchaseAsset")
 	public String purchaseAsset(Model model){
@@ -54,9 +58,56 @@ public class AssetController {
 		
 		return "purchaseAsset";
 	}
+	
+	//등록
+	@RequestMapping("/insertStatusFrm")
+	public String insertStatusAsset(AssetVo assetVo, Model model, String assetCode,String acquisitionDate
+																,String sanggakWay,String acquisitionPrice
+																,String purchaseCode){
+															
+		
+		Date date = new Date();									
+		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
+		
+		try {
+			date= sdf.parse(acquisitionDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		assetVo.setAssetCode(assetCode);
+		assetVo.setAcquisitionDate(date);
+		assetVo.setPurchaseCode(purchaseCode);
+		assetVo.setSanggakWay(sanggakWay);
+		assetVo.setAcquisitionPrice(acquisitionPrice);
+		
+		int insertUpd = assetService.insertStatusAsset(assetVo);
+		
+		String data = assetVo.getSanggakWay();
+		
+		int sanggakWay11 = Integer.parseInt(data);
+		
+		model.addAttribute("acquisitionPrice",acquisitionPrice);
+		model.addAttribute("date",date);
+		model.addAttribute("assetCode",assetCode);
+		model.addAttribute("purchaseCode",purchaseCode);
+		model.addAttribute("sanggakWay",sanggakWay);
+		if(insertUpd > 0) {
+			
+			if( sanggakWay11 > 0){
+				return "asset/straightAjax";
+			}else {
+				model.addAttribute("declining", SalesCodeConstant.declining);
+				return "asset/decliningAjax";
+			}		
+		}else {
+			model.addAttribute("assetCode",assetCode);
+			return "asset/insertAssetAjax";
+		}
+	}
+	
 	//모든 데이터 등록
 	@RequestMapping("/insertFrm")
-	public String insertFrm(Model model, AssetVo assetVo, String assetCode, String assetName,String date,
+	public String insertFrm(Model model, AssetVo assetVo,String assetCode, String assetName,String date,
 								String sanggakWay,String accountName,String clientName,String acquisitionPrice,
 								String residualvalue,String jukyo,String sanggakCode,
 								String depreciation,String accumulated,String purchaseCode,
@@ -95,52 +146,7 @@ public class AssetController {
 		}
 	}
 	 
-	//등록
-	@RequestMapping("/insertStatusFrm")
-	public String insertStatusAsset(AssetVo assetVo, Model model, String assetCode,String acquisitionDate
-																,String sanggakWay,String acquisitionPrice
-																,String purchaseCode){
-															
-		Date date = new Date();									
-		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
-		
-		try {
-			date= sdf.parse(acquisitionDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
-		assetVo.setAssetCode(assetCode);
-		assetVo.setAcquisitionDate(date);
-		assetVo.setPurchaseCode(purchaseCode);
-		assetVo.setSanggakWay(sanggakWay);
-		assetVo.setAcquisitionPrice(acquisitionPrice);
-		
-		int insertUpd = assetService.insertStatusAsset(assetVo);
-		
-		String data = assetVo.getSanggakWay();
-		
-		int sanggakWay11 = Integer.parseInt(data);
-		
-		model.addAttribute("acquisitionPrice",acquisitionPrice);
-		model.addAttribute("date",date);
-		model.addAttribute("assetCode",assetCode);
-		model.addAttribute("purchaseCode",purchaseCode);
-		model.addAttribute("sanggakWay",sanggakWay);
-		
-		if(insertUpd > 0) {
-			
-			if( sanggakWay11 > 0){
-				return "asset/straightAjax";
-			}else {
-				model.addAttribute("declining", SalesCodeConstant.declining);
-				return "asset/decliningAjax";
-			}		
-		}else {
-			model.addAttribute("assetCode",assetCode);
-			return "asset/insertAssetAjax";
-		}
-	}
+
 	
 	//부분 수정
 	@RequestMapping("/updateStatusAsset")
@@ -298,7 +304,6 @@ public class AssetController {
 	public String sellAsset(Model model){
 
 		return "sellAsset";
-		
 	}
 	
 	

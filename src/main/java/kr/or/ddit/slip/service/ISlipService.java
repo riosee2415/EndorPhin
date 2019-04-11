@@ -89,4 +89,13 @@ public interface ISlipService {
 	*/
 	public int finalSaveSlip(SlipVo slipVo);
 	
+	/**
+	* Method : getSlipMax
+	* 작성자 : PC05
+	* 변경이력 :
+	* @return
+	* Method 설명 : asset테이블에 마지막 slipnumber넘겨주기
+	*/
+	int getSlipMax();
+	
 }

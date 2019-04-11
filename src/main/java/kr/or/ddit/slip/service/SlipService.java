@@ -97,4 +97,10 @@ public class SlipService implements ISlipService {
 
 	}
 
+	@Override
+	public int getSlipMax() {
+		return slipDao.getSlipMax();
+	}
+
+
 }

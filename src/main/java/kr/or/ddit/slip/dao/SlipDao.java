@@ -98,4 +98,10 @@ public class SlipDao implements ISlipDao {
 		return sqlSessionTemplate.update("slip.finalSaveSlip", slipVo);
 	}
 
+	@Override
+	public int getSlipMax() {
+		return sqlSessionTemplate.selectOne("slip.getSlipMax");
+	}
+
+
 }

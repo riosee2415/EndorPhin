@@ -8,6 +8,7 @@
 		<td>${vo.assetName }</td>  
 		<td>${vo.assetCode }</td>	
 		<td><fmt:formatDate value="${vo.acquisitionDate  }" pattern="yyyy-MM-dd"/></td>
+																
 					<td>${vo.acquisitionPrice }</td>
 					<td>${vo.depreciation }</td>	
 					<td>${vo.accumulated }</td>									

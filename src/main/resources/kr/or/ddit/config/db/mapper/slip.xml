@@ -11,11 +11,11 @@
 			from	dual
 		</selectKey>
 		insert into slip
-		(slipnumber, total, slipdate, departmentname, jukyo, status)
+		(slipnumber, total, slipDate, departmentname, jukyo, status)
 		values
 		(#{slipNumber}
 		,#{total}
-		,sysdate
+		,#{slipDate}
 		,nvl(#{departmentName, jdbcType=VARCHAR},'미등록')
 		,nvl(#{departmentName, jdbcType=VARCHAR},'미등록')
 		,nvl(#{status,jdbcType=VARCHAR},'0'))
@@ -59,6 +59,10 @@
  		  from slip
 	</select>
 	
+	<select id="getSlipMax" resultType="Integer">
+		select max(slipNumber)
+		   from slip
+	</select>	
 	
 	<!-- 페이징처리를 위한 조회 -->
 	<select id="selectSlipPagingList" resultType="slipVo" parameterType="pageVo">

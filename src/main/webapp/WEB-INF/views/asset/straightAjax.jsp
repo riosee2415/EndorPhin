@@ -215,9 +215,9 @@
                 } else {
                     alert("작업을 계속진행합니다.");
                 }
-
             }
-            return false;
+                return false;
+          
         } 
 
 	}); 

@@ -25,33 +25,4 @@ public class ImagesController {
 	@Resource(name="employeeService")
 	IEmployeeService employeeService;
 	
-	@RequestMapping(path="/insOrUpdImages")
-	public String insertImages(String imageCode,String userId,MultipartRequest multparts) 
-								throws IllegalStateException, IOException{
-		if(multparts != null){
-			MultipartFile file = multparts.getFile("fileName");
-			String realPath ="c:\\picture\\"; // 경로설정
-			String realName = UUID.randomUUID().toString();
-			
-			ImagesVo imagesVo = new ImagesVo(file.getOriginalFilename()
-					,realPath,realName);
-			
-			if(userId!=null&&!(userId.equals(""))){
-				imagesVo.setUserId(userId);
-			}
-			
-			if (file.getSize() > 0) {
-				int extendIndex = file.getOriginalFilename().lastIndexOf(".");
-				file.transferTo(new File(realPath+realName+file.getOriginalFilename().substring(extendIndex)));
-				if(imageCode==null)
-					imagesService.insertImages(imagesVo);
-				else if(imageCode!=null){
-					imagesVo.setImageCode(imageCode);
-					imagesService.updateImages(imagesVo);
-				}
-				return imagesVo.getImageCode(); // 이미지 번호 반환
-			}
-		}	
-		return null;
-	}
 }

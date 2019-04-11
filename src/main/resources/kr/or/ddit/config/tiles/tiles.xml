@@ -151,7 +151,6 @@
         </definition>
         
         
-        
          <definition name="AttitudeListTiles" extends="layout"> <!-- 근태 항목 출력 -->
            <put-attribute name="content" value="/WEB-INF/views/attitude/attitudeList.jsp"/>
         </definition>
@@ -161,19 +160,11 @@
         </definition>
          
          <definition name="sellAsset" extends="layout"><!--고정자산 매각-->
-           <put-attribute name="content" value="/WEB-INF/views/asset/sellAsset.jsp"/>
-        </definition>
-        
-         <definition name="useAsset" extends="layout"><!--감가상각비 입력-->
-           <put-attribute name="content" value="/WEB-INF/views/depreciation/depreciation.jsp"/>
-        </definition>
-         
-         <definition name="sellAsset" extends="layout"><!--고정자산 매각-->
         	<put-attribute name="content" value="/WEB-INF/views/asset/sellAsset.jsp"/>
         </definition>
         
-         <definition name="useAsset" extends="layout"><!--감가상각비 입력-->
-        	<put-attribute name="content" value="/WEB-INF/views/asset_use/depreciation.jsp"/>
+         <definition name="assetUsed" extends="layout"><!--감가상각비 입력-->
+        	<put-attribute name="content" value="/WEB-INF/views/assetUsed/assetUsed.jsp"/>
         </definition>
         
          <definition name="boardType" extends="layout">

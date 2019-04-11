@@ -109,7 +109,7 @@
 		<!--코드로 검색  -->
 	<select id="searchAsset" resultType="assetVo" parameterType="map">
 		select
-		 ASSETCODE, 
+			ASSETCODE, 
 	        ASSETNAME, 
 	        acquisitionDate, 
 	        ACCOUNTNAME, 
@@ -128,6 +128,31 @@
 	        depreciationRate
 		from asset
 		where assetCode like '%' || #{assetCode} || '%'
+	</select>
+	
+	<select id="searchDateAsset" resultType="assetVo" parameterType="map">
+	   select ASSETCODE, 
+	        ASSETNAME, 
+	        acquisitionDate, 
+	        ACCOUNTNAME, 
+	        CLIENTNAME, 
+	        SANGGAKWAY, 
+	        ACQUISITIONPRICE, 
+	        SLIPNUMBER, 
+	        RESIDUALVALUE, 
+	        JUKYO, 
+	        COMPANYCODE,
+	        sanggakCode,
+	        depreciation,
+	        purchaseCode,
+	        accumulated,
+	        serviceLife,
+	        depreciationRate as all_slip
+		from asset 
+		where to_date(acquisitionDate,'yy/mm/dd') between to_date(#{acquisitionDate},'yy')
+		and to_date(sysdate,'yy/mm/dd')
+        and accountName like '%' || #{accountName} || '%'
+	 		
 	</select>
 </mapper>
 

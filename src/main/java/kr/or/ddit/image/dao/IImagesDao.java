@@ -9,4 +9,5 @@ public interface IImagesDao {
 	List<ImagesVo> getAllImages();
 	ImagesVo selectImages(String imageCode);
 	int deleteImages(String imageCode);
+	int updateImages(ImagesVo imagesVo);
 }

@@ -6,7 +6,7 @@
 
 <!-- 이미지 입력 -->
 	<insert id="insertImages" parameterType="imagesVo">
-		<selectKey keyProperty="imagecode" resultType="String" order="BEFORE">
+		<selectKey keyProperty="imageCode" resultType="String" order="BEFORE">
 		  	select 
 		  		IMAGES_SEQ.NEXTVAL
 		  	from 
@@ -15,7 +15,7 @@
 		insert into images
 		(imagecode, imagename, imagerealpath, imagerealname, usename, userid)
 		values
-		('I'||#{imagecode}
+		(#{imageCode}
 		,#{imageName}
 		,#{imageRealpath}
 		,#{imageRealname}
@@ -48,6 +48,13 @@
 		where imagecode = #{imageCode}
 	</delete>
 	
+	<update id="updateImages" parameterType="imagesVo">
+		update images
+		set		imageName = nvl(#{imageName, jdbcType=VARCHAR},imagename)
+				,imagerealpath = nvl(#{imageRealpath, jdbcType=VARCHAR},imagerealpath)
+				,imagerealname = nvl(#{imageRealname, jdbcType=VARCHAR},imagerealname)
+		where	imagecode = #{imageCode}
+	</update>
 	
 	
 </mapper>

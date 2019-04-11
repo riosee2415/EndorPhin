@@ -35,4 +35,9 @@ public class ImagesDao implements IImagesDao{
 		return sqlSessionTemplate.delete("images.deleteImages",imageCode);
 	}
 
+	@Override
+	public int updateImages(ImagesVo imagesVo) {
+		return sqlSessionTemplate.insert("images.updateImages",imagesVo);
+	}
+
 }

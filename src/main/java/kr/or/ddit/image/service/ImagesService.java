@@ -35,4 +35,9 @@ public class ImagesService implements IImagesService{
 		return imagesDao.deleteImages(imageCode);
 	}
 
+	@Override
+	public int updateImages(ImagesVo imagesVo) {
+		return imagesDao.updateImages(imagesVo);
+	}
+
 }

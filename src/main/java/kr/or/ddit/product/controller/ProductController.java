@@ -66,12 +66,12 @@ public class ProductController {
 	
 	@RequestMapping(path="/insOrUpdProduct",method=RequestMethod.POST)
 	public String insertProduct(ProductVo productVo,MultipartRequest multparts) throws IllegalStateException, IOException{
-		logger.debug("확인:{}",productVo);
+		logger.debug("확인:{}",productVo.getProductCode());
 		if(!(multparts.getFile("fileName").isEmpty())){
 			String updateOrInsertImages = imagesService.updateOrInsertImages(new ImagesVo(), multparts);
 			productVo.setImageCode(updateOrInsertImages);
 		}
-		if(productVo.getProductCode()==null)
+		if(productVo.getProductCode().equals(""))
 			productService.insertProduct(productVo);
 		else
 			productService.updateProduct(productVo);

@@ -32,7 +32,7 @@
 				</tr>
 			</table>
 		</form>
-		<form action="/product/deleteProduct" id="deleteFrm">
+		<form action="/product/deleteProduct" id="deleteFrm" method="post">
 			<input type="hidden" name="deprostatus" value="2" />
 			<div class="table-responsive">
 				<table class="table table-hover">
@@ -82,17 +82,17 @@
 			<table id="dialogTable">
 				<tr>
 					<td>
-						<label for="InputEmail">상품명</label>
-						<input type="text" id="dialog_ProductName" name="productName" class="form-control"
+						<label for="InputEmail">상품명(*)</label>
+						<input type="text" id="dialog_ProductName" name="productName" class="form-control needs"
 							placeholder="공제명을 입력해주세요">
 					</td>
 					<td>
-						<label for="inputPassword">규격명</label>
-						<input type="text" class="form-control" name="standard"
+						<label for="inputPassword">규격명(*)</label>
+						<input type="text" class="form-control needs" name="standard"
 							id="dialog_standard" /> 
 					</td>
-					<td><label for="inputPassword">기본 가격</label>
-						<input type="text" class="form-control" name="basePrice"
+					<td><label for="inputPassword">기본 가격(*)</label>
+						<input type="text" class="form-control needs" name="basePrice"
 							id="dialog_basePrice" /> </td>
 					<td rowspan="2">
 						<input id="modalFileInput" type="file" class="form-control" name="fileName">
@@ -113,9 +113,9 @@
 				</tr>
 			</table>
 		
-		<button id="dialog_updBtn" class="btn btn-default dialog__action modalUpd" >수정</button>
+		<input type="button" id="dialog_updBtn" class="btn btn-default modalUpd" value="수정" />
 		<button id="dialog_delBtn" class="btn btn-default dialog__action modalUpd">삭제</button>
-		<button id="dialog_insBtn" class="btn btn-default dialog__action modalIns">등록</button>
+		<input type="button" id="dialog_insBtn" class="btn btn-default modalIns" value="등록" />
 	</div>
 </form>
 
@@ -128,7 +128,20 @@
 	})
 	$(document).ready(function() {
 		dialog();
-		$("#dialog_insBtn,#dialog_updBtn").click(function(){$("#dialogFrm").attr('action','/product/insOrUpdProduct');});
+		$("#dialog_insBtn,#dialog_updBtn").click(function(){
+			var check = true;
+			$("#dialogFrm").attr('action','/product/insOrUpdProduct');
+			$('.needs').each(function(){
+				if($(this).val()==''){
+					alert("필수항목을 입력하세요.");
+					check=false;
+					return false;
+				}
+			});
+			if(check){
+				$("#dialogFrm").submit();
+			}
+		});
 		$("#dialog_delBtn").click(function(){$("#dialogFrm").attr('action','/product/deleteProduct');});
 	});
 	
@@ -142,6 +155,8 @@ function dialog() {
 
 		// Open the dialog
 		productDetail.on('click', function(e) {
+			$("#dialog_productCode").val('');
+			$("#modalImg").attr('src','');
 			dialogBox.toggleClass('dialog--active');
 			if($(this).text()!='신규등록'){
 				$(".modalIns").hide();

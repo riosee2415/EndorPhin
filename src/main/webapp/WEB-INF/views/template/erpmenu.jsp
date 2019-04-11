@@ -14,7 +14,7 @@
 		
 		<div style=" float: left; width: 60%;">
 				<button onchange="Lmenu()" type="button" id="sidebarCollapse" class="btn btn-link">
-				<h4><i class="fas fa-align-left"></i><br><span id="Lmenu">메뉴접기</span></h4>
+				<h4><i class="fas fa-align-left"></i><br><span id="Lmenu">메뉴펼치기</span></h4>
 				</button>
 			</div>
 		
@@ -132,8 +132,6 @@
 
 	
 $("#Lmenu").click(function() {
-	console.log("클릭");
-
 	if($('#Lmenu').text()==("메뉴접기")){
 		
 		$('#Lmenu').text("메뉴펼치기");

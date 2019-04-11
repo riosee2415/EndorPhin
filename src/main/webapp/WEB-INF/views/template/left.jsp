@@ -48,7 +48,7 @@
                                   
 <div class="wrapper">
     <!-- Sidebar  -->
-    <nav id="sidebar">
+    <nav id="sidebar" class="active">
         <div class="sidebar-header">
             <h3>공 사 중</h3>
         </div>

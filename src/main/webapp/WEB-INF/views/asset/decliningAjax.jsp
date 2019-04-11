@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-정률법
+<!--정률법  날짜, 취득원가를 받아서 감가상각비를 계산함-->
 
 <table class="table table-sm">
 	<thead class="thead">
 		<tr>
-			<td colspan="5" width="80%">| 고정자산등록   *F5사용불가</td>
+			<td colspan="5" width="80%">| 고정자산등록   </td>
 			<td></td>
 		</tr>
 	</thead>
@@ -162,8 +162,8 @@
 		
 		var acquisitionPrice  = $("#acquisitionPrice").val();
 		var cal 			  = $("#depreciationRate").val();
-		var accumulated 	  = acquisitionPrice*cal /* 감가상각누계액 */
-		var depreciation 	  = (acquisitionPrice-accumulated)*cal; /*정률법 = 감가상각비 계산 (취득원가-감가상각누계액) x 상각률 */
+		var accumulated 	  = 0; /* 감가상각누계액 */
+		var depreciation 	  = (acquisitionPrice-accumulated)*cal; /*정률법/// 감가상각비 = (취득원가-감가상각누계액) x 상각률 */
 		var depre			  = parseInt(depreciation);
 		var accumulated_parse = parseInt(accumulated);
 		
@@ -226,6 +226,7 @@
 		});
 	}
 	
+ 	
   	$(document).keydown(function (e) {
 	     
         if (e.which === 116) {

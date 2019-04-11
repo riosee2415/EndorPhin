@@ -21,4 +21,6 @@ public interface IAssetService {
 	int deleteAsset(String assetCode);
 	
 	List<AssetVo> searchAsset (String assetCode );
+	
+	List<AssetVo> searchDateAsset(String accountName, String acquisitionDate);
 }

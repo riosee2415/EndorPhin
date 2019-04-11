@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- 정액법  
+
+<!--정액법  날짜, 취득원가를 받아서 감가상각비를 계산함-->
 
 <input type="hidden" id="accumulated" name="accumulated" value="">
 
 <table class="table table-sm">
 	<thead class="thead">
 		<tr>
-			<td colspan="5" width="80%">| 고정자산등록    </td>
+			<td colspan="5" width="80%">| 고정자산등록   </td>
 			<td></td>
 		</tr>
 	</thead>
@@ -57,8 +58,8 @@
 			<td><input type="text" id="jukyo"></td> 
 		</tr>
 		<tr>
-			<td><button type="button" class="btn btn-primary" onclick="delete_fn();">취소 </button>
-			<button type="button" class="btn btn-primary" onclick="insertBtn_fn();">등록 </button></td>
+			<td><button type="button" class="btn btn-primary" onclick="deleteBtn();">취소 </button>
+			<button type="button" class="btn btn-primary" onclick="insertBtn();">등록 </button></td>
 			
 		</tr>
     </table>
@@ -152,8 +153,9 @@
 	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
  }
     
-	function insertBtn_fn(){
-		
+    
+	function insertBtn(){
+		alert("dsfdsf");
 		if($("#assetName").val().trim() == "" || $("#accountName").val().trim()==""
 			|| $("#clientName").val().trim() == "" || $("#sanggakCode").val().trim()==""
 			|| $("#depreciation").val().trim() == "" || $("#residualvalue").val().trim()==""){
@@ -181,7 +183,7 @@
 		});
 	}
 	
-	function delete_fn(){
+	function deleteBtn(){
  	$.ajax({
 		url 	: "${pageContext.request.contextPath }/deleteAsset",
 		data 	: "assetCode="+$("#assetCode").val(),

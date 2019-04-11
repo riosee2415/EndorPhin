@@ -21,30 +21,31 @@ public class ImagesDaoTest extends LogicConfig{
 
 	private Logger logger = LoggerFactory.getLogger(ImagesDaoTest.class);
 	
-	@Resource(name="imagesService")
-	IImagesService imagesService;
+
+	@Resource(name="imagesDao")
+	IImagesDao imagesDao;
 	
 	@Test
 	public void getAllImagesTest(){
-		List<ImagesVo> allImages = imagesService.getAllImages();
+		List<ImagesVo> allImages = imagesDao.getAllImages();
 		logger.debug("asdfljnsadf:{}",allImages.size());
 	}
 	
 	@Test
 	public void insertImagesTest() {
 		ImagesVo imagesVo= new ImagesVo("1","c:/","haha.png");
-		int insertPayment = imagesService.insertImages(imagesVo);
+		int insertPayment = imagesDao.insertImages(imagesVo);
 		logger.debug("확인 : {}",imagesVo.getImageCode());
 		assertEquals(1, insertPayment);
 	}
 	@Test
 	public void selectImagesTest() {
-		ImagesVo selectImages = imagesService.selectImages("1");
+		ImagesVo selectImages = imagesDao.selectImages("1");
 		assertTrue(selectImages.getImageName().equals("자"));
 	}
 	@Test
 	public void deleteImagesTest() {
-		int deleteProduct = imagesService.deleteImages("2");
+		int deleteProduct = imagesDao.deleteImages("2");
 		assertEquals(1, deleteProduct);
 	}
 

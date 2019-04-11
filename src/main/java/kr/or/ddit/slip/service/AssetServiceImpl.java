@@ -54,6 +54,11 @@ public class AssetServiceImpl implements IAssetService{
 		return assetDao.searchAsset(assetCode);
 	}
 
+	@Override
+	public List<AssetVo> searchDateAsset(String accountName, String acquisitionDate) {
+		return assetDao.searchDateAsset(accountName, acquisitionDate);
+	}
+
 
 
 }

@@ -62,7 +62,17 @@ public class AssetDaoImpl implements IAssetDao{
 	public List<AssetVo> searchAsset(String assetCode) {
 		HashMap<String, String> map = new HashMap<>();
 		map.put("assetCode", assetCode);
-		List<AssetVo> assetList = sqlSessionTemplate.selectList("asset.searchAsset", map);
-		return assetList;
+		 
+		return sqlSessionTemplate.selectList("asset.searchAsset", map);
+	}
+
+
+	@Override
+	public List<AssetVo> searchDateAsset(String accountName, String acquisitionDate) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("accountName", accountName);
+		map.put("acquisitionDate", acquisitionDate);
+		
+		return sqlSessionTemplate.selectList("asset.searchDateAsset", map);
 	}
 }

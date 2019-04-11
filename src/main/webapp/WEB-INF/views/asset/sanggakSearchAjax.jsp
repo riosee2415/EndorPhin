@@ -10,6 +10,7 @@
 	</tr>
 </c:forEach>
 <script>
+	
 	/*감가 상각선택 */
 	$(".establishTr").on("click", function() {
 		var sanggakCode = $(this).data("establishcode");

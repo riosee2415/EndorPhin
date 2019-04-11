@@ -10,7 +10,7 @@ public class ProductVo {
 	String productName;
 	String standard;
 	String outLine;
-	String userStatus;
+	String usestatus;
 	String basePrice;
 	
 	public String getProductCode() {
@@ -37,11 +37,11 @@ public class ProductVo {
 	public void setOutLine(String outLine) {
 		this.outLine = outLine;
 	}
-	public String getUserStatus() {
-		return userStatus;
+	public String getUsestatus() {
+		return usestatus;
 	}
-	public void setUserStatus(String userStatus) {
-		this.userStatus = userStatus;
+	public void setUsestatus(String usestatus) {
+		this.usestatus = usestatus;
 	}
 	public String getBasePrice() {
 		return basePrice;

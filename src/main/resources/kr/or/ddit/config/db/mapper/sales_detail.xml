@@ -14,6 +14,18 @@
 		,#{jukyo})
 
 	</insert>
+	
+	
+	<!-- 전표상세 수정하기 -->
+	<update id="updateSales_detail" parameterType="sales_detailVo">
+		update sales_detail
+		set	ESTABLISHCODE = #{establishCode}, 
+			JUKYO = #{jukyo}, 
+			PRICE = #{price}, 
+			STATUS = #{status}
+		WHERE SALESDETAILCODE=#{salesDetailCode}
+		
+	</update>
 
 
 	<!-- 매입매출상세  전체 불러오기 -->
@@ -24,14 +36,14 @@
 	</select>
 
 
-	<!-- 매입매출상세  선택하여 가져오기 -->
+	<!-- 매입매출  선택하여 가져오기 -->
 	<select id="selectSales_detail" resultType="sales_detailVo"
 		parameterType="String">
 		select
-		salesdetailcode, status, price, establishcode, salescode, jukyo
+		salesDetailCode, status, price, establishCode, salesCode, jukyo
 		from
 		sales_detail
-		where salesdetailcode = #{salesdetailcode}
+		where salesCode = #{salesCode}
 	</select>
 
 

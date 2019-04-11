@@ -100,17 +100,11 @@
 				<h3 class="dropdown-header">조회</h3>
 				<a class="dropdown-item" href="">발주현황</a>
 				<h3 class="dropdown-header">기초정보</h3>
-				<a class="dropdown-item" href="">상품 등록</a>
+				<a class="dropdown-item" href="/product/productInput">상품 등록</a>
 				<h3 class="dropdown-header">자재관리</h3>
 				<a class="dropdown-item" href="">입고 입력</a>
 			</div>
 		</div>
-
-
-
-
-                                        
-
 
 		<div class="col-md-2 cell-sys">
 			<div class="divname">그룹웨어</div>

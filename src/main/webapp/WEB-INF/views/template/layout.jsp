@@ -7,8 +7,8 @@
 <html>
 <style>
   	#content-wrapper{
-	    animation: fadein 2s;
-	    -webkit-animation: fadein 2s;
+	    animation: fadein 1.5s;
+	    -webkit-animation: fadein 1.5s;
 	}
 	@keyframes fadein {
 	    from {

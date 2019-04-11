@@ -235,9 +235,28 @@ public class Tax_calController {
 	public String sales_detailView(@RequestParam(name="salesCode")String salesCode
 								,Model model ) {
 			
-		model.addAttribute("salesCode", salesCode);
+		List<Sales_detailVo> sales_detailList = sales_detailService.selectSales_detail(salesCode);
+		model.addAttribute("sales_detailList", sales_detailList);
 			
 		return "taxcal/sales_detailView";
+	}
+	
+	
+	@RequestMapping("/updateSales_detail")
+	public String updateSales_detail(Sales_detailVo sales_detailVo) {
+		
+		logger.debug("salesDestailCode : {}", sales_detailVo.getSalesDetailCode());
+		logger.debug("salesDestailCode : {}", sales_detailVo.getSalesDetailCode());
+		logger.debug("salesDestailCode : {}", sales_detailVo.getSalesDetailCode());
+		logger.debug("salesDestailCode : {}", sales_detailVo.getSalesDetailCode());
+		logger.debug("salesDestailCode : {}", sales_detailVo.getSalesDetailCode());
+		logger.debug("salesDestailCode : {}", sales_detailVo.getSalesDetailCode());
+		logger.debug("salesDestailCode : {}", sales_detailVo.getSalesDetailCode());
+		
+		
+//		sales_detailService.updateSales_detail(sales_detailVo);
+		
+		return "update Data";
 	}
 	
 }

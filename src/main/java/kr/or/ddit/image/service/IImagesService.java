@@ -1,10 +1,10 @@
-package kr.or.ddit.image.dao;
+package kr.or.ddit.image.service;
 
 import java.util.List;
 
 import kr.or.ddit.image.model.ImagesVo;
 
-public interface IImagesDao {
+public interface IImagesService {
 	int insertImages(ImagesVo imagesVo);
 	List<ImagesVo> getAllImages();
 	ImagesVo selectImages(String imageCode);

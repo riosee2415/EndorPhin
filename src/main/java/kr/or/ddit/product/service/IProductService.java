@@ -1,10 +1,10 @@
-package kr.or.ddit.product.dao;
+package kr.or.ddit.product.service;
 
 import java.util.List;
 
 import kr.or.ddit.product.model.ProductVo;
 
-public interface IProductDao {
+public interface IProductService {
 	int insertProduct(ProductVo productVo);
 	List<ProductVo> getAllProduct();
 	ProductVo selectProduct(String productCode);

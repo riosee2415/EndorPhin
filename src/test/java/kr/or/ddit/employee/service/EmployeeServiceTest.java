@@ -9,9 +9,11 @@ import javax.annotation.Resource;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.multipart.MultipartRequest;
 
 import kr.or.ddit.employee.model.EmployeeVo;
 import kr.or.ddit.employee.model.Employee_detailVo;
+import kr.or.ddit.image.service.IImagesService;
 import kr.or.ddit.set.LogicConfig;
 
 public class EmployeeServiceTest extends LogicConfig{
@@ -23,6 +25,9 @@ public class EmployeeServiceTest extends LogicConfig{
 	@Resource(name = "employeeDetailService")
 	private IEmployeeDetailService employeeDetailService;
 	
+	@Resource(name="imagesService")
+	private IImagesService imagesService;
+	
 	@Test
 	public void selectEmployeeTest() {
 		EmployeeVo selectEmployee = employeeService.selectEmployee("2");
@@ -31,14 +36,34 @@ public class EmployeeServiceTest extends LogicConfig{
 	@Test
 	public void insertEmployeeTest() {
 		EmployeeVo employeeVo = new EmployeeVo();
-		employeeVo.setUserId("1006");
-		employeeVo.setUserNm("장원영");
+		employeeVo.setUserId("1010");
+		employeeVo.setUserNm("칸타타");
 		employeeVo.setDeptCode("100");
 		employeeVo.setPositionCode("30");
-		employeeVo.setBirthDate("20180101");
 		employeeVo.setRankCode("1");
+		employeeVo.setBirthDate("20180101");
 		int insertEmployee = employeeService.insertEmployee(employeeVo);
+		
+		
+		
+		
+		
+		
 		assertEquals(1, insertEmployee);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	}
 	@Test
 	public void deleteEmployeeTest() {
@@ -79,11 +104,11 @@ public class EmployeeServiceTest extends LogicConfig{
 		
 	}
 	
-	@Test
+	/*@Test
 	public void getAllEmployeeDetailImage() {
 		Employee_detailVo selectEmployeeDetail = employeeDetailService.selectEmployeeDetail("1005");
 		logger.debug("이미지 : {}", selectEmployeeDetail.getImg_path());
-	}
+	}*/
 	
 	
 	@Test
@@ -122,6 +147,18 @@ public class EmployeeServiceTest extends LogicConfig{
 		List<EmployeeVo> allEmployee = employeeService.SearchEmployee(vo);
 		
 		System.out.println(allEmployee);
+		
+	}
+	
+	
+	@Test
+	public void selectEmployee_detailTest() {
+		
+		
+		
+		Employee_detailVo selectEmployeeDetail = employeeDetailService.selectEmployeeDetail("10041");
+		
+		System.out.println("과자 :" + selectEmployeeDetail);
 		
 	}
 	

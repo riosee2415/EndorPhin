@@ -113,28 +113,10 @@ a:hover, a:focus {
 	border-color: black;
 }
 
-.modal-dialog.modal-80size {
-	width: 200% !important;
-	height: auto !important;
-}
 
-.modal-content.modal-80size {
-	width: 200% !important;
-	height: auto !important;
-}
 
-.modal.modal-center {
-	text-align: center;
-}
 
-@media screen and (min-width: 500px) {
-	.modal.modal-center:before {
-		display: inline-block;
-		vertical-align: middle;
-		content: " ";
-		height: 100%;
-	}
-}
+
 </style>
 
 
@@ -192,7 +174,7 @@ a:hover, a:focus {
 
 												<td class="boardTr" data-userid="${allEmployee.userId}"><button
 														type="button" class="btn btn-default" data-toggle="modal"
-														data-target="#my80sizeModal2">
+														data-target="#myModal">
 														<u>${allEmployee.userId }</u>
 													</button></td>
 
@@ -221,7 +203,7 @@ a:hover, a:focus {
 											제</button>
 										<button style="background-color: #6E6867 !important;"
 											type="button" class="btn btn-primary btn-lg"
-											data-toggle="modal" data-target="#my80sizeModal">신규등록</button>
+											data-toggle="modal" data-target="#myLargeModalInsert">신규등록</button>
 									</td>
 									<td>
 										<form action="${cp}/employee/SearchEmployee" id="searchFrm">
@@ -238,214 +220,25 @@ a:hover, a:focus {
 								</form>
 							</table>
 						</div>
+						
 
-						<!-- 신규 사원 등록 -->
-						<div class="modal fade" id="my80sizeModal" tabindex="-1"
-							role="dialog" aria-labelledby="my80sizeModalLabel">
-							<div class="modal-dialog modal-80size" role="document">
-								<div class="modal-content modal-80size">
-									<div class="modal-header" style="color: black">
-										<strong><h2>신규 사원 등록</h2></strong>
-									</div>
-									<div class="modal-body">
-										<div class="form-group">
-											<form action="${cp}/employee/insertEmployee" method="post"
-												enctype="multipart/form-data">
-												<label for="inputName">사원번호</label> <input type="text"
-													class="form-control" id="userId" name="userId"
-													placeholder="사원번호를 입력해 주세요"> <input type="button"
-													id="emplCheck" name="emplCheck" value="중복체크" /> <span
-													id="duplicate"></span>
-										</div>
-										<div class="form-group">
-											<label for="InputEmail">사원명</label> <input type="text"
-												class="form-control" name="userNm" placeholder="사원명을 입력해주세요">
-										</div>
+		
+										
+										
+										
+						<!--  사원 등록 모달창 불러오기  -->
+						<%@ include file="employeeInsert.jsp"%>
+				
+						<!--  사원 등록 모달창 불러오기  -->
+						<%@ include file="employeemodify.jsp"%>
+				
 
-										<div class="form-group">
-											<table>
-												<tr>
-													<td><label for="inputPassword">부서코드</label></td>
-													<td><select name="deptCode" class="form-control">
-															<option value="100">인사</option>
-															<option value="200">회계</option>
-															<option value="300">물류</option>
-													</select></td>
+						
 
-													<td><label for="inputPassword">직책코드</label></td>
-													<td><select name="positionCode" class="form-control">
-															<option value="60">사장</option>
-															<option value="50">부사장</option>
-															<option value="40">본부장</option>
-															<option value="30">팀장</option>
-															<option value="10">파트장</option>
-															<option value="10">팀원</option>
-													</select></td>
-
-													<td><label for="inputPassword">직급코드</label></td>
-													<td><select name="rankCode" class="form-control">
-															<option value="8">전무</option>
-															<option value="7">상무</option>
-															<option value="6">이사</option>
-															<option value="5">부장</option>
-															<option value="4">차장</option>
-															<option value="3">과장</option>
-															<option value="2">대리</option>
-															<option value="1">사원</option>
-													</select></td>
-												</tr>
-											</table>
-										</div>
-
-										<div class="form-group">
-											<label for="inputPassword">비밀번호</label> <input
-												type="password" class="form-control" id="inputPassword"
-												name="password" placeholder="비밀번호를 입력해주세요">
-										</div>
-										<div class="form-group">
-											<label for="inputPasswordCheck">비밀번호 확인</label> <input
-												type="password" class="form-control" id="inputPasswordCheck"
-												placeholder="비밀번호 확인을 위해 다시한번 입력 해 주세요">
-										</div>
-
-										<div class="form-group">
-											<label for="inputMobile">비고</label> <input type="text"
-												class="form-control" id="inputMobile" name="relate"
-												placeholder="특이사항란">
-										</div>
-										<div class="form-group">
-											<label for="inputtelNO">생년월일</label> <input type="text"
-												class="form-control" id="inputtelNO" name="BirthDate"
-												placeholder="생년월일을 입력하세요 예)19951010">
-										</div>
-										<div class="form-group">
-											<label for="inputtelNO">사진첨부</label>
-											<button>
-												<input type="file" class="form-control" name="realFilename">
-											</button>
-										</div>
-									</div>
-									<div class="modal-footer">
-										<button type="submit" class="btn btn-default">등록</button>
-										</form>
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal">닫기</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- 신규 사원 등록 끝 -->
-
-						<!-- 사원 정보 수정하기  -->
-						<div class="modal fade" id="my80sizeModal2" tabindex="-1"
-							role="dialog" aria-labelledby="my80sizeModalLabel"
-							style="color: black">
-							<div class="modal-dialog modal-80size" role="document">
-								<div class="modal-content modal-80size">
-									<div class="modal-header">
-										<strong><h2>사원 조회/수정</h2></strong>
-									</div>
-									<div class="modal-body">
-										<form action="${cp}/employee/updateEmployee_POST"
-											method="post">
-
-											<div class="form-group">
-												<label for="inputName">사원번호</label> <input type="text"
-													class="form-control" id="userIde" name="userId"
-													placeholder="사원번호를 입력해 주세요" readonly>
-
-
-
-												<div class="form-group">
-													<label for="InputEmail">사원명</label> <input type="text"
-														class="form-control" name="userNm" id="userNme"
-														placeholder="사원명을 입력해주세요">
-												</div>
-
-												<div class="form-group">
-													<table>
-														<tr>
-															<td><label for="inputPassword">부서코드</label></td>
-															<td><select id="deptCodee" name="deptCode"
-																class="form-control">
-																	<option value="100">인사</option>
-																	<option value="200">회계</option>
-																	<option value="300">물류</option>
-															</select></td>
-
-															<td><label for="inputPassword">직책코드</label></td>
-															<td><select id="positionCodee" name="positionCode"
-																class="form-control">
-																	<option value="60">사장</option>
-																	<option value="50">부사장</option>
-																	<option value="40">본부장</option>
-																	<option value="30">팀장</option>
-																	<option value="10">파트장</option>
-																	<option value="10">팀원</option>
-															</select></td>
-
-															<td><label for="inputPassword">직급코드</label></td>
-															<td><select id="rankCodee" name="rankCode"
-																class="form-control">
-																	<option value="8">전무</option>
-																	<option value="7">상무</option>
-																	<option value="6">이사</option>
-																	<option value="5">부장</option>
-																	<option value="4">차장</option>
-																	<option value="3">과장</option>
-																	<option value="2">대리</option>
-																	<option value="1">사원</option>
-															</select></td>
-														</tr>
-													</table>
-												</div>
-												<div class="form-group">
-													<label for="inputPassword">비밀번호</label> <input
-														type="password" class="form-control" id="inputPassworde"
-														name="password" placeholder="비밀번호를 입력해주세요">
-												</div>
-
-
-												<div class="form-group">
-													<label for="inputPasswordCheck">비밀번호 확인</label> <input
-														type="password" class="form-control"
-														id="inputPasswordChecke"
-														placeholder="비밀번호 확인을 위해 다시한번 입력 해 주세요">
-												</div>
-
-
-
-												<div class="form-group">
-													<label for="inputMobile">비고</label> <input type="text"
-														class="form-control" id="relatee" name="relate"
-														placeholder="특이사항란">
-												</div>
-
-
-												<div class="form-group">
-													<label for="inputtelNO">생년월일</label> <input type="text"
-														class="form-control" id="BirthDatee" name="BirthDate"
-														placeholder="생년월일을 입력하세요">
-												</div>
-
-
-												<div class="modal-footer">
-													<button type="submit" class="btn btn-default">수정</button>
-										</form>
-
-
-
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal">닫기</button>
-									</div>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
 			</p>
-			<!-- 사원 모달창 수정하기 끝  -->
 			<!-- Section2 시작-->
 			<div role="tabpanel" class="tab-pane fade" id="Section2">
 				<p>
@@ -472,7 +265,7 @@ a:hover, a:focus {
 										<tr>
 											<td class="boardTr" data-userid="${allEmployee.userId}"><button
 													type="button" class="btn btn-default" data-toggle="modal"
-													data-target="#my80sizeModal2">
+													data-target="#myLargeModalEdit">
 													<u>${allEmployee.userId }</u>
 												</button></td>
 
@@ -525,7 +318,7 @@ a:hover, a:focus {
 										<tr>
 											<td class="boardTr" data-userid="${allEmployee.userId}"><button
 													type="button" class="btn btn-default" data-toggle="modal"
-													data-target="#my80sizeModal2">
+													data-target="#myLargeModalEdit">
 													<u>${allEmployee.userId }</u>
 												</button></td>
 
@@ -575,7 +368,7 @@ a:hover, a:focus {
 										<tr>
 											<td class="boardTr" data-userid="${allEmployee.userId}"><button
 													type="button" class="btn btn-default" data-toggle="modal"
-													data-target="#my80sizeModal2">
+													data-target="#myLargeModalEdit">
 													<u>${allEmployee.userId }</u>
 												</button></td>
 
@@ -602,13 +395,11 @@ a:hover, a:focus {
 
 
 
-
-
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
-
 	<script>
+	
+	
+	
+	
 	
 	/*사원정보 수정하기*/
 	$("#mytbody").on("click", ".boardTr", function(){
@@ -629,6 +420,8 @@ a:hover, a:focus {
 				 $("#inputPasswordChecke").val(userIdCode.password);
 				 $("#relatee").val(userIdCode.relate);
 				 $("#BirthDatee").val(userIdCode.birthDate); 
+				 $("#userimage").attr('src','${cp}/employee/profileImg?userId=' + userIdCode.userId);
+			           
 				 
 			} 
 		});

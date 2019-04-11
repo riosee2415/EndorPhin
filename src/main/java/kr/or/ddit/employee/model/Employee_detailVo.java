@@ -12,20 +12,35 @@ public class Employee_detailVo {
 	String phoneNumber;
 	String address;
 	String marryStatus;
-	String img_name; 
-	String img_path;
+	String imagecode;
 	
-	public String getImg_name() {
-		return img_name;
+	
+	//이미지VO
+	
+	String imagename;
+	String imagerealpath;
+	String imagerealname;
+	
+	
+	
+	
+	public String getImagename() {
+		return imagename;
 	}
-	public void setImg_name(String img_name) {
-		this.img_name = img_name;
+	public void setImagename(String imagename) {
+		this.imagename = imagename;
 	}
-	public String getImg_path() {
-		return img_path;
+	public String getImagerealpath() {
+		return imagerealpath;
 	}
-	public void setImg_path(String img_path) {
-		this.img_path = img_path;
+	public void setImagerealpath(String imagerealpath) {
+		this.imagerealpath = imagerealpath;
+	}
+	public String getImagerealname() {
+		return imagerealname;
+	}
+	public void setImagerealname(String imagerealname) {
+		this.imagerealname = imagerealname;
 	}
 	public String getUserId() {
 		return userId;
@@ -63,6 +78,22 @@ public class Employee_detailVo {
 	public void setMarryStatus(String marryStatus) {
 		this.marryStatus = marryStatus;
 	}
+	public String getImagecode() {
+		return imagecode;
+	}
+	public void setImagecode(String imagecode) {
+		this.imagecode = imagecode;
+	}
+	@Override
+	public String toString() {
+		return "Employee_detailVo [userId=" + userId + ", finalSchool=" + finalSchool + ", email=" + email
+				+ ", phoneNumber=" + phoneNumber + ", address=" + address + ", marryStatus=" + marryStatus
+				+ ", imagecode=" + imagecode + ", imagename=" + imagename + ", imagerealpath=" + imagerealpath
+				+ ", imagerealname=" + imagerealname + "]";
+	}
+	
+	
+	
 	
 	
 

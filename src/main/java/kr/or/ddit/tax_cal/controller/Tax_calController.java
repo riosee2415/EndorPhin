@@ -235,9 +235,67 @@ public class Tax_calController {
 	public String sales_detailView(@RequestParam(name="salesCode")String salesCode
 								,Model model ) {
 			
-		model.addAttribute("salesCode", salesCode);
+		List<Sales_detailVo> sales_detailList = sales_detailService.selectSales_detail(salesCode);
+		model.addAttribute("sales_detailList", sales_detailList);
 			
 		return "taxcal/sales_detailView";
 	}
 	
+	
+	@RequestMapping("/updateSales_detail")
+	@ResponseBody
+	public String updateSales_detail(Sales_detailVo sales_detailVo, @RequestParam("sumPrice")String sumPrice) {
+		
+		sales_detailVo.setPrice(sales_detailVo.getPrice().replace(",", ""));
+		sales_detailService.updateSales_detail(sales_detailVo);
+		
+		
+		
+		
+		//===================================================================
+		String updateSumValue = sumPrice.replace(",", "");
+		
+		int supplyValue = Integer.parseInt(updateSumValue);
+		supplyValue = (int) (supplyValue * 0.9);
+		int surtax = Integer.parseInt(updateSumValue) - supplyValue;
+		
+		Tax_calVo tax_calVo = new Tax_calVo();
+		tax_calVo.setSalesCode(sales_detailVo.getSalesCode());
+		tax_calVo.setnSumValue(updateSumValue);
+		tax_calVo.setnSupplyValue(supplyValue + "");
+		tax_calVo.setnSurtax(surtax + "");
+		
+		tax_calService.updateTax_cal(tax_calVo);
+		
+		return "update Data";
+	}
+	
+	
+	@RequestMapping("/deletetax_cal")
+	@ResponseBody
+	public String deletetax_cal(@RequestParam("salesCode")String salesCode) {
+		
+		sales_detailService.deleteSales_detail(salesCode);
+		
+		tax_calService.deleteTax_cal(salesCode);
+		
+		return "delete Data";
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

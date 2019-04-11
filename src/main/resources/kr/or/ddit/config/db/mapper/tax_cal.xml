@@ -27,7 +27,7 @@
 	<!-- 매입매출세금계산서 삭제 -->
 	<delete id="deleteTax_cal" parameterType="String">
 		delete from tax_cal
-		where salescode = #{salescode}
+		where salescode = #{salesCode}
 	</delete>
 	
 	<!-- 페이징처리를 위한 조회 -->
@@ -42,11 +42,37 @@
 		 where rn between (#{page}-1)*#{pageSize}+1 and #{page}*#{pageSize}
 	</select>
 	
+	<!-- 날짜별 검색 후 페이징처리를 위한 조회 -->
+	<select id="selecTax_calPagingList_search" resultType="tax_calVo" parameterType="pageVo">
+	select *
+		  from
+			  (select a.*, rownum rn
+				 from
+					 (select tax_cal.*
+						from tax_cal
+					  order by salescode) a ) a
+		 where rn between (#{page}-1)*#{pageSize}+1 and #{page}*#{pageSize}
+		  AND to_date(slipdate, 'yy/mm/dd') between to_date(#{startDate}, 'yy/mm/dd') and to_date(#{endDate}, 'yy/mm/dd')
+	</select>
+	
+	
+	
 	<!-- 카운트 구하기 -->
 	<select id="getTax_calCnt" resultType="Integer">
 		select count(*)
 		from tax_cal
 	</select>
+	
+	
+	<!-- 카운트 구하기 검색 -->
+	<select id="getTax_calCnt_search" resultType="Integer">
+		select count(*)
+		from tax_cal
+		where to_date(slipdate, 'yy/mm/dd') between to_date(#{startDate}, 'yy/mm/dd') and to_date(#{endDate}, 'yy/mm/dd')
+	</select>
+	
+	
+	
 
 
 	<select id="getTax_seqNextval" resultType="String">
@@ -63,6 +89,15 @@
 		     (#{salesCode}, #{slipDate}, #{nSupplyValue}, #{salesStatus}, #{deptCode}, #{nSurtax}, #{orderCode}, #{clientName}, #{nSumValue}, #{auto}, #{entryType})
 	</insert>
 
+
+	<update id="updateTaX_cal" parameterType="tax_calVo">
+		UPDATE TAX_CAL
+		SET SUPPLYVALUE = #{nSupplyValue},
+			SURTAX = #{nSurtax},
+			SUMVALUE = #{nSumValue}
+		WHERE SALESCODE = #{salesCode}
+	
+	</update>
 
 
 </mapper>

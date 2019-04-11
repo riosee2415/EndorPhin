@@ -56,6 +56,7 @@
 
 
 <!-- 입력 폼 시작-->
+<h4> 전표 입력  <a  data-toggle="modal" href="#insertTip">[[ Tip ]]</a> </h4>
 <table>
 		<thead class="thead2">
 			<tr style="text-align: center;">
@@ -206,6 +207,57 @@
 		   			</div> 
 		   			
 		   			<div class="modal-footer">
+	   				</div> 
+	   				
+	   			</div> 
+	   		</div> 
+	   </div>
+	   
+	   
+	   
+	 <!--전표입력 팁 -->
+  	<div class="modal modal-center fade" id="insertTip" tabindex="4" role="dialog" aria-labelledby="my80sizeCenterModalLabel"> 
+	   		<div class="modal-dialog modal-80size modal-center" role="document">
+	   			 <div class="modal-content modal-80size"> 
+		   			<div class="modal-header"> 
+		   				<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+		   				<h4 class="modal-title" id="myModalLabel">전표입력 Tip!</h4>
+		   			</div> 
+		   			
+		   			<div class="modal-body"> 
+		   				<div class="form-group">
+		   					<label for="InputEmail">1. 하단의 내용을 보고 <font color="blue">매입코드</font>와 <font color="red">매출코드</font>를 정확히 입력해주세요.</label> 
+		   				</div>
+		   				
+		   				<div class="form-group">
+		   					<label for="InputEmail">2. 세금계산서를 발행한 거래는 <b>과세</b>, <br> &nbsp;&nbsp;&nbsp;&nbsp;계산서를 발행한 거래는 <b>면세</b> 거래 입니다.</label> 
+		   				</div>
+		   				
+		   				<div class="form-group">
+		   					<label for="InputEmail">3. <b>공급대가</b>를 입력하면 <br />&nbsp;&nbsp;&nbsp;&nbsp; 자동으로 공급가액과 부가세액을 계산합니다.</label> 
+		   				</div>
+		   				
+		   				
+		   				
+		   				<div class="form-group">
+		   					<label for="InputEmail">4. 거래처와 부서는 검색을 통해 입력이 가능합니다.</label> 
+		   				</div>
+		   				
+		   				<div class="form-group">
+		   					<label for="InputEmail">5. <font color="blue">발주번호</font>가 없는 경우엔 공란으로 두세요.</label> 
+		   				</div>
+		   				
+		   				<div class="form-group">
+		   					<label for="InputEmail">5. <font color="blue">국세청 전자세금계산서</font>를 발행한 경우 전자여부는 '여' 입니다.</label> 
+		   				</div>
+		   				
+		   			</div> 
+		   			
+		   			<div class="modal-footer">
+		   			<button type="button" class="btn btn-primary"  data-dismiss="modal" >확인</button>
 	   				</div> 
 	   				
 	   			</div> 

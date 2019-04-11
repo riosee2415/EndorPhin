@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- 정액법  
+<!-- 정액법 수정화면-->
 
 <input type="hidden" id="accumulated" name="accumulated" value="">
 
 <table class="table table-sm">
 	<thead class="thead">
 		<tr>
-			<td colspan="5" width="80%">| 고정자산등록</td>
+			<td colspan="5" width="80%">| 고정자산등록 </td>
 			<td></td>
 		</tr>
 	</thead>

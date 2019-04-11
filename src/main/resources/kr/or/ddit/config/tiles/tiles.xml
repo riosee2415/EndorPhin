@@ -25,15 +25,14 @@
         
         
         <definition name="helloTiles" extends="layout">
-           <put-attribute name="left" value=""/>
+<!--           <put-attribute name="left" value=""/>  -->
            <put-attribute name="content" value="/WEB-INF/views/template/erpcontents.jsp"/>
         </definition>
         
         <definition name="groupwareTiles" extends="layout_groupware">
-           <put-attribute name="left" value=""/>
+           <put-attribute name="left" value="/WEB-INF/views/template/left.jsp"/>
            <put-attribute name="content" value="/WEB-INF/views/template/groupcontents.jsp"/>
         </definition>
-        
         
         
         
@@ -153,7 +152,6 @@
         </definition>
         
         
-        
          <definition name="AttitudeListTiles" extends="layout"> <!-- 근태 항목 출력 -->
            <put-attribute name="content" value="/WEB-INF/views/attitude/attitudeList.jsp"/>
         </definition>
@@ -163,21 +161,12 @@
         </definition>
          
          <definition name="sellAsset" extends="layout"><!--고정자산 매각-->
-           <put-attribute name="content" value="/WEB-INF/views/asset/sellAsset.jsp"/>
-        </definition>
-        
-         <definition name="useAsset" extends="layout"><!--감가상각비 입력-->
-           <put-attribute name="content" value="/WEB-INF/views/depreciation/depreciation.jsp"/>
-        </definition>
-         
-         <definition name="sellAsset" extends="layout"><!--고정자산 매각-->
         	<put-attribute name="content" value="/WEB-INF/views/asset/sellAsset.jsp"/>
         </definition>
         
-         <definition name="useAsset" extends="layout"><!--감가상각비 입력-->
-        	<put-attribute name="content" value="/WEB-INF/views/depreciation/depreciation.jsp"/>
+         <definition name="assetUsed" extends="layout"><!--감가상각비 입력-->
+        	<put-attribute name="content" value="/WEB-INF/views/assetUsed/assetUsed.jsp"/>
         </definition>
-        
         
          <definition name="boardType" extends="layout">
            <put-attribute name="content" value="/WEB-INF/views/board/boardType.jsp"/>
@@ -211,6 +200,20 @@
          <definition name="AnnualListTiles" extends="layout">   <!-- 휴가 일수 등록 -->
            <put-attribute name="content" value="/WEB-INF/views/annual/annualList.jsp"/>
         </definition>
+        
+        
+         <definition name="prodInput" extends="layout">   <!-- 상품 등록 -->
+           <put-attribute name="content" value="/WEB-INF/views/product/productList.jsp"/>
+        </definition>
+        
+         <definition name="orderInput" extends="layout">   <!-- 발주 입력 -->
+           <put-attribute name="content" value="/WEB-INF/views/orders/orderInput.jsp"/>
+        </definition>
+         <definition name="currentOrder" extends="layout">   <!-- 발주 현황 -->
+           <put-attribute name="content" value="/WEB-INF/views/orders/currentOrder.jsp"/>
+        </definition>
+        
+        
         
         <definition name="boardList" extends="layout">
         	<put-attribute name="content" value="/WEB-INF/views/board/boardListTest.jsp"/>

@@ -38,4 +38,26 @@ public class Tax_calService implements ITax_calService{
 		return tax_calDao.getTax_seqNextval();
 	}
 
+	@Override
+	public int updateTax_cal(Tax_calVo tax_calVo) {
+		return tax_calDao.updateTax_cal(tax_calVo);
+	}
+
+	@Override
+	public Map<String, Object> selecTax_calPagingList_search(PageVo pageVo) {
+		
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+
+		resultMap.put("tax_calList", tax_calDao.selecTax_calPagingList(pageVo));
+		resultMap.put("tax_calCnt", tax_calDao.getTax_calCnt());
+		
+		return resultMap;
+	}
+
+	@Override
+	public int deleteTax_cal(String salesCode) {
+		return tax_calDao.deleteTax_cal(salesCode);
+	}
+
 }

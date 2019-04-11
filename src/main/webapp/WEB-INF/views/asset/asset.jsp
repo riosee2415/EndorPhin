@@ -13,14 +13,13 @@
 			</thead>
 				<tr>
 					<td> 고정자산등록코드
-					<input name="assetCodeS" id="assetCodeS" type="text" /> &nbsp
-					<input type="button" id="seachBtn" value="검색" /></td>
+					<input  name="assetCodeS" id="assetCodeS"  onkeydown="Enter_Check();" /> &nbsp
+					<input type="button" id="seachBtn" value="검색" class="bttn-fill bttn-md bttn-warning" /></td>
 				</tr>
 		</table>
 		<table class="table table-hover">
 			<thead class="thead">
 				<tr>
-					<th><input type="checkbox" name="allCheck" id="th_allCheck" onclick="allCheck();"></th> 
 					<th>자산코드</th>
 					<th>계정명</th>
 					<th>자산명</th>
@@ -32,7 +31,6 @@
 			<tbody id="assetListTbody">
 				<c:forEach items="${assetList }" var="vo">	
 					 <tr>
-						<td><input type="checkbox" name="checkRow"  value="${vo.assetCode }" ></td>
 						<td><a class="bttn-stretch bttn-warning detailView" href="#deptDetail" data-assetcode="${vo.assetCode }" 
 																	 data-acquisitiondate="${vo.acquisitionDate }"
 																	 data-purchasecode="${vo.purchaseCode }"
@@ -68,7 +66,6 @@
 		<button type="button" class="bttn-jelly bttn-warning"  onclick="fn_detail();">등록</button>
 	</div>
 </div>
-	<!--------------(삭제,등록) 버튼 ------------------->
 
 <!-----------------계정과목 검색 모달창 ---------------->	
 <div class="modal fade" id="my80sizeModal2" tabindex="-1" role="dialog" aria-labelledby="my100sizeModalLabel">
@@ -232,15 +229,12 @@
 	});	
 	
 	function Enter_Check(){
-	        // 엔터키의 코드는 13입니다.
-	    if(event.keyCode == 13){
-	    	$("#searchE_Btn").click();  // 실행할 이벤트
-	    }
-	    if(event.keyCode == 13){
-	    	$("#searchC_Btn").click();  // 실행할 이벤트
-	    }
-	    if(event.keyCode == 13){
-	    	$("#searchS_Btn").click();  // 실행할 이벤트
+	       
+	    if(event.keyCode == 13){ // 엔터키의 코드는 13입니다.
+	    	$("#searchE_Btn").click();  
+	    	$("#searchC_Btn").click();  
+	    	$("#searchS_Btn").click();  
+	    	$("#seachBtn").click();  
 	    }
 	}
     /*계정과목 검색  */
@@ -303,38 +297,7 @@
 		$("#sanggakCode").val(sanggakCode);
  	});
      
-	 function allCheck() {
-		if ($("#th_allCheck").is(':checked')) {
-				$("input[name=checkRow]").prop("checked", true);
-			} else {
-				$("input[name=checkRow]").prop("checked", false);
-			}
-		}
-	
-	/* 전체선택삭제 */
-	function allCheck() {
-		if ($("#th_allCheck").is(':checked')) {
-				$("input[name=checkRow]").prop("checked", true);
-			} else {
-				$("input[name=checkRow]").prop("checked", false);
-			}
-		}
-
-	/* 선택삭체*/
-	function myclick() {
-		var checkRow = '';
-		$("input[name=checkRow]:checked").each(function() {
-			checkRow += $(this).val()+",";
-		});
-			checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); //맨끝 콤마 지우기  
-			$("#checkRow").val(checkRow);
-			
-		if(checkRow === ""){		
-			alert("삭제할 대상을 선택하세요");
-			return false;
-		}
-				$("#del_frm").submit();
-	}
+	 
    
 	/* 등록 클릭했을 때 */
 	var insertFlag = 0;
@@ -348,15 +311,11 @@
 				}
 			});
 		
-			insertFlag = 1;
 			
-		} else if(insertFlag == 1){
-			$("#insertArea").html("");
-			insertFlag = 0;
-		}
+		} 
 	}
 	
-
+	/* 상세보기  */
 	$(".detailView").on("click", function(){
 		
 		if (insertFlag === 0) {
@@ -376,15 +335,9 @@
 					$("#acquisitionDate").val($(this).data().acquisitiondate);
 				}
 			});
-		
-			insertFlag = 1;
-			
-		} else if(insertFlag == 1){
-			$("#insertArea").html("");
-			insertFlag = 0;
 		}
 });
-	
+	/*코드 검색  */
 	$("#seachBtn").on("click",function(){
 		$.ajax({
 			url : "${pageContext.request.contextPath}/assetSearch",
@@ -396,7 +349,8 @@
 			}
 		});
 	});
-		
+	
+
 
 	</script>
 	

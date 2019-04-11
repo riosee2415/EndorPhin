@@ -45,10 +45,10 @@
             <h3 class="dropdown-header">고정자산</h3>
             <a class="dropdown-item" href="${pageContext.request.contextPath }/purchaseAsset">고정자산 등록</a>
             <a class="dropdown-item" href="${pageContext.request.contextPath }/sellAsset">고정자산 매각</a>
-            <a class="dropdown-item" href="${pageContext.request.contextPath }/useAsset">감가상각비</a>
+            <a class="dropdown-item" href="${pageContext.request.contextPath }/assetUsed">감가상각비</a>
         </div>
       </li>
-      
+    
        <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-folder"></i>
@@ -113,6 +113,13 @@
     
     
  a {color: #fff; text-decoration: none; outline: none}
+
+
+#sidebarCollapse{
+
+color: #fff; text-decoration: none; outline: none
+
+}
 
 
 #container div .col-md-2:hover {
@@ -192,6 +199,9 @@ cursor: pointer;
 	color:#fff;
 }
 
+
+
+
 </style>
 
 <div class="container-fluid"
@@ -215,10 +225,16 @@ cursor: pointer;
 		</div>
 
 		<div class="col-md-2"></div>
-		<div class="col-md-2"></div>
 		
 		
 		
+		
+		<div class="col-md-2">
+		
+		
+		
+		
+		</div>
 		
 		<div class="col-md-2">
 		<a class="header" href="${cp }/helloTiles">	<i class="fa fa-plug "></i> Logout</a>

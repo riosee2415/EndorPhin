@@ -1,5 +1,13 @@
 package kr.or.ddit.image.dao;
 
-public interface IImagesDao {
+import java.util.List;
 
+import kr.or.ddit.image.model.ImagesVo;
+
+public interface IImagesDao {
+	int insertImages(ImagesVo imagesVo);
+	List<ImagesVo> getAllImages();
+	ImagesVo selectImages(String imageCode);
+	int deleteImages(String imageCode);
+	int updateImages(ImagesVo imagesVo);
 }

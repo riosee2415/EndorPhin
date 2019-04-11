@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!--[등록화면 ]
+1. 자산코드, 취득일 , 상각방법, 정률법 ,정액법을 등록한다.
+2. 정류법과 정액법선택을 저장하고 화면을 분류함.-->
 <table>
 	<thead >
 		<tr>
@@ -27,8 +30,11 @@
 			<td colspan="2">&nbsp;&nbsp;취득금액(*)
 				<input type="text" id="acquisitionPrice" name="acquisitionPrice"></td> 
 			<td>
-				&nbsp;&nbsp;<input type="button" id="insertBtn" name="insertBtn" value="저장">
+				<button  id="insertBtn" name="insertBtn" class="btn btn-primary" >저장</button>
 			</td>	
+			<td>
+			<button class="btn btn-primary" onclick="fn_close();">닫기</button>
+			</td>
 		</tr>
 	</thead>
 </table>
@@ -107,7 +113,6 @@ $("#acquisitionPrice").keypress(function(e){
 				var month = 12-date.getMonth();
 				$("#month").val(month);
 				$('#insertBtn').attr('disabled', true);
-				$	
 
 		}
 	});
@@ -171,6 +176,8 @@ $("#acquisitionPrice").keypress(function(e){
 	    $('#acquisitionDate').datepicker('setDate', 'today');             
 	});
 	
-
+	function fn_close(){
+		$("#insertArea").html("");
+	}
 
 </script>

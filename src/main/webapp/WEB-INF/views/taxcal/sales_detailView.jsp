@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<h4> 전표 상세내역</h4>
+<h4> 전표 상세내역</h4> 
 <table border="1">
 	<thead class="thead">
 		<tr>
@@ -50,6 +50,7 @@
 <br />
 
 <input id="updateBtn" type="button" value="수정" /> 
+<input id="deleteBtn" type="button" value="삭제" /> 
 <input id="closeBtn" type="button" value="닫기" /> 
 
 <script>
@@ -71,7 +72,11 @@
 		fn_updateBtn();
 	});
 
-
+	
+	// 삭제 버튼 클릭
+	$("#deleteBtn").on("click",function(){
+		fn_deleteBtn();
+	});
 
 
 
@@ -88,12 +93,20 @@
 			
 			
 			$(".sales_detailTr").each(function(){
-				var salaesDetailCode 	= $(this).data().salesdetailcode;
-				var status 				= $(this).data().status;
-				var establishCode		= $(this).data().establishcode;
-				var jukyo				= $(this).data().jukyo;
-				var price 				= $(this).data().price;
-				fn_updateAjax(salesCode, salaesDetailCode, status, establishCode, jukyo, price);
+				var salesDetailCode 	= $(this).data().salesdetailcode;
+				var status 				= $(this).children().eq(0).children().val();
+				var establishCode		= $(this).children().eq(1).children().val();
+				var jukyo				= $(this).children().eq(2).children().val();
+				var price 				= "";
+				
+				if(status == "차변"){
+					price = $(this).children().eq(3).children().val();
+				} else {
+					price = $(this).children().eq(4).children().val();
+				}
+				
+				console.log(salesDetailCode);
+				fn_updateAjax(salesCode, salesDetailCode, status, establishCode, jukyo, price);
 			
 			});
 			
@@ -168,17 +181,21 @@
 	
 	
 	/********************** 상세전표 수정 Ajax**********************/
-	function fn_updateAjax(salesCode, salaesDetailCode, status, establishCode, jukyo, price){
+	function fn_updateAjax(salesCode, salesDetailCode, status, establishCode, jukyo, price){
+		
+		var sumPrice = $("#leftSum").val();
+		
 		$.ajax({
 			url : "${pageContext.request.contextPath }/updateSales_detail",
 			data :	"salesCode=" + salesCode
-				+	"&salaesDetailCode=" + salaesDetailCode
+				+	"&salesDetailCode=" + salesDetailCode
 				+	"&status=" + status
 				+	"&establishCode=" + establishCode
 				+	"&jukyo=" + jukyo
-				+	"&price=" + price	,
+				+	"&price=" + price	
+				+	"&sumPrice=" + sumPrice,
 			success : function(data){
-				
+				location.reload();
 			}
 				
 		});
@@ -186,6 +203,28 @@
 
 	
 	
+	/********************** 전표 삭제 **********************/
+	function fn_deleteBtn(){
+		
+		var salesCode = $(".sales_detailTr").data().salescode;
+		
+		
+		var check = confirm("삭제된 데이터는 복구가 불가능합니다. 삭제 하시겠습니까?");
+		if(check){
+			// 삭제처리
+			$.ajax({
+				url:"${pageContext.request.contextPath }/deletetax_cal",
+				data: "salesCode=" + salesCode,
+				success : function(data){
+					
+					location.reload();
+				}
+			});
+			
+		}else {
+			alert("삭제를 취소하였습니다.");
+		}
+	}
 	
 	
 	

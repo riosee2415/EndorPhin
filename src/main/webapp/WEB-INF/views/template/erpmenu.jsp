@@ -14,7 +14,7 @@
 		
 		<div style=" float: left; width: 60%;">
 				<button onchange="Lmenu()" type="button" id="sidebarCollapse" class="btn btn-link">
-				<h4><i class="fas fa-align-left"></i><br><span id="Lmenu">메뉴접기</span></h4>
+				<h4><i class="fas fa-align-left"></i><br><span id="Lmenu">메뉴펼치기</span></h4>
 				</button>
 			</div>
 
@@ -96,9 +96,9 @@
 			<div class="divname">물류/자재</div>
 			<div class="dropdown-menu" aria-labelledby="pagesDropdown">
 				<h3 class="dropdown-header">구매관리</h3>
-				<a class="dropdown-item" href="">발주 입력</a>
+				<a class="dropdown-item" href="/orders/orderInput">발주 입력</a>
 				<h3 class="dropdown-header">조회</h3>
-				<a class="dropdown-item" href="">발주현황</a>
+				<a class="dropdown-item" href="/orders/currentOrder">발주현황</a>
 				<h3 class="dropdown-header">기초정보</h3>
 				<a class="dropdown-item" href="/product/productInput">상품 등록</a>
 				<h3 class="dropdown-header">자재관리</h3>
@@ -133,8 +133,6 @@
 
 	
 $("#Lmenu").click(function() {
-	console.log("클릭");
-
 	if($('#Lmenu').text()==("메뉴접기")){
 		
 		$('#Lmenu').text("메뉴펼치기");

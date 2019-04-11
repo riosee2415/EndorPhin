@@ -39,7 +39,7 @@
                                   
 <div class="wrapper" >
     <!-- Sidebar  -->
-    <nav id="sidebar">
+    <nav id="sidebar" class="active">
         <div class="sidebar-header">
         </div>
 

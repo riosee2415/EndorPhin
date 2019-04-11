@@ -32,5 +32,10 @@ public class Sales_detailDao implements ISales_detailDao{
 		return sqlSessionTemplate.update("sales_detail.updateSales_detail", sales_detailVo);
 	}
 
+	@Override
+	public int deleteSales_detail(String salesCode) {
+		return sqlSessionTemplate.delete("sales_detail.deleteSales_detail", salesCode);
+	}
+
 }
 

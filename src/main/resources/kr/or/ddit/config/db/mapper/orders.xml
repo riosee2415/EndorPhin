@@ -6,13 +6,27 @@
 
 	<!-- 발주서 입력 -->
 	<insert id="insertOrders" parameterType="ordersVo">
+		<selectKey keyProperty="productCode" resultType="String" order="BEFORE">
+		  	select 
+		  		ORDERS_SEQ.NEXTVAL
+		  	from 
+		  		dual
+	    </selectKey>
 		insert into orders
 		(ordercode, deptcode, userid, orderprice, orderlist, duedate,
 		 paymentduedate, specialnote, clientcode, status, sortation)
 		values
-		(#{ordercode},#{deptcode},#{userid},#{orderprice}
-		,#{orderlist},sysdate,sysdate,#{specialnote},#{clientcode}
-		,#{status},#{sortation})
+		(#{orderCode}
+		,nvl(#{deptCode,jdbcType=VARCHAR},null)
+		,#{userId}
+		,#{orderPrice}
+		,#{orderlist}
+		,to_date(#{dueDate},'yyyy-MM-dd')
+		,to_date(nvl(#{paymentDueDate, jdbcType=VARCHAR},null),'yyyy-MM-dd')
+		,nvl(#{specialnote, jdbcType=VARCHAR},null)
+		,#{clientCode}
+		,nvl(#{status, jdbcType=VARCHAR},0)
+		,#{sortation})
 
 	</insert>
 
@@ -25,7 +39,6 @@
 		from orders
 	</select>
 
-
 	<!-- 발주서 선택하여 가져오기 -->
 	<select id="selectOrders" resultType="ordersVo"
 		parameterType="map">
@@ -33,14 +46,26 @@
 		ordercode, deptcode, userid, orderprice, orderlist, duedate,
 		 paymentduedate, specialnote, clientcode, status, sortation
 		from
-		orders where ordercode = #{ordercode}
+		orders where ordercode = #{orderCode}
 	</select>
 
+	<!-- 상품  전체 불러오기 -->
+	<select id="searchByName" resultType="ordersVo" parameterType="ordersVo">
+		select
+				ordercode, deptcode, userid, orderprice, orderlist, to_char(duedate,'yyyy-MM-dd') duedate,
+				 to_char(paymentduedate,'yyyy-MM-dd') paymentduedate, specialnote, 
+				 o.clientcode, status, sortation,clientname
+		from	orders o, client c
+		where   o.clientcode=c.clientcode
+		<if test="preDate!=null">
+        	and   duedate between to_date(#{preDate}) and to_date(#{postDate})
+		</if>
+	</select>
 
 	<!-- 발주서  삭제 -->
 	<delete id="deleteOrders" parameterType="map">
 		delete from orders
-		where ordercode = #{ordercode}
+		where ordercode = #{orderCode}
 	</delete>
 </mapper>
 

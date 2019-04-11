@@ -51,7 +51,7 @@
 					등록</a> <a class="dropdown-item"
 					href="${pageContext.request.contextPath }/sellAsset">고정자산 매각</a> <a
 					class="dropdown-item"
-					href="${pageContext.request.contextPath }/useAsset">감가상각비</a>
+					href="${pageContext.request.contextPath }/assetUsed">감가상각비</a>
 			</div>
 		</div>
 

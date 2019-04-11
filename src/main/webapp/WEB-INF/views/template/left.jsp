@@ -43,7 +43,7 @@
         <div class="sidebar-header">
         </div>
 
-      <!--   <ul class="list-unstyled components">
+      <ul class="list-unstyled components">
             <li class="active">
                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                     <i class="fas fa-home"></i>
@@ -82,7 +82,7 @@
                     </li>
                 </ul>
             </li>
-        </ul> -->
+        </ul>
 
     </nav>
 </div>

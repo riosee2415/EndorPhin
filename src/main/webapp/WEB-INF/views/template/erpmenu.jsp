@@ -17,13 +17,9 @@
 				<h4><i class="fas fa-align-left"></i><br><span id="Lmenu">메뉴펼치기</span></h4>
 				</button>
 			</div>
-
-
                        
 			<div style=" float: left; width: 40%;">
-				
 					<h4><i class="fa fa-bullhorn"></i> <br>공지사항</h4>
-				
 			</div>
 		</div>
 

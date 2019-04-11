@@ -17,7 +17,8 @@
 				<h4><i class="fas fa-align-left"></i><br><span id="Lmenu">메뉴접기</span></h4>
 				</button>
 			</div>
-		
+
+
                        
 			<div style=" float: left; width: 40%;">
 				

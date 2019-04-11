@@ -8,10 +8,9 @@
 
 		
 		
-<style>
+ <style>
 
-
-.wrapper {
+..wrapper {
     display: flex;
     align-items: stretch;
     perspective: 1500px; 
@@ -23,34 +22,25 @@
     background: #7386D5;
     color: #fff;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
-    transform-origin: center left; 
+    transform-origin: center left; /* Set the transformed position of sidebar to center left side. */
 }
 
 #sidebar.active {
     margin-left: -308px;
-    transform: rotateY(100deg); 
+    transform: rotateY(100deg); /* Rotate sidebar vertically by 100 degrees. */
 }
-
-
+    
+    
 </style>
 
 
 
-                            
 
-
-
-
-
-
-
-                          
                                   
-<div class="wrapper">
+<div class="wrapper" >
     <!-- Sidebar  -->
     <nav id="sidebar">
         <div class="sidebar-header">
-            <h3>공 사 중</h3>
         </div>
 
       <!--   <ul class="list-unstyled components">

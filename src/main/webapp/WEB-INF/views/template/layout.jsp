@@ -113,7 +113,7 @@
 			
 			                          
 	
-	    <div id="content-wrapper" class="cont">
+	    <div id="content-wrapper" class="cont" style="height: 100%">
 			<!-- <div class="container-fluid" > -->
 
 			<!-- Contents Source -->
@@ -181,13 +181,11 @@
  
                                               
                           
- 
  $(document).ready(function () {
-	    $('#sidebarCollapse').on('click', function () {
+	  $('#sidebarCollapse').on('click', function () {
 	        $('#sidebar').toggleClass('active');
-	        $(this).toggleClass('active');
 	    });
-	});
+ });
 </script>
 
 

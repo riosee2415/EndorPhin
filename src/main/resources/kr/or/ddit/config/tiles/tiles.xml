@@ -23,7 +23,6 @@
         
         
         
-        
         <definition name="helloTiles" extends="layout">
 <!--           <put-attribute name="left" value=""/>  -->
            <put-attribute name="content" value="/WEB-INF/views/template/erpcontents.jsp"/>

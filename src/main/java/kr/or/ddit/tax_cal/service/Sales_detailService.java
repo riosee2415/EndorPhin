@@ -30,6 +30,11 @@ public class Sales_detailService implements ISales_detailService{
 	public int updateSales_detail(Sales_detailVo sales_detailVo) {
 		return sales_detailDao.updateSales_detail(sales_detailVo);
 	}
+
+	@Override
+	public int deleteSales_detail(String salesCode) {
+		return sales_detailDao.deleteSales_detail(salesCode);
+	}
 	
 	
 }

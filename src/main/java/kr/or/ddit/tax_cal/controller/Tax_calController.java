@@ -270,4 +270,32 @@ public class Tax_calController {
 		return "update Data";
 	}
 	
+	
+	@RequestMapping("/deletetax_cal")
+	@ResponseBody
+	public String deletetax_cal(@RequestParam("salesCode")String salesCode) {
+		
+		sales_detailService.deleteSales_detail(salesCode);
+		
+		tax_calService.deleteTax_cal(salesCode);
+		
+		return "delete Data";
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

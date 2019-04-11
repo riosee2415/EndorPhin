@@ -50,6 +50,7 @@
 <br />
 
 <input id="updateBtn" type="button" value="수정" /> 
+<input id="deleteBtn" type="button" value="삭제" /> 
 <input id="closeBtn" type="button" value="닫기" /> 
 
 <script>
@@ -71,7 +72,11 @@
 		fn_updateBtn();
 	});
 
-
+	
+	// 삭제 버튼 클릭
+	$("#deleteBtn").on("click",function(){
+		fn_deleteBtn();
+	});
 
 
 
@@ -198,6 +203,28 @@
 
 	
 	
+	/********************** 전표 삭제 **********************/
+	function fn_deleteBtn(){
+		
+		var salesCode = $(".sales_detailTr").data().salescode;
+		
+		
+		var check = confirm("삭제된 데이터는 복구가 불가능합니다. 삭제 하시겠습니까?");
+		if(check){
+			// 삭제처리
+			$.ajax({
+				url:"${pageContext.request.contextPath }/deletetax_cal",
+				data: "salesCode=" + salesCode,
+				success : function(data){
+					
+					location.reload();
+				}
+			});
+			
+		}else {
+			alert("삭제를 취소하였습니다.");
+		}
+	}
 	
 	
 	

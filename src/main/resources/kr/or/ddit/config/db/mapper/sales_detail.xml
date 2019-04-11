@@ -50,7 +50,7 @@
 	<!-- 매입매출상세  삭제 -->
 	<delete id="deleteSales_detail" parameterType="String">
 		delete from sales_detail
-		where salesdetailcode = #{salesdetailcode}
+		where salesCode = #{salesCode}
 	</delete>
 
 </mapper>

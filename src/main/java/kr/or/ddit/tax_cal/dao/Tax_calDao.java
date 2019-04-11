@@ -57,4 +57,23 @@ public class Tax_calDao implements ITax_calDao{
 		return sqlSessionTemplate.update("tax_cal.updateTaX_cal", tax_calVo);
 	}
 
+	
+	/**
+	* Method : selecTax_calPagingList
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param pageVo
+	* @return 
+	* Method 설명 : Ajax를 통한 paging 검색 후
+	*/
+	@Override
+	public List<Tax_calVo> selecTax_calPagingList_search(PageVo pageVo) {
+		return sqlSessionTemplate.selectList("tax_cal.selecTax_calPagingList_search",pageVo);
+	}
+
+	@Override
+	public int deleteTax_cal(String salesCode) {
+		return sqlSessionTemplate.delete("tax_cal.deleteTax_cal", salesCode);
+	}
+
 }

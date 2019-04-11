@@ -12,7 +12,14 @@ public class ProductVo {
 	String outLine;
 	String usestatus;
 	String basePrice;
+	String imageCode;
 	
+	public String getImageCode() {
+		return imageCode;
+	}
+	public void setImageCode(String imageCode) {
+		this.imageCode = imageCode;
+	}
 	public String getProductCode() {
 		return productCode;
 	}

@@ -7,7 +7,7 @@
 	<!-- 상품 입력 -->
 	<insert id="insertProduct" parameterType="productVo">
 		insert into product
-		(productcode, productname, standard, outline, usestatus, baseprice)
+		(productcode, productname, standard, outline, usestatus, baseprice,imagecode)
 		values
 		('P'||#{productCode}
 		,#{productName}
@@ -15,13 +15,14 @@
 		,nvl(#{outLine, jdbcType=VARCHAR},null)
 		,nvl(#{usestatus, jdbcType=VARCHAR},1)
 		,#{basePrice})
+		,nvl(#{imageCode, jdbcType=VARCHAR},imagecode)
 	</insert>
 	
 
 	<!-- 상품  전체 불러오기 -->
 	<select id="getAllProduct" resultType="productVo">
 		select
-		productcode, productname, standard, outline, usestatus, baseprice
+		productcode, productname, standard, outline, usestatus, baseprice,imagecode
 		from product
 	</select>
 
@@ -30,7 +31,7 @@
 	<select id="selectProduct" resultType="productVo"
 		parameterType="map">
 		select
-		productcode, productname, standard, outline, usestatus, baseprice
+		productcode, productname, standard, outline, usestatus, baseprice,imagecode
 		from
 		product where productcode = #{productCode}
 	</select>
@@ -39,8 +40,19 @@
 	<!-- 상품 삭제 -->
 	<delete id="deleteProduct" parameterType="map">
 		delete from product
-		where productcode = #{productcode}
+		where productcode = #{productCode}
 	</delete>
+	
+	<update id="updateProduct" parameterType="productVo">
+		update product
+		set		productname = nvl(#{productName, jdbcType=VARCHAR},productname)
+				,standard = nvl(#{standard, jdbcType=VARCHAR},standard)
+				,outline = nvl(#{outLine, jdbcType=VARCHAR},outline)
+				,usestatus = nvl(#{usestatus, jdbcType=VARCHAR},usestatus)
+				,baseprice = nvl(#{basePrice, jdbcType=VARCHAR},baseprice)
+				,imagecode = nvl(#{imageCode, jdbcType=VARCHAR},imagecode)
+		where	productcode = #{productCode}
+	</update>
 
 </mapper>
 

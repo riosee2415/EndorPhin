@@ -18,6 +18,18 @@ public interface ITax_calDao {
 	public List<Tax_calVo> selecTax_calPagingList(PageVo pageVo);
 	
 	
+
+	/**
+	* Method : selecTax_calPagingList
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param pageVo
+	* @return
+	* Method 설명 : Ajax를 통한 페이지 리스트 뷰 검
+	*/
+	public List<Tax_calVo> selecTax_calPagingList_search(PageVo pageVo);
+	
+	
 	/**
 	* Method : getTax_calCnt
 	* 작성자 : sanghoyun
@@ -26,6 +38,8 @@ public interface ITax_calDao {
 	* Method 설명 : 매입매출전표 수량 확인
 	*/
 	public int getTax_calCnt();
+	
+	
 
 	
 	/**
@@ -58,4 +72,17 @@ public interface ITax_calDao {
 	* Method 설명 : 전표내역 수정
 	*/
 	public int updateTax_cal(Tax_calVo tax_calVo);
+	
+	
+	/**
+	* Method : deleteTax_cal
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param salesCode
+	* @return
+	* Method 설명 : 전표내용 삭제
+	*/
+	public int deleteTax_cal(String salesCode);
+	
+	
 }

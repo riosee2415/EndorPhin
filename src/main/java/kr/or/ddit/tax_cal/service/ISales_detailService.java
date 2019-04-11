@@ -37,4 +37,14 @@ public interface ISales_detailService {
 	*/
 	public int updateSales_detail(Sales_detailVo sales_detailVo);
 
+	
+	/**
+	* Method : deleteSales_detail
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param salesCode
+	* @return
+	* Method 설명 : 상세전표 삭제
+	*/
+	public int deleteSales_detail(String salesCode);
 }

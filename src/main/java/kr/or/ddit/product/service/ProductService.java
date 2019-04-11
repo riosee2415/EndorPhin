@@ -35,4 +35,14 @@ public class ProductService implements IProductService{
 		return productDao.deleteProduct(productCode);
 	}
 
+	@Override
+	public List<ProductVo> searchByName(String productName) {
+		return productDao.searchByName(productName);
+	}
+
+	@Override
+	public int updateProduct(ProductVo productVo) {
+		return productDao.updateProduct(productVo);
+	}
+
 }

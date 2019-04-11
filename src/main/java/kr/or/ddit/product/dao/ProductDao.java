@@ -35,4 +35,14 @@ public class ProductDao implements IProductDao{
 		return sqlSessionTemplate.delete("product.deleteProduct",productCode);
 	}
 
+	@Override
+	public List<ProductVo> searchByName(String productName) {
+		return sqlSessionTemplate.selectList("product.searchByName",productName);
+	}
+
+	@Override
+	public int updateProduct(ProductVo productVo) {
+		return sqlSessionTemplate.update("product.updateProduct",productVo);
+	}
+
 }

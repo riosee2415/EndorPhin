@@ -206,6 +206,13 @@
            <put-attribute name="content" value="/WEB-INF/views/product/productList.jsp"/>
         </definition>
         
+         <definition name="orderInput" extends="layout">   <!-- 발주 입력 -->
+           <put-attribute name="content" value="/WEB-INF/views/orders/orderInput.jsp"/>
+        </definition>
+         <definition name="currentOrder" extends="layout">   <!-- 발주 현황 -->
+           <put-attribute name="content" value="/WEB-INF/views/orders/currentOrder.jsp"/>
+        </definition>
+        
         
         
         <definition name="boardList" extends="layout">

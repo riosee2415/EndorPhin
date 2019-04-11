@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<h4> 전표 상세내역</h4>
+<h4> 전표 상세내역</h4> 
 <table border="1">
 	<thead class="thead">
 		<tr>

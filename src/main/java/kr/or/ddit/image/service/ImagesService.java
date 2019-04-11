@@ -41,13 +41,12 @@ public class ImagesService implements IImagesService{
 		if(multparts != null){
 			MultipartFile file = multparts.getFile("fileName");
 			imagesVo.setImageRealpath("c:\\picture\\"); // 경로설정
-			imagesVo.setImageRealname(UUID.randomUUID().toString());
+			int extendIndex = file.getOriginalFilename().lastIndexOf(".");
+			imagesVo.setImageRealname(UUID.randomUUID().toString()+file.getOriginalFilename().substring(extendIndex));
 			imagesVo.setImageName(file.getOriginalFilename());
 			
 			if (file.getSize() > 0) {
-				int extendIndex = file.getOriginalFilename().lastIndexOf(".");
-				file.transferTo(new File(imagesVo.getImageRealpath()+imagesVo.getImageRealname()
-						+file.getOriginalFilename().substring(extendIndex)));
+				file.transferTo(new File(imagesVo.getImageRealpath()+imagesVo.getImageRealname()));
 				if(imagesVo.getImageCode()==null)
 					imagesDao.insertImages(imagesVo);
 				else{

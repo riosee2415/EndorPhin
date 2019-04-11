@@ -6,6 +6,12 @@
 
 	<!-- 상품 입력 -->
 	<insert id="insertProduct" parameterType="productVo">
+		<selectKey keyProperty="productCode" resultType="String" order="BEFORE">
+		  	select 
+		  		PRODUCT_SEQ.NEXTVAL
+		  	from 
+		  		dual
+	    </selectKey>
 		insert into product
 		(productcode, productname, standard, outline, usestatus, baseprice,imagecode)
 		values
@@ -14,8 +20,8 @@
 		,#{standard}
 		,nvl(#{outLine, jdbcType=VARCHAR},null)
 		,nvl(#{usestatus, jdbcType=VARCHAR},1)
-		,#{basePrice})
-		,nvl(#{imageCode, jdbcType=VARCHAR},imagecode)
+		,#{basePrice}
+		,nvl(#{imageCode, jdbcType=VARCHAR},null))
 	</insert>
 	
 
@@ -24,6 +30,15 @@
 		select
 		productcode, productname, standard, outline, usestatus, baseprice,imagecode
 		from product
+	</select>
+	
+	
+	<!-- 상품  전체 불러오기 -->
+	<select id="searchByName" resultType="productVo" parameterType="map">
+		select
+		productcode, productname, standard, outline, usestatus, baseprice,imagecode
+		from product
+        where   productname like '%' ||#{productName}||'%'
 	</select>
 
 

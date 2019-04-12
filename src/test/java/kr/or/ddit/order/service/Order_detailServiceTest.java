@@ -1,4 +1,4 @@
-package kr.or.ddit.orders.service;
+package kr.or.ddit.order.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -20,9 +20,9 @@ import kr.or.ddit.order.service.IOrdersService;
 import kr.or.ddit.product.model.ProductVo;
 import kr.or.ddit.set.LogicConfig;
 
-public class OrdersServiceTest extends LogicConfig{
+public class Order_detailServiceTest extends LogicConfig{
 
-	private Logger logger = LoggerFactory.getLogger(OrdersServiceTest.class);
+	private Logger logger = LoggerFactory.getLogger(Order_detailServiceTest.class);
 	
 
 	@Resource(name="ordersService")
@@ -33,5 +33,9 @@ public class OrdersServiceTest extends LogicConfig{
 		List<OrdersVo> searchByName = ordersService.searchByName(new OrdersVo());
 		logger.debug("asdfljnsadf:{}",searchByName.get(0).getOrderCode());
 	}
-
+	@Test
+	public void selectOrdersTest(){
+		OrdersVo selectOrders = ordersService.selectOrders("0");
+		logger.debug("확인 : {}",selectOrders);
+	}
 }

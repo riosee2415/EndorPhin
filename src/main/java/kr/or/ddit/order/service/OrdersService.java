@@ -19,6 +19,11 @@ public class OrdersService implements IOrdersService{
 	public List<OrdersVo> searchByName(OrdersVo ordersVo) {
 		return ordersDao.searchByName(ordersVo);
 	}
+
+	@Override
+	public OrdersVo selectOrders(String orderCode) {
+		return ordersDao.selectOrders(orderCode);
+	}
 	
 	
 }

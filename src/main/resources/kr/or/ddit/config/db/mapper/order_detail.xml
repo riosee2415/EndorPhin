@@ -9,7 +9,7 @@
 		insert into order_detail
 		(orderdetailcode, ordercode, quantity, productcode)
 		values
-		(#{orderdetailcode},#{ordercode},#{quantity},#{productcode})
+		(#{orderDetailCode},#{orderCode},#{quantity},#{productCode})
 
 	</insert>
 
@@ -28,10 +28,17 @@
 		select
 		orderdetailcode, ordercode, quantity, productcode
 		from
-		order_detail where orderdetailcode = #{orderdetailcode}
+		order_detail where orderdetailcode = #{orderdetailCode}
 	</select>
 
 
+	<!-- 발주서 상세 전체 불러오기 -->
+	<select id="getOrder_detailByOrdercd" resultType="order_detailVo" parameterType="map">
+		select
+		orderdetailcode, ordercode, quantity, productcode
+		from order_detail
+		where	ordercode = #{orderCode}
+	</select>
 	<!-- 발주서 상세 삭제 -->
 	<delete id="deleteOrder_detail" parameterType="map">
 		delete from order_detail

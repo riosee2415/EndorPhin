@@ -136,11 +136,11 @@ a:hover, a:focus {
 						href="#Section1" aria-controls="home" role="tab" data-toggle="tab">사원
 							목록</a></li>
 					<li role="presentation"><a href="#Section2"
-						aria-controls="profile" role="tab" data-toggle="tab"> 인 사 </a></li>
+						aria-controls="Section2" role="tab" data-toggle="tab"> 인 사 </a></li>
 					<li role="presentation"><a href="#Section3"
-						aria-controls="messages" role="tab" data-toggle="tab"> 회 계 </a></li>
+						aria-controls="Section3" role="tab" data-toggle="tab"> 회 계 </a></li>
 					<li role="presentation"><a href="#Section4"
-						aria-controls="messages" role="tab" data-toggle="tab"> 물 류 </a></li>
+						aria-controls="Section4" role="tab" data-toggle="tab"> 물 류 </a></li>
 
 
 
@@ -149,7 +149,6 @@ a:hover, a:focus {
 				<!-- Tab panes -->
 				<div class="tab-content tabs">
 					<div role="tabpanel" class="tab-pane fade in active" id="Section1">
-						<p>
 						<form class="form-horizontal">
 							<div class="form-group">
 								<table class="table table-striped">
@@ -199,6 +198,7 @@ a:hover, a:focus {
 						</form>
 
 						<div class="form-group">
+							<form action="${cp}/employee/SearchEmployee" id="searchFrm">
 							<table>
 								<tr>
 									<td>
@@ -210,7 +210,6 @@ a:hover, a:focus {
 											data-toggle="modal" data-target="#myLargeModalInsert" id="employeeInsert">신규등록</button>
 									</td>
 									<td>
-										<form action="${cp}/employee/SearchEmployee" id="searchFrm">
 									</td>
 									<td style="padding-left: 600px"><input type="text"
 										class="search-query form-control" id="searchPay"
@@ -221,8 +220,8 @@ a:hover, a:focus {
 										</button>
 									</td>
 								</tr>
-								</form>
 							</table>
+							</form>
 						</div>
 						
 
@@ -239,12 +238,11 @@ a:hover, a:focus {
 
 						
 
+					
 				</div>
-			</div>
-			</p>
+			
 			<!-- Section2 시작-->
 			<div role="tabpanel" class="tab-pane fade" id="Section2">
-				<p>
 				<form class="form-horizontal">
 					<div class="form-group">
 						<table class="table table-striped">
@@ -288,13 +286,11 @@ a:hover, a:focus {
 					</div>
 
 				</form>
-				</p>
 			</div>
 			<!-- Section2 끝-->
 
 			<!-- Section3 시작-->
 			<div role="tabpanel" class="tab-pane fade" id="Section3">
-				<p>
 				<form class="form-horizontal">
 
 					<div class="form-group">
@@ -312,8 +308,6 @@ a:hover, a:focus {
 									<th>생년월일</th>
 								</tr>
 							</thead>
-
-
 
 							<tbody id="mytbody">
 								<c:forEach items="${allEmployee}" var="allEmployee">
@@ -341,13 +335,11 @@ a:hover, a:focus {
 					</div>
 
 				</form>
-				</p>
 			</div>
 			<!-- Section3 끝-->
 
 			<!-- Section4 시작-->
 			<div role="tabpanel" class="tab-pane fade" id="Section4">
-				<p>
 				<form class="form-horizontal">
 					<div class="form-group">
 						<table class="table table-striped">
@@ -390,12 +382,11 @@ a:hover, a:focus {
 						</table>
 					</div>
 				</form>
-				</p>
 			</div>
 		</div>
 	</div>
-
-
+</div>
+</div>
 
 
 	<script>

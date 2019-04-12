@@ -1,6 +1,7 @@
 package kr.or.ddit.tax_cal.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -58,6 +59,16 @@ public class Tax_calService implements ITax_calService{
 	@Override
 	public int deleteTax_cal(String salesCode) {
 		return tax_calDao.deleteTax_cal(salesCode);
+	}
+
+	@Override
+	public List<Tax_calVo> searchAllByType() {
+		return tax_calDao.searchAllByType();
+	}
+
+	@Override
+	public List<Tax_calVo> searchAllByType2() {
+		return tax_calDao.searchAllByType2();
 	}
 
 }

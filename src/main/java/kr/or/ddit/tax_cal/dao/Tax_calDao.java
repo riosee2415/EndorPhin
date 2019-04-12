@@ -76,4 +76,15 @@ public class Tax_calDao implements ITax_calDao{
 		return sqlSessionTemplate.delete("tax_cal.deleteTax_cal", salesCode);
 	}
 
+	@Override
+	public List<Tax_calVo> searchAllByType() {
+		return sqlSessionTemplate.selectList("tax_cal.searchAllByType");
+	}
+
+	@Override
+	public List<Tax_calVo> searchAllByType2() {
+		return sqlSessionTemplate.selectList("tax_cal.searchAllByType2");
+	}
+	
+
 }

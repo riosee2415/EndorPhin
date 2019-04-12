@@ -98,6 +98,48 @@
 		WHERE SALESCODE = #{salesCode}
 	
 	</update>
+	
+	
+	<select id="searchAllByType" resultType="tax_calVo">  
+		select
+		salescode, slipdate, supplyvalue, salesstatus, deptcode, surtax, ordercode, clientname, sumvalue, auto, entryType
+		from tax_cal
+		where salesstatus = '과세매입'
+        or salesstatus ='영세율'
+        or salesstatus ='계산서'
+        or salesstatus ='불공'
+        or salesstatus ='수입분'
+        or salesstatus ='금전등록'
+        or salesstatus ='카드과세'
+        or salesstatus ='카드면세'
+        or salesstatus ='카드영세'
+        or salesstatus ='무증빙'
+        or salesstatus ='현금과세'
+        or salesstatus ='현금면세'
+        
+	</select>
+	
+	
+	<select id="searchAllByType2" resultType="tax_calVo">  
+		select
+		salescode, slipdate, supplyvalue, salesstatus, deptcode, surtax, ordercode, clientname, sumvalue, auto, entryType
+		from tax_cal
+		where salesstatus = '과세매출'
+        or salesstatus ='영세율매출'
+        or salesstatus ='계산서매출'
+        or salesstatus ='과세무증빙매출'
+        or salesstatus ='간이과세매출'
+        or salesstatus ='수출L/C매출'
+        or salesstatus ='카드과세매출'
+        or salesstatus ='카드면세매출'
+        or salesstatus ='카드영세매출'
+        or salesstatus ='면세무증빙매출'
+        or salesstatus ='전자화폐매출'
+        or salesstatus ='현금과세매출'
+        or salesstatus ='현금면세매출'
+        or salesstatus ='현금영세매출'
+        
+	</select>
 
 
 </mapper>

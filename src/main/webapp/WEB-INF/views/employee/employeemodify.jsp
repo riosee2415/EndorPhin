@@ -8,6 +8,28 @@
 
 
 
+<!-- 큰 Modal -->
+ <div class="modal fade" id="myLargeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">기본 Modal 제목</h4>
+      </div>
+      <div class="modal-body">
+        Size don't matter.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+          
+
+
+                  
 
 
 
@@ -15,21 +37,42 @@
 
 
 
-<div class="modal fade" id="myLargeModalEdit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+<%-- <div class="modal fade" id="myLargeModalEdit" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">큰 Modal 제목</h4>
       </div>
-				<form action="${cp}/employee/updateEmployee_POST" method="post">
+				<form action="${cp}/employee/updateEmployee_POST" method="post" enctype="multipart/form-data">
 			<div class="modal-body">
 
 
-
-					<div class="container-fluid">
+					 <div id="emplinsert" class="container-fluid">
 						<div class="row">
-							
 							
 							<div class="col-md-2">
 							<img class="img-fluid" id="userimage" >
@@ -147,7 +190,7 @@
 
 						
 						
-			</div>
+			</div> 
 						
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-default">수정</button>
@@ -159,4 +202,4 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div>  --%>

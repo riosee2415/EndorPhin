@@ -85,15 +85,16 @@ public class EmployeeController {
 	
 	@RequestMapping(path = "/insertEmployee", method = RequestMethod.POST)
 	public String insertEmployee_POST(Model model, EmployeeVo vo,RedirectAttributes ra,
-			MultipartRequest multparts) throws IllegalStateException, IOException {
+			MultipartRequest multparts, Employee_detailVo detailVo) throws IllegalStateException, IOException {
 		
 		
 		
 		ImagesVo imageVo = new ImagesVo();
-		Employee_detailVo detailVo = new Employee_detailVo();
 		imageVo.setUserId(vo.getUserId());
 
 		
+		
+		detailVo.setAddress(detailVo.getAddress() + detailVo.getAddressDetail());	
 		
 		employeeService.insertEmployee(vo);
 		
@@ -101,40 +102,6 @@ public class EmployeeController {
 		detailVo.setUserId(vo.getUserId());
 		detailVo.setImagecode(imageCode);
 		employeeDetailService.insertEmployeeDetail(detailVo);
-		
-		
-		
-		
-		
-		
-		
-//		if(multparts != null){
-//			
-//		MultipartFile file = multparts.getFile("realFilename");
-//		ImagesVo imageVo = new ImagesVo();
-//		
-//		String file_name = "";
-//		String file_path = "";
-//		
-//		
-//		
-//		if (file.getSize() > 0) {
-//			file_name = file.getOriginalFilename();
-//			file_path = ("c:\\picture\\" + UUID.randomUUID().toString());
-//			file.transferTo(new File(file_path));
-//			
-//			imageVo.setUserId(vo.getUserId());
-//			imageVo.set
-//			
-//			
-//			
-//			detailVo.setImg_name(file_name);
-//			detailVo.setImg_path(file_path);
-//
-//			
-//		}
-//		
-//		}					 
 		
 		ra.addFlashAttribute("msg", "정상 등록 되었습니다");
 		return "redirect:/employee/getAllEmployee";

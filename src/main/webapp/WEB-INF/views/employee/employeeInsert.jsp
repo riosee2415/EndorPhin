@@ -36,36 +36,30 @@ margin-bottom: 15px;
       <div class="modal-body" style="color: black;font-weight: bold; ">
 
 
-
-
-                            
-
-
-
 					<div id="emplinsert" class="container-fluid">
 
 						<div class="row">
 							<div class="col-md-4" style="float: left; width: 40%;">
-								사원번호<input type="text" class="form-control" id="userId"
+								사원번호<i style="color: red;" class="fa fa-exclamation"></i><input type="text" class="form-control" id="userId"
 									name="userId" placeholder="사원번호를 입력하세요">
 							</div>
 							<div class="col-md-2" style="float: left; width: 20%;">
-								<br>
 							
+								<br>
 							<button style="background-color: #6E6867 !important; "
 											type="button" class="btn btn-primary btn" id="emplCheck" name="emplCheck">중복체크
 										</button>
 							</div>
+                
+         
 
 							<div class="col-md-4" style="float: left; width: 40%;">
-								<br><span  id="duplicate"></span>
+								필수입력항목(<i style="color: red;" class="fa fa-exclamation"></i>)<br><span  id="duplicate"></span>
 							</div>
 						</div>
-						
-
 						<div class="row">
 							<div class="col-md-10">
-								사원명 <input type="text" class="form-control" name="userNm"
+								사원명 <i style="color: red;" class="fa fa-exclamation"></i> <input type="text" class="form-control" name="userNm"
 									placeholder="사원명을 입력해주세요">
 							</div>
 						</div>
@@ -74,7 +68,7 @@ margin-bottom: 15px;
 
 						<div class="row">
 							<div class="col-md-3"  style=" float: left; width: 33%;">
-								<label for="inputPassword">부서명</label> <select id="deptCode_html"
+								<label for="inputPassword">부서명<i style="color: red;" class="fa fa-exclamation"></i></label> <select id="deptCode_html"
 									class="form-control" name="deptCode" class="form-control">
 									<!-- <option value="100">인사</option>
 									<option value="200">회계</option>
@@ -86,7 +80,7 @@ margin-bottom: 15px;
 
 
 							<div class="col-md-3"  style=" float: left; width: 33%;">
-								<label for="inputPassword">직책명</label> <select id="position_html"
+								<label for="inputPassword">직책명<i style="color: red;" class="fa fa-exclamation"></i></label> <select id="position_html"
 									class="form-control" name="positionCode" class="form-control">
 									<!-- <option value="60">사장</option>
 									<option value="50">부사장</option>
@@ -98,7 +92,7 @@ margin-bottom: 15px;
 							</div>
 							
 							<div class="col-md-3"  style=" float: left; width: 33%;">
-								<label for="inputPassword">직급명</label> <select id="rank_html"
+								<label for="inputPassword">직급명<i style="color: red;" class="fa fa-exclamation"></i></label> <select id="rank_html"
 									class="form-control" name="rankCode" class="form-control">
 									<!-- <option value="8">전무</option>
 									<option value="7">상무</option>
@@ -126,7 +120,7 @@ margin-bottom: 15px;
 						<div class="row">
 							<div class="col-md-10">
 
-								<label for="inputtelNO">생년월일</label> <input type="text"
+								<label for="inputtelNO">생년월일<i style="color: red;" class="fa fa-exclamation"></i></label> <input type="text"
 									class="form-control" id="inputtelNO" name="BirthDate"
 									placeholder="생년월일을 입력하세요 ex)19951010">
 
@@ -146,7 +140,6 @@ margin-bottom: 15px;
 							</div>
 						</div>
 
-
 						<div class="row">
 							<div class="col-md-10">
 
@@ -161,7 +154,7 @@ margin-bottom: 15px;
 							<div class="col-md-10">
 
 								<label for="inputtelNO">이메일</label> <input type="email"
-									class="form-control" id="inputtelNO" name="phoneNumber"
+									class="form-control" id="inputtelNO" name="email"
 									placeholder="이메일입력">
 							</div>
 						</div>

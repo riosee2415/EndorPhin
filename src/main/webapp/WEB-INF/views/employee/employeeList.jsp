@@ -83,7 +83,7 @@ a:hover, a:focus {
 	position: relative;
 }
 
-@media only screen and (max-width: 479px) {
+/* @media only screen and (max-width: 479px) {
 	.tab .nav-tabs {
 		border: none;
 	}
@@ -105,7 +105,7 @@ a:hover, a:focus {
 		bottom: -2px;
 		left: 0;
 	}
-}
+} */
 
 .table {
 	border-width: 3px;
@@ -114,15 +114,18 @@ a:hover, a:focus {
 }
 
 
-li { list-style: none }
 
 
 </style>
-
+                            
 
 </head>
 <body>
 
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myLargeModal">
+  큰 Modal
+</button>
+                               
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10" style="width: 100%">
@@ -174,7 +177,7 @@ li { list-style: none }
 
 												<td class="boardTr" data-userid="${allEmployee.userId}"><button
 														type="button" class="btn btn-default" data-toggle="modal"
-														data-target="#myModal">
+														data-target="#myLargeModalEdit2">
 														<u>${allEmployee.userId }</u>
 													</button></td>
 
@@ -236,7 +239,6 @@ li { list-style: none }
 
 						
 
-					</div>
 				</div>
 			</div>
 			</p>
@@ -266,7 +268,7 @@ li { list-style: none }
 										<tr>
 											<td class="boardTr" data-userid="${allEmployee.userId}"><button
 													type="button" class="btn btn-default" data-toggle="modal"
-													data-target="#myLargeModalEdit">
+													data-target="#myLargeModalEdit1">
 													<u>${allEmployee.userId }</u>
 												</button></td>
 
@@ -319,7 +321,7 @@ li { list-style: none }
 										<tr>
 											<td class="boardTr" data-userid="${allEmployee.userId}"><button
 													type="button" class="btn btn-default" data-toggle="modal"
-													data-target="#myLargeModalEdit">
+													data-target="#myLargeModalEdit1">
 													<u>${allEmployee.userId }</u>
 												</button></td>
 
@@ -369,7 +371,7 @@ li { list-style: none }
 										<tr>
 											<td class="boardTr" data-userid="${allEmployee.userId}"><button
 													type="button" class="btn btn-default" data-toggle="modal"
-													data-target="#myLargeModalEdit">
+													data-target="#myLargeModalEdit1">
 													<u>${allEmployee.userId }</u>
 												</button></td>
 
@@ -397,6 +399,7 @@ li { list-style: none }
 
 
 	<script>
+	
 	//사원 신규등록 클릭시 정보가져오기
 	$("#employeeInsert").on("click", function(){
 		
@@ -575,7 +578,7 @@ li { list-style: none }
 
 		}); 
 	</script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
 	<form id="frm1" action="${cp}/employee/deleteEmployee" method="get">
 		<input type="hidden" id="delete_no" name="delete_no" />
 	</form>

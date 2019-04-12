@@ -37,7 +37,40 @@
 				</tr>
 			</thead>	
 			<tbody id="assetTbody">
-				
+
+				<c:forEach items="${depreciationList }" var="vo">
+					<tr>
+						<td>${vo.assetName }</td>
+						<td>${vo.assetCode }</td>
+						<td><fmt:formatDate value="${vo.acquisitionDate  }" pattern="yyyy-MM-dd" /></td>
+
+						<td>${vo.acquisitionPrice }</td>
+						<td>${vo.depreciation }</td>
+						<td>${vo.accumulated }</td>
+						<td>${vo.residualvalue }</td>
+						<td>${vo.serviceLife }</td>
+						
+						<!-- 데이트타입 스트링으로 변경 -->
+						<c:set var="dates" >
+							<fmt:formatDate value="${vo.acquisitionDate  }" pattern="yyyy/MM/dd" />
+						</c:set>
+						<td><a class="bttn-stretch bttn-warning detailView" 
+														data-assetcode="${vo.assetCode }" 
+														 data-acquisitiondate="${dates }"
+														 data-purchasecode="${vo.purchaseCode }"
+														 data-sanggakway="${vo.sanggakWay }"
+														 data-acquisitionprice="${vo.acquisitionPrice }"
+														 data-accountname="${vo.accountName }"
+														 data-clientname="${vo.clientName }"  
+														 data-assetname="${vo.assetName }"
+														 data-residualvalue="${vo.residualvalue }"
+														 data-jukyo="${vo.jukyo }"
+														 data-sanggakcode="${vo.sanggakCode }"
+														 data-depreciation="${vo.depreciation }"
+														 data-accumulated="${vo.accumulated }">장부반영</a></td>
+														
+						</tr>	
+				</c:forEach>
 			</tbody>
 			
 		</table>
@@ -84,18 +117,35 @@
  	 
  	appendYear($("#acquisitionDate"));
  		
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
  	/*장부반영 */
- 	function apply_click(){
+ 	 $(".detailView").on("click", function(){
+ 		var date = $(this).data().acquisitiondate;
+ 		var clientName = $(this).data().clientname;
+ 		var sanggakcode = $(this).data().sanggakcode;
+ 		var depreciation = $(this).data().depreciation;
+ 		var status = 1;
+ 		 
  		$.ajax({
- 			url : "${pageContext.request.contextPath }/slipApply",
- 			data : "accountName="+$("#accountName").val() + "&"+ "acquisitionDate="+$("#acquisitionDate").val(),
+ 			url : "${pageContext.request.contextPath }/insertslipApply",
+ 			data : "acquisitionDate="+ $(this).data().acquisitiondate +"&"+
+ 			"clientName="+ $(this).data().clientname +"&"+
+ 			"sanggakCode="+ $(this).data().sanggakcode +"&"+
+ 			"depreciation="+ $(this).data().depreciation ,
+ 			
  			success : function(data){
- 				$("#accountName").val("");
- 				$("#assetTbody").html(data);
+ 				
+ 				alert("장부반영이 완료되었습니다.");
+ 				$('.detailView').attr('disabled', true);
  			}
   		});
- 	}
-   
+ 	}); 
+ 	
 	</script>
 
  	

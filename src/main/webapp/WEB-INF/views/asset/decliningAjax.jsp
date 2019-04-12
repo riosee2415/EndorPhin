@@ -238,6 +238,7 @@
                 		url 	: "${pageContext.request.contextPath }/deleteAsset",
                 		data 	: "assetCode="+$("#assetCode").val(),
                 		success : function(data){
+                			
 	                   	 alert("고정자산등록을 취소합니다.");
 	                   	$("#insertArea").html("");	
 	                   	location.reload();

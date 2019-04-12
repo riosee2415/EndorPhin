@@ -8,10 +8,7 @@ var modalAddCheck = false;
 		$("#dialogFrm").attr("action","/updDeduct");
 	})
 	
-	$("#estBtn").click(function(){
-		window.open("/searchEstablish?check=new", "네이버새창", "width=800, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );  
-	})
-	$("#dialogSearchBtn").click(function(){
+	$("#dialogSearchBtn, #estBtn").click(function(){
 		window.open("/searchEstablish", "네이버새창", "width=800, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );  
 	})
 	
@@ -74,6 +71,9 @@ var modalAddCheck = false;
 	};
 
 	$("#addModalCheckBtn").on("click", function() {
+		if($("input[name=deductCode]").val()==""){
+			alert('값을 입력하세요');
+		}
 		$.ajax({
 			type : "get",
 			url : "/findDeductCode",

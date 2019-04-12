@@ -28,6 +28,8 @@ import kr.or.ddit.employee.model.EmployeeVo;
 import kr.or.ddit.employee.model.Employee_detailVo;
 import kr.or.ddit.employee.service.IEmployeeDetailService;
 import kr.or.ddit.employee.service.IEmployeeService;
+import kr.or.ddit.image.model.ImagesVo;
+import kr.or.ddit.image.service.IImagesService;
 
 @RequestMapping("/employee")
 @Controller
@@ -40,6 +42,9 @@ public class EmployeeController {
 	
 	@Resource(name = "employeeDetailService")
 	private IEmployeeDetailService employeeDetailService;
+	
+	@Resource(name="imagesService")
+	private IImagesService imagesService;
 	
 	
 	@RequestMapping(path = "/getAllEmployee", method = RequestMethod.GET)
@@ -63,33 +68,55 @@ public class EmployeeController {
 	@RequestMapping(path = "/insertEmployee", method = RequestMethod.POST)
 	public String insertEmployee_POST(Model model, EmployeeVo vo,RedirectAttributes ra,
 			MultipartRequest multparts) throws IllegalStateException, IOException {
+		
+		
+		
+		ImagesVo imageVo = new ImagesVo();
+		Employee_detailVo detailVo = new Employee_detailVo();
+		imageVo.setUserId(vo.getUserId());
+
+		
+		
 		employeeService.insertEmployee(vo);
 		
-		
-		
-		if(multparts != null){
-			
-		MultipartFile file = multparts.getFile("realFilename");
-		Employee_detailVo detailVo = new Employee_detailVo();
-		
-		String file_name = "";
-		String file_path = "";
+		String imageCode = imagesService.updateOrInsertImages(imageVo, multparts);
+		detailVo.setUserId(vo.getUserId());
+		detailVo.setImagecode(imageCode);
+		employeeDetailService.insertEmployeeDetail(detailVo);
 		
 		
 		
-		if (file.getSize() > 0) {
-			file_name = file.getOriginalFilename();
-			file_path = ("c:\\picture\\" + UUID.randomUUID().toString());
-			file.transferTo(new File(file_path));
-			
-			detailVo.setUserId(vo.getUserId());
-			detailVo.setImg_name(file_name);
-			detailVo.setImg_path(file_path);
-
-			employeeDetailService.insertEmployeeDetail(detailVo);
-		}
 		
-		}					 
+		
+		
+		
+//		if(multparts != null){
+//			
+//		MultipartFile file = multparts.getFile("realFilename");
+//		ImagesVo imageVo = new ImagesVo();
+//		
+//		String file_name = "";
+//		String file_path = "";
+//		
+//		
+//		
+//		if (file.getSize() > 0) {
+//			file_name = file.getOriginalFilename();
+//			file_path = ("c:\\picture\\" + UUID.randomUUID().toString());
+//			file.transferTo(new File(file_path));
+//			
+//			imageVo.setUserId(vo.getUserId());
+//			imageVo.set
+//			
+//			
+//			
+//			detailVo.setImg_name(file_name);
+//			detailVo.setImg_path(file_path);
+//
+//			
+//		}
+//		
+//		}					 
 		
 		ra.addFlashAttribute("msg", "정상 등록 되었습니다");
 		return "redirect:/employee/getAllEmployee";
@@ -159,21 +186,28 @@ public class EmployeeController {
 		
 		
 	}
-	
-	
+	       
 	
 	@RequestMapping("/profileImg")
 	public void profileImg(HttpServletRequest request, HttpServletResponse response,
 			@RequestParam("userId") String userId) throws IOException {
+		
+		
 
-		response.setHeader("content-Disposition", "attachment; filename=profile.png");
-		response.setContentType("image.png");
-		logger.debug("이미지서브릿 : {}",userId);
+		//response.setHeader("content-Disposition", "attachment; filename=profile.png");
+		//response.setContentType("image.png");
+		
+		
 		Employee_detailVo vo = employeeDetailService.selectEmployeeDetail(userId);
 
+		
+		String Img_path = vo.getImagerealpath() + vo.getImagerealname();
+		
+		System.out.println("경로 :" + Img_path);
+		
 		FileInputStream fis;
-		if (vo != null && vo.getImg_name() != null) {
-			fis = new FileInputStream(new File(vo.getImg_path()));
+		if (vo != null && vo.getImagename() != null) {
+			fis = new FileInputStream(new File(Img_path));
 		} else {
 
 			ServletContext application = request.getServletContext();
@@ -193,7 +227,6 @@ public class EmployeeController {
 		fis.close();
 
 	}
-	
 	
 	@RequestMapping(path = "/updateEmployee", method = RequestMethod.GET)
 	@ResponseBody

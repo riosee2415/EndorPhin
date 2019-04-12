@@ -8,7 +8,7 @@
 	<!-- 사원정보 입력 -->
 	<insert id="insertEmployee_detail" parameterType="employee_detailVo">
 		insert into employee_detail
-		(userid, finalschool, email, phonenumber, address, marrystatus,img_name, img_path)
+		(userid, finalschool, email, phonenumber, address, marrystatus,imagecode)
 		values
 		(
 		#{userId},
@@ -17,8 +17,7 @@
 		nvl(#{phoneNumber, jdbcType=VARCHAR},null),
 		nvl(#{address, jdbcType=VARCHAR},null),
 		nvl(#{marryStatus, jdbcType=VARCHAR},null),
-		nvl(#{img_name, jdbcType=VARCHAR},null),
-		nvl(#{img_path, jdbcType=VARCHAR},null)
+		nvl(#{imagecode, jdbcType=VARCHAR},null)
 		)
 	
 	</insert>
@@ -27,18 +26,35 @@
 	<!-- 사원정보 전체 불러오기 -->
 	<select id="getAllEmployee_detail" resultType="employee_detailVo">
 		select
-		userid, finalschool, email, phonenumber, address, marrystatus,img_name, img_path
+		userid, finalschool, email, phonenumber, address, marrystatus,imagecode
 		from employee_detail
 	</select>
+
+
+
+
+
+
+
 
 
 	<!-- 사원정보 선택하여 가져오기 -->
 	<select id="selectEmployee_detail" resultType="employee_detailVo"
 		parameterType="map">
-		select
-		userid, finalschool, email, phonenumber, address, marrystatus,img_name, img_path
-		from
-		employee_detail where userid = #{userid}
+		 select
+		a.userid,
+        a.finalschool,
+        a.email,
+        a.phonenumber,
+        a.address,
+        a.marrystatus,
+        a.imagecode,
+        b.imagename,
+        b.imagerealpath,
+        b.imagerealname
+		from employee_detail a, images b
+		where a.imagecode = b.imagecode
+        and b.userid = #{userid}
 	</select>
 
 

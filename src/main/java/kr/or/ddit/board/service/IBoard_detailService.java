@@ -141,4 +141,22 @@ public interface IBoard_detailService {
 	* Method 설명 : 게시판 별 게시글 전체 갯수
 	 */
 	Integer selectBoardCount(String boardTypeCode);
+	
+	/**
+	 * 
+	* Method : selectBoardTitle
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param startDate
+	* @param endDate
+	* @param title
+	* @return
+	* Method 설명 : 검색
+	 */
+	public List<Board_detailVo> selectBoardTitle(String startDate, String endDate, String title);
+	public List<Board_detailVo> selectBoardUserId(String startDate, String endDate, String userId);
+	public List<Board_detailVo> selectBoardcontens(String startDate, String endDate, String contents);
+	
+	public List<Board_detailVo> listAll(String searchType, String keyword, String startDate, String endDate);
+	public int countAricle(String searchType, String keyword, String startDate, String endDate);
 }

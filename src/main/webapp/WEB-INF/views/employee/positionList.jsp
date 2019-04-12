@@ -117,8 +117,6 @@ background-color: #6E6867;
 
 </style>
 </head>
-<body>
-
 <div class="row">
         <div class="col-md-1" style="width: 100%">
         </div>
@@ -489,5 +487,3 @@ background-color: #6E6867;
 	<form id="frm2" action="${cp}/employee/detailEmployee" method="get">
 		<input type="hidden" id="userId" name="userId" />
 	</form> 
-
-</body>

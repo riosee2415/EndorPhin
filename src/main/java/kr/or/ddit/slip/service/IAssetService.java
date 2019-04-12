@@ -23,4 +23,7 @@ public interface IAssetService {
 	List<AssetVo> searchAsset (String assetCode );
 	
 	List<AssetVo> searchDateAsset(String accountName, String acquisitionDate);
+	
+	
+
 }

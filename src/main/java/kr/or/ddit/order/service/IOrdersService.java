@@ -1,9 +1,9 @@
-package kr.or.ddit.order.dao;
+package kr.or.ddit.order.service;
 
 import java.util.List;
 
 import kr.or.ddit.order.model.OrdersVo;
 
-public interface IOrdersDao {
+public interface IOrdersService {
 	List<OrdersVo> searchByName(OrdersVo ordersVo);
 }

@@ -1,3 +1,4 @@
+<%@page import="com.fasterxml.jackson.annotation.JsonInclude.Include"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -81,9 +82,7 @@
 	</div>
 </div>
 
-<div id="content23"></div>
-
-
+<%@ include file="/paymentModal/deductModal.jsp"%>
 <!-- 상세조회 모달창 -->
 
 <form action="/delDeproduct" id="dialogFrm">
@@ -111,9 +110,4 @@
 
 <script type="text/javascript" src="/js/deduct.js">
 	
-</script>
-<script>
-	$(document).ready(function() {
-		$("#content23").load("/temporaryFile/lee.html");
-	});
 </script>

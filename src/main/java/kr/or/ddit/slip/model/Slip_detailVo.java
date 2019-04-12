@@ -6,12 +6,12 @@ package kr.or.ddit.slip.model;
  */
 public class Slip_detailVo {
 	
-	String slipDetailNo;
-	String status;
-	String price;
-	String clientCard;
-	String slipNumber;
-	String establishCode;
+	String slipDetailNo; // 전표 상세번호
+	String status; //차대변 구분
+	String price; // 금액
+	String clientCard; //거래처/계좌/카드
+	String slipNumber; //전표번호
+	String establishCode; //계정과목코드
 	
 	public String getSlipDetailNo() {
 		return slipDetailNo;

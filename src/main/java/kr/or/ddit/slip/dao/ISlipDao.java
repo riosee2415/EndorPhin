@@ -106,5 +106,15 @@ public interface ISlipDao {
 	*/
 	public int finalSaveSlip(SlipVo slipVo);
 	
+	/**
+	* Method : getSlipMax
+	* 작성자 : PC05
+	* 변경이력 :
+	* @return
+	* Method 설명 : max값 asset테이블에 넘겨주기 
+	*/
+	int getSlipMax();
+	
+	
 	
 }

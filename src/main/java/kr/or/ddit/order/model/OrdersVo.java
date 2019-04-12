@@ -14,13 +14,35 @@ public class OrdersVo {
 	String userId;
 	String orderPrice;
 	String orderList;
-	Date dueDate;
-	Date paymentDueDate;
+	String dueDate;
+	String paymentDueDate;
 	String specialnote;
 	String clientCode;
 	String status;
 	String sortation;
 	
+	String preDate;
+	String postDate;
+	String clientname;
+	
+	public String getClientname() {
+		return clientname;
+	}
+	public void setClientname(String clientname) {
+		this.clientname = clientname;
+	}
+	public String getPreDate() {
+		return preDate;
+	}
+	public void setPreDate(String preDate) {
+		this.preDate = preDate;
+	}
+	public String getPostDate() {
+		return postDate;
+	}
+	public void setPostDate(String postDate) {
+		this.postDate = postDate;
+	}
 	public String getOrderCode() {
 		return orderCode;
 	}
@@ -51,16 +73,16 @@ public class OrdersVo {
 	public void setOrderList(String orderList) {
 		this.orderList = orderList;
 	}
-	public Date getDueDate() {
+	public String getDueDate() {
 		return dueDate;
 	}
-	public void setDueDate(Date dueDate) {
+	public void setDueDate(String dueDate) {
 		this.dueDate = dueDate;
 	}
-	public Date getPaymentDueDate() {
+	public String getPaymentDueDate() {
 		return paymentDueDate;
 	}
-	public void setPaymentDueDate(Date paymentDueDate) {
+	public void setPaymentDueDate(String paymentDueDate) {
 		this.paymentDueDate = paymentDueDate;
 	}
 	public String getSpecialnote() {

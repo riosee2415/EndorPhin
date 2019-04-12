@@ -48,8 +48,7 @@
   <link href="${pageContext.request.contextPath}/resources/js/Chart.StackedBar.js" rel="stylesheet" type="text/css">
   <!-- 차트 js 종료 -->
   
-  
-  
+  <script type="text/javascript" src="/js/attrchange.js"></script>
   
   
   <!-- Acoount Part Basic Style -->

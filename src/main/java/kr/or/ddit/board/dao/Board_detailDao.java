@@ -10,6 +10,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.or.ddit.board.model.Board_detailVo;
+import kr.or.ddit.board.model.CommentsVo;
 import kr.or.ddit.util.model.PageVo;
 
 @Repository("board_detailDao")
@@ -264,8 +265,69 @@ public class Board_detailDao implements IBoard_detailDao{
 	
 	@Override
 	public int countAricle(String searchType, String keyword, String startDate, String endDate) {
-		// TODO Auto-generated method stub
-		return 0;
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("keyword", keyword);
+		map.put("searchType", searchType);
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		return sqlSession.selectOne("board_detail.countAricle",map);
+	}
+
+	/**
+	 * 
+	* Method : insertBoardReply
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param param
+	* Method 설명 : 댓글 등록
+	 */
+	@Override
+	public void insertBoardReply(CommentsVo param) {
+		sqlSession.insert("comments.insertBoardReply", param);
+		
+	}
+
+	/**
+	 * 
+	* Method : updateBoardReply
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param param
+	* Method 설명 : 댓글 수정
+	 */
+	@Override
+	public void updateBoardReply(CommentsVo param) {
+		sqlSession.update("comments.updateBoardReply", param);
+		
+	}
+
+	/**
+	 * 
+	* Method : selectBoardReplyList
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param param
+	* @return
+	* Method 설명 : 댓글 리스트 조회
+	 */
+	@Override
+	public List<CommentsVo> selectBoardReplyList(String param) {
+		return sqlSession.selectList("comments.selectBoardReplyList", param);
+	}
+
+	/**
+	 * 
+	* Method : deleteCommnetOne
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardNo
+	* @return
+	* Method 설명 : 댓글 삭제
+	 */
+	@Override
+	public int deleteBoardReply(String boardNo) {
+		
+		return sqlSession.delete("comments.deleteBoardReply", boardNo);
 	}
 	
 }

@@ -301,4 +301,61 @@ public class Board_detailService implements IBoard_detailService{
 		return board_detailDao.countAricle(searchType, keyword, startDate, endDate);
 	}
 
+	/**
+	 * 
+	* Method : updateBoardReply
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param param
+	* Method 설명 : 댓글 수정
+	 */
+	@Override
+	public void updateBoardReply(CommentsVo param) {
+		board_detailDao.updateBoardReply(param);
+		
+	}
+
+	/**
+	 * 
+	* Method : insertBoardReply
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param param
+	* Method 설명 : 댓글 등록
+	 */
+	@Override
+	public void insertBoardReply(CommentsVo param) {
+		board_detailDao.insertBoardReply(param);
+		
+	}
+
+	/**
+	 * 
+	* Method : selectBoardReplyList
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param param
+	* @return
+	* Method 설명 : 댓글 리스트 조회
+	 */
+	@Override
+	public List<CommentsVo> selectBoardReplyList(String param) {
+		
+		return board_detailDao.selectBoardReplyList(param);
+	}
+
+	/**
+	 * 
+	* Method : deleteCommnetOne
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardNo
+	* @return
+	* Method 설명 : 댓글 삭제
+	 */
+	@Override
+	public int deleteBoardReply(String boardNo) {
+		return board_detailDao.deleteBoardReply(boardNo);
+	}
+
 }

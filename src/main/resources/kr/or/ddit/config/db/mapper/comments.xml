@@ -55,6 +55,34 @@
 			
 		 where commentno=#{commentNo}
 	</update>
+	
+	<!-- 테스트 -->
+	<!-- 댓글 등록 -->
+	<insert id="insertBoardReply" parameterType="commentsVo" >
+        
+	    insert into comments(boardNo, commentNo, commentUser, commentContents, commentDate, commentTitle)
+	    values (#{boardNo}, COMMENTNO_SEQ.nextval, #{commentUser}, #{commentContents}, sysdate, nvl(#{commentTitle, jdbcType=VARCHAR }, 'null'))
+	</insert>
+	
+	<select id="selectBoardReplyList" resultType="commentsVo" parameterType="String">
+	    select commentNo,
+			   commentTitle,
+			   commentContents,
+			   boardNo,
+			   commentDate,
+			   commentUser
+		  from comments		
+	     where boardNo=#{boardNo}
+	         order by commentNo
+    </select>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteBoardReply" parameterType="String">
+		delete from comments
+		where boardNo = #{boardNo}
+	</delete>
+
+
 </mapper>
 
 

@@ -54,7 +54,15 @@
 					등록</a> <a class="dropdown-item"
 					href="${pageContext.request.contextPath }/sellAsset">고정자산 매각</a> <a
 					class="dropdown-item"
-					href="${pageContext.request.contextPath }/assetUsed">감가상각비</a>
+				href="${pageContext.request.contextPath }/assetUsed">감가상각비</a>
+					<h3 class="dropdown-header">회계관리</h3>
+					<a class="dropdown-item" href="${pageContext.request.contextPath }/psList">매입매출장</a> 
+					<a class="dropdown-item" href="${pageContext.request.contextPath }/purchaseAsset">합계잔액시산표</a> 
+					<a class="dropdown-item" href="${pageContext.request.contextPath }/purchaseAsset">재무상태표</a> 
+					<a class="dropdown-item" href="${pageContext.request.contextPath }/purchaseAsset">손익계산서</a> 
+				<h3 class="dropdown-header">부가가치세</h3>
+					<a class="dropdown-item" href="${pageContext.request.contextPath }/purchaseAsset">부가세신고서</a>
+				
 			</div>
 		</div>
 

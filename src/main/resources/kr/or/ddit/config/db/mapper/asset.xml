@@ -81,6 +81,14 @@
 		     where  assetCode = #{assetCode}
 	</update>
 	
+	<!--일반전표 장부반영 되었을 때 전표번호등록해주기  -->
+	<update id="updateSlipNumber" parameterType="assetVo">
+		 update asset set 
+		 		slipNumber  = #{slipNumber}
+		     where  assetCode = #{assetCode}
+	</update>
+	
+	
 	<update id="updateAsset" parameterType="assetVo">
 		 update asset set 
 					assetName  = #{assetName},

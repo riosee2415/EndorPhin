@@ -89,6 +89,7 @@ $("#acquisitionPrice").keypress(function(e){
 	
 	fn_insertSet(e);
 });
+    //금액 엔터누를시 콤마 찍힘
 	function fn_insertSet(e){
 		if(e.which == 13){
 		var comma = fn_numberWithCommas($("#acquisitionPrice").val());
@@ -96,6 +97,7 @@ $("#acquisitionPrice").keypress(function(e){
 		$("#acquisitionPrice").val(comma);
 	}
 	}
+	/*내용연수표로 이동 */
 	function myClick(){
 		$.ajax({
 			url  : "${pageContext.request.contextPath }/serviceLife",

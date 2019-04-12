@@ -161,7 +161,7 @@
 		
 		var acquisitionPrice  = $("#acquisitionPrice1").val();
 		var cal 			  = $("#depreciationRate").val();
-		var accumulated 	  = acquisitionPrice*cal /* 감가상각누계액 */
+		var accumulated 	  = 0; /* 감가상각누계액 */
 		var depreciation 	  = (acquisitionPrice-accumulated)*cal; /*정률법 = 감가상각비 계산 (취득원가-감가상각누계액) x 상각률 */
 		var depre			  = parseInt(depreciation);
 		var accumulated_parse = parseInt(accumulated);
@@ -173,16 +173,17 @@
 		$("#serviceLife").val(data); 
 		$("#depreciation").val(depre);
 		
-		
 		$('.buttons').trigger('click');
-    	
+		
 	});
     
 	 /*원단위 콤마 변환*/
 	function fn_numberWithCommas(x) {
 	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
-	
+	function removeComma(str){
+		return parseInt(str.replace(/,/g,""));
+	}
 	function insertBtn_fn(){
 		if($("#assetName").val().trim() == "" || $("#accountName").val().trim()==""
 			|| $("#clientName").val().trim() == "" || $("#sanggakCode").val().trim()==""
@@ -191,6 +192,11 @@
 			alert("(*)은 필수 사항입니다.");
 			return false;
 		}
+		var delDepre  = $("#depreciation").val();
+			delDepre = removeComma(delDepre);
+		$("#depreciation").val(delDepre);
+		
+		
 		$.ajax({
 			url  : "${pageContext.request.contextPath }/insertFrm",
 			data : "assetCode="+$("#assetCode1").val() + "&"+ "date="+$("#date").val()+ 

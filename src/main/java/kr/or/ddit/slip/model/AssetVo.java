@@ -15,7 +15,7 @@ public class AssetVo {
 	String clientName; // 거래처명 =
 	String sanggakWay; // 상각방법 =
 	String acquisitionPrice; // 취득금액 =
-	int slipNumber; // 전표번호
+	String slipNumber; // 전표번호
 	String residualvalue; // 잔존가치 =
 	String jukyo; // 적요 =
 	String companyCode;// 회사코드
@@ -83,11 +83,11 @@ public class AssetVo {
 		this.acquisitionPrice = acquisitionPrice;
 	}
 
-	public int getSlipNumber() {
+	public String getSlipNumber() {
 		return slipNumber;
 	}
 
-	public void setSlipNumber(int slipNumber) {
+	public void setSlipNumber(String slipNumber) {
 		this.slipNumber = slipNumber;
 	}
 

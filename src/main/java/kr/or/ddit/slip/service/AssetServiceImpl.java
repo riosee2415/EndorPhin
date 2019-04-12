@@ -59,6 +59,11 @@ public class AssetServiceImpl implements IAssetService{
 		return assetDao.searchDateAsset(accountName, acquisitionDate);
 	}
 
+	@Override
+	public int updateSlipNumber(AssetVo assetVo) {
+		return assetDao.updateSlipNumber(assetVo);
+	}
+
 
 
 

@@ -31,7 +31,7 @@
 					<th>취득가액</th>
 					<th>감가 상각비</th>
 					<th>감가상각 누계액</th>
-					<th>자존가치</th>
+					<th>잔존가치</th>
 					<th>내용연수</th>
 					<th>장부반영</th>
 				</tr>
@@ -116,32 +116,23 @@
  	}
  	 
  	appendYear($("#acquisitionDate"));
- 		
- 	
- 	
- 	
- 	
- 	
  	
  	/*장부반영 */
  	 $(".detailView").on("click", function(){
- 		var date = $(this).data().acquisitiondate;
- 		var clientName = $(this).data().clientname;
- 		var sanggakcode = $(this).data().sanggakcode;
- 		var depreciation = $(this).data().depreciation;
- 		var status = 1;
- 		 
- 		$.ajax({
+ 	
+ 		 $.ajax({
  			url : "${pageContext.request.contextPath }/insertslipApply",
  			data : "acquisitionDate="+ $(this).data().acquisitiondate +"&"+
  			"clientName="+ $(this).data().clientname +"&"+
- 			"sanggakCode="+ $(this).data().sanggakcode +"&"+
- 			"depreciation="+ $(this).data().depreciation ,
+ 			"sanggakCode="+ $(this).data().sanggakcode+"&"+
+ 			"assetCode="+ $(this).data().assetcode+"&"+
+ 			"depreciation="+ $(this).data().depreciation, 
  			
  			success : function(data){
  				
  				alert("장부반영이 완료되었습니다.");
- 				$('.detailView').attr('disabled', true);
+ 				return false;
+ 				
  			}
   		});
  	}); 

@@ -143,11 +143,15 @@
 		$("#depreciation").val(depre);
 		
 		$('.buttons').trigger('click');
+		
 	});
     /*원단위 콤마 변환*/
 	function fn_numberWithCommas(x) {
 	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
  }
+	function removeComma(str)	{
+		return parseInt(str.replace(/,/g,""));
+	}
     
 	function insertBtn_fn(){
 		
@@ -157,6 +161,10 @@
 			alert("(*)은 필수 사항입니다.");
 			return false;
 		}
+		var delDepre  = $("#depreciation").val();
+		delDepre = removeComma(delDepre);
+		$("#depreciation").val(delDepre);
+		
 		$.ajax({
 			url  : "${pageContext.request.contextPath }/insertFrm",
 			data : "assetCode="+$("#assetCode1").val() + "&"+ "date="+$("#date").val()+ 

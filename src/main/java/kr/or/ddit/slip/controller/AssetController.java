@@ -183,12 +183,12 @@ public class AssetController {
 		AssetVo asset = assetService.selectAsset(assetCode); //상세보기 
 		
 	
-		if(updAssect > 0) {
+		if(updAssect > 0) { 
 			
-			if( sanggakWay11 > 0){
+			if( sanggakWay11 > 0){  //정액법일때 
 				model.addAttribute("asset", asset);
 				return "asset/modify_straightAjax";
-			}else {
+			}else {   //정률법일때
 				model.addAttribute("declining", SalesCodeConstant.declining);
 				model.addAttribute("asset", asset);
 				return "asset/modify_decliningAjax";
@@ -297,6 +297,16 @@ public class AssetController {
 		return "purchaseAsset";
 		
 	}
+	
+	//매입매출에 장부반영
+	@RequestMapping("applyTax_cal")
+	public String applyTax_cal(String acquisitionPrice){
+		
+		logger.debug("acquisitionPrice:{}",acquisitionPrice);
+		return "purchaseAsset";
+	}
+	
+	
 	
 	//매각
 	@RequestMapping(path="sellAsset", method=RequestMethod.GET)

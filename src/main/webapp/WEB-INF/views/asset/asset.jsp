@@ -211,23 +211,6 @@
 
 	<script>
 	
-	$("document").ready(function() {
-	
-		 $("#yes_Btn").on("click", function(){
-	
-			var deptcode = $("#upd_deptCode").val();
-			var status 	 = $("#yes_Btn").val();
-			
-			alert(deptcode);
-			alert($("#yes_Btn").val());
-	
-			$("#frm_deptCode").val(deptcode);
-			$("#frm_usestatus").val(status);
-			
-			$("#useFrm").submit();
-		});  
-	});	
-	
 	function Enter_Check(){
 	       
 	    if(event.keyCode == 13){ // 엔터키의 코드는 13입니다.
@@ -336,7 +319,7 @@
 				}
 			});
 		}
-});
+	});
 	/*코드 검색  */
 	$("#seachBtn").on("click",function(){
 		$.ajax({
@@ -349,8 +332,16 @@
 			}
 		});
 	});
-	
-
+	$("#applybtn").on("click",function(){
+		
+		$.ajax({
+			url:"${pageContext.request.contextPath}/applyTax_cal",
+			data:"acquisitionPrice="+$(this).data().acquisitionprice,
+			success:function(data){
+				alert("ddd");
+			}
+		});
+	});
 
 	</script>
 	

@@ -151,17 +151,23 @@
     /*원단위 콤마 변환*/
 	function fn_numberWithCommas(x) {
 	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
- }
+ 	}
     
-    
+	function removeComma(str){
+		return parseInt(str.replace(/,/g,""));
+	}
+	
 	function insertBtn(){
-		alert("dsfdsf");
 		if($("#assetName").val().trim() == "" || $("#accountName").val().trim()==""
 			|| $("#clientName").val().trim() == "" || $("#sanggakCode").val().trim()==""
 			|| $("#depreciation").val().trim() == "" || $("#residualvalue").val().trim()==""){
 			alert("(*)은 필수 사항입니다.");
 			return false;
 		}
+		var delDepre  = $("#depreciation").val();
+		delDepre = removeComma(delDepre);
+		$("#depreciation").val(delDepre);
+		
 		$.ajax({
 			url  : "${pageContext.request.contextPath }/insertFrm",
 			data : "assetCode="+$("#assetCode").val() + "&"+ "date="+$("#date").val()+ 

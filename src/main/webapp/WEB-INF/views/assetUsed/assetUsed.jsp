@@ -117,13 +117,26 @@
  	 
  	appendYear($("#acquisitionDate"));
  		
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
  	/*장부반영 */
  	 $(".detailView").on("click", function(){
  		var date = $(this).data().acquisitiondate;
- 		 alert(date);
- 		  $.ajax({
+ 		var clientName = $(this).data().clientname;
+ 		var sanggakcode = $(this).data().sanggakcode;
+ 		var depreciation = $(this).data().depreciation;
+ 		var status = 1;
+ 		 
+ 		$.ajax({
  			url : "${pageContext.request.contextPath }/insertslipApply",
- 			data : "acquisitionDate="+ $(this).data().acquisitiondate,
+ 			data : "acquisitionDate="+ $(this).data().acquisitiondate +"&"+
+ 			"clientName="+ $(this).data().clientname +"&"+
+ 			"sanggakCode="+ $(this).data().sanggakcode +"&"+
+ 			"depreciation="+ $(this).data().depreciation ,
  			
  			success : function(data){
  				

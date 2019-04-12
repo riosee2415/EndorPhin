@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.ddit.slip.model.AssetVo;
 import kr.or.ddit.slip.model.SlipVo;
+import kr.or.ddit.slip.model.Slip_detailVo;
 import kr.or.ddit.slip.service.IAssetService;
 import kr.or.ddit.slip.service.ISlipService;
+import kr.or.ddit.slip.service.ISlip_detailService;
 
 @Controller
 public class assetUsedController {
@@ -29,6 +31,8 @@ public class assetUsedController {
 	@Resource(name="slipService")
 	private ISlipService slipService;
 	
+	@Resource(name="slip_detailService")
+	private ISlip_detailService slip_detailService;
 	
 	@RequestMapping("assetUsed")
 	public String ListDepreciation(Model model) {
@@ -51,8 +55,9 @@ public class assetUsedController {
 		return "assetUsed/assetDateSearchAjax";
 	}
 
-	@RequestMapping("insertslipApply")
-	public String slipInsertApply(SlipVo slipVo,String acquisitionDate,Model model) throws ParseException {
+	/*@RequestMapping("insertslipApply")
+	public String slipInsertApply(SlipVo slipVo,String acquisitionDate,Model model,
+								  String depreciation,String clientName, String sanggakCode) throws ParseException {
 		
 		Date date = new Date();									
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yy/MM/dd");
@@ -71,11 +76,24 @@ public class assetUsedController {
 		
 		int slipNumber = slipService.getSlipCnt();
 		slipNumber++;
-		model.addAttribute("slipNumber", slipNumber);
 		
+		String slipNum = Integer.toString(slipNumber);
 		
+		int slipDetailNo = 0;
+		slipDetailNo++;
+		String detailNo = Integer.toString(slipDetailNo);
+		
+		Slip_detailVo vo = new Slip_detailVo();
+		vo.setSlipNumber("132");
+		vo.setSlipDetailNo("2");
+		vo.setStatus("1");
+		vo.setPrice(depreciation);
+		vo.setClientCard(clientName);
+		vo.setEstablishCode(sanggakCode);
+		
+		slip_detailService.insertDetailSlip(vo);
 		return "assetUsed";
-	}
+	}*/
 	
 	
 }

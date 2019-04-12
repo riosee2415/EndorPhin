@@ -121,284 +121,126 @@ a:hover, a:focus {
 
 </head>
 <body>
-
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myLargeModal">
-  큰 Modal
-</button>
-                               
-	<div class="row">
-		<div class="col-md-1"></div>
-		<div class="col-md-10" style="width: 100%">
-			<div class="tab" role="tabpanel">
-				<!-- Nav tabs -->
-				<ul class="nav nav-tabs" role="tablist">
-					<li role="presentation" class="active"><a id="frmTap"
-						href="#Section1" aria-controls="home" role="tab" data-toggle="tab">사원
-							목록</a></li>
-					<li role="presentation"><a href="#Section2"
-						aria-controls="profile" role="tab" data-toggle="tab"> 인 사 </a></li>
-					<li role="presentation"><a href="#Section3"
-						aria-controls="messages" role="tab" data-toggle="tab"> 회 계 </a></li>
-					<li role="presentation"><a href="#Section4"
-						aria-controls="messages" role="tab" data-toggle="tab"> 물 류 </a></li>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-10" style="width: 100%">
+				<div class="tab" role="tabpanel">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs" role="tablist">
+						<li role="presentation" class="active"><a id="frmTap"
+							href="#Section1" aria-controls="home" role="tab"
+							data-toggle="tab">사원 목록</a></li>
+						<li role="presentation"><a href="#Section2"
+							aria-controls="profile" role="tab" data-toggle="tab"> 인 사 </a></li>
+						<li role="presentation"><a href="#Section3"
+							aria-controls="messages" role="tab" data-toggle="tab"> 회 계 </a></li>
+						<li role="presentation"><a href="#Section4"
+							aria-controls="messages" role="tab" data-toggle="tab"> 물 류 </a></li>
 
 
 
-				</ul>
+					</ul>
 
-				<!-- Tab panes -->
-				<div class="tab-content tabs">
-					<div role="tabpanel" class="tab-pane fade in active" id="Section1">
-						<p>
-						<form class="form-horizontal">
-							<div class="form-group">
-								<table class="table table-striped">
-									<thead class="thead">
-										<tr>
-											<th>선택</th>
-											<th>사원번호</th>
-											<th>사원명</th>
-											<th>부서명</th>
-											<th>직책명</th>
-											<th>직급명</th>
-											<th>근속년수</th>
-											<th>비고</th>
-											<th>입사일</th>
-											<th>생년월일</th>
-										</tr>
-									</thead>
-
-									<tbody id="mytbody">
-										<c:forEach items="${allEmployee}" var="allEmployee">
+					<!-- Tab panes -->
+					<div class="tab-content tabs">
+						<div role="tabpanel" class="tab-pane fade in active" id="Section1">
+							<p>
+							<form class="form-horizontal">
+								<div class="form-group">
+									<table class="table table-striped">
+										<thead class="thead">
 											<tr>
-												<td><input type="checkbox" name="check"
-													value="${allEmployee.userId}"
-													style="width: 30px; height: 30px;"></td>
-
-												<td class="boardTr" data-userid="${allEmployee.userId}"><button
-														type="button" class="btn btn-default" data-toggle="modal"
-														data-target="#myLargeModalEdit2">
-														<u>${allEmployee.userId }</u>
-													</button></td>
-
-												<td>${allEmployee.userNm }</td>
-												<td>${allEmployee.deptname }</td>
-												<td>${allEmployee.positionname }</td>
-												<td>${allEmployee.rankname }</td>
-												<td>${allEmployee.continuousYear }</td>
-												<td>${allEmployee.relate }</td>
-												<td>${allEmployee.joinCompany }</td>
-												<td>${allEmployee.birthDate }</td>
+												<th>선택</th>
+												<th>사원번호</th>
+												<th>사원명</th>
+												<th>부서명</th>
+												<th>직책명</th>
+												<th>직급명</th>
+												<th>근속년수</th>
+												<th>비고</th>
+												<th>입사일</th>
+												<th>생년월일</th>
 											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
-							
+										</thead>
 
-						</form>
+										<tbody id="mytbody">
+											<c:forEach items="${allEmployee}" var="allEmployee">
+												<tr>
+													<td><input type="checkbox" name="check"
+														value="${allEmployee.userId}"
+														style="width: 30px; height: 30px;"></td>
 
-						<div class="form-group">
-							<table>
-								<tr>
-									<td>
-										<button style="background-color: #6E6867 !important;"
-											type="button" class="btn btn-primary btn-lg" id="cancleBtn">삭
-											제</button>
-										<button style="background-color: #6E6867 !important;"
-											type="button" class="btn btn-primary btn-lg"
-											data-toggle="modal" data-target="#myLargeModalInsert" id="employeeInsert">신규등록</button>
-									</td>
-									<td>
-										<form action="${cp}/employee/SearchEmployee" id="searchFrm">
-									</td>
-									<td style="padding-left: 600px"><input type="text"
-										class="search-query form-control" id="searchPay"
-										name="searchName" placeholder="사원명을 검색하시오" /></td>
-									<td>
-										<button class="btn btn-info" type="submit" id="searchBtn">
-											<span class=" glyphicon glyphicon-search">검색</span>
-										</button>
-									</td>
-								</tr>
-								</form>
-							</table>
+													<td class="boardTr" data-userid="${allEmployee.userId}"><button
+															type="button" class="btn btn-default" data-toggle="modal"
+															data-target="#myLargeModalEdit2">
+															<u>${allEmployee.userId }</u>
+														</button></td>
+
+													<td>${allEmployee.userNm }</td>
+													<td>${allEmployee.deptname }</td>
+													<td>${allEmployee.positionname }</td>
+													<td>${allEmployee.rankname }</td>
+													<td>${allEmployee.continuousYear }</td>
+													<td>${allEmployee.relate }</td>
+													<td>${allEmployee.joinCompany }</td>
+													<td>${allEmployee.birthDate }</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</form>
+							</p>
 						</div>
-						
-
-		
-										
-										
-										
-						<!--  사원 등록 모달창 불러오기  -->
-						<%@ include file="employeeInsert.jsp"%>
-				
-						<!--  사원 등록 모달창 불러오기  -->
-						<%@ include file="employeemodify.jsp"%>
-				
-
-						
-
+					</div>
 				</div>
 			</div>
-			</p>
-			<!-- Section2 시작-->
-			<div role="tabpanel" class="tab-pane fade" id="Section2">
-				<p>
-				<form class="form-horizontal">
-					<div class="form-group">
-						<table class="table table-striped">
-							<thead class="thead">
-								<tr>
-									<th>사원번호</th>
-									<th>사원명</th>
-									<th>부서명</th>
-									<th>직책명</th>
-									<th>직급명</th>
-									<th>근속년수</th>
-									<th>비고</th>
-									<th>입사일</th>
-									<th>생년월일</th>
-								</tr>
-							</thead>
 
-							<tbody id="mytbody">
-								<c:forEach items="${allEmployee}" var="allEmployee">
-									<c:if test="${allEmployee.deptname == '인사' }">
-										<tr>
-											<td class="boardTr" data-userid="${allEmployee.userId}"><button
-													type="button" class="btn btn-default" data-toggle="modal"
-													data-target="#myLargeModalEdit1">
-													<u>${allEmployee.userId }</u>
-												</button></td>
 
-											<td>${allEmployee.userNm }</td>
-											<td>${allEmployee.deptname }</td>
-											<td>${allEmployee.positionname }</td>
-											<td>${allEmployee.rankname }</td>
-											<td>${allEmployee.continuousYear }</td>
-											<td>${allEmployee.relate }</td>
-											<td>${allEmployee.joinCompany }</td>
-											<td>${allEmployee.birthDate }</td>
-										</tr>
-									</c:if>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-
-				</form>
-				</p>
+			<div class="form-group">
+				<table>
+					<tr>
+						<td>
+							<button style="background-color: #6E6867 !important;"
+								type="button" class="btn btn-primary btn-lg" id="cancleBtn">삭
+								제</button>
+							<button style="background-color: #6E6867 !important;"
+								type="button" class="btn btn-primary btn-lg" data-toggle="modal"
+								data-target="#myLargeModalInsert" id="employeeInsert">신규등록</button>
+						</td>
+						<td>
+							<form action="${cp}/employee/SearchEmployee" id="searchFrm">
+						</td>
+						<td style="padding-left: 600px"><input type="text"
+							class="search-query form-control" id="searchPay"
+							name="searchName" placeholder="사원명을 검색하시오" /></td>
+						<td>
+							<button class="btn btn-info" type="submit" id="searchBtn">
+								<span class=" glyphicon glyphicon-search">검색</span>
+							</button>
+						</td>
+					</tr>
+					</form>
+				</table>
 			</div>
-			<!-- Section2 끝-->
-
-			<!-- Section3 시작-->
-			<div role="tabpanel" class="tab-pane fade" id="Section3">
-				<p>
-				<form class="form-horizontal">
-
-					<div class="form-group">
-						<table class="table table-striped">
-							<thead class="thead">
-								<tr>
-									<th>사원번호</th>
-									<th>사원명</th>
-									<th>부서명</th>
-									<th>직책명</th>
-									<th>직급명</th>
-									<th>근속년수</th>
-									<th>비고</th>
-									<th>입사일</th>
-									<th>생년월일</th>
-								</tr>
-							</thead>
-
-
-
-							<tbody id="mytbody">
-								<c:forEach items="${allEmployee}" var="allEmployee">
-									<c:if test="${allEmployee.deptname == '회계' }">
-										<tr>
-											<td class="boardTr" data-userid="${allEmployee.userId}"><button
-													type="button" class="btn btn-default" data-toggle="modal"
-													data-target="#myLargeModalEdit1">
-													<u>${allEmployee.userId }</u>
-												</button></td>
-
-											<td>${allEmployee.userNm }</td>
-											<td>${allEmployee.deptname }</td>
-											<td>${allEmployee.positionname }</td>
-											<td>${allEmployee.rankname }</td>
-											<td>${allEmployee.continuousYear }</td>
-											<td>${allEmployee.relate }</td>
-											<td>${allEmployee.joinCompany }</td>
-											<td>${allEmployee.birthDate }</td>
-										</tr>
-									</c:if>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-
-				</form>
-				</p>
-			</div>
-			<!-- Section3 끝-->
-
-			<!-- Section4 시작-->
-			<div role="tabpanel" class="tab-pane fade" id="Section4">
-				<p>
-				<form class="form-horizontal">
-					<div class="form-group">
-						<table class="table table-striped">
-							<thead class="thead">
-								<tr>
-									<th>사원번호</th>
-									<th>사원명</th>
-									<th>부서명</th>
-									<th>직책명</th>
-									<th>직급명</th>
-									<th>근속년수</th>
-									<th>비고</th>
-									<th>입사일</th>
-									<th>생년월일</th>
-								</tr>
-							</thead>
-
-							<tbody id="mytbody">
-								<c:forEach items="${allEmployee}" var="allEmployee">
-									<c:if test="${allEmployee.deptname == '물류' }">
-										<tr>
-											<td class="boardTr" data-userid="${allEmployee.userId}"><button
-													type="button" class="btn btn-default" data-toggle="modal"
-													data-target="#myLargeModalEdit1">
-													<u>${allEmployee.userId }</u>
-												</button></td>
-
-											<td>${allEmployee.userNm }</td>
-											<td>${allEmployee.deptname }</td>
-											<td>${allEmployee.positionname }</td>
-											<td>${allEmployee.rankname }</td>
-											<td>${allEmployee.continuousYear }</td>
-											<td>${allEmployee.relate }</td>
-											<td>${allEmployee.joinCompany }</td>
-											<td>${allEmployee.birthDate }</td>
-										</tr>
-									</c:if>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-				</form>
-				</p>
-			</div>
-		</div>
-	</div>
 
 
 
 
-	<script>
+
+			<!--  사원 등록 모달창 불러오기  -->
+			<%@ include file="employeeInsert.jsp"%>
+
+			<!--  사원 등록 모달창 불러오기  -->
+			<%@ include file="employeemodify.jsp"%>
+
+
+
+
+
+
+			<script>
 	
 	//사원 신규등록 클릭시 정보가져오기
 	$("#employeeInsert").on("click", function(){
@@ -483,7 +325,7 @@ a:hover, a:focus {
 				 $("#inputPasswordChecke").val(userIdCode.password);
 				 $("#relatee").val(userIdCode.relate);
 				 $("#BirthDatee").val(userIdCode.birthDate); 
-				 $("#userimage").attr('src','${cp}/employee/profileImg?userId=' + userIdCode.userId);
+			  $("#userimage").attr('src','${cp}/employee/profileImg?userId=' + userIdCode.userId); 
 			           
 				 
 			} 
@@ -579,11 +421,11 @@ a:hover, a:focus {
 		}); 
 	</script>
 
-	<form id="frm1" action="${cp}/employee/deleteEmployee" method="get">
-		<input type="hidden" id="delete_no" name="delete_no" />
-	</form>
+			<form id="frm1" action="${cp}/employee/deleteEmployee" method="get">
+				<input type="hidden" id="delete_no" name="delete_no" />
+			</form>
 
-	<form id="frm2" action="${cp}/employee/detailEmployee" method="get">
-		<input type="hidden" id="userId" name="userId" />
-	</form>
+			<form id="frm2" action="${cp}/employee/detailEmployee" method="get">
+				<input type="hidden" id="userId" name="userId" />
+			</form>
 </body>

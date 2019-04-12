@@ -114,7 +114,7 @@ a:hover, a:focus {
 }
 
 
-
+li { list-style: none }
 
 
 </style>
@@ -191,6 +191,7 @@ a:hover, a:focus {
 									</tbody>
 								</table>
 							</div>
+							
 
 						</form>
 
@@ -203,7 +204,7 @@ a:hover, a:focus {
 											제</button>
 										<button style="background-color: #6E6867 !important;"
 											type="button" class="btn btn-primary btn-lg"
-											data-toggle="modal" data-target="#myLargeModalInsert">신규등록</button>
+											data-toggle="modal" data-target="#myLargeModalInsert" id="employeeInsert">신규등록</button>
 									</td>
 									<td>
 										<form action="${cp}/employee/SearchEmployee" id="searchFrm">
@@ -396,6 +397,65 @@ a:hover, a:focus {
 
 
 	<script>
+	//사원 신규등록 클릭시 정보가져오기
+	$("#employeeInsert").on("click", function(){
+		
+		
+		$.ajax({
+			url			: "${pageContext.request.contextPath }/employee/getSelectBox" ,
+			method		: "get",
+			//data		: "userId="+$(this).data().userid,
+			success		: function(data) {
+				console.log(data);
+				makeUserList(data);
+				 
+				
+			} 
+		});
+		
+	});
+	
+	
+	
+	function makeUserList(data) {
+		
+		var deptCode_html = "";
+		var position_html = "";
+		var rank_html = "";
+		
+		for(var i = 0; i < data.allDept.length; i++){
+			var dept = data.allDept[i];
+			
+			deptCode_html += "<option value=' " + dept.deptCode +" '> "+dept.deptName +"</option>";
+			
+		}
+		                       
+		$("#deptCode_html").html(deptCode_html);
+		
+		
+		
+		for(var i = 0; i < data.allPosition.length; i++){
+			
+			if(data.allPosition[i].positionStatus == "직책"){
+				var position = data.allPosition[i];
+				position_html += "<option value=' " + position.positionCode +" '> "+position.positionName +"</option>";
+				
+			}else if(data.allPosition[i].positionStatus == "직급"){
+				
+				var rank = data.allPosition[i];
+				rank_html += "<option value=' " + rank.positionCode +" '> "+rank.positionName +"</option>";
+			}
+			
+		
+		}          
+		       
+		$("#position_html").html(position_html);
+		$("#rank_html").html(rank_html);
+		
+		
+		
+		
+	}
 	
 	
 	
@@ -483,11 +543,39 @@ a:hover, a:focus {
 				});
 
 			}); 
+			 
 			
 
 		});
-	</script>
+		
+		 
+		 
+		 $("#zipcodeBtn").on("click", function() {
 
+			new daum.Postcode({
+				oncomplete : function(data) {
+					console.log(data);
+				
+					//새 우편번호 : data.zonecode
+					//우편번호 input select .val (data.zonecode)
+					//$("#zipcode").val(data.zonecode);
+					
+					//기본주소(도로주소) : data.roadAddress
+					//주소1 input select .val (data.zonecode);
+					$("#address").val(data.roadAddress);
+					
+					//상세주소 input focus
+					//$("#addressDetail").focus();
+				
+				
+					
+				
+				}
+			}).open();
+
+		}); 
+	</script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<form id="frm1" action="${cp}/employee/deleteEmployee" method="get">
 		<input type="hidden" id="delete_no" name="delete_no" />
 	</form>

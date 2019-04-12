@@ -3,7 +3,9 @@ package kr.or.ddit.employee.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -24,10 +26,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.or.ddit.company.model.DeptVo;
+import kr.or.ddit.company.service.IDeptService;
 import kr.or.ddit.employee.model.EmployeeVo;
 import kr.or.ddit.employee.model.Employee_detailVo;
+import kr.or.ddit.employee.model.PositionVo;
 import kr.or.ddit.employee.service.IEmployeeDetailService;
 import kr.or.ddit.employee.service.IEmployeeService;
+import kr.or.ddit.employee.service.IPositionService;
 import kr.or.ddit.image.model.ImagesVo;
 import kr.or.ddit.image.service.IImagesService;
 
@@ -46,6 +52,14 @@ public class EmployeeController {
 	@Resource(name="imagesService")
 	private IImagesService imagesService;
 	
+	//   직급/직책
+	@Resource(name = "positionService")
+	private IPositionService positionService;
+	
+	//  부서정보
+	@Resource(name="deptService")
+	private IDeptService deptService;
+	
 	
 	@RequestMapping(path = "/getAllEmployee", method = RequestMethod.GET)
 	public String getAllEmployee(Model model) {
@@ -58,6 +72,10 @@ public class EmployeeController {
 		
 		return "employeeListTiles";
 	}
+	
+	
+	
+	
 	
 	@RequestMapping(path = "/insertEmployee", method = RequestMethod.GET)
 	public String insertEmployee_GET(Model model) {
@@ -297,6 +315,38 @@ public class EmployeeController {
 	
 	
 	
+	
+	@RequestMapping(path="/getSelectBox", method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> getSelectBox(Model model) {
+		
+		
+		
+		
+		List<PositionVo> allPosition = positionService.getAllPosition();
+		List<DeptVo> allDept = deptService.getAllDept();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		Map<String, Object> selectMap = new HashMap<>();
+		
+		selectMap.put("allPosition", allPosition);
+		selectMap.put("allDept", allDept);
+		
+		
+		
+		
+		
+		
+		return selectMap;
+		
+	}
 	
 	
 	

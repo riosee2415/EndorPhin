@@ -13,6 +13,7 @@ public class Employee_detailVo {
 	String address;
 	String marryStatus;
 	String imagecode;
+	String addressDetail;
 	
 	
 	//이미지VO
@@ -23,7 +24,12 @@ public class Employee_detailVo {
 	
 	
 	
-	
+	public String getAddressDetail() {
+		return addressDetail;
+	}
+	public void setAddressDetail(String addressDetail) {
+		this.addressDetail = addressDetail;
+	}
 	public String getImagename() {
 		return imagename;
 	}

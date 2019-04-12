@@ -109,6 +109,14 @@ public class OrdersVo {
 	public void setSortation(String sortation) {
 		this.sortation = sortation;
 	}
+	@Override
+	public String toString() {
+		return "OrdersVo [orderCode=" + orderCode + ", deptCode=" + deptCode + ", userId=" + userId + ", orderPrice="
+				+ orderPrice + ", orderList=" + orderList + ", dueDate=" + dueDate + ", paymentDueDate="
+				+ paymentDueDate + ", specialnote=" + specialnote + ", clientCode=" + clientCode + ", status=" + status
+				+ ", sortation=" + sortation + ", preDate=" + preDate + ", postDate=" + postDate + ", clientname="
+				+ clientname + "]";
+	}
 	
 	
 	

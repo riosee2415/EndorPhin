@@ -34,8 +34,8 @@
 	<!-- 발주서 전체 불러오기 -->
 	<select id="getAllOrders" resultType="ordersVo">
 		select
-		ordercode, deptcode, userid, orderprice, orderlist, duedate,
-		 paymentduedate, specialnote, clientcode, status, sortation
+		ordercode, deptcode, userid, orderprice, orderlist, to_char(duedate,'yyyy-MM-dd') duedate,
+				 to_char(paymentduedate,'yyyy-MM-dd') paymentduedate, specialnote, clientcode, status, sortation
 		from orders
 	</select>
 
@@ -43,8 +43,8 @@
 	<select id="selectOrders" resultType="ordersVo"
 		parameterType="map">
 		select
-		ordercode, deptcode, userid, orderprice, orderlist, duedate,
-		 paymentduedate, specialnote, clientcode, status, sortation
+		ordercode, deptcode, userid, orderprice, orderlist, to_char(duedate,'yyyy-MM-dd') duedate,
+				 to_char(paymentduedate,'yyyy-MM-dd') paymentduedate, specialnote, clientcode, status, sortation
 		from
 		orders where ordercode = #{orderCode}
 	</select>

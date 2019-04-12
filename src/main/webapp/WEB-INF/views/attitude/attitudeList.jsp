@@ -105,8 +105,6 @@ select {
 
 <!--  근태 항목 등록 모달창 종료  -->
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
 <script>
 	

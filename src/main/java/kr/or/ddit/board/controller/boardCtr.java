@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.or.ddit.board.model.Board_detailVo;
+import kr.or.ddit.board.model.CommentsVo;
 import kr.or.ddit.board.service.IAttach_boardService;
 import kr.or.ddit.board.service.IBoard_TypeService;
 import kr.or.ddit.board.service.IBoard_detailService;
@@ -138,9 +139,12 @@ public class boardCtr {
 	public String boardRead(HttpServletRequest request, String boardNo, Model model, String boardTypeCode) throws Exception {
         
         Board_detailVo boardInfo = board_detailService.selectBoardOne(boardNo);
+        List<CommentsVo> replylist = board_detailService.selectBoardReplyList(boardNo);
+
         
         model.addAttribute("boardInfo", boardInfo);
         model.addAttribute("boardTypeCode", boardTypeCode);
+        model.addAttribute("replylist", replylist);
         
         return "boardRead";
 	}
@@ -180,6 +184,45 @@ public class boardCtr {
      model.addAttribute("boardTypeCode",boardTypeCode);
      return "redirect:/boardList";
 	}
+	
+	/**
+	 * 
+	* Method : boardReplySave
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param request
+	* @param boardReplyInfo
+	* @return
+	* Method 설명 : 댓글 등록
+	 */
+	@RequestMapping(value = "/boardReplySave")
+    public String boardReplySave(Model model, CommentsVo boardReplyInfo, String boardTypeCode) {
+        
+		board_detailService.insertBoardReply(boardReplyInfo);
+		model.addAttribute("boardTypeCode", boardTypeCode);
+
+        return "redirect:/boardRead?boardNo=" + boardReplyInfo.getBoardNo();
+    }
+
+	/**
+	 * 
+	* Method : board5ReplyDelete
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param request
+	* @param boardReplyInfo
+	* @return
+	* Method 설명 : 댓글 삭제
+	 */
+	@RequestMapping(value = "/boardReplyDelete")
+    public String board5ReplyDelete(Model model ,HttpServletRequest request, CommentsVo boardReplyInfo, String boardTypeCode) {
+        
+		board_detailService.deleteBoardReply(boardReplyInfo.getCommentNo());
+		model.addAttribute("boardTypeCode",boardTypeCode);
+
+        return "redirect:/boardRead?boardNo=" + boardReplyInfo.getBoardNo();
+    }
+
 
 	/**
 	 * 

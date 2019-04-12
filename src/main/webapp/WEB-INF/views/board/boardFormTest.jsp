@@ -43,7 +43,7 @@
         <input type="hidden" name="boardNo" value="${boardInfo.boardNo}"> 
     </form>    
 </body>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
 function fn_formSubmit(){
     var form = document.form;

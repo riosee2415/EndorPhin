@@ -3,6 +3,7 @@ package kr.or.ddit.board.dao;
 import java.util.List;
 
 import kr.or.ddit.board.model.Board_detailVo;
+import kr.or.ddit.board.model.CommentsVo;
 import kr.or.ddit.slip.model.SlipVo;
 import kr.or.ddit.util.model.PageVo;
 
@@ -167,5 +168,48 @@ public interface IBoard_detailDao {
 	
 	public List<Board_detailVo> listAll(String searchType, String keyword, String startDate, String endDate);
 	public int countAricle(String searchType, String keyword, String startDate, String endDate);
+	
+	/**
+	 * 
+	* Method : insertBoardReply
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param param
+	* Method 설명 : 댓글 등록
+	 */
+	public void insertBoardReply(CommentsVo param);
+	
+	/**
+	 * 
+	* Method : updateBoardReply
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param param
+	* Method 설명 : 댓글 수정
+	 */
+	public void updateBoardReply(CommentsVo param);
+	
+	/**
+	 * 
+	* Method : selectBoard5ReplyList
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param param
+	* @return
+	* Method 설명 : 댓글 리스트 조회
+	 */
+	public List<CommentsVo> selectBoardReplyList(String param);
+	
+	/**
+	 * 
+	* Method : deleteBoardOne
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardNo
+	* @return
+	* Method 설명 : 댓글 삭제
+	 */
+	public int deleteBoardReply(String boardNo);
+
 	
 }

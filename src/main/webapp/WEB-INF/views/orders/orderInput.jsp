@@ -34,10 +34,11 @@
 		</form>
 		<form action="/product/deleteProduct" id="deleteFrm" method="post">
 			<div class="table-responsive">
-				<table class="table table-hover">
+				
+			</div><table class="table table-hover">
 					<thead>
 						<tr>
-							<th><input type="checkbox" id="checkAll" /></th>
+							<th><input type="checkbox" id="checkAll"></th>
 							<th>발주번호</th>
 							<th>구분</th>
 							<th>발주일</th>
@@ -50,9 +51,8 @@
 					<tbody>
 						<c:forEach items="${orderList}" var="vo">
 							<tr>
-								<td><input type="checkbox" class="check"/></td>
-								<td><a  
-									class="bttn-stretch bttn-md bttn-warning">${vo.orderCode}</a></td>
+								<td><input type="checkbox" class="check"></td>
+								<td><a class="bttn-stretch bttn-md bttn-warning orderDialog">${vo.orderCode}</a></td>
 								<td>${vo.sortation}</td>
 								<td>${vo.dueDate}</td>
 								<td>${vo.clientname}</td>
@@ -63,21 +63,18 @@
 						</c:forEach>
 					</tbody>
 				</table>
-			</div>
 
 			<div class="btn_btm">
 				<input class="bttn-jelly bttn-md bttn-warning" type="button"
 					id="delProdBtn" value="선택 삭제">
 				<button type="button" class="bttn-jelly bttn-md bttn-warning orderDialog"
-					data-toggle="modal" style="margin-left: 20px"
-					data-target="#detailLayer">신규등록</button>
+					style="margin-left: 20px">신규등록</button>
 			</div>
 		</form>
 	</div>
 </div>
 
 <!-- 상세조회 모달창 -->
-<form action="/product/deleteProduct" id="dialogFrm" method="post" enctype="multipart/form-data">
 	<div class="dialog">
 		 <span class="dialog__close">&#x2715;</span> <label for="inputName">발주서 상세</label>
 		 <input type="hidden" name="productCode" id="dialog_productCode"/>
@@ -86,88 +83,62 @@
                     <!-- Nav tabs -->
                     <div>
 	                    <ul class="nav nav-tabs" role="tablist">
-	                        <li role="presentation" class="active"><a href="#uploadTab" aria-controls="uploadTab" role="tab" data-toggle="tab">내수품</a>
+	                        <li role="presentation" class="active"><a href="#uploadTab" aria-controls="uploadTab" 
+	                        				role="tab" data-toggle="tab" class="tabControl">수입품</a>
 	                        </li>
-	                        <li role="presentation"><a href="#browseTab" aria-controls="browseTab" role="tab" data-toggle="tab">수입품</a>
-	
+	                        <li role="presentation"><a href="#browseTab" aria-controls="browseTab" role="tab" 
+	                        				data-toggle="tab" class="tabControl">내수품</a>
 	                        </li>
 	                    </ul>
                     </div>
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane" id="uploadTab"></div>
-                        <div role="tabpanel" class="tab-pane" id="browseTab"></div>
+                        <div role="tabpanel" class="tab-pane" id="uploadTab">
+                       	</div>
+                        <div role="tabpanel" class="tab-pane" id="browseTab">
+                        	</div>
                     </div>
                 </div>
-             </div>
-         <div>
 			<input type="button" id="dialog_updBtn" class="btn btn-default modalUpd" value="수정" />
 			<button id="dialog_delBtn" class="btn btn-default dialog__action modalUpd">삭제</button>
 			<input type="button" id="dialog_insBtn" class="btn btn-default modalIns" value="등록" />
 		</div>
 	</div>
-</form>
 
 <script>
-	var tabHtml = "<div>
-        <table class=\'table table-hover\'>
-			<tr>
-				<th>발주일(*)</th>
-				<td><input type=\'text\'/></td>
-				<th>발주내역(*)</th>
-				<td><input type=\'text\'/></td>
-			</tr>
-			<tr>
-				<th>부서</th>
-				<td><input type=\'text\'/></td>
-				<th>담당자</th>
-				<td><input type=\'text\'/></td>
-			</tr>
-			<tr>
-				<th>담당자</th>
-				<td><input type=\'text\'/></td>
-				<th>납기일</th>
-				<td><input type=\'text\'/></td>
-			</tr>
-		</table>
-		</div>
-		<div>
-		<button class=\'btn btn-default\'>상품 주문</button>
-		</div>
-		<div>
-		<table class=\'table table-hover\'>
-			<thead>
-				<tr>
-					<th><input type=\'checkbox\' id=\'checkAll\' /></th>
-					<th>발주번호</th>
-					<th>상품명</th>
-					<th>규격</th>
-					<th>수량</th>
-					<th>단가</th>
-					<th>공급가액</th>
-				</tr>
-			</thead>
-			<tbody id=\'dialogProductTbody\'>
-			</tbody>
-		</table>
-		</div>
-		<div>
-		<button class=\'btn btn-default\'>선택 삭제</button>
-		<div style=\'float: right;\'>
-		<label>공급가액</label>
-		<input type=\'text\'/>
-		<label>부가세</label>
-		<input type=\'text\'/>
-		<label>합계</label>
-		<input type=\'text\'/>
-		</div>								
-		</div>";
-	$(".orderDialog").click(function(){
-		$(".tab-pane").eq(0).toggleClass("active");
+	$(".tabControl").on('click',function(){
+		$(".tab-pane").removeClass('show');	
+	})
+	$(document).ready(function(){
+		$("#uploadTab,#browseTab").load("/tab/orderInputTap.html");
 		dialog();
-	});
+	})
 	function dialog(){
-		$(".dialog").toggleClass('dialog--active');
+		$(".orderDialog").click(function(e){
+			$(".tabControl").show();
+			$(".tab-pane").eq(0).toggleClass("active");
+			$("#dialog_productCode").val('');
+			$(".dialog").toggleClass('dialog--active');
+			if($(this).text()!='신규등록'){
+				$(".modalIns").hide();
+				$('.modalUpd').show();
+				$.ajax({
+					method : "post",
+					url : "/orders/selectOrder",
+					data : "orderCode=" + $(this).html(),
+					success : function(data) {
+						console.log(data);
+						inputData(data);
+					}
+				});
+			}
+			else{
+				$('input[type=text]').val('');
+				$(".modalIns").show();
+				$('.modalUpd').hide();
+			}
+		});
+		
 		// Close the dialog - click close button
 		$('.dialog__close').on('click', function() {
 			$(".dialog").removeClass('dialog--active');
@@ -182,5 +153,23 @@
 			}
 		});
 	}
+	function inputData(data){
+		$(".tabControl").each(function(index,item){
+			if($(item).html()!=data.orderVo.sortation)
+				$(item).hide();
+		});
+			$("input[name=dueDate]").val(data.orderVo.dueDate);
+			$("input[name=orderList]").val(data.orderVo.orderList);
+			$("input[name=deptCode]").val(data.orderVo.deptCode);
+			$("input[name=userId]").val(data.orderVo.userId);
+			$("input[name=clientname]").val(data.orderVo.clientname);
+			$("input[name=paymentDueDate]").val(data.orderVo.paymentDueDate);
+			$("input[name=orderPrice]").val(data.orderVo.orderPrice);
+	}
+	$("input[name=orderPrice]").on('attrchange',function(){
+		$("input[name=surtax]").val($("input[name=orderPrice]").val()/10);
+	})
 </script>
+
+
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">

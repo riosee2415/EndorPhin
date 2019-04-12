@@ -107,5 +107,6 @@ $(function() {
 </div>
 </c:if>  --%>  
 <jsp:include page="/WEB-INF/views/board/pagingforSubmit.jsp" />
+<a href="boardForm"><button type="button" class="bttn-jelly bttn-md bttn-warning">글쓰기</button></a>
 </body>
 </html>

@@ -19,5 +19,20 @@ public class OrdersDao implements IOrdersDao{
 	public List<OrdersVo> searchByName(OrdersVo ordersVo) {
 		return sqlSessionTemplate.selectList("orders.searchByName",ordersVo);
 	}
+
+	@Override
+	public OrdersVo selectOrders(String orderCode) {
+		return sqlSessionTemplate.selectOne("orders.selectOrders",orderCode);
+	}
+
+	@Override
+	public int insertOrders(OrdersVo ordersVo) {
+		return sqlSessionTemplate.insert("orders.insertOrders",ordersVo);
+	}
+
+	@Override
+	public int deleteOrders(String orderCode) {
+		return sqlSessionTemplate.delete("orders.deleteOrders",orderCode);
+	}
 	
 }

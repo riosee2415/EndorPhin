@@ -70,14 +70,15 @@
   <!-- font-awesome CSS -->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>	
 	
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
 	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
 	crossorigin="anonymous"></script>
 	
+<script type="text/javascript" src="/js/attrchange.js"></script>
+
 	
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/>
@@ -131,7 +132,6 @@
 	
 	 
 	  <!-- Bootstrap core JavaScript-->
-	  <script src="/resources/vendor/jquery/jquery.min.js"></script>
 	  <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	  <!-- Core plugin JavaScript-->
 	  <script src="/resources/vendor/jquery-easing/jquery.easing.min.js"></script>

@@ -42,7 +42,6 @@
   <link type="text/css" href="${pageContext.request.contextPath }/css/bttn.css" rel="stylesheet" >
   
   <!-- 차트 js 삽입 -->
-  <link href="${pageContext.request.contextPath}/resources/js/Chart.js" rel="stylesheet" type="text/css">
   <link href="${pageContext.request.contextPath}/resources/js/Chart.LlineBar.js" rel="stylesheet" type="text/css">
   <link href="${pageContext.request.contextPath}/resources/js/Chart.min.js" rel="stylesheet" type="text/css">
   <link href="${pageContext.request.contextPath}/resources/js/Chart.StackedBar.js" rel="stylesheet" type="text/css">
@@ -72,6 +71,12 @@
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 	
+	<!-- menu CSS -->
+	<link rel="stylesheet" type="text/css" href="/css/menu.css">
+  <script type="text/javascript" src="/js/function.js"></script>
+
+	<!-- left CSS -->	
+	<link rel="stylesheet" type="text/css" href="/css/left.css">
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
 	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
@@ -84,16 +89,12 @@
 	
 
 <style>
-	
-	
 	.cont{
 	background-color:#F5F4F0;
 	
 	}
 	
 	</style>
-
-
 
 </head>
 	

@@ -31,6 +31,9 @@
 			<tbody id="assetListTbody">
 				<c:forEach items="${assetList }" var="vo">	
 					 <tr>
+						 <c:set var="dates" >
+							<fmt:formatDate value="${vo.acquisitionDate  }" pattern="yyyy/MM/dd" />
+						</c:set>
 						<td><a class="bttn-stretch bttn-warning detailView" href="#deptDetail" data-assetcode="${vo.assetCode }" 
 																	 data-acquisitiondate="${vo.acquisitionDate }"
 																	 data-purchasecode="${vo.purchaseCode }"
@@ -50,7 +53,11 @@
    						<td>${vo.accountName }</td>								
 						<td><fmt:formatDate value="${vo.acquisitionDate  }" pattern="yyyy-MM-dd"/></td>
 						<td>${vo.acquisitionPrice }</td>
-						<td><input class="bttn-simple bttn-warning" type="button" value="장부반영" id="applybtn" name="applybtn"/></td>
+						<td><a class="bttn-stretch bttn-warning apply"  data-acquisitionprice1="${vo.acquisitionPrice }"
+																		data-acquisitiondate1="${dates }"
+																		data-clientname1="${vo.clientName }"
+																		data-sanggakcode1="${vo.accountName }"
+																		data-jukyo1="${vo.jukyo }">장부반영</a></td>
 				 	</tr>
 				 	<div id="insertArea"></div>
 				</c:forEach>
@@ -155,6 +162,7 @@
 			</table>
 			</div>
 			  <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			   <input type="hidden" class="buttons" data-dismiss="modal" value=""/>
 			</div>
 		</div>
 	</div>
@@ -262,6 +270,7 @@
 		
 		$("#sel_account").val(establishnamekor);
 		$("#accountName").val(establishnamekor);
+		$('.buttons').trigger('click');
 	});
 	
   	/*거래처선택 */
@@ -270,6 +279,7 @@
 
 		$("#clientN").val(clientName);
 		$("#clientName").val(clientName);
+		$('.buttons').trigger('click');
 	});
 	
  	/*감가 상각선택 */
@@ -280,12 +290,9 @@
 		$("#sanggakCode").val(sanggakCode);
  	});
      
-	 
    
 	/* 등록 클릭했을 때 */
-	var insertFlag = 0;
 	function fn_detail(){
-		if (insertFlag === 0) {
 			$.ajax({
 				url : "${pageContext.request.contextPath}/getAssetInsertBtn",
 				success : function(data){
@@ -293,15 +300,10 @@
 					$("#assetCode").focus();
 				}
 			});
-		
-			
 		} 
-	}
 	
 	/* 상세보기  */
 	$(".detailView").on("click", function(){
-		
-		if (insertFlag === 0) {
 			
 			$.ajax({
 				url : "${pageContext.request.contextPath}/getAssetModifyBtn",
@@ -316,9 +318,8 @@
 					$("#sanggakWay").val($(this).data().sanggakway);
 					$("#acquisitionPrice").val($(this).data().acquisitionprice);
 					$("#acquisitionDate").val($(this).data().acquisitiondate);
-				}
-			});
-		}
+			}
+		});
 	});
 	/*코드 검색  */
 	$("#seachBtn").on("click",function(){
@@ -332,13 +333,26 @@
 			}
 		});
 	});
-	$("#applybtn").on("click",function(){
+	/* 장부반영 */
+	$(".apply").on("click",function(){
+		var acquisitionPrice = $(this).data().acquisitionprice1;
 		
+		var supplyValue = parseInt(parseInt(acquisitionPrice)/1.1);
+		var surtax 	 	= parseInt(acquisitionPrice - supplyValue);
+		
+		var sumValue	= supplyValue + surtax;
 		$.ajax({
 			url:"${pageContext.request.contextPath}/applyTax_cal",
-			data:"acquisitionPrice="+$(this).data().acquisitionprice,
+			data : "acquisitionPrice="+supplyValue
+					+"&"+"acquisitionDate="+$(this).data().acquisitiondate1
+					+"&"+"surtax="+surtax
+					+"&"+"sumValue="+sumValue
+					+"&"+"jukyo="+$(this).data().jukyo1
+					+"&"+"establishCode="+$(this).data().sanggakcode1
+					+"&"+"clientName="+$(this).data().clientname1,
+					
 			success:function(data){
-				alert("ddd");
+				alert("장부반영이 완료되었습니다.");
 			}
 		});
 	});

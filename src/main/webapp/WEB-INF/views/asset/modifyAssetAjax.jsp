@@ -18,7 +18,7 @@
 				
 				<c:if test="${asset.purchaseCode == 51}">
 					<option value="51" selected="selected">51 과세매입</option></c:if>
-					<option value="54" ">54 불공</option>
+					<option value="54" >54 불공</option>
 				<c:if test="${asset.purchaseCode == 54}">
 					<option value="51" >51 과세매입</option>
 				</c:if>	

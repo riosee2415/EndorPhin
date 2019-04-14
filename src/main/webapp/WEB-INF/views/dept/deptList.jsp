@@ -125,7 +125,7 @@
 	   					<div class="form-group">
 	   					<label for="InputEmail">회사 코드 &nbsp;&nbsp;</label> 
 	   					<input type="text" id="upd_companyCode" name="upd_companyCode" />
-	   					<input type="button" class="btn btn-default" data-toggle="modal" data-target="#my80sizeModal2" value="검색" >
+	   					<input type="button" class="btn btn-default" data-toggle="modal" data-target="#my80sizeModal3" value="검색" >
 	   				</div>
 	   			<div class="modal-footer">
 	   			
@@ -174,8 +174,7 @@
 					</thead>
 					<tbody id="companyListTbody">
 						<c:forEach items="${companyList }" var="vo">
-							<tr class="companyTr" data-selcompanycode="${vo.companyCode }"
-								onclick="companyTr();">
+							<tr class="companyTr" data-selcompanycode="${vo.companyCode }">
 								<td>${vo.companyCode}</td>
 								<td>${vo.companyName}</td>
 							</tr>
@@ -189,6 +188,52 @@
 	</div>
 </div>
 
+
+<!-----------------회사 코드 수정 검색 모달창 ---------------->	
+	 	<!-- 80% size Modal -->
+<div class="modal fade" id="my80sizeModal3" tabindex="-1" role="dialog" aria-labelledby="my100sizeModalLabel">
+	<div class="modal-dialog modal-80size" role="document">
+		<div class="modal-content modal-80size">
+			<div class="modal-header">
+				<h6>| 계정과목 조회</h6>
+			</div>
+			<div class="modal-body">
+				<div class="form-group"></div>
+				<table>
+					<thead>
+						<tr>
+							<th>회사명&nbsp;</th>
+							<th><input style="width: 150px;" type="text" class="form-control" id="u_companyName" name="u_companyName"></th>
+							<th><button type="button" class="btn btn-inverse" id="upd_Search">검색</button><th>
+						</tr>
+						<tr>
+							<th>선택된 회사명</th>
+							<th><input type="text" style="width: 150px;" type="text" class="form-control" id="selcompany2" name="selcompany2"></th>
+							<th><button type="button" class="buttons" class="btn btn-default" data-dismiss="modal">확인</button></th>
+						</tr>
+						
+				</table>  <br>
+				<table class="table table-sm">
+					<thead class="thead">
+						<tr>
+							<th>회사 코드</th>
+							<th>회사명</th>
+					</thead>
+					<tbody id="upd_companyListTbody">
+						<c:forEach items="${companyList }" var="vo">
+							<tr class="upd_companyTr" data-upd_selcompanycode="${vo.companyCode }">
+								<td>${vo.companyCode}</td>
+								<td>${vo.companyName}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			  <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			  <input type="hidden" class="buttons" data-dismiss="modal" value=""/>
+			</div>
+		</div>
+	</div>
+</div>
 	<!---------------등록, 검색, 삭제  ---------------->
 	
 	<form id="insertFrm" action="${pageContext.request.contextPath }/insertDept">
@@ -236,17 +281,60 @@
 			return false;
 		} 
 	 	
-	 	companyTr();
+	// 	companyTr();
 	 	$("#insertFrm").submit();
 	
 });
-	function companyTr(){
-		alert("dd");
-		var companyCode1 = $(this).data("selcompanycode");
-		alert(companyCode1);
+    
+    
+    
+    /*회사이름 검색  */
+ 	$("#searchC_Btn").on("click", function(){
+ 		if($("#companyName").val().trim()==""){
+ 			alert("회사명을 입력하세요.");
+ 			$("companyName").focus();
+ 			return false;
+ 		}
+		$.ajax({
+    		url 	: "${pageContext.request.contextPath }/searchCompanyAjax",
+    		data 	: "companyName=" + $("#companyName").val(),
+    		success : function(data){
+    			$("#companyName").val("");
+				$("#companyListTbody").html(data);
+    			
+    		}
+    	});
+    }); 
+    
+ 	 /*수정회사이름 검색  */
+ 	$("#upd_Search").on("click", function(){
+ 		if($("#u_companyName").val().trim()==""){
+ 			alert("회사명을 입력하세요.");
+ 			$("u_companyName").focus();
+ 			return false;
+ 		}
+		$.ajax({
+    		url 	: "${pageContext.request.contextPath }/companyUpdSearchAjax",
+    		data 	:"u_companyName=" + $("#u_companyName").val(),
+    		success : function(data){
+    			$("#u_companyName").val("");
+				$("#upd_companyListTbody").html(data);
+    			
+    		}
+    	});
+    }); 
+ 	 
+	$(".companyTr").on("click", function(){
+		var companyCode1 = $(this).data().selcompanycode;
 		$("#selcompany").val(companyCode1);
-		$("#companycode").val(companyCode1);
-	}
+		$("#companyCode").val(companyCode1);
+	});
+	$(".upd_companyTr").on("click", function(){
+		
+		var companyCode1 = $(this).data().upd_selcompanycode;
+		$("#selcompany2").val(companyCode1);
+		$("#upd_companyCode").val(companyCode1);
+	});
 	
 	$("document").ready(function() {
 		
@@ -287,9 +375,6 @@
 	
 			var deptcode = $("#upd_deptCode").val();
 			var status 	 = $("#yes_Btn").val();
-			
-			alert(deptcode);
-			alert($("#yes_Btn").val());
 	
 			$("#frm_deptCode").val(deptcode);
 			$("#frm_usestatus").val(status);
@@ -325,25 +410,6 @@
     });
 });	
 	
-    /*회사이름 검색  */
- 	$("#searchC_Btn").on("click", function(){
- 		if($("#companyName").val().trim()==""){
- 			alert("회사명을 입력하세요.");
- 			$("companyName").focus();
- 			return false;
- 		}
-		$.ajax({
-    		url 	: "${pageContext.request.contextPath }/searchCompanyAjax",
-    		data 	: "companyName=" + $("#companyName").val(),
-    		success : function(data){
-    			$("#companyName").val("");
-				$("#companyListTbody").html(data);
-    			
-    		}
-    	});
-    }); 
-    
-    
  	/* 카드 코드,이름 검색 */  
     	
     	$("#seachBtn").on("click", function(){

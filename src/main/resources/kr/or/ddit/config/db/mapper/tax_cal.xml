@@ -86,7 +86,9 @@
 		insert into tax_cal
   			 (SALESCODE, SLIPDATE, SUPPLYVALUE, SALESSTATUS, DEPTCODE, SURTAX, ORDERCODE, CLIENTNAME, SUMVALUE, AUTO, ENTRYTYPE)
 		VALUES
-		     (#{salesCode}, #{slipDate}, #{nSupplyValue}, #{salesStatus}, #{deptCode}, #{nSurtax}, #{orderCode}, #{clientName}, #{nSumValue}, #{auto}, #{entryType})
+		     (#{salesCode}, #{slipDate}, #{nSupplyValue}, #{salesStatus},
+		     nvl(#{deptCode, jdbcType=VARCHAR},null), #{nSurtax}, #{orderCode}, #{clientName}, #{nSumValue},
+		     nvl(#{auto, jdbcType=VARCHAR},null),nvl(#{entryType, jdbcType=VARCHAR},null))
 	</insert>
 
 

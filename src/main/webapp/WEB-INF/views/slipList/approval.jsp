@@ -140,7 +140,7 @@
 			$("#checkRow").val(checkRow);
 		
 			if(checkRow === ""){		
-			alert("삭제할 대상을 선택하세요");
+			alert("체크박스를 선택하세요");
 			return false;
 		}
 		

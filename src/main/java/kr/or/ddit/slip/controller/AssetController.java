@@ -23,7 +23,11 @@ import kr.or.ddit.slip.model.AssetVo;
 import kr.or.ddit.slip.service.IAssetService;
 import kr.or.ddit.slip.service.ISlipService;
 import kr.or.ddit.tax_cal.model.EstablishVo;
+import kr.or.ddit.tax_cal.model.Sales_detailVo;
+import kr.or.ddit.tax_cal.model.Tax_calVo;
 import kr.or.ddit.tax_cal.service.IEstablishService;
+import kr.or.ddit.tax_cal.service.ISales_detailService;
+import kr.or.ddit.tax_cal.service.ITax_calService;
 
 @Controller
 public class AssetController {
@@ -41,6 +45,12 @@ public class AssetController {
 	
 	@Resource(name="slipService")
 	private ISlipService slipService;
+	
+	@Resource(name="tax_calService")
+	private ITax_calService tax_calService;
+	
+	@Resource(name="sales_detailService")
+	private ISales_detailService sales_detailService;
 	
 	//리스트 출력
 	@RequestMapping("/purchaseAsset")
@@ -139,12 +149,11 @@ public class AssetController {
 		int updAsset = assetService.updateAsset(assetVo);
 		
 		if(updAsset > 0) {
-			return "redirect:/purchaseAsset";
+			return "purchaseAsset";
 		}else {
-			return "redirect:/purchaseAsset";
+			return "purchaseAsset";
 		}
 	}
-	 
 
 	
 	//부분 수정
@@ -300,13 +309,56 @@ public class AssetController {
 	
 	//매입매출에 장부반영
 	@RequestMapping("applyTax_cal")
-	public String applyTax_cal(String acquisitionPrice){
+	public String applyTax_cal(Tax_calVo tax_calVo, Sales_detailVo sales_detailVo ,String sumValue, String surtax, 
+								String acquisitionPrice, String acquisitionDate,String clientName,
+								String jukyo, String establishCode) throws ParseException{
 		
-		logger.debug("acquisitionPrice:{}",acquisitionPrice);
+		
+		SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd");
+		Date date = df.parse(acquisitionDate);
+		
+		String salesCode = tax_calService.getTax_seqNextval();
+
+		tax_calVo.setSalesCode(salesCode);
+		tax_calVo.setSlipDate(date);
+		tax_calVo.setSalesStatus("과세매입");
+		tax_calVo.setDeptCode("999");
+		tax_calVo.setOrderCode("0");
+		tax_calVo.setClientName(clientName);
+		tax_calVo.setAuto("여");
+		tax_calVo.setEntryType("외상");
+		tax_calVo.setnSumValue(sumValue); //공급대가
+		tax_calVo.setnSupplyValue(acquisitionPrice); //공급가액 = 취득금액 / 1.1
+		tax_calVo.setnSurtax(surtax);//부가세 = 취득금액 - 공급가액
+		
+		tax_calService.insertTax_cal(tax_calVo);
+		
+		sales_detailVo.setStatus("차변");
+		sales_detailVo.setPrice(surtax);
+		sales_detailVo.setSalesCode(salesCode);
+		sales_detailVo.setEstablishCode(establishCode);
+		sales_detailVo.setJukyo(jukyo);
+		
+		sales_detailService.insertSales_detail(sales_detailVo);
+		
+		sales_detailVo.setStatus("차변");
+		sales_detailVo.setPrice(acquisitionPrice);
+		sales_detailVo.setSalesCode(salesCode);
+		sales_detailVo.setEstablishCode(establishCode);
+		sales_detailVo.setJukyo(jukyo);
+		
+		sales_detailService.insertSales_detail(sales_detailVo);
+		
+		
+		sales_detailVo.setStatus("대변");
+		sales_detailVo.setPrice(sumValue);
+		sales_detailVo.setSalesCode(salesCode);
+		sales_detailVo.setEstablishCode(establishCode);
+		sales_detailVo.setJukyo(jukyo);
+		
+		sales_detailService.insertSales_detail(sales_detailVo);
 		return "purchaseAsset";
 	}
-	
-	
 	
 	//매각
 	@RequestMapping(path="sellAsset", method=RequestMethod.GET)

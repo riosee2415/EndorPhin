@@ -1,4 +1,4 @@
-<div tabindex="2">
+<div tabindex="1">
 	<table class="table table-hover">
 		<tr>
 			<th>발주일(*)</th>
@@ -8,30 +8,30 @@
 		</tr>
 		<tr>
 			<th>부서</th>
-			<td><input name="deptCode" type='text' />
+			<td><input name="deptCode" type='text' readonly/>
 				<button class="btn btn-default searchModal" value="0">
 					<i class="fa fa-search"></i>
 				</button></td>
 			<th>담당자</th>
-			<td><input name="userId" type='text' />
+			<td><input name="userId" type='text' readonly/>
 				<button class="btn btn-default searchModal" value="1">
 					<i class="fa fa-search"></i>
 				</button></td>
 		</tr>
 		<tr>
 			<th>거래처</th>
-			<td><input name="clientname" type='text' />
+			<td><input name="clientname" type='text' readonly/>
 				<button class="btn btn-default searchModal" value="2">
 					<i class="fa fa-search"></i>
 				</button></td>
 			<th>납기일</th>
-			<td><input name="paymentDueDate searchModal" id="dueDatePicker"
+			<td><input name="paymentDueDate searchModal" id="dueDatePicker" readonly
 				type='text' /></td>
 		</tr>
 	</table>
 </div>
 <div>
-	<button class="btn btn-default">상품 주문</button>
+	<button class="btn btn-default" id="addProduct">상품 주문</button>
 </div>
 <div>
 	<table class="table table-hover">
@@ -93,11 +93,49 @@
 	</div>
 </div>
 
-
+<!-- second modal (상세 등록 화면) -->
+<div class="modal" id="myModal4" data-backdrop="static" tabindex="3"
+	aria-hidden="true" style="display: none; z-index: 1080;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="secondModalTitle"></h4>
+				<button id="secondAddClose1" type="button" class="close"
+					data-dismiss="modal" aria-hidden="true">×</button>
+			</div>
+			<div class="container"></div>
+			<div class="modal-body">
+				<h3>작성일</h3>
+				<input type="text" id="datepicker">
+				<div style="overflow: scroll; width: 450px; height: 200px;">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>항목코드</th>
+								<th>항목명</th>
+								<th>금액</th>
+							</tr>
+						</thead>
+						<tbody id="secondModalTbody">
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<a href="#" data-dismiss="modal" class="btn" id="secondAddClose">Close</a>
+				<a href="#" class="btn" id="secondModalAddSave">등록</a>
+			</div>
+		</div>
+	</div>
+</div>
 
 <script>
 
 $(document).ready(function(){
+	$("#addProduct").click(function(){
+		$("#myModal4").modal('show');
+	});
+	
 	surtaxChange();	
 	$("#dueDatePicker").datepicker({
 			dateFormat: 'yy-mm-dd' //Input Display Format 변경

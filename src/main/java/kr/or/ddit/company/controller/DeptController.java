@@ -32,11 +32,11 @@ public class DeptController {
 	
 	
 	@RequestMapping("/deptList")
-	public String deptList(Model model ){
+	public String deptList(Model model ) {
 		
 		List<DeptVo> deptList = deptService.getAllDept();
 		List<CompanyVo> companyList= companyService.getAllcompany();
-
+		
 		model.addAttribute("deptList", deptList);
 		model.addAttribute("companyList", companyList);
 		
@@ -69,6 +69,7 @@ public class DeptController {
 		deptVo.setUseStatus("1");
 		
 		int insertCnt = deptService.insertDept(deptVo);
+		
 		
 		if(insertCnt > 0){
 			return "redirect:/deptList";

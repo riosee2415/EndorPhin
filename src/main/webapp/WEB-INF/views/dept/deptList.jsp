@@ -34,7 +34,8 @@
 																	 data-upd_deptname="${vo.deptName }"
 																	 data-upd_companycode="${vo.companyCode }"
 																	 data-upd_usestatus="${vo.useStatus }"
-																	 data-toggle="modal">${vo.deptCode}</a></td>
+																	 data-toggle="modal">${vo.deptCode}
+																	 </a></td>
    														
 						<td>${vo.deptName }</td>
 						<td>${vo.companyCode }</td>
@@ -48,6 +49,7 @@
 						</c:choose>
 						<td></td>
 				 	</tr>		 
+				
 				</c:forEach>
 			</tbody>
 		</table>
@@ -128,8 +130,7 @@
 	   					<input type="button" class="btn btn-default" data-toggle="modal" data-target="#my80sizeModal3" value="검색" >
 	   				</div>
 	   			<div class="modal-footer">
-	   			
-					<button id="yes_Btn" name="yes_Btn" class="btn btn-default" data-dismiss="modal"  value="1" style="background: #486068; color: #ffffff"></button>
+					<button id="yes_Btn" name="yes_Btn" class="btn btn-default" data-dismiss="modal" style="background: #486068; color: #ffffff"></button>
 	   				<!-- <input type="hidden" id="no_Btn" name="no_Btn" class="btn btn-default" data-dismiss="modal" value="0" style="background: #ff8e77; color: #ffffff"> -->
 	   				
 	   				<button type="button" id="modalUpdateBtn" class="btn btn-default" data-dismiss="modal" >수정</button>
@@ -258,17 +259,69 @@
 	</form>
     <!---------------------------------------------->
 	<script>
+	
+	$(document).ready(function() {
+		/* 상세보기  */
+		$(".detailView").on("click", function(){
+			$("#upd_deptCode").val($(this).data().upd_deptcode);
+			$("#upd_deptName").val($(this).data().upd_deptname);
+			$("#upd_companyCode").val($(this).data().upd_companycode);
+			if($(this).data().upd_usestatus==1){
+				$("#yes_Btn").html("미사용");
+				$("#yes_Btn").val('0');
+				
+			}
+			else if($(this).data().upd_usestatus==0){
+				$("#yes_Btn").html("사용");
+				$("#yes_Btn").val('1');
+				$("#yes_btn").attr("style","background: #ff8e77; color: #ffffff");
+			}
+			
+		});
+		
+		/*사용여부 수정  */
+		 $("#yes_Btn").on("click", function(){
+	
+			var deptcode = $("#upd_deptCode").val();
+			var status 	 = $("#yes_Btn").val();
+	
+			alert(status);
+			$("#frm_deptCode").val(deptcode);
+			$("#frm_usestatus").val(status);
+			
+			$("#useFrm").submit();
+		});  
+		
+		/* 수정 */
+		$("#modalUpdateBtn").on("click", function(){ 
+			
+			$("#frmdeptCode1").val($("#upd_deptCode").val());
+			$("#frmdeptName1").val($("#upd_deptName").val());
+			$("#frmcompanyCode1").val($("#upd_companyCode").val());
+			
+			if($("#upd_deptName").val().trim()==""){
+				alert("부서명을 입력하세요");
+				$("#upd_deptName").focus();
+				return false;
+			}
+		 	
+			if($("#upd_companyCode").val().trim()==""){
+				alert("회사코드를 선택하세요");
+				$("#upd_companyCode").focus();
+				return false;
+		}  
+	 	
+ 		$("#updateFrm").submit();
+    });
+});	
+	
+	
     /* 등록  */
 	$("#insertBtn").on("click", function(){
 		
-		var deptCode 		= $("#deptCode").val();
-		var deptName  	    = $("#deptName").val();
-		var companyCode		= $("#companyCode").val();
-		
-		$("#frmdeptCode").val(deptCode);
-		$("#frmdeptName").val(deptName);
-		$("#frmcompanyCode").val(companyCode);
-		
+		$("#frmdeptCode").val($("#deptCode").val());
+		$("#frmdeptName").val($("#deptName").val());
+		$("#frmcompanyCode").val($("#companyCode").val());
 		
 		if($("#deptName").val().trim()==""){
 			alert("부서명을 입력하세요");
@@ -280,13 +333,10 @@
 			$("#companyCode").focus();
 			return false;
 		} 
-	 	
 	// 	companyTr();
 	 	$("#insertFrm").submit();
 	
 });
-    
-    
     
     /*회사이름 검색  */
  	$("#searchC_Btn").on("click", function(){
@@ -301,7 +351,6 @@
     		success : function(data){
     			$("#companyName").val("");
 				$("#companyListTbody").html(data);
-    			
     		}
     	});
     }); 
@@ -336,82 +385,9 @@
 		$("#upd_companyCode").val(companyCode1);
 	});
 	
-	$("document").ready(function() {
-		
-		/* 상세보기  */
-		$(".detailView").on("click", function(){
-			
-			$("#upd_deptCode").val($(this).data().upd_deptcode);
-			$("#upd_deptName").val($(this).data().upd_deptname);
-			$("#upd_companyCode").val($(this).data().upd_companycode);
-			
-			if($(this).data().upd_usestatus==1){
-				$("#yes_Btn").html("미사용");
-				
-			}
-			else if($(this).data().upd_usestatus==0){
-				$("#yes_Btn").html("사용");
-				$("#yes_btn").attr("style","background: #ff8e77; color: #ffffff");
-			}
-			
-		});
-		/* function useClick(){
-			
-			var deptcode = $("#upd_deptCode").val();
-			var target = document.querySelector('#yes_Btn');
-			if($("#yes_Btn").value == '1'){
-				target.value="1";
-			}else{
-				target.value = "0"
-			}
-			
-			$("#frm_deptCode").val(deptcode);
-			$("#frm_usestatus").val(target);
-			
-			$("#useFrm").submit();
-		} */
-		/*사용여부 수정  */
-		 $("#yes_Btn").on("click", function(){
-	
-			var deptcode = $("#upd_deptCode").val();
-			var status 	 = $("#yes_Btn").val();
-	
-			$("#frm_deptCode").val(deptcode);
-			$("#frm_usestatus").val(status);
-			
-			$("#useFrm").submit();
-		});  
-		
-		/* 수정 */
-		$("#modalUpdateBtn").on("click", function(){ 
-			
-			var deptcode  	    = $("#upd_deptCode").val();
-			var deptName  	    = $("#upd_deptName").val();
-			var companyCode		= $("#upd_companyCode").val();
-			
-			
-			$("#frmdeptCode1").val(deptcode);
-			$("#frmdeptName1").val(deptName);
-			$("#frmcompanyCode1").val(companyCode);
-			
-			if($("#upd_deptName").val().trim()==""){
-				alert("부서명을 입력하세요");
-				$("#upd_deptName").focus();
-				return false;
-			}
-		 	
-			if($("#upd_companyCode").val().trim()==""){
-				alert("회사코드를 선택하세요");
-				$("#upd_companyCode").focus();
-				return false;
-		}  
-	 	
- 		$("#updateFrm").submit();
-    });
-});	
+
 	
  	/* 카드 코드,이름 검색 */  
-    	
     	$("#seachBtn").on("click", function(){
     		if($("#deptCode1").val().trim() != "" || $("#deptName1").val().trim() !=""){
    	 	$.ajax({
@@ -448,7 +424,6 @@
        	});
    	 }
 }); 
-    
  	
  	/* 카드코드 중복체크 ajax */
 	    $("#duplCheckbtn").on("click", function(){

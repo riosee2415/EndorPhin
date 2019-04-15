@@ -104,4 +104,7 @@ public interface IAssetDao {
 	
 	
 	int updateSlipNumber(AssetVo assetVo);
+	
+	
+	int updateJangbu(AssetVo assetVo);
 }

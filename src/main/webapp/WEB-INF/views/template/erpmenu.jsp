@@ -49,7 +49,7 @@
 						</ul></li>
 					<li><a class="parent" href="#">고정자산</a>
 						<ul class="sub-menu">
-							<li><a href="${pageContext.request.contextPath }/clientview">고정자산
+							<li><a href="${pageContext.request.contextPath }/purchaseAsset">고정자산
 									등록</a></li>
 							<li><a href="${pageContext.request.contextPath }/sellAsset">고정자산
 									매각</a></li>

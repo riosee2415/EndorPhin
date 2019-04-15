@@ -53,12 +53,16 @@
    						<td>${vo.accountName }</td>								
 						<td><fmt:formatDate value="${vo.acquisitionDate  }" pattern="yyyy-MM-dd"/></td>
 						<td>${vo.acquisitionPrice }</td>
-						<td><a class="bttn-stretch bttn-warning apply"  data-acquisitionprice1="${vo.acquisitionPrice }"
+						<c:if test="${vo.jangbu == null}">
+						<td><a class="bttn-stretch bttn-warning apply" data-assetcode1="${vo.assetCode }" 
+																		data-acquisitionprice1="${vo.acquisitionPrice }"
 																		data-acquisitiondate1="${dates }"
 																		data-clientname1="${vo.clientName }"
 																		data-sanggakcode1="${vo.accountName }"
 																		data-jukyo1="${vo.jukyo }">장부반영</a></td>
-				 	</tr>
+																		
+						</c:if>
+				 		</tr>
 				 	<div id="insertArea"></div>
 				</c:forEach>
 			</tbody>
@@ -349,10 +353,13 @@
 					+"&"+"sumValue="+sumValue
 					+"&"+"jukyo="+$(this).data().jukyo1
 					+"&"+"establishCode="+$(this).data().sanggakcode1
-					+"&"+"clientName="+$(this).data().clientname1,
+					+"&"+"clientName="+$(this).data().clientname1
+					+"&"+"assetCode="+$(this).data().assetcode1,
 					
 			success:function(data){
 				alert("장부반영이 완료되었습니다.");
+				location.reload();
+					
 			}
 		});
 	});

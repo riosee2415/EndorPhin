@@ -47,7 +47,7 @@
   <link href="${pageContext.request.contextPath}/resources/js/Chart.StackedBar.js" rel="stylesheet" type="text/css">
   <!-- 차트 js 종료 -->
   
-  <script type="text/javascript" src="/js/attrchange.js"></script>
+  
   
   
   <!-- Acoount Part Basic Style -->
@@ -162,8 +162,6 @@
 <!-- javascript -->     <script src="https://d3js.org/d3.v3.min.js"></script>     <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
-
-
 
 
 <!-- ERP/그룹웨어 나누기 -->

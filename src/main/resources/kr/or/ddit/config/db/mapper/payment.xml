@@ -29,10 +29,8 @@
 							and     dpd.deprostatus='1'
 							and     pd.paycode=(select max(paycode)+1 from payment)),0)
 		,nvl(#{relate, jdbcType=VARCHAR},null)
-		<if test="taxamount!=null">
-		, taxamount=#{taxamount}
-		</if>
 		,to_date( nvl(#{payDay, jdbcType=VARCHAR},null),'yyyyMMdd')
+		,nvl(#{taxamount, jdbcType=VARCHAR},null)
 		)
 	</insert>
 	

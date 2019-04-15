@@ -49,9 +49,9 @@
 	</delete>
 	
 	<!-- 댓글 수정 -->
-	<update id="updateComments" parameterType="commentsVo">
+	<update id="updateBoardReply" parameterType="commentsVo">
 		update comments
-		   set commentcontents=#{commentcontents}
+		   set commentcontents=#{commentContents}
 			
 		 where commentno=#{commentNo}
 	</update>
@@ -73,13 +73,13 @@
 			   commentUser
 		  from comments		
 	     where boardNo=#{boardNo}
-	         order by commentNo
+	     order by commentDate desc
     </select>
 	
 	<!-- 댓글 삭제 -->
 	<delete id="deleteBoardReply" parameterType="String">
 		delete from comments
-		where boardNo = #{boardNo}
+		where commentNo = #{commentNo}
 	</delete>
 
 

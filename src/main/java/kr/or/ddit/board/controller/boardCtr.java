@@ -107,9 +107,9 @@ public class boardCtr {
 	 */
 	@RequestMapping(value = "/boardSave")
 	public String boardSave(@ModelAttribute Board_detailVo boardInfo, HttpServletRequest request, String boardTypeCode, Model model) throws Exception {
-//		HttpSession session = request.getSession();
-//		EmployeeVo employeeVo = (EmployeeVo) session.getAttribute("employeeVo");
-//		boardInfo.setUserId(employeeVo.getUserId());
+		HttpSession session = request.getSession();
+		EmployeeVo employeeVo = (EmployeeVo) session.getAttribute("employeeVo");
+		boardInfo.setUserId(employeeVo.getUserId());
 		if (boardInfo.getBoardNo() == null || "".equals(boardInfo.getBoardNo())) {
 			board_detailService.insertBoard(boardInfo);
 			model.addAttribute("boardTypeCode", boardTypeCode);
@@ -197,10 +197,12 @@ public class boardCtr {
 	 */
 	@RequestMapping(value = "/boardReplySave")
     public String boardReplySave(Model model, CommentsVo boardReplyInfo, String boardTypeCode) {
-        
-		board_detailService.insertBoardReply(boardReplyInfo);
+		if (boardReplyInfo.getCommentNo()==null || "".equals(boardReplyInfo.getCommentNo())) {
+			board_detailService.insertBoardReply(boardReplyInfo);
+		 } else {
+			 board_detailService.updateBoardReply(boardReplyInfo);
+		 }
 		model.addAttribute("boardTypeCode", boardTypeCode);
-
         return "redirect:/boardRead?boardNo=" + boardReplyInfo.getBoardNo();
     }
 
@@ -222,7 +224,7 @@ public class boardCtr {
 
         return "redirect:/boardRead?boardNo=" + boardReplyInfo.getBoardNo();
     }
-
+	
 
 	/**
 	 * 

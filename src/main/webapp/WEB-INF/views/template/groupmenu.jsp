@@ -33,9 +33,9 @@
 				</ul></li>
 			<li class="parent"><a href="#">게시판</a>
 				<ul class="sub-menu">
-					<li><a href="#">공지사항</a></li>
-					<li><a href="#">자유 게시판</a></li>
-					<li><a href="#">Q&A 게시판</a></li>
+					<li><a href="/boardList?boardTypeCode=7">공지사항</a></li>
+					<li><a href="/boardList?boardTypeCode=5">자유 게시판</a></li>
+					<li><a href="/boardList?boardTypeCode=8">Q&A 게시판</a></li>
 				</ul></li>
 			<li><a href="#">일정 관리</a></li>
 			<li class="parent"><a href="#">총무지원</a>

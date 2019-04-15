@@ -201,5 +201,5 @@ public interface IBoard_detailService {
 	* @return
 	* Method 설명 : 댓글 삭제
 	 */
-	public int deleteBoardReply(String boardNo);
+	public int deleteBoardReply(String commentNo);
 }

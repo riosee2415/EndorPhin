@@ -159,9 +159,19 @@ $(document).ready(function(){
 });
 
 function modalClickEvent(){
-	$(".selectDept").click(function(){
+	$(".selectDept, .selectEmployee, .selectClient").click(function(){
+		switch ($(this).attr('class')) {
+			case 'selectDept':
+				$('input[name=deptCode]').val($(this).find('td').eq(0).html());
+				break;
+			case 'selectEmployee':
+				$('input[name=userId]').val($(this).find('td').eq(0).html());
+				break;
+			case 'selectClient':
+				$('input[name=clientname]').val($(this).find('td').eq(1).html());
+				break;
+		}
 		$("#myModal3").modal('hide');
-// 		$("input[name=deptCode]").val()
 	});
 }
 function surtaxChange(){

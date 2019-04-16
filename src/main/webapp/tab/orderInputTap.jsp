@@ -1,31 +1,56 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<style>
+#searchProductText {
+	width: 150px !important;
+	display: inline !important;
+}
+
+.bootTapText {
+	width: 200px !important;
+	display: inline !important;
+}
+
+.quanText {
+	width: 80px !important;
+}
+</style>
+
 <div tabindex="1">
 	<table class="table table-hover">
 		<tr>
 			<th>발주일(*)</th>
-			<td><input name="dueDate" type='text' /></td>
+			<td><input class="form-control bootTapText" name="dueDate"
+				type='text' /></td>
 			<th>발주내역(*)</th>
-			<td><input name="orderList" type='text' /></td>
+			<td><input class="form-control bootTapText" name="orderList"
+				type='text' /></td>
 		</tr>
 		<tr>
 			<th>부서</th>
-			<td><input name="deptCode" type='text' readonly/>
+			<td><input class="form-control bootTapText" name="deptCode"
+				type='text' readonly />
 				<button class="btn btn-default searchModal" value="0">
 					<i class="fa fa-search"></i>
 				</button></td>
 			<th>담당자</th>
-			<td><input name="userId" type='text' readonly/>
+			<td><input class="form-control bootTapText" name="userId"
+				type='text' readonly />
 				<button class="btn btn-default searchModal" value="1">
 					<i class="fa fa-search"></i>
 				</button></td>
 		</tr>
 		<tr>
 			<th>거래처</th>
-			<td><input name="clientname" type='text' readonly/>
+			<td><input class="form-control bootTapText" name="clientname"
+				type='text' readonly />
 				<button class="btn btn-default searchModal" value="2">
 					<i class="fa fa-search"></i>
 				</button></td>
 			<th>납기일</th>
-			<td><input name="paymentDueDate searchModal" id="dueDatePicker" readonly
+			<td><input class="form-control bootTapText"
+				name="paymentDueDate searchModal" id="dueDatePicker" readonly
 				type='text' /></td>
 		</tr>
 	</table>
@@ -37,7 +62,7 @@
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th><input type="checkbox" id="checkAll" /></th>
+				<th><input type="checkbox" id="modalCheckAll" /></th>
 				<th>발주번호</th>
 				<th>상품명</th>
 				<th>규격</th>
@@ -53,9 +78,11 @@
 <div>
 	<button class="btn btn-default">선택 삭제</button>
 	<div style='float: right;'>
-		<label>공급가액</label> <input name="orderPrice" type='text' /> <label>부가세</label>
-		<input name="surtax" type='text' /> <label>합계</label> <input
-			type='text' name="totalPrice" />
+		<label>공급가액</label> <input class="form-control bootTapText"
+			name="orderPrice" type='text' readonly /> <label>부가세</label> <input
+			class="form-control bootTapText" name="surtax" type='text' readonly />
+		<label>합계</label> <input class="form-control bootTapText" type='text'
+			name="totalPrice" readonly />
 	</div>
 </div>
 
@@ -86,8 +113,6 @@
 			</div>
 			<div class="modal-footer">
 				<a href="#" data-dismiss="modal" class="btn" id="secondUpdClose">Close</a>
-				<a href="#" class="btn" id="secondModalUpd">수정</a> <a href="#"
-					class="btn" id="secondModalDel">삭제</a>
 			</div>
 		</div>
 	</div>
@@ -105,15 +130,22 @@
 			</div>
 			<div class="container"></div>
 			<div class="modal-body">
-				<h3>작성일</h3>
-				<input type="text" id="datepicker">
+				<section>
+					<h3>상품 등록</h3>
+					<input type="text" class="search-query form-control"
+						id="searchProductText" placeholder="Search.." />
+					<button class="btn btn-default" id="searchProductBtn">
+						<i class="fa fa-search"></i>
+					</button>
+				</section>
 				<div style="overflow: scroll; width: 450px; height: 200px;">
 					<table class="table table-hover">
 						<thead>
 							<tr>
 								<th>항목코드</th>
 								<th>항목명</th>
-								<th>금액</th>
+								<th>규격</th>
+								<th>기본 금액</th>
 							</tr>
 						</thead>
 						<tbody id="secondModalTbody">
@@ -123,7 +155,6 @@
 			</div>
 			<div class="modal-footer">
 				<a href="#" data-dismiss="modal" class="btn" id="secondAddClose">Close</a>
-				<a href="#" class="btn" id="secondModalAddSave">등록</a>
 			</div>
 		</div>
 	</div>
@@ -132,6 +163,54 @@
 <script>
 
 $(document).ready(function(){
+	
+	$("#searchProductBtn, #addProduct").click(function(){
+		$.ajax({
+			method : "post",
+			url : "/orders/searchProduct",
+			data : {
+				productName : $("#searchProductText").val()
+			},
+			success : function(data) {
+				$("#secondModalTbody").html('');
+				for (var i = 0; i < data.productList.length; i++) {
+					$("#secondModalTbody").append("<tr class=\'productTr\'>"
+					+"<td>"+data.productList[i].productCode+"</td>"
+					+"<td>"+data.productList[i].productName+"</td>"
+					+"<td>"+data.productList[i].standard+"</td>"
+					+"<td>"+data.productList[i].basePrice+"</td>"
+					+"<tr>");
+				}
+				productTrInput();
+			}
+		});
+	})
+	function productTrInput(){
+		$(".productTr").off('click');
+		$(".productTr").on('click',function(index,item){
+			var item=$(this);
+			var check=true;
+			$(".dialogPdcd").each(function(){
+				if($(this).html()==$(item).children('td').eq(0).html()){
+					alert('이미 존재하는 상품입니다.');
+					check=false;
+				}
+			});
+			if(check){
+				$("#dialogProductTbody").append("<tr>");
+				$("#dialogProductTbody").append("<td><input type=\'checkbox\' class=\'detailCheck\'></td>");
+					$("#dialogProductTbody").append("<td class=\'dialogPdcd\'>"+item.children('td').eq(0).html()+"</td>");
+				for (var i = 1; i < 3; i++) 
+					$("#dialogProductTbody").append("<td>"+item.children('td').eq(i).html()+"</td>");
+				$("#dialogProductTbody").append("<td>"+"<input type=\'text\' class=\'form-control quanText\' value=0 />"+"</td>");
+				$("#dialogProductTbody").append("<td class=\'baseprice\'>"+item.children('td').eq(3).html()+"</td>");
+				$("#dialogProductTbody").append("<td class=\'totalPrice\'>"+0+"</td>");
+				$("#dialogProductTbody").append("</tr>");
+			}
+			numChange();
+			$("#myModal4").modal('hide');
+		});
+	}
 	$("#addProduct").click(function(){
 		$("#myModal4").modal('show');
 	});
@@ -212,12 +291,12 @@ function modalClickEvent(){
 		$("#myModal3").modal('hide');
 	});
 }
+
 function surtaxChange(){
 	$("input[name=orderPrice]").on('change',function(){
        	$("input[name=surtax]").val(parseInt($("input[name=orderPrice]").val())/10);
        	$("input[name=totalPrice]").val(Number($("input[name=surtax]").val())+
-       			Number($("input[name=orderPrice]").val()));
+       			Number($("input[name=orderPrice]").val())).change();
 	});
 }
 </script>
-

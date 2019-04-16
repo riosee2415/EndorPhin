@@ -42,6 +42,9 @@ public class ImagesController {
 //        }
 //        logger.debug("이미지 : {}", file.getAbsolutePath());
 //        return image;
+		if(imageName==null){
+			return;
+		}
 		FileInputStream fis;
 		
 		fis = new FileInputStream(new File(imageName));

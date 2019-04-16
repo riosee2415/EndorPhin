@@ -38,7 +38,7 @@
 		select
 		productcode, productname, standard, outline, usestatus, baseprice,imagecode
 		from product
-        where   productname like '%' ||#{productName}||'%'
+        where   productname like '%' ||nvl(#{productName, jdbcType=VARCHAR},null)||'%'
 	</select>
 
 

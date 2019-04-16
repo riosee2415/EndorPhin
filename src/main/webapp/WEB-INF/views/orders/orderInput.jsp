@@ -77,7 +77,6 @@
 <!-- 상세조회 모달창 -->
 	<div class="dialog">
 		 <span class="dialog__close">&#x2715;</span> <label for="inputName">발주서 상세</label>
-		 <input type="hidden" name="productCode" id="dialog_productCode"/>
 		 <div class="modal-body">
 			<div role="tabpanel">
                     <!-- Nav tabs -->
@@ -99,12 +98,25 @@
                         	</div>
                     </div>
                 </div>
-			<input type="button" id="dialog_updBtn" class="btn btn-default modalUpd" value="수정" />
-			<button id="dialog_delBtn" class="btn btn-default dialog__action modalUpd">삭제</button>
-			<input type="button" id="dialog_insBtn" class="btn btn-default modalIns" value="등록" />
+               	<div>
+					<input type="button" id="dialog_updBtn" class="btn btn-default modalUpd" value="수정" />
+					<button id="dialog_delBtn" class="btn btn-default dialog__action modalUpd">삭제</button>
+					<input type="button" id="dialog_insBtn" class="btn btn-default modalIns" value="등록" />
+				</div>
 		</div>
 	</div>
 <script>
+	$("#checkAll").on("click", function() {
+		if (this.checked == false) {
+			$("input[class=check]").each(function() {
+				this.checked = false;
+			});
+		} else {
+			$("input[class=check]").each(function() {
+				this.checked = true;
+			});
+		}
+	});
 	var deptList = new Map();
 	var employeeList = new Map();
 	var clientList = new Map();
@@ -113,7 +125,7 @@
 		$(".tab-pane").removeClass('show');	
 	})
 	$(document).ready(function(){
-		$("#uploadTab,#browseTab").load("/tab/orderInputTap.html");
+		$("#uploadTab,#browseTab").load("/tab/orderInputTap.jsp");
 		dialog();
 	})
 	function dialog(){
@@ -172,14 +184,45 @@
 		for (var i = 0; i < data.detailList.length; i++) {
 			$("#dialogProductTbody").append("<tr>");
 			$("#dialogProductTbody").append("<td><input type=\'checkbox\' class=\'detailCheck\'></td>");
-			$("#dialogProductTbody").append("<td>"+data.detailList[i].orderCode+"</td>");
+			$("#dialogProductTbody").append("<td class=\'dialogPdcd\'>"+data.detailList[i].productCode+"</td>");
 			$("#dialogProductTbody").append("<td>"+data.detailList[i].productname+"</td>");
 			$("#dialogProductTbody").append("<td>"+data.detailList[i].standard+"</td>");
-			$("#dialogProductTbody").append("<td>"+data.detailList[i].quantity+"</td>");
-			$("#dialogProductTbody").append("<td>"+data.detailList[i].baseprice+"</td>");
-			$("#dialogProductTbody").append("<td>"+data.detailList[0].quantity*data.detailList[0].baseprice+"</td>");
+			$("#dialogProductTbody").append("<td>"+"<input type=\'text\' value="
+					+data.detailList[i].quantity+" class=\'form-control quanText\' />"+"</td>");
+			$("#dialogProductTbody").append("<td class=\'baseprice\'>"+data.detailList[i].baseprice+"</td>");
+			$("#dialogProductTbody").append("<td class=\'totalPrice\'>"+data.detailList[0].quantity*data.detailList[0].baseprice+"</td>");
 			$("#dialogProductTbody").append("</tr>");
 		}
+		numChange();
+	}
+		
+		function modalCheckEvent() {
+			if (this.checked == false) {
+				$("input[class=detailCheck]").each(function() {
+					this.checked = false;
+				});
+			} else {
+				$("input[class=detailCheck]").each(function() {
+					this.checked = true;
+				});
+			}
+		}
+	function numChange(){
+		$("#modalCheckAll").off("click");
+		$("#modalCheckAll").on("click", modalCheckEvent);
+		$(".quanText, .totalPrice").off('change');
+		$(".quanText").on('change',function(){
+			$(this).parents('td').
+						next().next().html(parseInt($(this).val())*parseInt($(this).
+												parents('td').siblings('.baseprice').html())).change();
+		});
+		$(".totalPrice").on('change',function(){
+			var totalPrice=0;
+			$(".totalPrice").each(function(){
+				totalPrice+=parseInt($(this).html());
+			})
+			$("input[name=orderPrice]").val(totalPrice).change();
+		})
 	}
 </script>
 

@@ -38,5 +38,11 @@ public class EmployeeDetailService implements IEmployeeDetailService{
 	public int deleteEmployeeDetail(String userId) {
 		return employeeDetailDao.deleteEmployeeDetail(userId);
 	}
+
+	@Override
+	public int updateEmployeeDetail(Employee_detailVo vo) {
+		
+		return employeeDetailDao.updateEmployeeDetail(vo);
+	}
 	
 }

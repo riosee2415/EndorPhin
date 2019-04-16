@@ -11,6 +11,29 @@ public class Order_detailVo {
 	String quantity;
 	String productCode;
 	
+	
+	String productname;
+	String standard;
+	String baseprice;
+	
+	public String getProductname() {
+		return productname;
+	}
+	public void setProductname(String productname) {
+		this.productname = productname;
+	}
+	public String getStandard() {
+		return standard;
+	}
+	public void setStandard(String standard) {
+		this.standard = standard;
+	}
+	public String getBaseprice() {
+		return baseprice;
+	}
+	public void setBaseprice(String baseprice) {
+		this.baseprice = baseprice;
+	}
 	public String getOrderDetailCode() {
 		return orderDetailCode;
 	}

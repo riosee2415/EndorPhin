@@ -309,10 +309,9 @@ public class AssetController {
 	
 	//매입매출에 장부반영
 	@RequestMapping("applyTax_cal")
-	public String applyTax_cal(Tax_calVo tax_calVo, Sales_detailVo sales_detailVo ,String sumValue, String surtax, 
+	public String applyTax_cal(Tax_calVo tax_calVo, Sales_detailVo sales_detailVo ,AssetVo assetVo,String sumValue, String surtax, 
 								String acquisitionPrice, String acquisitionDate,String clientName,
-								String jukyo, String establishCode) throws ParseException{
-		
+								String jukyo, String establishCode,String assetCode) throws ParseException{
 		
 		SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd");
 		Date date = df.parse(acquisitionDate);
@@ -344,7 +343,7 @@ public class AssetController {
 		sales_detailVo.setStatus("차변");
 		sales_detailVo.setPrice(acquisitionPrice);
 		sales_detailVo.setSalesCode(salesCode);
-		sales_detailVo.setEstablishCode(establishCode);
+		sales_detailVo.setEstablishCode("부가세대급금");
 		sales_detailVo.setJukyo(jukyo);
 		
 		sales_detailService.insertSales_detail(sales_detailVo);
@@ -353,10 +352,15 @@ public class AssetController {
 		sales_detailVo.setStatus("대변");
 		sales_detailVo.setPrice(sumValue);
 		sales_detailVo.setSalesCode(salesCode);
-		sales_detailVo.setEstablishCode(establishCode);
+		sales_detailVo.setEstablishCode("미지급금");
 		sales_detailVo.setJukyo(jukyo);
 		
 		sales_detailService.insertSales_detail(sales_detailVo);
+		
+		assetVo.setAssetCode(assetCode);
+		assetVo.setJangbu("1");
+		assetService.updateJangbu(assetVo);
+		
 		return "purchaseAsset";
 	}
 	

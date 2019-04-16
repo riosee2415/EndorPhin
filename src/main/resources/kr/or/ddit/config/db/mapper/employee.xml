@@ -66,7 +66,7 @@
 	<!-- 사원 선택하여 가져오기 -->
 	<select id="selectEmployee" resultType="employeeVo"
 		parameterType="map">
-		select
+		 select
       a.userid,
         a.usernm,
         a.deptcode,
@@ -77,8 +77,14 @@
         d.positionname rankname,
         a.continuousyear,
         a.relate,
-        to_char(a.joincompany,'yyyy-MM-dd') joincompany,
-        to_char(a.birthdate,'yyyy-MM-dd') birthdate,
+        e.finalschool,
+        e.email,
+        e.phonenumber,
+        e.address,
+        e.imagecode,
+       e.marrystatus,
+        to_char(a.joincompany,'yyyy-mm-dd') joincompany,
+        to_char(a.birthdate,'yyyy-mm-dd') birthdate,
         password
       from employee a left outer join position b
       on
@@ -86,13 +92,14 @@
       left outer join dept c
       on
         a.deptcode = c.deptcode
-    left outer join position d
+   	 left outer join position d
         on
         a.rankcode = d.positioncode
+        left outer join employee_detail e
+        on
+        a.userid = e.userid
 		
-		
-		
-		 where userid = #{userid}
+		 where a.userid = #{userid}
 	</select>
 
 
@@ -158,12 +165,12 @@
 	</select>
 	
 	<!-- 사원 이름으로 검색 -->
-	<select id="selectUserByNm" resultType="employeeVo" parameterType="map">
+	<!-- <select id="selectUserByNm" resultType="employeeVo" parameterType="map">
 		select  userid,usernm,deptcode,positioncode,rankcode,continuousyear,relate
         ,joincompany,birthdate,password
 		from    employee
 		where   usernm like '%' ||#{usernm} ||'%'
-	</select>
+	</select> -->
 
 
 

@@ -85,6 +85,11 @@ public class Tax_calDao implements ITax_calDao{
 	public List<Tax_calVo> searchAllByType2() {
 		return sqlSessionTemplate.selectList("tax_cal.searchAllByType2");
 	}
+
+	@Override
+	public List<Tax_calVo> searchAllByType51(String searchData2) {
+		return sqlSessionTemplate.selectList("tax_cal.searchAllByType51", searchData2);
+	}
 	
 
 }

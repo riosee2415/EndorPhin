@@ -84,48 +84,39 @@ a:hover, a:focus {
 }
 
 /* @media only screen and (max-width: 479px) {
-	.tab .nav-tabs {
-		border: none;
-	}
-	.tab .nav-tabs li {
-		width: 100%;
-		text-align: center;
-		margin-bottom: 15px;
-	}
-	.tab .nav-tabs li a {
-		margin: 0;
-		border-bottom: 2px solid transparent;
-	}
-	.tab .nav-tabs li a:before {
-		content: "";
-		width: 100%;
-		height: 2px;
-		background: #079fc9;
-		position: absolute;
-		bottom: -2px;
-		left: 0;
-	}
+   .tab .nav-tabs {
+      border: none;
+   }
+   .tab .nav-tabs li {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 15px;
+   }
+   .tab .nav-tabs li a {
+      margin: 0;
+      border-bottom: 2px solid transparent;
+   }
+   .tab .nav-tabs li a:before {
+      content: "";
+      width: 100%;
+      height: 2px;
+      background: #079fc9;
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+   }
 } */
-
 .table {
 	border-width: 3px;
 	border-style: inset;
 	border-color: black;
 }
-
-
-
-
 </style>
-                            
+
 
 </head>
 <body>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myLargeModal">
-  큰 Modal
-</button>
-                               
 	<div class="row">
 		<div class="col-md-1"></div>
 		<div class="col-md-10" style="width: 100%">
@@ -176,7 +167,7 @@ a:hover, a:focus {
 
 												<td class="boardTr" data-userid="${allEmployee.userId}"><button
 														type="button" class="btn btn-default" data-toggle="modal"
-														data-target="#myLargeModalEdit2">
+														data-target="#myLargeModalEdit">
 														<u>${allEmployee.userId }</u>
 													</button></td>
 
@@ -193,382 +184,446 @@ a:hover, a:focus {
 									</tbody>
 								</table>
 							</div>
-							
+
 
 						</form>
 
 						<div class="form-group">
 							<form action="${cp}/employee/SearchEmployee" id="searchFrm">
-							<table>
-								<tr>
-									<td>
-										<button style="background-color: #6E6867 !important;"
-											type="button" class="btn btn-primary btn-lg" id="cancleBtn">삭
-											제</button>
-										<button style="background-color: #6E6867 !important;"
-											type="button" class="btn btn-primary btn-lg"
-											data-toggle="modal" data-target="#myLargeModalInsert" id="employeeInsert">신규등록</button>
-									</td>
-									<td>
-									</td>
-									<td style="padding-left: 600px"><input type="text"
-										class="search-query form-control" id="searchPay"
-										name="searchName" placeholder="사원명을 검색하시오" /></td>
-									<td>
-										<button class="btn btn-info" type="submit" id="searchBtn">
-											<span class=" glyphicon glyphicon-search">검색</span>
-										</button>
-									</td>
-								</tr>
-							</table>
+								<table>
+									<tr>
+										<td>
+											<button style="background-color: #6E6867 !important;"
+												type="button" class="btn btn-primary btn-lg" id="cancleBtn">삭
+												제</button>
+											<button style="background-color: #6E6867 !important;"
+												type="button" class="btn btn-primary btn-lg"
+												data-toggle="modal" data-target="#myLargeModalInsert"
+												id="employeeInsert">신규등록</button>
+										</td>
+										<td></td>
+										<td style="padding-left: 600px"><input type="text"
+											class="search-query form-control" id="searchPay"
+											name="searchName" placeholder="사원명을 검색하시오" /></td>
+										<td>
+											<button class="btn btn-info" type="submit" id="searchBtn">
+												<span class=" glyphicon glyphicon-search">검색</span>
+											</button>
+										</td>
+									</tr>
+								</table>
 							</form>
 						</div>
-						
+					</div>
 
-		
-										
-										
-										
-						<!--  사원 등록 모달창 불러오기  -->
-						<%@ include file="employeeInsert.jsp"%>
-				
-						<!--  사원 등록 모달창 불러오기  -->
-						<%@ include file="employeemodify.jsp"%>
-				
 
-						
 
-					
+
+					<!-- Section2 시작-->
+					<div role="tabpanel" class="tab-pane fade" id="Section2">
+						<form class="form-horizontal">
+							<div class="form-group">
+								<table class="table table-striped">
+									<thead class="thead">
+										<tr>
+											<th>사원번호</th>
+											<th>사원명</th>
+											<th>부서명</th>
+											<th>직책명</th>
+											<th>직급명</th>
+											<th>근속년수</th>
+											<th>비고</th>
+											<th>입사일</th>
+											<th>생년월일</th>
+										</tr>
+									</thead>
+
+									<tbody id="mytbody">
+										<c:forEach items="${allEmployee}" var="allEmployee">
+											<c:if test="${allEmployee.deptname == '인사' }">
+												<tr>
+													<td class="boardTr" data-userid="${allEmployee.userId}"><button
+															type="button" class="btn btn-default" data-toggle="modal"
+															data-target="#myLargeModalEdit">
+															<u>${allEmployee.userId }</u>
+														</button></td>
+
+													<td>${allEmployee.userNm }</td>
+													<td>${allEmployee.deptname }</td>
+													<td>${allEmployee.positionname }</td>
+													<td>${allEmployee.rankname }</td>
+													<td>${allEmployee.continuousYear }</td>
+													<td>${allEmployee.relate }</td>
+													<td>${allEmployee.joinCompany }</td>
+													<td>${allEmployee.birthDate }</td>
+												</tr>
+											</c:if>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+
+						</form>
+					</div>
+					<!-- Section2 끝-->
+
+					<!-- Section3 시작-->
+					<div role="tabpanel" class="tab-pane fade" id="Section3">
+						<form class="form-horizontal">
+
+							<div class="form-group">
+								<table class="table table-striped">
+									<thead class="thead">
+										<tr>
+											<th>사원번호</th>
+											<th>사원명</th>
+											<th>부서명</th>
+											<th>직책명</th>
+											<th>직급명</th>
+											<th>근속년수</th>
+											<th>비고</th>
+											<th>입사일</th>
+											<th>생년월일</th>
+										</tr>
+									</thead>
+
+									<tbody id="mytbody">
+										<c:forEach items="${allEmployee}" var="allEmployee">
+											<c:if test="${allEmployee.deptname == '회계' }">
+												<tr>
+													<td class="boardTr" data-userid="${allEmployee.userId}"><button
+															type="button" class="btn btn-default" data-toggle="modal"
+															data-target="#myLargeModalEdit">
+															<u>${allEmployee.userId }</u>
+														</button></td>
+
+													<td>${allEmployee.userNm }</td>
+													<td>${allEmployee.deptname }</td>
+													<td>${allEmployee.positionname }</td>
+													<td>${allEmployee.rankname }</td>
+													<td>${allEmployee.continuousYear }</td>
+													<td>${allEmployee.relate }</td>
+													<td>${allEmployee.joinCompany }</td>
+													<td>${allEmployee.birthDate }</td>
+												</tr>
+											</c:if>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+
+						</form>
+					</div>
+					<!-- Section3 끝-->
+
+					<!-- Section4 시작-->
+					<div role="tabpanel" class="tab-pane fade" id="Section4">
+						<form class="form-horizontal">
+							<div class="form-group">
+								<table class="table table-striped">
+									<thead class="thead">
+										<tr>
+											<th>사원번호</th>
+											<th>사원명</th>
+											<th>부서명</th>
+											<th>직책명</th>
+											<th>직급명</th>
+											<th>근속년수</th>
+											<th>비고</th>
+											<th>입사일</th>
+											<th>생년월일</th>
+										</tr>
+									</thead>
+
+									<tbody id="mytbody">
+										<c:forEach items="${allEmployee}" var="allEmployee">
+											<c:if test="${allEmployee.deptname == '물류' }">
+												<tr>
+													<td class="boardTr" data-userid="${allEmployee.userId}"><button
+															type="button" class="btn btn-default" data-toggle="modal"
+															data-target="#myLargeModalEdit">
+															<u>${allEmployee.userId }</u>
+														</button></td>
+
+													<td>${allEmployee.userNm }</td>
+													<td>${allEmployee.deptname }</td>
+													<td>${allEmployee.positionname }</td>
+													<td>${allEmployee.rankname }</td>
+													<td>${allEmployee.continuousYear }</td>
+													<td>${allEmployee.relate }</td>
+													<td>${allEmployee.joinCompany }</td>
+													<td>${allEmployee.birthDate }</td>
+												</tr>
+											</c:if>
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+						</form>
+					</div>
 				</div>
-			
-			<!-- Section2 시작-->
-			<div role="tabpanel" class="tab-pane fade" id="Section2">
-				<form class="form-horizontal">
-					<div class="form-group">
-						<table class="table table-striped">
-							<thead class="thead">
-								<tr>
-									<th>사원번호</th>
-									<th>사원명</th>
-									<th>부서명</th>
-									<th>직책명</th>
-									<th>직급명</th>
-									<th>근속년수</th>
-									<th>비고</th>
-									<th>입사일</th>
-									<th>생년월일</th>
-								</tr>
-							</thead>
-
-							<tbody id="mytbody">
-								<c:forEach items="${allEmployee}" var="allEmployee">
-									<c:if test="${allEmployee.deptname == '인사' }">
-										<tr>
-											<td class="boardTr" data-userid="${allEmployee.userId}"><button
-													type="button" class="btn btn-default" data-toggle="modal"
-													data-target="#myLargeModalEdit1">
-													<u>${allEmployee.userId }</u>
-												</button></td>
-
-											<td>${allEmployee.userNm }</td>
-											<td>${allEmployee.deptname }</td>
-											<td>${allEmployee.positionname }</td>
-											<td>${allEmployee.rankname }</td>
-											<td>${allEmployee.continuousYear }</td>
-											<td>${allEmployee.relate }</td>
-											<td>${allEmployee.joinCompany }</td>
-											<td>${allEmployee.birthDate }</td>
-										</tr>
-									</c:if>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-
-				</form>
-			</div>
-			<!-- Section2 끝-->
-
-			<!-- Section3 시작-->
-			<div role="tabpanel" class="tab-pane fade" id="Section3">
-				<form class="form-horizontal">
-
-					<div class="form-group">
-						<table class="table table-striped">
-							<thead class="thead">
-								<tr>
-									<th>사원번호</th>
-									<th>사원명</th>
-									<th>부서명</th>
-									<th>직책명</th>
-									<th>직급명</th>
-									<th>근속년수</th>
-									<th>비고</th>
-									<th>입사일</th>
-									<th>생년월일</th>
-								</tr>
-							</thead>
-
-							<tbody id="mytbody">
-								<c:forEach items="${allEmployee}" var="allEmployee">
-									<c:if test="${allEmployee.deptname == '회계' }">
-										<tr>
-											<td class="boardTr" data-userid="${allEmployee.userId}"><button
-													type="button" class="btn btn-default" data-toggle="modal"
-													data-target="#myLargeModalEdit1">
-													<u>${allEmployee.userId }</u>
-												</button></td>
-
-											<td>${allEmployee.userNm }</td>
-											<td>${allEmployee.deptname }</td>
-											<td>${allEmployee.positionname }</td>
-											<td>${allEmployee.rankname }</td>
-											<td>${allEmployee.continuousYear }</td>
-											<td>${allEmployee.relate }</td>
-											<td>${allEmployee.joinCompany }</td>
-											<td>${allEmployee.birthDate }</td>
-										</tr>
-									</c:if>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-
-				</form>
-			</div>
-			<!-- Section3 끝-->
-
-			<!-- Section4 시작-->
-			<div role="tabpanel" class="tab-pane fade" id="Section4">
-				<form class="form-horizontal">
-					<div class="form-group">
-						<table class="table table-striped">
-							<thead class="thead">
-								<tr>
-									<th>사원번호</th>
-									<th>사원명</th>
-									<th>부서명</th>
-									<th>직책명</th>
-									<th>직급명</th>
-									<th>근속년수</th>
-									<th>비고</th>
-									<th>입사일</th>
-									<th>생년월일</th>
-								</tr>
-							</thead>
-
-							<tbody id="mytbody">
-								<c:forEach items="${allEmployee}" var="allEmployee">
-									<c:if test="${allEmployee.deptname == '물류' }">
-										<tr>
-											<td class="boardTr" data-userid="${allEmployee.userId}"><button
-													type="button" class="btn btn-default" data-toggle="modal"
-													data-target="#myLargeModalEdit1">
-													<u>${allEmployee.userId }</u>
-												</button></td>
-
-											<td>${allEmployee.userNm }</td>
-											<td>${allEmployee.deptname }</td>
-											<td>${allEmployee.positionname }</td>
-											<td>${allEmployee.rankname }</td>
-											<td>${allEmployee.continuousYear }</td>
-											<td>${allEmployee.relate }</td>
-											<td>${allEmployee.joinCompany }</td>
-											<td>${allEmployee.birthDate }</td>
-										</tr>
-									</c:if>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-				</form>
 			</div>
 		</div>
 	</div>
-</div>
-</div>
 
 
+	<!--  사원 등록 모달창 불러오기  -->
+	<%@ include file="employeeInsert.jsp"%>
+
+	<!--  사원 등록 모달창 불러오기  -->
+	<%@ include file="employeemodify.jsp"%>
 	<script>
 	
-	//사원 신규등록 클릭시 정보가져오기
-	$("#employeeInsert").on("click", function(){
-		
-		
-		$.ajax({
-			url			: "${pageContext.request.contextPath }/employee/getSelectBox" ,
-			method		: "get",
-			//data		: "userId="+$(this).data().userid,
-			success		: function(data) {
-				console.log(data);
-				makeUserList(data);
-				 
-				
-			} 
-		});
-		
-	});
-	
-	
-	
-	function makeUserList(data) {
-		
-		var deptCode_html = "";
-		var position_html = "";
-		var rank_html = "";
-		
-		for(var i = 0; i < data.allDept.length; i++){
-			var dept = data.allDept[i];
-			
-			deptCode_html += "<option value=' " + dept.deptCode +" '> "+dept.deptName +"</option>";
-			
-		}
-		                       
-		$("#deptCode_html").html(deptCode_html);
-		
-		
-		
-		for(var i = 0; i < data.allPosition.length; i++){
-			
-			if(data.allPosition[i].positionStatus == "직책"){
-				var position = data.allPosition[i];
-				position_html += "<option value=' " + position.positionCode +" '> "+position.positionName +"</option>";
-				
-			}else if(data.allPosition[i].positionStatus == "직급"){
-				
-				var rank = data.allPosition[i];
-				rank_html += "<option value=' " + rank.positionCode +" '> "+rank.positionName +"</option>";
-			}
-			
-		
-		}          
-		       
-		$("#position_html").html(position_html);
-		$("#rank_html").html(rank_html);
-		
-		
-		
-		
-	}
-	
-	
-	
-	
-	
-	/*사원정보 수정하기*/
-	$("#mytbody").on("click", ".boardTr", function(){
-			
-		console.log($(this).data().userid);
-		
-		$.ajax({
-			url			: "${pageContext.request.contextPath }/employee/updateEmployee" ,
-			method		: "get",
-			data		: "userId="+$(this).data().userid,
-			success		: function(userIdCode) {
-				 $("#userIde").val(userIdCode.userId); 
-				 $("#userNme").val(userIdCode.userNm);
-		         $("#deptCodee").val(userIdCode.deptCode);
-				 $("#positionCodee").val(userIdCode.positionCode);
-				 $("#rankCodee").val(userIdCode.rankCode);
-				 $("#inputPassworde").val(userIdCode.password);
-				 $("#inputPasswordChecke").val(userIdCode.password);
-				 $("#relatee").val(userIdCode.relate);
-				 $("#BirthDatee").val(userIdCode.birthDate); 
-				 $("#userimage").attr('src','${cp}/employee/profileImg?userId=' + userIdCode.userId);
-			           
-				 
-			} 
-		});
-	});
-	/*Duplication Check*/
-	$("#emplCheck").on("click", function(){
-		$.ajax({
-			url			: "${pageContext.request.contextPath }/employee/emplIdAjax" ,
-			method		: "post",
-			data		: "userId="+$("#userId").val(),
-			success		: function(userIdCode) {
-				transDupl(userIdCode);
-				
-			}
-		});
-	});
-	
-	
-	var duplicateCode = "";
-	
-	function transDupl(userIdCode){
-		if(userIdCode == 1){
-			insertFlag = "1";
-			duplicateCode = "<b><font color='blue'>사용가능한 사원번호 입니다. </font></b>";
-			$("#duplicate").html(duplicateCode);
-		} else if (userIdCode == 0){
-			duplicateCode = "<b><font color='red'>중복된 사원번호 가 있습니다.</font></b>";
-			$("#duplicate").html(duplicateCode);
-		} else if (userIdCode == "WS"){
-			duplicateCode = "<b><font color='red'>사원번호를 입력하세요.</font></b>";
-			$("#duplicate").html(duplicateCode);
-		}
-		
-	}
-	
-	
+	  /*사원정보 수정하기*/
+	   $("#mytbody").on("click", ".boardTr", function(){
+		   
+		   var deptCode_htmlEdit = "";
+		   var position_htmlEdit = "";
+		   var rank_htmlEdit = "";
+		                     
+	         
+	      console.log($(this).data().userid);
+	      
+	      $.ajax({
+	         url         : "${pageContext.request.contextPath }/employee/updateEmployee" ,
+	         method      : "get",
+	         data      : "userId="+$(this).data().userid,
+	         success      : function(userIdCode) {
+	             $("#userIde").val(userIdCode.userId); 
+	             $("#userNme").val(userIdCode.userNm);
+	             $("#deptCode_htmlEdit").val(userIdCode.deptCode); 
+	             $("#position_htmlEdit").val(userIdCode.positionCode);
+	             $("#rank_htmlEdit").val(userIdCode.rankCode);
+	           console.log(userIdCode.birthDate);
+	             
+	             $("#relateE").val(userIdCode.relate);
+	             $("#BirthDateE").val(userIdCode.birthDate);
+	             $("#finalSchoolE").val(userIdCode.finalschool);
+	             $("#phoneNumberE").val(userIdCode.phonenumber); 
+	             $("#emailE").val(userIdCode.email); 
+	             
+	             var addrtemp = Array();
+	             addrtemp = userIdCode.address.split(',');
 
-		$(document).ready(function() {
-			
-			$("#frmTap").trigger('click');
-		
-			
-			 //server side 에서 비교
-			<c:if test="${msg != null}">
-			alert("${msg}");
-			</c:if> 
-			
-			
-			 //사용자 tr 태그 클릭시 이벤트 핸들러
-			$("#cancleBtn").click(function() {
-				var implArray = new Array();
-
-				$('input:checkbox[name="check"]:checked').each(function() {
-					implArray.push($(this).val());
+	          	 $("#addressE").val(addrtemp[0]); 
+	             $("#addressDetailE").val(addrtemp[1]); 
+	             $("#marryStatusE").val(userIdCode.marryStatus); 
+	             $("#imagecodeE").val(userIdCode.imagecode); 
+	             
+	             $("#userimage").attr('src','${cp}/employee/profileImg?userId=' + userIdCode.userId);
+	             
+	         } 
+	      });
+	   });
+	  
 	
-				$("#delete_no").val(implArray);
-				$("#frm1").submit();
-				
-				});
+   
+   //사원 신규등록 클릭시 정보가져오기
+   $("#employeeInsert").on("click", function(){
+      
+      
+      $.ajax({
+         url         : "${pageContext.request.contextPath }/employee/getSelectBox" ,
+         method      : "get",
+         //data      : "userId="+$(this).data().userid,
+         success      : function(data) {
+            console.log(data);
+            makeUserList(data);
+             
+            
+         } 
+      });
+      
+   });
+   
+   
+   
+   
+   
+   function makeUserList(data) {
+      
+      var deptCode_html = "";
+      var position_html = "";
+      var rank_html = "";
+      
+      for(var i = 0; i < data.allDept.length; i++){
+         var dept = data.allDept[i];
+         
+         deptCode_html += "<option value='" +dept.deptCode+"'> "+dept.deptName +"</option>";
+         
+      }
+                             
+      $("#deptCode_html").html(deptCode_html);
+      
+      
+      
+      for(var i = 0; i < data.allPosition.length; i++){
+         
+         if(data.allPosition[i].positionStatus == "직책"){
+            var position = data.allPosition[i];
+            position_html += "<option value='" + position.positionCode +"'> "+position.positionName +"</option>";
+            
+         }else if(data.allPosition[i].positionStatus == "직급"){
+            
+            var rank = data.allPosition[i];
+            rank_html += "<option value='" + rank.positionCode +"'> "+rank.positionName +"</option>";
+         }
+         
+      
+      }          
+             
+      $("#position_html").html(position_html);
+      $("#rank_html").html(rank_html);
+      
+      
+      
+      
+   }
+   
+   
+   
+ 
+   /*Duplication Check*/
+   $("#emplCheck").on("click", function(){
+      $.ajax({
+         url         : "${pageContext.request.contextPath }/employee/emplIdAjax" ,
+         method      : "post",
+         data      : "userId="+$("#userId").val(),
+         success      : function(userIdCode) {
+            transDupl(userIdCode);
+            
+         }
+      });
+   });
+   
+   
+   var duplicateCode = "";
+   
+   function transDupl(userIdCode){
+      if(userIdCode == 1){
+         insertFlag = "1";
+         duplicateCode = "<b><font color='blue'>사용가능한 사원번호 입니다. </font></b>";
+         $("#duplicate").html(duplicateCode);
+      } else if (userIdCode == 0){
+         duplicateCode = "<b><font color='red'>중복된 사원번호 가 있습니다.</font></b>";
+         $("#duplicate").html(duplicateCode);
+      } else if (userIdCode == "WS"){
+         duplicateCode = "<b><font color='red'>사원번호를 입력하세요.</font></b>";
+         $("#duplicate").html(duplicateCode);
+      }
+      
+   }
+   
+   
 
-			}); 
-			 
-			
+      $(document).ready(function() {
+         
+         $("#frmTap").trigger('click');
+         
+         
+       //수정창 부서,직급 정보가져오기
+   		  
+   		   $.ajax({
+   		         url         : "${pageContext.request.contextPath }/employee/getSelectBox" ,
+   		         method      : "get",
+   		         //data      : "userId="+$(this).data().userid,
+   		         success      : function(data) {
+   		            editUserList(data);
+   		             
+   		            
+   		         } 
+   		      });
+   	  
+   	  function editUserList(data) {
+   	      
+   	      var deptCode_html = "";
+   	      var position_html = "";
+   	      var rank_html = "";
+   	      
+   	      for(var i = 0; i < data.allDept.length; i++){
+   	         var dept = data.allDept[i];
+   	         
+   	         deptCode_html += "<option value='" + dept.deptCode +"'> "+dept.deptName +"</option>";
+   	         
+   	      }
+   	                             
+   	      $("#deptCode_htmlEdit").html(deptCode_html);
+   	      
+   	      
+   	      
+   	      for(var i = 0; i < data.allPosition.length; i++){
+   	         
+   	         if(data.allPosition[i].positionStatus == "직책"){
+   	            var position = data.allPosition[i];
+   	            position_html += "<option value='" + position.positionCode +"'> "+position.positionName +"</option>";
+   	            
+   	         }else if(data.allPosition[i].positionStatus == "직급"){
+   	            
+   	            var rank = data.allPosition[i];
+   	            rank_html += "<option value='" + rank.positionCode +"'> "+rank.positionName +"</option>";
+   	         }
+   	         
+   	      
+   	      }          
+   	             
+   	      $("#position_htmlEdit").html(position_html);
+   	      $("#rank_htmlEdit").html(rank_html);
+   	      
+   	      
+   	   } 
+      
+         
+          //server side 에서 비교
+         <c:if test="${msg != null}">
+         alert("${msg}");
+         </c:if> 
+         
+         
+          //사용자 tr 태그 클릭시 이벤트 핸들러
+         $("#cancleBtn").click(function() {
+            var implArray = new Array();
 
-		});
-		
-		 
-		 
-		 $("#zipcodeBtn").on("click", function() {
+            $('input:checkbox[name="check"]:checked').each(function() {
+               implArray.push($(this).val());
+   
+            $("#delete_no").val(implArray);
+            $("#frm1").submit();
+            
+            });
 
-			new daum.Postcode({
-				oncomplete : function(data) {
-					console.log(data);
-				
-					//새 우편번호 : data.zonecode
-					//우편번호 input select .val (data.zonecode)
-					//$("#zipcode").val(data.zonecode);
-					
-					//기본주소(도로주소) : data.roadAddress
-					//주소1 input select .val (data.zonecode);
-					$("#address").val(data.roadAddress);
-					
-					//상세주소 input focus
-					//$("#addressDetail").focus();
-				
-				
-					
-				
-				}
-			}).open();
+         }); 
+          
+         
 
-		}); 
-	</script>
+      });
+      
+       
+       
+       $("#zipcodeBtn").on("click", function() {
+
+         new daum.Postcode({
+            oncomplete : function(data) {
+               console.log(data);
+            
+               //새 우편번호 : data.zonecode
+               //우편번호 input select .val (data.zonecode)
+               //$("#zipcode").val(data.zonecode);
+               
+               //기본주소(도로주소) : data.roadAddress
+               //주소1 input select .val (data.zonecode);
+               $("#address").val(data.roadAddress);
+               
+               //상세주소 input focus
+               //$("#addressDetail").focus();
+            
+            
+               
+            
+            }
+         }).open();
+
+      }); 
+   </script>
 
 	<form id="frm1" action="${cp}/employee/deleteEmployee" method="get">
 		<input type="hidden" id="delete_no" name="delete_no" />

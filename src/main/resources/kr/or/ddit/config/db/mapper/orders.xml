@@ -19,7 +19,11 @@
 		(#{orderCode}
 		,nvl(#{deptCode,jdbcType=VARCHAR},null)
 		,#{userId}
-		,#{orderPrice}
+		,nvl((select sum(baseprice*quantity)
+				from orders o , order_detail od,product p
+				where   o.ordercode=od.ordercode
+				and od.productcode=p.productcode
+				and #{orderCode}),0)		
 		,#{orderlist}
 		,to_date(#{dueDate},'yyyy-MM-dd')
 		,to_date(nvl(#{paymentDueDate, jdbcType=VARCHAR},null),'yyyy-MM-dd')
@@ -67,6 +71,25 @@
 		delete from orders
 		where ordercode = #{orderCode}
 	</delete>
+	
+	<update id="updateOrders" parameterType="ordersVo">
+		update orders
+		set deptcode = nvl(#{deptCode,jdbcType=VARCHAR},deptcode)
+		,userid = nvl(#{userId,jdbcType=VARCHAR},userid)
+		,orderprice = nvl((select sum(baseprice*quantity)
+							from orders o , order_detail od,product p
+							where   o.ordercode=od.ordercode
+							and od.productcode=p.productcode
+							and #{orderCode}),orderprice)		
+		,orderlist = nvl(#{orderlist,jdbcType=VARCHAR},orderlist)
+		,duedate = to_date(nvl(#{dueDate,jdbcType=VARCHAR},duedate),'yyyy-MM-dd')
+		,paymentduedate=to_date(nvl(#{paymentDueDate, jdbcType=VARCHAR},paymentduedate),'yyyy-MM-dd')
+		,specialnote = nvl(#{specialnote, jdbcType=VARCHAR},specialnote)
+		,clientcode = nvl(#{clientCode, jdbcType=VARCHAR},clientcode)
+		,status = nvl(#{status, jdbcType=VARCHAR},status)
+		,sortation = nvl(#{sortation, jdbcType=VARCHAR},sortation)
+		where	ordercode=#{orderCode}
+	</update>
 </mapper>
 
 

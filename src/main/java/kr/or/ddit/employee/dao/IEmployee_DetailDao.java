@@ -10,5 +10,7 @@ public interface IEmployee_DetailDao {
 	int insertEmployeeDetail(Employee_detailVo employeeVo);
 	int deleteEmployeeDetail(String userId);
 	List<Employee_detailVo> getAllEmployeeDetail();
+	
+	int updateEmployeeDetail(Employee_detailVo vo);
 
 }

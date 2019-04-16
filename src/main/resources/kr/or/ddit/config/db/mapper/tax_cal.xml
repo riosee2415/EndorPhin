@@ -142,6 +142,15 @@
         or salesstatus ='현금영세매출'
         
 	</select>
+	
+	
+	<select id="searchAllByType51" parameterType="String" resultType="tax_calVo">  
+		select
+		salescode, slipdate, supplyvalue, salesstatus, deptcode, surtax, ordercode, clientname, sumvalue, auto, entryType
+		from tax_cal
+		where salesstatus = #{searchData2}
+        
+	</select>
 
 
 </mapper>

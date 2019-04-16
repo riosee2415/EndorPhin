@@ -10,13 +10,11 @@
 		<table class="table table-hover">
 			<tr>
 				<td>연도/년도 <select class="chosen-select" id="acquisitionDate">
-						<option selected="selected"></option>
-				</select>
+								<option selected="selected"></option>
+							</select>
 				</td>
-				<td>계정과목명 <input id="accountName" name="accountName" type="text"
-					id="year" type="text" /> &nbsp <input type="button"
-					class="bttn-fill bttn-warning" id="seachBtn" value="검색"
-					onclick="myClick();" />
+				<td>계정과목명 <input id="accountName" name="accountName" type="text"id="year" type="text" /> &nbsp
+						   <input type="button" class="bttn-fill bttn-warning" id="seachBtn" value="검색"onclick="myClick();" />
 				</td>
 			</tr>
 		</table>
@@ -40,9 +38,7 @@
 					<tr>
 						<td>${vo.assetName }</td>
 						<td>${vo.assetCode }</td>
-						<td><fmt:formatDate value="${vo.acquisitionDate  }"
-								pattern="yyyy-MM-dd" /></td>
-
+						<td><fmt:formatDate value="${vo.acquisitionDate  }"	pattern="yyyy-MM-dd" /></td>
 						<td>${vo.acquisitionPrice }</td>
 						<td>${vo.depreciation }</td>
 						<td>${vo.accumulated }</td>
@@ -51,23 +47,23 @@
 
 						<!-- 데이트타입 스트링으로 변경 -->
 						<c:set var="dates">
-							<fmt:formatDate value="${vo.acquisitionDate  }"
-								pattern="yyyy/MM/dd" />
+							<fmt:formatDate value="${vo.acquisitionDate  }"	pattern="yyyy/MM/dd" />
 						</c:set>
-						<td><a class="bttn-stretch bttn-warning detailView"
-							data-assetcode="${vo.assetCode }"
-							data-acquisitiondate="${dates }"
-							data-purchasecode="${vo.purchaseCode }"
-							data-sanggakway="${vo.sanggakWay }"
-							data-acquisitionprice="${vo.acquisitionPrice }"
-							data-accountname="${vo.accountName }"
-							data-clientname="${vo.clientName }"
-							data-assetname="${vo.assetName }"
-							data-residualvalue="${vo.residualvalue }"
-							data-jukyo="${vo.jukyo }" data-sanggakcode="${vo.sanggakCode }"
-							data-depreciation="${vo.depreciation }"
-							data-accumulated="${vo.accumulated }">장부반영</a></td>
-
+						<td><c:if test="${vo.slipNumber == null }">
+						<a class="bttn-stretch bttn-warning detailView"
+																data-assetcode="${vo.assetCode }"
+																data-acquisitiondate="${dates }"
+																data-purchasecode="${vo.purchaseCode }"
+																data-sanggakway="${vo.sanggakWay }"
+																data-acquisitionprice="${vo.acquisitionPrice }"
+																data-accountname="${vo.accountName }"
+																data-clientname="${vo.clientName }"
+																data-assetname="${vo.assetName }"
+																data-residualvalue="${vo.residualvalue }"
+																data-jukyo="${vo.jukyo }" data-sanggakcode="${vo.sanggakCode }"
+																data-depreciation="${vo.depreciation }"
+																data-accumulated="${vo.accumulated }">장부반영</a>
+						</c:if></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -92,8 +88,7 @@
 		}
 		$.ajax({
 			url : "${pageContext.request.contextPath }/assetDateSearch",
-			data : "accountName=" + $("#accountName").val() + "&"
-					+ "acquisitionDate=" + $("#acquisitionDate").val(),
+			data : "accountName=" + $("#accountName").val() + "&"	+ "acquisitionDate=" + $("#acquisitionDate").val(),
 			success : function(data) {
 				$("#accountName").val("");
 				$("#assetTbody").html(data);
@@ -117,33 +112,24 @@
 	appendYear($("#acquisitionDate"));
 
 	/*장부반영 */
-	$(".detailView")
-			.on(
-					"click",
-					function() {
+	$(".detailView").on("click",
+		function() {
+			$.ajax({
+				url : "${pageContext.request.contextPath }/insertslipApply",
+				data : "acquisitionDate="+ $(this).data().acquisitiondate
+						+ "&" + "clientName="+ $(this).data().clientname + "&"
+						+ "sanggakCode="+ $(this).data().sanggakcode + "&"
+						+ "assetCode="+ $(this).data().assetcode + "&"
+						+ "depreciation="+ $(this).data().depreciation,
+				success : function(data) {
 
-						$
-								.ajax({
-									url : "${pageContext.request.contextPath }/insertslipApply",
-									data : "acquisitionDate="
-											+ $(this).data().acquisitiondate
-											+ "&" + "clientName="
-											+ $(this).data().clientname + "&"
-											+ "sanggakCode="
-											+ $(this).data().sanggakcode + "&"
-											+ "assetCode="
-											+ $(this).data().assetcode + "&"
-											+ "depreciation="
-											+ $(this).data().depreciation,
+					alert("장부반영이 완료되었습니다.");
+					location.reload();
+					return false;
 
-									success : function(data) {
-
-										alert("장부반영이 완료되었습니다.");
-										return false;
-
-									}
-								});
-					});
+				}
+			});
+		});
 </script>
 
 

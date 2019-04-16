@@ -8,13 +8,14 @@
 	<div class="col-md-1"></div>
 	<div class="col-md-10">
 		<h2>
-			<i class="fa fa-calculator"></i>매입매출장1
+			<i class="fa fa-calculator"></i>매입매출장
 		</h2>
 
 
 
 			<table>
 				<tr>
+					
 					<td align="center">유형</td>
 					<td><select style="width: 140px;" id="first" onchange="javascript:firstDataRead()">
 						<option>-----</option>
@@ -26,7 +27,17 @@
 					<td><input class="bttn-fill bttn-warning" id="search_1" type="button" value="검색" /></td>
 
 				</tr>
+				
 			</table>
+			<br />
+			<table>
+				<tr>
+					<td> 날짜 : <input type="text" /></td>
+					<td>  ~  </td>
+					<td> <input type="text" /></td>
+				</tr>
+			</table>
+			
 			<br />
 
 	<table class="table table-hover" style="font-size: small;">
@@ -96,7 +107,7 @@
 		
 		if(str2 ==  "undefined" || str2 == null || str2 == ""){
 			alert("유형과 구분을 선택하세요.");
-		} else if (str2 == "전체"){
+		} else {
 			searchData_1(str1, str2);
 		}
 		
@@ -142,6 +153,10 @@
 			url : "${pageContext.request.contextPath }/searchAllByType",
 			data : "searchData1=" + str1 + "&searchData2=" + str2,
 			success : function(data){
+				$("#searchDataList").html("");
+				$("#totalValue").html("");
+				
+				
 				
 				var inputValue = data.split("==");
 				

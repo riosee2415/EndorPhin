@@ -30,9 +30,59 @@ public class EmployeeVo {
 	//부서이름
 	String deptname;
 	
+	//사원 디테일 
+	String finalschool;
+	String email;
+	String phonenumber;
+	String address;
+	String addressDetail;
+	String marryStatus;
+	String imagecode;
 	
 	
 	
+	public String getAddressDetail() {
+		return addressDetail;
+	}
+	public void setAddressDetail(String addressDetail) {
+		this.addressDetail = addressDetail;
+	}
+	public String getImagecode() {
+		return imagecode;
+	}
+	public void setImagecode(String imagecode) {
+		this.imagecode = imagecode;
+	}
+	public String getMarryStatus() {
+		return marryStatus;
+	}
+	public void setMarryStatus(String marryStatus) {
+		this.marryStatus = marryStatus;
+	}
+	public String getFinalschool() {
+		return finalschool;
+	}
+	public void setFinalschool(String finalschool) {
+		this.finalschool = finalschool;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPhonenumber() {
+		return phonenumber;
+	}
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 	public String getPositionname() {
 		return positionname;
 	}
@@ -126,8 +176,12 @@ public class EmployeeVo {
 		return "EmployeeVo [userId=" + userId + ", userNm=" + userNm + ", deptCode=" + deptCode + ", positionCode="
 				+ positionCode + ", rankCode=" + rankCode + ", continuousYear=" + continuousYear + ", relate=" + relate
 				+ ", joinCompany=" + joinCompany + ", BirthDate=" + BirthDate + ", password=" + password
-				+ ", positionname=" + positionname + ", rankname=" + rankname + ", deptname=" + deptname + "]";
+				+ ", positionname=" + positionname + ", rankname=" + rankname + ", deptname=" + deptname
+				+ ", finalschool=" + finalschool + ", email=" + email + ", phonenumber=" + phonenumber + ", address="
+				+ address + ", marryStatus=" + marryStatus + "]";
 	}
+	
+	
 	
 	
 	

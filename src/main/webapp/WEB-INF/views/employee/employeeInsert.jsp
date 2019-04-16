@@ -29,9 +29,12 @@
 		</div>
 		<form action="${cp}/employee/insertEmployee" method="post"
 			enctype="multipart/form-data">
-			<div class="modal-content"
-				style="color: black; font-weight: bold; overflow: scroll;">
+			<div class="modal-content" style="color: black; font-weight: bold;">
+				
+				
+				<div class="modal-body">
 				<div id="emplinsert" class="container-fluid">
+
 
 					<div class="row">
 						<div class="col-md-4" style="float: left; width: 40%;">
@@ -193,14 +196,13 @@
 					</div>
 
 
-
-
-
 					<div class="row">
 						<div class="col-md-10">
-							<label for="inputtelNO">결혼기념일</label> <input type="text"
-								class="form-control" id="inputtelNO" name="address"
-								placeholder="결혼기념일을 입력하세요 예)19951010">
+							<label for="inputtelNO">결혼여부</label> <select id="marryStatus"
+								class="form-control" name="marryStatus" class="form-control">
+								 <option value="0">미혼</option>
+									<option value="1">결혼</option>
+							</select>
 						</div>
 					</div>
 
@@ -211,8 +213,13 @@
 								class="form-control" name="fileName" />
 						</div>
 					</div>
+					</div>
+				<div class="modal-footer">
 				<button type="submit" class="btn btn-default">등록</button>
+					
 				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+				</div>
+				
 				</div>
 			</div>
 		</form>

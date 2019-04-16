@@ -17,6 +17,8 @@ a {
 	outline: none
 }
 
+
+
 #container div .col-md-2:hover {
 	background: #4D341B;
 	color: #fff !important;
@@ -96,8 +98,8 @@ a {
 
 
 		<div class="col-md-2 headFont">
-			<a class="header" href="${cp }/helloTiles"> <img alt=""
-				src="${cp }/upload/erpblack.jpg" style="height: 50px;"/></a>
+			 <a class="header" href="${cp }/helloTiles">
+			 <!-- <img src="${cp }/upload/erpblack.jpg" style="width: 235px; height: 70px;" /> --></a>
 		</div>
 
 

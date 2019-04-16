@@ -64,6 +64,11 @@ public class AssetServiceImpl implements IAssetService{
 		return assetDao.updateSlipNumber(assetVo);
 	}
 
+	@Override
+	public int updateJangbu(AssetVo assetVo) {
+		return assetDao.updateJangbu(assetVo);
+	}
+
 
 
 

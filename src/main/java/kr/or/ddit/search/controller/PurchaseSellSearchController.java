@@ -42,12 +42,15 @@ public class PurchaseSellSearchController {
 		
 		List<Tax_calVo> taxList = new ArrayList<>();
 		
-		if(searchData1.equals("매입")) {
+		
+		
+		if(searchData1.equals("매입") && searchData2.equals("전체")) {
 			taxList = tax_calService.searchAllByType();
-		} else if (searchData1.equals("매출") ) {
+		} else if (searchData1.equals("매출") && searchData2.equals("전체")) {
 			taxList = tax_calService.searchAllByType2();
+		} else {
+			taxList = tax_calService.searchAllByType51(searchData2);
 		}
-	
 		
 		model.addAttribute("taxList", taxList);
 		

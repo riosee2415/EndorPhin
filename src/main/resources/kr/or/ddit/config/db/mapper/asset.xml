@@ -23,7 +23,8 @@
 	        purchaseCode,
 	        accumulated,
 	        serviceLife,
-	        depreciationRate
+	        depreciationRate,
+	        jangbu
 	    FROM ASSET
 	</select>
 	
@@ -46,6 +47,7 @@
 	        purchaseCode,
 	        accumulated,
 	        serviceLife,
+	        jangbu,
 	        depreciationRate
 	    FROM ASSET
 	    WHERE ASSETCODE = #{assetCode}
@@ -88,6 +90,12 @@
 		     where  assetCode = #{assetCode}
 	</update>
 	
+	<!--매입매출에 장부완료시 장부상태 변경-->
+	<update id="updateJangbu" parameterType="assetVo">
+		 update asset set 
+		 		jangbu  = #{jangbu}
+		     where  assetCode = #{assetCode}
+	</update>
 	
 	<update id="updateAsset" parameterType="assetVo">
 		 update asset set 

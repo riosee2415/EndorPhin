@@ -39,4 +39,9 @@ public class EmployeeDetailDao implements IEmployee_DetailDao{
 		return selectList;
 	}
 
+	
+	@Override
+	public int updateEmployeeDetail(Employee_detailVo vo) {
+		return sqlSessionTemplate.update("employee_detail.updateEmployee_detail", vo);
+	}
 }

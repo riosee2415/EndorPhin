@@ -34,5 +34,10 @@ public class OrdersDao implements IOrdersDao{
 	public int deleteOrders(String orderCode) {
 		return sqlSessionTemplate.delete("orders.deleteOrders",orderCode);
 	}
+
+	@Override
+	public int updateOrders(OrdersVo ordersVo) {
+		return sqlSessionTemplate.insert("orders.updateOrders",ordersVo);
+	}
 	
 }

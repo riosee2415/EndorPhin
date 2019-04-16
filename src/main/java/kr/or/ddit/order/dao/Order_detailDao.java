@@ -30,4 +30,9 @@ public class Order_detailDao implements IOrder_detailDao{
 		return sqlSessionTemplate.insert("order_detail.insertOrder_detail",order_detailVo);
 	}
 
+	@Override
+	public int deleteOrder_detailByOdcd(String orderCode) {
+		return sqlSessionTemplate.delete("order_detail.deleteOrder_detailByOdcd",orderCode);
+	}
+
 }

@@ -95,9 +95,9 @@ public interface IBoard_detailService {
 	* 변경이력 :
 	* @param param
 	* @return
-	* Method 설명 : 게시글 등록 & 게시글 수정
+	* Method 설명 : 게시글 등록
 	 */
-	int insertBoard(Board_detailVo param);
+	int insertBoard(Board_detailVo param, List<Attach_boardVo> attachList);
 	
 	/**
 	 * 
@@ -119,7 +119,7 @@ public interface IBoard_detailService {
 	* @return
 	* Method 설명 : 게시글 수정
 	 */
-	int updateBoard(Board_detailVo param);
+	int updateBoard(Board_detailVo param, List<Attach_boardVo> attachList);
 	
 	/**
 	 * 
@@ -202,4 +202,15 @@ public interface IBoard_detailService {
 	* Method 설명 : 댓글 삭제
 	 */
 	public int deleteBoardReply(String commentNo);
+	
+	/**
+	 * 
+	* Method : selectBoardFileList
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardNo
+	* @return
+	* Method 설명 : 첨부파일 리스트 조회
+	 */
+	public List<Attach_boardVo> selectBoardFileList(String boardNo);
 }

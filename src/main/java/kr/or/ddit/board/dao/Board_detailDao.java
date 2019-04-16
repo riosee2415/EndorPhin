@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import kr.or.ddit.board.model.Attach_boardVo;
 import kr.or.ddit.board.model.Board_detailVo;
 import kr.or.ddit.board.model.CommentsVo;
 import kr.or.ddit.util.model.PageVo;
@@ -328,6 +329,20 @@ public class Board_detailDao implements IBoard_detailDao{
 	public int deleteBoardReply(String commentNo) {
 		
 		return sqlSession.delete("comments.deleteBoardReply", commentNo);
+	}
+
+	/**
+	 * 
+	* Method : selectBoardFileList
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardNo
+	* @return
+	* Method 설명 : 첨부파일 리스트 조회
+	 */
+	@Override
+	public List<Attach_boardVo> selectBoardFileList(String boardNo) {
+		return sqlSession.selectList("attach_board.attachBoardFileList", boardNo);
 	}
 	
 }

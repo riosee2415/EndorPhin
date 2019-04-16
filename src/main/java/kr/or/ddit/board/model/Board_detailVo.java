@@ -20,7 +20,6 @@ public class Board_detailVo {	//게시글
 	
 	String startDate;
 	String endDate;
-
 	
 	public String getBoardNo() {
 		return boardNo;

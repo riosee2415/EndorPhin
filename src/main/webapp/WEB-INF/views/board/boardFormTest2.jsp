@@ -13,7 +13,7 @@
         <div class="col-md-1"></div>
         <div class="col-md-10">
             <c:set var="boardNo" value="${boardInfo.boardNo}" />
-            <form name="form" action="boardSave" method="post" enctype="multipart/form-data">
+            <form name="form" action="boardSave" method="post">
                 <table class="table table-striped">
                     <c:choose>
                         <c:when test="${boardNo eq null}">
@@ -41,19 +41,12 @@
                             <td><textarea id="contents" name="contents" rows="10" cols="80">${boardInfo.contents}</textarea></td>
                         </tr>
                         <tr>
-                            <td>첨부</td>
-                            <td>
-                                <c:forEach var="listview" items="${listview}" varStatus="attachCnt">
-                                    <input type="checkbox" name="attachCode" value="${listview.attachCode}">
-                                    <a href="download?attachCode=${listview.attachCode }">${listview.attachName }</a>
-                                </c:forEach>
-
-                                <input type="file" name="attachFile" multiple="" />
-                            </td>
+                         	<td><input type="file" name="file"></td>
                         </tr>
                     </tbody>
                 </table>
                 <br>
+<!--                 <a href="#" onclick="history.back(-1)"><button class="bttn-jelly bttn-warning">돌아가기</button></a> -->
                 <a href="#" onclick="fn_formSubmit()"><button class="bttn-jelly bttn-warning">저장</button></a>
                 <input type="hidden" name="boardTypeCode" value="${boardTypeCode}">
                 <input type="hidden" name="boardNo" value="${boardInfo.boardNo}">

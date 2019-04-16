@@ -112,8 +112,8 @@
 	appendYear($("#acquisitionDate"));
 
 	/*장부반영 */
-	$(".detailView").on("click",
-		function() {
+	$(".detailView").on("click",function() {
+	
 			$.ajax({
 				url : "${pageContext.request.contextPath }/insertslipApply",
 				data : "acquisitionDate="+ $(this).data().acquisitiondate

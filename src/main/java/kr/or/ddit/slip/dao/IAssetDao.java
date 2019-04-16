@@ -107,4 +107,15 @@ public interface IAssetDao {
 	
 	
 	int updateJangbu(AssetVo assetVo);
+	
+	
+	/**
+	* Method : insertDisposal
+	* 작성자 : PC05
+	* 변경이력 :
+	* @param assetVo
+	* @return
+	* Method 설명 :매각 수정 
+	*/
+	int updateDisposal(AssetVo assetVo);
 }

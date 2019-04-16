@@ -157,7 +157,7 @@
 			$("#depreciationRate").val(forty);
 		}
 		if(data === 12){
-			$("#depreciationRate").val(five);
+			$("#depreciationRate").val(tweenty);
 		}
 		
 		var acquisitionPrice  = $("#acquisitionPrice").val();
@@ -173,7 +173,6 @@
 		$("#accumulated").val(accumulated_parse);
 		$("#serviceLife").val(data); 
 		$("#depreciation").val(depre);
-		
 		
 		$('.buttons').trigger('click');
     	

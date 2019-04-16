@@ -16,11 +16,11 @@
 			<td> &nbsp;&nbsp;* 유형 : 
 				<select id ="purchaseCode1" name="purchaseCode1">
 				
-				<c:if test="${asset.purchaseCode == 51}">
-					<option value="51" selected="selected">51 과세매입</option></c:if>
-					<option value="54" >54 불공</option>
-				<c:if test="${asset.purchaseCode == 54}">
-					<option value="51" >51 과세매입</option>
+				<c:if test="${asset.purchaseCode == '과세매입'}">
+					<option value="과세매입" selected="selected">51 과세매입</option></c:if>
+					<option value="불공" >54 불공</option>
+				<c:if test="${asset.purchaseCode == '불공'}">
+					<option value="과세매입" >51 과세매입</option>
 				</c:if>	
 					
 				</select>
@@ -41,10 +41,10 @@
 			<td colspan="2">&nbsp;&nbsp;취득금액(*)
 				<input type="text" id="acquisitionPrice1" name="acquisitionPrice1" value="${asset.acquisitionPrice}"></td> 
 			<td>
-				<button class="btn btn-primary"id="insertBtn" name="insertBtn">수정</button>
+				<button class="btn btn-primary btn-sm"id="insertBtn" name="insertBtn">수정</button>
 			</td>
 			<td>
-				<button class="btn btn-primary"id="closeBtn" name="closeBtn">닫기</button>
+				<button class="btn btn-primary btn-sm"id="closeBtn" name="closeBtn">닫기</button>
 			</td>		
 		</tr>
 	</thead>

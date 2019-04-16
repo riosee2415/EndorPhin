@@ -69,6 +69,11 @@ public class AssetServiceImpl implements IAssetService{
 		return assetDao.updateJangbu(assetVo);
 	}
 
+	@Override
+	public int updateDisposal(AssetVo assetVo) {
+		return assetDao.updateDisposal(assetVo);
+	}
+
 
 
 

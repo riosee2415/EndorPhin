@@ -86,4 +86,10 @@ public class AssetDaoImpl implements IAssetDao{
 	public int updateJangbu(AssetVo assetVo) {
 		return sqlSessionTemplate.update("updateJangbu",assetVo);
 	}
+
+
+	@Override
+	public int updateDisposal(AssetVo assetVo) {
+		return sqlSessionTemplate.insert("updateDisposal",assetVo);
+	}
 }

@@ -311,7 +311,7 @@ public class AssetController {
 	@RequestMapping("applyTax_cal")
 	public String applyTax_cal(Tax_calVo tax_calVo, Sales_detailVo sales_detailVo ,AssetVo assetVo,String sumValue, String surtax, 
 								String acquisitionPrice, String acquisitionDate,String clientName,
-								String jukyo, String establishCode,String assetCode) throws ParseException{
+								String jukyo, String establishCode,String assetCode,String purchaseCode) throws ParseException{
 		
 		SimpleDateFormat df = new SimpleDateFormat("yy/MM/dd");
 		Date date = df.parse(acquisitionDate);
@@ -320,7 +320,7 @@ public class AssetController {
 
 		tax_calVo.setSalesCode(salesCode);
 		tax_calVo.setSlipDate(date);
-		tax_calVo.setSalesStatus("과세매입");
+		tax_calVo.setSalesStatus(purchaseCode);
 		tax_calVo.setDeptCode("999");
 		tax_calVo.setOrderCode("0");
 		tax_calVo.setClientName(clientName);
@@ -364,12 +364,7 @@ public class AssetController {
 		return "purchaseAsset";
 	}
 	
-	//매각
-	@RequestMapping(path="sellAsset", method=RequestMethod.GET)
-	public String sellAsset(Model model){
 
-		return "sellAsset";
-	}
 	
 	
 }

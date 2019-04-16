@@ -92,6 +92,17 @@ public interface ITax_calService {
 	public List<Tax_calVo> searchAllByType2();
 	
 	
+	/**
+	* Method : searchAllByType51
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param searchData2
+	* @return
+	* Method 설명 : 데이터로 겸색
+	*/
+	public List<Tax_calVo> searchAllByType51(String searchData2);
+	
+	
 	
 	
 }

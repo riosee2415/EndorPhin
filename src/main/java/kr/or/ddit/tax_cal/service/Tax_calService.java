@@ -71,4 +71,9 @@ public class Tax_calService implements ITax_calService{
 		return tax_calDao.searchAllByType2();
 	}
 
+	@Override
+	public List<Tax_calVo> searchAllByType51(String searchData2) {
+		return tax_calDao.searchAllByType51(searchData2);
+	}
+
 }

@@ -31,6 +31,9 @@
 			<tbody id="assetListTbody">
 				<c:forEach items="${assetList }" var="vo">	
 					 <tr>
+						 <c:set var="dates" >
+							<fmt:formatDate value="${vo.acquisitionDate  }" pattern="yyyy/MM/dd" />
+						</c:set>
 						<td><a class="bttn-stretch bttn-warning detailView" href="#deptDetail" data-assetcode="${vo.assetCode }" 
 																	 data-acquisitiondate="${vo.acquisitionDate }"
 																	 data-purchasecode="${vo.purchaseCode }"
@@ -50,8 +53,16 @@
    						<td>${vo.accountName }</td>								
 						<td><fmt:formatDate value="${vo.acquisitionDate  }" pattern="yyyy-MM-dd"/></td>
 						<td>${vo.acquisitionPrice }</td>
-						<td><input class="bttn-simple bttn-warning" type="button" value="장부반영" id="applybtn" name="applybtn"/></td>
-				 	</tr>
+						<c:if test="${vo.jangbu == null}">
+						<td><a class="bttn-stretch bttn-warning apply" data-assetcode1="${vo.assetCode }" 
+																		data-acquisitionprice1="${vo.acquisitionPrice }"
+																		data-acquisitiondate1="${dates }"
+																		data-clientname1="${vo.clientName }"
+																		data-sanggakcode1="${vo.accountName }"
+																		data-jukyo1="${vo.jukyo }">장부반영</a></td>
+																		
+						</c:if>
+				 		</tr>
 				 	<div id="insertArea"></div>
 				</c:forEach>
 			</tbody>
@@ -155,6 +166,7 @@
 			</table>
 			</div>
 			  <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			   <input type="hidden" class="buttons" data-dismiss="modal" value=""/>
 			</div>
 		</div>
 	</div>
@@ -211,23 +223,6 @@
 
 	<script>
 	
-	$("document").ready(function() {
-	
-		 $("#yes_Btn").on("click", function(){
-	
-			var deptcode = $("#upd_deptCode").val();
-			var status 	 = $("#yes_Btn").val();
-			
-			alert(deptcode);
-			alert($("#yes_Btn").val());
-	
-			$("#frm_deptCode").val(deptcode);
-			$("#frm_usestatus").val(status);
-			
-			$("#useFrm").submit();
-		});  
-	});	
-	
 	function Enter_Check(){
 	       
 	    if(event.keyCode == 13){ // 엔터키의 코드는 13입니다.
@@ -279,6 +274,7 @@
 		
 		$("#sel_account").val(establishnamekor);
 		$("#accountName").val(establishnamekor);
+		$('.buttons').trigger('click');
 	});
 	
   	/*거래처선택 */
@@ -287,6 +283,7 @@
 
 		$("#clientN").val(clientName);
 		$("#clientName").val(clientName);
+		$('.buttons').trigger('click');
 	});
 	
  	/*감가 상각선택 */
@@ -297,12 +294,9 @@
 		$("#sanggakCode").val(sanggakCode);
  	});
      
-	 
    
 	/* 등록 클릭했을 때 */
-	var insertFlag = 0;
 	function fn_detail(){
-		if (insertFlag === 0) {
 			$.ajax({
 				url : "${pageContext.request.contextPath}/getAssetInsertBtn",
 				success : function(data){
@@ -310,15 +304,10 @@
 					$("#assetCode").focus();
 				}
 			});
-		
-			
 		} 
-	}
 	
 	/* 상세보기  */
 	$(".detailView").on("click", function(){
-		
-		if (insertFlag === 0) {
 			
 			$.ajax({
 				url : "${pageContext.request.contextPath}/getAssetModifyBtn",
@@ -333,10 +322,9 @@
 					$("#sanggakWay").val($(this).data().sanggakway);
 					$("#acquisitionPrice").val($(this).data().acquisitionprice);
 					$("#acquisitionDate").val($(this).data().acquisitiondate);
-				}
-			});
-		}
-});
+			}
+		});
+	});
 	/*코드 검색  */
 	$("#seachBtn").on("click",function(){
 		$.ajax({
@@ -349,8 +337,32 @@
 			}
 		});
 	});
-	
-
+	/* 장부반영 */
+	$(".apply").on("click",function(){
+		var acquisitionPrice = $(this).data().acquisitionprice1;
+		
+		var supplyValue = parseInt(parseInt(acquisitionPrice)/1.1);
+		var surtax 	 	= parseInt(acquisitionPrice - supplyValue);
+		
+		var sumValue	= supplyValue + surtax;
+		$.ajax({
+			url:"${pageContext.request.contextPath}/applyTax_cal",
+			data : "acquisitionPrice="+supplyValue
+					+"&"+"acquisitionDate="+$(this).data().acquisitiondate1
+					+"&"+"surtax="+surtax
+					+"&"+"sumValue="+sumValue
+					+"&"+"jukyo="+$(this).data().jukyo1
+					+"&"+"establishCode="+$(this).data().sanggakcode1
+					+"&"+"clientName="+$(this).data().clientname1
+					+"&"+"assetCode="+$(this).data().assetcode1,
+					
+			success:function(data){
+				alert("장부반영이 완료되었습니다.");
+				location.reload();
+					
+			}
+		});
+	});
 
 	</script>
 	

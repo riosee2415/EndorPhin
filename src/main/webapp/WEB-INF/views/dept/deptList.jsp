@@ -34,7 +34,8 @@
 																	 data-upd_deptname="${vo.deptName }"
 																	 data-upd_companycode="${vo.companyCode }"
 																	 data-upd_usestatus="${vo.useStatus }"
-																	 data-toggle="modal">${vo.deptCode}</a></td>
+																	 data-toggle="modal">${vo.deptCode}
+																	 </a></td>
    														
 						<td>${vo.deptName }</td>
 						<td>${vo.companyCode }</td>
@@ -48,6 +49,7 @@
 						</c:choose>
 						<td></td>
 				 	</tr>		 
+				
 				</c:forEach>
 			</tbody>
 		</table>
@@ -125,11 +127,10 @@
 	   					<div class="form-group">
 	   					<label for="InputEmail">회사 코드 &nbsp;&nbsp;</label> 
 	   					<input type="text" id="upd_companyCode" name="upd_companyCode" />
-	   					<input type="button" class="btn btn-default" data-toggle="modal" data-target="#my80sizeModal2" value="검색" >
+	   					<input type="button" class="btn btn-default" data-toggle="modal" data-target="#my80sizeModal3" value="검색" >
 	   				</div>
 	   			<div class="modal-footer">
-	   			
-					<button id="yes_Btn" name="yes_Btn" class="btn btn-default" data-dismiss="modal"  value="1" style="background: #486068; color: #ffffff"></button>
+					<button id="yes_Btn" name="yes_Btn" class="btn btn-default" data-dismiss="modal" style="background: #486068; color: #ffffff"></button>
 	   				<!-- <input type="hidden" id="no_Btn" name="no_Btn" class="btn btn-default" data-dismiss="modal" value="0" style="background: #ff8e77; color: #ffffff"> -->
 	   				
 	   				<button type="button" id="modalUpdateBtn" class="btn btn-default" data-dismiss="modal" >수정</button>
@@ -174,8 +175,7 @@
 					</thead>
 					<tbody id="companyListTbody">
 						<c:forEach items="${companyList }" var="vo">
-							<tr class="companyTr" data-selcompanycode="${vo.companyCode }"
-								onclick="companyTr();">
+							<tr class="companyTr" data-selcompanycode="${vo.companyCode }">
 								<td>${vo.companyCode}</td>
 								<td>${vo.companyName}</td>
 							</tr>
@@ -189,6 +189,52 @@
 	</div>
 </div>
 
+
+<!-----------------회사 코드 수정 검색 모달창 ---------------->	
+	 	<!-- 80% size Modal -->
+<div class="modal fade" id="my80sizeModal3" tabindex="-1" role="dialog" aria-labelledby="my100sizeModalLabel">
+	<div class="modal-dialog modal-80size" role="document">
+		<div class="modal-content modal-80size">
+			<div class="modal-header">
+				<h6>| 계정과목 조회</h6>
+			</div>
+			<div class="modal-body">
+				<div class="form-group"></div>
+				<table>
+					<thead>
+						<tr>
+							<th>회사명&nbsp;</th>
+							<th><input style="width: 150px;" type="text" class="form-control" id="u_companyName" name="u_companyName"></th>
+							<th><button type="button" class="btn btn-inverse" id="upd_Search">검색</button><th>
+						</tr>
+						<tr>
+							<th>선택된 회사명</th>
+							<th><input type="text" style="width: 150px;" type="text" class="form-control" id="selcompany2" name="selcompany2"></th>
+							<th><button type="button" class="buttons" class="btn btn-default" data-dismiss="modal">확인</button></th>
+						</tr>
+						
+				</table>  <br>
+				<table class="table table-sm">
+					<thead class="thead">
+						<tr>
+							<th>회사 코드</th>
+							<th>회사명</th>
+					</thead>
+					<tbody id="upd_companyListTbody">
+						<c:forEach items="${companyList }" var="vo">
+							<tr class="upd_companyTr" data-upd_selcompanycode="${vo.companyCode }">
+								<td>${vo.companyCode}</td>
+								<td>${vo.companyName}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			  <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			  <input type="hidden" class="buttons" data-dismiss="modal" value=""/>
+			</div>
+		</div>
+	</div>
+</div>
 	<!---------------등록, 검색, 삭제  ---------------->
 	
 	<form id="insertFrm" action="${pageContext.request.contextPath }/insertDept">
@@ -213,84 +259,33 @@
 	</form>
     <!---------------------------------------------->
 	<script>
-    /* 등록  */
-	$("#insertBtn").on("click", function(){
-		
-		var deptCode 		= $("#deptCode").val();
-		var deptName  	    = $("#deptName").val();
-		var companyCode		= $("#companyCode").val();
-		
-		$("#frmdeptCode").val(deptCode);
-		$("#frmdeptName").val(deptName);
-		$("#frmcompanyCode").val(companyCode);
-		
-		
-		if($("#deptName").val().trim()==""){
-			alert("부서명을 입력하세요");
-			$("#deptName").focus();
-			return false;
-		}
-	 	if($("#companyCode").val().trim()==""){
-			alert("회사코드를 선택하세요");
-			$("#companyCode").focus();
-			return false;
-		} 
-	 	
-	 	companyTr();
-	 	$("#insertFrm").submit();
 	
-});
-	function companyTr(){
-		alert("dd");
-		var companyCode1 = $(this).data("selcompanycode");
-		alert(companyCode1);
-		$("#selcompany").val(companyCode1);
-		$("#companycode").val(companyCode1);
-	}
-	
-	$("document").ready(function() {
-		
+	$(document).ready(function() {
 		/* 상세보기  */
 		$(".detailView").on("click", function(){
-			
 			$("#upd_deptCode").val($(this).data().upd_deptcode);
 			$("#upd_deptName").val($(this).data().upd_deptname);
 			$("#upd_companyCode").val($(this).data().upd_companycode);
-			
 			if($(this).data().upd_usestatus==1){
 				$("#yes_Btn").html("미사용");
+				$("#yes_Btn").val('0');
 				
 			}
 			else if($(this).data().upd_usestatus==0){
 				$("#yes_Btn").html("사용");
+				$("#yes_Btn").val('1');
 				$("#yes_btn").attr("style","background: #ff8e77; color: #ffffff");
 			}
 			
 		});
-		/* function useClick(){
-			
-			var deptcode = $("#upd_deptCode").val();
-			var target = document.querySelector('#yes_Btn');
-			if($("#yes_Btn").value == '1'){
-				target.value="1";
-			}else{
-				target.value = "0"
-			}
-			
-			$("#frm_deptCode").val(deptcode);
-			$("#frm_usestatus").val(target);
-			
-			$("#useFrm").submit();
-		} */
+		
 		/*사용여부 수정  */
 		 $("#yes_Btn").on("click", function(){
 	
 			var deptcode = $("#upd_deptCode").val();
 			var status 	 = $("#yes_Btn").val();
-			
-			alert(deptcode);
-			alert($("#yes_Btn").val());
 	
+			alert(status);
 			$("#frm_deptCode").val(deptcode);
 			$("#frm_usestatus").val(status);
 			
@@ -300,14 +295,9 @@
 		/* 수정 */
 		$("#modalUpdateBtn").on("click", function(){ 
 			
-			var deptcode  	    = $("#upd_deptCode").val();
-			var deptName  	    = $("#upd_deptName").val();
-			var companyCode		= $("#upd_companyCode").val();
-			
-			
-			$("#frmdeptCode1").val(deptcode);
-			$("#frmdeptName1").val(deptName);
-			$("#frmcompanyCode1").val(companyCode);
+			$("#frmdeptCode1").val($("#upd_deptCode").val());
+			$("#frmdeptName1").val($("#upd_deptName").val());
+			$("#frmcompanyCode1").val($("#upd_companyCode").val());
 			
 			if($("#upd_deptName").val().trim()==""){
 				alert("부서명을 입력하세요");
@@ -325,6 +315,29 @@
     });
 });	
 	
+	
+    /* 등록  */
+	$("#insertBtn").on("click", function(){
+		
+		$("#frmdeptCode").val($("#deptCode").val());
+		$("#frmdeptName").val($("#deptName").val());
+		$("#frmcompanyCode").val($("#companyCode").val());
+		
+		if($("#deptName").val().trim()==""){
+			alert("부서명을 입력하세요");
+			$("#deptName").focus();
+			return false;
+		}
+	 	if($("#companyCode").val().trim()==""){
+			alert("회사코드를 선택하세요");
+			$("#companyCode").focus();
+			return false;
+		} 
+	// 	companyTr();
+	 	$("#insertFrm").submit();
+	
+});
+    
     /*회사이름 검색  */
  	$("#searchC_Btn").on("click", function(){
  		if($("#companyName").val().trim()==""){
@@ -338,14 +351,43 @@
     		success : function(data){
     			$("#companyName").val("");
 				$("#companyListTbody").html(data);
-    			
     		}
     	});
     }); 
     
-    
+ 	 /*수정회사이름 검색  */
+ 	$("#upd_Search").on("click", function(){
+ 		if($("#u_companyName").val().trim()==""){
+ 			alert("회사명을 입력하세요.");
+ 			$("u_companyName").focus();
+ 			return false;
+ 		}
+		$.ajax({
+    		url 	: "${pageContext.request.contextPath }/companyUpdSearchAjax",
+    		data 	:"u_companyName=" + $("#u_companyName").val(),
+    		success : function(data){
+    			$("#u_companyName").val("");
+				$("#upd_companyListTbody").html(data);
+    			
+    		}
+    	});
+    }); 
+ 	 
+	$(".companyTr").on("click", function(){
+		var companyCode1 = $(this).data().selcompanycode;
+		$("#selcompany").val(companyCode1);
+		$("#companyCode").val(companyCode1);
+	});
+	$(".upd_companyTr").on("click", function(){
+		
+		var companyCode1 = $(this).data().upd_selcompanycode;
+		$("#selcompany2").val(companyCode1);
+		$("#upd_companyCode").val(companyCode1);
+	});
+	
+
+	
  	/* 카드 코드,이름 검색 */  
-    	
     	$("#seachBtn").on("click", function(){
     		if($("#deptCode1").val().trim() != "" || $("#deptName1").val().trim() !=""){
    	 	$.ajax({
@@ -382,7 +424,6 @@
        	});
    	 }
 }); 
-    
  	
  	/* 카드코드 중복체크 ajax */
 	    $("#duplCheckbtn").on("click", function(){

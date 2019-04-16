@@ -23,7 +23,8 @@
 	        purchaseCode,
 	        accumulated,
 	        serviceLife,
-	        depreciationRate
+	        depreciationRate,
+	        jangbu
 	    FROM ASSET
 	</select>
 	
@@ -46,6 +47,7 @@
 	        purchaseCode,
 	        accumulated,
 	        serviceLife,
+	        jangbu,
 	        depreciationRate
 	    FROM ASSET
 	    WHERE ASSETCODE = #{assetCode}
@@ -78,6 +80,20 @@
 					sanggakWay  = #{sanggakWay},
 					acquisitionPrice = #{acquisitionPrice},
 					purchaseCode = #{purchaseCode}
+		     where  assetCode = #{assetCode}
+	</update>
+	
+	<!--일반전표 장부반영 되었을 때 전표번호등록해주기  -->
+	<update id="updateSlipNumber" parameterType="assetVo">
+		 update asset set 
+		 		slipNumber  = #{slipNumber}
+		     where  assetCode = #{assetCode}
+	</update>
+	
+	<!--매입매출에 장부완료시 장부상태 변경-->
+	<update id="updateJangbu" parameterType="assetVo">
+		 update asset set 
+		 		jangbu  = #{jangbu}
 		     where  assetCode = #{assetCode}
 	</update>
 	

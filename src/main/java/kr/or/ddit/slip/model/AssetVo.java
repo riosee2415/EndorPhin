@@ -15,7 +15,7 @@ public class AssetVo {
 	String clientName; // 거래처명 =
 	String sanggakWay; // 상각방법 =
 	String acquisitionPrice; // 취득금액 =
-	int slipNumber; // 전표번호
+	String slipNumber; // 전표번호
 	String residualvalue; // 잔존가치 =
 	String jukyo; // 적요 =
 	String companyCode;// 회사코드
@@ -25,6 +25,7 @@ public class AssetVo {
 	String accumulated; // 감가상각 누계액
 	String serviceLife; //내용연수 
 	String depreciationRate; // 상각률
+	String jangbu; //매입매출 장부반영
 	
 
 	public String getAssetCode() {
@@ -83,11 +84,11 @@ public class AssetVo {
 		this.acquisitionPrice = acquisitionPrice;
 	}
 
-	public int getSlipNumber() {
+	public String getSlipNumber() {
 		return slipNumber;
 	}
 
-	public void setSlipNumber(int slipNumber) {
+	public void setSlipNumber(String slipNumber) {
 		this.slipNumber = slipNumber;
 	}
 
@@ -163,14 +164,12 @@ public class AssetVo {
 		this.depreciationRate = depreciationRate;
 	}
 
-	@Override
-	public String toString() {
-		return "AssetVo [assetCode=" + assetCode + ", assetName=" + assetName + ", acquisitionDate=" + acquisitionDate
-				+ ", accountName=" + accountName + ", clientName=" + clientName + ", sanggakWay=" + sanggakWay
-				+ ", acquisitionPrice=" + acquisitionPrice + ", slipNumber=" + slipNumber + ", residualvalue="
-				+ residualvalue + ", jukyo=" + jukyo + ", companyCode=" + companyCode + ", sanggakCode=" + sanggakCode
-				+ ", depreciation=" + depreciation + ", purchaseCode=" + purchaseCode + ", accumulated=" + accumulated
-				+ ", serviceLife=" + serviceLife + ", depreciationRate=" + depreciationRate + "]";
+	public String getJangbu() {
+		return jangbu;
+	}
+
+	public void setJangbu(String jangbu) {
+		this.jangbu = jangbu;
 	}
 	
 }

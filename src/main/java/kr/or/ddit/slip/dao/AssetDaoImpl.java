@@ -75,4 +75,15 @@ public class AssetDaoImpl implements IAssetDao{
 		
 		return sqlSessionTemplate.selectList("asset.searchDateAsset", map);
 	}
+
+
+	@Override
+	public int updateSlipNumber(AssetVo assetVo) {
+		return sqlSessionTemplate.update("updateSlipNumber",assetVo);
+	}
+
+	@Override
+	public int updateJangbu(AssetVo assetVo) {
+		return sqlSessionTemplate.update("updateJangbu",assetVo);
+	}
 }

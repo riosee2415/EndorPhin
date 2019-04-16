@@ -101,4 +101,10 @@ public interface IAssetDao {
 	* Method 설명 : 날짜와 계정검색 
 	*/
 	List<AssetVo> searchDateAsset(String accountName, String acquisitionDate);
+	
+	
+	int updateSlipNumber(AssetVo assetVo);
+	
+	
+	int updateJangbu(AssetVo assetVo);
 }

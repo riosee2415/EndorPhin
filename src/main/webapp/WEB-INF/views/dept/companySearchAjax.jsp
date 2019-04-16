@@ -4,8 +4,16 @@
 
 	<c:forEach items="${companyList }" var="vo">
 		<tr class="companyTr" data-selcompanycode="${vo.companyCode }"
-			onclick="companyTr();">
+			>
 			<td>${vo.companyCode}</td>
 			<td>${vo.companyName}</td>
 		</tr>
 	</c:forEach>
+
+<script>
+$(".companyTr").on("click", function(){
+	var companyCode1 = $(this).data().selcompanycode;
+	$("#selcompany").val(companyCode1);
+	$("#companyCode").val(companyCode1);
+});
+	</script>

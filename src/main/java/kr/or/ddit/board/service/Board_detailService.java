@@ -354,8 +354,8 @@ public class Board_detailService implements IBoard_detailService{
 	* Method 설명 : 댓글 삭제
 	 */
 	@Override
-	public int deleteBoardReply(String boardNo) {
-		return board_detailDao.deleteBoardReply(boardNo);
+	public int deleteBoardReply(String commentNo) {
+		return board_detailDao.deleteBoardReply(commentNo);
 	}
 
 }

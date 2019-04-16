@@ -8,11 +8,12 @@
 
 
 <div class="row">
-<div class="col-md-11" style="width: 160%;">
+<div class="col-md-1"></div>
+<div class="col-md-10" >
 	<div class="form-group">
 		<table class="table table-striped">
 			<thead class="thead">
-				<tr style="font-size: 3px;">
+				<tr style="font-size: 2px;">
 					<th>사번</th>
 					<th>성명</th>
 					<th>직위</th>
@@ -28,7 +29,7 @@
 			</thead>
 			<tbody id="mainPaymentListTbody">
 				<c:forEach step="1" items="${payList}" varStatus="index" var="payVo">
-					<tr class='mainTr'>
+					<tr class='mainTr' style="font-size: 10px;">
 						<td>${payVo.userId }</td>
 						<td>${payVo.usernm }</td>
 						<td>${payVo.positionname }</td>

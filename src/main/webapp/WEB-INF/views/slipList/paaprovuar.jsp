@@ -166,7 +166,7 @@
 			}
 		}
 
-	/* 선택 승인취소*/
+	/* 승인 */
 	function myclick() {
 		var checkRow = '';
 		$("input[name=checkRow]:checked").each(function() {
@@ -176,7 +176,7 @@
 			$("#checkRow").val(checkRow);
 		
 			if(checkRow === ""){		
-			alert("삭제할 대상을 선택하세요");
+			alert("체크박스를 선택하세요");
 			return false;
 		}
 		

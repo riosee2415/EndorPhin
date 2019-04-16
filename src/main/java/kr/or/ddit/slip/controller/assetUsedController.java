@@ -55,8 +55,8 @@ public class assetUsedController {
 		return "assetUsed/assetDateSearchAjax";
 	}
 
-	/*@RequestMapping("insertslipApply")
-	public String slipInsertApply(SlipVo slipVo,String acquisitionDate,Model model,
+	@RequestMapping("insertslipApply")
+	public String slipInsertApply(SlipVo slipVo, String assetCode,String acquisitionDate,Model model,
 								  String depreciation,String clientName, String sanggakCode) throws ParseException {
 		
 		Date date = new Date();									
@@ -74,26 +74,39 @@ public class assetUsedController {
 		String currval = slipService.currvalSeq();
 		logger.debug("currval:{}",currval);
 		
-		int slipNumber = slipService.getSlipCnt();
-		slipNumber++;
+		int slipNumber = slipService.getSlipCnt()+1;
 		
-		String slipNum = Integer.toString(slipNumber);
+		String currvalNum = slipService.currvalSeq();
 		
-		int slipDetailNo = 0;
-		slipDetailNo++;
-		String detailNo = Integer.toString(slipDetailNo);
 		
 		Slip_detailVo vo = new Slip_detailVo();
-		vo.setSlipNumber("132");
-		vo.setSlipDetailNo("2");
+		
+		vo.setSlipNumber(currvalNum);
+		vo.setSlipDetailNo("1");
 		vo.setStatus("1");
 		vo.setPrice(depreciation);
 		vo.setClientCard(clientName);
 		vo.setEstablishCode(sanggakCode);
 		
 		slip_detailService.insertDetailSlip(vo);
+		
+		Slip_detailVo vo1 = new Slip_detailVo();
+		vo1.setSlipNumber(currvalNum);
+		vo1.setSlipDetailNo("2");
+		vo1.setStatus("0");
+		vo1.setPrice(depreciation);
+		vo1.setClientCard(clientName);
+		vo1.setEstablishCode("818");
+		
+		slip_detailService.insertDetailSlip(vo1);
+		
+		AssetVo assetVo = new AssetVo();
+		assetVo.setSlipNumber(currvalNum);
+		assetVo.setAssetCode(assetCode);
+		assetService.updateSlipNumber(assetVo);
+		
 		return "assetUsed";
-	}*/
+	}
 	
 	
 }

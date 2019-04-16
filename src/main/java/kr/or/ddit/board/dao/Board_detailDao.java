@@ -325,9 +325,9 @@ public class Board_detailDao implements IBoard_detailDao{
 	* Method 설명 : 댓글 삭제
 	 */
 	@Override
-	public int deleteBoardReply(String boardNo) {
+	public int deleteBoardReply(String commentNo) {
 		
-		return sqlSession.delete("comments.deleteBoardReply", boardNo);
+		return sqlSession.delete("comments.deleteBoardReply", commentNo);
 	}
 	
 }

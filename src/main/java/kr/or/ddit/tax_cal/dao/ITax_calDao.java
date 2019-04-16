@@ -42,6 +42,8 @@ public interface ITax_calDao {
 	
 
 	
+
+	
 	/**
 	* Method : insertTax_cal
 	* 작성자 : sanghoyun
@@ -83,6 +85,28 @@ public interface ITax_calDao {
 	* Method 설명 : 전표내용 삭제
 	*/
 	public int deleteTax_cal(String salesCode);
+	
+	
+	
+	
+	/**
+	* Method : searchAllByType
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @return
+	* Method 설명 : 매입 전체 조회하기
+	*/
+	public List<Tax_calVo> searchAllByType();
+	
+	
+	/**
+	* Method : searchAllByType
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @return
+	* Method 설명 : 매출 전체 조회하기
+	*/
+	public List<Tax_calVo> searchAllByType2();
 	
 	
 }

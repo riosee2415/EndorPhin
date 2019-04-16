@@ -175,20 +175,21 @@ public class EmployeeController {
 	
 	@RequestMapping("/profileImg")
 	public void profileImg(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam("userId") String userId) throws IOException {
+			@RequestParam("userId") String userId) throws Exception {
 		
 		
 
-		//response.setHeader("content-Disposition", "attachment; filename=profile.png");
-		//response.setContentType("image.png");
+		response.setHeader("content-Disposition", "attachment; filename=profile.png");
+		response.setContentType("image.png");
+		String Img_path = "";
 		
 		
-		Employee_detailVo vo = employeeDetailService.selectEmployeeDetail(userId);
+		Employee_detailVo  vo = employeeDetailService.selectEmployeeDetail(userId);
 
-		
-		String Img_path = vo.getImagerealpath() + vo.getImagerealname();
-		
-		System.out.println("경로 :" + Img_path);
+		if (vo != null && vo.getImagename() != null) {
+			
+		 Img_path = vo.getImagerealpath() + vo.getImagerealname();
+		}
 		
 		FileInputStream fis;
 		if (vo != null && vo.getImagename() != null) {

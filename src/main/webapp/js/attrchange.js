@@ -121,4 +121,4 @@ https://github.com/meetselva/attrchange/blob/master/MIT-License.txt
 			return $.fn.attrchange['extensions'][a].call(this, b);
 		}
 	}
-})(jQuery);
+});

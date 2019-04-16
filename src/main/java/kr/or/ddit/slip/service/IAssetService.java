@@ -24,6 +24,7 @@ public interface IAssetService {
 	
 	List<AssetVo> searchDateAsset(String accountName, String acquisitionDate);
 	
-	
+	int updateSlipNumber(AssetVo assetVo);
 
+	int updateJangbu(AssetVo assetVo);
 }

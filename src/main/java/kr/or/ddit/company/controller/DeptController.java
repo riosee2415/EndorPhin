@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.or.ddit.company.model.CardsVo;
 import kr.or.ddit.company.model.CompanyVo;
 import kr.or.ddit.company.model.DeptVo;
 import kr.or.ddit.company.service.ICompanyService;
@@ -33,11 +32,11 @@ public class DeptController {
 	
 	
 	@RequestMapping("/deptList")
-	public String deptList(Model model ){
+	public String deptList(Model model ) {
 		
 		List<DeptVo> deptList = deptService.getAllDept();
 		List<CompanyVo> companyList= companyService.getAllcompany();
-
+		
 		model.addAttribute("deptList", deptList);
 		model.addAttribute("companyList", companyList);
 		
@@ -61,7 +60,8 @@ public class DeptController {
 	@RequestMapping(path="/insertDept", method=RequestMethod.GET)
 	public String insertDept(DeptVo deptVo, Model model, @RequestParam("frmdeptCode") String deptCode 
 														,@RequestParam("frmcompanyCode") String companyCode
-														,@RequestParam("frmdeptName") String deptName){
+														,@RequestParam("frmdeptName") String deptName
+														){
 													
 		deptVo.setDeptCode(deptCode);
 		deptVo.setCompanyCode(companyCode);
@@ -69,6 +69,7 @@ public class DeptController {
 		deptVo.setUseStatus("1");
 		
 		int insertCnt = deptService.insertDept(deptVo);
+		
 		
 		if(insertCnt > 0){
 			return "redirect:/deptList";
@@ -85,6 +86,15 @@ public class DeptController {
 		model.addAttribute("companyList", companyList);
 		
 		return "dept/companySearchAjax";
+	}
+	//회사 이름 검색
+	@RequestMapping("/companyUpdSearchAjax")
+	public String companyUpdSearchAjax(String u_companyName, Model model) {
+		
+		List<CompanyVo> companyList = companyService.serachCompany(u_companyName);
+		model.addAttribute("companyList", companyList);
+		
+		return "dept/companyUpdSearchAjax";
 	}
 	
 	// 부서 이름, 코드검색
@@ -165,8 +175,6 @@ public class DeptController {
 		deptVo.setDeptCode(frm_deptCode);
 		deptVo.setUseStatus(frm_usestatus);
 		
-		logger.debug("======================");
-		logger.debug("frm_deptCode : {}" , frm_deptCode);
 		logger.debug("use_status : {}" ,frm_usestatus);
 		
 		int update = deptService.upateStatusDept(deptVo);

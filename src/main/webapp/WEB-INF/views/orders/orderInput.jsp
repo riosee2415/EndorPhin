@@ -104,8 +104,11 @@
 			<input type="button" id="dialog_insBtn" class="btn btn-default modalIns" value="등록" />
 		</div>
 	</div>
-
 <script>
+	var deptList = new Map();
+	var employeeList = new Map();
+	var clientList = new Map();
+	
 	$(".tabControl").on('click',function(){
 		$(".tab-pane").removeClass('show');	
 	})
@@ -119,6 +122,8 @@
 			$(".tab-pane").eq(0).toggleClass("active");
 			$("#dialog_productCode").val('');
 			$(".dialog").toggleClass('dialog--active');
+			$('input[type=text]').val('');
+			$('#dialogProductTbody').html('');
 			if($(this).text()!='신규등록'){
 				$(".modalIns").hide();
 				$('.modalUpd').show();
@@ -127,13 +132,11 @@
 					url : "/orders/selectOrder",
 					data : "orderCode=" + $(this).html(),
 					success : function(data) {
-						console.log(data);
 						inputData(data);
 					}
 				});
 			}
 			else{
-				$('input[type=text]').val('');
 				$(".modalIns").show();
 				$('.modalUpd').hide();
 			}
@@ -158,18 +161,26 @@
 			if($(item).html()!=data.orderVo.sortation)
 				$(item).hide();
 		});
-			$("input[name=dueDate]").val(data.orderVo.dueDate);
-			$("input[name=orderList]").val(data.orderVo.orderList);
-			$("input[name=deptCode]").val(data.orderVo.deptCode);
-			$("input[name=userId]").val(data.orderVo.userId);
-			$("input[name=clientname]").val(data.orderVo.clientname);
-			$("input[name=paymentDueDate]").val(data.orderVo.paymentDueDate);
-			$("input[name=orderPrice]").val(data.orderVo.orderPrice);
+		$("input[name=dueDate]").val(data.orderVo.dueDate);
+		$("input[name=orderList]").val(data.orderVo.orderList);
+		$("input[name=deptCode]").val(data.orderVo.deptCode);
+		$("input[name=userId]").val(data.orderVo.userId);
+		$("input[name=clientname]").val(data.orderVo.clientname);
+		$("input[name=paymentDueDate]").val(data.orderVo.paymentDueDate);
+		$("input[name=orderPrice]").val(data.orderVo.orderPrice).change();
+		
+		for (var i = 0; i < data.detailList.length; i++) {
+			$("#dialogProductTbody").append("<tr>");
+			$("#dialogProductTbody").append("<td><input type=\'checkbox\' class=\'detailCheck\'></td>");
+			$("#dialogProductTbody").append("<td>"+data.detailList[i].orderCode+"</td>");
+			$("#dialogProductTbody").append("<td>"+data.detailList[i].productname+"</td>");
+			$("#dialogProductTbody").append("<td>"+data.detailList[i].standard+"</td>");
+			$("#dialogProductTbody").append("<td>"+data.detailList[i].quantity+"</td>");
+			$("#dialogProductTbody").append("<td>"+data.detailList[i].baseprice+"</td>");
+			$("#dialogProductTbody").append("<td>"+data.detailList[0].quantity*data.detailList[0].baseprice+"</td>");
+			$("#dialogProductTbody").append("</tr>");
+		}
 	}
-	$("input[name=orderPrice]").on('attrchange',function(){
-		$("input[name=surtax]").val($("input[name=orderPrice]").val()/10);
-	})
 </script>
-
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">

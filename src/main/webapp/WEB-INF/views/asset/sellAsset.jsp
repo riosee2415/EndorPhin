@@ -21,11 +21,9 @@
 				<tr>
 					<th><input type="checkbox" name="allCheck" id="th_allCheck" onclick="allCheck();"></th> 
 					<th>자산코드</th>
-					<th>유형</th>
 					<th>계정명</th>
 					<th>자산명</th>
 					<th>매각/폐기일</th>
-					<th>장부반영</th>
 				</tr>
 			</thead>	
 			<tbody id="deptListTbody">

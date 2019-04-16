@@ -84,6 +84,8 @@ $("#acquisitionPrice").keypress(function(e){
 		$("#acquisitionPrice").val(comma);
 	}
 	}
+	
+	/* 내용연수표로 이동 */
 	function myClick(){
 		$.ajax({
 			url  : "${pageContext.request.contextPath }/serviceLife",
@@ -93,12 +95,24 @@ $("#acquisitionPrice").keypress(function(e){
 			}	   
 		});
 	}
+	
+	/*원단위 콤마 변환*/
+	function fn_numberWithCommas(x) {
+	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+	function removeComma(str){
+		return parseInt(str.replace(/,/g,""));
+	}
+	
 	$("#insertBtn").on("click", function(){
 
 		if($("#assetCode").val().trim() == "" || $("#acquisitionPrice").val().trim()==""){
 			alert("(*)은 필수 사항입니다.");
 			return false;
 		}
+		var price = $("#acquisitionPrice").val();
+		price = removeComma(price);
+		$("#acquisitionPrice").val(price);
 	
 		$.ajax({
 			url  : "${pageContext.request.contextPath }/insertStatusFrm",
@@ -118,10 +132,7 @@ $("#acquisitionPrice").keypress(function(e){
 	});
 });
 		  
-	/*원단위 콤마 변환*/
-	function fn_numberWithCommas(x) {
-	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	}
+
 			
 	/* 카드코드 중복체크 ajax */
 	$("#duplCheckbtn").on("click", function(){

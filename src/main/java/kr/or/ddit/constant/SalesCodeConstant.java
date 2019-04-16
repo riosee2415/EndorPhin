@@ -14,17 +14,17 @@ public class SalesCodeConstant {
 		salesCode.put("11", "과세매출");
 		salesCode.put("12", "영세율매출");
 		salesCode.put("13", "계산서매출");
-		salesCode.put("14", "과세무증빙");
-		salesCode.put("15", "간이과세");
-		salesCode.put("16", "수출L/C");
-		salesCode.put("17", "카드과세");
-		salesCode.put("18", "카드면세");
-		salesCode.put("19", "카드영세");
-		salesCode.put("20", "면세무증빙");
-		salesCode.put("21", "전자화폐");
-		salesCode.put("22", "현금과세");
-		salesCode.put("23", "현금면세");
-		salesCode.put("24", "현금영세");
+		salesCode.put("14", "과세무증빙매출");
+		salesCode.put("15", "간이과세매출");
+		salesCode.put("16", "수출L/C매출");
+		salesCode.put("17", "카드과세매출");
+		salesCode.put("18", "카드면세매출");
+		salesCode.put("19", "카드영세매출");
+		salesCode.put("20", "면세무증빙매출");
+		salesCode.put("21", "전자화폐매출");
+		salesCode.put("22", "현금과세매출");
+		salesCode.put("23", "현금면세매출");
+		salesCode.put("24", "현금영세매출");
 	}
 
 	// 매입코드

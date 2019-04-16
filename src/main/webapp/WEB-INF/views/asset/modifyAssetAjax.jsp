@@ -18,7 +18,7 @@
 				
 				<c:if test="${asset.purchaseCode == 51}">
 					<option value="51" selected="selected">51 과세매입</option></c:if>
-					<option value="54" ">54 불공</option>
+					<option value="54" >54 불공</option>
 				<c:if test="${asset.purchaseCode == 54}">
 					<option value="51" >51 과세매입</option>
 				</c:if>	
@@ -89,6 +89,7 @@ $("#acquisitionPrice").keypress(function(e){
 	
 	fn_insertSet(e);
 });
+    //금액 엔터누를시 콤마 찍힘
 	function fn_insertSet(e){
 		if(e.which == 13){
 		var comma = fn_numberWithCommas($("#acquisitionPrice").val());
@@ -96,6 +97,7 @@ $("#acquisitionPrice").keypress(function(e){
 		$("#acquisitionPrice").val(comma);
 	}
 	}
+	/*내용연수표로 이동 */
 	function myClick(){
 		$.ajax({
 			url  : "${pageContext.request.contextPath }/serviceLife",

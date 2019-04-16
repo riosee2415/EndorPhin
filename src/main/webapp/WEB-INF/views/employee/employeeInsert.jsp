@@ -29,9 +29,12 @@
 		</div>
 		<form action="${cp}/employee/insertEmployee" method="post"
 			enctype="multipart/form-data">
-			<div class="modal-content"
-				style="color: black; font-weight: bold; overflow: scroll;">
+			<div class="modal-content" style="color: black; font-weight: bold;">
+				
+				
+				<div class="modal-body">
 				<div id="emplinsert" class="container-fluid">
+
 
 					<div class="row">
 						<div class="col-md-4" style="float: left; width: 40%;">
@@ -211,8 +214,13 @@
 								class="form-control" name="fileName" />
 						</div>
 					</div>
+					</div>
+				<div class="modal-footer">
 				<button type="submit" class="btn btn-default">등록</button>
+					
 				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+				</div>
+				
 				</div>
 			</div>
 		</form>

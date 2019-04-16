@@ -175,7 +175,8 @@ to {
 
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
-
+		<!-- 다음 주소찾기 API -->
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 </body>
 <!-- ERP/그룹웨어 나누기 -->
 <script>  

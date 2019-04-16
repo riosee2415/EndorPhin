@@ -63,6 +63,22 @@
 		delete from employee_detail
 		where userid = #{userid}
 	</delete>
+	
+	
+	
+	
+	<!-- 사원 업데이트 -->
+			<update id="updateEmployee_detail" parameterType="employee_detailVo">
+			update employee_detail set
+			finalschool=nvl(#{finalSchool,jdbcType=VARCHAR},null),
+			email=nvl(#{email,jdbcType=VARCHAR},null),
+			phonenumber=nvl(#{phoneNumber,jdbcType=VARCHAR},null),
+			address=nvl(#{address,jdbcType=VARCHAR},null),
+			marrystatus=nvl(#{marryStatus,jdbcType=VARCHAR},null),
+			imagecode=nvl(#{imagecode,jdbcType=VARCHAR},null)
+			where userid=#{userId}
+			
+			</update>
 
 
 </mapper>

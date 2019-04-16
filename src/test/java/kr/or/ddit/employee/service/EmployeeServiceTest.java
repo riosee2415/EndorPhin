@@ -30,8 +30,9 @@ public class EmployeeServiceTest extends LogicConfig{
 	
 	@Test
 	public void selectEmployeeTest() {
-		EmployeeVo selectEmployee = employeeService.selectEmployee("2");
-		logger.debug("감자 : {}",selectEmployee);
+		EmployeeVo selectEmployee = employeeService.selectEmployee("1022");
+		System.out.println("선택사원 :" + selectEmployee);
+		
 	}
 	@Test
 	public void insertEmployeeTest() {
@@ -156,11 +157,29 @@ public class EmployeeServiceTest extends LogicConfig{
 		
 		
 		
-		Employee_detailVo selectEmployeeDetail = employeeDetailService.selectEmployeeDetail("10041");
+		Employee_detailVo selectEmployeeDetail = employeeDetailService.selectEmployeeDetail("1022");
 		
 		System.out.println("과자 :" + selectEmployeeDetail);
 		
 	}
+	@Test
+	public void updateEmplDetailTest() {
+		Employee_detailVo detailVo = new Employee_detailVo();
+		
+		
+		detailVo.setUserId("1002");
+		detailVo.setAddress("서울");	
+		detailVo.setFinalSchool("고려대");
+		detailVo.setEmail("1234@naver.com");
+		detailVo.setPhoneNumber("01012341234");
+		detailVo.setMarryStatus("1");
+		detailVo.setImagecode("5");
+		
+		int updateEmployeeDetail = employeeDetailService.updateEmployeeDetail(detailVo);
+
+
+	}
+	
 	
 	
 

@@ -19,102 +19,78 @@
 
 
 
-<!-- 신규 사원 등록 -->
+<!-- 사원 조회/수정 -->
 <div class="modal fade" id="myLargeModalEdit" tabindex="-1"
 	role="dialog" aria-labelledby="myLargeModalLabel">
 	<div class="modal-dialog modal-lg" role="document">
+	<form action="${cp}/employee/updateEmployee_POST" method="post"
+						enctype="multipart/form-data">
 		<div class="modal-header">
 			<h4 class="modal-title" id="myModalLabel"
-				style="margin: auto; font-weight: bold; color: white;">신규 사원 등록</h4>
+				style="margin: auto; font-weight: bold; color: white;">사원 조회/수정</h4>
 		</div>
-		<form action="${cp}/employee/insertEmployee" method="post"
-			enctype="multipart/form-data">
-			<div class="modal-content" style="color: black; font-weight: bold;">
-				
-				
-				<div class="modal-body">
+
+		<div class="modal-content" style="color: black; font-weight: bold;">
+
+
+			<div class="modal-body">
 				<div id="emplinsert" class="container-fluid">
 
 
-
+					
 						<div class="row">
 							<div class="col-md-4">
-								<img style="height: 150px; width: 250px;" class="img-fluid" id="userimage"> <input type="file"
-									name="fileEdit" value="사진변경">
+								<img style="height: 150px; width: 250px; border-style: solid;"
+									class="img-fluid" id="userimage"> <label
+									class="btn btn-primary btn-file"
+									style="background-color: #626867; margin-left: 65px">
+									사진변경 <input style="display: none;" type="file" id="fileEdit"
+									name="fileName">
+								</label>
 							</div>
 							<div class="col-md-4">
-							
-							
-							
-							
-							
-							
+								사원번호<input type="text" class="form-control" id="userIde"
+									name="userId" placeholder="사원번호를 입력하세요" readonly> 사원명 <input
+									type="text" class="form-control" id="userNme" name="userNm"
+									placeholder="사원명을 입력해주세요">
 							</div>
 						</div>
+						
+					
+					<input type="hidden" id="imagecodeE" name="imagecode">
 
-						<div class="row">
-						<div class="col-md-4" style="float: left; width: 40%;">
-							사원번호<i style="color: red;" class="fa fa-exclamation"></i><input
-								type="text" class="form-control" id="userId" name="userId"
-								placeholder="사원번호를 입력하세요">
-						</div>
-						<div class="col-md-2" style="float: left; width: 20%;">
-
-							<br>
-							<button style="background-color: #6E6867 !important;"
-								type="button" class="btn btn-primary btn" id="emplCheck"
-								name="emplCheck">중복체크</button>
-						</div>
-
-
-
-						<div class="col-md-4" style="float: left; width: 40%;">
-							필수입력항목(<i style="color: red;" class="fa fa-exclamation"></i>)<br>
-							<span id="duplicate"></span>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-10">
-							사원명 <i style="color: red;" class="fa fa-exclamation"></i> <input
-								type="text" class="form-control" name="userNm"
-								placeholder="사원명을 입력해주세요">
-						</div>
-					</div>
-
-
-
-					<div class="row">
-						<div class="col-md-3" style="float: left; width: 33%;">
-							<label for="inputPassword">부서명<i style="color: red;"
-								class="fa fa-exclamation"></i></label> <select id="deptCode_html"
-								class="form-control" name="deptCode" class="form-control">
-								<!-- <option value="100">인사</option>
+				<div class="row">
+					<div class="col-md-3" style="float: left; width: 33%;">
+						<label for="inputPassword">부서명<i style="color: red;"
+							class="fa fa-exclamation"></i></label> <select id="deptCode_htmlEdit"
+							class="form-control"  name="deptCode" class="form-control">
+							<!-- <option value="100">인사</option>
 									<option value="200">회계</option>
 									<option value="300">물류</option> -->
-							</select>
-						</div>
+						</select>
+					</div>
 
 
 
 
-						<div class="col-md-3" style="float: left; width: 33%;">
-							<label for="inputPassword">직책명<i style="color: red;"
-								class="fa fa-exclamation"></i></label> <select id="position_html"
-								class="form-control" name="positionCode" class="form-control">
-								<!-- <option value="60">사장</option>
+					<div class="col-md-3" style="float: left; width: 33%;">
+						<label for="inputPassword">직책명<i style="color: red;"
+							class="fa fa-exclamation"></i></label> <select id="position_htmlEdit"
+							class="form-control" name="positionCode" class="form-control">
+							<!-- <option value="60">사장</option>
 									<option value="50">부사장</option>
 									<option value="40">본부장</option>
 									<option value="30">팀장</option>
 									<option value="10">파트장</option>
 									<option value="10">팀원</option> -->
-							</select>
-						</div>
+						</select>
+					</div>
 
-						<div class="col-md-3" style="float: left; width: 33%;">
-							<label for="inputPassword">직급명<i style="color: red;"
-								class="fa fa-exclamation"></i></label> <select id="rank_html"
-								class="form-control" name="rankCode" class="form-control">
-								<!-- <option value="8">전무</option>
+					<div class="col-md-3" style="float: left; width: 33%;">
+						<label for="inputPassword">직급명<i style="color: red;"
+							class="fa fa-exclamation"></i></label> <select id="rank_htmlEdit"
+							class="form-control" name="rankCode" class="form-control">
+							<!-- <option value="8">전무</option>
 									<option value="7">상무</option>
 									<option value="6">이사</option>
 									<option value="5">부장</option>
@@ -122,125 +98,162 @@
 									<option value="3">과장</option>
 									<option value="2">대리</option>
 									<option value="1">사원</option> -->
+						</select>
+					</div>
+				</div>
+
+
+				<div class="row">
+					<div class="col-md-10">
+
+						<label for="inputMobile">비고</label> <input type="text"
+							class="form-control" id="relateE" name="relate"
+							placeholder="특이사항란">
+
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-10">
+
+						<label for="inputtelNO">생년월일<i style="color: red;"
+							class="fa fa-exclamation"></i></label> <input type="text"
+							class="form-control" id="BirthDateE" name="BirthDate"
+							placeholder="생년월일을 입력하세요 ex)19951010">
+
+					</div>
+				</div>
+
+
+
+				<div class="row">
+					<div class="col-md-10">
+
+						<label for="inputtelNO">최종학교</label> <input type="text"
+							class="form-control" id="finalSchoolE" name="finalschool"
+							placeholder="최종학교를 입력하세요">
+
+
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-10">
+
+						<label for="inputtelNO">연락처</label> <input type="text"
+							class="form-control" id="phoneNumberE" name="phonenumber"
+							placeholder="연락처를 입력하세요 ex)01012341234">
+					</div>
+				</div>
+
+
+				<div class="row">
+					<div class="col-md-10">
+
+						<label for="inputtelNO">이메일</label> <input type="email"
+							class="form-control" id="emailE" name="email"
+							placeholder="이메일입력">
+					</div>
+				</div>
+
+
+
+				<div class="row">
+					<div class="col-md-7" style="float: left; width: 70%;">
+
+						<label for="inputtelNO">주소</label> <input type="text"
+							class="form-control" id="addressE" name="address"
+							placeholder="주소입력">
+					</div>
+					<div class="col-md-3"
+						style="float: left; width: 30%; margin-top: 7px">
+						<br>
+						<button style="background-color: #6E6867 !important;"
+							type="button" class="btn btn-primary btn" id="zipcodeBtnE">주소찾기
+						</button>
+					</div>
+				</div>
+
+
+
+				<div class="row">
+					<div class="col-md-10">
+						<label for="inputtelNO">상세 주소</label> <input type="text"
+							class="form-control" id="addressDetailE" name="addressDetail"
+							placeholder="상세 주소 입력">
+					</div>
+				</div>
+
+
+
+
+
+				<div class="row">
+						<div class="col-md-10">
+							<label for="inputtelNO">결혼여부</label> <select id="marryStatusE"
+								class="form-control" name="marryStatus" class="form-control">
+								 <option value="0">미혼</option>
+								 <option value="1">결혼</option>
 							</select>
 						</div>
 					</div>
 
 
-					<div class="row">
-						<div class="col-md-10">
-
-							<label for="inputMobile">비고</label> <input type="text"
-								class="form-control" id="inputMobile" name="relate"
-								placeholder="특이사항란">
-
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-10">
-
-							<label for="inputtelNO">생년월일<i style="color: red;"
-								class="fa fa-exclamation"></i></label> <input type="text"
-								class="form-control" id="inputtelNO" name="BirthDate"
-								placeholder="생년월일을 입력하세요 ex)19951010">
-
-						</div>
-					</div>
-
-
-
-					<div class="row">
-						<div class="col-md-10">
-
-							<label for="inputtelNO">최종학교</label> <input type="text"
-								class="form-control" id="inputtelNO" name="finalSchool"
-								placeholder="최종학교를 입력하세요">
-
-
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-10">
-
-							<label for="inputtelNO">연락처</label> <input type="text"
-								class="form-control" id="inputtelNO" name="phoneNumber"
-								placeholder="연락처를 입력하세요 ex)01012341234">
-						</div>
-					</div>
-
-
-					<div class="row">
-						<div class="col-md-10">
-
-							<label for="inputtelNO">이메일</label> <input type="email"
-								class="form-control" id="inputtelNO" name="email"
-								placeholder="이메일입력">
-						</div>
-					</div>
-
-
-
-					<div class="row">
-						<div class="col-md-7" style="float: left; width: 70%;">
-
-							<label for="inputtelNO">주소</label> <input type="text"
-								class="form-control" id="address" name="address"
-								placeholder="주소입력">
-						</div>
-						<div class="col-md-3"
-							style="float: left; width: 30%; margin-top: 7px">
-							<br>
-							<button style="background-color: #6E6867 !important;"
-								type="button" class="btn btn-primary btn" id="zipcodeBtn">주소찾기
-							</button>
-						</div>
-					</div>
-
-
-
-
-
-					<div class="row">
-						<div class="col-md-10">
-
-							<label for="inputtelNO">상세 주소</label> <input type="text"
-								class="form-control" id="addressDetail" name="addressDetail"
-								placeholder="상세 주소 입력">
-						</div>
-					</div>
-
-
-
-
-
-					<div class="row">
-						<div class="col-md-10">
-							<label for="inputtelNO">결혼기념일</label> <input type="text"
-								class="form-control" id="inputtelNO" name="address"
-								placeholder="결혼기념일을 입력하세요 예)19951010">
-						</div>
-					</div>
-
-
-					<div class="row">
-						<div class="col-md-10">
-							<label for="inputtelNO">사진첨부</label> <input type="file"
-								class="form-control" name="fileName" />
-						</div>
-					</div>
-					</div>
-				<div class="modal-footer">
-				<button type="submit" class="btn btn-default">등록</button>
-					
-				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-				</div>
-				
-				</div>
 			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-default">등록</button>
+
+				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+			</div>
+
+		</div>
 		</form>
 	</div>
 </div>
 
+
+
+
+
+<script>
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#userimage').attr('src', e.target.result);
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+
+	$("#fileEdit").change(function() {
+		readURL(this);
+	});
+	
+	
+	 $("#zipcodeBtnE").on("click", function() {
+
+         new daum.Postcode({
+            oncomplete : function(data) {
+               console.log(data);
+            
+               //새 우편번호 : data.zonecode
+               //우편번호 input select .val (data.zonecode)
+               //$("#zipcode").val(data.zonecode);
+               
+               //기본주소(도로주소) : data.roadAddress
+               //주소1 input select .val (data.zonecode);
+               $("#addressE").val(data.roadAddress);
+               
+               //상세주소 input focus
+               //$("#addressDetail").focus();
+            
+            
+               
+            
+            }
+         }).open();
+
+      }); 
+</script>
 

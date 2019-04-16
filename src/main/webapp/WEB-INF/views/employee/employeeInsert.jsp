@@ -196,14 +196,13 @@
 					</div>
 
 
-
-
-
 					<div class="row">
 						<div class="col-md-10">
-							<label for="inputtelNO">결혼기념일</label> <input type="text"
-								class="form-control" id="inputtelNO" name="address"
-								placeholder="결혼기념일을 입력하세요 예)19951010">
+							<label for="inputtelNO">결혼여부</label> <select id="marryStatus"
+								class="form-control" name="marryStatus" class="form-control">
+								 <option value="0">미혼</option>
+									<option value="1">결혼</option>
+							</select>
 						</div>
 					</div>
 

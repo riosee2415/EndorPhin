@@ -20,5 +20,7 @@ public interface IEmployeeDetailService {
 	//��� ����
 	int deleteEmployeeDetail(String userId);
 	
+	int updateEmployeeDetail(Employee_detailVo vo);
+	
 	
 }

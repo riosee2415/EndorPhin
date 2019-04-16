@@ -217,18 +217,34 @@ public class EmployeeController {
 	@RequestMapping(path = "/updateEmployee", method = RequestMethod.GET)
 	@ResponseBody
 	public EmployeeVo updateEmployee_GET(String userId,RedirectAttributes ra) throws IllegalStateException, IOException {
-		logger.debug("userId : {}", userId);
 		
 		EmployeeVo selectEmpl = employeeService.selectEmployee(userId);
 		return selectEmpl;
 	}
 	
+	
+	
 	@RequestMapping(path = "/updateEmployee_POST", method = RequestMethod.POST)
-	public String updateEmployee_POST(EmployeeVo vo,RedirectAttributes ra) {
-		logger.debug("수정 서블릿 : {}" ,vo);
+	public String updateEmployee_POST(EmployeeVo vo,RedirectAttributes ra,MultipartRequest multparts) throws IllegalStateException, IOException {
+		Employee_detailVo detailVo = new Employee_detailVo();
 		
 		
 		
+		ImagesVo imageVo = new ImagesVo();
+		imageVo.setUserId(vo.getUserId());
+		imageVo.setImageCode(vo.getImagecode());
+		String imageCode = imagesService.updateOrInsertImages(imageVo, multparts);
+		
+		detailVo.setUserId(vo.getUserId());
+		detailVo.setAddress(vo.getAddress() + ","  + vo.getAddressDetail());	
+		detailVo.setFinalSchool(vo.getFinalschool());
+		detailVo.setEmail(vo.getEmail());
+		detailVo.setPhoneNumber(vo.getPhonenumber());
+		detailVo.setMarryStatus(vo.getMarryStatus());
+		detailVo.setImagecode(vo.getImagecode());
+		
+		
+		employeeDetailService.updateEmployeeDetail(detailVo);
 		employeeService.updateEmployee(vo);
 		
 		ra.addFlashAttribute("msg", "정상 수정 되었습니다");
@@ -236,18 +252,24 @@ public class EmployeeController {
 	}
 	
 	
+	
 	@RequestMapping(path = "/SearchEmployee", method = RequestMethod.GET)
 	public String SearchEmployee(Model model, String searchName, String deptselect) {
+		
 		EmployeeVo vo = new EmployeeVo();
 		
-		vo.setUserId(searchName);
 		
+		if(searchName != null){
+		vo.setUserNm(searchName);
+		}
+		if(deptselect != null){
 		vo.setDeptname(deptselect);
-		
+		}
 		
 		List<EmployeeVo> allEmployee = employeeService.SearchEmployee(vo);
 		
 		
+		System.out.println("사이즈 :" + allEmployee.size());
 		model.addAttribute("allEmployee",allEmployee);
 		
 		return "employeeListTiles";
@@ -289,15 +311,8 @@ public class EmployeeController {
 	public Map<String, Object> getSelectBox(Model model) {
 		
 		
-		
-		
 		List<PositionVo> allPosition = positionService.getAllPosition();
 		List<DeptVo> allDept = deptService.getAllDept();
-		
-		
-		
-		
-		
 		
 		
 		
@@ -308,18 +323,9 @@ public class EmployeeController {
 		selectMap.put("allDept", allDept);
 		
 		
-		
-		
-		
-		
 		return selectMap;
 		
 	}
-	
-	
-	
-	
-	
 	
 	
 	

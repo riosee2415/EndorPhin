@@ -26,15 +26,23 @@
                     </tr>
                     <tr>
                         <td>내용</td>
-                         <td colspan='2'><textarea id="contents" name="contents" rows="10" cols="80">${boardInfo.contents}</textarea></td>
+                         <td colspan='2'><textarea id="contents" name="contents" rows="10" cols="80" readonly>${boardInfo.contents}</textarea></td>
 <%--                         <td colspan='2'>${boardInfo.contents}</td> --%>
+                    </tr>
+                    <tr>
+                    	<td>첨부파일</td>
+                    	<td>
+                    		<c:forEach items="${listview }" var="listview" varStatus="status">
+								<a href="/download?attachCode=${listview.attachCode }">${listview.attachName }</a>
+							</c:forEach>
+                    	</td>
                     </tr>
                 </tbody>
             </table>
             <br>
             <a href="#" onclick="history.back(-1)"><button class="bttn-jelly bttn-warning">돌아가기</button></a>
             <a href="boardDelete?boardNo=${boardInfo.boardNo}&boardTypeCode=${boardTypeCode}"><button class="bttn-jelly bttn-warning">삭제</button></a>
-            <a href="boardForm?boardNo=${boardInfo.boardNo}&boardTypeCode=${boardTypeCode}"><button class="bttn-jelly bttn-warning">저장</button></a>
+            <a href="boardForm?boardNo=${boardInfo.boardNo}&boardTypeCode=${boardTypeCode}"><button class="bttn-jelly bttn-warning">수정</button></a>
             <p>&nbsp;</p>
             <div style="border: 1px solid; width: 600px; padding: 5px">
                 <form name="form" action="boardReplySave" method="post">

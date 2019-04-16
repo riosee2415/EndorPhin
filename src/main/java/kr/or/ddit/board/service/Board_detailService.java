@@ -190,9 +190,14 @@ public class Board_detailService implements IBoard_detailService{
 	* Method 설명 : 게시글 등록
 	 */
 	@Override
-	public int insertBoard(Board_detailVo param) {
+	public int insertBoard(Board_detailVo param, List<Attach_boardVo> attachList) {
+		int attachCnt= 0;
 		int insertBoard = board_detailDao.insertBoard(param);
-		return insertBoard;
+		for (Attach_boardVo attach : attachList) {
+			attach_boardDao.attachInsert(attach);
+			attachCnt++;
+		}
+		return insertBoard + attachCnt;
 	}
 
 	/**
@@ -220,9 +225,14 @@ public class Board_detailService implements IBoard_detailService{
 	* Method 설명 : 게시글 수정
 	 */
 	@Override
-	public int updateBoard(Board_detailVo param) {
+	public int updateBoard(Board_detailVo param, List<Attach_boardVo> attachList) {
+		int attachCnt = 0;
 		int updateBoard = board_detailDao.updateBoard(param);
-		return updateBoard;
+		for (Attach_boardVo attach : attachList) {
+			attach_boardDao.attachUpdate(attach);
+			attachCnt++;
+		}
+		return updateBoard + attachCnt;
 	}
 
 	/**
@@ -356,6 +366,20 @@ public class Board_detailService implements IBoard_detailService{
 	@Override
 	public int deleteBoardReply(String commentNo) {
 		return board_detailDao.deleteBoardReply(commentNo);
+	}
+
+	/**
+	 * 
+	* Method : selectBoardFileList
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardNo
+	* @return
+	* Method 설명 : 첨부파일 리스트 조회
+	 */
+	@Override
+	public List<Attach_boardVo> selectBoardFileList(String boardNo) {
+		return board_detailDao.selectBoardFileList(boardNo);
 	}
 
 }

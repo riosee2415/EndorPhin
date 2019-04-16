@@ -98,13 +98,8 @@ a {
 
 
 		<div class="col-md-2 headFont">
-<<<<<<< HEAD
-			 <a class="header" href="${cp }/helloTiles"></a> <%--<img alt=""
-				src="${cp }/upload/erpblack.jpg" style="width: 235px; height: 70px;" /></a> --%>
-=======
-			<a class="header" href="${cp }/helloTiles"> <img alt=""
-				src="${cp }/upload/erpblack.jpg" style="height: 50px;"/></a>
->>>>>>> branch 'master' of https://gitlab.com/dditEndorphin/endorphin.git
+			 <a class="header" href="${cp }/helloTiles">
+			 <!-- <img src="${cp }/upload/erpblack.jpg" style="width: 235px; height: 70px;" /> --></a>
 		</div>
 
 

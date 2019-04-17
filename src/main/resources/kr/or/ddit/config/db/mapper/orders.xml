@@ -6,7 +6,7 @@
 
 	<!-- 발주서 입력 -->
 	<insert id="insertOrders" parameterType="ordersVo">
-		<selectKey keyProperty="productCode" resultType="String" order="BEFORE">
+		<selectKey keyProperty="orderCode" resultType="String" order="BEFORE">
 		  	select 
 		  		ORDERS_SEQ.NEXTVAL
 		  	from 
@@ -23,8 +23,8 @@
 				from orders o , order_detail od,product p
 				where   o.ordercode=od.ordercode
 				and od.productcode=p.productcode
-				and #{orderCode}),0)		
-		,#{orderlist}
+				and od.ordercode = #{orderCode}),0)		
+		,#{orderList}
 		,to_date(#{dueDate},'yyyy-MM-dd')
 		,to_date(nvl(#{paymentDueDate, jdbcType=VARCHAR},null),'yyyy-MM-dd')
 		,nvl(#{specialnote, jdbcType=VARCHAR},null)
@@ -80,15 +80,15 @@
 							from orders o , order_detail od,product p
 							where   o.ordercode=od.ordercode
 							and od.productcode=p.productcode
-							and #{orderCode}),orderprice)		
-		,orderlist = nvl(#{orderlist,jdbcType=VARCHAR},orderlist)
+							and od.ordercode = #{orderCode}),orderprice)		
+		,orderlist = nvl(#{orderList,jdbcType=VARCHAR},orderlist)
 		,duedate = to_date(nvl(#{dueDate,jdbcType=VARCHAR},duedate),'yyyy-MM-dd')
-		,paymentduedate=to_date(nvl(#{paymentDueDate, jdbcType=VARCHAR},paymentduedate),'yyyy-MM-dd')
+		,paymentduedate = to_date(nvl(#{paymentDueDate, jdbcType=VARCHAR},paymentduedate),'yyyy-MM-dd')
 		,specialnote = nvl(#{specialnote, jdbcType=VARCHAR},specialnote)
 		,clientcode = nvl(#{clientCode, jdbcType=VARCHAR},clientcode)
 		,status = nvl(#{status, jdbcType=VARCHAR},status)
 		,sortation = nvl(#{sortation, jdbcType=VARCHAR},sortation)
-		where	ordercode=#{orderCode}
+		where	ordercode = #{orderCode}
 	</update>
 </mapper>
 

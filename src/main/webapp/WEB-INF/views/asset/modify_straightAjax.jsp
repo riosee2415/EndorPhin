@@ -153,6 +153,7 @@
 		return parseInt(str.replace(/,/g,""));
 	}
     
+	/* 수정 */
 	function insertBtn_fn(){
 		
 		if($("#assetName").val().trim() == "" || $("#accountName").val().trim()==""
@@ -167,7 +168,7 @@
 		
 		$.ajax({
 			url  : "${pageContext.request.contextPath }/insertFrm",
-			data : "assetCode="+$("#assetCode1").val() + "&"+ "date="+$("#date").val()+ 
+			data : "assetCode="+$("#assetCode1").val() + "&"+ "date="+$("#acquisitionDate1").val()+ 
 					"&" +"assetName="+$("#assetName").val()+ 
 					"&" +"sanggakWay="+$("#sanggakWay1").val() +  "&"+"accountName="+$("#accountName").val()+ 
 					"&" + "clientName="+$("#clientName").val() + "&" + "acquisitionPrice="+$("#acquisitionPrice1").val()+ 

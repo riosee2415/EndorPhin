@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!--[수정화면 /상세화면]
 1. 자산코드, 취득일 , 상각방법, 정률법 ,정액법을 수정한다
 2. 정류법과 정액법선택을 저장하고 화면을 분류함.-->
@@ -10,17 +12,20 @@
 			<td colspan="2" >자산코드(*)
 			<input type="text" id="assetCode1" name="assetCode1" value="${asset.assetCode}" readonly> 
 			<td><br><br></td>
-		<tr>
+		<tr> 
+			<c:set var="dates" >
+				<fmt:formatDate value="${asset.acquisitionDate  }" pattern="yyyy/MM/dd" />
+			</c:set>
 			<td colspan="2" > 취득일(*) &nbsp;&nbsp;&nbsp; 
-				<input id="acquisitionDate1" name="acquisitionDate1" type="text" style="width: 200px;"  >
+				<input id="acquisitionDate1" name="acquisitionDate1" type="text" style="width: 200px;" value="${dates}"  >
 			<td> &nbsp;&nbsp;* 유형 : 
 				<select id ="purchaseCode1" name="purchaseCode1">
 				
-				<c:if test="${asset.purchaseCode == 51}">
-					<option value="51" selected="selected">51 과세매입</option></c:if>
-					<option value="54" >54 불공</option>
-				<c:if test="${asset.purchaseCode == 54}">
-					<option value="51" >51 과세매입</option>
+				<c:if test="${asset.purchaseCode == '과세매입'}">
+					<option value="과세매입" selected="selected">51 과세매입</option></c:if>
+					<option value="불공" >54 불공</option>
+				<c:if test="${asset.purchaseCode == '불공'}">
+					<option value="과세매입" >51 과세매입</option>
 				</c:if>	
 					
 				</select>
@@ -41,10 +46,10 @@
 			<td colspan="2">&nbsp;&nbsp;취득금액(*)
 				<input type="text" id="acquisitionPrice1" name="acquisitionPrice1" value="${asset.acquisitionPrice}"></td> 
 			<td>
-				<button class="btn btn-primary"id="insertBtn" name="insertBtn">수정</button>
+				<button class="btn btn-primary btn-sm"id="insertBtn" name="insertBtn">수정</button>
 			</td>
 			<td>
-				<button class="btn btn-primary"id="closeBtn" name="closeBtn">닫기</button>
+				<button class="btn btn-primary btn-sm"id="closeBtn" name="closeBtn">닫기</button>
 			</td>		
 		</tr>
 	</thead>
@@ -182,8 +187,6 @@ $("#acquisitionPrice").keypress(function(e){
 	        ,minDate: "-1M" 
 	        ,maxDate: "+1M"                
 	    });                    
-	    
-	    $('#acquisitionDate1').datepicker('setDate', 'today');             
 	});
 	$("#closeBtn").on("click", function(){
 		$("#insertArea").html("");

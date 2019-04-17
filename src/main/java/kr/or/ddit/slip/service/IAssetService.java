@@ -27,4 +27,6 @@ public interface IAssetService {
 	int updateSlipNumber(AssetVo assetVo);
 
 	int updateJangbu(AssetVo assetVo);
+	
+	int updateDisposal(AssetVo assetVo);
 }

@@ -230,5 +230,10 @@
            <put-attribute name="content" value="/WEB-INF/views/ps/psList.jsp"/>
         </definition>
         
+       
+         <definition name="document" extends="layout_groupware">    <!--그룹웨어 - 기안상신함 -->
+           <put-attribute name="content" value="/WEB-INF/views/document/document.jsp"/>
+        </definition>
+        
         
 </tiles-definitions>

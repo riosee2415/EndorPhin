@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+       
+
 <tiles-definitions>
-        
        <definition name="layout" template="/WEB-INF/views/template/layout.jsp">
            <put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
            <put-attribute name="menu" value="/WEB-INF/views/template/erpmenu.jsp"/>
@@ -237,17 +238,14 @@
            <put-attribute name="content" value="/WEB-INF/views/ps/psList.jsp"/>
         </definition>
         
-<<<<<<< HEAD
        
          <definition name="document" extends="layout_groupware">    <!--그룹웨어 - 기안상신함 -->
            <put-attribute name="content" value="/WEB-INF/views/document/document.jsp"/>
         </definition>
-=======
         <definition name="sumChance" extends="layout">   <!-- 합계잔액 -->
 		<put-attribute name="content"
 			value="/WEB-INF/views/ps/sumChance.jsp" />
 		</definition>
->>>>>>> refs/remotes/origin/master
         
         
 </tiles-definitions>

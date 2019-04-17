@@ -135,16 +135,17 @@ a:hover, a:focus {
 
 
 
-
-
-
-
-
-
 	</div>
 	
 <script>
 
+$(document).ready(function() {
+$("#frmTap").trigger('click');
+	
+});
+
+
+var datas2=[];
 
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
@@ -195,34 +196,41 @@ a:hover, a:focus {
         calendar.unselect()
       },
       
-      
+              
       editable: true,
       eventLimit: true, // allow "more" link when too many events
-      events: function(timezone,succ,fail){
+      events:
+    	  function(timeStamp,suss,fail){
+
+    	  var datas=[];
     		$.ajax({
     			url			: "${cp}/schedule/getAllSchedule" ,
     			method		: "get",
     			async: false,
     			success		: function(allSchedule) {
-
-    				var datas=[];
     				for (var i = 0; i < allSchedule.length; i++) {
     	  				var temp = allSchedule[i];
     	   				datas.push({title : temp.schedule_title,
     	 		  					start : temp.schedule_start,
     	 		  					end : temp.schedule_end});
     	  			}   
-    				succ(datas);
+
+    				suss(datas);
 
     			}              	
     		}); 
+    		
     	}
       
-    });
+      
+     });
 
     calendar.render();
   });
 
+
+  
+  
 </script>
 
 <%--   --%>

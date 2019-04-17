@@ -4,12 +4,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.mvel2.sh.Main;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.ddit.slip.model.AssetVo;
@@ -40,12 +38,8 @@ public class AssetSellCotroller {
 	@RequestMapping("insertCheck")
 	public String disposal_check(AssetVo assetVo,String assetCode, String disposalPrice, String disposalDate){
 		
-		logger.debug("assetCode:{}",assetCode);
-		logger.debug("disposalPrice:{}",disposalPrice);
-		logger.debug("disposalDate:{}",disposalDate);
-		
 		int updCnt = assetService.updateDisposal(assetVo);
-		logger.debug("assetVo:{}",assetVo);
+		
 		return "assetSell";
 	}
 	

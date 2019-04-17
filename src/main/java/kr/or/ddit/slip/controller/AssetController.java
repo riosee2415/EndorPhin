@@ -68,7 +68,7 @@ public class AssetController {
 		return "purchaseAsset";
 	}
 	
-	//등록
+	//부분등록
 	@RequestMapping("/insertStatusFrm")
 	public String insertStatusAsset(AssetVo assetVo, Model model, String assetCode,String acquisitionDate
 																,String sanggakWay,String acquisitionPrice

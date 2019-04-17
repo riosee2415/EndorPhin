@@ -29,15 +29,24 @@
 			<tbody id="deptListTbody">
 				<c:forEach items="${assetSellList }" var="vo">
 					 <tr>
-						<td><a class="bttn-stretch bttn-warning disposalView" href="#disposalDetail" data-assetcode_d="${vo.assetCode }"
-									   								data-toggle="modal">${vo.assetCode }</a></td>
+						<c:set var="dates">
+							<fmt:formatDate value="${vo.acquisitionDate  }" pattern="yyyy/MM/dd" />
+						</c:set>
+						<c:set var="disposalDate">
+							<fmt:formatDate value="${vo.disposalDate  }" pattern="yyyy/MM/dd" />
+						</c:set>
+						<td><a class="bttn-stretch bttn-warning disposalView" href="#disposalDetail"
+								 									data-assetcode_d="${vo.assetCode }"
+								 									data-acquisitiondate_d="${dates }"
+								 									data-acquisitionprice_d="${vo.acquisitionPrice }"
+								 									data-servicelife_d="${vo.serviceLife }"
+								 									data-disposalprice="${vo.disposalPrice }"
+								 									data-disposaldate="${disposalDate }"
+							     									data-toggle="modal">${vo.assetCode }</a></td>
    						<td>${vo.assetName }</td>	
    						<td>${vo.accountName}</td>								
-						<td><fmt:formatDate value="${vo.disposalDate  }"	pattern="yyyy-MM-dd" /></td>
+						<td><fmt:formatDate value="${vo.disposalDate  }" pattern="yyyy-MM-dd" /></td>
 						
-						<c:set var="dates">
-							<fmt:formatDate value="${vo.disposalDate  }"	pattern="yyyy/MM/dd" />
-						</c:set>
 						<td><a class="bttn-stretch bttn-warning detailView" 
 																data-assetcode="${vo.assetCode }"
 																data-acquisitiondate="${dates }"
@@ -58,37 +67,53 @@
 		</table>
 	</div>
 </div>
-<div class="modal fade" id="disposalDetail" role="disposalDetail" aria-hidden="true"> 
- 		<div class="modal-dialog">
+ 		
+ 	<div class="modal fade" id="disposalDetail" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
  		 <div class="modal-content"> 
-  			<div class="modal-header">
-				<label>| 매각등록</label>
-					<button type="button" class="close" data-dismiss="modal"aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-					</button>
+  			<div class="modal-header" >
+  			<table>
+  				<tr>
+					<td><label >| 매각등록</label>
+  				</tr>
+			</table>
 			</div>
 			<div class="modal-body">
 				<table>
+				<tr><td><label >|----그룹웨어하면서 구현하겠습니다...----------</label></td></tr>
 					<tr>
-						<td><label>자산코드(*)&nbsp;&nbsp;&nbsp;</label></td> 
-						<td><input type="text" id="assetCode" name="assetCode"  readonly="readonly"> </td>
+						<td><label>자산코드&nbsp;&nbsp;&nbsp;</label></td> 
+						<td><input type="text" id="assetCode" name="assetCode" class="form-control-sm " readonly="readonly" style="background: #F4EBE7;"> </td>
+					</tr>
+					<tr> 
+						<td><label>자산명&nbsp;&nbsp;</label> </td>
+						<td><input type="text" id="serviceLife"  class="form-control-sm"readonly></td>
+						<td><label>취득금액&nbsp;&nbsp;</label> </td>
+						<td><input type="text" id="acquisitionPrice" class="form-control-sm" readonly></td>
+						
+					</tr>
+					<tr>
+						<td><label>취득날짜&nbsp;&nbsp;</label> </td>
+						<td><input type="text" id="acquisitionDate"class="form-control-sm"  readonly></td>
+						<td><label>내용연수&nbsp;&nbsp;</label> </td>
+						<td><input type="text" id="serviceLife" class="form-control-sm" readonly></td>
+						
 					</tr>
 					<tr> 
 						<td><label>매각 금액(*)&nbsp;&nbsp;&nbsp;</label></td> 
-						<td><input type="text" id="disposalPrice" name="disposalPrice" > </td>
-					</tr>
-					<tr> 
+						<td><input type="text" id="disposalPrice" name="disposalPrice" class="form-control-sm"> </td>
 						<td><label>매각/폐기일&nbsp;&nbsp;</label></td> 
-						<td><input type="text" id="disposalDate" name="disposalDate"> </td>
-						<td><input type="button"class="btn btn-warning btn-sm" id="disposal_ok" name="disposal_ok" value="확인 "> </td>
+						<td><input type="text" id="disposalDate" name="disposalDate" class="form-control-sm"> </td>
+						<td><input type="button"class="btn btn-warning btn-sm" id="disposal_ok" name="disposal_ok" value="확인 " >
+						 </td>
+					</tr>
+					<tr>
+						<td><label>잔존가치&nbsp;&nbsp;</label> </td> 
+						<td><input type="text" id="disposal" readonly class="form-control-sm"></td>
 					</tr>
 					<tr> 
 						<td><label>손실/이익 확인 &nbsp;&nbsp;</label></td> 
 						<td><div id="ok"></div></td>
-					</tr>
-					<tr> 
-						<td><label>잔존가치&nbsp;&nbsp;</label> </td> 
-						<td><input type="text" id="disposal"></td>
 					</tr>
 				</table>
 				</div>	
@@ -120,8 +145,14 @@
 			}
 		});
 	});
+	/* 상세보기 */
 	$(".disposalView").on("click",function() {
 		$("#assetCode").val($(this).data("assetcode_d"));
+		$("#disposalDate").val($(this).data("disposaldate"));
+		$("#disposalPrice").val($(this).data("disposalprice"));
+		$("#acquisitionPrice").val($(this).data("acquisitionprice_d"));
+		$("#acquisitionDate").val($(this).data("acquisitiondate_d"));
+		$("#serviceLife").val($(this).data("servicelife_d"));
 	});
 	
 	/*1. 매각 금액, 날짜 등록  */
@@ -133,20 +164,33 @@
 		$.ajax({
 			url : "${pageContext.request.contextPath }/insertCheck",
 			data : "assetCode="+ $("#assetCode").val()+"&" +
-					"disposalPrice="+ $("#disposalPrice").val()+"&" 
-				  + "disposalDate="+ $("#disposalDate").val(),
-			success : function(data) {
-				location.reload();
-				alert("확인");
+				   "disposalPrice="+ $("#disposalPrice").val()+"&" 
+				   + "disposalDate="+ $("#disposalDate").val(),
+			success : function(data) {      /* 잔존가치  = 취득금액 - 감가상각누계액  
+		    								    감가 상각 누계액 구하는 과정  */
+				
+				var start    	= $("#acquisitionDate").val();
+				var date 	    = new Date($("#acquisitionDate").val());
+				var serviceLife = $("#serviceLife").val();
+				var result 	 	= date.getFullYear() + parseInt(serviceLife);
+				var end			= result + "-" + parseInt(date.getMonth()+1) + "-" + date.getDate(); /*취득일에 내용연수 더한날짜  */				
+				var arr1 = start.split("/");
+				var arr2 = end.split("-");
+				var da1 = new Date(arr1[0], arr1[1], arr1[2]);
+				var da2 = new Date(arr2[0], arr2[1], arr2[2]);
+				
+				var dif    = da2 - da1;			
+				var cDay   = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
+			    var cMonth = cDay * 30;// 월 만듬
+			    var cYear  = cMonth * 12; // 년 만듬
+			    
+				var  years = parseInt(dif/cYear);	/*연 차이 계산 */
+				var  month = parseInt(dif/cMonth);	/*개월수  계산  */
+				var  days  = parseInt(dif/cDay);	/*일차이  계산  */
+				
 			}
 		});
 	});
-
-	
-	
-	
-	
-	
 	
 	
     $(function() {
@@ -169,8 +213,6 @@
             ,maxDate: "+1M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)                
         });                    
         
-        //초기값을 오늘 날짜로 설정
-        $('#disposalDate').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)            
     });
 	</script>
 

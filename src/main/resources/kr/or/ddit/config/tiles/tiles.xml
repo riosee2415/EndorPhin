@@ -230,5 +230,10 @@
            <put-attribute name="content" value="/WEB-INF/views/ps/psList.jsp"/>
         </definition>
         
+        <definition name="sumChance" extends="layout">   <!-- 합계잔액 -->
+		<put-attribute name="content"
+			value="/WEB-INF/views/ps/sumChance.jsp" />
+		</definition>
+        
         
 </tiles-definitions>

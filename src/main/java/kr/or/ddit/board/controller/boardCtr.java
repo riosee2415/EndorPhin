@@ -1,11 +1,19 @@
 package kr.or.ddit.board.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -15,7 +23,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 
+import kr.or.ddit.board.model.Attach_boardVo;
 import kr.or.ddit.board.model.Board_detailVo;
 import kr.or.ddit.board.model.CommentsVo;
 import kr.or.ddit.board.service.IAttach_boardService;
@@ -28,7 +39,11 @@ import kr.or.ddit.util.model.PageVo;
 
 @Controller
 public class boardCtr {
+	
+	private static final String UPLOAD_PATH = "/Users/macbook/picture";
+	
 	private static final Logger logger = LoggerFactory.getLogger(boardCtr.class);
+	
 	@Resource(name="board_detailService")
 	private IBoard_detailService board_detailService;
 	
@@ -87,7 +102,11 @@ public class boardCtr {
 		
         if (boardNo!=null) {
         	Board_detailVo boardInfo = board_detailService.selectBoardOne(boardNo);
+        	List<Attach_boardVo> listview = board_detailService.selectBoardFileList(boardNo);
+
         	model.addAttribute("boardInfo", boardInfo);
+        	model.addAttribute("listview", listview);
+        	
         }
 
 		model.addAttribute("boardTypeCode", boardTypeCode);
@@ -103,18 +122,95 @@ public class boardCtr {
 	* @param boardInfo
 	* @return
 	* @throws Exception
-	* Method 설명 : 게시글 저장
+	* Method 설명 : 게시글 저장 버튼
 	 */
 	@RequestMapping(value = "/boardSave")
-	public String boardSave(@ModelAttribute Board_detailVo boardInfo, HttpServletRequest request, String boardTypeCode, Model model) throws Exception {
+	public String boardSave(@ModelAttribute Board_detailVo boardInfo, HttpServletRequest request
+					, String boardTypeCode,String attachCode, Model model, MultipartRequest multipart) throws Exception {
 		HttpSession session = request.getSession();
 		EmployeeVo employeeVo = (EmployeeVo) session.getAttribute("employeeVo");
 		boardInfo.setUserId(employeeVo.getUserId());
 		if (boardInfo.getBoardNo() == null || "".equals(boardInfo.getBoardNo())) {
-			board_detailService.insertBoard(boardInfo);
+			List<Attach_boardVo> attachList =  new ArrayList<Attach_boardVo>();
+			List<MultipartFile> attachFiles = multipart.getFiles("attachFile");
+			
+			String attachName = "";
+			String attachRealname = "";
+			String attachRealpath = "";
+			
+			for (MultipartFile multipartFile : attachFiles) {
+				
+					if(!multipartFile.getName().equals("attachFile")){
+						continue;
+				}
+				
+				ServletContext application = session.getServletContext();
+				String path = application.getRealPath("/upload");
+				
+				attachName = multipartFile.getOriginalFilename();
+				attachRealname = path + File.separator + UUID.randomUUID().toString();
+				attachRealpath = path;
+					
+				ServletContext app = session.getServletContext();
+				String filepath = app.getRealPath("/upload");
+				
+				attachName = multipartFile.getOriginalFilename();
+				attachRealname = filepath + File.separator + UUID.randomUUID().toString();
+				attachRealpath = filepath;
+				
+				if (multipartFile.getSize() > 0 ) {
+					
+					multipartFile.transferTo(new File(attachRealname));
+					
+					Attach_boardVo attachVo = new Attach_boardVo();
+					attachVo.setAttachName(attachName);
+					attachVo.setAttachRealname(attachRealname);
+					attachVo.setAttachRealpath(attachRealpath);
+					
+					attachList.add(attachVo);
+				}
+			}
+			board_detailService.insertBoard(boardInfo, attachList);
 			model.addAttribute("boardTypeCode", boardTypeCode);
 		} else {
-			board_detailService.updateBoard(boardInfo);
+			if(attachCode != null){
+				attach_boardService.attach_boardDelete(attachCode);
+			}
+			
+			List<Attach_boardVo> attachList =  new ArrayList<>();
+			List<MultipartFile> attachFile = multipart.getFiles("attachFile");
+			
+			String attachName = "";
+			String attachRealname = "";
+			String attachRealpath = "";
+			
+			for (MultipartFile multipartFile : attachFile) {
+				
+				if(!multipartFile.getName().equals("attachFile")){
+					continue;
+				}
+				ServletContext application = request.getServletContext();
+				String path = application.getRealPath("/upload");
+				
+				attachName = multipartFile.getOriginalFilename();
+				attachRealname = UPLOAD_PATH + File.separator + UUID.randomUUID().toString();
+				attachRealpath = path;
+				
+				if (multipartFile.getSize() > 0 ) {
+					
+					multipartFile.transferTo(new File(attachRealname));
+					
+					Attach_boardVo attachVo = new Attach_boardVo();
+					attachVo.setAttachCode(attachCode);
+					attachVo.setAttachName(attachName);
+					attachVo.setAttachRealname(path + File.separator + attachRealname);
+					attachVo.setAttachRealpath(attachRealpath);
+					
+					attachList.add(attachVo);
+				}
+			}
+			
+			board_detailService.updateBoard(boardInfo, attachList);
 			model.addAttribute("boardTypeCode", boardTypeCode);
 		}
 		
@@ -140,11 +236,12 @@ public class boardCtr {
         
         Board_detailVo boardInfo = board_detailService.selectBoardOne(boardNo);
         List<CommentsVo> replylist = board_detailService.selectBoardReplyList(boardNo);
-
+        List<Attach_boardVo> listview = board_detailService.selectBoardFileList(boardNo);
         
         model.addAttribute("boardInfo", boardInfo);
         model.addAttribute("boardTypeCode", boardTypeCode);
         model.addAttribute("replylist", replylist);
+        model.addAttribute("listview", listview);
         
         return "boardRead";
 	}
@@ -160,10 +257,47 @@ public class boardCtr {
 	* Method 설명 : 게시글 수정버튼
 	 */
 	@RequestMapping(value = "/boardUpdateSave")
-	public String board1UpdateSave(@ModelAttribute("boardInfo") Board_detailVo boardInfo, String boardTypeCode, Model model) throws Exception {
+	public String boardUpdateSave(@ModelAttribute("boardInfo") Board_detailVo boardInfo, String attachCode, String boardTypeCode, Model model, HttpServletRequest request,MultipartRequest multipart) throws Exception {
 	        
-		board_detailService.updateBoard(boardInfo);
-	    model.addAttribute(boardTypeCode);
+		if(attachCode != null){
+			attach_boardService.attach_boardDelete(attachCode);
+		}
+		
+		List<Attach_boardVo> attachList =  new ArrayList<>();
+		List<MultipartFile> attachFile = multipart.getFiles("attachFile");
+		
+		String attachName = "";
+		String attachRealname = "";
+		String attachRealpath = "";
+		
+		for (MultipartFile multipartFile : attachFile) {
+			
+			if(!multipartFile.getName().equals("attachFile")){
+				continue;
+			}
+			ServletContext application = request.getServletContext();
+			String path = application.getRealPath("/upload");
+			
+			attachName = multipartFile.getOriginalFilename();
+			attachRealname = UPLOAD_PATH + File.separator + UUID.randomUUID().toString();
+			attachRealpath = path;
+			
+			if (multipartFile.getSize() > 0 ) {
+				
+				multipartFile.transferTo(new File(attachRealname));
+				
+				Attach_boardVo attachVo = new Attach_boardVo();
+				attachVo.setAttachCode(attachCode);
+				attachVo.setAttachName(attachName);
+				attachVo.setAttachRealname(path + File.separator + attachRealname);
+				attachVo.setAttachRealpath(attachRealpath);
+				
+				attachList.add(attachVo);
+			}
+		}
+		
+		board_detailService.updateBoard(boardInfo, attachList);
+	    model.addAttribute("boardTypeCode", boardTypeCode);
 	    return "redirect:/boardList";
 	}
 	
@@ -208,7 +342,7 @@ public class boardCtr {
 
 	/**
 	 * 
-	* Method : board5ReplyDelete
+	* Method : boardReplyDelete
 	* 작성자 : macbook
 	* 변경이력 :
 	* @param request
@@ -217,7 +351,7 @@ public class boardCtr {
 	* Method 설명 : 댓글 삭제
 	 */
 	@RequestMapping(value = "/boardReplyDelete")
-    public String board5ReplyDelete(Model model ,HttpServletRequest request, CommentsVo boardReplyInfo, String boardTypeCode) {
+    public String boardReplyDelete(Model model ,HttpServletRequest request, CommentsVo boardReplyInfo, String boardTypeCode) {
         
 		board_detailService.deleteBoardReply(boardReplyInfo.getCommentNo());
 		model.addAttribute("boardTypeCode",boardTypeCode);
@@ -225,6 +359,25 @@ public class boardCtr {
         return "redirect:/boardRead?boardNo=" + boardReplyInfo.getBoardNo();
     }
 	
+	@RequestMapping(value = "/download")
+	public void download(String attachCode, HttpServletResponse resp) throws IOException{
+		Attach_boardVo attachVo = attach_boardService.attachCodeSelectOne(attachCode);
+	      String attach_name = new String(attachVo.getAttachName().getBytes("UTF-8"), "ISO-8859-1");
+	      
+	      FileInputStream fis = new FileInputStream(new File(attachVo.getAttachRealname()));
+	      resp.setHeader("Content-Disposition", "attachment; filename=\"" + attach_name + "\"");
+	      
+	      ServletOutputStream sos = resp.getOutputStream();
+	      byte[] buff = new byte[512];
+	      int len = 0;
+	      
+	      while((len = fis.read(buff)) > -1){
+	    	  sos.write(buff);
+	      }
+	      
+	      sos.close();
+	      fis.close();
+	}
 
 	/**
 	 * 

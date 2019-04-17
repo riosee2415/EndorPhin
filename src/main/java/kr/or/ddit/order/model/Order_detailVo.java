@@ -58,7 +58,19 @@ public class Order_detailVo {
 	public void setProductCode(String productCode) {
 		this.productCode = productCode;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "Order_detailVo [orderDetailCode=" + orderDetailCode + ", orderCode=" + orderCode + ", quantity="
+				+ quantity + ", productCode=" + productCode + ", productname=" + productname + ", standard=" + standard
+				+ ", baseprice=" + baseprice + "]";
+	}
+	public Order_detailVo(String orderDetailCode, String orderCode, String quantity, String productCode) {
+		this.orderDetailCode = orderDetailCode;
+		this.orderCode = orderCode;
+		this.quantity = quantity;
+		this.productCode = productCode;
+	}
+	public Order_detailVo() {
+	}
 
 }

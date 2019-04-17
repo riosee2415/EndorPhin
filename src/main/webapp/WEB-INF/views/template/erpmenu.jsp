@@ -49,10 +49,8 @@
 						</ul></li>
 					<li><a class="parent" href="#">고정자산</a>
 						<ul class="sub-menu">
-							<li><a href="${pageContext.request.contextPath }/purchaseAsset">고정자산
-									등록</a></li>
-							<li><a href="${pageContext.request.contextPath }/sellAsset">고정자산
-									매각</a></li>
+							<li><a href="${pageContext.request.contextPath }/purchaseAsset">고정자산등록</a></li>
+							<li><a href="${pageContext.request.contextPath }/assetSell">고정자산매각</a></li>
 							<li><a href="${pageContext.request.contextPath }/assetUsed">감가상각비</a></li>
 						</ul></li>
 					<li><a class="parent" href="#">회계관리</a>

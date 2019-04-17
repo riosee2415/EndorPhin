@@ -2,6 +2,7 @@ package kr.or.ddit.board.dao;
 
 import java.util.List;
 
+import kr.or.ddit.board.model.Attach_boardVo;
 import kr.or.ddit.board.model.Board_detailVo;
 import kr.or.ddit.board.model.CommentsVo;
 import kr.or.ddit.slip.model.SlipVo;
@@ -210,6 +211,17 @@ public interface IBoard_detailDao {
 	* Method 설명 : 댓글 삭제
 	 */
 	public int deleteBoardReply(String commentNo);
+	
+	/**
+	 * 
+	* Method : selectBoardFileList
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardNo
+	* @return
+	* Method 설명 : 첨부파일 리스트 조회
+	 */
+	public List<Attach_boardVo> selectBoardFileList(String boardNo);
 
 	
 }

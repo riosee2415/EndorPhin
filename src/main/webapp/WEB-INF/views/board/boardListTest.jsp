@@ -5,6 +5,8 @@
 <html>
 
 <head>
+
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>board</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -13,17 +15,12 @@
     $(function() {
         $("#startDate").datepicker( // inputbox 의 id 가 startDate 이겠죠.
             {
-                dateFormat: 'yy-mm-dd' // 만약 2011년 4월 29일 선택하면  inputbox 에 '2011/04/29' 로표시
-                    ,
-                buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" // 우측 달력 icon 의 이미지 패스 
-                    ,
-                buttonImageOnly: true //  inputbox 뒤에 달력icon만 표시한다. ('...' 표시생략)
-                    ,
-                changeMonth: true // 월선택 select box 표시 (기본은 false)
-                    ,
-                changeYear: true // 년선택 selectbox 표시 (기본은 false)
-                    ,
-                showButtonPanel: true // 하단 today, done  버튼기능 추가 표시 (기본은 false)
+                 dateFormat: 'yy-mm-dd' // 만약 2011년 4월 29일 선택하면  inputbox 에 '2011/04/29' 로표시
+                ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" // 우측 달력 icon 의 이미지 패스
+                ,buttonImageOnly: true //  inputbox 뒤에 달력icon만 표시한다. ('...' 표시생략)
+                ,changeMonth: true // 월선택 select box 표시 (기본은 false)
+                ,changeYear: true // 년선택 selectbox 표시 (기본은 false)
+                ,showButtonPanel: true // 하단 today, done  버튼기능 추가 표시 (기본은 false)
             });
 
         $("#endDate").datepicker({
@@ -45,13 +42,21 @@
 </script>
 <style>
     /* 글 숨기 */
-                .target { display: inline-block;
-                    width: 100px; white-space: nowrap;
-                    overflow: hidden; text-overflow: ellipsis;
-                }
+.target { 
+	display: inline-block;
+	width: 100px; white-space: nowrap;
+	overflow: hidden; text-overflow: ellipsis;
+}
 
-            </style>
+a {
+	color: black !important;
+	text-decoration: none;
+	outline: none
+}
 
+
+</style>
+                
 <body>
     <div class="row">
         <div class="col-md-1"></div>
@@ -102,7 +107,9 @@
                         <th>등록일</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style="color: black !important">
+                
+                
                     <c:forEach var="listview" items="${postList}">
                         <tr>
                             <td>${listview.boardNo}</td>

@@ -17,7 +17,7 @@
 					<input type="button" id="seachBtn" value="검색" class="bttn-fill bttn-md bttn-warning" /></td>
 				</tr>
 		</table>
-		<table class="table table-hover">
+		<table class="table table-striped">
 			<thead class="thead">
 				<tr>
 					<th>자산코드</th>
@@ -53,15 +53,16 @@
    						<td>${vo.accountName }</td>								
 						<td><fmt:formatDate value="${vo.acquisitionDate  }" pattern="yyyy-MM-dd"/></td>
 						<td>${vo.acquisitionPrice }</td>
-						<c:if test="${vo.jangbu == null}">
-						<td><a class="bttn-stretch bttn-warning apply" data-assetcode1="${vo.assetCode }" 
+						<td><c:if test="${vo.jangbu == null}">
+						<a class="bttn-stretch bttn-warning apply" data-assetcode1="${vo.assetCode }" 
 																		data-acquisitionprice1="${vo.acquisitionPrice }"
 																		data-acquisitiondate1="${dates }"
 																		data-clientname1="${vo.clientName }"
 																		data-sanggakcode1="${vo.accountName }"
-																		data-jukyo1="${vo.jukyo }">장부반영</a></td>
+																		data-jukyo1="${vo.jukyo }"
+																	    data-purchasecode1="${vo.purchaseCode }">장부반영</a>
 																		
-						</c:if>
+						</c:if></td>
 				 		</tr>
 				 	<div id="insertArea"></div>
 				</c:forEach>
@@ -354,6 +355,7 @@
 					+"&"+"jukyo="+$(this).data().jukyo1
 					+"&"+"establishCode="+$(this).data().sanggakcode1
 					+"&"+"clientName="+$(this).data().clientname1
+					+"&"+"purchaseCode="+$(this).data().purchasecode1
 					+"&"+"assetCode="+$(this).data().assetcode1,
 					
 			success:function(data){

@@ -17,8 +17,8 @@
 				<input id="acquisitionDate" name="acquisitionDate" type="text" style="width: 200px;" id="acquisitionDate" >
 			<td> &nbsp;&nbsp;* 유형 : 
 				<select id ="purchaseCode" name="purchaseCode">
-								<option value="51" selected="selected">51 과세매입</option>
-								<option value="54" >54 불공</option>
+								<option value="과세메입" selected="selected">51 과세매입</option>
+								<option value="불공" >54 불공</option>
 				</select>
 			</td>
 			<td>  &nbsp;&nbsp;* 상각방법: 
@@ -30,10 +30,10 @@
 			<td colspan="2">&nbsp;&nbsp;취득금액(*)
 				<input type="text" id="acquisitionPrice" name="acquisitionPrice"></td> 
 			<td>
-				<button  id="insertBtn" name="insertBtn" class="btn btn-primary" >저장</button>
+				<button  id="insertBtn" name="insertBtn" class="btn btn-primary btn-sm">저장</button>
 			</td>	
 			<td>
-			<button class="btn btn-primary" onclick="fn_close();">닫기</button>
+			<button class="btn btn-primary btn-sm" onclick="fn_close();">닫기</button>
 			</td>
 		</tr>
 	</thead>

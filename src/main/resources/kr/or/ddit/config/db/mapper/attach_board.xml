@@ -65,6 +65,20 @@
 		 where attachCode = #{attachCode}
 	</delete>
 	
+	<select id="attachBoardFileList" resultType="attach_boardVo" parameterType="String">
+		select attachcode,
+			   attachname,
+			   attachrealpath,
+			   attachrealname,
+			   boardno
+			   
+		  from attach_board
+		
+		 where boardno = #{boardNo}
+		 order by attachCode desc
+	</select>
+	
+	
 </mapper>
 
 

@@ -24,8 +24,10 @@
 	        accumulated,
 	        serviceLife,
 	        depreciationRate,
+	        disposalDate,
+	        disposalPrice,
 	        jangbu
-	    FROM ASSET
+	    FROM asset
 	</select>
 	
 	<!--상세화면 조회하기   -->
@@ -54,20 +56,7 @@
 	    
 	</select>
 	
-	
-	<!-- 자산 추가하기 -->
-	<insert id="insertAsset" parameterType="assetVo">
-		INSERT overwrite  INTO ASSET
-        (ASSETCODE, ASSETNAME, ACQUISITIONDATE, ACCOUNTNAME, CLIENTNAME, SANGGAKWAY, acquisitionPrice, 
-          RESIDUALVALUE, JUKYO,sanggakCode,depreciation,purchaseCode,accumulated,serviceLife,depreciationRate)
-   		 VALUES
-        (#{assetCode},nvl(#{assetName, jdbcType=VARCHAR},null),#{acquisitionDate},#{accountName},
-         nvl(#{clientName, jdbcType=VARCHAR},null),#{sanggakWay},#{acquisitionPrice}
-        ,nvl(#{residualvalue, jdbcType=VARCHAR},null),nvl(#{jukyo, jdbcType=VARCHAR},null)
-        ,nvl(#{sanggakCode, jdbcType=VARCHAR},null),nvl(#{depreciation, jdbcType=VARCHAR},null)
-        ,nvl(#{purchaseCode, jdbcType=VARCHAR},null),nvl(#{accumulated, jdbcType=VARCHAR},null),#{serviceLife},#{depreciationRate})
-	</insert> 
-	
+	<!--전표코드, 날짜, 상각방법등 먼저 저장시키기  -->
 	<insert id="insertStatusAsset" parameterType="assetVo">              
      insert into asset
         (assetCode, acquisitionDate,sanggakWay, purchaseCode,acquisitionPrice) values
@@ -116,13 +105,21 @@
 		     where  assetCode = #{assetCode}
 	</update>
 	
-	<!--  삭제 -->
+	<!-- 삭제 -->
 	<delete id="deleteAsset" parameterType="map">
 		delete from asset
 		where assetCode = nvl(#{assetCode, jdbcType=VARCHAR},null)
 	</delete>
 	
-		<!--코드로 검색  -->
+	<!-- 매각 등록(수정으로 매각금액, 매각일 입력) -->
+	<insert id="updateDisposal" parameterType="assetVo">              
+    update asset set 
+  			disposalDate  = #{disposalDate},	
+		 	disposalPrice  = #{disposalPrice}
+		   where assetCode = #{assetCode}
+	</insert>	
+
+	<!--코드로 검색  -->
 	<select id="searchAsset" resultType="assetVo" parameterType="map">
 		select
 			ASSETCODE, 

@@ -21,7 +21,7 @@
 	<table class="table table-hover">
 		<tr>
 			<th>발주일(*)</th>
-			<td><input class="form-control bootTapText" name="dueDate"
+			<td><input class="form-control bootTapText dueDatePicker" name="dueDate" 
 				type='text' /></td>
 			<th>발주내역(*)</th>
 			<td><input class="form-control bootTapText" name="orderList"
@@ -31,32 +31,33 @@
 			<th>부서</th>
 			<td><input class="form-control bootTapText" name="deptCode"
 				type='text' readonly />
-				<button class="btn btn-default searchModal" value="0">
+				<button type="button" class="btn btn-default searchModal" value="0">
 					<i class="fa fa-search"></i>
 				</button></td>
 			<th>담당자</th>
 			<td><input class="form-control bootTapText" name="userId"
 				type='text' readonly />
-				<button class="btn btn-default searchModal" value="1">
+				<button type="button" class="btn btn-default searchModal" value="1">
 					<i class="fa fa-search"></i>
 				</button></td>
 		</tr>
 		<tr>
 			<th>거래처</th>
-			<td><input class="form-control bootTapText" name="clientname"
+			<td><input type="hidden" name="clientCode" />
+			<input class="form-control bootTapText" name="clientname"
 				type='text' readonly />
-				<button class="btn btn-default searchModal" value="2">
+				<button type="button" class="btn btn-default searchModal" value="2">
 					<i class="fa fa-search"></i>
 				</button></td>
 			<th>납기일</th>
-			<td><input class="form-control bootTapText"
-				name="paymentDueDate searchModal" id="dueDatePicker" readonly
+			<td><input class="form-control bootTapText dueDatePicker"
+				name="paymentDueDate" 
 				type='text' /></td>
 		</tr>
 	</table>
 </div>
 <div>
-	<button class="btn btn-default" id="addProduct">상품 주문</button>
+	<button type="button" class="btn btn-default" id="addProduct">상품 주문</button>
 </div>
 <div>
 	<table class="table table-hover">
@@ -76,7 +77,7 @@
 	</table>
 </div>
 <div>
-	<button class="btn btn-default">선택 삭제</button>
+	<button type="button" class="btn btn-default" id="delProductByCheck">선택 삭제</button>
 	<div style='float: right;'>
 		<label>공급가액</label> <input class="form-control bootTapText"
 			name="orderPrice" type='text' readonly /> <label>부가세</label> <input
@@ -134,7 +135,7 @@
 					<h3>상품 등록</h3>
 					<input type="text" class="search-query form-control"
 						id="searchProductText" placeholder="Search.." />
-					<button class="btn btn-default" id="searchProductBtn">
+					<button type="button" class="btn btn-default" id="searchProductBtn">
 						<i class="fa fa-search"></i>
 					</button>
 				</section>
@@ -163,6 +164,15 @@
 <script>
 
 $(document).ready(function(){
+	
+	$("#delProductByCheck").click(function(){
+		$("input[class=detailCheck]:checked").each(function(){
+			console.log($(this).parents('td').parents('tr'));
+			$(this).parents('td').parents('tr').remove();
+		});
+	});
+	
+	
 	
 	$("#searchProductBtn, #addProduct").click(function(){
 		$.ajax({
@@ -197,15 +207,17 @@ $(document).ready(function(){
 				}
 			});
 			if(check){
-				$("#dialogProductTbody").append("<tr>");
-				$("#dialogProductTbody").append("<td><input type=\'checkbox\' class=\'detailCheck\'></td>");
-					$("#dialogProductTbody").append("<td class=\'dialogPdcd\'>"+item.children('td').eq(0).html()+"</td>");
-				for (var i = 1; i < 3; i++) 
-					$("#dialogProductTbody").append("<td>"+item.children('td').eq(i).html()+"</td>");
-				$("#dialogProductTbody").append("<td>"+"<input type=\'text\' class=\'form-control quanText\' value=0 />"+"</td>");
-				$("#dialogProductTbody").append("<td class=\'baseprice\'>"+item.children('td').eq(3).html()+"</td>");
-				$("#dialogProductTbody").append("<td class=\'totalPrice\'>"+0+"</td>");
-				$("#dialogProductTbody").append("</tr>");
+				var temp;			
+				for (var i = 1; i < 3; i++) {
+					temp+="<td>"+item.children('td').eq(i).html()+"</td>";}
+				$("#dialogProductTbody").append("<tr>"
+				+"<td><input type=\'checkbox\' class=\'detailCheck\'></td>"
+				+"<td class=\'dialogPdcd\'>"+
+												"<input type=\'hidden\' name=\'productCode\' value="+
+													item.children('td').eq(0).html()+" />"+item.children('td').eq(0).html()+"</td>"
+				+temp+"<td>"+"<input name=\'quantity\' type=\'text\' class=\'form-control quanText\' value=0 />"+"</td>"
+				+"<td class=\'baseprice\'>"+item.children('td').eq(3).html()+"</td>"
+				+"<td class=\'totalPrice\'>"+0+"</td>");
 			}
 			numChange();
 			$("#myModal4").modal('hide');
@@ -214,9 +226,8 @@ $(document).ready(function(){
 	$("#addProduct").click(function(){
 		$("#myModal4").modal('show');
 	});
-	
 	surtaxChange();	
-	$("#dueDatePicker").datepicker({
+	$(".dueDatePicker").datepicker({
 			dateFormat: 'yy-mm-dd' //Input Display Format 변경
             ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
             ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
@@ -231,7 +242,7 @@ $(document).ready(function(){
             ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
             ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일']
 	});
-	$('#dueDatePicker').datepicker('setDate', 'today');
+	$('.dueDatePicker').datepicker('setDate', 'today');
 	$(".searchModal").click(function(index, item){
 		var check = $(this).val();
 		$.ajax({
@@ -285,6 +296,7 @@ function modalClickEvent(){
 				$('input[name=userId]').val($(this).find('td').eq(0).html());
 				break;
 			case 'selectClient':
+				$('input[name=clientCode]').val($(this).find('td').eq(0).html());
 				$('input[name=clientname]').val($(this).find('td').eq(1).html());
 				break;
 		}

@@ -47,7 +47,7 @@
 	   	<typeAlias  alias="surtaxVo" type="kr.or.ddit.tax_cal.model.SurtaxVo"/>
 	   	<typeAlias  alias="tax_calVo" type="kr.or.ddit.tax_cal.model.Tax_calVo"/>
 	   	<typeAlias  alias="pageVo" type="kr.or.ddit.util.model.PageVo"/>
-	   	
+	   	<typeAlias  alias="ScheduleVo" type="kr.or.ddit.schedule.model.ScheduleVo"/>
 	   	
     </typeAliases>
   <mappers>
@@ -94,5 +94,6 @@
   	<mapper resource="kr/or/ddit/config/db/mapper/surtax.xml"/>
   	<mapper resource="kr/or/ddit/config/db/mapper/tax_cal.xml"/>
   	<mapper resource="kr/or/ddit/config/db/mapper/warehouse.xml"/>
+  	<mapper resource="kr/or/ddit/config/db/mapper/schedule.xml"/>
   </mappers>
 </configuration>

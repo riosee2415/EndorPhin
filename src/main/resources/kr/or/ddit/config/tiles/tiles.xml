@@ -159,8 +159,8 @@
            <put-attribute name="content" value="/WEB-INF/views/asset/asset.jsp"/>
         </definition>
          
-         <definition name="sellAsset" extends="layout"><!--고정자산 매각-->
-        	<put-attribute name="content" value="/WEB-INF/views/asset/sellAsset.jsp"/>
+         <definition name="assetSell" extends="layout"><!--고정자산 매각-->
+        	<put-attribute name="content" value="/WEB-INF/views/assetSell/assetSell.jsp"/>
         </definition>
         
          <definition name="assetUsed" extends="layout"><!--감가상각비 입력-->
@@ -225,6 +225,13 @@
         <definition name="boardRead" extends="layout_groupware">
         	<put-attribute name="content" value="/WEB-INF/views/board/boardReadTest.jsp"/>
         </definition>
+        
+        
+        <definition name="scheduleTiles" extends="layout_groupware">
+        	<put-attribute name="content" value="/WEB-INF/views/schedule/scheduleList.jsp"/>
+        </definition>
+        
+        
         
           <definition name="psList" extends="layout">   <!-- 매입매출 -->
            <put-attribute name="content" value="/WEB-INF/views/ps/psList.jsp"/>

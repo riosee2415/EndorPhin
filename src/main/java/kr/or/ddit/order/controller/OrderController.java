@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.ddit.company.service.IDeptService;
@@ -96,4 +97,16 @@ public class OrderController {
 		return map;
 	}
 	
+	@RequestMapping(path="/insertOrder",method=RequestMethod.POST)
+	public String insertOrder(String[] quantity,String[] productCode,OrdersVo orderVo){
+		ordersService.updateAndInsertOrder(quantity, productCode, orderVo);
+		return "redirect:/orders/orderInput";
+	}
+	@RequestMapping(path="/deleteOrder",method=RequestMethod.POST)
+	public String deleteOrder(String[] orderCode){
+		for (int i = 0; i < orderCode.length; i++) {
+			ordersService.deleteOrders(orderCode[i]);
+		}
+		return "redirect:/orders/orderInput";
+	}
 }

@@ -7,14 +7,14 @@
 <div class="row">
 	<div class="col-md-1"></div>
 	<div class="col-md-10">
-		<h2><i class="fa fa-calculator"></i>고정자산 등록</h2>	
+		<h3><i class="fa fa-calculator"></i>고정자산 등록</h3>	
 		<table class="table table-hover">
 			<thead class="thead">
 			</thead>
 				<tr>
-					<td> 고정자산등록코드
-					<input  name="assetCodeS" id="assetCodeS"  onkeydown="Enter_Check();" /> &nbsp
-					<input type="button" id="seachBtn" value="검색" class="bttn-fill bttn-md bttn-warning" /></td>
+					<td><label>고정자산등록코드</label> 
+					<input class="form-control-xm" style="width: 250px;" name="assetCodeS" id="assetCodeS"  onkeydown="Enter_Check();" /> &nbsp
+					<input type="button" id="seachBtn" value="검색" class="bttn-fill bttn-md bttn-warning " /></td>
 				</tr>
 		</table>
 		<table class="table table-striped">

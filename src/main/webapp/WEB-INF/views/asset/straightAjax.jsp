@@ -130,9 +130,9 @@
     <script>
     
 
-    /* depreciation 정액법 = (취득원가 - 잔존가치)/ 내용년수  */
+    /* depreciation 정액법 = (취득원가 - 잔존가치)/ 내용연수  */
     $(".classTr").on("click", function(){
-		var data = $(this).data("value"); /* 내용년수  */
+		var data = $(this).data("value"); /* 내용연수  */
 		var cal  = 1/parseInt(data);     
 		var fixed = cal.toFixed(3);
 		

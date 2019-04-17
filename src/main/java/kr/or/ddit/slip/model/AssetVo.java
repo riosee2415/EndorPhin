@@ -8,22 +8,22 @@ import java.util.Date;
  *
  */
 public class AssetVo {
-	String assetCode; // 자산코드 =
-	String assetName; // 자산명 =
-	Date acquisitionDate; // 취득일 =
-	String accountName; // 계정명 =
-	String clientName; // 거래처명 =
-	String sanggakWay; // 상각방법 =
-	String acquisitionPrice; // 취득금액 =
+	String assetCode; // 자산코드 
+	String assetName; // 자산명 
+	Date acquisitionDate; // 취득일 
+	String accountName; // 계정명 
+	String clientName; // 거래처명 
+	String sanggakWay; // 상각방법 
+	String acquisitionPrice; // 취득금액 
 	String slipNumber; // 전표번호
-	String residualvalue; // 잔존가치 =
-	String jukyo; // 적요 =
-	String companyCode;// 회사코드
-	String sanggakCode; // 감가상각계정코드 =
-	String depreciation; // 감가상각비
-	String purchaseCode; // 업무용, 업무무관코드
-	String accumulated; // 감가상각 누계액
-	String serviceLife; //내용연수 
+	String residualvalue; // 잔존가치 
+	String jukyo; 		// 적요 
+	String companyCode;		// 회사코드
+	String sanggakCode; 	// 감가상각계정코드 
+	String depreciation; 	// 감가상각비
+	String purchaseCode;	 // 업무용, 업무무관코드
+	String accumulated;		 // 감가상각 누계액
+	String serviceLife;		 //내용연수 
 	String depreciationRate; // 상각률
 	String jangbu; //매입매출 장부반영
 	Date disposalDate;//매각 날짜 

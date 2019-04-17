@@ -5,6 +5,8 @@
 <html>
 
 <head>
+
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>board</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -46,8 +48,15 @@
 	overflow: hidden; text-overflow: ellipsis;
 }
 
-</style>
+a {
+	color: black !important;
+	text-decoration: none;
+	outline: none
+}
 
+
+</style>
+                
 <body>
     <div class="row">
         <div class="col-md-1"></div>
@@ -98,7 +107,9 @@
                         <th>등록일</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style="color: black !important">
+                
+                
                     <c:forEach var="listview" items="${postList}">
                         <tr>
                             <td>${listview.boardNo}</td>

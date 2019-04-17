@@ -46,6 +46,18 @@
 			AND SLIPDETAILNO = #{slipDetailNo}
 	</delete>
 	
+	<!-- 자산 계정과목 구하기 -->
+	<select id="selectAssetData" resultType="slip_detailVo" parameterType="map">
+		SELECT 
+		    a.STATUS,
+		    a.PRICE,
+		    a.ESTABLISHCODE
+		FROM SLIP_DETAIL a, SLIP b
+		WHERE a.slipnumber = b.slipnumber
+		AND a.ESTABLISHCODE BETWEEN 101 AND 250
+		AND b.SLIPDATE  <![CDATA[ <= ]]>  LAST_DAY(to_date(#{chooseYear} || '/' || #{chooseMonth}, 'yyyy-mm'))
+	</select>
+	
 	
 	
 </mapper>

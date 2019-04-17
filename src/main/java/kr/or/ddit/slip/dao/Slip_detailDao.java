@@ -92,6 +92,17 @@ public class Slip_detailDao implements ISlip_detailDao{
 		
 		return sqlSessionTemplate.delete("slipdetail.deleteSlip_detail_one", map);
 	}
+
+
+	@Override
+	public List<Slip_detailVo> selectAssetData(String chooseYear, String chooseMonth) {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("chooseYear", chooseYear);
+		map.put("chooseMonth", chooseMonth);
+		
+		return sqlSessionTemplate.selectList("slipdetail.selectAssetData", map);
+	}
 	
 	
 	

@@ -77,4 +77,10 @@ public class Slip_detailService implements ISlip_detailService{
 		return slip_detailDao.deleteSlip_detail_one(slipNumber, slipDetailNo);
 	}
 
+
+	@Override
+	public List<Slip_detailVo> selectAssetData(String chooseYear, String chooseMonth) {
+		return slip_detailDao.selectAssetData(chooseYear, chooseMonth);
+	}
+
 }

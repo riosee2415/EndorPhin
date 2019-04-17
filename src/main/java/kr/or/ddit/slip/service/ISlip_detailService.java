@@ -63,4 +63,22 @@ public interface ISlip_detailService {
 	* Method 설명 : 전표번호, 전표상세번호로 전표 하나 삭제하기
 	*/
 	public int deleteSlip_detail_one(String slipNumber, String slipDetailNo);
+	
+	
+	/**
+	* Method : selectAssetData
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param chooseYear
+	* @param chooseMonth
+	* @return
+	* Method 설명 : 자산 불러오기
+	*/
+	public List<Slip_detailVo> selectAssetData(String chooseYear, String chooseMonth);
+	
+	
+	
+	
 }
+
+

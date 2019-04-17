@@ -4,6 +4,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
+<style>
+
+
+a {
+	color: black !important;
+	text-decoration: none;
+	outline: none
+}
+
+</style>
+
+
+
 <h1 class="page-header">게시글 상세화면</h1>
 <form id="frm" class="form-horizontal" role="form" enctype="multipart/form-data">
 

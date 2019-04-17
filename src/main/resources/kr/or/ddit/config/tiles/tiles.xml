@@ -226,14 +226,28 @@
         	<put-attribute name="content" value="/WEB-INF/views/board/boardReadTest.jsp"/>
         </definition>
         
+        
+        <definition name="scheduleTiles" extends="layout_groupware">
+        	<put-attribute name="content" value="/WEB-INF/views/schedule/scheduleList.jsp"/>
+        </definition>
+        
+        
+        
           <definition name="psList" extends="layout">   <!-- 매입매출 -->
            <put-attribute name="content" value="/WEB-INF/views/ps/psList.jsp"/>
         </definition>
         
+<<<<<<< HEAD
        
          <definition name="document" extends="layout_groupware">    <!--그룹웨어 - 기안상신함 -->
            <put-attribute name="content" value="/WEB-INF/views/document/document.jsp"/>
         </definition>
+=======
+        <definition name="sumChance" extends="layout">   <!-- 합계잔액 -->
+		<put-attribute name="content"
+			value="/WEB-INF/views/ps/sumChance.jsp" />
+		</definition>
+>>>>>>> refs/remotes/origin/master
         
         
 </tiles-definitions>

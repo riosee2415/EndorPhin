@@ -57,7 +57,7 @@
 						<ul class="sub-menu">
 							<li><a href="${pageContext.request.contextPath }/psList">매입매출장</a></li>
 							<li><a
-								href="${pageContext.request.contextPath }/purchaseAsset">합계잔액시산표</a></li>
+								href="${pageContext.request.contextPath }/sumChance">합계잔액시산표</a></li>
 							<li><a
 								href="${pageContext.request.contextPath }/purchaseAsset">재무상태표</a></li>
 							<li><a

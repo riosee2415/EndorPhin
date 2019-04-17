@@ -61,6 +61,25 @@ to {
 <!-- 차트 js 종료 -->
 
 
+
+
+<!-- 달력API 시작 -->
+
+<link href='/resources/packages/core/main.css' rel='stylesheet' />
+<link href='/resources/packages/daygrid/main.css' rel='stylesheet' />
+<link href='/resources/packages/timegrid/main.css' rel='stylesheet' />
+<link href='/resources/packages/list/main.css' rel='stylesheet' />
+
+
+<script src='/resources/packages/core/main.js'></script>
+<script src='/resources/packages/interaction/main.js'></script>
+<script src='/resources/packages/daygrid/main.js'></script>
+<script src='/resources/packages/timegrid/main.js'></script>
+<script src='/resources/packages/list/main.js'></script>
+
+<!-- 달력API 종료 -->
+
+
 <!-- Acoount Part Basic Style -->
 <link type="text/css"
 	href="${pageContext.request.contextPath }/css/accountBasic.css"

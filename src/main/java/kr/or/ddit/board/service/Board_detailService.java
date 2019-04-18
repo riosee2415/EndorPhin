@@ -191,13 +191,19 @@ public class Board_detailService implements IBoard_detailService{
 	 */
 	@Override
 	public int insertBoard(Board_detailVo param, List<Attach_boardVo> attachList) {
-		int attachCnt= 0;
 		int insertBoard = board_detailDao.insertBoard(param);
-		for (Attach_boardVo attach : attachList) {
-			attach_boardDao.attachInsert(attach);
-			attachCnt++;
+		
+		if(insertBoard == 0){
+			return insertBoard;
 		}
-		return insertBoard + attachCnt;
+		for (Attach_boardVo attach : attachList) {
+			attach.setBoardNo(param.getBoardNo());
+			insertBoard = attach_boardDao.attachInsert(attach);
+			if(insertBoard == 0) {
+				return insertBoard;
+			}
+		}
+		return insertBoard;
 	}
 
 	/**
@@ -225,14 +231,34 @@ public class Board_detailService implements IBoard_detailService{
 	* Method 설명 : 게시글 수정
 	 */
 	@Override
-	public int updateBoard(Board_detailVo param, List<Attach_boardVo> attachList) {
-		int attachCnt = 0;
+	public int updateBoard(Board_detailVo param, List<Attach_boardVo> attachList, String[] removeList) {
 		int updateBoard = board_detailDao.updateBoard(param);
-		for (Attach_boardVo attach : attachList) {
-			attach_boardDao.attachUpdate(attach);
-			attachCnt++;
+		
+		if(updateBoard == 0){
+			return updateBoard;
 		}
-		return updateBoard + attachCnt;
+		if(attachList !=null){
+			for (Attach_boardVo attach : attachList) {
+				attach.setBoardNo(param.getBoardNo());
+				updateBoard = attach_boardDao.attachInsert(attach);
+				
+				if(updateBoard == 0) {
+					return updateBoard;
+				}
+			}
+		}
+		
+		if(removeList != null) {
+			for(String attachCode : removeList) {
+				updateBoard = attach_boardDao.attach_boardDelete(attachCode);
+				
+				if(updateBoard == 0) {
+					return updateBoard;
+				}
+			}
+		}
+		
+		return updateBoard;
 	}
 
 	/**

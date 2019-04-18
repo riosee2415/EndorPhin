@@ -119,7 +119,7 @@ public interface IBoard_detailService {
 	* @return
 	* Method 설명 : 게시글 수정
 	 */
-	int updateBoard(Board_detailVo param, List<Attach_boardVo> attachList);
+	int updateBoard(Board_detailVo param, List<Attach_boardVo> attachList, String[] removeList);
 	
 	/**
 	 * 

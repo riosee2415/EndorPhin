@@ -134,7 +134,7 @@ public class boardCtr {
 	 */
 	@RequestMapping(value = "/boardSave")
 	public String boardSave(@ModelAttribute Board_detailVo boardInfo, HttpServletRequest request
-					, String boardTypeCode,String attachCode, Model model, MultipartRequest multipart) throws Exception {
+					, String boardTypeCode,String attachCode, Model model, MultipartRequest multipart, String[] removeList) throws Exception {
 		HttpSession session = request.getSession();
 		EmployeeVo employeeVo = (EmployeeVo) session.getAttribute("employeeVo");
 		boardInfo.setUserId(employeeVo.getUserId());
@@ -142,22 +142,17 @@ public class boardCtr {
 			List<Attach_boardVo> attachList =  new ArrayList<Attach_boardVo>();
 			List<MultipartFile> attachFiles = multipart.getFiles("attachFile");
 			
-			String attachName = "";
-			String attachRealname = "";
-			String attachRealpath = "";
 			
-			for (MultipartFile multipartFile : attachFiles) {
-				
-					if(!multipartFile.getName().equals("attachFile")){
-						continue;
-				}
+		for (MultipartFile multipartFile : attachFiles) {
+			
+			if(multipartFile.getSize() > 0){
 				
 				ServletContext application = session.getServletContext();
 				String path = application.getRealPath("/upload");
 				
-				attachName = multipartFile.getOriginalFilename();
-				attachRealname = path + File.separator + UUID.randomUUID().toString();
-				attachRealpath = path;
+				String attachName = multipartFile.getOriginalFilename();
+				String attachRealname = path + File.separator + UUID.randomUUID().toString();
+				String attachRealpath = path;
 					
 				ServletContext app = session.getServletContext();
 				String filepath = app.getRealPath("/upload");
@@ -166,64 +161,54 @@ public class boardCtr {
 				attachRealname = filepath + File.separator + UUID.randomUUID().toString();
 				attachRealpath = filepath;
 				
-				if (multipartFile.getSize() > 0 ) {
-					
-					multipartFile.transferTo(new File(attachRealname));
-					
-					Attach_boardVo attachVo = new Attach_boardVo();
-					attachVo.setAttachName(attachName);
-					attachVo.setAttachRealname(attachRealname);
-					attachVo.setAttachRealpath(attachRealpath);
-					
-					attachList.add(attachVo);
-				}
+				multipartFile.transferTo(new File(attachRealname));
+				
+				Attach_boardVo attachVo = new Attach_boardVo();
+				attachVo.setAttachName(attachName);
+				attachVo.setAttachRealname(attachRealname);
+				attachVo.setAttachRealpath(attachRealpath);
+				
+				attachList.add(attachVo);
 			}
+		}
 			board_detailService.insertBoard(boardInfo, attachList);
 			model.addAttribute("boardTypeCode", boardTypeCode);
+			
 		} else {
-			if(attachCode != null){
-				attach_boardService.attach_boardDelete(attachCode);
-			}
 			
-			List<Attach_boardVo> attachList =  new ArrayList<>();
+			List<Attach_boardVo> attachList = new ArrayList<>();
 			List<MultipartFile> attachFile = multipart.getFiles("attachFile");
-			
-			String attachName = "";
-			String attachRealname = "";
-			String attachRealpath = "";
-			
+
 			for (MultipartFile multipartFile : attachFile) {
-				
-				if(!multipartFile.getName().equals("attachFile")){
-					continue;
-				}
-				ServletContext application = request.getServletContext();
-				String path = application.getRealPath("/upload");
-				
-				attachName = multipartFile.getOriginalFilename();
-				attachRealname = UPLOAD_PATH + File.separator + UUID.randomUUID().toString();
-				attachRealpath = path;
-				
-				if (multipartFile.getSize() > 0 ) {
-					
+
+				if (multipartFile.getSize() > 0) {
+					ServletContext application = request.getServletContext();
+					String path = application.getRealPath("/upload");
+
+					String attachName = multipartFile.getOriginalFilename();
+					String attachRealname = UPLOAD_PATH + File.separator + UUID.randomUUID().toString();
+					String attachRealpath = path;
+
 					multipartFile.transferTo(new File(attachRealname));
-					
+
 					Attach_boardVo attachVo = new Attach_boardVo();
 					attachVo.setAttachCode(attachCode);
 					attachVo.setAttachName(attachName);
 					attachVo.setAttachRealname(path + File.separator + attachRealname);
 					attachVo.setAttachRealpath(attachRealpath);
-					
+
 					attachList.add(attachVo);
+
+					model.addAttribute("boardTypeCode", boardTypeCode);
 				}
 			}
 			
-			board_detailService.updateBoard(boardInfo, attachList);
+			board_detailService.updateBoard(boardInfo, attachList, removeList);
 			model.addAttribute("boardTypeCode", boardTypeCode);
+			return "redirect:/boardList";
 		}
-		
 		model.addAttribute("boardTypeCode", boardTypeCode);
-	    return "redirect:/boardList";
+		return "redirect:/boardList";
 	}
 	
 	/**

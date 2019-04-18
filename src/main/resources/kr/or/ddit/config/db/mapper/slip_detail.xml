@@ -228,10 +228,10 @@
 	
 	<select id="selectSumChance" resultType="sumchanceVo" parameterType="map">
 	SELECT
-     establishcode,
-      debit,
-      credit,
-      debit-credit OperatorValue
+      a.establishcode as establishCode,
+      a.debit as debit,
+      a.credit as credit,
+      b.ESTABLISHNAMEKOR as establishName
     FROM
     (SELECT 
     establishcode,
@@ -244,9 +244,10 @@
                 a.ESTABLISHCODE
             FROM SLIP_DETAIL a, SLIP b
             WHERE a.slipnumber = b.slipnumber
-            AND b.SLIPDATE  <![CDATA[ <= ]]>  LAST_DAY(to_date(#{chooseYear} || '/' || #{chooseMonth}, 'yyyy-mm'))
+           AND b.SLIPDATE  <![CDATA[ <= ]]>  LAST_DAY(to_date(#{chooseYear} || '/' || #{chooseMonth}, 'yyyy-mm'))
             group by a.establishcode, a.status)
-	group by establishcode)
+	group by establishcode) a, establish b
+	WHERE a.establishcode = b.establishcode
 	order by establishcode
 		
 	</select>

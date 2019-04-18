@@ -7,7 +7,7 @@
 	<div class="col-md-10">
 	
 	<h2>
-			<i class="fa fa-calculator"></i>합계잔액시산표1
+			<i class="fa fa-calculator"></i>합계잔액시산표
 		</h2>
 		
 		

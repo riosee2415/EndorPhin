@@ -34,9 +34,17 @@ public interface IScheduleService {
 	* @return
 	* Method 설명 : 스케줄이력 삭제
 	*/
-	int deleteSchedule(ScheduleVo code);
+	int deleteSchedule(String code);
 	
-	
+	/**
+	* Method : deleteAttitude
+	* 작성자 : leemjaewoo
+	* 변경이력 :
+	* @param userId
+	* @return
+	* Method 설명 : 스케줄이력 수정
+	*/
+	int modifySchedule(ScheduleVo code);
 	
 	
 	

@@ -24,36 +24,22 @@ public class ScheduleController {
 	@Resource(name="scheduleService")
 	IScheduleService scheduleService;
 	
-	
-	
-	
 	@RequestMapping(path = "/view", method = RequestMethod.GET)
 	public String getAllEmployee() {
-		
-		
 		return "scheduleTiles";
 	}
-	
 	
 	@RequestMapping(path = "/getAllSchedule", method = RequestMethod.GET)
 	@ResponseBody
 	public List<ScheduleVo> getAllSchedule() {
-		
-		
 		List<ScheduleVo> allSchedule = scheduleService.getAllSchedule();
-		
 		
 		return allSchedule;
 	}
-	
-	
-	
-	
 
-	
 	@RequestMapping(path="/scheduleInsertAjax", method=RequestMethod.GET)
 	@ResponseBody
-	public String scheduleInsertAjax(String title, String start,String end,String allDay) {
+	public List<ScheduleVo> scheduleInsertAjax(String title, String start,String end,String allDay) {
 		
 		
 		if(title != null && start != null && end != null){
@@ -65,12 +51,27 @@ public class ScheduleController {
 		}
 		
 		
-		return "redirect:/view/getAllSchedule";
+		return getAllSchedule();
 	}
 	
 	
+	@RequestMapping(path="/scheduleDeleteAjax", method=RequestMethod.GET)
+	@ResponseBody
+	public List<ScheduleVo> scheduleDeleteAjax(String scNo) {
+		
+		scheduleService.deleteSchedule(scNo);
+		
+		return getAllSchedule();
+	}
 	
 	
+	@RequestMapping(path="/scheduleUpdateAjax", method=RequestMethod.GET)
+	@ResponseBody
+	public List<ScheduleVo> scheduleUpdateAjax(ScheduleVo vo) {
+		scheduleService.modifySchedule(vo);
+		
+		return getAllSchedule();
+	}
 	
 	
 }

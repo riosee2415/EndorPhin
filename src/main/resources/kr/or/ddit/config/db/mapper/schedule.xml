@@ -9,7 +9,7 @@
 		insert into schedule
 		(schedule_no, schedule_title, schedule_start, schedule_end)
 		values
-		(schedule_seq.nextval,#{schedule_title},to_date(#{schedule_start},'yyyy-mm-dd'),to_date(#{schedule_end},'yyyy-mm-dd')-1)
+		(schedule_seq.nextval,#{schedule_title},to_date(#{schedule_start},'yyyy-mm-dd'),to_date(#{schedule_end},'yyyy-mm-dd'))
 	</insert>
 
 	
@@ -20,38 +20,22 @@
 	</select>
 
 
+
+	<delete id="deleteSchedule" parameterType="String">
+		delete from schedule
+		where schedule_no = #{schedule_no}
+	</delete>  
 	
- 	<!-- 전표상세 수정하기 -->
-	<!-- <update id="updateSales_detail" parameterType="sales_detailVo">
-		update sales_detail
-		set	ESTABLISHCODE = #{establishCode}, 
-			JUKYO = #{jukyo}, 
-			PRICE = #{price}, 
-			STATUS = #{status}
-		WHERE SALESDETAILCODE=#{salesDetailCode}
-		
-	</update>
-
-
 	
-
-
-	매입매출  선택하여 가져오기
-	<select id="selectSales_detail" resultType="sales_detailVo"
-		parameterType="String">
-		select
-		salesDetailCode, status, price, establishCode, salesCode, jukyo
-		from
-		sales_detail
-		where salesCode = #{salesCode}
-	</select>
-
-
-	매입매출상세  삭제
-	<delete id="deleteSales_detail" parameterType="String">
-		delete from sales_detail
-		where salesCode = #{salesCode}
-	</delete>  -->
+			<update id="updateSchedule" parameterType="scheduleVo">
+			update schedule set
+			schedule_title = nvl(#{schedule_title,jdbcType=VARCHAR},schedule_title),
+			schedule_start = nvl(#{schedule_start,jdbcType=VARCHAR},schedule_start),
+			<if test="schedule_end != null">
+			schedule_end = to_date(#{schedule_end},'yyyy-mm-dd')
+			</if>
+			where schedule_no=#{schedule_no}
+			</update>
 
 </mapper>
 

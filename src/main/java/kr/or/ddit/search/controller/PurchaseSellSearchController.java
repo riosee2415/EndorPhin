@@ -19,6 +19,7 @@ import kr.or.ddit.slip.model.Slip_detailVo;
 import kr.or.ddit.slip.service.ISlip_detailService;
 import kr.or.ddit.tax_cal.model.Tax_calVo;
 import kr.or.ddit.tax_cal.service.ITax_calService;
+import kr.or.ddit.util.model.SumChanceVo;
 
 @Controller
 public class PurchaseSellSearchController {
@@ -90,8 +91,6 @@ public class PurchaseSellSearchController {
 								,	@RequestParam("month")String month
 								,	Model model) {
 		
-		logger.debug("year : {}", year);
-		logger.debug("month : {}", month);
 		
 		List<Slip_detailVo> list = slip_detailService.selectAssetData(year, month);
 		
@@ -99,6 +98,81 @@ public class PurchaseSellSearchController {
 		
 		return "ps/sum_asset";
 	}
+	
+	
+	// 부채 불러오기
+	@RequestMapping("/callObligationData")
+	public String callObligationData(	@RequestParam("year")String year
+								,	@RequestParam("month")String month
+								,	Model model) {
+		
+		
+		List<Slip_detailVo> list = slip_detailService.selectObligationData(year, month);
+		
+		model.addAttribute("list", list);
+		
+		return "ps/sum_obligation";
+	}
+		
+		
+	// 자본 불러오기
+	@RequestMapping("/callCapitalData")
+	public String callCapitalData(	@RequestParam("year")String year
+								,	@RequestParam("month")String month
+								,	Model model) {
+		
+		List<Slip_detailVo> list = slip_detailService.selectCapitalData(year, month);
+		
+		model.addAttribute("list", list);
+		
+		return "ps/sum_capital";
+	}
+			
+			
+			
+	// 비용 불러오기
+	@RequestMapping("/callCostData")
+	public String callCostData(	@RequestParam("year")String year
+								,	@RequestParam("month")String month
+								,	Model model) {
+		
+		List<Slip_detailVo> list = slip_detailService.selectCostlData(year, month);
+		
+		model.addAttribute("list", list);
+		
+		return "ps/sum_cost";
+	}
+				
+				
+	// 수익 불러오기
+	@RequestMapping("/callRevenueData")
+	public String callRevenueData(	@RequestParam("year")String year
+								,	@RequestParam("month")String month
+								,	Model model) {
+		
+		List<Slip_detailVo> list = slip_detailService.selectRevenuelData(year, month);
+		
+		model.addAttribute("list", list);
+		
+		return "ps/sum_revenue";
+	}
+	
+	
+		
+	// 수익 불러오기
+	@RequestMapping("/selectSumChance")
+	public String selectSumChance(	@RequestParam("year")String year
+								,	@RequestParam("month")String month
+								,	Model model) {
+	
+	List<SumChanceVo> list = slip_detailService.selectSumChanceData(year, month);
+	
+	model.addAttribute("list", list);
+	
+	return "ps/sum_view";
+	}
+	
+	
 	
 
 }

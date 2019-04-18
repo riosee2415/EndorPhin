@@ -9,7 +9,6 @@ public class PageVo {
 	String startDate;
 	String endDate;
 	
-	
 	public String getStartDate() {
 		return startDate;
 	}
@@ -42,10 +41,15 @@ public class PageVo {
 	public void setBoardTypeCode(String boardTypeCode) {
 		this.boardTypeCode = boardTypeCode;
 	}
+	
+	
 	@Override
 	public String toString() {
-		return "PageVo [page=" + page + ", pageSize=" + pageSize + ", boardTypeCode=" + boardTypeCode + "]";
+		return "PageVo [page=" + page + ", pageSize=" + pageSize + ", boardTypeCode=" + boardTypeCode + ", startDate="
+				+ startDate + ", endDate=" + endDate + "]";
 	}
+	
+	
 	
 	
 }

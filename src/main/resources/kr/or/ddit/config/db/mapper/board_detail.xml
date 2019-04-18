@@ -220,6 +220,45 @@
 		and #{endDate}
     	and #{searchType} like '%' || #{keyword} || '%'
     </sql>
+    
+    
+    
+    
+    <select id="postSearch" resultType="board_detailVo" parameterType="board_detailVo">
+          select boardNo, title, contents, postDate, boardTypeCode, userId
+		  from
+				(select a.boardNo boardNo, 
+				        a.title title, 
+				        a.contents contents, 
+				        to_char(a.postDate,'yyyy-MM-dd') postDate, 
+				        a.boardTypeCode boardTypeCode, 
+				        a.userId userId, rownum rn
+				    from
+				    (select boardNo, 
+				    		title, 
+				    		contents, 
+				    		postDate, 
+				    		boardTypeCode, 
+				    		userId
+				       from board_detail
+				      where boardTypeCode = '5'
+				      order by boardNo desc) a ) a
+ 		 where rn between (#{page}-1) * #{pageSize}+1 and #{page}*#{pageSize}
+ 		 <if test="title != null">
+         and title like '%' || #{title} || '%'
+         </if>
+         <if test="contents != null">
+         and contents like '%' || #{contents} || '%'
+         </if>
+          <if test="userId != null">
+         and userid like '%' || #{userId} || '%'
+         </if>
+          <if test="startDate != null and endDate != null">
+         and postDate between #{startDate}
+		 and #{endDate}
+   		 </if>
+   
+    </select>
 </mapper>
 
 

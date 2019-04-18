@@ -76,4 +76,9 @@ public class Tax_calService implements ITax_calService{
 		return tax_calDao.searchAllByType51(searchData2);
 	}
 
+	@Override
+	public List<Map<String, String>> selectBy51() {
+		return tax_calDao.selectBy51();
+	}
+
 }

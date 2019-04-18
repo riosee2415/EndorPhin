@@ -25,9 +25,14 @@ public class ScheduleService implements IScheduleService{
 	}
 
 	@Override
-	public int deleteSchedule(ScheduleVo code) {
+	public int deleteSchedule(String code) {
 		return scheduleDao.deleteSchedule(code);
 		
+	}
+
+	@Override
+	public int modifySchedule(ScheduleVo code) {
+		return scheduleDao.modifySchedule(code);
 	}
 
 }

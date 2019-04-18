@@ -213,4 +213,15 @@ public interface IBoard_detailService {
 	* Method 설명 : 첨부파일 리스트 조회
 	 */
 	public List<Attach_boardVo> selectBoardFileList(String boardNo);
+	/**
+	 * 
+	* Method : selectBoardFileList
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardNo
+	* @return
+	* Method 설명 : 글 검색
+	 */
+	public List<Board_detailVo> SearchPostList(Board_detailVo vo);
+	
 }

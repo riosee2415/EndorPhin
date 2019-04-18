@@ -64,7 +64,7 @@
 								href="${pageContext.request.contextPath }/purchaseAsset">손익계산서</a></li>
 						</ul></li>
 					<li><a
-						href="${pageContext.request.contextPath }/purchaseAsset">부가세신고서</a>
+						href="${pageContext.request.contextPath }/tax_report">부가세신고서</a>
 					</li>
 				</ul></li>
 			<li class="parent"><a href="#">인사</a>

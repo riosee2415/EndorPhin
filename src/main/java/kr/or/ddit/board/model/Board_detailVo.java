@@ -4,18 +4,20 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.ddit.util.model.PageVo;
+
 /**
  * 
  * @author sanghoyun
  *
  */
-public class Board_detailVo {	//게시글
+public class Board_detailVo extends PageVo{	//게시글
 	
 	String boardNo;				//게시글 번호
 	String title;				//제목
 	String contents;			//내용
 	String postDate;				//작성일시
-	String boardTypeCode;		//게시판 분류 코드
+	String boardTypeCode;		//게시판 분류 코
 	String userId;				//작성자
 	
 	String startDate;

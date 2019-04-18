@@ -42,6 +42,26 @@ public class ScheduleServiceTest extends LogicConfig{
 		
 	}
 	
+	
+	@Test
+	public void deleteScheduleTest() {
+		
+		
+		scheduleService.deleteSchedule("32");
+		
+	}
+	@Test
+	public void modifyScheduleTest() {
+		ScheduleVo vo = new ScheduleVo();
+		vo.setSchedule_no("33");
+		vo.setSchedule_title("수정2");
+		vo.setSchedule_start("2019-07-07");
+		vo.setSchedule_end("2019-07-07");
+		
+		scheduleService.modifySchedule(vo);
+		
+	}
+	
 
 	
 	

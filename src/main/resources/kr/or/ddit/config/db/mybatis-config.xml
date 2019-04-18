@@ -48,6 +48,7 @@
 	   	<typeAlias  alias="tax_calVo" type="kr.or.ddit.tax_cal.model.Tax_calVo"/>
 	   	<typeAlias  alias="pageVo" type="kr.or.ddit.util.model.PageVo"/>
 	   	<typeAlias  alias="ScheduleVo" type="kr.or.ddit.schedule.model.ScheduleVo"/>
+	   	<typeAlias  alias="sumchanceVo" type="kr.or.ddit.util.model.SumChanceVo"/>
 	   	
     </typeAliases>
   <mappers>

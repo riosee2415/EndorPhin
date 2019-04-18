@@ -58,10 +58,10 @@ to {
 <link
 	href="${pageContext.request.contextPath}/resources/js/Chart.StackedBar.js"
 	rel="stylesheet" type="text/css">
+	<link
+	href="${pageContext.request.contextPath}/resources/js/jquery.twbsPagination.js"
+	rel="stylesheet" type="text/css">
 <!-- 차트 js 종료 -->
-
-
-
 
 <!-- 달력API 시작 -->
 
@@ -80,6 +80,14 @@ to {
 <!-- 달력API 종료 -->
 
 
+<link href="${pageContext.request.contextPath}/css/dashboard.css"
+	rel="stylesheet">
+	<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+
+
+
 <!-- Acoount Part Basic Style -->
 <link type="text/css"
 	href="${pageContext.request.contextPath }/css/accountBasic.css"
@@ -88,7 +96,7 @@ to {
 <!-- dialog style -->
 <link href="${pageContext.request.contextPath}/css/dialog.css"
 	rel="stylesheet">
-
+	
 <!-- Custom fonts for this template-->
 <link
 	href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css"

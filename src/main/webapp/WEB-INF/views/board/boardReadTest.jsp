@@ -69,8 +69,8 @@ a {
                 <div style="border: 1px solid gray; width: 600px; padding: 5px; margin-top: 5px;">
                     <c:out value="${replylist.commentUser}" />
                     <fmt:formatDate value="${replylist.commentDate}" pattern="yyyy-MM-dd HH:mm:ss" />
-                    <a href="#" onclick="fn_replyDelete('<c:out value=" ${replylist.commentNo}" />')">삭제</a>
-                    <a href="#" onclick="fn_replyUpdate('<c:out value=" ${replylist.commentNo}" />')">수정</a>
+                    <a href="#" onclick="fn_replyDelete('<c:out value=" ${replylist.commentNo}" />')"><button class="bttn-jelly bttn-warning">삭제</button></a>
+                    <a href="#" onclick="fn_replyUpdate('<c:out value=" ${replylist.commentNo}" />')"><button class="bttn-jelly bttn-warning">수정</button></a>
                     <br />
                     <div id="reply<c:out value=" ${replylist.commentNo}" />">
                     <c:out value="${replylist.commentContents}" />

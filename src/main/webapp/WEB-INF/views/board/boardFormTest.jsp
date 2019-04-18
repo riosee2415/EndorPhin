@@ -53,7 +53,7 @@
 <!--                 	</p> -->
 <!--                 </div> -->
                 <br>
-                <a href="#this" class="btn" id="addFile">파일 추가</a>
+<!--                 <a href="#this" class="btn" id="addFile">파일 추가</a> -->
                 <a href="#" onclick="fn_formSubmit()"><button class="bttn-jelly bttn-warning">저장</button></a>
                 <input type="hidden" name="boardTypeCode" value="${boardTypeCode}">
                 <input type="hidden" name="boardNo" value="${boardInfo.boardNo}">

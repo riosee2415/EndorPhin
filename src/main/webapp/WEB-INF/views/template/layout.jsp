@@ -153,6 +153,20 @@ to {
 
 
 
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="favicon.ico" />
+
+<!-- jQuery -->
+<!-- <script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.min.js"></script>-->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+
+<script src="/SE2/js/HuskyEZCreator.js"></script>
+
+
 <style>
 .cont {
 	background-color: #F5F4F0;

@@ -47,16 +47,210 @@
 	</delete>
 	
 	<!-- 자산 계정과목 구하기 -->
-	<select id="selectAssetData" resultType="slip_detailVo" parameterType="map">
+	<select id="selectAssetDataLeft" resultType="slip_detailVo" parameterType="map">
 		SELECT 
-		    a.STATUS,
-		    a.PRICE,
-		    a.ESTABLISHCODE
-		FROM SLIP_DETAIL a, SLIP b
-		WHERE a.slipnumber = b.slipnumber
-		AND a.ESTABLISHCODE BETWEEN 101 AND 250
-		AND b.SLIPDATE  <![CDATA[ <= ]]>  LAST_DAY(to_date(#{chooseYear} || '/' || #{chooseMonth}, 'yyyy-mm'))
+		    status,
+		    price,
+		    establishcode
+		FROM
+		
+		(
+			SELECT 
+		        min(a.STATUS) status,
+		        sum(a.PRICE) price,
+		        a.ESTABLISHCODE
+		    FROM SLIP_DETAIL a, SLIP b
+		    WHERE a.slipnumber = b.slipnumber
+		    AND a.ESTABLISHCODE BETWEEN 101 AND 250
+			AND b.SLIPDATE  <![CDATA[ <= ]]>  LAST_DAY(to_date(#{chooseYear} || '/' || #{chooseMonth}, 'yyyy-mm'))
+			and a.status = 0
+	  		group by a.establishcode
+				union all
+			SELECT 
+		        min(a.STATUS) status,
+		        sum(a.PRICE) price,
+		        a.ESTABLISHCODE
+		    FROM SLIP_DETAIL a, SLIP b
+		    WHERE a.slipnumber = b.slipnumber
+		    AND a.ESTABLISHCODE BETWEEN 101 AND 250
+			AND b.SLIPDATE  <![CDATA[ <= ]]>  LAST_DAY(to_date(#{chooseYear} || '/' || #{chooseMonth}, 'yyyy-mm'))
+			and a.status =1
+	  		group by a.establishcode
+	  	)
+	  	ORDER BY establishcode
+  		
 	</select>
+	
+	
+	<!-- 부채 계정과목 구하기 -->
+	<select id="selectObligationDataLeft" resultType="slip_detailVo" parameterType="map">
+		SELECT 
+		    status,
+		    price,
+		    establishcode
+		FROM
+		
+		(
+			SELECT 
+		        min(a.STATUS) status,
+		        sum(a.PRICE) price,
+		        a.ESTABLISHCODE
+		    FROM SLIP_DETAIL a, SLIP b
+		    WHERE a.slipnumber = b.slipnumber
+		    AND a.ESTABLISHCODE BETWEEN 251 AND 330
+			AND b.SLIPDATE  <![CDATA[ <= ]]>  LAST_DAY(to_date(#{chooseYear} || '/' || #{chooseMonth}, 'yyyy-mm'))
+			and a.status = 0
+	  		group by a.establishcode
+				union all
+			SELECT 
+		        min(a.STATUS) status,
+		        sum(a.PRICE) price,
+		        a.ESTABLISHCODE
+		    FROM SLIP_DETAIL a, SLIP b
+		    WHERE a.slipnumber = b.slipnumber
+		    AND a.ESTABLISHCODE BETWEEN 251 AND 330
+			AND b.SLIPDATE  <![CDATA[ <= ]]>  LAST_DAY(to_date(#{chooseYear} || '/' || #{chooseMonth}, 'yyyy-mm'))
+			and a.status =1
+	  		group by a.establishcode
+	  	)
+	  	ORDER BY establishcode
+  		
+	</select>
+	
+	<!-- 자본 계정과목 구하기 -->
+	<select id="selectCapitalDataLeft" resultType="slip_detailVo" parameterType="map">
+		SELECT 
+		    status,
+		    price,
+		    establishcode
+		FROM
+		
+		(
+			SELECT 
+		        min(a.STATUS) status,
+		        sum(a.PRICE) price,
+		        a.ESTABLISHCODE
+		    FROM SLIP_DETAIL a, SLIP b
+		    WHERE a.slipnumber = b.slipnumber
+		    AND a.ESTABLISHCODE BETWEEN 331 AND 400
+			AND b.SLIPDATE  <![CDATA[ <= ]]>  LAST_DAY(to_date(#{chooseYear} || '/' || #{chooseMonth}, 'yyyy-mm'))
+			and a.status = 0
+	  		group by a.establishcode
+				union all
+			SELECT 
+		        min(a.STATUS) status,
+		        sum(a.PRICE) price,
+		        a.ESTABLISHCODE
+		    FROM SLIP_DETAIL a, SLIP b
+		    WHERE a.slipnumber = b.slipnumber
+		    AND a.ESTABLISHCODE BETWEEN 331 AND 400
+			AND b.SLIPDATE  <![CDATA[ <= ]]>  LAST_DAY(to_date(#{chooseYear} || '/' || #{chooseMonth}, 'yyyy-mm'))
+			and a.status =1
+	  		group by a.establishcode
+	  	)
+	  	ORDER BY establishcode
+  		
+	</select>
+	
+	
+	<!-- 비용 계정과목 구하기 -->
+	<select id="selectCostDataLeft" resultType="slip_detailVo" parameterType="map">
+		SELECT 
+		    status,
+		    price,
+		    establishcode
+		FROM
+		
+		(
+			SELECT 
+		        min(a.STATUS) status,
+		        sum(a.PRICE) price,
+		        a.ESTABLISHCODE
+		    FROM SLIP_DETAIL a, SLIP b
+		    WHERE a.slipnumber = b.slipnumber
+		    AND a.ESTABLISHCODE BETWEEN 501 AND 900
+			AND b.SLIPDATE  <![CDATA[ <= ]]>  LAST_DAY(to_date(#{chooseYear} || '/' || #{chooseMonth}, 'yyyy-mm'))
+			and a.status = 0
+	  		group by a.establishcode
+				union all
+			SELECT 
+		        min(a.STATUS) status,
+		        sum(a.PRICE) price,
+		        a.ESTABLISHCODE
+		    FROM SLIP_DETAIL a, SLIP b
+		    WHERE a.slipnumber = b.slipnumber
+		    AND a.ESTABLISHCODE BETWEEN 501 AND 900
+			AND b.SLIPDATE  <![CDATA[ <= ]]>  LAST_DAY(to_date(#{chooseYear} || '/' || #{chooseMonth}, 'yyyy-mm'))
+			and a.status =1
+	  		group by a.establishcode
+	  	)
+	  	ORDER BY establishcode
+  		
+	</select>
+	
+	
+	<!-- 수익 계정과목 구하기 -->
+	<select id="selectRevenueDataLeft" resultType="slip_detailVo" parameterType="map">
+		SELECT 
+		    status,
+		    price,
+		    establishcode
+		FROM
+		
+		(
+			SELECT 
+		        min(a.STATUS) status,
+		        sum(a.PRICE) price,
+		        a.ESTABLISHCODE
+		    FROM SLIP_DETAIL a, SLIP b
+		    WHERE a.slipnumber = b.slipnumber
+		    AND a.ESTABLISHCODE BETWEEN 901 AND 999
+			AND b.SLIPDATE  <![CDATA[ <= ]]>  LAST_DAY(to_date(#{chooseYear} || '/' || #{chooseMonth}, 'yyyy-mm'))
+			and a.status = 0
+	  		group by a.establishcode
+				union all
+			SELECT 
+		        min(a.STATUS) status,
+		        sum(a.PRICE) price,
+		        a.ESTABLISHCODE
+		    FROM SLIP_DETAIL a, SLIP b
+		    WHERE a.slipnumber = b.slipnumber
+		    AND a.ESTABLISHCODE BETWEEN 901 AND 999
+			AND b.SLIPDATE  <![CDATA[ <= ]]>  LAST_DAY(to_date(#{chooseYear} || '/' || #{chooseMonth}, 'yyyy-mm'))
+			and a.status =1
+	  		group by a.establishcode
+	  	)
+	  	ORDER BY establishcode
+  		
+	</select>
+	
+	
+	
+	<select id="selectSumChance" resultType="sumchanceVo" parameterType="map">
+	SELECT
+     establishcode,
+      debit,
+      credit,
+      debit-credit OperatorValue
+    FROM
+    (SELECT 
+    establishcode,
+    NVL(sum(decode(status, 0,  price)),0) debit,
+    NVL(sum(decode(status, 1,  price)),0) credit
+    FROM(
+            SELECT 
+                a.STATUS,
+                sum(a.PRICE) price,
+                a.ESTABLISHCODE
+            FROM SLIP_DETAIL a, SLIP b
+            WHERE a.slipnumber = b.slipnumber
+            AND b.SLIPDATE  <![CDATA[ <= ]]>  LAST_DAY(to_date(#{chooseYear} || '/' || #{chooseMonth}, 'yyyy-mm'))
+            group by a.establishcode, a.status)
+	group by establishcode)
+	order by establishcode
+		
+	</select>
+	
 	
 	
 	

@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.or.ddit.slip.model.SlipVo;
 import kr.or.ddit.slip.model.Slip_detailVo;
+import kr.or.ddit.util.model.SumChanceVo;
 
 public interface ISlip_detailService {
 	
@@ -79,6 +80,64 @@ public interface ISlip_detailService {
 	
 	
 	
+	/**
+	* Method : selectAssetData
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param chooseYear
+	* @param chooseMonth
+	* @return
+	* Method 설명 : 부채 불러오기
+	*/
+	public List<Slip_detailVo> selectObligationData(String chooseYear, String chooseMonth);
+	
+	
+	
+	/**
+	* Method : selectAssetData
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param chooseYear
+	* @param chooseMonth
+	* @return
+	* Method 설명 : 자본 불러오기
+	*/
+	public List<Slip_detailVo> selectCapitalData(String chooseYear, String chooseMonth);
+	
+	
+	
+	/**
+	* Method : selectAssetData
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param chooseYear
+	* @param chooseMonth
+	* @return
+	* Method 설명 : 비용 불러오기
+	*/
+	public List<Slip_detailVo> selectCostlData(String chooseYear, String chooseMonth);
+	
+	/**
+	* Method : selectAssetData
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param chooseYear
+	* @param chooseMonth
+	* @return
+	* Method 설명 : 수익 불러오기
+	*/
+	public List<Slip_detailVo> selectRevenuelData(String chooseYear, String chooseMonth);
+	
+	/**
+	* Method : selectSumChanceData
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @param chooseYear
+	* @param chooseMonth
+	* @return
+	* Method 설명 : 합계잔액시산표 데이터 불러오기
+	*/
+	public List<SumChanceVo> selectSumChanceData(String chooseYear, String chooseMonth);
 }
 
 

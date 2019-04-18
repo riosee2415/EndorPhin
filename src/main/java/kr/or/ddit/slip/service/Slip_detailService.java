@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.ddit.slip.dao.ISlip_detailDao;
 import kr.or.ddit.slip.model.Slip_detailVo;
+import kr.or.ddit.util.model.SumChanceVo;
 
 @Service("slip_detailService")
 public class Slip_detailService implements ISlip_detailService{
@@ -81,6 +82,37 @@ public class Slip_detailService implements ISlip_detailService{
 	@Override
 	public List<Slip_detailVo> selectAssetData(String chooseYear, String chooseMonth) {
 		return slip_detailDao.selectAssetData(chooseYear, chooseMonth);
+	}
+
+
+	@Override
+	public List<Slip_detailVo> selectObligationData(String chooseYear, String chooseMonth) {
+		return slip_detailDao.selectObligationData(chooseYear, chooseMonth);
+	}
+
+
+	@Override
+	public List<Slip_detailVo> selectCapitalData(String chooseYear, String chooseMonth) {
+		return slip_detailDao.selectCapitalData(chooseYear, chooseMonth);
+	}
+
+
+	@Override
+	public List<Slip_detailVo> selectCostlData(String chooseYear, String chooseMonth) {
+		return slip_detailDao.selectCostlData(chooseYear, chooseMonth);
+	}
+
+
+	@Override
+	public List<Slip_detailVo> selectRevenuelData(String chooseYear, String chooseMonth) {
+		return slip_detailDao.selectRevenuelData(chooseYear, chooseMonth);
+				
+	}
+
+
+	@Override
+	public List<SumChanceVo> selectSumChanceData(String chooseYear, String chooseMonth) {
+		return slip_detailDao.selectSumChanceData(chooseYear, chooseMonth);
 	}
 
 }

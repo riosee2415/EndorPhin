@@ -10,6 +10,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.or.ddit.slip.model.Slip_detailVo;
+import kr.or.ddit.util.model.SumChanceVo;
 
 @Repository("slip_detailDao")
 public class Slip_detailDao implements ISlip_detailDao{
@@ -101,9 +102,60 @@ public class Slip_detailDao implements ISlip_detailDao{
 		map.put("chooseYear", chooseYear);
 		map.put("chooseMonth", chooseMonth);
 		
-		return sqlSessionTemplate.selectList("slipdetail.selectAssetData", map);
+		return sqlSessionTemplate.selectList("slipdetail.selectAssetDataLeft", map);
 	}
+
+
+	@Override
+	public List<Slip_detailVo> selectObligationData(String chooseYear, String chooseMonth) {
+
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("chooseYear", chooseYear);
+		map.put("chooseMonth", chooseMonth);
+		
+		return sqlSessionTemplate.selectList("slipdetail.selectObligationDataLeft", map);
+	}
+
+
+	@Override
+	public List<Slip_detailVo> selectCapitalData(String chooseYear, String chooseMonth) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("chooseYear", chooseYear);
+		map.put("chooseMonth", chooseMonth);
+		
+		return sqlSessionTemplate.selectList("slipdetail.selectCapitalDataLeft", map);
+	}
+
+
+	@Override
+	public List<Slip_detailVo> selectCostlData(String chooseYear, String chooseMonth) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("chooseYear", chooseYear);
+		map.put("chooseMonth", chooseMonth);
+		
+		return sqlSessionTemplate.selectList("slipdetail.selectCostDataLeft", map);
+	}
+
+
+	@Override
+	public List<Slip_detailVo> selectRevenuelData(String chooseYear, String chooseMonth) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("chooseYear", chooseYear);
+		map.put("chooseMonth", chooseMonth);
+		
+		return sqlSessionTemplate.selectList("slipdetail.selectRevenueDataLeft", map);
+	}
+
+
+	@Override
+	public List<SumChanceVo> selectSumChanceData(String chooseYear, String chooseMonth) {
+		
+	Map<String, String> map = new HashMap<String, String>();
+	map.put("chooseYear", chooseYear);
+	map.put("chooseMonth", chooseMonth);
 	
+	return sqlSessionTemplate.selectList("slipdetail.selectSumChance", map);
+	}
 	
 	
 	

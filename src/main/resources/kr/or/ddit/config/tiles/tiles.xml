@@ -246,6 +246,10 @@
 		<put-attribute name="content"
 			value="/WEB-INF/views/ps/sumChance.jsp" />
 		</definition>
+			
+		<definition name="tax_report" extends="layout">   <!-- 부가세신고서 -->
+			<put-attribute name="content" value="/WEB-INF/views/taxcal/tax_report.jsp" />
+		</definition>
         
         
 </tiles-definitions>

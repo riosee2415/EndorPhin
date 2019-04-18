@@ -281,6 +281,13 @@ public class Tax_calController {
 		
 		return "delete Data";
 	}
+	
+	
+	@RequestMapping("/tax_report")
+	public String tax_report() {
+		
+		return "tax_report";
+	}
 
 }
 

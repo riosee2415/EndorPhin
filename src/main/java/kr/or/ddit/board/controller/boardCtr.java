@@ -256,50 +256,50 @@ public class boardCtr {
 	* @throws Exception
 	* Method 설명 : 게시글 수정버튼
 	 */
-	@RequestMapping(value = "/boardUpdateSave")
-	public String boardUpdateSave(@ModelAttribute("boardInfo") Board_detailVo boardInfo, String attachCode, String boardTypeCode, Model model, HttpServletRequest request,MultipartRequest multipart) throws Exception {
-	        
-		if(attachCode != null){
-			attach_boardService.attach_boardDelete(attachCode);
-		}
-		
-		List<Attach_boardVo> attachList =  new ArrayList<>();
-		List<MultipartFile> attachFile = multipart.getFiles("attachFile");
-		
-		String attachName = "";
-		String attachRealname = "";
-		String attachRealpath = "";
-		
-		for (MultipartFile multipartFile : attachFile) {
-			
-			if(!multipartFile.getName().equals("attachFile")){
-				continue;
-			}
-			ServletContext application = request.getServletContext();
-			String path = application.getRealPath("/upload");
-			
-			attachName = multipartFile.getOriginalFilename();
-			attachRealname = UPLOAD_PATH + File.separator + UUID.randomUUID().toString();
-			attachRealpath = path;
-			
-			if (multipartFile.getSize() > 0 ) {
-				
-				multipartFile.transferTo(new File(attachRealname));
-				
-				Attach_boardVo attachVo = new Attach_boardVo();
-				attachVo.setAttachCode(attachCode);
-				attachVo.setAttachName(attachName);
-				attachVo.setAttachRealname(path + File.separator + attachRealname);
-				attachVo.setAttachRealpath(attachRealpath);
-				
-				attachList.add(attachVo);
-			}
-		}
-		
-		board_detailService.updateBoard(boardInfo, attachList);
-	    model.addAttribute("boardTypeCode", boardTypeCode);
-	    return "redirect:/boardList";
-	}
+//	@RequestMapping(value = "/boardUpdateSave")
+//	public String boardUpdateSave(@ModelAttribute("boardInfo") Board_detailVo boardInfo, String attachCode, String boardTypeCode, Model model, HttpServletRequest request,MultipartRequest multipart) throws Exception {
+//	        
+//		if(attachCode != null){
+//			attach_boardService.attach_boardDelete(attachCode);
+//		}
+//		
+//		List<Attach_boardVo> attachList =  new ArrayList<>();
+//		List<MultipartFile> attachFile = multipart.getFiles("attachFile");
+//		
+//		String attachName = "";
+//		String attachRealname = "";
+//		String attachRealpath = "";
+//		
+//		for (MultipartFile multipartFile : attachFile) {
+//			
+//			if(!multipartFile.getName().equals("attachFile")){
+//				continue;
+//			}
+//			ServletContext application = request.getServletContext();
+//			String path = application.getRealPath("/upload");
+//			
+//			attachName = multipartFile.getOriginalFilename();
+//			attachRealname = UPLOAD_PATH + File.separator + UUID.randomUUID().toString();
+//			attachRealpath = path;
+//			
+//			if (multipartFile.getSize() > 0 ) {
+//				
+//				multipartFile.transferTo(new File(attachRealname));
+//				
+//				Attach_boardVo attachVo = new Attach_boardVo();
+//				attachVo.setAttachCode(attachCode);
+//				attachVo.setAttachName(attachName);
+//				attachVo.setAttachRealname(path + File.separator + attachRealname);
+//				attachVo.setAttachRealpath(attachRealpath);
+//				
+//				attachList.add(attachVo);
+//			}
+//		}
+//		
+//		board_detailService.updateBoard(boardInfo, attachList);
+//	    model.addAttribute("boardTypeCode", boardTypeCode);
+//	    return "redirect:/boardList";
+//	}
 	
 	/**
 	 * 
@@ -359,6 +359,16 @@ public class boardCtr {
         return "redirect:/boardRead?boardNo=" + boardReplyInfo.getBoardNo();
     }
 	
+	/**
+	 * 
+	* Method : download
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param attachCode
+	* @param resp
+	* @throws IOException
+	* Method 설명 : 파일 다운 
+	 */
 	@RequestMapping(value = "/download")
 	public void download(String attachCode, HttpServletResponse resp) throws IOException{
 		Attach_boardVo attachVo = attach_boardService.attachCodeSelectOne(attachCode);

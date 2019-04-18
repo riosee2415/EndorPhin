@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>board1</title>
-</head>
 <body>
     <form name="form" action="/boardUpdateSave">
         <table border="1" style="width:600px">
@@ -34,4 +28,3 @@
         <a href="#" onclick="form.submit()">저장</a>
     </form>    
 </body>
-</html>

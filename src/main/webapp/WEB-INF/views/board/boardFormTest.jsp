@@ -1,12 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>board</title>
-</head>
 
 <body>
     <div class="row">
@@ -28,10 +21,10 @@
                         <col width='*%' />
                     </colgroup>
                     <tbody>
-                        <!--                 <tr> -->
-                        <!--                     <td>작성자</td>  -->
-                        <%--                     <td><input type="text" id="userId" name="userId" size="20" maxlength="20" value="${boardInfo.userId}"></td>  --%>
-                        <!--                 </tr> -->
+<!--                                         <tr> -->
+<!--                                             <td>작성자</td>  -->
+<%--                                             <td><input type="text" id="userId" name="userId" size="20" maxlength="20" value="${boardInfo.userId}"></td>  --%>
+<!--                                         </tr> -->
                         <tr>
                             <td>제목</td>
                             <td><input id="title" type="text" name="title" size="70" maxlength="250" value="${boardInfo.title}"></td>
@@ -41,7 +34,7 @@
                             <td><textarea id="contents" name="contents" rows="10" cols="80">${boardInfo.contents}</textarea></td>
                         </tr>
                         <tr>
-                            <td>첨부</td>
+                            <td>첨부파일</td>
                             <td>
                                 <c:forEach var="listview" items="${listview}" varStatus="attachCnt">
                                     <input type="checkbox" name="attachCode" value="${listview.attachCode}">
@@ -53,7 +46,14 @@
                         </tr>
                     </tbody>
                 </table>
+                
+<!--                 <div id="fileDiv"> -->
+<!--                 	<p> -->
+<!--                 		<input type="file" id="file" name="file_0"><a href="#this" class="btn" id="delete" name="delete">삭제</a> -->
+<!--                 	</p> -->
+<!--                 </div> -->
                 <br>
+                <a href="#this" class="btn" id="addFile">파일 추가</a>
                 <a href="#" onclick="fn_formSubmit()"><button class="bttn-jelly bttn-warning">저장</button></a>
                 <input type="hidden" name="boardTypeCode" value="${boardTypeCode}">
                 <input type="hidden" name="boardNo" value="${boardInfo.boardNo}">
@@ -92,7 +92,31 @@
 
         form.submit();
     }
+    
+//     var gfv_count = 1;
+//     $("#addFile").on("click", function(e){ //파일 추가 버튼
+//     	e.preventDefault();
+//     	if(gfv_count < 5){
+//     	fn_addFile();
+//     	}else{
+//     		alert("더이상 추가할수 없습니다.");	
+//     	}
+//     });
+    
+
+//     function fn_addFile(){ 
+//     	var str = "<p><input type='file' name='file_"+(gfv_count++)+"'><a href='#this' class='btn' name='delete'>삭제</a></p>";
+    	
+//     	$("#fileDiv").append(str);
+//     	$("a[name='delete']").on("click", function(e){ //삭제 버튼 
+//     		e.preventDefault();
+//     		fn_deleteFile($(this));
+//     	});
+//     }
+    
+//     function fn_deleteFile(obj){
+//     	obj.parent().remove();
+//     }
+
 
 </script>
-
-</html>

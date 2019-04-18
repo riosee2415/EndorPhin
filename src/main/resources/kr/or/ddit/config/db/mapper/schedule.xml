@@ -9,7 +9,7 @@
 		insert into schedule
 		(schedule_no, schedule_title, schedule_start, schedule_end)
 		values
-		(schedule_seq.nextval,#{schedule_title},to_date(#{schedule_start},'yyyy-mm-dd'),to_date(#{schedule_end},'yyyy-mm-dd')-1)
+		(schedule_seq.nextval,#{schedule_title},to_date(#{schedule_start},'yyyy-mm-dd'),to_date(#{schedule_end},'yyyy-mm-dd'))
 	</insert>
 
 	
@@ -25,6 +25,17 @@
 		delete from schedule
 		where schedule_no = #{schedule_no}
 	</delete>  
+	
+	
+			<update id="updateSchedule" parameterType="scheduleVo">
+			update schedule set
+			schedule_title = nvl(#{schedule_title,jdbcType=VARCHAR},schedule_title),
+			schedule_start = nvl(#{schedule_start,jdbcType=VARCHAR},schedule_start),
+			<if test="schedule_end != null">
+			schedule_end = to_date(#{schedule_end},'yyyy-mm-dd')
+			</if>
+			where schedule_no=#{schedule_no}
+			</update>
 
 </mapper>
 

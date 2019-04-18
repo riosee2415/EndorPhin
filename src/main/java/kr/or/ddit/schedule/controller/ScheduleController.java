@@ -81,6 +81,21 @@ public class ScheduleController {
 	
 	
 	
+	@RequestMapping(path="/scheduleUpdateAjax", method=RequestMethod.GET)
+	@ResponseBody
+	public List<ScheduleVo> scheduleUpdateAjax(ScheduleVo vo) {
+		
+		
+		scheduleService.modifySchedule(vo);
+		
+		List<ScheduleVo> allSchedule = scheduleService.getAllSchedule();
+		
+		
+		return allSchedule;
+	}
+	
+	
+	
 	
 	
 	

@@ -30,4 +30,9 @@ public class ScheduleService implements IScheduleService{
 		
 	}
 
+	@Override
+	public int modifySchedule(ScheduleVo code) {
+		return scheduleDao.modifySchedule(code);
+	}
+
 }

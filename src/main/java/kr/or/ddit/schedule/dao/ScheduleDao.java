@@ -38,4 +38,11 @@ public class ScheduleDao implements IScheduleDao{
 	}
 
 	
+	@Override
+	public int modifySchedule(ScheduleVo code) {
+		return sqlSessionTemplate.update("schedule.updateSchedule",code);
+				
+	}
+
+	
 }

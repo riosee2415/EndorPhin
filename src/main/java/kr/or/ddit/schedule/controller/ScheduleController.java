@@ -70,6 +70,20 @@ public class ScheduleController {
 	
 	
 	
+	@RequestMapping(path="/scheduleDeleteAjax", method=RequestMethod.GET)
+	@ResponseBody
+	public String scheduleDeleteAjax(String scNo) {
+		
+		scheduleService.deleteSchedule(scNo);
+		
+		return "redirect:/view/getAllSchedule";
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

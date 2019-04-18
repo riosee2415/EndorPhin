@@ -20,38 +20,11 @@
 	</select>
 
 
-	
- 	<!-- 전표상세 수정하기 -->
-	<!-- <update id="updateSales_detail" parameterType="sales_detailVo">
-		update sales_detail
-		set	ESTABLISHCODE = #{establishCode}, 
-			JUKYO = #{jukyo}, 
-			PRICE = #{price}, 
-			STATUS = #{status}
-		WHERE SALESDETAILCODE=#{salesDetailCode}
-		
-	</update>
 
-
-	
-
-
-	매입매출  선택하여 가져오기
-	<select id="selectSales_detail" resultType="sales_detailVo"
-		parameterType="String">
-		select
-		salesDetailCode, status, price, establishCode, salesCode, jukyo
-		from
-		sales_detail
-		where salesCode = #{salesCode}
-	</select>
-
-
-	매입매출상세  삭제
-	<delete id="deleteSales_detail" parameterType="String">
-		delete from sales_detail
-		where salesCode = #{salesCode}
-	</delete>  -->
+	<delete id="deleteSchedule" parameterType="String">
+		delete from schedule
+		where schedule_no = #{schedule_no}
+	</delete>  
 
 </mapper>
 

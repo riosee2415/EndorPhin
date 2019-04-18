@@ -33,9 +33,9 @@ public class ScheduleDao implements IScheduleDao{
 
 	
 	@Override
-	public int deleteSchedule(ScheduleVo code) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteSchedule(String code) {
+		return sqlSessionTemplate.delete("schedule.deleteSchedule",code);
 	}
 
+	
 }

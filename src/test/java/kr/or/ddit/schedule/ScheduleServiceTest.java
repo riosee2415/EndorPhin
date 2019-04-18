@@ -42,6 +42,15 @@ public class ScheduleServiceTest extends LogicConfig{
 		
 	}
 	
+	
+	@Test
+	public void deleteScheduleTest() {
+		
+		
+		scheduleService.deleteSchedule("32");
+		
+	}
+	
 
 	
 	

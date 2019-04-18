@@ -34,8 +34,7 @@ public interface IScheduleDao {
 	* @return
 	* Method 설명 : 스케줄이력 삭제
 	*/
-	int deleteSchedule(ScheduleVo code);
-	
+	int deleteSchedule(String code);
 	
 	
 	

@@ -9,15 +9,16 @@ import java.util.Date;
  */
 public class DocumentVo {
 	
-	String documentNumber;
-	String title;
-	String preservation;
-	Date presentDate;
-	String contents;
-	String tempSortation;
-	String completeSortation;
-	String presentUser;
-	String presentDepartment;
+	String documentNumber;  //기안문서번호
+	String title; 			//제목
+	String preservation;	 //보존년한
+	Date presentDate; 		//기안일자
+	String contents; 		//내용
+	String tempSortation; //임시구문
+ 	String completeSortation;//완료구븐
+	String presentUser;		//기안자
+	String presentDepartment;	//기안부서
+	String documentType; //기안문서 종류 
 	
 	public String getDocumentNumber() {
 		return documentNumber;
@@ -73,8 +74,12 @@ public class DocumentVo {
 	public void setPresentDepartment(String presentDepartment) {
 		this.presentDepartment = presentDepartment;
 	}
-	
-	
-	
+	public String getDocumentType() {
+		return documentType;
+	}
+	public void setDocumentType(String documentType) {
+		this.documentType = documentType;
+	}
 
+	
 }

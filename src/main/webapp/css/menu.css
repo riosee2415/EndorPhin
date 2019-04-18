@@ -2,7 +2,6 @@
 
 body {
 	background-color: #eee;
-	background-image: url(../images/patterns/light_toast.png);
 	color: #666;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 12px;
@@ -80,7 +79,6 @@ ol, ul {
 }
 
 #main-menu > li.parent {
-	background-image: url(../images/plus-gray.png);
 	background-size: 7px 7px;
 	background-repeat: no-repeat;
 	background-position: left center;

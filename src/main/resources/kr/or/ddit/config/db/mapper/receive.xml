@@ -6,13 +6,20 @@
 
 	<!-- 창고 입출고 이력 입력 -->
 	<insert id="insertReceive" parameterType="receiveVo">
+		<selectKey keyProperty="receivecode" order="BEFORE" resultType="String">
+			select receive_seq.nextval()
+			from	dual
+		</selectKey>
 		insert into receive
 		(receivecode, receivedate, sortation, quantity, material,
 		 warehousecode, ordercode, productcode)
 		values
-		(#{receivecode},sysdate,#{sortation},#{quantity},#{material}
-		,#{warehousecode},#{ordercode},#{productcode})
-
+		(#{receiveCode},sysdate,#{sortation}
+		,nvl(#{quantity, jdbcType=VARCHAR},null)
+		,nvl(#{material, jdbcType=VARCHAR},null)
+		,#{warehouseCode}
+		,nvl(#{orderCode, jdbcType=VARCHAR},null)
+		,#{productCode})
 	</insert>
 
 
@@ -31,17 +38,28 @@
 		select
 		receivecode, receivedate, sortation, quantity, material,
 		 warehousecode, ordercode, productcode
-		from
-		receive where receivecode = #{receivecode}
+		from	receive 
+		where   ordercode = #{orderCode}
 	</select>
 
 
 	<!-- 창고 입출고 이력  삭제 -->
 	<delete id="deleteReceive" parameterType="String">
 		delete from receive
-		where receivecode = #{receivecode}
+		where receivecode = #{receiveCode}
 	</delete>
-
+	
+	<update id="updateReceive" parameterType="receiveVo">
+		update receive
+		set receivedate = nvl(#{receiveDate, jdbcType=VARCHAR},receivedate)
+			,sortation = nvl(#{sortation, jdbcType=VARCHAR},sortation)
+			,quantity = nvl(#{quantity, jdbcType=VARCHAR},quantity)
+			,material = nvl(#{material, jdbcType=VARCHAR},material)
+			,warehousecode = nvl(#{warehouseCode, jdbcType=VARCHAR},warehousecode)
+			,ordercode = nvl(#{orderCode, jdbcType=VARCHAR},ordercode)
+			,productcode = nvl(#{productCode, jdbcType=VARCHAR},productcode)
+		where	receivecode = #{receiveCode}
+	</update>
 </mapper>
 
 

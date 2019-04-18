@@ -11,7 +11,8 @@
 		warehousename,
 		warehouselocal)
 		values
-		(#{warehousecode},#{warehousename},#{warehouselocal})
+		(#{wareHouseCode},#{wareHouseName}
+		,nvl(#{wareHouselocal, jdbcType=VARCHAR},null))
 
 	</insert>
 
@@ -34,23 +35,15 @@
 		warehousename,
 		warehouselocal
 		from
-		warehouse where warehousecode = #{warehousecode}
+		warehouse where warehousecode = #{wareHouseCode}
 	</select>
 
 
 	<!-- 창고 삭제 -->
 	<delete id="deleteWarehouse" parameterType="String">
 		delete from warehouse
-		where warehousecode = #{warehousecode}
+		where warehousecode = #{wareHouseCode}
 	</delete>
-
-
-
-
-
-
-
-
 
 
 
@@ -66,23 +59,16 @@
 		b.material
 		from warehouse a, receive b
 		where
-		b.warehousecode = #{a.warehousecode}
+		b.warehousecode = #{a.wareHouseCode}
 		order by a.warehousename desc
 	</select>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+	<update id="updateWareHouse" parameterType="warehouseVo">
+		update warehouse
+		set	warehousename = nvl(#{wareHouseName, jdbcType=VARCHAR},warehousename)
+		,	warehouselocal =nvl(#{wareHouselocal, jdbcType=VARCHAR},warehouselocal)
+		where	warehousecode= #{wareHouseCode}
+	</update>
 
 
 </mapper>

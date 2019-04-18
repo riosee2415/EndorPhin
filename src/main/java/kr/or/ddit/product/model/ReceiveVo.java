@@ -10,7 +10,7 @@ import java.util.Date;
 public class ReceiveVo {
 	
 	String receiveCode;
-	Date receiveDate;
+	String receiveDate;
 	String sortation;
 	String quantity;
 	String material;
@@ -24,10 +24,10 @@ public class ReceiveVo {
 	public void setReceiveCode(String receiveCode) {
 		this.receiveCode = receiveCode;
 	}
-	public Date getReceiveDate() {
+	public String getReceiveDate() {
 		return receiveDate;
 	}
-	public void setReceiveDate(Date receiveDate) {
+	public void setReceiveDate(String receiveDate) {
 		this.receiveDate = receiveDate;
 	}
 	public String getSortation() {

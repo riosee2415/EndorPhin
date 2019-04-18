@@ -47,10 +47,12 @@
 	<select id="selectOrders" resultType="ordersVo"
 		parameterType="map">
 		select
-		ordercode, deptcode, userid, orderprice, orderlist, to_char(duedate,'yyyy-MM-dd') duedate,
-				 to_char(paymentduedate,'yyyy-MM-dd') paymentduedate, specialnote, clientcode, status, sortation
+		o.ordercode, deptcode, userid, orderprice, orderlist, to_char(duedate,'yyyy-MM-dd') duedate,
+				 to_char(paymentduedate,'yyyy-MM-dd') paymentduedate, specialnote, o.clientcode, status, sortation,clientname
 		from
-		orders where ordercode = #{orderCode}
+		orders o, client c
+		where   o.clientcode=c.clientcode
+		and ordercode = #{orderCode}
 	</select>
 
 	<!-- 상품  전체 불러오기 -->

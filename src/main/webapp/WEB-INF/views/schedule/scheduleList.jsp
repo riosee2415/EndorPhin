@@ -20,7 +20,7 @@
     margin: 0 auto;
   } 
   
-  .fc-button-group > .fc-button:not(:last-child){
+ /*  .fc-button-group > .fc-button:not(:last-child){
   font-weight: bolder;
   font-size: x-large;
   }
@@ -35,7 +35,8 @@
   .fc-next-button fc-button fc-button-primary{
    font-weight: bolder;
   font-size: x-large;
-  }
+  } */
+  
   
 </style>
 
@@ -179,6 +180,7 @@ var calendar;
         calendar.unselect()
       },
               
+      
       editable: true,
       eventLimit: true, // allow "more" link when too many events
       events:function (timeStamp,suss,fail){

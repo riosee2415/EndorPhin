@@ -1,5 +1,6 @@
 package kr.or.ddit.tax_cal.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -103,7 +104,14 @@ public interface ITax_calService {
 	public List<Tax_calVo> searchAllByType51(String searchData2);
 	
 	
-	
+	/**
+	* Method : selectBy51
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @return
+	* Method 설명 : 과세매입 가져오기
+	*/
+	public List<Map<String, String>> selectBy51();
 	
 }
 

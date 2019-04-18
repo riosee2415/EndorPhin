@@ -16,7 +16,7 @@
 			</c:otherwise>
 		</c:choose>
 		<td style="text-align: center;"><fmt:formatNumber value="${l.debit }" pattern="#,###"/></td>
-		<td style="text-align: center;">${l.establishCode }</td>
+		<td style="text-align: center;">${l.establishName }</td>
 		<td style="text-align: center;"><fmt:formatNumber value="${l.credit }" pattern="#,###"/></td>
 		<c:choose>
 			<c:when test="${l.debit-l.credit <= 0}">

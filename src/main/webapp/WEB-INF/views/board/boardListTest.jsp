@@ -37,11 +37,12 @@
 	overflow: hidden; text-overflow: ellipsis;
 }
 
-a {
+table a {
 	color: black !important;
 	text-decoration: none;
 	outline: none
 }
+
 
 
 </style>
@@ -53,7 +54,7 @@ a {
             <div class="form-group">
                 <h2><strong><i class="fas fa-pen-alt"></i>게시판</strong></h2>
             </div>
-            <form action="${cp}/boardList?boardTypeCode=${boardTypeCode}" method="post">
+            <form action="${cp}/SearchPost?boardTypeCode=${boardTypeCode}" method="post">
                 <table class="table table-striped">
                     <thead class="thead">
                         <tr>
@@ -65,7 +66,7 @@ a {
                             </td>
                             <td><input style="color: black" type="text" id="endDate" class="search-query form-control" name="endDate" class="startDate" /></td>
                             <td>
-                                <select name="searchType">
+                                <select name="searchType" style="color: black !important">
                                     <option value="title" <c:out value="${map.searchType == 'title' ? 'selected' : '' }" />>제목</option>
                                     <option value="contents" <c:out value="${map.searchType == 'contents' ? 'selected' : '' }" />>내용</option>
                                     <option value="userId" <c:out value="${map.searchType == 'userId' ? 'selected' : '' }" />>작성자</option>
@@ -78,10 +79,11 @@ a {
                         </tr>
                     </thead>
                 </table>
-                <input type="hidden" name="keyword" value="map.keyword">
             </form>
 
-            <table class="table table-hover">
+
+
+            <table class="table table-hover" >
                 <colgroup>
                     <col width='8%' />
                     <col width='*%' />
@@ -97,6 +99,7 @@ a {
                     </tr>
                 </thead>
                 <tbody style="color: black !important">
+                
                 
                 
                     <c:forEach var="listview" items="${postList}">

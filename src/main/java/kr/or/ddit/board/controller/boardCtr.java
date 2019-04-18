@@ -68,7 +68,15 @@ public class boardCtr {
 	 */
 	@RequestMapping(value = "/boardList")
     public String boardList(Model model, PageVo pageVo,@RequestParam(defaultValue="title")String searchType, @RequestParam(defaultValue="")String keyword,@RequestParam(defaultValue="")String startDate, @RequestParam(defaultValue="")String endDate) throws Exception {
-//        List<Board_detailVo> listview = board_detailService.selectBoardList();
+
+		/*System.out.println("서치타입 :" + searchType); 
+		System.out.println("내용 :" + keyword); 
+		System.out.println("시작날짜 :" + startDate); 
+		System.out.println("종료날짜 :" + endDate); 
+		
+		*/
+		
+		//        List<Board_detailVo> listview = board_detailService.selectBoardList();
 //        
 //        model.addAttribute("listview", listview);
 //        model.addAttribute("boardTypeCode", param.getBoardTypeCode());
@@ -388,6 +396,46 @@ public class boardCtr {
 	      sos.close();
 	      fis.close();
 	}
+	
+	
+	/**
+	 * 
+	* Method : boardList
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param model
+	* @return
+	* @throws Exception
+	* Method 설명 : 게시글 리스트 조회
+	 */
+	@RequestMapping(value = "/SearchPost")
+    public String SearchPost(Model model,@RequestParam(defaultValue="title")String searchType,
+    		String keyword,String startDate,String endDate) throws Exception {
+		
+		Board_detailVo vo = new Board_detailVo();
+		
+		if(searchType.equals("title")){
+			vo.setTitle(keyword);
+			vo.setStartDate(startDate);
+			vo.setEndDate(endDate);
+		}else if(searchType.equals("contents")){
+			vo.setContents(keyword);
+			vo.setStartDate(startDate);
+			vo.setEndDate(endDate);
+		}else if(searchType.equals("userId")){
+			vo.setUserId(keyword);
+			vo.setStartDate(startDate);
+			vo.setEndDate(endDate);
+		}
+		
+		List<Board_detailVo> postList = board_detailService.SearchPostList(vo);
+		
+		model.addAttribute("postList",postList);
+		model.addAttribute("pageSize", vo.getPageSize());
+		model.addAttribute("page", vo.getPage());
+		
+		return "boardList";
+    }
 
 	/**
 	 * 

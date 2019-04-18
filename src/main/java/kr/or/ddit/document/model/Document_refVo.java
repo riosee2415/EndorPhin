@@ -5,10 +5,10 @@ package kr.or.ddit.document.model;
  *
  */
 public class Document_refVo {
-	String referenceNumber;
-	String documentNumber;
-	String userId;
-	String sortation;
+	String referenceNumber; //참조번호
+	String documentNumber; //기안문서번호
+	String userId; //사원번호
+	String sortation; //구분
 	
 	public String getReferenceNumber() {
 		return referenceNumber;

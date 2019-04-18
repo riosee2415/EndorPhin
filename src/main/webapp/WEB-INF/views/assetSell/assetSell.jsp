@@ -80,7 +80,6 @@
 			</div>
 			<div class="modal-body">
 				<table>
-				<tr><td><label >|----그룹웨어하면서 구현하겠습니다...----------</label></td></tr>
 					<tr>
 						<td><label>자산코드&nbsp;&nbsp;&nbsp;</label></td> 
 						<td><input type="text" id="assetCode" name="assetCode" class="form-control-sm " readonly="readonly" style="background: #F4EBE7;"> </td>

@@ -344,5 +344,10 @@ public class Board_detailDao implements IBoard_detailDao{
 	public List<Attach_boardVo> selectBoardFileList(String boardNo) {
 		return sqlSession.selectList("attach_board.attachBoardFileList", boardNo);
 	}
-	
+
+	@Override
+	public List<Board_detailVo> SearchPostList(Board_detailVo vo) {
+		return sqlSession.selectList("board_detail.postSearch", vo);
+		
+	}
 }

@@ -153,6 +153,14 @@
 	</select>
 
 
+
+	<select id="selectBy51" resultType="map">
+		select
+			sum(SUPPLYVALUE) as supplyValue,
+	        sum(SURTAX) as surtax
+	    from tax_cal
+	    where salesstatus = '과세매입'
+	</select>
 </mapper>
 
 

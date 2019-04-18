@@ -1,6 +1,8 @@
 package kr.or.ddit.tax_cal.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import kr.or.ddit.tax_cal.model.Tax_calVo;
 import kr.or.ddit.util.model.PageVo;
@@ -118,6 +120,15 @@ public interface ITax_calDao {
 	* Method 설명 : 데이터로 겸색
 	*/
 	public List<Tax_calVo> searchAllByType51(String searchData2);
+	
+	/**
+	* Method : selectBy51
+	* 작성자 : sanghoyun
+	* 변경이력 :
+	* @return
+	* Method 설명 : 과세매입 가져오기
+	*/
+	public List<Map<String, String>> selectBy51();
 	
 	
 }

@@ -8,10 +8,10 @@
 	<insert id="insertDocument" parameterType="documentVo">
 		insert into document
 		(documentnumber, title, preservation, presentdate, contents, tempsortation,
-		 completesortation, presentuser, presentdepartment)
+		 completesortation, presentuser, presentdepartment,documentType)
 		values
 		(#{documentnumber},#{title},#{preservation},sysdate
-		,#{contents},#{tempsortation},#{completesortation},#{presentuser},#{presentdepartment})
+		,#{contents},#{tempsortation},#{completesortation},#{presentuser},#{presentdepartment},#{documentType})
 
 	</insert>
 
@@ -20,7 +20,7 @@
 	<select id="getAllDocument" resultType="documentVo">
 		select
 		documentnumber, title, preservation, presentdate, contents, tempsortation,
-		 completesortation, presentuser, presentdepartment
+		 completesortation, presentuser, presentdepartment,documentType
 		from document
 	</select>
 

@@ -382,4 +382,10 @@ public class Board_detailService implements IBoard_detailService{
 		return board_detailDao.selectBoardFileList(boardNo);
 	}
 
+	
+	@Override
+	public List<Board_detailVo> SearchPostList(Board_detailVo vo) {
+		return board_detailDao.SearchPostList(vo);
+	}
+
 }

@@ -3,6 +3,7 @@ package kr.or.ddit.tax_cal.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -284,8 +285,11 @@ public class Tax_calController {
 	
 	
 	@RequestMapping("/tax_report")
-	public String tax_report() {
-		
+	public String tax_report(Model model) {
+			List<Map<String,String>> map51 = tax_calService.selectBy51();
+			
+			model.addAttribute("map51", map51);
+			
 		return "tax_report";
 	}
 

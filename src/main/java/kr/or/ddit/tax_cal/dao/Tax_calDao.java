@@ -1,6 +1,8 @@
 package kr.or.ddit.tax_cal.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -89,6 +91,11 @@ public class Tax_calDao implements ITax_calDao{
 	@Override
 	public List<Tax_calVo> searchAllByType51(String searchData2) {
 		return sqlSessionTemplate.selectList("tax_cal.searchAllByType51", searchData2);
+	}
+
+	@Override
+	public List<Map<String, String>> selectBy51(){
+		return sqlSessionTemplate.selectList("tax_cal.selectBy51");
 	}
 	
 

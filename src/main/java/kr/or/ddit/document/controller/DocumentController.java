@@ -3,20 +3,19 @@ package kr.or.ddit.document.controller;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.ddit.document.model.DocumentVo;
 import kr.or.ddit.document.service.IDocumentService;
-import kr.or.ddit.employee.dao.IEmployeeDao;
 import kr.or.ddit.employee.model.EmployeeVo;
 
 @Controller
@@ -33,34 +32,39 @@ public class DocumentController {
 		String userName = employeeVo.getUserNm().toString();
 		String deptName = employeeVo.getDeptname().toString();
 		
+		List<DocumentVo> documentList = documentService.getAllDocument();
+		
+		model.addAttribute("documentList",documentList);
 		model.addAttribute("userName",userName);
 		model.addAttribute("deptName",deptName);
+		
 		return "document";
 	}
 	@RequestMapping("/insertDocument")
 	public String insertDocument(DocumentVo documentVo,String presentDepartment,String documentNumber, String presentUser,
-								String presentDate,String title,String contents,String preservation ) throws ParseException{
+								String presentDate,String title,String contents,String preservation, String documentType, 
+								HttpSession session)
+										throws ParseException{
+		
+		
+		logger.debug("documentType:{}",documentType);
+		EmployeeVo employeeVo = (EmployeeVo) session.getAttribute("employeeVo");
+		String userId= employeeVo.getUserId().toString();
 		
 		Date date = new Date();									
 		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
 		date= sdf.parse(presentDate);
-			
-		logger.debug("presentDepartment:{}",presentDepartment);
-		logger.debug("documentNumber:{}",documentNumber);
-		logger.debug("presentUser:{}",presentUser);
-		logger.debug("presentDate:{}",presentDate);
-		logger.debug("title:{}",title);
-		logger.debug("contents:{}",contents);
-		logger.debug("preservation:{}",preservation);
-		documentVo.setPresentDepartment(presentDepartment);
-		documentVo.setDocumentNumber(documentNumber);
-		documentVo.setPresentUser(presentUser);
+		
+		documentVo.setPresentUser(userId);
 		documentVo.setPresentDate(date);
-		documentVo.setTitle(title);
-		documentVo.setContents("sdfsd");
-		documentVo.setPreservation(preservation);
+		documentVo.setDocumentType(documentType);
 		
 		int insert = documentService.insertDocument(documentVo);
-		return "document";
+		
+		if(insert > 0){
+			return "document";
+		}else{
+			return "document";
+		}
 	}
 }

@@ -1,5 +1,7 @@
 package kr.or.ddit.document.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -16,6 +18,11 @@ public class DocumentService implements IDocumentService{
 	@Override
 	public int insertDocument(DocumentVo documentVo) {
 		return documentDao.insertDocument(documentVo);
+	}
+
+	@Override
+	public List<DocumentVo> getAllDocument() {
+		return documentDao.getAllDocument();
 	}
 	
 }

@@ -441,7 +441,7 @@
     
 		var dupleCode ="";
 		
-	    function transDupl(dupleCode){
+	    function transDupl(){
 	    	if(dupleCode == "0"){
 	    		dupleCode ="<b><font color='blue'>사용가능한 카드 코드입니다.</font><br>"
 	    		$("#dupleCode").html(dupleCode);

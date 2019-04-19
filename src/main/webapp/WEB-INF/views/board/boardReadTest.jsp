@@ -26,7 +26,8 @@ a {
                 <tbody>
                     <tr>
                         <td>제목</td>
-                        <td colspan='2'><input id="title" type="text" name="title" size="70" maxlength="200" value="${boardInfo.title}" readonly></td>
+                        <td><input id="title" type="text" name="title" size="70" maxlength="200" value="${boardInfo.title}" readonly></td>
+                        <td>조회수 : <input id="userId" type="text" name="title" size="30" maxlength="200" value="${boardInfo.views}" readonly></td>
                     </tr>
                     <tr>
                         <td>작성자</td>
@@ -35,7 +36,7 @@ a {
                     </tr>
                     <tr>
                         <td>내용</td>
-                         <td colspan='2'><textarea id="contents" name="contents" rows="10" cols="80" readonly>${boardInfo.contents}</textarea></td>
+                         <td colspan='2'><textarea id="contents" name="contents" rows="10" cols="100" readonly>${boardInfo.contents}</textarea></td>
                     </tr>
                     <tr>
                     	<td>첨부파일</td>

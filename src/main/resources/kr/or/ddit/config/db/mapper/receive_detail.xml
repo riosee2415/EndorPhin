@@ -12,9 +12,10 @@
 	</insert>
 	
 	<select id="getReceive_detail" parameterType="map" resultType="receive_detailVo">
-		select	receivecode, productcode,quantity
-		from	receive_detail
-		where	receivecode = #{receiveCode}
+		select	receivecode, rd.productcode,quantity,productname,p.standard,p.baseprice
+		from	receive_detail rd , product p
+		where	rd.productcode= p.productcode
+		and		receivecode = #{receiveCode}
 	</select>
 	
 	<delete id="deleteReceive_detail" parameterType="map">

@@ -244,7 +244,7 @@ function dialog() {
 				dialogBox.removeClass('dialog--active');
 			}
 		});
-
+		numChange();
 	};
 	
 	$("#checkAll").on("click", function() {
@@ -286,10 +286,17 @@ function dialog() {
 			$("#dialogReceiveTbody").append("<tr>"
 			+"<td><input type=\'checkbox\' class=\'detailCheck\'></td>"
 			+"<td>"+temp.productCode+"</td>"
+			+"<td>"+temp.productname+"</td>"
+			+"<td>"+temp.standard+"</td>"
+			+"<td><input type=\'text\' name=\'quantity\' value=\'"+temp.quantity
+			+"\' class=\'form-control bootTapText quanText\'/></td>"
+			+"<td>"+temp.baseprice+"</td>"
+			+"<td>"+temp.baseprice*temp.quantity+"</td>"
 				+"</tr>");
 		}
+		numChange();
 	}
-	$(document).ready(function(){
+	function datepicker(){
 		$(".dueDatePicker").datepicker({
 			dateFormat: 'yy-mm-dd' //Input Display Format 변경
             ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
@@ -305,6 +312,34 @@ function dialog() {
             ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
             ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일']
 		});
-		$('.dueDatePicker').datepicker('setDate', 'today');
-	});
+		$('.dueDatePicker').datepicker('setDate', 'today');	
+	}
+	function numChange(){
+		$("#modalCheckAll").off("click");
+		$("#modalCheckAll").on("click", modalCheckEvent);
+		$(".quanText, .totalPrice").off('change');
+		$(".quanText").on('change',function(){
+			$(this).parents('td').
+						next().next().html(parseInt($(this).val())*parseInt($(this).
+												parents('td').next().html())).change();
+		});
+		$(".totalPrice").on('change',function(){
+			var totalPrice=0;
+			$(".totalPrice").each(function(){
+				totalPrice+=parseInt($(this).html());
+			})
+			$("input[name=orderPrice]").val(totalPrice).change();
+		})
+	}
+	function modalCheckEvent() {
+		if (this.checked == false) {
+			$("input[class=detailCheck]").each(function() {
+				this.checked = false;
+			});
+		} else {
+			$("input[class=detailCheck]").each(function() {
+				this.checked = true;
+			});
+		}
+	}
 </script>

@@ -43,8 +43,6 @@ table a {
 	outline: none
 }
 
-
-
 </style>
                 
 <body>
@@ -80,9 +78,6 @@ table a {
                     </thead>
                 </table>
             </form>
-
-
-
             <table class="table table-hover" >
                 <colgroup>
                     <col width='8%' />
@@ -99,9 +94,6 @@ table a {
                     </tr>
                 </thead>
                 <tbody style="color: black !important">
-                
-                
-                
                     <c:forEach var="listview" items="${postList}">
                         <tr>
                             <td>${listview.boardNo}</td>

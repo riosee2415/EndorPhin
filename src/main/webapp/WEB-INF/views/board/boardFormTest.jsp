@@ -117,6 +117,4 @@
 //     function fn_deleteFile(obj){
 //     	obj.parent().remove();
 //     }
-
-
 </script>

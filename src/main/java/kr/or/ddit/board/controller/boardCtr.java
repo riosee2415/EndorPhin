@@ -68,15 +68,7 @@ public class boardCtr {
 	 */
 	@RequestMapping(value = "/boardList")
     public String boardList(Model model, PageVo pageVo,@RequestParam(defaultValue="title")String searchType, @RequestParam(defaultValue="")String keyword,@RequestParam(defaultValue="")String startDate, @RequestParam(defaultValue="")String endDate) throws Exception {
-
-		/*System.out.println("서치타입 :" + searchType); 
-		System.out.println("내용 :" + keyword); 
-		System.out.println("시작날짜 :" + startDate); 
-		System.out.println("종료날짜 :" + endDate); 
-		
-		*/
-		
-		//        List<Board_detailVo> listview = board_detailService.selectBoardList();
+//        List<Board_detailVo> listview = board_detailService.selectBoardList();
 //        
 //        model.addAttribute("listview", listview);
 //        model.addAttribute("boardTypeCode", param.getBoardTypeCode());

@@ -22,8 +22,6 @@
            <put-attribute name="content" value=""/>
         </definition> 
         
-        
-        
         <definition name="helloTiles" extends="layout">
 <!--           <put-attribute name="left" value=""/>  -->
            <put-attribute name="content" value="/WEB-INF/views/template/erpcontents.jsp"/>
@@ -33,11 +31,6 @@
            <put-attribute name="left" value="/WEB-INF/views/template/left.jsp"/>
            <put-attribute name="content" value="/WEB-INF/views/template/groupcontents.jsp"/>
         </definition>
-        
-        
-        
-        
-        
         
         <definition name="clientview" extends="layout">
            <put-attribute name="content" value="/WEB-INF/views/client/clientview.jsp"/>
@@ -51,9 +44,6 @@
          <definition name="cardsList" extends="layout">
            <put-attribute name="content" value="/WEB-INF/views/company/cardsList.jsp"/>
         </definition>
-        <!--  -->
-        
-        
         
         <definition name="employeeListTiles" extends="layout">
            <put-attribute name="content" value="/WEB-INF/views/employee/employeeList.jsp"/>
@@ -101,11 +91,9 @@
            <put-attribute name="content" value="/WEB-INF/views/slipList/paaprovuar.jsp"/>
         </definition>
         
-        
          <definition name="testTiles" extends="layout">
            <put-attribute name="content" value="/WEB-INF/views/test.jsp"/>
         </definition>
-        
         
         <definition name="paymentAdjustView" extends="layout"> <!-- 급여 조정 항목 -->
            <put-attribute name="content" value="/WEB-INF/views/payment/paymentAdjust.jsp"/>
@@ -151,7 +139,6 @@
         	<put-attribute name="content" value="/WEB-INF/views/payment/paymentslipInput.jsp"/>
         </definition>
         
-        
          <definition name="AttitudeListTiles" extends="layout"> <!-- 근태 항목 출력 -->
            <put-attribute name="content" value="/WEB-INF/views/attitude/attitudeList.jsp"/>
         </definition>
@@ -192,15 +179,9 @@
            <put-attribute name="content" value="/WEB-INF/views/attitudeRecord/attitudeRecordList.jsp"/>
         </definition>
         
-         <definition name="freeboardTest" extends="layout">
-           <put-attribute name="content" value="/WEB-INF/views/board/freeboardTest.jsp"/>
-        </definition>
-        
-        
          <definition name="AnnualListTiles" extends="layout">   <!-- 휴가 일수 등록 -->
            <put-attribute name="content" value="/WEB-INF/views/annual/annualList.jsp"/>
         </definition>
-        
         
          <definition name="prodInput" extends="layout">   <!-- 상품 등록 -->
            <put-attribute name="content" value="/WEB-INF/views/product/productList.jsp"/>
@@ -212,8 +193,6 @@
          <definition name="currentOrder" extends="layout">   <!-- 발주 현황 -->
            <put-attribute name="content" value="/WEB-INF/views/orders/currentOrder.jsp"/>
         </definition>
-        
-        
         
         <definition name="boardList" extends="layout_groupware">
         	<put-attribute name="content" value="/WEB-INF/views/board/boardListTest.jsp"/>
@@ -232,12 +211,9 @@
         	<put-attribute name="content" value="/WEB-INF/views/schedule/scheduleList.jsp"/>
         </definition>
         
-        
-        
           <definition name="psList" extends="layout">   <!-- 매입매출 -->
            <put-attribute name="content" value="/WEB-INF/views/ps/psList.jsp"/>
         </definition>
-        
        
          <definition name="document" extends="layout_groupware">    <!--그룹웨어 - 기안상신함 -->
            <put-attribute name="content" value="/WEB-INF/views/document/document.jsp"/>

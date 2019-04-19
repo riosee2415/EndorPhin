@@ -2,25 +2,19 @@
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 
 <style>
-
 #nav{
 
-
-		font-size :large;
- 		width: 500px;
-        margin-left: auto;
-        margin-right: auto;
+	font-size :large;
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
 
 }
-
-
 </style>
-
 
 <c:set var="lastPage" value="${Integer(postCnt/pageSize + (postCnt%pageSize > 0 ? 1 : 0)) }" />
 <nav id="nav" >
     <ul class="pagination">
-
 
         <c:choose>
             <c:when test="${page == 1 }">

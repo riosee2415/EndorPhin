@@ -217,65 +217,6 @@ public class Board_detailDao implements IBoard_detailDao{
 
 	/**
 	 * 
-	* Method : selectBoardTitle
-	* 작성자 : macbook
-	* 변경이력 :
-	* @param startDate
-	* @param endDate
-	* @param title
-	* @return
-	* Method 설명 : 검색
-	 */
-	@Override
-	public List<Board_detailVo> selectBoardTitle(String startDate, String endDate, String title) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("startDate", startDate);
-		map.put("endDate", endDate);
-		map.put("title", title);
-		
-		return sqlSession.selectList("board_detail.selectBoardTitle",map);
-	}
-	
-	@Override
-	public List<Board_detailVo> selectBoardUserId(String startDate, String endDate, String userId) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("startDate", startDate);
-		map.put("endDate", endDate);
-		map.put("userId", userId);
-		
-		return sqlSession.selectList("board_detail.selectBoardUserId",map);
-	}
-
-	@Override
-	public List<Board_detailVo> selectBoardcontens(String startDate, String endDate, String contents) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("startDate", startDate);
-		map.put("endDate", endDate);
-		map.put("contents", contents);
-		
-		return sqlSession.selectList("board_detail.selectBoardContents",map);
-	}
-
-	@Override
-	public List<Board_detailVo> listAll(String searchType, String keyword, String startDate, String endDate) {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("keyword", keyword);
-		map.put("searchType", searchType);
-		return sqlSession.selectList("board_detail.listAll",map);
-	}
-	
-	@Override
-	public int countAricle(String searchType, String keyword, String startDate, String endDate) {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("keyword", keyword);
-		map.put("searchType", searchType);
-		map.put("startDate", startDate);
-		map.put("endDate", endDate);
-		return sqlSession.selectOne("board_detail.countAricle",map);
-	}
-
-	/**
-	 * 
 	* Method : insertBoardReply
 	* 작성자 : macbook
 	* 변경이력 :

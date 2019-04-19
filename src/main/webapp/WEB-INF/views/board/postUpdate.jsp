@@ -96,6 +96,4 @@
 		</table>
 		<button type="submit" class="btn btn-default" id="btn_write">저장</button>
 	</div>
-	
-           
 </form>

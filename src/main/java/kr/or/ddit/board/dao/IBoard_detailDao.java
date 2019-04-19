@@ -155,23 +155,6 @@ public interface IBoard_detailDao {
 	
 	/**
 	 * 
-	* Method : getBetweenSlip
-	* 작성자 : macbook
-	* 변경이력 :
-	* @param pre_date
-	* @param post_date
-	* @return
-	* Method 설명 : 검색
-	 */
-	public List<Board_detailVo> selectBoardTitle(String startDate, String endDate, String title);
-	public List<Board_detailVo> selectBoardUserId(String startDate, String endDate, String userId);
-	public List<Board_detailVo> selectBoardcontens(String startDate, String endDate, String contents);
-	
-	public List<Board_detailVo> listAll(String searchType, String keyword, String startDate, String endDate);
-	public int countAricle(String searchType, String keyword, String startDate, String endDate);
-	
-	/**
-	 * 
 	* Method : insertBoardReply
 	* 작성자 : macbook
 	* 변경이력 :

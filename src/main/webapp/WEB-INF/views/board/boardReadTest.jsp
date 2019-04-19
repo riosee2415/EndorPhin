@@ -2,7 +2,6 @@
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
 <style>
 
 
@@ -28,18 +27,15 @@ a {
                     <tr>
                         <td>제목</td>
                         <td colspan='2'><input id="title" type="text" name="title" size="70" maxlength="200" value="${boardInfo.title}" readonly></td>
-<%--                         <td>${boardInfo.title}</td> --%>
                     </tr>
                     <tr>
                         <td>작성자</td>
                         <td><input id="userId" type="text" name="title" size="70" maxlength="200" value="${boardInfo.userId}" readonly></td>
                         <td>작성일 : <input id="userId" type="text" name="title" size="30" maxlength="200" value="${boardInfo.postDate}" readonly></td>
-<%--                         <td>${boardInfo.userId}</td> --%>
                     </tr>
                     <tr>
                         <td>내용</td>
                          <td colspan='2'><textarea id="contents" name="contents" rows="10" cols="80" readonly>${boardInfo.contents}</textarea></td>
-<%--                         <td colspan='2'>${boardInfo.contents}</td> --%>
                     </tr>
                     <tr>
                     	<td>첨부파일</td>

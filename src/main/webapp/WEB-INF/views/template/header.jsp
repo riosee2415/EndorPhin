@@ -5,14 +5,18 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Poor+Story" rel="stylesheet">
 
 
 <style>
 
+#userName{
+color : white;
+font-family: 'Black Han Sans', sans-serif;
+font-family: 'Poor Story', cursive;
+font-size: 2em;
 
-
-
-                 
+}
 
 
 #logo {
@@ -145,9 +149,10 @@ a {
 	<div class="row headermenu">
 
 
+
 		<div class="col-md-2" style="margin-top: auto;">
 			 <a class="header" href="${cp }/helloTiles">
-			 <span  id="logo">EnDorPhin</span>
+			 <span id="logo">EnDorPhin</span>
 			 <!-- <img src="${cp }/upload/erpblack.jpg" style="width: 235px; height: 70px;" /> --></a>
 		</div>
 
@@ -163,10 +168,12 @@ a {
 		<div class="col-md-2"></div>
 
 
-		<div class="col-md-2"></div>
+		 <div class="col-md-2" style="margin-top: auto; margin-bottom: auto;">
+		<span id="userName"> ${employeeVo.deptname}팀 ${employeeVo.userNm}님   접속중입니다</span>
+		</div> 
 
 		<div class="col-md-2">
-			<a class="header" href="${cp }/helloTiles"> <i
+			<a  class="header" href="${cp }/login"> <i
 				class="fa fa-plug "></i> Logout
 			</a>
 		</div>
@@ -174,7 +181,37 @@ a {
 	</div>
 </div>
 
+<script>
+           
 
+$(document).ready(function() {
+	
+	 $.ajax({
+         url         : "${cp}/employee/SearchEmployeeAjax" ,
+         method      : "get",
+         async: false,
+         success      : function(allSchedule) {
+            var datas=[];
+          for (var i = 0; i < allSchedule.length; i++) {
+               var temp = allSchedule[i];
+                datas.push({id : temp.schedule_no,
+                        title : temp.schedule_title,
+                         start : temp.schedule_start,
+                         end : temp.schedule_end});
+            }   
+            suss(datas);
+         }                 
+      }); 
+	
+	
+	
+};
+
+
+
+
+
+</script>
 
 
 

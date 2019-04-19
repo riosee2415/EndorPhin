@@ -232,13 +232,17 @@
 <script>
 
 $("#signBtn").on("click", function(){
+	alert("ddd");
 	$.ajax({
 		url : "${pageContext.request.contextPath }/insertDocument",
 		data : "documentNumber="+ $("#documentNumber").val()+ "&" + 
 				"presentUser="+ $("#presentUser").val() + "&"
 				+ "presentDate="+ $("#presentDate").val() + "&"
 				+ "title="+ $("#title").val() + "&"
+				+ "presentDepartment="+ $("#presentDepartment").val() + "&"
+				+ "preservation="+$("#preservation").val() + "&"
 				+ "contents="+ $("#contents").val(),
+				
 		success : function(data) {
 			alert("기안작성이 완료되었습니다.");
 			location.reload();

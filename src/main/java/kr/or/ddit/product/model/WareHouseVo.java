@@ -29,6 +29,16 @@ public class WareHouseVo {
 		this.wareHouselocal = wareHouselocal;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "WareHouseVo [wareHouseCode=" + wareHouseCode + ", wareHouseName=" + wareHouseName + ", wareHouselocal="
+				+ wareHouselocal + "]";
+	}
+	public WareHouseVo() {
+	}
+	public WareHouseVo(String wareHouseCode, String wareHouseName) {
+		this.wareHouseCode = wareHouseCode;
+		this.wareHouseName = wareHouseName;
+	}
 	
 }

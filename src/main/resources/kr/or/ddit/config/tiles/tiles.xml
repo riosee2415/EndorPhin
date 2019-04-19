@@ -186,6 +186,9 @@
          <definition name="prodInput" extends="layout">   <!-- 상품 등록 -->
            <put-attribute name="content" value="/WEB-INF/views/product/productList.jsp"/>
         </definition>
+         <definition name="wareHouseTiles" extends="layout">   <!-- 창고 관리 -->
+           <put-attribute name="content" value="/WEB-INF/views/product/wareHouseList.jsp"/>
+        </definition>
         
          <definition name="orderInput" extends="layout">   <!-- 발주 입력 -->
            <put-attribute name="content" value="/WEB-INF/views/orders/orderInput.jsp"/>

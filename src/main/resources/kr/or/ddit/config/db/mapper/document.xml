@@ -10,8 +10,8 @@
 		(documentnumber, title, preservation, presentdate, contents, tempsortation,
 		 completesortation, presentuser, presentdepartment,documentType)
 		values
-		(#{documentnumber},#{title},#{preservation},sysdate
-		,#{contents},#{tempsortation},#{completesortation},#{presentuser},#{presentdepartment},#{documentType})
+		(#{documentNumber},#{title},#{preservation},sysdate
+		,#{contents},#{tempSortation},#{completeSortation},#{presentUser},#{presentDepartment},#{documentType})
 
 	</insert>
 

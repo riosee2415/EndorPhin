@@ -1,5 +1,9 @@
 package kr.or.ddit.document.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.ddit.document.model.DocumentVo;
+import kr.or.ddit.document.service.IDocumentService;
 import kr.or.ddit.employee.dao.IEmployeeDao;
 import kr.or.ddit.employee.model.EmployeeVo;
 
@@ -18,8 +23,8 @@ import kr.or.ddit.employee.model.EmployeeVo;
 public class DocumentController {
 	private Logger logger = LoggerFactory.getLogger(DocumentController.class);
 
-	@Resource(name="employeeDao")
-	private IEmployeeDao dao;
+	@Resource(name="documentService")
+	private IDocumentService documentService;
 	
 	@RequestMapping("/document")
 	public String document(Model model, HttpSession session,DocumentVo documentVo){
@@ -33,8 +38,29 @@ public class DocumentController {
 		return "document";
 	}
 	@RequestMapping("/insertDocument")
-	public String insertDocument(String documentNumber, String presentUser,String presentDate,String title,String contents){
-
+	public String insertDocument(DocumentVo documentVo,String presentDepartment,String documentNumber, String presentUser,
+								String presentDate,String title,String contents,String preservation ) throws ParseException{
+		
+		Date date = new Date();									
+		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
+		date= sdf.parse(presentDate);
+			
+		logger.debug("presentDepartment:{}",presentDepartment);
+		logger.debug("documentNumber:{}",documentNumber);
+		logger.debug("presentUser:{}",presentUser);
+		logger.debug("presentDate:{}",presentDate);
+		logger.debug("title:{}",title);
+		logger.debug("contents:{}",contents);
+		logger.debug("preservation:{}",preservation);
+		documentVo.setPresentDepartment(presentDepartment);
+		documentVo.setDocumentNumber(documentNumber);
+		documentVo.setPresentUser(presentUser);
+		documentVo.setPresentDate(date);
+		documentVo.setTitle(title);
+		documentVo.setContents("sdfsd");
+		documentVo.setPreservation(preservation);
+		
+		int insert = documentService.insertDocument(documentVo);
 		return "document";
 	}
 }

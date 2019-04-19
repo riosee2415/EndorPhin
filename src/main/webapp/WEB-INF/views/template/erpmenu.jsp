@@ -118,6 +118,7 @@
 							기초정보</a>
 						<ul class="sub-menu">
 							<li><a href="/product/productInput">상품 등록</a></li>
+							<li><a href="/wareHouse/getAllWareHouse">창고 관리</a></li>
 						</ul></li>
 					<li><a class="parent" href="#"><i class="icon-file-alt"></i>
 							자재관리</a>

@@ -77,8 +77,8 @@ public class Tax_calService implements ITax_calService{
 	}
 
 	@Override
-	public List<Map<String, String>> selectBy51() {
-		return tax_calDao.selectBy51();
+	public List<Map<String, String>> selectBy51(String startDate, String endDate) {
+		return tax_calDao.selectBy51(startDate, endDate);
 	}
 
 }

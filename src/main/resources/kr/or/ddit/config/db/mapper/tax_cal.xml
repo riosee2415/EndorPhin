@@ -154,12 +154,16 @@
 
 
 
-	<select id="selectBy51" resultType="map">
-		select
-			sum(SUPPLYVALUE) as supplyValue,
-	        sum(SURTAX) as surtax
-	    from tax_cal
-	    where salesstatus = '과세매입'
+	<select id="selectBy51" parameterType="map" resultType="map" >
+			select
+			NVL(sum(SUPPLYVALUE), 0) as supplyValue,
+	        NVL(sum(SURTAX), 0) as surtax,
+            NVL(salesstatus, '없음') as salesstatus
+		    from tax_cal
+		    where to_date(slipdate, 'yy-mm-dd') between to_date(#{startDate}, 'yy-mm-dd') and to_date(#{endDate}, 'yy-mm-dd')
+	        group by salesstatus
+	        order by salesstatus
+        
 	</select>
 </mapper>
 

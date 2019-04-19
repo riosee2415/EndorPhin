@@ -285,12 +285,35 @@ public class Tax_calController {
 	
 	
 	@RequestMapping("/tax_report")
-	public String tax_report(Model model) {
-			List<Map<String,String>> map51 = tax_calService.selectBy51();
-			
-			model.addAttribute("map51", map51);
+	public String tax_report( 	Model model) {
+		
 			
 		return "tax_report";
+	}
+	
+	
+	@RequestMapping("/searchTax_report")
+	public String searchTax_report(@RequestParam("startDate")String startDate
+								,@RequestParam("endDate")String endDate
+								,Model model) {
+		
+		
+		List<Map<String,String>> map51 = tax_calService.selectBy51(startDate, endDate);
+		
+		
+		logger.debug("map : {}", map51.get(0).get("SURTAX"));
+		logger.debug("map : {}", map51.get(0).get("SURTAX"));
+		logger.debug("map : {}", map51.get(0).get("SURTAX"));
+		logger.debug("map : {}", map51.get(0).get("SURTAX"));
+		logger.debug("map : {}", map51.get(0).get("SURTAX"));
+		logger.debug("map : {}", map51.get(0).get("SURTAX"));
+		
+		model.addAttribute("startDate", startDate);
+		model.addAttribute("endDate", endDate);
+		
+		model.addAttribute("map51", map51);
+		
+		return "taxcal/tax_reportView"; 
 	}
 
 }

@@ -111,7 +111,8 @@ public interface ITax_calService {
 	* @return
 	* Method 설명 : 과세매입 가져오기
 	*/
-	public List<Map<String, String>> selectBy51();
+	public List<Map<String, String>> selectBy51(String startDate, String endDate);
+
 	
 }
 

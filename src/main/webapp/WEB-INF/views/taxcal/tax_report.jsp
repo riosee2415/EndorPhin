@@ -9,269 +9,62 @@
 		<h2>
 			<i class="fa fa-calculator"></i>부가세신고서
 		</h2>
+		
+		<input id="t1Btn" class="bttn-fill bttn-warning" type="button" value="1기 예정" />
+		<input id="c1Btn" class="bttn-fill bttn-warning" type="button" value="1기 확정" />
+		<input id="t2Btn" class="bttn-fill bttn-warning" type="button" value="2기 예정" />
+		<input id="c2Btn" class="bttn-fill bttn-warning" type="button" value="2기 확정" />
 
 
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<td colspan="4">구분</td>
-					<td>금액</td>
-					<td>세액</td>
-				</tr>
-			</thead>
-
-			<tbody>
-				<tr>
-					<td rowspan="9">매입</td>
-					<td rowspan="4">과세</td>
-					<td>세금계산서발급분</td>
-					<td>1</td>
-					<!-- 금액/ 세액 -->
-					<td><fmt:formatNumber value="${map51.get(0).get('SUPPLYVALUE') }" pattern="#,###" /></td>
-					<td><fmt:formatNumber value="${map51.get(0).get('SURTAX') }" pattern="#,###" /></td>
-				</tr>
-
-				<tr>
-					<td>매입자발행세금계산서</td>
-					<td>2</td>
-					<!-- 금액/ 세액 -->
-					<td></td>
-					<td></td>
-				</tr>
-
-				<tr>
-					<td>신용카드/현금영수증발행분</td>
-					<td>3</td>
-					<!-- 금액/ 세액 -->
-					<td></td>
-					<td></td>
-				</tr>
-
-				<tr>
-					<td>기타(정규영수증외매출분)</td>
-					<td>4</td>
-					<!-- 금액/ 세액 -->
-					<td></td>
-					<td></td>
-				</tr>
-
-				<tr>
-					<td rowspan="2">영세</td>
-					<td>세금계산서발급분</td>
-					<td>5</td>
-					<!-- 금액/ 세액 -->
-					<td></td>
-					<td></td>
-				</tr>
-
-				<tr>
-					<td>기타</td>
-					<td>6</td>
-					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
-				</tr>
-
-				<tr>
-					<td colspan="2">예정신고누락분</td>
-					<td>7</td>
-					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
-				</tr>
-
-				<tr>
-					<td colspan="2">대손세액가감</td>
-					<td>8</td>
-					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
-				</tr>
-
-				<tr>
-					<td colspan="2">합계</td>
-					<td>9</td>
-					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
-				</tr>
-
-
-
-
-				<tr>
-					<td rowspan="10">매출</td>
-					<td rowspan="3">세금계산서수취분</td>
-					<td>일반매입</td>
-					<td rowspan="2">10</td>
-					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
-				</tr>
-
-				<tr>
-					<td>수출기업수입분납유예</td>
-					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
-				</tr>
-
-				<tr>
-					<td>고정자산매입</td>
-					<td>11</td>
-					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
-				</tr>
-
-				<tr>
-					<td colspan="2">예정신고누락분</td>
-					<td>12</td>
-					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
-				</tr>
-
-				<tr>
-					<td colspan="2">매입자발행세금계산서</td>
-					<td>13</td>
-					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
-				</tr>
-
-				<tr>
-					<td colspan="2">그밖의공제매입세액</td>
-					<td>14</td>
-					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
-				</tr>
-
-				<tr>
-					<td colspan="2">합계</td>
-					<td>15</td>
-					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
-				</tr>
-
-				<tr>
-					<td colspan="2">공제받지못할매입세액</td>
-					<td>16</td>
-					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
-				</tr>
-
-				<tr>
-					<td colspan="2">차감계</td>
-					<td>17</td>
-					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
-				</tr>
-
-				<tr>
-					<td colspan="4">납부(환급)세액(매출세액-매입세액)</td>
-					<!-- 세액 -->
-					<td>1230000123</td>
-				</tr>
-
-
-				<tr>
-					<td rowspan="3">경감공제세액</td>
-					<td colspan="2">그밖의경감공제새액</td>
-					<td>18</td>
-					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
-				</tr>
-
-				<tr>
-					<td colspan="2">신용카드매출전표등발행공제</td>
-					<td>19</td>
-					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
-				</tr>
-
-				<tr>
-					<td colspan="2">합계</td>
-					<td>20</td>
-					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
-				</tr>
-
-				<tr>
-					<td colspan="3">예정신고미홥금세액</td>
-					<td>21</td>
-					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
-				</tr>
-
-				<tr>
-					<td colspan="3">예정고지세액</td>
-					<td>22</td>
-					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
-				</tr>
-
-				<tr>
-					<td colspan="3">사업양수자의대리납부기납부세액</td>
-					<td>23</td>
-					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
-				</tr>
-
-				<tr>
-					<td colspan="3">매입자납부특례기납부세액</td>
-					<td>24</td>
-					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
-				</tr>
-
-				<tr>
-					<td colspan="3">신용카드업자의대리납부기납부세액</td>
-					<td>25</td>
-					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
-				</tr>
-
-				<tr>
-					<td colspan="3">가산세액계</td>
-					<td>26</td>
-					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
-				</tr>
-
-				<tr>
-					<td colspan="5">차감,가감하여납부할세액(환급받을세액)</td>
-					<!-- 세액 -->
-					<td>1230000123</td>
-				</tr>
-
-				<tr>
-					<td colspan="5">총괄납부사업자가납부할세액(환급받을세액)</td>
-					<!-- 세액 -->
-					<td>1230000123</td>
-				</tr>
-			</tbody>
-
-
-		</table>
-
+<div id="view"></div>
 
 
 
 	</div>
 </div>
 
+
+<Script>
+
+// 버튼 입력 시 Action
+
+	/*1기 예정*/
+	$("#t1Btn").on("click", function(){
+		searchTax_report_t1("19/01/01", "19/03/31");
+	});
+
+	/*1기 확정*/
+	$("#c1Btn").on("click", function(){
+		searchTax_report_t1("19/04/01", "19/06/30");
+	});
+
+	/*2기 예정*/
+	$("#t2Btn").on("click", function(){
+		searchTax_report_t1("19/07/01", "19/09/30");
+	});
+	
+	/*2기 확정*/
+	$("#c2Btn").on("click", function(){
+		searchTax_report_t1("19/10/01", "19/12/31");
+	});
+	
+	
+	
+	
+//function
+
+	/*1기 예정 조회*/
+	function searchTax_report_t1(startDate, endDate){
+		$.ajax({
+			url : "${pageContext.request.contextPath }/searchTax_report",
+			data : "startDate=" + startDate + "&endDate=" + endDate,
+			success : function(data){
+				console.log(data);
+				$("#view").html(data);
+			}
+				
+				
+		});
+	}
+</Script>
 

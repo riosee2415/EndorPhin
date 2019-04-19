@@ -94,8 +94,13 @@ public class Tax_calDao implements ITax_calDao{
 	}
 
 	@Override
-	public List<Map<String, String>> selectBy51(){
-		return sqlSessionTemplate.selectList("tax_cal.selectBy51");
+	public List<Map<String, String>> selectBy51(String startDate, String endDate){
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		
+		return sqlSessionTemplate.selectList("tax_cal.selectBy51", map);
 	}
 	
 

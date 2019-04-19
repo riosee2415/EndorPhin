@@ -16,11 +16,18 @@ public class Board_detailVo extends PageVo{	//게시글
 	String boardNo;				//게시글 번호
 	String title;				//제목
 	String contents;			//내용
-	String postDate;				//작성일시
+	String postDate;			//작성일시
 	String boardTypeCode;		//게시판 분류 코드
 	String userId;				//작성자
+	String views;				//조회수
 	
 	String startDate;
+	public String getViews() {
+		return views;
+	}
+	public void setViews(String views) {
+		this.views = views;
+	}
 	String endDate;
 	
 	public String getBoardNo() {
@@ -71,13 +78,13 @@ public class Board_detailVo extends PageVo{	//게시글
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
+	
 	@Override
 	public String toString() {
 		return "Board_detailVo [boardNo=" + boardNo + ", title=" + title + ", contents=" + contents + ", postDate="
-				+ postDate + ", boardTypeCode=" + boardTypeCode + ", userId=" + userId + ", startDate=" + startDate
-				+ ", endDate=" + endDate + "]";
+				+ postDate + ", boardTypeCode=" + boardTypeCode + ", userId=" + userId + ", views=" + views
+				+ ", startDate=" + startDate + ", endDate=" + endDate + "]";
 	}
-	
 	
 
 }

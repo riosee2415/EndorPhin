@@ -217,4 +217,14 @@ public interface IBoard_detailDao {
 	 */
 	public List<Board_detailVo> SearchPostList(Board_detailVo vo);
 	
+	/**
+	 * 
+	* Method : updateViewsRead
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardNo
+	* Method 설명 : 조회수 증가
+	 */ 
+	public void updateViewsRead(String boardNo);
+	
 }

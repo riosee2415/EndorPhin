@@ -34,7 +34,6 @@ import kr.or.ddit.board.service.IBoard_TypeService;
 import kr.or.ddit.board.service.IBoard_detailService;
 import kr.or.ddit.board.service.ICommentsService;
 import kr.or.ddit.employee.model.EmployeeVo;
-import kr.or.ddit.slip.model.SlipVo;
 import kr.or.ddit.util.model.PageVo;
 
 @Controller
@@ -219,6 +218,7 @@ public class boardCtr {
 	@RequestMapping(value = "/boardRead")
 	public String boardRead(HttpServletRequest request, String boardNo, Model model, String boardTypeCode) throws Exception {
         
+		board_detailService.updateViewsRead(boardNo);
         Board_detailVo boardInfo = board_detailService.selectBoardOne(boardNo);
         List<CommentsVo> replylist = board_detailService.selectBoardReplyList(boardNo);
         List<Attach_boardVo> listview = board_detailService.selectBoardFileList(boardNo);
@@ -386,7 +386,7 @@ public class boardCtr {
 	* Method 설명 : 게시글 리스트 조회
 	 */
 	@RequestMapping(value = "/SearchPost")
-    public String SearchPost(Model model,@RequestParam(defaultValue="title")String searchType,
+    public String SearchPost(Model model, @RequestParam(defaultValue="title")String searchType,
     		String keyword,String startDate,String endDate) throws Exception {
 		
 		Board_detailVo vo = new Board_detailVo();
@@ -406,13 +406,11 @@ public class boardCtr {
 		}
 		
 		List<Board_detailVo> postList = board_detailService.SearchPostList(vo);
-		
-		model.addAttribute("postList",postList);
+		model.addAttribute("postList", postList);
 		model.addAttribute("pageSize", vo.getPageSize());
 		model.addAttribute("page", vo.getPage());
 		
 		return "boardList";
     }
-
 
 }

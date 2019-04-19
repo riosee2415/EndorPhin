@@ -4,49 +4,108 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
-
-
 <style>
-  body {
-   /*  margin: 40px 10px; */
-    padding: 0;
-    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-    font-size: 14px;
-  }
 
-  #calendar {
-    max-width: auto;
-    margin: 0 auto;
-  } 
+#calendar {
+background-color: #FBF5EF;
+}     
+.fc-title{
+    font-size: 1.3em;
+    color: white;
+    width : 200px;
+    margin-left: auto;
+    margin-right: auto;
+    
+}     
+     
+     
+  body {
+        padding: 0;
+        font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+        font-size: 18px;
+    }
+
+  .fc-sun {color:#e31b23; background-color:#F8E0E0 }
+.fc-sat {color:#007dc3;  background-color:#E0F2F7 }
   
- /*  .fc-button-group > .fc-button:not(:last-child){
-  font-weight: bolder;
-  font-size: x-large;
-  }
-  .fc-button-group > .fc-button:not(:first-child) {
-   font-weight: bolder;
-  font-size: x-large;
-  }
-  .fc-icon-chevron-right:before {
-  font-weight: bolder;
-  font-size: x-large;
-  }
-  .fc-next-button fc-button fc-button-primary{
-   font-weight: bolder;
-  font-size: x-large;
-  } */
   
+/* ===============================================================   */
+a:hover,a:focus{
+    text-decoration: none;
+    outline: none;
+}
+.tab .nav-tabs{
+    border: none;
+    border-bottom: 2px solid #079fc9;
+    margin: 0;
+}
+
+.tab .nav-tabs li a{
+	
+    padding: 10px 20px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #293241;
+    text-transform: uppercase;
+    border: 2px solid #e6e5e1;
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
+    z-index: 1;
+    position: relative;
+    transition: all 0.3s ease 0s;
+}
+
+.tab .nav-tabs li a:hover,
+.tab .nav-tabs li.active a{
+    background: #fff;
+    color: #079fc9;
+    border: 2px solid #079fc9;
+    border-bottom-color: transparent;
+}
+.tab .nav-tabs li a:before{
+    content: "";
+    display: block;
+    height: 2px;
+    background: #fff;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    transform: scaleX(0);
+    transition: all 0.3s ease-in-out 0s;
+}
+.tab .nav-tabs li.active a:before,
+.tab .nav-tabs li a:hover:before{ transform: scaleX(1); }
+@media only screen and (max-width: 479px){
+    .tab .nav-tabs{ border: none; }
+    .tab .nav-tabs li{
+        width: 100%;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .tab .nav-tabs li a{
+        margin: 0;
+        border-bottom: 2px solid transparent;
+    }
+    .tab .nav-tabs li a:before{
+        content: "";
+        width: 100%;
+        height: 2px;
+        background: #079fc9;
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+    }
+}
   
 </style>
-
 
 
 <body>
 
    <div class="container-fluid">
-      <div class="row" style="margin-top: 50px">
-         <div class="col-md-2"></div>
+      <div class="row" style="margin-top: 30px">
+         <div class="col-md-1"></div>
 
          <div class="col-md-2">
             <h1 style="font-weight: bolder;">
@@ -58,18 +117,39 @@
       </div>
 
 
-		<div class="row" style="margin-top: 50px">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
-				<!-- 달력 시작 -->
-				<div id='calendar'></div>
-				<!-- 달력 종료 -->
+		<div class="row" style="margin-top: 10px">
+			<div class="col-md-1"></div>
+			<div class="col-md-10">
+
+
+				<div class="tab" role="tabpanel">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs" role="tablist">
+						<li role="presentation" class="active"><a id="frmTap"
+							href="#Section1" aria-controls="home" role="tab"
+							data-toggle="tab">회사 일정</a></li>
+						<li role="presentation"><a href="#Section2"
+							aria-controls="profile" role="tab" data-toggle="tab">개인 일정 </a></li>
+					</ul>
+				</div>
 			</div>
-			<div class="col-md-2"></div>
+			<div class="col-md-1"></div>
 		</div>
 
 
 
+			<div role="tabpanel" class="tab-pane fade in active" id="Section1">
+				<div class="row" style="margin-top: 10px">
+					<div class="col-md-1"></div>
+					<div class="col-md-10">
+						<!-- 달력 시작 -->
+						<div id='calendar'></div>
+						<!-- 달력 종료 -->
+					</div>
+					<div class="col-md-1"></div>
+				</div>
+			</div>
+			
 
 
 	</div>
@@ -78,11 +158,11 @@
 
 //========================날짜포멧 시작
 function getFormatDate(date){
-   var year = date.getFullYear();                                 //yyyy
+   var year = date.getFullYear();                         //yyyy
    var month = (1 + date.getMonth());                     //M
-   month = month >= 10 ? month : '0' + month;     // month 두자리로 저장
-   var day = date.getDate();                                        //d
-   day = day >= 10 ? day : '0' + day;                            //day 두자리로 저장
+   month = month >= 10 ? month : '0' + month;             // month 두자리로 저장
+   var day = date.getDate();                              //d
+   day = day >= 10 ? day : '0' + day;                     //day 두자리로 저장
    return  year + '-' + month + '-' + day;
 }
 //========================날짜포멧 종료
@@ -128,6 +208,13 @@ var calendar;
    },
    
    //===========================================================캘린더 수정부분 종료
+   
+   
+   
+   eventDrop: function(info) {
+       console.log(info);
+    },
+   
       
       eventDragStop: function(event) {
       
@@ -207,7 +294,14 @@ var calendar;
      });
     calendar.render();
   });
-
+  
+  
+  
+  $(document).ready(function() {
+	  
+		$("#frmTap").trigger('click');
+  });
+		
   
 </script>
                                        

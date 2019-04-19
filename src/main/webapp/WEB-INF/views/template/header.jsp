@@ -4,7 +4,55 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans" rel="stylesheet">
+
+
 <style>
+
+
+
+
+                 
+
+
+#logo {
+color : white;
+font-weight :1500;
+ font-family: 'Black Han Sans', sans-serif;
+	-webkit-animation: tracking-in-contract 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+	        animation: tracking-in-contract 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+}
+
+@-webkit-keyframes tracking-in-contract {
+  0% {
+    letter-spacing: 1em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    letter-spacing: normal;
+    opacity: 1;
+  }
+}
+@keyframes tracking-in-contract {
+  0% {
+    letter-spacing: 1em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    letter-spacing: normal;
+    opacity: 1;
+  }
+}
+
+
+
+
 a {
 	color: #fff;
 	text-decoration: none;
@@ -97,11 +145,11 @@ a {
 	<div class="row headermenu">
 
 
-		<div class="col-md-2 headFont">
+		<div class="col-md-2" style="margin-top: auto;">
 			 <a class="header" href="${cp }/helloTiles">
+			 <span  id="logo">EnDorPhin</span>
 			 <!-- <img src="${cp }/upload/erpblack.jpg" style="width: 235px; height: 70px;" /> --></a>
 		</div>
-
 
 		<div id="erpmenu" class="col-md-2">
 			<a class="header" href="${cp }/helloTiles">E R P</a>
@@ -115,8 +163,6 @@ a {
 		<div class="col-md-2"></div>
 
 
-
-
 		<div class="col-md-2"></div>
 
 		<div class="col-md-2">
@@ -124,8 +170,6 @@ a {
 				class="fa fa-plug "></i> Logout
 			</a>
 		</div>
-
-
 
 	</div>
 </div>

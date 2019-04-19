@@ -1,6 +1,7 @@
 package kr.or.ddit.product.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -20,15 +21,7 @@ public class ReceiveDao implements IReceiveDao{
 		return sqlSessionTemplate.insert("receive.insertReceive",receiveVo);
 	}
 
-	@Override
-	public List<ReceiveVo> getAllReceive() {
-		return sqlSessionTemplate.selectList("receive.getAllReceive");
-	}
 
-	@Override
-	public ReceiveVo selectReceive(String orderCode) {
-		return sqlSessionTemplate.selectOne("receive.selectReceive",orderCode);
-	}
 
 	@Override
 	public int deleteReceive(String receiveCode) {
@@ -38,6 +31,27 @@ public class ReceiveDao implements IReceiveDao{
 	@Override
 	public int updateReceive(ReceiveVo receiveVo) {
 		return sqlSessionTemplate.update("receive.updateReceive",receiveVo);
+	}
+
+
+	@Override
+	public List<ReceiveVo> getAllReceive(Map<String, Object> map) {
+		return sqlSessionTemplate.selectList("receive.getAllReceive",map);
+	}
+
+
+
+
+	@Override
+	public ReceiveVo selectReceiveBycd(String receiveCode) {
+		return sqlSessionTemplate.selectOne("receive.selectReceive",receiveCode);
+	}
+
+
+
+	@Override
+	public List<ReceiveVo> selectReceive(Map<String, Object> map) {
+		return sqlSessionTemplate.selectList("receive.selectReceive",map);
 	}
 
 }

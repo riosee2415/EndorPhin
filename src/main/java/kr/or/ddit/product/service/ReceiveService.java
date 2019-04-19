@@ -1,6 +1,7 @@
 package kr.or.ddit.product.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -21,16 +22,6 @@ public class ReceiveService implements IReceiveService{
 	}
 
 	@Override
-	public List<ReceiveVo> getAllReceive() {
-		return receiveDao.getAllReceive();
-	}
-
-	@Override
-	public ReceiveVo selectReceive(String orderCode) {
-		return receiveDao.selectReceive(orderCode);
-	}
-
-	@Override
 	public int deleteReceive(String receiveCode) {
 		return receiveDao.deleteReceive(receiveCode);
 	}
@@ -39,5 +30,19 @@ public class ReceiveService implements IReceiveService{
 	public int updateReceive(ReceiveVo receiveVo) {
 		return receiveDao.updateReceive(receiveVo);
 	}
+
+
+	@Override
+	public List<ReceiveVo> getAllReceive(Map<String, Object> map) {
+		return receiveDao.getAllReceive(map);
+	}
+
+
+	@Override
+	public List<ReceiveVo> selectReceive(Map<String,Object> map) {
+		return receiveDao.selectReceive(map);
+	}
+
+
 
 }

@@ -170,25 +170,6 @@ function dialog() {
 		dialogBox.removeClass('dialog--active');
 	});
 
-	// Close the dialog - press escape key // key#27
-	$(document).keyup(function(e) {
-		if (e.keyCode === 27) {
-			dialogBox.removeClass('dialog--active');
-		}
-	});
-
-	// Close dialog - click outside
-	$(document).on(
-			"click",
-			function(e) {
-				if ($(e.target).is(dialogBox) === false 
-						&& $(e.target).is(dialogChild) === false
-						&& $(e.target).is(secondModal) === false
-						&& $(e.target).is(secondModalChild) === false) {
-					dialogBox.removeClass("dialog--active");
-				}
-			});
-
 };
 $(document).ready(function(){
 	dialog();

@@ -26,18 +26,13 @@
 		where schedule_no = #{schedule_no}
 	</delete>  
 	
-	
-			<update id="updateSchedule" parameterType="scheduleVo">
-			update schedule set
-			schedule_title = nvl(#{schedule_title,jdbcType=VARCHAR},schedule_title),
-			schedule_start = nvl(#{schedule_start,jdbcType=VARCHAR},schedule_start),
-			<if test="schedule_end != null">
-			schedule_end = to_date(#{schedule_end},'yyyy-mm-dd')
-			</if>
-			where schedule_no=#{schedule_no}
-			</update>
+	<update id="updateSchedule" parameterType="scheduleVo">
+	update schedule set
+	schedule_title = nvl(#{schedule_title,jdbcType=VARCHAR},schedule_title),
+	schedule_start = nvl(#{schedule_start,jdbcType=VARCHAR},schedule_start),
+	schedule_end = nvl(#{schedule_end,jdbcType=VARCHAR},schedule_end)
+	where schedule_no=#{schedule_no}
+	</update>
 
 </mapper>
-
-
 

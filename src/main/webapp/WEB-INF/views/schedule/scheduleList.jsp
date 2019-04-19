@@ -211,11 +211,79 @@ var calendar;
    
    
    
+   
+   
+    //============================================타이틀 수정 시작
+    	  
+   eventClick: function(event, element) {
+		
+		var title = prompt('Event Title:');
+		
+	    event.event.setProp = title;
+	    
+	    
+	    console.log(event);
+	    
+	    
+	 var id =  event.event.id;
+	 var title = event.event.setProp;
+	    
+	    $.ajax({
+	          url         : "${cp}/schedule/scheduleUpdateAjax" ,
+	          method      : "get",
+	          traditional : true,
+	           data      : {  schedule_no: id,
+	                          schedule_title: title
+	           }, 
+	          success      : function(data) {
+	             calendar.refetchEvents();
+	          } 
+	       });  
+	   
+	  },
+	  
+   //===========================================================타이틀 수정 종료
+   
+                              
+                       
+   
+   
+   
+ 
+    //============================================일정 이동하기 시작
    eventDrop: function(info) {
        console.log(info);
-    },
-   
-      
+       
+       if(info.event.end != null){
+    	   var id =  info.event.id;
+           var title = info.event.title;
+           var start = getFormatDate(info.event.start);
+           var end = getFormatDate(info.event.end); 
+       }else if(info.event.end == null){
+    	   var id =  info.event.id;
+           var title = info.event.title;
+           var start = getFormatDate(info.event.start);
+           var end = getFormatDate(info.event.start); 
+       }
+       
+       
+                                                      
+	   $.ajax({
+	          url         : "${cp}/schedule/scheduleUpdateAjax" ,
+	          method      : "get",
+	          traditional : true,
+	           data      : {  schedule_no: id,
+	                          schedule_title: title,
+		                      schedule_start: start,
+		                      schedule_end: end
+	           }, 
+	          success      : function(data) {
+	             calendar.refetchEvents();
+	          } 
+	       });  
+	   
+   },
+ //============================================일정 이동하기 종료
       eventDragStop: function(event) {
       
            var trashEl = jQuery('#calendar');

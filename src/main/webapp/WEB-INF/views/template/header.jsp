@@ -181,37 +181,3 @@ a {
 	</div>
 </div>
 
-<script>
-           
-
-$(document).ready(function() {
-	
-	 $.ajax({
-         url         : "${cp}/employee/SearchEmployeeAjax" ,
-         method      : "get",
-         async: false,
-         success      : function(allSchedule) {
-            var datas=[];
-          for (var i = 0; i < allSchedule.length; i++) {
-               var temp = allSchedule[i];
-                datas.push({id : temp.schedule_no,
-                        title : temp.schedule_title,
-                         start : temp.schedule_start,
-                         end : temp.schedule_end});
-            }   
-            suss(datas);
-         }                 
-      }); 
-	
-	
-	
-};
-
-
-
-
-
-</script>
-
-
-

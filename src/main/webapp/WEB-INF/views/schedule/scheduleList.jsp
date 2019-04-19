@@ -278,7 +278,7 @@ var calendar;
  //============================================일정 이동하기 종료
       eventDragStop: function(event) {
       
-           var trashEl = jQuery('#calendar');
+           var trashEl = $(this).el;
            var ofs = trashEl.offset();
 
            var x1 = ofs.left;

@@ -6,41 +6,51 @@
 
 	<!-- 창고 입출고 이력 입력 -->
 	<insert id="insertReceive" parameterType="receiveVo">
-		<selectKey keyProperty="receivecode" order="BEFORE" resultType="String">
-			select receive_seq.nextval()
+		<selectKey keyProperty="receiveCode" order="BEFORE" resultType="String">
+			select receive_seq.nextval
 			from	dual
 		</selectKey>
 		insert into receive
-		(receivecode, receivedate, sortation, quantity, material,
-		 warehousecode, ordercode, productcode)
+		(receivecode, receivedate, sortation, material,
+		 warehousecode, ordercode)
 		values
 		(#{receiveCode},sysdate,#{sortation}
-		,nvl(#{quantity, jdbcType=VARCHAR},null)
 		,nvl(#{material, jdbcType=VARCHAR},null)
 		,#{warehouseCode}
-		,nvl(#{orderCode, jdbcType=VARCHAR},null)
-		,#{productCode})
+		,nvl(#{orderCode, jdbcType=VARCHAR},null))
 	</insert>
 
 
 	<!-- 창고 입출고 이력  전체 불러오기 -->
-	<select id="getAllReceive" resultType="receiveVo">
-		select
-		receivecode, receivedate, sortation, quantity, material,
-		 warehousecode, ordercode, productcode
-		from receive
+	<select id="getAllReceive" resultType="receiveVo" parameterType="map">
+		select  RECEIVECODE, to_char(RECEIVEDATE,'yyyy-MM-dd') receivedate, r.SORTATION,
+        MATERIAL, r.WAREHOUSECODE, r.ORDERCODE,warehousename
+		from    receive r, orders o , warehouse w
+		where   r.ordercode = o.ordercode
+		and		r.warehousecode = w.warehousecode
+		<if test="preDate!=null">
+	        and     receivedate (between to_date(#{preDate},'yyyy-MM-dd')
+	        and     to_date(#{postDate},'yyyy-MM-dd'))
+        </if>
 	</select>
 
 
 	<!-- 창고 입출고 이력 선택하여 가져오기 -->
 	<select id="selectReceive" resultType="receiveVo"
-		parameterType="String">
-		select
-		receivecode, receivedate, sortation, quantity, material,
-		 warehousecode, ordercode, productcode
-		from	receive 
-		where   ordercode = #{orderCode}
+		parameterType="map">
+		select  RECEIVECODE, to_char(RECEIVEDATE,'yyyy-MM-dd') receivedate, r.SORTATION, 
+        MATERIAL, r.WAREHOUSECODE, r.ORDERCODE,warehousename
+		from    receive r, orders o , warehouse w
+		where   r.ordercode = o.ordercode
+		and		r.warehousecode = w.warehousecode
+		<if test="orderCode!=null">
+			and		r.ordercode = #{orderCode}
+		</if>
+		<if test="receiveCode!=null">
+			and		r.receivecode = #{receiveCode}
+		</if>
 	</select>
+	
 
 
 	<!-- 창고 입출고 이력  삭제 -->
@@ -53,11 +63,12 @@
 		update receive
 		set receivedate = nvl(#{receiveDate, jdbcType=VARCHAR},receivedate)
 			,sortation = nvl(#{sortation, jdbcType=VARCHAR},sortation)
-			,quantity = nvl(#{quantity, jdbcType=VARCHAR},quantity)
-			,material = nvl(#{material, jdbcType=VARCHAR},material)
+			,material = (select sum(quantity*baseprice)
+						from    receive_detail rd,product p
+						where   rd.productcode=p.productcode
+						and     receivecode=#{receiveCode})
 			,warehousecode = nvl(#{warehouseCode, jdbcType=VARCHAR},warehousecode)
 			,ordercode = nvl(#{orderCode, jdbcType=VARCHAR},ordercode)
-			,productcode = nvl(#{productCode, jdbcType=VARCHAR},productcode)
 		where	receivecode = #{receiveCode}
 	</update>
 </mapper>

@@ -38,6 +38,7 @@
     	<typeAlias  alias="productListVo" type="kr.or.ddit.product.model.ProductListVo"/>
     	<typeAlias  alias="productVo" type="kr.or.ddit.product.model.ProductVo"/>
     	<typeAlias  alias="receiveVo" type="kr.or.ddit.product.model.ReceiveVo"/>
+    	<typeAlias  alias="receive_detailVo" type="kr.or.ddit.product.model.Receive_detailVo"/>
     	<typeAlias  alias="warehouseVo" type="kr.or.ddit.product.model.WareHouseVo"/>
     	<typeAlias  alias="assetVo" type="kr.or.ddit.slip.model.AssetVo"/>
     	<typeAlias  alias="slip_detailVo" type="kr.or.ddit.slip.model.Slip_detailVo"/>
@@ -87,6 +88,7 @@
   	<mapper resource="kr/or/ddit/config/db/mapper/product.xml"/>
   	<mapper resource="kr/or/ddit/config/db/mapper/productlist.xml"/>
   	<mapper resource="kr/or/ddit/config/db/mapper/receive.xml"/>
+  	<mapper resource="kr/or/ddit/config/db/mapper/receive_detail.xml"/>
   	<mapper resource="kr/or/ddit/config/db/mapper/retire.xml"/>
   	<mapper resource="kr/or/ddit/config/db/mapper/sales_detail.xml"/>
   	<mapper resource="kr/or/ddit/config/db/mapper/shipment.xml"/>

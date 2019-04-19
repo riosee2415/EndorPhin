@@ -180,7 +180,6 @@
 		$(".orderDialog").click(function(e){
 			$(".tabControl").show();
 			$(".tab-pane").eq(0).toggleClass("active");
-			$("#dialog_productCode").val('');
 			$(".dialog").toggleClass('dialog--active');
 			$('input[type=text]').val('');
 			$('#dialogProductTbody').html('');

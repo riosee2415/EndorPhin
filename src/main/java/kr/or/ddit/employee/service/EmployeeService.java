@@ -53,5 +53,10 @@ public class EmployeeService implements IEmployeeService{
 	public List<EmployeeVo> selectUserByNm(String usernm) {
 		return employeeDao.selectUserByNm(usernm);
 	}
+
+	@Override
+	public List<EmployeeVo> selectMoreEmployee(String positionCode) {
+		return employeeDao.selectMoreEmployee(positionCode);
+	}
 	
 }

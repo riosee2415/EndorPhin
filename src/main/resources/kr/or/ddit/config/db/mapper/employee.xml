@@ -172,11 +172,24 @@
 		where   usernm like '%' ||#{usernm} ||'%'
 	</select> -->
 
-
-
-
-
-
+	<!-- 입력받은 직책보다 높은 직책 출력 -->
+	<select id="selectMoreEmployee" resultType="employeeVo" parameterType="map">
+	   select
+	       a.userId,
+	       a.userNm,
+	       a.positionCode,
+	       b.positionName positionName,
+	       c.deptName deptName,
+	       d.positionName rankName
+	      from employee
+	      a left outer join position b 
+	         on a.positionCode = b.positionCode
+	      left outer join dept c 
+	          on a.deptCode = c.deptCode
+	      left outer join position d  
+	         on a.rankCode = d.positionCode
+	          where a.positionCode &gt; #{positionCode}  
+	</select>
 
 
 

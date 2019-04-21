@@ -85,5 +85,14 @@ public interface IEmployeeService {
 	*/
 	List<EmployeeVo> SearchEmployee(EmployeeVo userNm);
 	
+	/**
+	* Method : selectMoreEmployee
+	* 작성자 : pc05
+	* 변경이력 :
+	* @param userId
+	* @return
+	* Method 설명 : 입력받은 직책보다 높은 직책 출력
+	*/
+	List<EmployeeVo>  selectMoreEmployee(String positionCode);
 	
 }

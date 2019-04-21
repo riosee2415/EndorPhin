@@ -45,24 +45,7 @@ public class EmployeeServiceTest extends LogicConfig{
 		employeeVo.setBirthDate("20180101");
 		int insertEmployee = employeeService.insertEmployee(employeeVo);
 		
-		
-		
-		
-		
-		
 		assertEquals(1, insertEmployee);
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	}
@@ -134,7 +117,6 @@ public class EmployeeServiceTest extends LogicConfig{
 		
 		employeeService.updateEmployee(employeeVo);
 		
-		
 	}
 	
 	
@@ -143,19 +125,13 @@ public class EmployeeServiceTest extends LogicConfig{
 		EmployeeVo vo = new EmployeeVo();
 		vo.setUserNm("임");
 		
-		
-		
 		List<EmployeeVo> allEmployee = employeeService.SearchEmployee(vo);
 		
 		System.out.println(allEmployee);
-		
 	}
-	
 	
 	@Test
 	public void selectEmployee_detailTest() {
-		
-		
 		
 		Employee_detailVo selectEmployeeDetail = employeeDetailService.selectEmployeeDetail("1022");
 		
@@ -177,9 +153,14 @@ public class EmployeeServiceTest extends LogicConfig{
 		
 		int updateEmployeeDetail = employeeDetailService.updateEmployeeDetail(detailVo);
 
-
 	}
 	
+	@Test
+	public void selectMoreEmpolyee(){
+		List<EmployeeVo> list = employeeService.selectMoreEmployee("30");
+		assertNotNull(list);
+		System.out.println("list----------"+list);
+	}	
 	
 	
 

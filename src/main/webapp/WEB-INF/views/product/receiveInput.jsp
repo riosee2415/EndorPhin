@@ -109,10 +109,6 @@
 						<th>물자대</th>
 						<td><input class="form-control bootTapText" name="material"
 							type='text' readonly />
-							<button type="button" class="btn btn-default searchModal"
-								value="0">
-								<i class="fa fa-search"></i>
-							</button></td>
 						<th>창고명(*)</th>
 						<td><input type="hidden" name="warehouseCode" /> <input
 							class="form-control bootTapText" name="warehousename" type='text'
@@ -167,6 +163,47 @@
 					class="btn btn-default modalIns">등록</button>
 			</div>
 		</form>
+	</div>
+</div>
+
+<div class="modal" id="myModal4" data-backdrop="static" tabindex="3"
+	aria-hidden="true" style="display: none; z-index: 1080;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="secondModalTitle"></h4>
+				<button id="secondAddClose1" type="button" class="close"
+					data-dismiss="modal" aria-hidden="true">×</button>
+			</div>
+			<div class="container"></div>
+			<div class="modal-body">
+				<section>
+					<h3>상품 등록</h3>
+					<input type="text" class="search-query form-control"
+						id="searchProductText" placeholder="Search.." />
+					<button type="button" class="btn btn-default" id="searchProductBtn">
+						<i class="fa fa-search"></i>
+					</button>
+				</section>
+				<div style="overflow: scroll; width: 450px; height: 200px;">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>항목코드</th>
+								<th>항목명</th>
+								<th>규격</th>
+								<th>기본 금액</th>
+							</tr>
+						</thead>
+						<tbody id="secondModalTbody">
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<a href="#" data-dismiss="modal" class="btn" id="secondAddClose">Close</a>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -341,5 +378,50 @@ function dialog() {
 				this.checked = true;
 			});
 		}
+	};
+	
+	$("#addProduct").click(function(){
+		$("#myModal4").modal('show');
+	});
+	
+	$("#searchProductBtn, #addProduct").click(function(){
+		$.ajax({
+			method : "post",
+			url : "/orders/searchProduct",
+			data : {
+				productName : $("#searchProductText").val()
+			},
+			success : function(data) {
+				$("#secondModalTbody").html('');
+				for (var i = 0; i < data.productList.length; i++) {
+					$("#secondModalTbody").append("<tr class=\'productTr\'>"
+					+"<td>"+data.productList[i].productCode+"</td>"
+					+"<td>"+data.productList[i].productName+"</td>"
+					+"<td>"+data.productList[i].standard+"</td>"
+					+"<td>"+data.productList[i].basePrice+"</td>"
+					+"<tr>");
+				}
+				productTrInput();
+			}
+		});
+	});
+	
+	function productTrInput(){
+		$(".productTr").off('click');
+		$(".productTr").on('click',function(index,item){
+			var item=$(this);
+			var check=true;
+			$(".dialogPdcd").each(function(){
+				if($(this).html()==$(item).children('td').eq(0).html()){
+					alert('이미 존재하는 상품입니다.');
+					check=false;
+				}
+			});
+			if(check){
+				
+			}
+			numChange();
+			$("#myModal4").modal('hide');
+		});
 	}
 </script>

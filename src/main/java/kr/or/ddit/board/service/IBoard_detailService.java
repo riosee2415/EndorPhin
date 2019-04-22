@@ -206,4 +206,6 @@ public interface IBoard_detailService {
 	 */
 	public List<Board_detailVo> SearchPostList(Board_detailVo vo);
 	
+	public void updateViewsRead(String boardNo);
+	
 }

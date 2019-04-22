@@ -1,5 +1,7 @@
 package kr.or.ddit.document.dao;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -16,6 +18,11 @@ public class DocumentDao implements IDocumentDao{
 	@Override
 	public int insertDocument(DocumentVo documentVo) {
 		return sqlSessionTemplate.insert("document.insertDocument",documentVo);
+	}
+
+	@Override
+	public List<DocumentVo> getAllDocument() {
+		return sqlSessionTemplate.selectList("document.getAllDocument");
 	}
 	
 }

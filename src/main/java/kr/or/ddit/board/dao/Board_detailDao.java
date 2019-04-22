@@ -289,6 +289,18 @@ public class Board_detailDao implements IBoard_detailDao{
 	@Override
 	public List<Board_detailVo> SearchPostList(Board_detailVo vo) {
 		return sqlSession.selectList("board_detail.postSearch", vo);
-		
+	}
+
+	/**
+	 * 
+	* Method : updateViewsRead
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardNo
+	* Method 설명 : 조회수 증가
+	 */
+	@Override
+	public void updateViewsRead(String boardNo) {
+		sqlSession.update("board_detail.updateViewsRead", boardNo);
 	}
 }

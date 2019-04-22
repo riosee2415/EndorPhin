@@ -361,11 +361,24 @@ public class Board_detailService implements IBoard_detailService{
 	public List<Attach_boardVo> selectBoardFileList(String boardNo) {
 		return board_detailDao.selectBoardFileList(boardNo);
 	}
-
 	
 	@Override
 	public List<Board_detailVo> SearchPostList(Board_detailVo vo) {
 		return board_detailDao.SearchPostList(vo);
+	}
+
+	/**
+	 * 
+	* Method : updateViewsRead
+	* 작성자 : macbook
+	* 변경이력 :
+	* @param boardNo
+	* Method 설명 : 조회수 증가
+	 */
+	@Override
+	public void updateViewsRead(String boardNo) {
+		board_detailDao.updateViewsRead(boardNo);
+		
 	}
 
 }

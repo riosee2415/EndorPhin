@@ -2,7 +2,6 @@ package kr.or.ddit.document.service;
 
 import static org.junit.Assert.assertTrue;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.annotation.Resource;
@@ -24,14 +23,12 @@ public class DocumentServiceTest extends LogicConfig{
 			
 		DocumentVo documentVo = new DocumentVo();
 		documentVo.setPresentDepartment("100");
-		documentVo.setDocumentNumber("11");
+		documentVo.setDocumentNumber("8");
 		documentVo.setPresentUser("11");
 		documentVo.setTitle("1");
-		documentVo.setContents("1");
+		documentVo.setContents("1111");
 		documentVo.setPreservation("11");
-		documentVo.setDocumentType("100");
-		documentVo.setCompleteSortation("11");
-		documentVo.setTempSortation("11");
+		documentVo.setPresentDate(date);
 		
 		int insertCompany = documentService.insertDocument(documentVo);
 		assertTrue(insertCompany==1);

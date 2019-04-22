@@ -123,7 +123,7 @@
 					<li><a class="parent" href="#"><i class="icon-file-alt"></i>
 							자재관리</a>
 						<ul class="sub-menu">
-							<li><a href="">입고 입력</a></li>
+							<li><a href="/wareHouse/getAllReceive">입고 입력</a></li>
 						</ul></li>
 				</ul></li>
 		</ul>

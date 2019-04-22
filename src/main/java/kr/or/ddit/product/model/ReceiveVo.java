@@ -1,7 +1,5 @@
 package kr.or.ddit.product.model;
 
-import java.util.Date;
-
 /**
  * 
  * @author sanghoyun
@@ -12,12 +10,25 @@ public class ReceiveVo {
 	String receiveCode;
 	String receiveDate;
 	String sortation;
-	String quantity;
 	String material;
 	String warehouseCode;
 	String orderCode;
-	String productCode;
 	
+	String baseprice; // 금액
+	String warehousename; // 창고명
+	
+	public String getWarehousename() {
+		return warehousename;
+	}
+	public void setWarehousename(String warehousename) {
+		this.warehousename = warehousename;
+	}
+	public String getBaseprice() {
+		return baseprice;
+	}
+	public void setBaseprice(String baseprice) {
+		this.baseprice = baseprice;
+	}
 	public String getReceiveCode() {
 		return receiveCode;
 	}
@@ -35,12 +46,6 @@ public class ReceiveVo {
 	}
 	public void setSortation(String sortation) {
 		this.sortation = sortation;
-	}
-	public String getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(String quantity) {
-		this.quantity = quantity;
 	}
 	public String getMaterial() {
 		return material;
@@ -60,11 +65,18 @@ public class ReceiveVo {
 	public void setOrderCode(String orderCode) {
 		this.orderCode = orderCode;
 	}
-	public String getProductCode() {
-		return productCode;
+	@Override
+	public String toString() {
+		return "ReceiveVo [receiveCode=" + receiveCode + ", receiveDate=" + receiveDate + ", sortation=" + sortation
+				+ ", material=" + material + ", warehouseCode=" + warehouseCode + ", orderCode=" + orderCode
+				+ ", baseprice=" + baseprice + ", warehousename=" + warehousename + "]";
 	}
-	public void setProductCode(String productCode) {
-		this.productCode = productCode;
+	public ReceiveVo() {
+	}
+	public ReceiveVo(String receiveDate, String sortation, String warehouseCode) {
+		this.receiveDate = receiveDate;
+		this.sortation = sortation;
+		this.warehouseCode = warehouseCode;
 	}
 	
 	

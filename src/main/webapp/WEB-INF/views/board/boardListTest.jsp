@@ -91,6 +91,7 @@ table a {
                         <th>제목</th>
                         <th>등록자</th>
                         <th>등록일</th>
+                        <th>조회수</th>
                     </tr>
                 </thead>
                 <tbody style="color: black !important">
@@ -100,6 +101,7 @@ table a {
                             <td><a href="boardRead?boardNo=${listview.boardNo}&boardTypeCode=${boardTypeCode}">${listview.title}</a></td>
                             <td>${listview.userId}</td>
                             <td>${listview.postDate}</td>
+                            <td>${listview.views}</td>
                         </tr>
                     </c:forEach>
                 </tbody>

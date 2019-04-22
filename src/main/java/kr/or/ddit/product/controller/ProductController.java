@@ -48,7 +48,7 @@ public class ProductController {
 	
 	@RequestMapping(path = "/findProductCode", method = RequestMethod.POST, produces = { "application/json" })
 	@ResponseBody
-	public ProductVo findDeductCode_post(Model model, String productCode) {
+	public ProductVo findDeductCode_post(String productCode) {
 		ProductVo selectProduct = productService.selectProduct(productCode);
 		if(selectProduct.getImageCode()!=null){
 			ImagesVo selectImages = imagesService.selectImages(selectProduct.getImageCode());

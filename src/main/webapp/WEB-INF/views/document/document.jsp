@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+
+<link href="css/document.css" rel="stylesheet" type="text/css">
+
+<br>
 <div class="row">
 	<div class="col-md-1"></div>
 	<div class="col-md-10">
@@ -12,9 +16,7 @@
 			<div class="container-fluid">
 				<table>
 					<tr>  
-						<td><br>
-						<br></td>
-					</tr> 
+						<td><br><br></td></tr>
 					<tr>
 						<td><label for="date">작성일&nbsp;
 								<span class="asteriskField">*</span></label></td>
@@ -32,26 +34,21 @@
 							</div></td>
 					</tr>
 					<tr>
-						<td><br>
-						<label>문서종류&nbsp;&nbsp;</label></td>
-						<td><select class="form-control " id="documentType"
-							name="documentType">
+						<td><br><label>문서종류&nbsp;&nbsp;</label></td>
+						<td><select class="form-control " id="documentType" name="documentType">
 								<option value="품의서" selected="selected">품의서</option>
 								<option value="기안서">기안서</option>
 								<option value="발주서">발주서</option>
 						</select></td>
 						<td><label>&nbsp;&nbsp;&nbsp;&nbsp;제목</label>
-							&nbsp;&nbsp;&nbsp;&nbsp;
 							<input class="form-control-sm"type="text" style="width: 280px" /> &nbsp;&nbsp;</td>
 						<td><button id="searchBtn" name="searchBtn"class="btn btn-secondary" style="color: #ffffff;">검색</button></td>
 					</tr>
 					<tr>
-						<td><br>
-						<br></td>
+						<td><br><br></td>
 					</tr>
 				</table>
 			</div>
-
 			<table class="table table-striped">
 				<thead class="thead">
 					<tr>
@@ -60,26 +57,32 @@
 						<td>신청일</td>
 						<td>작성자</td>
 						<td>제목</td>
-						<td>첨부</td>
 					</tr>
 				</thead>
 				<tbody id="assetTbody">
 
-					<c:forEach items="${depreciationList }" var="vo">
+					<c:forEach items="${documentList }" var="vo">
 						<tr>
-							<td>${vo.assetName }</td>
-							<td>${vo.assetCode }</td>
-							<td><fmt:formatDate value="${vo.acquisitionDate }" pattern="yyyy-MM-dd" /></td>
-							<td>${vo.acquisitionPrice }</td>
-							<td>${vo.depreciation }</td>
-							<td>${vo.accumulated }</td>
-							<td>${vo.residualvalue }</td>
-							<td>${vo.serviceLife }</td>
-
-							<!-- 데이트타입 스트링으로 변경 -->
-							<c:set var="dates">
-								<fmt:formatDate value="${vo.acquisitionDate }" pattern="yyyy/MM/dd" />
-							</c:set>
+							 <c:set var="dates" >
+								<fmt:formatDate value="${vo.presentDate  }" pattern="yyyy/MM/dd" />
+							</c:set>							
+							<td><a class="bttn-stretch bttn-warning detailView" href="#documentDetail" 
+																				 data-documentnumber="${vo.documentNumber }" 
+																				 data-title="${vo.title }" 
+																				 data-preservation="${vo.preservation }" 
+																				 data-presentdate="${dates }" 
+																				 data-contents="${vo.contents }" 
+																				 data-tempsortation="${vo.tempSortation }" 
+																				 data-completesortation="${vo.completeSortation }" 
+																				 data-presentuser="${vo.presentUser }" 
+																				 data-presentdepartment="${vo.presentDepartment }" 
+																				 data-documenttype="${vo.documentType }"
+																				 data-toggle="modal">${vo.documentNumber }</a></td>
+							
+							<td>${vo.documentType }</td>
+							<td><fmt:formatDate value="${vo.presentDate }" pattern="yyyy-MM-dd" /></td>
+							<td>${vo.presentUser }</td>
+							<td>${vo.title }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -87,35 +90,145 @@
 		</div>
 		
 		<div class="modal-footer">
-			<select class="form-control " id="documentType" name="documentType"style="width: 150px;">
+			<select class="form-control-lg " id="documentType" name="documentType"style="width: 150px;">
 				<option value="품의서" selected="selected">품의서</option>
 				<option value="기안서">기안서</option>
 				<option value="발주서">발주서</option>
 			</select>
-			<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#my80sizeModal3">문서작성</button>
+			<button type="button" class="btn btn-secondary btn-lg" data-toggle="modal" data-target="#my80sizeModal3">문서작성</button>
 		</div>
 	</div>
 </div>
-
- <!-- 문서작성-->
+<!--------------------상세보기 ------------------>
+<div class="modal fade" id="documentDetail" tabindex="-1" role="dialog"
+	aria-labelledby="myLargeModalLabel">
+	<div class="modal-dialog modal-lg" role="document">
+	
+		<div class="modal-content">
+			<div class="modal-header"  style="background:#6C757D;" >
+			<table>
+				<tr><td><div id="de_documentType" style="color: #ffffff;" ></div></td></tr>
+			</table>
+			</div>
+			<div class="doc_contents">
+				<div class='doc_paper'>
+					<table>
+						<tr>
+							<td class='board_blank'><div style='width: 64px'></div></td>
+							<td class='board_blank'><div style='width: 134px'></div></td>
+							<td class='board_blank'><div style='width: 317px'></div></td>
+							<td class='board_blank'><div style='width: 64px'></div></td>
+							<td class='board_blank'><div style='width: 134px'></div></td>
+						</tr>
+						<tr>
+							<th rowspan='2' colspan='3' class='paper_title'><div id="de_documentType2"></div></th>
+							<th>문서번호</th>
+							<td><div id="de_documentNumber"></div></td>
+						</tr>
+						<tr>
+							<th>보존연한</th>
+							<td><div id="de_preservation"></div></td>
+						<tr>
+							<th>기안부서</th>
+							<td><div id="de_presentDepartment"></div></td>
+							<td rowspan='2' colspan='3' class='paper_table'>
+								<table style='width: 100%;'>
+									<tr>
+										<th rowspan='3' style='width: 5%'>기<br />안<br />부<br />서
+										</th>
+										<th>결재</th>
+										<th>결재</th>
+										<th>결재</th>
+										<th>결재</th>
+										<th>결재</th>
+									</tr>
+									<tr>
+										<td style='height: 50px;'>완료 <br />2019-04-18
+										</td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>부장 곽동훈</td>
+										<td></td>
+										<td></td>
+										<td>과장 써니</td>
+										<td>차장 홍필호</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<th>기안자</th>
+							<td><div id="de_presentUser"></div></td>
+						<tr>
+							<th>기안일자</th>
+							<td><div id="de_presentDate"></div></td>
+							<td rowspan='2' colspan='3' class='paper_table'>
+								<table style='width: 100%;'>
+									<tr>
+										<th rowspan='3' style='width: 5%'>협<br />조<br />부<br />서
+										</th>
+										<th>결재</th>
+										<th>결재</th>
+										<th>결재</th>
+										<th>결재</th>
+										<th>결재</th>
+									</tr>
+									<tr>
+										<td style='height: 50px;'></td>
+										<td>ㅈㅈㄷㄱ</td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<th>협조부서</th>
+							<td></td>
+						</tr>
+						<tr>
+							<th>제목</th>
+							<td colspan='4'><div id="de_title"></div></td>
+						</tr>
+						<tr>
+							<td colspan='5' class='board_contents'>
+								<div class='board_contents_txt'>
+									<p>
+									</p>
+								</div>
+								<div id="de_contents"></div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+<!-- --------------------문서작성-------------------------------------->
 <div class="modal fade" id="my80sizeModal3" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 	<div class="modal-dialog modal-lg" role="document">
 		 <div class="modal-content"> 
  			<div class="modal-header"  style="background:#6C757D;"  >
  			<table>
- 				<tr>
-				<td><h5  style="color: #ffffff;" >|품위서작성</h5>
- 				</tr>
-		</table>
-		</div>
+				<tr><td><h5  style="color: #ffffff;" >|품의서작성</h5>
+					<td><button id="secondAddClose1" type="button" class="close" data-dismiss="modal" aria-hidden="true" >×</button></td>
+				</tr>
+			</table>
+			</div>
 		<div class="modal-body">
 				<div class="modal-body">
 				<table>
 					<tr>
-						<td><label>문서번호&nbsp;&nbsp;&nbsp;</label></td> 
-						<td><input type="text" id="documentNumber" name="documentNumber" class="form-control-sm " style="background: #F4EBE7;"style="width: 250px"> </td>
-						<td><label>보존년한&nbsp;&nbsp;</label> </td>
-						<td><select class="form-control-sm " id="preservation" name="preservation"style="width: 100px;">
+						<td><label>문서번호</label></td> 
+						<td><input type="text" id="documentNumber" name="documentNumber" class="form-control" style="background: #F4EBE7;"style="width: 130px"> </td>
+						<td><label>&nbsp;&nbsp;보존년한&nbsp;&nbsp;</label> </td>
+						<td><select class="form-control " id="preservation" name="preservation"style="width: 100px;">
 							<option value="5년" selected="selected">5년</option>
 							<option value="4년">4년</option>
 							<option value="3년">3년</option>
@@ -124,25 +237,24 @@
 						</select></td>
 					</tr>
 					<tr>
-						<td><label>기안부서&nbsp;&nbsp;</label> </td>
-						<td ><input type="text" id="presentDepartment"class="form-control-sm" readonly value="${deptName}" ></td>
-						<td><label>기안자&nbsp;&nbsp;
+						<td><label>기안부서</label> </td>
+						<td ><input type="text" id="presentDepartment"class="form-control" readonly value="${deptName}" ></td>
+						<td><label>&nbsp;&nbsp;기안자
 							<span class="asteriskField">*</span></label></td>
-						<td><input type="text" id="presentUser" class="form-control-sm" readonly style="width: 200px" value="${userName}" /></td>
+						<td><input type="text" id="presentUser" class="form-control" readonly style="width: 200px" value="${userName}" /></td>
 					</tr>
 					<tr> 
 						<td colspan="1"><label for="presentDate">기안일자&nbsp;
 								<span class="asteriskField">*</span></label></td>
 						<td><div class="input-group">
-								<input class="form-control-sm" id="presentDate" name="presentDate"placeholder="YYYY/MM/DD" type="text" style="width: 180px" />&nbsp;
-								<div class="input-group-addon">
+								<input class="form-control-sm" id="presentDate" name="presentDate" placeholder="YYYY/MM/DD" type="text" style="width: 180px" />&nbsp;
 									<i class="fa fa-calendar"></i>
-								</div></div></td>
+							</div></td>
 					</tr>
 					<tr>
 						<td><label>제목&nbsp;&nbsp;
 							<span class="asteriskField">*</span></label></td>  
-						<td  colspan="4"><input type="text" id="title" style="width: 480px" class="form-control-sm"></td>
+						<td  colspan="4"><input type="text" id="title" style="width: 480px" class="form-control"></td>
 					</tr>
 				</table>
 				<br>
@@ -161,119 +273,136 @@
 				</div>
 						
 			<div class="modal-footer">
-				<button type="button" id="signBtn1" class="btn btn-outline-secondary" data-toggle="modal"  data-target="#my80sizeModal4">결재선 지정</button>
-				<button type="button" id="referenceBtn" class="btn btn-outline-secondary">참조선 지정</button>
-				<button type="button" id="signBtn"  class="btn btn-secondary" id="signBtn" name="signBtn">결제상신</button>
-				<button type="button" class="btn btn-secondary" id="temporarilyBtn" data-toggle="modal" data-target="#my80sizeModal2">임시저장</button>
-				<button type="button" class="btn btn-secondary" id="showBtn" data-toggle="modal" data-target="#my80sizeModal2">미리보기</button>
+				<button type="button" id="selectSignBtn" class="btn btn-outline-secondary btn-lg" data-toggle="modal"  data-target="#my80sizeModal4" value="${positionCode}" onclick="selectSignClick();">결재선 지정</button>
+				<button type="button" id="referenceBtn" class="btn btn-outline-secondary btn-lg">참조선 지정</button>
+				<button type="button" id="signBtn"  class="btn btn-secondary btn-lg" id="signBtn" name="signBtn" >결제상신</button>
+				<button type="button" class="btn btn-secondary btn-lg" id="temporarilyBtn" data-toggle="modal" data-target="#my80sizeModal2">임시저장</button>
 			</div>
   		</div> 
 	</div>
 </div>
 
+<!----------------------------결재선 지정 모달창  ---------------------->
 
-<div class="modal fade" id="my80sizeModal4" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal fade" id="my80sizeModal4" tabindex="-1" role="dialog" aria-labelledby="my100sizeModalLabel">
 	<div class="modal-dialog modal-lg" role="document">
-		 <div class="modal-content"> 
-				<div class="container-fluid">
-					<div class="row">
-						<div class="modal-header">
-				<h3 class="page-header" >|결재선 지정</h3>
-		</div>
-			<div class="col-sm-15 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<table>
-					<tr>
-						<td><label>부서명</label></td>
-						<td><input class="form-control" name="deptName" id="deptName" style="width: 200px; height: 25px;" /></td>
-						<td><button type="button" class="btn btn-outline-secondary btn-sm" id="dept_searchBtn">검색</button></td>
-						<td><label>사원명</label></td>
-						<td><input class="form-control" name="usernm" id="usernm" style="width: 200px; height: 25px;" /></td>
-						<td><button type="button" class="btn btn-outline-secondary btn-sm" id="user_searchBtn">검색</button></td>
-					</tr>
-				</table>
-				<table class="table table-sm">
-					<thead class="thead">
-					<tr>
-						<th>부서</th>
-						<th>직금</th>
-						<th>직원코드</th>
-						<th>직원명</th>
-					</tr>
-					</thead>
-					<tbody>
-					
-					</tbody>
-				</table>
-				<table class="table table-sm">
-					<thead class="thead">
-					<tr>
-						<th>부서</th>
-						<th>직금</th>
-						<th>직원코드</th>
-						<th>직원명</th>
-					</tr>
-					</thead>
-					<tbody>
-					
-					</tbody>
-				</table>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary btn-sm" id="insertBtn" data-toggle="modal">저장</button>
-					<button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal">취소</button>
-				</div>
-			 </div>
+		<div class="modal-content modal-80size">
+          <div class="modal-header " style="background:#6C757D;">
+			<h4 style="color: #ffffff;" >| 결재선 지정</h4>
+			<button id="secondAddClose1" type="button" class="close" data-dismiss="modal" aria-hidden="true" >×</button>
 		  </div>
-		</div> 
-	</div>		
- </div>
-</div> 
-
-
+			<div class="modal-body">
+			<center>
+			<table>
+				<thead>
+					<tr>
+						<td><label>부서명&nbsp;</label></td>
+						<td><input class="form-control" name="deptName" id="deptName" style="width: 200px; height: 25px;" /></td>
+						<td><label>&nbsp;&nbsp;사원명 &nbsp;&nbsp;</label></td>
+						<td><input class="form-control" name="usernm" id="usernm" style="width: 200px; height: 25px;" /></td>
+						<td><button type="button" class="btn btn-outline-secondary" id="user_searchBtn">검색</button></td>
+					</tr>
+			</table>  <br>
+			<div style="overflow:scroll;">
+			<table class="table table-sm">
+				<thead class="thead">
+					<tr>
+						<th></th>
+						<th>직원명</th>
+						<th>부서</th>
+						<th>직급</th>
+			
+				</thead>
+				<tbody id="clinetTbody">
+				<c:forEach items="${employeeList }" var="vo">
+					<tr class="employeetTr" data-usernm="${vo.userNm }">
+						<td><input type="checkbox" name="checkRow" value="${vo.userId }" ></td>
+						<td>${vo.userNm}</td>
+						<td>${vo.deptname}</td>
+						<td>${vo.positionname}</td>
+					</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+			</div>
+     		<table class="brd_write2">
+              	<tr>
+                     <td>
+                         <div style="padding-top:10px; text-align:center">
+                            <button  class="btn btn-secondary btn-sm" id="btnSelectEmployee">▼</button>
+                            <button  class="btn btn-secondary btn-sm"class="rbDecorated"  name="btnDeleteEmployee" id="btnDeleteEmployee" onclick="deleteClick();">▲</button>
+                         </div>
+					</td>
+				</tr>
+			</table>
+			<table class="table table-sm" ><br>
+				<thead class="thead" >
+					<tr>
+						<th></th>
+						<th>직원명</th>
+						<th>부서</th>
+						<th>직급</th>
+					</tr>
+				</thead>
+				<tbody id="clinetTbody">
+					<tr>
+						<td><div class="col-lg-12" id="ex3_Result0" ></div></td>
+						<td><div class="col-lg-12" id="ex3_Result1" ></div></td>
+						<td><div class="col-lg-12" id="ex3_Result2" ></div></td>
+						<td><div class="col-lg-12" id="ex3_Result3" ></div></td> 
+					</tr>
+				</tbody>
+			</table>
+			<div class="modal-footer">
+			  <button type="button" id="insertBtn" class="btn btn-outline-secondary btn-lg" onclick=" myclick();">결재라인 저장</button>
+			</div> 
+			  <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">닫기</button> 
+			  <input type="hidden" class="buttons" data-dismiss="modal" value=""/>
+			</div>
+			</div>
+			<center>
+		</div>
+	</div>
+	
+ 	<form id="insert_frm" action="${pageContext.request.contextPath }/insertDocument_ref">
+ 		<input type="hidden" id="checkRow" name="checkRow">
+ 		<input type="hidden" id="frm_documentNumber" name="frm_documentNumber">
+ 		
+ 	</form>		 
+ 	
 <script>
-
-$("#signBtn").on("click", function(){
-	alert("ddd");
-	$.ajax({
-		url : "${pageContext.request.contextPath }/insertDocument",
-		data : "documentNumber="+ $("#documentNumber").val()+ "&" + 
-				"presentUser="+ $("#presentUser").val() + "&"
-				+ "presentDate="+ $("#presentDate").val() + "&"
-				+ "title="+ $("#title").val() + "&"
-				+ "presentDepartment="+ $("#presentDepartment").val() + "&"
-				+ "preservation="+$("#preservation").val() + "&"
-				+ "contents="+ $("#contents").val(),
-				
-		success : function(data) {
-			alert("기안작성이 완료되었습니다.");
-			location.reload();
-			return false;
-		}
+	
+	$(".detailView").on("click", function(){
+		$("#de_presentDepartment").html($(this).data("presentdepartment"));
+		$("#de_presentUser").html($(this).data("presentuser"));
+		$("#de_presentDate").html($(this).data("presentdate"));
+		$("#de_documentType").html($(this).data("documenttype"));
+		$("#de_documentNumber").html($(this).data("documentnumber"));
+		$("#de_preservation").html($(this).data("preservation"));
+		$("#de_title").html($(this).data("title"));
+		$("#de_contents").html($(this).data("contents"));
+		$("#de_documentType2").html($(this).data("documenttype"));
 	});
-});
-
-var oEditors = []; 
-
-$(document).ready(function() {
-	// Editor Setting
-	nhn.husky.EZCreator.createInIFrame({
-		oAppRef : oEditors, // 전역변수 명과 동일해야 함.
-		elPlaceHolder : "contents", // 에디터가 그려질 textarea ID 값과 동일 해야 함.
-		sSkinURI : "/SE2/SmartEditor2Skin.html", // Editor HTML
-		fCreator : "createSEditor2", // SE2BasicCreator.js 메소드명이니 변경 금지 X
-		htParams : {
-			// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
-			bUseToolbar : true,
-			// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
-			bUseVerticalResizer : true,
-			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
-			bUseModeChanger : true, 
-		},
-	 	fOnAppLoad: function () {    
-	      $("iframe").css("width", "100%").css("height", "399px");
-	    }
-	});
-});
-
+	
+	function selectSignClick(){
+		$.ajax({
+			url : "${pageContext.request.contextPath }/insertDocument",
+			data : "documentNumber="+ $("#documentNumber").val()+ "&" + 
+					"presentUser="+ $("#presentUser").val() + "&"
+					+ "presentDate="+ $("#presentDate").val() + "&"
+					+ "title="+ $("#title").val() + "&"
+					+ "presentDepartment="+ $("#presentDepartment").val() + "&"
+					+ "preservation="+$("#preservation").val() + "&"
+					+ "documentType="+$("#documentType").val() + "&"
+					+ "contents="+ $("#contents").val()+"&",
+					
+			success : function(data) {
+				alert("기안작성이 완료되었습니다.");
+				location.reload();
+				return false;
+			}
+		});
+	}
 	// 필수값 Check
 	function validation(){
 		var contents = $.trim(oEditors[0].getContents());
@@ -285,36 +414,139 @@ $(document).ready(function() {
 
 		return true;
 	}
-	
 
-	
-	$(document).ready(function(){
-		var date_input=$('input[name="date"]'); //our date input has the name "date"
-		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-		date_input.datepicker({
-			dateFormat: 'yy/mm/dd',
-			container: container,
-			todayHighlight: true,
-			autoclose: true,
+	// 상단 선택버튼 클릭시 체크된 Row의 값을 가져온다.
+	$("#btnSelectEmployee").click(function(){ 
+		
+		var rowData = new Array();
+		var tdArr0 = new Array();
+		var tdArr1 = new Array();
+		var tdArr2 = new Array();
+		var tdArr3 = new Array();
+		
+		var checkbox = $("input[name=checkRow]:checked");
+		// 체크된 체크박스 값을 가져온다
+		checkbox.each(function(i) {
+
+			// checkbox.parent() : checkbox의 부모는 <td>이다.
+			// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
+			var tr = checkbox.parent().parent().eq(i);
+			var td = tr.children();
+			
+			// 체크된 row의 모든 값을 배열에 담는다.
+			rowData.push(tr.text());
+
+			// td.eq(0)은 체크박스 이므로  td.eq(1)의 값부터 가져온다.
+			var check 	 = td.eq(0).html()+"<br> ";
+			var name  	 = td.eq(1).text()+"<br> ";
+			var dept  	 = td.eq(2).text()+"<br> ";
+			var position = td.eq(3).text()+"<br>  ";
+			
+			// 가져온 값을 배열에 담는다.
+			tdArr0.push(check);
+		 	tdArr1.push(name);
+			tdArr2.push(dept);
+			tdArr3.push(position);
+			
+			$("#ex3_Result0").html(tdArr0);	
+			$("#ex3_Result1").html(tdArr1);	
+			$("#ex3_Result2").html(tdArr2);	
+			$("#ex3_Result3").html(tdArr3);	
 			
 		});
-		var date_input=$('input[name="date2"]'); //our date input has the name "date"
-		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-		date_input.datepicker({
-			dateFormat: 'yy/mm/dd',
-			container: container,
-			todayHighlight: true,
-			autoclose: true,
-		});
 		
-		var date_input=$('input[name="presentDate"]'); //our date input has the name "date"
-		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-		date_input.datepicker({
-			dateFormat: 'yy/mm/dd',
-			container: container,
-			todayHighlight: true,
-			autoclose: true,
+	});
+/* 	$("#insertBtn").click(function(){ 
+		var conf = confirm("결재선이 저장되었습니다.");
+		if(conf == true){
+			$('.buttons').trigger('click');
+		}
+	}); */
+	function deleteClick() {
+		$("#ex3_Result0").html("");	
+		$("#ex3_Result1").html("");	
+		$("#ex3_Result2").html("");	
+		$("#ex3_Result3").html("");	
+	}
+	
+	function myclick() {
+		
+		var checkRow = '';
+	
+		$("input[name=checkRow]:checked").each(function() {
+			checkRow += $(this).val()+",";
+		});
+			checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); //맨끝 콤마 지우기  
+			
+			
+			if(checkRow === ""){		
+			alert("결재선이 지정되어 있지 않습니다.");
+			return false;
+			}
+				$("#frm_documentNumber").val($("#documentNumber").val());
+				$("#checkRow").val(checkRow);
+				alert(checkRow);
+				$("#insert_frm").submit();
+				$('.buttons').trigger('click');
+			
+	}
+
+		
+		
+	
+	var oEditors = []; 
+	
+	$(document).ready(function() {
+		// Editor Setting
+		nhn.husky.EZCreator.createInIFrame({
+			oAppRef : oEditors, // 전역변수 명과 동일해야 함.
+			elPlaceHolder : "contents", // 에디터가 그려질 textarea ID 값과 동일 해야 함.
+			sSkinURI : "/SE2/SmartEditor2Skin.html", // Editor HTML
+			fCreator : "createSEditor2", // SE2BasicCreator.js 메소드명이니 변경 금지 X
+			htParams : {
+				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseToolbar : true,
+				// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseVerticalResizer : true,
+				// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+				bUseModeChanger : true, 
+			},
+		 	fOnAppLoad: function () {    
+		      $("iframe").css("width", "100%").css("height", "399px");
+		    }
 		});
 	});
-
-</script>
+	
+		
+		
+		/*달력 3개입력받을 거 있음  */
+		$(document).ready(function(){
+			var date_input=$('input[name="date"]'); //our date input has the name "date"
+			var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+			date_input.datepicker({
+				dateFormat: 'yy/mm/dd',
+				container: container,
+				todayHighlight: true,
+				autoclose: true,
+				
+			});
+			var date_input=$('input[name="date2"]'); //our date input has the name "date"
+			var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+			date_input.datepicker({
+				dateFormat: 'yy/mm/dd',
+				container: container,
+				todayHighlight: true,
+				autoclose: true,
+			});
+			
+			var date_input=$('input[name="presentDate"]'); //our date input has the name "date"
+			var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+			date_input.datepicker({
+				dateFormat: 'yy/mm/dd',
+				container: container,
+				todayHighlight: true,
+				autoclose: true,
+			});
+		});
+	
+	</script>

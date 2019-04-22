@@ -197,6 +197,12 @@
            <put-attribute name="content" value="/WEB-INF/views/orders/currentOrder.jsp"/>
         </definition>
         
+         <definition name="receiveInput" extends="layout">   <!-- 발주 현황 -->
+           <put-attribute name="content" value="/WEB-INF/views/product/receiveInput.jsp"/>
+        </definition>
+        
+        
+        
         <definition name="boardList" extends="layout_groupware">
         	<put-attribute name="content" value="/WEB-INF/views/board/boardListTest.jsp"/>
         </definition>

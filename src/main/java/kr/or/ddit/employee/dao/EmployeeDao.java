@@ -54,4 +54,9 @@ public class EmployeeDao implements IEmployeeDao{
 		return sqlSessionTemplate.selectList("employee.selectUserByNm", usernm);
 	}
 
+	@Override
+	public List<EmployeeVo> selectMoreEmployee(String positionCode) {
+		return sqlSessionTemplate.selectList("employee.selectMoreEmployee",positionCode);
+	}
+
 }

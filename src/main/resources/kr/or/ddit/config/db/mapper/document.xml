@@ -3,28 +3,42 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="document">
-
+	
 	<!-- 기안 입력 -->
 	<insert id="insertDocument" parameterType="documentVo">
+		<selectKey order="BEFORE" keyProperty="presentDepartment" resultType="String">
+			SELECT deptCode
+			  from	dept
+			 where deptName = #{presentDepartment}
+		</selectKey>
 		insert into document
-		(documentnumber, title, preservation, presentdate, contents, tempsortation,
+		(documentnumber, title, preservation, presentDate, contents, tempsortation,
 		 completesortation, presentuser, presentdepartment,documentType)
 		values
-		(#{documentNumber},#{title},#{preservation},sysdate
-		,#{contents},#{tempSortation},#{completeSortation},#{presentUser},#{presentDepartment},#{documentType})
-
+		(#{documentNumber},#{title},#{preservation}, #{presentDate}
+		,nvl(#{contents, jdbcType=VARCHAR},null),nvl(#{tempSortation, jdbcType=VARCHAR},null),nvl(#{completeSortation, jdbcType=VARCHAR},null),
+		#{presentUser},#{presentDepartment},nvl(#{documentType, jdbcType=VARCHAR},null))
 	</insert>
 
 
-	<!-- 기안 전체 불러오기 -->
+	<!-- 기안문서 전체 불러오기 -->
 	<select id="getAllDocument" resultType="documentVo">
-		select
-		documentnumber, title, preservation, presentdate, contents, tempsortation,
-		 completesortation, presentuser, presentdepartment,documentType
-		from document
+	    select  a.documentNumber,
+		        a.title,
+		        a.preservation,
+		        a.presentDate,
+		        a.contents,
+		        a.tempSortation,
+		        a.completeSortation,
+		        b.userNm presentUser,
+		        c.deptname presentDepartment,
+		        a.documentType
+   		   from  document a ,employee b, dept c
+    	  where  a.presentUser = b.userid
+     		and  a.presentDepartment = c.deptCode
 	</select>
 
-
+	
 	<!-- 기안 선택하여 가져오기 -->
 	<select id="selectDocument" resultType="documentVo"
 		parameterType="map">

@@ -49,20 +49,12 @@ to {
 	rel="stylesheet">
 
 <!-- 차트 js 삽입 -->
-<link
-	href="${pageContext.request.contextPath}/resources/js/Chart.LlineBar.js"
-	rel="stylesheet" type="text/css">
-<link
-	href="${pageContext.request.contextPath}/resources/js/Chart.min.js"
-	rel="stylesheet" type="text/css">
-<link
-	href="${pageContext.request.contextPath}/resources/js/Chart.StackedBar.js"
-	rel="stylesheet" type="text/css">
-	<link
-	href="${pageContext.request.contextPath}/resources/js/jquery.twbsPagination.js"
-	rel="stylesheet" type="text/css">
+<%-- <script src="${pageContext.request.contextPath}/resources/js/Chart.LlineBar.js"></script> --%>
+<%-- <script src="${pageContext.request.contextPath}/resources/js/Chart.min.js"    ></script> --%>
+<%-- <script src="${pageContext.request.contextPath}/resources/js/Chart.StackedBar.js" type="text/javascript"></script> --%>
 <!-- 차트 js 종료 -->
-
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 <!-- 달력API 시작 -->
 
 <link href='/resources/packages/core/main.css' rel='stylesheet' />
@@ -79,6 +71,8 @@ to {
 
 <!-- 달력API 종료 -->
 
+<!-- 지도 API -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4d1997a6f668b23970f9ffd21d6ec929&libraries=services"></script>
 
 <link href="${pageContext.request.contextPath}/css/dashboard.css"
 	rel="stylesheet">
@@ -118,8 +112,7 @@ to {
 <link rel="stylesheet"
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
 
 <!-- menu CSS -->
 <link rel="stylesheet" type="text/css" href="/css/menu.css">

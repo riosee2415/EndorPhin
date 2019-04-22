@@ -276,8 +276,12 @@ var calendar;
  //============================================일정 이동하기 종료
       eventDragStop: function(event) {
       
+<<<<<<< HEAD
            var trashEl = jQuery('#calendar');
            
+=======
+           var trashEl = $(this).el;
+>>>>>>> branch 'master' of https://gitlab.com/dditEndorphin/endorphin.git
            var ofs = trashEl.offset();
 
            var x1 = ofs.left;

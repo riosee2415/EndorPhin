@@ -76,13 +76,8 @@ to {
 
 <link href="${pageContext.request.contextPath}/css/dashboard.css"
 	rel="stylesheet">
-	<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
 		<!-- 다음 주소찾기 API -->
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-
-
 
 <!-- Acoount Part Basic Style -->
 <link type="text/css"
@@ -124,7 +119,7 @@ to {
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
 	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
 	crossorigin="anonymous"></script>
-
+	
 
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">

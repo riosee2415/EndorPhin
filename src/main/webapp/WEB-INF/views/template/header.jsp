@@ -180,14 +180,3 @@ a {
 
 	</div>
 </div>
-
-<<<<<<< HEAD
-<script>
-           
-
-</script>
-
-
-
-=======
->>>>>>> branch 'master' of https://gitlab.com/dditEndorphin/endorphin.git

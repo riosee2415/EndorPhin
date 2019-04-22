@@ -40,8 +40,7 @@
 				</tr>
 			</table>
 		</form>
-		<form action="/product/deleteProduct" id="deleteFrm" method="post">
-			<input type="hidden" name="deprostatus" value="2" />
+		<form action="/wareHouse/deleteWareHouse" id="deleteFrm" method="post">
 			<div class="table-responsive">
 				<table class="table table-hover">
 					<thead>
@@ -51,7 +50,6 @@
 							<th>입고일</th>
 							<th>창고명</th>
 							<th>구분</th>
-							<th>품목</th>
 							<th>물자대</th>
 						</tr>
 					</thead>
@@ -64,8 +62,9 @@
 									class="bttn-stretch bttn-md bttn-warning receiveDetail">${vo.receiveCode }</a></td>
 								<td>${vo.receiveDate}</td>
 								<td>${vo.warehousename}</td>
-								<td>${vo.sortation}</td>
-								<td>g</td>
+								<c:if test="${vo.sortation==0 }">
+									<td>입고</td>
+								</c:if>
 								<td>${vo.material}</td>
 							</tr>
 						</c:forEach>
@@ -90,7 +89,8 @@
 	<span class="dialog__close">&#x2715;</span> <label for="inputName">입고
 		상세</label>
 	<div class="modal-body">
-		<form action="/orders/deleteOrder" method="post" id="dialogFrm">
+		<form action="/wareHouse/insOrUpdWareHouse" method="post" id="dialogFrm">
+		<input type="hidden" name="receiveCode">
 			<div>
 				<table class="table table-hover">
 					<tr>
@@ -148,13 +148,10 @@
 					<label>공급가액</label> <input class="form-control bootTapText"
 						name="orderPrice" type='text' readonly /> <label>부가세</label> <input
 						class="form-control bootTapText" name="surtax" type='text'
-						readonly /> <label>합계</label> <input
-						class="form-control bootTapText" type='text' name="totalPrice"
 						readonly />
 				</div>
 			</div>
 			<div>
-				<input type="hidden" name="orderCode" />
 				<button type="button" id="dialog_updBtn"
 					class="btn btn-default modalUpd">수정</button>
 				<button type="button" id="dialog_delBtn"
@@ -208,7 +205,14 @@
 </div>
 
 <script>
-//ENTER 안먹게 하는것
+	$("#delProdBtn").click(function(){
+		var item = $(this);
+		$("input[class=check]:checked").each(function(){
+			item.append("<input type=\'hidden\' value="+$(this)+"/>");
+		})
+	});
+	
+	//ENTER 안먹게 하는것
 	function captureReturnKey(e) {
 	    if(e.keyCode==13 && e.srcElement.type != 'textarea')
 	    return false;
@@ -223,7 +227,7 @@
 		dialog();
 		$("#dialog_insBtn,#dialog_updBtn").click(function(){
 			var check = true;
-			$("#dialogFrm").attr('action','/product/insOrUpdProduct');
+			$("#dialogFrm").attr('action','/wareHouse/insOrUpdReceive');
 			$('.needs').each(function(){
 				if($(this).val()==''){
 					alert("필수항목을 입력하세요.");
@@ -235,7 +239,9 @@
 				$("#dialogFrm").submit();
 			}
 		});
-		$("#dialog_delBtn").click(function(){$("#dialogFrm").attr('action','/product/deleteProduct');});
+		$("#dialog_delBtn").click(function(){
+			$("#dialogFrm").attr('action','/wareHouse/deleteReceive');
+			$("#dialogFrm").submit();});
 	});
 	
 function dialog() {
@@ -251,6 +257,7 @@ function dialog() {
 			dialogBox.toggleClass('dialog--active');
 			$("#dialogReceiveTbody").html(' ');
 			if($(this).text()!='신규등록'){
+				$('input[name=receiveCode]').val($(this).parents(".receiveTr").data("rccd"));
 				$(".modalIns").hide();
 				$('.modalUpd').show();
 				$.ajax({
@@ -317,24 +324,26 @@ function dialog() {
 		$("input[name=orderCode]").val(data.receiveVo.orderCode);
 		$("input[name=material]").val(data.receiveVo.material);
 		$("input[name=warehousename]").val(data.receiveVo.warehousename);
+		$("input[name=warehouseCode]").val(data.receiveVo.warehouseCode);
 		
 		for (var i = 0; i < data.receiveDetailList.length; i++) {
 			var temp =data.receiveDetailList[i];
 			$("#dialogReceiveTbody").append("<tr>"
-			+"<td><input type=\'checkbox\' class=\'detailCheck\'></td>"
-			+"<td>"+temp.productCode+"</td>"
+			+"<td><input type=\'checkbox\' class=\'detailCheck\'><input type=\'hidden\' name=\'productCode\'"+
+			'value=\''+temp.productCode+"\''/></td>"
+			+"<td class=\'dialogPdcd\'>"+temp.productCode+"</td>"
 			+"<td>"+temp.productname+"</td>"
 			+"<td>"+temp.standard+"</td>"
 			+"<td><input type=\'text\' name=\'quantity\' value=\'"+temp.quantity
 			+"\' class=\'form-control bootTapText quanText\'/></td>"
 			+"<td>"+temp.baseprice+"</td>"
-			+"<td>"+temp.baseprice*temp.quantity+"</td>"
+			+"<td class=\'totalPrice\'>"+temp.baseprice*temp.quantity+"</td>"
 				+"</tr>");
 		}
 		numChange();
 	}
 	function datepicker(){
-		$(".dueDatePicker").datepicker({
+		$("input[name=receiveDate]").datepicker({
 			dateFormat: 'yy-mm-dd' //Input Display Format 변경
             ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
             ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
@@ -349,7 +358,7 @@ function dialog() {
             ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
             ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일']
 		});
-		$('.dueDatePicker').datepicker('setDate', 'today');	
+		$('input[name=receiveDate]').datepicker('setDate', 'today');	
 	}
 	function numChange(){
 		$("#modalCheckAll").off("click");
@@ -366,6 +375,9 @@ function dialog() {
 				totalPrice+=parseInt($(this).html());
 			})
 			$("input[name=orderPrice]").val(totalPrice).change();
+			$("input[name=surtax]").val(parseInt($("input[name=orderPrice]").val())/10);
+			$("input[name=material]").val(parseInt($("input[name=orderPrice]").val())+
+											parseInt($('input[name=surtax]').val()));
 		})
 	}
 	function modalCheckEvent() {
@@ -418,7 +430,18 @@ function dialog() {
 				}
 			});
 			if(check){
-				
+				var innerText = '<tr>'
+					+"<td><input type=\'checkbox\' class=\'detailCheck\'><input type=\'hidden\' name=\'productCode\'"+
+					'value=\''+$(item).children('td').eq(0).html()+"\' /></td>";
+				innerText+='<td class=\'dialogPdcd\'>'+$(item).children('td').eq(0).html()+'</td>';
+				for (var i = 1; i < 3; i++) {
+					innerText+='<td>'+$(item).children('td').eq(i).html()+'</td>';
+				}
+				innerText+='<td><input type=\'text\' name=\'quantity\''
+				+'class=\'form-control bootTapText quanText\'></td>'
+				innerText+='<td>'+$(item).children('td').eq(3).html()+'</td>';
+				innerText+='<td class=\'totalPrice\'>0</td></tr>';
+				$('#dialogReceiveTbody').append(innerText);
 			}
 			numChange();
 			$("#myModal4").modal('hide');

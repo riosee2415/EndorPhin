@@ -14,7 +14,6 @@ public class ReceiveVo {
 	String warehouseCode;
 	String orderCode;
 	
-	String baseprice; // 금액
 	String warehousename; // 창고명
 	
 	public String getWarehousename() {
@@ -22,12 +21,6 @@ public class ReceiveVo {
 	}
 	public void setWarehousename(String warehousename) {
 		this.warehousename = warehousename;
-	}
-	public String getBaseprice() {
-		return baseprice;
-	}
-	public void setBaseprice(String baseprice) {
-		this.baseprice = baseprice;
 	}
 	public String getReceiveCode() {
 		return receiveCode;
@@ -65,18 +58,18 @@ public class ReceiveVo {
 	public void setOrderCode(String orderCode) {
 		this.orderCode = orderCode;
 	}
-	@Override
-	public String toString() {
-		return "ReceiveVo [receiveCode=" + receiveCode + ", receiveDate=" + receiveDate + ", sortation=" + sortation
-				+ ", material=" + material + ", warehouseCode=" + warehouseCode + ", orderCode=" + orderCode
-				+ ", baseprice=" + baseprice + ", warehousename=" + warehousename + "]";
-	}
 	public ReceiveVo() {
 	}
 	public ReceiveVo(String receiveDate, String sortation, String warehouseCode) {
 		this.receiveDate = receiveDate;
 		this.sortation = sortation;
 		this.warehouseCode = warehouseCode;
+	}
+	@Override
+	public String toString() {
+		return "ReceiveVo [receiveCode=" + receiveCode + ", receiveDate=" + receiveDate + ", sortation=" + sortation
+				+ ", material=" + material + ", warehouseCode=" + warehouseCode + ", orderCode=" + orderCode
+				+ ", warehousename=" + warehousename + "]";
 	}
 	
 	

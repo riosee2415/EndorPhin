@@ -5,6 +5,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.ddit.image.model.ImagesVo;
 import kr.or.ddit.product.model.ProductVo;
+import kr.or.ddit.product.model.ReceiveVo;
+import kr.or.ddit.product.model.Receive_detailVo;
 import kr.or.ddit.product.model.WareHouseVo;
 import kr.or.ddit.product.service.IReceiveService;
 import kr.or.ddit.product.service.IReceive_detailService;
@@ -21,6 +25,9 @@ import kr.or.ddit.product.service.IWareHouseService;
 @RequestMapping("/wareHouse")
 @Controller
 public class WareHouseController {
+	
+	private Logger logger = LoggerFactory.getLogger(WareHouseController.class);
+	
 	@Resource(name="wareHouseService")
 	IWareHouseService wareHouseService;
 	
@@ -44,7 +51,36 @@ public class WareHouseController {
 		return selectWarehouse;
 	}
 	
-	@RequestMapping(path="/updateWareHouse")
+	@RequestMapping(path="/insOrUpdReceive")
+	public String insOrUpdReceive(ReceiveVo receiveVo,String[] quantity,String[] productCode){
+		if(receiveVo.getReceiveCode()==null){
+			receiveService.insertReceive(receiveVo);
+		}
+		for (int i = 0; i < quantity.length; i++) {
+			receive_detailService.insertReceive_detail(new 
+					Receive_detailVo(receiveVo.getReceiveCode(), productCode[i], quantity[i]));
+		}
+		receiveService.updateReceive(receiveVo);
+		return "redirect:/wareHouse/getAllReceive";
+	}
+	
+	@RequestMapping(path="/deleteReceive")
+	public String deleteReceive(String[] receiveCode){
+		for (int i = 0; i < receiveCode.length; i++) {
+			logger.debug("ㅎㅎ: {}",receiveCode[i]);
+//			receiveService.deleteReceive(receiveCode[i]);
+		}
+		return "redirect:/wareHouse/getAllReceive";
+	}
+	@RequestMapping(path="/deleteWareHouse")
+	public String deleteWareHouse(String[] wareHouseCode){
+		for (int i = 0; i < wareHouseCode.length; i++) {
+			wareHouseService.deleteWarehouse(wareHouseCode[i]);
+		}
+		return "redirect:/wareHouse/getAllWareHouse";
+	}
+	
+	@RequestMapping(path="/insOrUpdWareHouse",method=RequestMethod.POST)
 	public String updateWareHouse(WareHouseVo wareHouseVo){
 		wareHouseService.updateWarehouse(wareHouseVo);
 		return "redirect:/wareHouse/getAllWareHouse";

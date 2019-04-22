@@ -30,45 +30,24 @@ public class Slip_detailController {
 	
 	
 	@RequestMapping("/insertDetailSlip")
-	public String insertDetailSlip(	@RequestParam(name="slipDetailNo")String  slipDetailNo
-								,	@RequestParam(name="status")String  status
+	public String insertDetailSlip(	@RequestParam(name="status")String  status
 								,	@RequestParam(name="price")String  price
-								,	@RequestParam(name="clientCard")String  clientCard
-								,	@RequestParam(name="slipNumber")String  slipNumber
-								,	@RequestParam(name="establishCode")String  establishCode
-								,	@RequestParam(name="currval")String  currval
-								,	@RequestParam(name="insertSlipDate")String  insertSlipDate
-								,	@RequestParam(name="insertDept", defaultValue="미등록")String  insertDept
+								,	@RequestParam(name="juckyo", defaultValue="미등록")String  juckyo
+								,	@RequestParam(name="dept", defaultValue="미등록")String  dept
+								,	@RequestParam(name="slipDate")String  slipDate
+								,	@RequestParam(name="establish", defaultValue="미등록")String  establish
+								,	@RequestParam(name="client", defaultValue="미등록")String  client
 								,	Model model) {
 		
 		
 		
-		
-		String[] establishCodeArr = establishCode.split("_");
-		String[] clientCardArr = clientCard.split("_");
-		
-		
-		Slip_detailVo dvo = new Slip_detailVo();
-		
-		dvo.setSlipDetailNo(slipDetailNo);
-		dvo.setStatus(status);
-		dvo.setPrice(price);
-		dvo.setClientCard(clientCardArr[1]);
-		dvo.setSlipNumber(currval);
-		dvo.setEstablishCode(establishCodeArr[0]);
-		
-		slip_detailService.insertDetailSlip(dvo);
-		
-		List<Slip_detailVo> slip_detailList = slip_detailService.getSlip_detailBySlipNumber(currval);
-		
-		
-		
-		model.addAttribute("slip_detailList", slip_detailList);
-		model.addAttribute("currval", currval);
-		model.addAttribute("slipDate", insertSlipDate);
-		model.addAttribute("insertDept", insertDept);
-		
-
+		model.addAttribute("status", status);
+		model.addAttribute("price", price);
+		model.addAttribute("juckyo", juckyo);
+		model.addAttribute("dept", dept);
+		model.addAttribute("slipDate", slipDate);
+		model.addAttribute("establish", establish);
+		model.addAttribute("client", client);
 		
 		return "slip_detail/slip_detailInsert";
 	}

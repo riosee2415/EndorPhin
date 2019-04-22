@@ -9,7 +9,7 @@
 	<div class="col-md-10">
 
 
-	<h4>${startDate } ~ ${endDate }</h4>
+	<h3>${startDate } ~ ${endDate }</h3>
 		<table class="table table-striped">
 			<thead>
 				<tr>

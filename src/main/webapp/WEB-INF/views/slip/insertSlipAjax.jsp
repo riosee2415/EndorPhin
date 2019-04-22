@@ -13,13 +13,11 @@
 	</style>
 </head>
 <br />
-<input id="currval" type="hidden" value="${currval }" />
 
 	<center>
 	  	<table>
 	  		<thead class="thead2">
 				<tr>
-					<td>  전표번호 </td>
 					
 					<td>  작성일(*)  </td>
 	
@@ -43,7 +41,6 @@
 			<tbody>
 					
 				<tr>
-					<td> <input style="width: 50px;" type="text" id="insertSlipNumber" name="insertSlipNumber" value="${slipNumber }" readonly ></td>
 					
 					<td> <input style="width: 100px;"  type="text" id="insertSlipDate">    </td>
 					
@@ -82,6 +79,9 @@
 	  	
 		  		<div id="temporaryArea">
 		  		
+		  		
+		  		<label id="leftVale"></label>
+		  		<label id="rightVale"></label>
 		  		</div>
 		  		
 		  		<br />
@@ -89,7 +89,13 @@
 		  		<div id="cancleBtn_onlySlip">
 		  			<input type="button" class="bttn-simple bttn-warning" id="cancleOnlySlip" name="cancleOnlySlip" value="작성취소" />
 		  		</div>
+		  		
+		  		
+		  		
+		  		
   		</center>
+  		
+  		
   		
   		
   		
@@ -297,46 +303,34 @@
   		 
   	 });
     
-  	var detailNo  = 1;
   	
   	$("#temporaryAddition").on("click", function(){
   		
   		
-  		$("#cancleOnlySlip").attr("disabled", true);
-  		/*Validation*/
-
-  		
-  		/*Insert Source*/
-  		var insertSlipNumber		= $("#insertSlipNumber").val();
-  		var insertSelectSlipStatus 	= $("select[name=status]").val();
-  		var insertEstablish			= $("#searchEstablishValue").val();
-  		var insertClientCard		= $("#searchClientValue").val();
-  		var insertPrice				= $("#searchPriceValue").val();
-  		var currval					= $("#currval").val();
-  		var insertSlipDate			= $("#insertSlipDate").val();
-  		var insertDept				= $("select[name=dept]").val();
-  		var juckyo					= $("#juckyo").val();
   		
   		$.ajax({
-  			url : "${pageContext.request.contextPath }/insertDetailSlip",
-  			data : "slipDetailNo=" + detailNo + "&status=" + insertSelectSlipStatus + "&price=" + insertPrice + "&clientCard=" + insertClientCard + "&slipNumber=" + insertSlipNumber + "&establishCode=" + insertEstablish + "&currval=" + currval +"&insertSlipDate=" + insertSlipDate + "&insertDept=" + insertDept + "&juckyo=" + juckyo,
-  			success : function(data){
-  				console.log(data);
-  				$("#temporaryArea").html(data);
-  				
-  			}
+  			url :  "${pageContext.request.contextPath }/insertDetailSlip",
+			data : "status=" + $("select[name=status]").val() + "&price=" + $("#searchPriceValue").val() 
+					+ "&juckyo=" + $("#juckyo").val() + "&dept=" + $("select[name=dept]").val()
+					+ "&slipDate=" + $("#insertSlipDate").val() + "&establish=" + $("#searchEstablishValue").val()
+					+ "&client=" + $("#searchClientValue").val(),
+			success : function(data){
+				$("#temporaryArea").append(data);
+			} 
   			
   		});
   		
+  	
   		
-  		detailNo++;
   		
   		// 입력영역 값 초기화
   		$("#searchEstablishValue").val("");
   		$("#searchClientValue").val("");
+  		$("#juckyo").val("");
+  		$("#searchPriceValue").val("");
   		
-  	});
-  	
+  		
+	});
   	
   	$(document).keydown(function (e) {
   	     

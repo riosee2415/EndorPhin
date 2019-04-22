@@ -39,6 +39,7 @@
 		where	p.productcode = od.productcode
 		and		ordercode = #{orderCode}
 	</select>
+	
 	<!-- 발주서 상세 삭제 -->
 	<delete id="deleteOrder_detail" parameterType="map">
 		delete from order_detail

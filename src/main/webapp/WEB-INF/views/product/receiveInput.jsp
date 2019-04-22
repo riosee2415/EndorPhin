@@ -65,6 +65,10 @@
 								<c:if test="${vo.sortation==0 }">
 									<td>입고</td>
 								</c:if>
+								<c:if test="${vo.sortation==1 }">
+									<td>출고</td>
+								</c:if>
+								
 								<td>${vo.material}</td>
 							</tr>
 						</c:forEach>
@@ -316,12 +320,34 @@
 		datepicker();
 		$("#dialog_insBtn,#dialog_updBtn").click(function(){
 			var check = true;
+			
 			$("#dialogFrm").attr('action','/wareHouse/insOrUpdReceive');
 			$('.needs').each(function(){
 				if($(this).val()==''){
 					alert("필수항목을 입력하세요.");
 					check=false;
 					return false;
+				}
+			});
+			$.ajax({
+				method : "post",
+				url : "/orders/searchOrder_detail",
+				async : false,
+				data : "orderCode=" + $('input[name=orderCode]').val(),
+				success : function(data) {
+					if($(".dialogPdcd").length>data.detail.length){
+						alert('발주항목에 맞지 않는 상품이 있습니다.');
+						check=false;
+						return false;
+					}
+					$(".dialogPdcd").each(function(){
+						for (var i = 0; i < data.length; i++) {
+							if(i==data.length-1&&$(this).val()!=data[i].productCode)
+								alert('발주항목에 맞지 않는 상품이 있습니다.');
+								check=false;
+								return false;
+						}
+					});
 				}
 			});
 			if(check){
@@ -331,6 +357,13 @@
 		$("#dialog_delBtn").click(function(){
 			$("#dialogFrm").attr('action','/wareHouse/deleteReceive');
 			$("#dialogFrm").submit();});
+		
+		$("#delProductByCheck").click(function(){
+			$("input[class=detailCheck]:checked").each(function(){
+				console.log($(this).parents('td').parents('tr'));
+				$(this).parents('td').parents('tr').remove();
+			});
+		});
 	});
 	
 function dialog() {
@@ -490,7 +523,9 @@ function dialog() {
 			method : "post",
 			url : "/orders/searchProduct",
 			data : {
-				productName : $("#searchProductText").val()
+				productName : $("#searchProductText").val(),
+				orderCode : $("input[name=orderCode]").val()
+				
 			},
 			success : function(data) {
 				$("#secondModalTbody").html('');

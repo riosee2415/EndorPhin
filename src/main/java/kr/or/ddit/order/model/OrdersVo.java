@@ -21,10 +21,17 @@ public class OrdersVo {
 	String status;
 	String sortation;
 	
+	String receivepay;
 	String preDate;
 	String postDate;
 	String clientname;
 	
+	public String getReceivepay() {
+		return receivepay;
+	}
+	public void setReceivepay(String receivepay) {
+		this.receivepay = receivepay;
+	}
 	public String getClientname() {
 		return clientname;
 	}

@@ -12,6 +12,41 @@
 	display: table-cell;
 	vertical-align: middle !important;
 }
+
+.nav>li>a:focus, .nav>li>a:hover {
+	text-decoration: none;
+	background-color: #eee;
+}
+
+.nav-tabs>li>a:hover {
+	border-color: #eee #eee #ddd;
+}
+
+.nav>li>a {
+	position: relative;
+	display: block;
+	padding: 10px 15px;
+}
+
+.nav-tabs>li>a {
+	margin-right: 2px;
+	line-height: 1.42857143;
+	border: 1px solid transparent;
+	border-radius: 4px 4px 0 0;
+}
+
+.tabControl {
+	color: #000 !important;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover
+	{
+	color: #555;
+	cursor: default;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-bottom-color: transparent;
+}
 </style>
 <div class="row">
 	<div class="col-md-1"></div>
@@ -52,22 +87,27 @@
 						</tr>
 					</thead>
 					<tbody>
-<%-- 						<c:forEach items="${ }" var="vo"> --%>
+						<c:forEach items="${orderList}" var="vo">
 							<tr>
-
+								<td><input type="checkbox" class="check"></td>
+								<td>${vo.sortation}</td>
+								<td><a
+									class="bttn-stretch bttn-md bttn-warning orderDialog">${vo.orderCode}</a></td>
+								<td>${vo.dueDate}</td>
+								<td>${vo.paymentDueDate}</td>
+								<td>${vo.clientname}</td>
+								<td>${vo.orderList}</td>
+								<td>${vo.receivepay}</td>
+								<td>${vo.orderPrice}</td>
 							</tr>
-<%-- 						</c:forEach> --%>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
 
 			<div class="btn_btm">
 				<input class="bttn-jelly bttn-md bttn-warning" type="button"
-					id="delProdBtn" value="선택 삭제">
-				<button type="button"
-					class="bttn-jelly bttn-md bttn-warning productDetail"
-					data-toggle="modal" style="margin-left: 20px"
-					data-target="#detailLayer">신규등록</button>
+					id="delProdBtn" value="EXCEL">
 			</div>
 		</form>
 	</div>
@@ -75,40 +115,142 @@
 
 <!-- 상세조회 모달창 -->
 <div class="dialog">
-	<span class="dialog__close">&#x2715;</span> <label for="inputName">상품
-		정보</label> <input type="hidden" name="productCode" id="dialog_productCode" />
-	<table id="dialogTable">
-		<tr>
-			<td><label for="InputEmail">상품명(*)</label> <input type="text"
-				id="dialog_ProductName" name="productName"
-				class="form-control needs" placeholder="공제명을 입력해주세요"></td>
-			<td><label for="inputPassword">규격명(*)</label> <input type="text"
-				class="form-control needs" name="standard" id="dialog_standard" />
-			</td>
-			<td><label for="inputPassword">기본 가격(*)</label> <input
-				type="text" class="form-control needs" name="basePrice"
-				id="dialog_basePrice" /></td>
-			<td rowspan="2"><input id="modalFileInput" type="file"
-				class="form-control" name="fileName"> <img src=""
-				style="width: 200px; height: 180px;" id="modalImg"></td>
-		</tr>
-		<tr>
-			<td><span><label for="inputPassword">개요</label><br /> <input
-					type="text" class="form-control" name="outLine" id="dialog_outLine" /></span>
-			</td>
-			<td><label for="inputPassword">사용여부</label> <select
-				name="usestatus" class="form-control" id="dialog_useStatus">
-					<option value="1">예</option>
-					<option value="2">아니오</option>
-			</select></td>
-		</tr>
-	</table>
-
-	<input type="button" id="dialog_updBtn"
-		class="btn btn-default modalUpd" value="수정" />
-	<button id="dialog_delBtn"
-		class="btn btn-default dialog__action modalUpd">삭제</button>
-	<input type="button" id="dialog_insBtn"
-		class="btn btn-default modalIns" value="등록" />
+	<span class="dialog__close">&#x2715;</span> <label for="inputName">발주서
+		상세</label>
+	<div class="modal-body">
+		<form action="/orders/deleteOrder" method="post" id="dialogFrm">
+			<div role="tabpanel">
+				<!-- Nav tabs -->
+				<div>
+					<ul class="nav nav-tabs" role="tablist">
+						<li role="presentation" class="active"><a href="#orderDetail"
+							aria-controls="uploadTab" role="tab" data-toggle="tab"
+							class="tabControl active">발주 상세</a></li>
+						<li role="presentation"><a href="#orderslist"
+							aria-controls="browseTab" role="tab" data-toggle="tab"
+							class="tabControl">발주 품목</a></li>
+						<li role="presentation"><a href="#receiveList"
+							aria-controls="browseTab" role="tab" data-toggle="tab"
+							class="tabControl">입고 현황</a></li>
+					</ul>
+				</div>
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane" id="orderDetail">
+						<table class="table table-hover">
+							<tr>
+								<th>발주일(*)</th>
+								<td><input class="form-control bootTapText dueDatePicker"
+									name="dueDate" type='text' readonly/></td>
+								<th>발주내역(*)</th>
+								<td><input class="form-control bootTapText"
+									name="orderList" type='text' readonly/></td>
+							</tr>
+							<tr>
+								<th>부서</th>
+								<td><input class="form-control bootTapText" name="deptCode"
+									type='text' readonly /></td>
+								<th>담당자</th>
+								<td><input class="form-control bootTapText" name="userId"
+									type='text' readonly /></td>
+							</tr>
+							<tr>
+								<th>거래처</th>
+								<td><input type="hidden" name="clientCode" /> <input
+									class="form-control bootTapText" name="clientname" type='text'
+									readonly /></td>
+								<th>납기일</th>
+								<td><input class="form-control bootTapText dueDatePicker"
+									name="paymentDueDate" type='text' readonly/></td>
+							</tr>
+						</table>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="orderslist"></div>
+					<div role="tabpanel" class="tab-pane" id="receiveList"></div>
+				</div>
+			</div>
+		</form>
+	</div>
 </div>
 
+<script>
+function dialog(){
+	$(".orderDialog").click(function(e){
+		$(".tabControl").show();
+		$(".tab-pane").eq(0).toggleClass("active");
+		$(".dialog").toggleClass('dialog--active');
+		$.ajax({
+			method : "post",
+			url : "/orders/selectOrder",
+			data :{
+				orderCode : $(this).html(),
+				check : true
+			},
+			success : function(data) {
+				console.log(data);
+				inputData(data);
+			}
+		});
+	});
+	
+	$('.dialog__close').on('click', function() {
+		$(".dialog").removeClass('dialog--active');
+		$(".tab-pane").removeClass('active show');
+	});
+
+	$(document).keyup(function(e) {
+		if (e.keyCode === 27) {
+			$(".dialog").removeClass('dialog--active');
+			$(".tab-pane").removeClass('active show');
+		}
+	});
+}
+function inputData(data){
+	$("input[name=dueDate]").val(data.orderVo.dueDate);
+	$("input[name=orderList]").val(data.orderVo.orderList);
+	$("input[name=deptCode]").val(data.orderVo.deptCode);
+	$("input[name=userId]").val(data.orderVo.userId);
+	$("input[name=clientname]").val(data.orderVo.clientname);
+	$("input[name=paymentDueDate]").val(data.orderVo.paymentDueDate);
+	var ordersList = '<table class=\'table table-hover\'>';
+	ordersList+='<tr><th>발주번호</th><th>상품명</th><th>규격</th><th>수량</th><th>단가</th><th>공급가액</th></tr>';
+	for (var i = 0; i < data.detailList.length; i++) {
+		var tempDetail=data.detailList[i];
+		ordersList+="<tr>"
+		+"<td>"+tempDetail.orderCode+"</td>"
+		+"<td>"+tempDetail.productname+"</td>"
+		+"<td>"+tempDetail.standard+"</td>"
+		+"<td>"+tempDetail.quantity+"</td>"
+		+"<td>"+tempDetail.baseprice+"</td>"
+		+"<td>"+tempDetail.baseprice*tempDetail.quantity+"</td>"
+		+"</tr>";
+	}
+	ordersList +='</table>';
+	$("#orderslist").html(ordersList);
+	receiveInput(data);
+}
+function receiveInput(data){
+	var receiveText='<table class=\'table table-hover\'>';
+	receiveText +='<tr><th>입고번호</th><th>입고일</th><th>창고명</th><th>품목</th><th>수량</th><th>입고액</th></tr>';
+	for (var i = 0; i < data.receiveDetail.allReceive.length; i++) {
+		if(data.receiveDetail.allReceive[i].sortation==0){
+			for (var j = 0; j < data.receiveDetail.allReceiveDetail[i].length; j++) {
+				var ard = data.receiveDetail.allReceiveDetail[i][j];
+				receiveText+='<tr>'
+				+'<td>'+ard.receiveCode+'</td>'
+				+'<td>'+data.receiveDetail.allReceive[i].receiveDate+'</td>'
+				+'<td>'+data.receiveDetail.allReceive[i].warehousename+'</td>'
+				+'<td>'+ard.productname+'</td>'
+				+'<td>'+ard.quantity+'</td>'
+				+'<td>'+ard.baseprice*ard.quantity+'</td>'
+				+'</tr>';
+			}
+		}
+	}
+	receiveText+="</table>";
+	$('#receiveList').html(receiveText);
+}
+$(document).ready(function(){
+	dialog();
+})
+</script>

@@ -11,4 +11,5 @@ public interface IReceiveService {
 	List<ReceiveVo> selectReceive(Map<String,Object> map);
 	int deleteReceive(String receiveCode);
 	int updateReceive(ReceiveVo receiveVo);
+	Map<String,Object> selectReceiveNdetail(String orderCode);
 }

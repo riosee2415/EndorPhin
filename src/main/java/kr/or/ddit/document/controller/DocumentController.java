@@ -47,6 +47,10 @@ public class DocumentController {
 		List<DocumentVo> documentList = documentService.getAllDocument();
 		List<EmployeeVo> employeeList = employeeService.selectMoreEmployee(positionCode);
 		
+		List<Document_refVo> document_refList = document_refService.getAllDocument_ref();
+		
+		
+		model.addAttribute("document_refList",document_refList);
 		model.addAttribute("employeeList",employeeList);
 		model.addAttribute("documentList",documentList);
 		model.addAttribute("userName",userName);
@@ -57,28 +61,38 @@ public class DocumentController {
 	}
 	
 	@RequestMapping("/selectDocument")
-	@ResponseBody
-	public String selectDocument(String documentNumber, Model model, HttpSession session
-									,Document_refVo document_refVo){
+	public String selectDocument(@RequestParam(name="documentNumber", defaultValue="empty")String documentNumber,
+									Model model, HttpSession session ,Document_refVo document_refVo){
+									
 		
 		List<Document_refVo> selectDocument = document_refService.selectDocument_ref(documentNumber);
+		
 		model.addAttribute("selectDocument",selectDocument);
+		model.addAttribute("documentNumber",documentNumber);
 		
 		EmployeeVo employeeVo = (EmployeeVo) session.getAttribute("employeeVo");
-		String userId 	= employeeVo.getUserId();
+		String userId		  = employeeVo.getUserId().toString();
 		
-		String endDiv="0";
 		for(int i = 0; i < selectDocument.size(); i++){
 			if(userId.equals(selectDocument.get(i).getUserId())){
-				endDiv="1";
-				model.addAttribute("endDiv",endDiv);
-				logger.debug("getUserId:::::{}",selectDocument.get(i).getUserId());
 				
+				String ref_userId = selectDocument.get(i).getUserId();
+				String document = selectDocument.get(i).getDocumentNumber();
+			/*	if(soratation.equals("0")) {
+					document_refVo.setSortation("1");
+					document_refService.updateDocument_ref(documentNumber);
+					
+					logger.debug("soratation:::::{}",selectDocument.get(i).getSortation());
+				model.addAttribute("ref_userId",ref_userId);
+				model.addAttribute("document",document);
+				logger.debug("ref_userId:::::{}", ref_userId);
+				logger.debug("document:::::{}", document);
+				}*/
+			model.addAttribute("ref_userId",ref_userId);
+			model.addAttribute("document",document);
 			}
-			/*document_refVo.setSortation("1");
-			document_refService.updateDocument_ref(documentNumber);*/
 		}
-		return endDiv;
+		return "document";
 	}
 	
 	@RequestMapping("/insertDocument")

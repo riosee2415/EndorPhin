@@ -90,12 +90,12 @@
 		</div>
 		
 		<div class="modal-footer">
-			<select class="form-control-lg " id="documentType" name="documentType"style="width: 150px;">
+			<select class="form-control " id="documentType" name="documentType"style="width: 150px;">
 				<option value="품의서" selected="selected">품의서</option>
 				<option value="기안서">기안서</option>
 				<option value="발주서">발주서</option>
 			</select>
-			<button type="button" class="btn btn-secondary btn-lg" data-toggle="modal" data-target="#my80sizeModal3">문서작성</button>
+			<button type="button" class="btn btn-secondary " data-toggle="modal" data-target="#my80sizeModal3">문서작성</button>
 		</div>
 	</div>
 </div>
@@ -126,7 +126,7 @@
 							<td><div id="de_documentNumber"></div></td>
 						</tr>
 						<tr>
-							<th>보존연한</th>
+							<th>보존연한</th> 
 							<td><div id="de_preservation"></div></td>
 						<tr>
 							<th>기안부서</th>
@@ -204,11 +204,21 @@
 								<div id="de_contents"></div>
 							</td>
 						</tr>
-						</table>
-						<div class="modal-footer">
-						<button type="button" id="approvalBtn" class="btn btn-outline-secondary btn-lg" onClick="signCheck();">승인</button>
-						<button type="button" id="backBtn"  class="btn btn-secondary btn-lg" >반려</button>
-						</div>
+						</table>${documentNumber}
+						<div id="buttondiv"></div>
+						<c:forEach items="${selectDocument }" var="vo">
+							<c:if test="${sessionScope.employeeVo.userId !=null }">
+								<c:if test="${sessionScope.employeeVo.userId == vo.userId}">
+									<c:if test="${vo.documentNumber == documentNumber }">
+										<div class="modal-footer">
+											<button type="button" id="approvalBtn"
+												class="btn btn-outline-secondary">승인</button>
+											<button type="button" id="backBtn" class="btn btn-secondary">반려</button>
+										</div>
+									</c:if>
+								</c:if>
+							</c:if>
+						</c:forEach>
 				</div>
 			</div>
 		</div>
@@ -264,7 +274,16 @@
 				</table>
 				<br>
 					<textarea  name="contents" id="contents" rows="10" cols="150" style="width: 730px; height: 300px;"></textarea>
-						<table>
+					<div class="col-sm-2" style="padding-left: 0px;">
+						 <a href="#this" class="btn" id="addFile"><button class="bttn-jelly bttn-warning btn-sm">파일추가</button></a>
+					</div>
+					 <div id="fileDiv">
+                	<p>
+                		<input type="file" id="filename" name="filename" multiple="" ><a href="#this" id="gfv_count" class="btn" id="delete" name="delete">삭제</a>
+                	</p>
+               		 </div>
+						<!-- <table>
+						
 							<tr>
 								<th scope="row">첨부파일1</th>
 								<td><input name="filename" type="file" multiple /></td>
@@ -273,15 +292,15 @@
 								<th scope="row">첨부파일2</th>
 								<td><input name="filename" type="file" multiple /></td>
 							</tr>
-						</table>
+						</table> -->
 					</div>
 				</div>
 						
 			<div class="modal-footer">
-				<button type="button" id="selectSignBtn" class="btn btn-outline-secondary btn-lg" data-toggle="modal"  data-target="#my80sizeModal4" value="${positionCode}" >결재선 지정</button>
-				<button type="button" id="referenceBtn" class="btn btn-outline-secondary btn-lg">참조선 지정</button>
-				<button type="button" id="signBtn"  class="btn btn-secondary btn-lg" id="signBtn" name="signBtn"onclick="selectSignClick();">결제상신</button>
-				<button type="button" class="btn btn-secondary btn-lg" id="temporarilyBtn" data-toggle="modal" data-target="#my80sizeModal2">임시저장</button>
+				<button type="button" id="selectSignBtn" class="btn btn-outline-secondary" data-toggle="modal"  data-target="#my80sizeModal4" value="${positionCode}" >결재선 지정</button>
+				<button type="button" id="referenceBtn" class="btn btn-outline-secondary">참조선 지정</button>
+				<button type="button" id="signBtn"  class="btn btn-secondary " id="signBtn" name="signBtn"onclick="selectSignClick();">결제상신</button>
+				<button type="button" class="btn btn-secondary" id="temporarilyBtn" data-toggle="modal" data-target="#my80sizeModal2">임시저장</button>
 			</div>
   		</div> 
 	</div>
@@ -359,15 +378,16 @@
 				</tbody>
 			</table>
 			<div class="modal-footer">
-			  <button type="button" id="insertBtn" class="btn btn-outline-secondary btn-lg" onclick=" insertclick();">결재라인 저장</button>
+			  <button type="button" id="insertBtn" class="btn btn-outline-secondary " onclick=" insertclick();">결재라인 저장</button>
 			</div> 
-			  <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">닫기</button> 
+			  <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button> 
 			  <input type="hidden" class="buttons" data-dismiss="modal" value=""/>
 			</div>
 			</div>
 			<center>
 		</div>
 	</div>
+
  	
 <script>
 
@@ -384,21 +404,26 @@
 		$("#de_documentType2").html($(this).data("documenttype"));
 		
 		 $.ajax({
-			 url : "${pageContext.request.contextPath }/selectDocument",
+			 url : "${pageContext.request.contextPath }/document",
 			 data :  "documentNumber="+$(this).data("documentnumber"),
-			 success : function() {
+			 success : function(data) {
+				 ocation.reload();
 			 }
 		});  
 	});
-	/* var endDiv ="";
-	 function signCheck(){
+ /* 	var endDiv ="";
+ 	
+ 	$("#approvalBtn").on("click", function(){
 		if(endDiv == "0"){
 			alert("이미 승인된 문서입니다.");
 		}else if(endDiv = "1"){
 			endDiv="<b><font color='red'>결제완료 </font><br>"
 			$("#endDiv").html(endDiv);
+		}else if(endDiv = "empty"){
+			alert("승인 권한이 없습니다.");
 		}
-		 */
+	 });
+	  */
 	
 	
 	function selectSignClick(){
@@ -412,6 +437,7 @@
 					+ "preservation="+$("#preservation").val() + "&"
 					+ "documentType="+$("#documentType").val() + "&"
 					+ "contents="+ $("#contents").val()+"&"
+					+ "filename="+ $("#filename").val()+"&"
 					+ "checkRow=" + checkRow,
 					
 			success : function(data) {
@@ -479,18 +505,52 @@
 		});
 		
 	});
-/* 	$("#insertBtn").click(function(){ 
-		var conf = confirm("결재선이 저장되었습니다.");
-		if(conf == true){
-			$('.buttons').trigger('click');
-		}
-	}); */
+	
 	function deleteClick() {
 		$("#ex3_Result0").html("");	
 		$("#ex3_Result1").html("");	
 		$("#ex3_Result2").html("");	
 		$("#ex3_Result3").html("");	
 	}
+	
+	
+	
+	   var gfv_count = 1;
+	    var max_count = 5;
+
+	    function fn_addFile(){
+	    	var str = "<p><input type='file' name='filename' ><a href='#this' id='"+ (gfv_count++) +"' class='deletebtn' name='delete'>삭제</a></p>";
+	    		
+	    	$("#fileDiv").append(str);
+	    	
+	    	$("#"+(gfv_count-1)).on("click", function(e){ //삭제 버튼 
+	    		e.preventDefault();
+	    		fn_deleteFile($(this));
+	    		alert("삭제");
+	    	});
+	   	 }
+	    
+	    $("#addFile").on("click", function(e){ //파일 추가 버튼
+	    	e.preventDefault();
+		    if(gfv_count < max_count){
+		    	fn_addFile();
+		    	console.log(gfv_count);
+		    }else{
+		    	alert("더 이상 추가할수 없습니다.");
+		    	return;
+		    }
+	    });
+	    
+	    
+	    //삭제 실행
+	    function fn_deleteFile(obj){
+	    	gfv_count--;
+	    	obj.parent().remove();
+	    	console.log(gfv_count);
+	    }
+	    
+	
+	
 	
 	
 	var oEditors = []; 

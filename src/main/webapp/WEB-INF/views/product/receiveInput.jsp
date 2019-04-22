@@ -23,7 +23,7 @@
 	<div class="col-md-1"></div>
 	<div class="col-md-10">
 		<h3>
-			<i class="fa fa-calculator"></i>입고 입력
+			<i class="fa fa-calculator"></i>입출고 관리
 		</h3>
 		<form action="/product/productInput" id="searchFrm" method="get">
 			<table>
@@ -95,7 +95,7 @@
 				<table class="table table-hover">
 					<tr>
 						<th>입고일(*)</th>
-						<td><input class="form-control bootTapText dueDatePicker"
+						<td><input class="form-control bootTapText datePicker"
 							name="receiveDate" type='text' /></td>
 						<th>발주번호</th>
 						<td><input class="form-control bootTapText" name="orderCode"
@@ -109,12 +109,19 @@
 						<th>물자대</th>
 						<td><input class="form-control bootTapText" name="material"
 							type='text' readonly />
+						<th>구분</th>
+						<td>
+							<select name="sortation" class="form-control bootTapText">
+								<option value="0">입고</option>
+								<option value="1">출고</option>
+							</select>
+						</td>
 						<th>창고명(*)</th>
 						<td><input type="hidden" name="warehouseCode" /> <input
 							class="form-control bootTapText" name="warehousename" type='text'
 							readonly />
 							<button type="button" class="btn btn-default searchModal"
-								value="2">
+								value="1">
 								<i class="fa fa-search"></i>
 						</button></td>
 					</tr>
@@ -163,6 +170,39 @@
 	</div>
 </div>
 
+<!-- 거래처 / 발주 선택 모달 -->
+<div class="modal" id="myModal3" data-backdrop="static" tabindex="3"
+	aria-hidden="true" style="display: none; z-index: 1080;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="secondModalTitle"></h4>
+				<button id="secondUpdClose1" type="button" class="close"
+					data-dismiss="modal" aria-hidden="true">×</button>
+			</div>
+			<div class="container"></div>
+			<div class="modal-body">
+				<div style="overflow: scroll; width: 450px; height: 200px;">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>항목코드</th>
+								<th>항목명</th>
+							</tr>
+						</thead>
+						<tbody id="secondModalUpdTbody">
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<a href="#" data-dismiss="modal" class="btn" id="secondUpdClose">Close</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 상품 등록 화면 -->
 <div class="modal" id="myModal4" data-backdrop="static" tabindex="3"
 	aria-hidden="true" style="display: none; z-index: 1080;">
 	<div class="modal-dialog">
@@ -205,6 +245,54 @@
 </div>
 
 <script>
+	$(".searchModal").click(function(index, item){
+		var check = $(this).val();
+		$.ajax({
+			method : "post",
+			url : "/wareHouse/selectModal",
+			data : {
+				check : $(this).val()
+			},
+			success : function(data) {
+				$("#secondModalUpdTbody").html("");
+				switch (check) {
+					case '0':
+						for (var i = 0; i < data.orderList.length; i++) {
+							$("#secondModalUpdTbody").append("<tr class=\'selectOrder\'>"
+							+"<td>"+data.orderList[i].orderCode+"</td>"
+							+"<td>"+data.orderList[i].orderList+"</td>"
+							+"</tr>");
+						}
+						break;
+					case '1':
+						for (var i = 0; i < data.wareHouseList.length; i++) {
+							$("#secondModalUpdTbody").append("<tr class=\'selectClient\'>"+
+							"<td>"+data.wareHouseList[i].wareHouseCode+"</td>"+
+							"<td>"+data.wareHouseList[i].wareHouseName+"</td>"+
+							+"<tr>");
+						}
+						break;
+				}
+				modalClickEvent();
+			}
+		});
+		$("#myModal3").modal('show');
+	})
+	
+	function modalClickEvent(){
+	$(".selectOrder, .selectClient").click(function(){
+		switch ($(this).attr('class')) {
+			case 'selectOrder':
+				$('input[name=orderCode]').val($(this).find('td').eq(0).html());
+				break;
+			case 'selectClient':
+				$('input[name=warehouseCode]').val($(this).find('td').eq(0).html());
+				$('input[name=warehousename]').val($(this).find('td').eq(1).html());
+				break;
+		}
+		$("#myModal3").modal('hide');
+	});
+	}
 	$("#delProdBtn").click(function(){
 		var item = $(this);
 		$("input[class=check]:checked").each(function(){
@@ -225,6 +313,7 @@
 	})
 	$(document).ready(function() {
 		dialog();
+		datepicker();
 		$("#dialog_insBtn,#dialog_updBtn").click(function(){
 			var check = true;
 			$("#dialogFrm").attr('action','/wareHouse/insOrUpdReceive');
@@ -343,7 +432,7 @@ function dialog() {
 		numChange();
 	}
 	function datepicker(){
-		$("input[name=receiveDate]").datepicker({
+		$(".datePicker").datepicker({
 			dateFormat: 'yy-mm-dd' //Input Display Format 변경
             ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
             ,showMonthAfterYear:true //년도 먼저 나오고, 뒤에 월 표시
@@ -358,7 +447,7 @@ function dialog() {
             ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 부분 텍스트
             ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일']
 		});
-		$('input[name=receiveDate]').datepicker('setDate', 'today');	
+		$('.datePicker').datepicker('setDate', 'today');	
 	}
 	function numChange(){
 		$("#modalCheckAll").off("click");

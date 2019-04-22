@@ -5,6 +5,7 @@ import java.util.Map;
 
 import kr.or.ddit.payment.model.Payment4UpdVo;
 import kr.or.ddit.payment.model.PaymentVo;
+import kr.or.ddit.util.model.PageVo;
 
 public interface IPaymentService {
 	int insertPayment(PaymentVo paymentVo);
@@ -12,7 +13,7 @@ public interface IPaymentService {
 	List<PaymentVo> getPayment_u(String userId);
 	PaymentVo selectPayment(String paycode);
 	int deletePayment(String paycode);
-	List<PaymentVo> getPaymentList();
+	Map<String,Object> getPaymentList(PageVo pageVo);
 	List<PaymentVo> getPaymentListByUserNm(String usernm);
 	boolean updateAndInsertPayment(Payment4UpdVo payment4UpdVo);
 	void updatePaymentDetailAjax(Payment4UpdVo payment4UpdVo);

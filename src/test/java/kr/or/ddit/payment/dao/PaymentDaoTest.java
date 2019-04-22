@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import kr.or.ddit.payment.model.PaymentVo;
 import kr.or.ddit.set.LogicConfig;
+import kr.or.ddit.util.model.PageVo;
 
 public class PaymentDaoTest extends LogicConfig{
 
@@ -43,7 +44,7 @@ public class PaymentDaoTest extends LogicConfig{
 	}
 	@Test
 	public void getPaymentListTest() {
-		List<PaymentVo> allPayment = paymentDao.getPaymentList();
+		List<PaymentVo> allPayment = paymentDao.getPaymentList(new PageVo());
 		for (PaymentVo paymentVo : allPayment) {
 			logger.debug("payment111:{}",paymentVo);
 		}

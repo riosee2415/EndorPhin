@@ -61,6 +61,48 @@
 				</tr>
 			</tfoot>
 		</table>
+		<c:set var="lastPage"
+			value="${Integer(paymentCnt/pageSize + (paymentCnt%pageSize > 0 ? 1 : 0))}" />
+		<nav style="text-align: center;">
+		<ul id="pagination" class="pagination">
+		<c:choose>
+			<c:when test="${page == 1 }">
+				<li class="disabled"><a class="bttn-minimal bttn-md bttn-warning" aria-label="Previous"> <span
+						aria-hidden="true">&laquo;</span>
+				</a></li>
+			</c:when>
+			<c:otherwise>
+				<li><a href="/addPayment" aria-label="Previous" class="bttn-minimal bttn-md bttn-warning">
+						<span aria-hidden="true">&laquo;</span>
+				</a></li>
+			</c:otherwise>
+		</c:choose>
+		
+		<c:forEach begin="1" end="${lastPage }" var="i">
+			<c:set var="active" value="" />
+			<c:if test="${i == page }">
+				<c:set var="active" value="active" />
+			</c:if>
+		
+			<li class="${active }"><a class="bttn-minimal bttn-md bttn-warning"
+				href="/addPayment?page=${i}">${i}</a></li>
+		</c:forEach>
+		
+		
+		<c:choose>
+			<c:when test="${page == lastPage }">
+				<li class="disabled"><a class="bttn-minimal bttn-md bttn-warning" aria-label="Next"> <span
+						aria-hidden="true">&raquo;</span>
+				</a></li>
+			</c:when>
+			<c:otherwise>
+				<li><a class="bttn-minimal bttn-md bttn-warning" href="/addPayment?page=${lastPage}"
+					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+				</a></li>
+			</c:otherwise>
+		</c:choose>
+		</ul>
+		</nav>
 	</div>
 </div>
 

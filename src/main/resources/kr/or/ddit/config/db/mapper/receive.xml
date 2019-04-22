@@ -14,7 +14,7 @@
 		(receivecode, receivedate, sortation, material,
 		 warehousecode, ordercode)
 		values
-		(#{receiveCode},sysdate,#{sortation}
+		(#{receiveCode},sysdate,nvl(#{sortation, jdbcType=VARCHAR},null)
 		,nvl(#{material, jdbcType=VARCHAR},null)
 		,#{warehouseCode}
 		,nvl(#{orderCode, jdbcType=VARCHAR},null))

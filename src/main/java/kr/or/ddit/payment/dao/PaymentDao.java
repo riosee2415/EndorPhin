@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.or.ddit.payment.model.PaymentVo;
+import kr.or.ddit.util.model.PageVo;
 
 @Repository("paymentDao")
 public class PaymentDao implements IPaymentDao{
@@ -43,8 +44,8 @@ public class PaymentDao implements IPaymentDao{
 	}
 
 	@Override
-	public List<PaymentVo> getPaymentList() {
-		return sqlSessionTemplate.selectList("payment.getPaymentList");
+	public List<PaymentVo> getPaymentList(PageVo pageVo) {
+		return sqlSessionTemplate.selectList("payment.getPaymentList",pageVo);
 	}
 
 	@Override
@@ -100,6 +101,11 @@ public class PaymentDao implements IPaymentDao{
 	@Override
 	public List<PaymentVo> selectDeptNPayment(String paydayMonth) {
 		return sqlSessionTemplate.selectList("payment.selectDeptNPayment",paydayMonth);
+	}
+
+	@Override
+	public int getPaymentCnt() {
+		return sqlSessionTemplate.selectOne("payment.getPaymentCnt");
 	}
 
 

@@ -40,19 +40,20 @@ public class ScheduleController {
 		
 		return allSchedule;
 	}
+	
 
 	@RequestMapping(path="/scheduleInsertAjax", method=RequestMethod.GET)
 	@ResponseBody
-	public List<ScheduleVo> scheduleInsertAjax(String title, String start,String end,String allDay,HttpServletRequest request) {
+	public List<ScheduleVo> scheduleInsertAjax(String title,String userid,  String start,String end,String allDay,HttpServletRequest request) {
 		
-		EmployeeVo attribute = (EmployeeVo) request.getSession().getAttribute("employeeVo");
+		//EmployeeVo attribute = (EmployeeVo) request.getSession().getAttribute("employeeVo");
 		
 		if(title != null && start != null && end != null){
 		ScheduleVo vo = new ScheduleVo();
 		vo.setSchedule_title(title);
 		vo.setSchedule_start(start);
 		vo.setSchedule_end(end);
-		vo.setUserid(attribute.getUserId());
+		vo.setUserid(userid);
 		scheduleService.insertSchedule(vo);
 		}
 		

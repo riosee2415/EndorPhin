@@ -18,6 +18,7 @@ import kr.or.ddit.payment.model.De_product_divVo;
 import kr.or.ddit.payment.model.Payment4UpdVo;
 import kr.or.ddit.payment.model.PaymentVo;
 import kr.or.ddit.payment.model.Payment_detailVo;
+import kr.or.ddit.util.model.PageVo;
 
 @Service("paymentService")
 public class PaymentService implements IPaymentService{
@@ -58,10 +59,6 @@ public class PaymentService implements IPaymentService{
 		return paymentDao.getPayment_u(userId);
 	}
 
-	@Override
-	public List<PaymentVo> getPaymentList() {
-		return paymentDao.getPaymentList();
-	}
 
 	@Override
 	public List<PaymentVo> getPaymentListByUserNm(String usernm) {
@@ -225,5 +222,14 @@ public class PaymentService implements IPaymentService{
 		Map<String,Object> map = new HashMap<>();
 		map.put("paydayYear", paydayMonth);
 		return paymentDao.selectYearPaymentListDetail(map);
+	}
+
+	@Override
+	public Map<String, Object> getPaymentList(PageVo pageVo) {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+
+		resultMap.put("paymentList", paymentDao.getPaymentList(pageVo));
+		resultMap.put("paymentCnt", paymentDao.getPaymentCnt());
+		return resultMap;
 	}
 }

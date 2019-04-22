@@ -37,6 +37,7 @@ import kr.or.ddit.slip.service.ISlipService;
 import kr.or.ddit.slip.service.ISlip_detailService;
 import kr.or.ddit.tax_cal.model.EstablishVo;
 import kr.or.ddit.tax_cal.service.IEstablishService;
+import kr.or.ddit.util.model.PageVo;
 
 @Controller
 public class PaymentController {
@@ -300,14 +301,14 @@ public class PaymentController {
 	}
 
 	@RequestMapping(path = "/addPayment", method = RequestMethod.GET)
-	public String addPaymentView(String searchPaymentName, Model model) {
-		List<PaymentVo> paymentList = null;
+	public String addPaymentView(PageVo pageVo,String searchPaymentName, Model model) {
 		if (searchPaymentName == null) {
-			paymentList = paymentService.getPaymentList();
+			model.addAllAttributes(paymentService.getPaymentList(pageVo));
+			model.addAttribute("pageSize", pageVo.getPageSize());
+			model.addAttribute("page", pageVo.getPage());
 		} else {
-			paymentList = paymentService.getPaymentListByUserNm(searchPaymentName);
+			model.addAttribute("paymentList", paymentService.getPaymentListByUserNm(searchPaymentName));
 		}
-		model.addAttribute("paymentList", paymentList);
 		return "addPaymentView";
 	}
 

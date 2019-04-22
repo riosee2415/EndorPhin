@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.or.ddit.payment.model.PaymentVo;
+import kr.or.ddit.util.model.PageVo;
 
 public interface IPaymentDao {
 	int insertPayment(PaymentVo paymentVo);
@@ -12,7 +13,7 @@ public interface IPaymentDao {
 	PaymentVo selectPayment(String paycode);
 	int deletePayment(String paycode);
 	List<PaymentVo> getPayment_u(String userId);
-	List<PaymentVo> getPaymentList();
+	List<PaymentVo> getPaymentList(PageVo pageVo);
 	List<PaymentVo> getPaymentListByUserNm(String usernm);
 	String getMaxPayment();
 	String searchPaymentDupl(PaymentVo paymentVo);
@@ -23,4 +24,5 @@ public interface IPaymentDao {
 	String paycodeByIdnDay(PaymentVo paymentVo);
 	String selectincometax(String divsalary);
 	List<PaymentVo> selectDeptNPayment(String paydayMonth);
+	int getPaymentCnt();
 }

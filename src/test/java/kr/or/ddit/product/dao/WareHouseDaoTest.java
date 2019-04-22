@@ -39,7 +39,7 @@ public class WareHouseDaoTest extends LogicConfig{
 	@Test
 	public void selectWarehouseTest() {
 		WareHouseVo selectWarehouse = wareHouseDao.selectWarehouse("1");
-		assertTrue(selectWarehouse.getWareHouseName().equals("준호창고"));
+		assertTrue(selectWarehouse.getWareHouseName().equals("처음준호창고"));
 	}
 	@Test
 	public void deleteProductTest() {

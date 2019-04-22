@@ -10,27 +10,17 @@
 background-color: #FBF5EF;
 }     
 .fc-title{
-    font-size: 1.3em;
+    font-size: 1.5em;
     color: white;
-    width : 200px;
-    margin-left: auto;
-    margin-right: auto;
-    
 }     
      
-     
-  body {
-        padding: 0;
-        font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-        font-size: 18px;
-    }
 
   .fc-sun {color:#e31b23; background-color:#F8E0E0 }
 .fc-sat {color:#007dc3;  background-color:#E0F2F7 }
   
   
 /* ===============================================================   */
-a:hover,a:focus{
+ a:hover,a:focus{
     text-decoration: none;
     outline: none;
 }
@@ -96,14 +86,23 @@ a:hover,a:focus{
         bottom: -2px;
         left: 0;
     }
+} 
+
+
+                   
+
+#company{
+
+pointer-events: none;
+
 }
   
-</style>
-
-
+</style> 
+                          
 <body>
 
-   <div class="container-fluid">
+
+   <div  class="container-fluid">
       <div class="row" style="margin-top: 30px">
          <div class="col-md-1"></div>
 
@@ -117,7 +116,7 @@ a:hover,a:focus{
       </div>
 
 
-		<div class="row" style="margin-top: 10px">
+		<div class="row" style="margin-top: 10px" onchange="test()">
 			<div class="col-md-1"></div>
 			<div class="col-md-10">
 
@@ -128,7 +127,7 @@ a:hover,a:focus{
 						<li role="presentation" class="active"><a id="frmTap"
 							href="#Section1" aria-controls="home" role="tab"
 							data-toggle="tab">회사 일정</a></li>
-						<li role="presentation"><a href="#Section2"
+						<li role="presentation"><a href="#Section1" id="frmTap2"
 							aria-controls="profile" role="tab" data-toggle="tab">개인 일정 </a></li>
 					</ul>
 				</div>
@@ -137,20 +136,20 @@ a:hover,a:focus{
 		</div>
 
 
-
 			<div role="tabpanel" class="tab-pane fade in active" id="Section1">
 				<div class="row" style="margin-top: 10px">
 					<div class="col-md-1"></div>
-					<div class="col-md-10">
-						<!-- 달력 시작 -->
+					<div class="col-md-10" id="company">
+						<!-- 회사 달력 시작 -->
 						<div id='calendar'></div>
-						<!-- 달력 종료 -->
+						<!-- 회사 달력 종료 -->
 					</div>
 					<div class="col-md-1"></div>
 				</div>
 			</div>
 
 	</div>
+	
    
 <script>
 
@@ -206,7 +205,6 @@ var calendar;
    },
    
    //===========================================================캘린더 수정부분 종료
-   
    
    
     //============================================타이틀 수정 시작
@@ -279,12 +277,16 @@ var calendar;
       eventDragStop: function(event) {
       
            var trashEl = jQuery('#calendar');
+           
            var ofs = trashEl.offset();
 
            var x1 = ofs.left;
            var x2 = ofs.left + trashEl.outerWidth(true);
            var y1 = ofs.top;
            var y2 = ofs.top + trashEl.outerHeight(true);
+           
+           return false;
+           
            if (!(event.jsEvent.pageX >= x1 && event.jsEvent.pageX<= x2 &&
                 event.jsEvent.pageY >= y1 && event.jsEvent.pageY <= y2)) {
                  event.el.remove();
@@ -310,6 +312,11 @@ var calendar;
             return false;
          }
          if(title!=null){
+        	 var userid=null;
+        	/*  if($("#frmTap").hasClass('active')){
+        		 userid =; 
+        	 } */
+        		 
             $.ajax({
                 url         : "${cp}/schedule/scheduleInsertAjax" ,
                 method      : "get",
@@ -340,10 +347,18 @@ var calendar;
               var datas=[];
             for (var i = 0; i < allSchedule.length; i++) {
                  var temp = allSchedule[i];
+                 if($("#frmTap").hasClass('active')&&temp.userid==null){
                   datas.push({id : temp.schedule_no,
                           title : temp.schedule_title,
                            start : temp.schedule_start,
                            end : temp.schedule_end});
+                 }
+                 else if(!$("#frmTap").hasClass('active')&&temp.userid == '${employeeVo.userId}'){
+                  datas.push({id : temp.schedule_no,
+                          title : temp.schedule_title,
+                           start : temp.schedule_start,
+                           end : temp.schedule_end});
+                 }
               }   
               suss(datas);
            }                 
@@ -351,19 +366,38 @@ var calendar;
         
      }
       
+      
      });
     calendar.render();
   });
   
   
   
+   $("#frmTap, #frmTap2").mouseup(function(){
+	  calendar.refetchEvents();
+  }); 
+  
+  
+   
+  
   $(document).ready(function() {
 	  
-		$("#frmTap").trigger('click');
+	    var session = '${employeeVo.deptname}';
+	   
+	   if(session == '인사'){
+		   $('#company').css('pointer-events', 'inherit');
+	   }  
+	   
+	   
+	$("#frmTap").trigger('click');
+		
+		
   });
 		
   
 </script>
+
+	
                                        
 <%--   --%>
 

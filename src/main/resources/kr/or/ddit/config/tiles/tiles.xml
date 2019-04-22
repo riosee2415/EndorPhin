@@ -227,6 +227,12 @@
          <definition name="document" extends="layout_groupware">    <!--그룹웨어 - 기안상신함 -->
            <put-attribute name="content" value="/WEB-INF/views/document/document.jsp"/>
         </definition>
+         <definition name="temporarily" extends="layout_groupware">    <!--그룹웨어 - 임시보관함-->
+           <put-attribute name="content" value="/WEB-INF/views/document/temporarily.jsp"/>
+        </definition>
+        
+        
+        
         <definition name="sumChance" extends="layout">   <!-- 합계잔액 -->
 		<put-attribute name="content"
 			value="/WEB-INF/views/ps/sumChance.jsp" />

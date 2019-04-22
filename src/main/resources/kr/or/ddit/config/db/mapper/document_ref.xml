@@ -9,7 +9,7 @@
 		insert into document_ref
 		(referencenumber, documentnumber, userid, sortation)
 		values
-		(#{referenceNumber},#{documentNumber},#{userId},#{sortation})
+		(documentRef_seq.nextval,#{documentNumber},#{userId},#{sortation})
 
 	</insert>
 
@@ -23,12 +23,11 @@
 
 
 	<!-- 기안참조 선택하여 가져오기 -->
-	<select id="selectDocument_ref" resultType="document_refVo"
-		parameterType="map">
+	<select id="selectDocument_ref" resultType="document_refVo"	parameterType="map">
 		select
 		referencenumber, documentnumber, userid, sortation
 		from
-		document_ref where referencenumber = #{referenceNumber}
+		document_ref where documentNumber = #{documentNumber}
 	</select>
 
 
@@ -37,6 +36,12 @@
 		delete from document_ref
 		where referencenumber = #{referenceNumber}
 	</delete>
+	
+	<update id="updateDocument_ref" parameterType="document_refVo">
+		update document_ref set 
+			sortation = #{sortation}
+			where documentnumber = #{documentNumber}
+	</update>
 
 
 </mapper>

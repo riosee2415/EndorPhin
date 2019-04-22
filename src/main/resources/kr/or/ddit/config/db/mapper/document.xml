@@ -40,20 +40,19 @@
 
 	
 	<!-- 기안 선택하여 가져오기 -->
-	<select id="selectDocument" resultType="documentVo"
-		parameterType="map">
+	<select id="selectDocument" resultType="documentVo" parameterType="map">
 		select
 		documentnumber, title, preservation, presentdate, contents, tempsortation,
 		 completesortation, presentuser, presentdepartment
 		from
-		document where documentnumber = #{documentnumber}
+		document where documentNumber = #{documentNumber}
 	</select>
 
 
 	<!-- 기안 삭제 -->
 	<delete id="deleteDocument" parameterType="map">
 		delete from document
-		where documentnumber = #{documentnumber}
+		where documentnumber = #{documentNumber}
 	</delete>
 
 

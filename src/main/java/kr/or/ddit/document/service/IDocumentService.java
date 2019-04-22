@@ -24,4 +24,7 @@ public interface IDocumentService {
 	* Method 설명 : 기안등록
 	*/
 	int insertDocument(DocumentVo documentVo);
+	
+	
+	List<DocumentVo> selectDocument(String documentnumber);
 }

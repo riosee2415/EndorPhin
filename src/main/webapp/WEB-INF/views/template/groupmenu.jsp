@@ -22,13 +22,12 @@
 					<li><a href="#"><i class="icon-wrench"></i> 기안함</a>
 						<ul class="sub-menu">
 							<li><a href="${pageContext.request.contextPath }/document">기안 상신함</a></li>
-							<li><a href="#">임시 보관함</a></li>
+							<li><a href="${pageContext.request.contextPath }/temporarily">임시 보관함</a></li>
 							<li><a href="#">기안 완료함</a></li>
 						</ul></li>
 					<li><a href="#"><i class="icon-wrench"></i> 결재함</a>
 						<ul class="sub-menu">
 							<li><a href="#">미결함</a></li>
-							<li><a href="#">기결함</a></li>
 							<li><a href="#">반려함</a></li>
 							</ul></li>
 					<li><a href="#"><i class="icon-wrench"></i> 수신함</a></li>

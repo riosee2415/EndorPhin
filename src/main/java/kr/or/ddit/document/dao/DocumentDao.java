@@ -24,5 +24,10 @@ public class DocumentDao implements IDocumentDao{
 	public List<DocumentVo> getAllDocument() {
 		return sqlSessionTemplate.selectList("document.getAllDocument");
 	}
+
+	@Override
+	public List<DocumentVo> selectDocument(String documentnumber) {
+		return sqlSessionTemplate.selectList("document.selectDocument",documentnumber);
+	}
 	
 }

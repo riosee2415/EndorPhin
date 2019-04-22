@@ -143,7 +143,7 @@
 										<th>결재</th>
 									</tr>
 									<tr>
-										<td style='height: 50px;'>완료 <br />2019-04-18
+										<td style='height: 50px;'>완료<div id="endDiv"></div> <br />2019-04-18
 										</td>
 										<td></td>
 										<td></td>
@@ -204,12 +204,17 @@
 								<div id="de_contents"></div>
 							</td>
 						</tr>
-					</table>
+						</table>
+						<div class="modal-footer">
+						<button type="button" id="approvalBtn" class="btn btn-outline-secondary btn-lg" onClick="signCheck();">승인</button>
+						<button type="button" id="backBtn"  class="btn btn-secondary btn-lg" >반려</button>
+						</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	</div>
+	
 <!-- --------------------문서작성-------------------------------------->
 <div class="modal fade" id="my80sizeModal3" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
 	<div class="modal-dialog modal-lg" role="document">
@@ -273,9 +278,9 @@
 				</div>
 						
 			<div class="modal-footer">
-				<button type="button" id="selectSignBtn" class="btn btn-outline-secondary btn-lg" data-toggle="modal"  data-target="#my80sizeModal4" value="${positionCode}" onclick="selectSignClick();">결재선 지정</button>
+				<button type="button" id="selectSignBtn" class="btn btn-outline-secondary btn-lg" data-toggle="modal"  data-target="#my80sizeModal4" value="${positionCode}" >결재선 지정</button>
 				<button type="button" id="referenceBtn" class="btn btn-outline-secondary btn-lg">참조선 지정</button>
-				<button type="button" id="signBtn"  class="btn btn-secondary btn-lg" id="signBtn" name="signBtn" >결제상신</button>
+				<button type="button" id="signBtn"  class="btn btn-secondary btn-lg" id="signBtn" name="signBtn"onclick="selectSignClick();">결제상신</button>
 				<button type="button" class="btn btn-secondary btn-lg" id="temporarilyBtn" data-toggle="modal" data-target="#my80sizeModal2">임시저장</button>
 			</div>
   		</div> 
@@ -354,7 +359,7 @@
 				</tbody>
 			</table>
 			<div class="modal-footer">
-			  <button type="button" id="insertBtn" class="btn btn-outline-secondary btn-lg" onclick=" myclick();">결재라인 저장</button>
+			  <button type="button" id="insertBtn" class="btn btn-outline-secondary btn-lg" onclick=" insertclick();">결재라인 저장</button>
 			</div> 
 			  <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">닫기</button> 
 			  <input type="hidden" class="buttons" data-dismiss="modal" value=""/>
@@ -363,15 +368,10 @@
 			<center>
 		</div>
 	</div>
-	
- 	<form id="insert_frm" action="${pageContext.request.contextPath }/insertDocument_ref">
- 		<input type="hidden" id="checkRow" name="checkRow">
- 		<input type="hidden" id="frm_documentNumber" name="frm_documentNumber">
- 		
- 	</form>		 
  	
 <script>
-	
+
+
 	$(".detailView").on("click", function(){
 		$("#de_presentDepartment").html($(this).data("presentdepartment"));
 		$("#de_presentUser").html($(this).data("presentuser"));
@@ -382,10 +382,27 @@
 		$("#de_title").html($(this).data("title"));
 		$("#de_contents").html($(this).data("contents"));
 		$("#de_documentType2").html($(this).data("documenttype"));
+		
+		 $.ajax({
+			 url : "${pageContext.request.contextPath }/selectDocument",
+			 data :  "documentNumber="+$(this).data("documentnumber"),
+			 success : function() {
+			 }
+		});  
 	});
+	/* var endDiv ="";
+	 function signCheck(){
+		if(endDiv == "0"){
+			alert("이미 승인된 문서입니다.");
+		}else if(endDiv = "1"){
+			endDiv="<b><font color='red'>결제완료 </font><br>"
+			$("#endDiv").html(endDiv);
+		}
+		 */
+	
 	
 	function selectSignClick(){
-		$.ajax({
+		 $.ajax({
 			url : "${pageContext.request.contextPath }/insertDocument",
 			data : "documentNumber="+ $("#documentNumber").val()+ "&" + 
 					"presentUser="+ $("#presentUser").val() + "&"
@@ -394,27 +411,33 @@
 					+ "presentDepartment="+ $("#presentDepartment").val() + "&"
 					+ "preservation="+$("#preservation").val() + "&"
 					+ "documentType="+$("#documentType").val() + "&"
-					+ "contents="+ $("#contents").val()+"&",
+					+ "contents="+ $("#contents").val()+"&"
+					+ "checkRow=" + checkRow,
 					
 			success : function(data) {
 				alert("기안작성이 완료되었습니다.");
 				location.reload();
 				return false;
 			}
+		}); 
+	}
+	var checkRow = '';
+	function insertclick() {
+	
+		$("input[name=checkRow]:checked").each(function() {
+			checkRow += $(this).val()+",";
 		});
-	}
-	// 필수값 Check
-	function validation(){
-		var contents = $.trim(oEditors[0].getContents());
-		if(contents === '<p>&nbsp;</p>' || contents === ''){ // 기본적으로 아무것도 입력하지 않아도 <p>&nbsp;</p> 값이 입력되어 있음. 
-			alert("내용을 입력하세요.");
-			oEditors.getById['smarteditor'].exec('FOCUS');
+			checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); //맨끝 콤마 지우기  
+			
+			if(checkRow === ""){		
+			alert("결재선이 지정되어 있지 않습니다.");
 			return false;
-		}
-
-		return true;
+			}
+			$("#checkRow").val(checkRow);
+			$('.buttons').trigger('click');
+			alert(checkRow);
+			
 	}
-
 	// 상단 선택버튼 클릭시 체크된 Row의 값을 가져온다.
 	$("#btnSelectEmployee").click(function(){ 
 		
@@ -469,30 +492,6 @@
 		$("#ex3_Result3").html("");	
 	}
 	
-	function myclick() {
-		
-		var checkRow = '';
-	
-		$("input[name=checkRow]:checked").each(function() {
-			checkRow += $(this).val()+",";
-		});
-			checkRow = checkRow.substring(0, checkRow.lastIndexOf(",")); //맨끝 콤마 지우기  
-			
-			
-			if(checkRow === ""){		
-			alert("결재선이 지정되어 있지 않습니다.");
-			return false;
-			}
-				$("#frm_documentNumber").val($("#documentNumber").val());
-				$("#checkRow").val(checkRow);
-				alert(checkRow);
-				$("#insert_frm").submit();
-				$('.buttons').trigger('click');
-			
-	}
-
-		
-		
 	
 	var oEditors = []; 
 	
@@ -517,7 +516,17 @@
 		});
 	});
 	
-		
+	// 필수값 Check
+	function validation(){
+		var contents = $.trim(oEditors[0].getContents());
+		if(contents === '<p>&nbsp;</p>' || contents === ''){ // 기본적으로 아무것도 입력하지 않아도 <p>&nbsp;</p> 값이 입력되어 있음. 
+			alert("내용을 입력하세요.");
+			oEditors.getById['smarteditor'].exec('FOCUS');
+			return false;
+		}
+
+		return true;
+	}
 		
 		/*달력 3개입력받을 거 있음  */
 		$(document).ready(function(){

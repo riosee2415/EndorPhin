@@ -76,18 +76,30 @@
 			</tbody>
 	  	</table>
 	  		<br />
-	  	
-		  		<div id="temporaryArea">
 		  		
+		  		<table>
+		  			<thead class="thead">
+			  			<tr>
+			  				<td>날짜</td>
+			  				<td>구분</td>
+			  				<td>계정과목</td>
+			  				<td>거래처</td>
+			  				<td>부서</td>
+			  				<td>메모</td>
+			  				<td colspan="2">금액</td>
+			  			</tr>
+		  			</thead>
+		  			<tbody id="temporaryArea">
+		  			
+		  			</tbody>
+		  		</table>
 		  		
-		  		<label id="leftVale"></label>
-		  		<label id="rightVale"></label>
-		  		</div>
-		  		
+		  		<label style="font-weight: bold;" id="leftVale"></label>
+		  		<label style="font-weight: bold;" id="rightVale"></label>
 		  		<br />
 		  		
 		  		<div id="cancleBtn_onlySlip">
-		  			<input type="button" class="bttn-simple bttn-warning" id="cancleOnlySlip" name="cancleOnlySlip" value="작성취소" />
+		  			<input type="button" class="bttn-simple bttn-warning" id="insertOnlySlip" name="insertOnlySlip" value="작성" />
 		  		</div>
 		  		
 		  		
@@ -320,9 +332,6 @@
   			
   		});
   		
-  	
-  		
-  		
   		// 입력영역 값 초기화
   		$("#searchEstablishValue").val("");
   		$("#searchClientValue").val("");
@@ -343,36 +352,27 @@
             return false;
         }
 }); 
+  	
+  	
+  	// 작성 버튼
+  	$("#insertOnlySlip").on("click",function(){
+  		var le = $("#leftVale").text();
+  		var ri = $("#rightVale").text();
+  		 
+  		le = le.split(":");
+  		ri = ri.split(":");
+  		
+  		alert(le[1]);
+  		alert(ri[1]);
+  		
+  		if(le[1] != ri[1]){
+  			alert("차변/대변 금액이 일치하지 않습니다.");
+  		} else {
+  			alert("작성 실행");
+  		}
+  	});
 
   	
-  	$("#cancleOnlySlip").on("click", function(){
-		var answer = confirm("입력하신 전표 데이터가 삭제됩니다. 취소하시겠습니까?");
-		
-		// 확인버튼
-		if(answer){
-			$.ajax({
-				url : "${pageContext.request.contextPath }/cancleOnlySlip",
-				data : "slipNumber=" + $("#currval").val() ,
-				success : function(data){
-					alert("전표입력 정상 취소");
-				$("#insertArea").html("");
-				insertFlag = 0;		
-					
-				}
-				
-			});
-			
-				
-			
-			
-			
-			$("#insertSlipBtn").attr("disabled", false);
-		// 취소버튼 (동작 없음)
-		} else if(!answer){
-			
-		}
-  		
-  	});
 
 
      </script>

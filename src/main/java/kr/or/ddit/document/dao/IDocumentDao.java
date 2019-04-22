@@ -28,4 +28,6 @@ public interface IDocumentDao {
 	* Method 설명 : 기안문서 등록
 	*/
 	int insertDocument(DocumentVo documentVo);
+	
+	List<DocumentVo> selectDocument(String documentnumber);
 }

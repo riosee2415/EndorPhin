@@ -1,6 +1,7 @@
 package kr.or.ddit.board_detail.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -12,6 +13,7 @@ import kr.or.ddit.attitude.service.AttitudeServiceTest;
 import kr.or.ddit.board.model.Board_detailVo;
 import kr.or.ddit.board.service.IBoard_detailService;
 import kr.or.ddit.set.LogicConfig;
+import kr.or.ddit.util.model.PageVo;
 
 public class Board_detailServiceTest extends LogicConfig{
 
@@ -35,6 +37,18 @@ public class Board_detailServiceTest extends LogicConfig{
 		List<Board_detailVo> searchPostList = board_detailService.SearchPostList(vo);
 		
 		System.out.println("검색 :" + searchPostList);
+		
+	}
+	
+//	@Test
+	public void boardListTest(){
+		PageVo pageVo = new PageVo();
+		Map<String, Object> resultMap = board_detailService.selectPostList(pageVo);
+		List<Board_detailVo> boardList = (List<Board_detailVo>) resultMap.get("postList");
+		for(Board_detailVo vo : boardList){
+			System.out.println(vo);
+			System.out.println("userCnt : " + boardList);
+		}
 		
 	}
 

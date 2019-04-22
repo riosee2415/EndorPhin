@@ -24,5 +24,10 @@ public class DocumentService implements IDocumentService{
 	public List<DocumentVo> getAllDocument() {
 		return documentDao.getAllDocument();
 	}
+
+	@Override
+	public List<DocumentVo> selectDocument(String documentnumber) {
+		return documentDao.selectDocument(documentnumber);
+	}
 	
 }

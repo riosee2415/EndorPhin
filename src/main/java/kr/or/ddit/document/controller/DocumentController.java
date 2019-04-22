@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.ddit.document.model.DocumentVo;
 import kr.or.ddit.document.model.Document_refVo;
@@ -47,61 +48,85 @@ public class DocumentController {
 		List<EmployeeVo> employeeList = employeeService.selectMoreEmployee(positionCode);
 		
 		model.addAttribute("employeeList",employeeList);
-		
 		model.addAttribute("documentList",documentList);
 		model.addAttribute("userName",userName);
 		model.addAttribute("deptName",deptName);
 		model.addAttribute("positionCode",positionCode);
-		
+
 		return "document";
 	}
 	
-	@RequestMapping("/insertDocument_ref")
-	public String insertDocument_ref(Document_refVo document_refVo,@RequestParam("checkRow") String checkRow,
-																	@RequestParam("frm_documentNumber") String documentNumber) {
+	@RequestMapping("/selectDocument")
+	@ResponseBody
+	public String selectDocument(String documentNumber, Model model, HttpSession session
+									,Document_refVo document_refVo){
 		
+		List<Document_refVo> selectDocument = document_refService.selectDocument_ref(documentNumber);
+		model.addAttribute("selectDocument",selectDocument);
 		
-		logger.debug("documentNumber:{}",documentNumber);
-		String[] arrIdx = checkRow.toString().split(",");
+		EmployeeVo employeeVo = (EmployeeVo) session.getAttribute("employeeVo");
+		String userId 	= employeeVo.getUserId();
 		
-		
-        for (int i=0; i< arrIdx.length; i++) {
-        	String arr = (arrIdx[i]);
-        	document_refVo.setUserId(arr);
-        	document_refVo.setDocumentNumber(documentNumber);
-        	document_refVo.setReferenceNumber(documentNumber);
-        	document_refVo.setSortation("0");
-        	document_refService.insertDocument_ref(document_refVo);
-            logger.debug("arr:{}",arr);
-        }
-        logger.debug("arr:{}",checkRow);
-		return "document";
+		String endDiv="0";
+		for(int i = 0; i < selectDocument.size(); i++){
+			if(userId.equals(selectDocument.get(i).getUserId())){
+				endDiv="1";
+				model.addAttribute("endDiv",endDiv);
+				logger.debug("getUserId:::::{}",selectDocument.get(i).getUserId());
+				
+			}
+			/*document_refVo.setSortation("1");
+			document_refService.updateDocument_ref(documentNumber);*/
+		}
+		return endDiv;
 	}
-
+	
 	@RequestMapping("/insertDocument")
 	public String insertDocument(DocumentVo documentVo,String presentDepartment,String documentNumber, String presentUser,
 								String presentDate,String title,String contents,String preservation, String documentType, 
-								HttpSession session) throws ParseException{
+								HttpSession session,@RequestParam("checkRow") String checkRow) throws ParseException{
 	
-    
+	
 		EmployeeVo employeeVo = (EmployeeVo) session.getAttribute("employeeVo");
+    	
+    	String userId = employeeVo.getUserId().toString();
+    	
+    	Date date = new Date();									
+    	SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
+    	date= sdf.parse(presentDate);
+    	
+    	documentVo.setDocumentNumber(documentNumber);
+    	documentVo.setPresentUser(userId);
+    	documentVo.setPresentDate(date);
+    	documentVo.setDocumentType(documentType);
+    	
+    	int insert = documentService.insertDocument(documentVo);
 		
-		String userId= employeeVo.getUserId().toString();
+		Document_refVo document_refVo = new Document_refVo();
+		String[] arrIdx = checkRow.toString().split(",");
 		
-		Date date = new Date();									
-		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
-		date= sdf.parse(presentDate);
-		
-		documentVo.setPresentUser(userId);
-		documentVo.setPresentDate(date);
-		documentVo.setDocumentType(documentType);
-		
-		int insert = documentService.insertDocument(documentVo);
-		
-		if(insert > 0){
+		String arr = "";
+		int cntInsert = 0;
+        for (int i=0; i < arrIdx.length; i++) {
+        	arr = arrIdx[i];
+        	document_refVo.setUserId(arr);
+        	document_refVo.setDocumentNumber(documentNumber);
+        	document_refVo.setReferenceNumber("");
+        	document_refVo.setSortation("0");
+        	cntInsert = document_refService.insertDocument_ref(document_refVo);
+        }
+        	
+		if(cntInsert > 0){
 			return "document";
 		}else{
 			return "document";
 		}
 	}
+	
+	@RequestMapping("/temporarily")
+	public String temporarilyList(Model model){
+		
+		return "temporarily";
+	}
+	
 }

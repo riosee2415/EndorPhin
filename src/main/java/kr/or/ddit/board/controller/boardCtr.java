@@ -39,7 +39,7 @@ import kr.or.ddit.util.model.PageVo;
 @Controller
 public class boardCtr {
 	
-	private static final String UPLOAD_PATH = "/Users/macbook/picture";
+//	private static final String UPLOAD_PATH = "/Users/macbook/picture";
 	
 	private static final Logger logger = LoggerFactory.getLogger(boardCtr.class);
 	
@@ -407,10 +407,11 @@ public class boardCtr {
 			vo.setEndDate(endDate);
 		}
 		
-		List<Board_detailVo> postList = board_detailService.SearchPostList(vo);
-		model.addAttribute("postList", postList);
 		model.addAttribute("pageSize", vo.getPageSize());
 		model.addAttribute("page", vo.getPage());
+		model.addAttribute("boardTypeCode", vo.getBoardTypeCode());
+		List<Board_detailVo> postList = board_detailService.SearchPostList(vo);
+		model.addAttribute("postList", postList);
 		
 		return "boardList";
     }

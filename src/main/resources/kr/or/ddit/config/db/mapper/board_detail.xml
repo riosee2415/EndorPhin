@@ -61,7 +61,7 @@
 				    		userId,
 				    		views
 				       from board_detail
-				      where boardTypeCode = #{boardTypeCode}
+				      where boardTypeCode = '5'
 				      order by boardNo desc) a ) a
  		 where rn between (#{page}-1) * #{pageSize}+1 and #{page}*#{pageSize}
  	</select>
@@ -250,7 +250,7 @@
 				    		userId,
 				    		views
 				       from board_detail
-				      where boardTypeCode = #{boardTypeCode}       
+				      where boardTypeCode = '5'      
 				      order by boardNo desc) a ) a
  		 where rn between (#{page}-1) * #{pageSize}+1 and #{page}*#{pageSize}
  		 <if test="title != null">

@@ -9,8 +9,15 @@ public class Payment4UpdVo {
 	private String deprostatus;
 	private List<String> decdMap;
 	private List<String> decdPayList;
+	private String relate;
 	
 	
+	public String getRelate() {
+		return relate;
+	}
+	public void setRelate(String relate) {
+		this.relate = relate;
+	}
 	public String getDeprostatus() {
 		return deprostatus;
 	}

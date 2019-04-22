@@ -205,6 +205,10 @@
 			<div class="modal-body">
 				<h3>작성일</h3>
 				<input type="text" id="datepicker">
+				<select name="relate" id="insRelate">
+					<option value="고정">고정</option>
+					<option value="비고정">비고정</option>
+				</select>
 				<div style="overflow: scroll; width: 450px; height: 200px;">
 					<table class="table table-hover">
 						<thead>
@@ -236,11 +240,16 @@
 				<h4 class="modal-title" id="secondModalTitle"></h4>
 				<button id="secondUpdClose1" type="button" class="close"
 					data-dismiss="modal" aria-hidden="true">×</button>
+					
 			</div>
 			<div class="container"></div>
 			<div class="modal-body">
 				<h3>작성일</h3>
 				<input type="text" id="datepicker1">
+				<select name="relate" id="updRelate">
+					<option value="고정">고정</option>
+					<option value="비고정">비고정</option>
+				</select>
 				<div style="overflow: scroll; width: 450px; height: 200px;">
 					<table class="table table-hover">
 						<thead>
@@ -347,7 +356,8 @@
 					userid : userId,
 					payday : paydate,
 					decdMap : decdList,
-					decdPayList : decdPayList
+					decdPayList : decdPayList,
+					relate : $("#insRelate").val()
 				}),
 				success : function(data) {
 					if (data.msg == false) {
@@ -390,7 +400,8 @@
 					payCode : $('#secondModalDel').val(),
 					deprostatus : $('#secondModalUpd').data('deprostatus'),
 					decdMap : decdList,
-					decdPayList : decdPayList
+					decdPayList : decdPayList,
+					relate : $("#updRelate").val()
 				}),
 				success : function(data) {
 					if (data.msg == false) {
@@ -436,6 +447,7 @@
 	}
 	function secondDetailInit(data, deprostatus) {
 		$("#secondModalTbody").empty();
+		$("#updRelate").val(data.paymentVo.relate);
 		$(".secondMoney").each(
 				function() {
 					for (var i = 0; i < data.paymentDetailList.length; i++) {
@@ -534,7 +546,7 @@
 				"#firModalProductThead,#firModalProductTbody,#firModalDeductThead,#firModalDeductTbody,#firModalWithholdThead,#firModalWithholdTbody")
 				.html("");
 		$("#firModalProductThead,#firModalDeductThead,#firModalWithholdThead")
-				.append("<th>급여일</th>");
+				.append("<th>적용일</th>");
 		for (var i = 0; i < data.divList.length; i++) {
 			deductName.set(data.divList[i].deductCode, 0);
 			if (data.divList[i].deprostatus == 1) {
@@ -617,8 +629,7 @@
 				$("#firModalDeductTbody,#firModalWithholdTbody").append(
 						"<td>" + data.paymentList[i].totalWage + "</td>");
 
-				$(
-						"#firModalWithholdTbody,#firModalDeductTbody,#firModalProductTbody")
+				$("#firModalWithholdTbody,#firModalDeductTbody,#firModalProductTbody")
 						.append("</tr>");
 			}
 		}

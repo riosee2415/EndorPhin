@@ -81,6 +81,7 @@ public class PaymentService implements IPaymentService{
 			PaymentVo paymentVo = new PaymentVo();
 			paymentVo.setPayCode(maxPayment);
 			paymentVo.setPayDay(payment4UpdVo.getPayday());
+			paymentVo.setRelate(payment4UpdVo.getRelate());
 			withhold(paymentVo);
 			return true;
 		}
@@ -100,6 +101,7 @@ public class PaymentService implements IPaymentService{
 		PaymentVo paymentVo = new PaymentVo();
 		paymentVo.setPayCode(payment4UpdVo.getPayCode());
 		paymentVo.setPayDay(payment4UpdVo.getPayday());
+		paymentVo.setRelate(payment4UpdVo.getRelate());
 		withhold(paymentVo);
 	}
 

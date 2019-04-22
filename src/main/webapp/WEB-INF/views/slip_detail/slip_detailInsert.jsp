@@ -4,7 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 	
-	<table>
 		<tr>
 			<td><input type="text" value="${slipDate }" readonly/></td>
 			<td style="width: 50px;">
@@ -34,9 +33,10 @@
 						<input class="right" type="text" value="${price }" readonly/>
 					</c:otherwise>
 				</c:choose>
-			</Td>
-		<tr>
-	</table>
+			</td>
+		</tr>
+	
+	
 	
 	
 	<script>
@@ -49,7 +49,7 @@
 			$(".left").each(function(){
 				leftSum += parseInt($(this).val());
 			});
-			$("#leftVale").text(leftSum);
+			$("#leftVale").text("차변합게 : " + leftSum);
 		
 		
 			//대변합계
@@ -57,7 +57,7 @@
 				rightSum += parseInt($(this).val());
 			});
 		
-			$("#rightVale").text(rightSum);
+			$("#rightVale").text("대변합게 : " + rightSum);
 		});
 		
 		

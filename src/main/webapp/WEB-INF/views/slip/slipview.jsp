@@ -27,7 +27,7 @@
 				<th>승인여부</th>
 			</tr>
 		</thead>
-		<tbody id="establishListTbody">
+			<tbody id="establishListTbody">
 		</tbody>
 	</table>
 

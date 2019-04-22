@@ -53,9 +53,9 @@
                 	</p>
                 </div>
                 <br>
-                <a href="#this" class="btn" id="addFile">파일 추가</a>
+                <a href="#this" class="btn" id="addFile"><button class="bttn-jelly bttn-warning">파일추가</button></a>
 <!--                 <a href="#" onclick="fn_formSubmit()"><button class="bttn-jelly bttn-warning">저장</button></a> -->
-                <button id="savebtn" class="bttn-jelly bttn-warning">저장</button>
+                <button type="button" id="savebtn" class="bttn-jelly bttn-warning">저장</button>
                 <input type="hidden" name="boardTypeCode" value="${boardTypeCode}">
                 <input type="hidden" name="boardNo" value="${boardInfo.boardNo}">
             </form>
@@ -115,13 +115,6 @@
     		fn_deleteFile($(this));
     		alert("삭제");
     	});
-// 	    $(".deletebtn").on("click", function(){  //파일 삭제 버튼
-// 	    	console.log('delete');
-// 	    	gfv_count--;
-// 	    	console.log(gfv_count);
-// 	    	$(this).parent().remove();
-	
-// 	    });
    	 }
     
     $("#addFile").on("click", function(e){ //파일 추가 버튼
@@ -130,7 +123,7 @@
 	    	fn_addFile();
 	    	console.log(gfv_count);
 	    }else{
-	    	alert("더이상 추가할수 없습니다.");
+	    	alert("더 이상 추가할수 없습니다.");
 	    	return;
 	    }
     });

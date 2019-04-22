@@ -9,7 +9,9 @@
 		insert into schedule
 		(schedule_no, schedule_title, schedule_start, schedule_end,userid)
 		values
-		(schedule_seq.nextval,#{schedule_title},to_date(#{schedule_start},'yyyy-mm-dd'),to_date(#{schedule_end},'yyyy-mm-dd'),#{userid})
+		(schedule_seq.nextval,#{schedule_title},to_date(#{schedule_start},'yyyy-mm-dd'),to_date(#{schedule_end},'yyyy-mm-dd'),
+		nvl(#{userid, jdbcType=VARCHAR},null)
+		)
 	</insert>
 
 	

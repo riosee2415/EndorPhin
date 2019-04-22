@@ -41,7 +41,8 @@
  	
  	<!-- 게시글 목록 조회 -->
  	<select id ="selectPostList" resultType="board_detailVo" parameterType="pageVo">
-	 	select boardNo, title, contents, postDate, boardTypeCode, userId, views
+	 	select boardNo, title, contents, postDate, boardTypeCode, userId, views,
+	 		   (SELECT COUNT(*) FROM ATTACH_BOARD WHERE boardNo=a.boardNo) filecnt
 		  from
 				(select a.boardNo boardNo, 
 				        a.title title, 
@@ -125,7 +126,8 @@
 	
 	<!-- 게시글 리스트 -->
     <select id="selectBoardList" resultType="board_detailVo" parameterType="PageVo">
-        select boardNo, title, contents, postDate, boardTypeCode, userId, views
+        select boardNo, title, contents, postDate, boardTypeCode, userId, views,
+        	   (SELECT COUNT(*) FROM ATTACH_BOARD WHERE boardNo=a.boardNo) filecnt
 		  from
 				(select a.boardNo boardNo, 
 				        a.title title, 
@@ -228,7 +230,8 @@
     </sql>
     
     <select id="postSearch" resultType="board_detailVo" parameterType="board_detailVo">
-          select boardNo, title, contents, postDate, boardTypeCode, userId, views
+          select boardNo, title, contents, postDate, boardTypeCode, userId, views, 
+          		 (SELECT COUNT(*) FROM ATTACH_BOARD WHERE boardNo=a.boardNo) filecnt
 		  from
 				(select a.boardNo boardNo, 
 				        a.title title, 

@@ -20,7 +20,14 @@ public class Board_detailVo extends PageVo{	//게시글
 	String boardTypeCode;		//게시판 분류 코드
 	String userId;				//작성자
 	String views;				//조회수
+	String filecnt;				//첨부파일
 	
+	public String getFilecnt() {
+		return filecnt;
+	}
+	public void setFilecnt(String filecnt) {
+		this.filecnt = filecnt;
+	}
 	String startDate;
 	public String getViews() {
 		return views;
@@ -83,8 +90,6 @@ public class Board_detailVo extends PageVo{	//게시글
 	public String toString() {
 		return "Board_detailVo [boardNo=" + boardNo + ", title=" + title + ", contents=" + contents + ", postDate="
 				+ postDate + ", boardTypeCode=" + boardTypeCode + ", userId=" + userId + ", views=" + views
-				+ ", startDate=" + startDate + ", endDate=" + endDate + "]";
+				+ ", filecnt=" + filecnt + ", startDate=" + startDate + ", endDate=" + endDate + "]";
 	}
-	
-
 }

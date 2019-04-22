@@ -58,10 +58,11 @@
 	<!-- 상품  전체 불러오기 -->
 	<select id="searchByName" resultType="ordersVo" parameterType="ordersVo">
 		select
-				ordercode, deptcode, userid, orderprice, orderlist, to_char(duedate,'yyyy-MM-dd') duedate,
+				o.ordercode, deptcode, userid, orderprice, orderlist, to_char(duedate,'yyyy-MM-dd') duedate,
 				 to_char(paymentduedate,'yyyy-MM-dd') paymentduedate, specialnote, 
-				 o.clientcode, status, sortation,clientname
-		from	orders o, client c
+				 o.clientcode, status, sortation,clientname,r.receivepay
+		from	orders o left outer join (select ordercode,sum(material) receivepay from receive group by ordercode) r
+        on      r.ordercode = o.ordercode, client c
 		where   o.clientcode=c.clientcode
 		<if test="preDate!=null">
         	and   duedate between to_date(#{preDate}) and to_date(#{postDate})

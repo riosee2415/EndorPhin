@@ -22,6 +22,7 @@ import kr.or.ddit.order.service.ICilentService;
 import kr.or.ddit.order.service.IOrder_detailService;
 import kr.or.ddit.order.service.IOrdersService;
 import kr.or.ddit.product.service.IProductService;
+import kr.or.ddit.product.service.IReceiveService;
 
 @RequestMapping(path="/orders")
 @Controller
@@ -47,6 +48,9 @@ public class OrderController {
 	@Resource(name="productService")
 	IProductService productService;
 	
+	@Resource(name="receiveService")
+	IReceiveService receiveService;
+	
 	@RequestMapping(path="/orderInput")
 	public String orderInput(OrdersVo ordersVo,Model model){
 		List<OrdersVo> searchByName = ordersService.searchByName(ordersVo);
@@ -58,7 +62,9 @@ public class OrderController {
 	}
 	
 	@RequestMapping(path="/currentOrder")
-	public String currentOrder(){
+	public String currentOrder(OrdersVo ordersVo,Model model){
+		List<OrdersVo> searchByName = ordersService.searchByName(ordersVo);
+		model.addAttribute("orderList",searchByName);
 		return "currentOrder";
 	}
 	
@@ -82,10 +88,13 @@ public class OrderController {
 	
 	@RequestMapping(path="/selectOrder")
 	@ResponseBody
-	public Map<String, Object> selectOrder(String orderCode){
+	public Map<String, Object> selectOrder(String orderCode,boolean check){
 		Map<String, Object> map = new HashMap<>();
 		map.put("orderVo", ordersService.selectOrders(orderCode));
 		map.put("detailList", order_detailService.getOrder_detailByOrdercd(orderCode));
+		if(check){
+			map.put("receiveDetail", receiveService.selectReceiveNdetail(orderCode));
+		}
 		return map;
 	}
 	
@@ -109,4 +118,12 @@ public class OrderController {
 		}
 		return "redirect:/orders/orderInput";
 	}
+	@RequestMapping(path="/searchOrder_detail")
+	@ResponseBody
+	public Map<String, Object> searchOrder_detail(String orderCode){
+		Map<String, Object> map = new HashMap<>();
+		map.put("detail", order_detailService.getOrder_detailByOrdercd(orderCode));
+		return map;
+	}
+	
 }

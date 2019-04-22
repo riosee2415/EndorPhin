@@ -25,9 +25,9 @@
 	<select id="getAllReceive" resultType="receiveVo" parameterType="map">
 		select  RECEIVECODE, to_char(RECEIVEDATE,'yyyy-MM-dd') receivedate, r.SORTATION,
         MATERIAL, r.WAREHOUSECODE, r.ORDERCODE,warehousename
-		from    receive r, orders o , warehouse w
-		where   r.ordercode = o.ordercode
-		and		r.warehousecode = w.warehousecode
+		from    receive r left outer join orders o 
+		on   r.ordercode = o.ordercode, warehouse w
+		where		r.warehousecode = w.warehousecode
 		<if test="preDate!=null">
 	        and     receivedate (between to_date(#{preDate},'yyyy-MM-dd')
 	        and     to_date(#{postDate},'yyyy-MM-dd'))

@@ -3,6 +3,7 @@ package kr.or.ddit.payment.service;
 import static org.junit.Assert.*;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import kr.or.ddit.payment.model.PaymentVo;
 import kr.or.ddit.set.LogicConfig;
+import kr.or.ddit.util.model.PageVo;
 
 public class PaymentServiceTest extends LogicConfig{
 
@@ -50,7 +52,7 @@ public class PaymentServiceTest extends LogicConfig{
 	}
 	@Test
 	public void getPaymentListTest() {
-		List<PaymentVo> allPayment = paymentService.getPaymentList();
+		Map<String, Object> allPayment = paymentService.getPaymentList(new PageVo());
 		assertTrue(allPayment.size()>0);
 	}
 	@Test

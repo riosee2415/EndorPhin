@@ -21,8 +21,6 @@ public class ReceiveDao implements IReceiveDao{
 		return sqlSessionTemplate.insert("receive.insertReceive",receiveVo);
 	}
 
-
-
 	@Override
 	public int deleteReceive(String receiveCode) {
 		return sqlSessionTemplate.delete("receive.deleteReceive",receiveCode);
@@ -38,9 +36,6 @@ public class ReceiveDao implements IReceiveDao{
 	public List<ReceiveVo> getAllReceive(Map<String, Object> map) {
 		return sqlSessionTemplate.selectList("receive.getAllReceive",map);
 	}
-
-
-
 
 	@Override
 	public ReceiveVo selectReceiveBycd(String receiveCode) {

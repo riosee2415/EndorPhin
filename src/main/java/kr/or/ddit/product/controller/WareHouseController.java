@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.ddit.image.model.ImagesVo;
+import kr.or.ddit.order.model.OrdersVo;
+import kr.or.ddit.order.service.ICilentService;
+import kr.or.ddit.order.service.IOrdersService;
 import kr.or.ddit.product.model.ProductVo;
 import kr.or.ddit.product.model.ReceiveVo;
 import kr.or.ddit.product.model.Receive_detailVo;
@@ -27,6 +30,9 @@ import kr.or.ddit.product.service.IWareHouseService;
 public class WareHouseController {
 	
 	private Logger logger = LoggerFactory.getLogger(WareHouseController.class);
+	
+	@Resource(name="ordersService")
+	IOrdersService ordersService;
 	
 	@Resource(name="wareHouseService")
 	IWareHouseService wareHouseService;
@@ -53,9 +59,12 @@ public class WareHouseController {
 	
 	@RequestMapping(path="/insOrUpdReceive")
 	public String insOrUpdReceive(ReceiveVo receiveVo,String[] quantity,String[] productCode){
-		if(receiveVo.getReceiveCode()==null){
+		if(receiveVo.getReceiveCode().equals("")){
 			receiveService.insertReceive(receiveVo);
 		}
+		Map<String,Object> map = new HashMap<>();
+		map.put("receiveCode",receiveVo.getReceiveCode());
+		receive_detailService.deleteReceive_detail(map);
 		for (int i = 0; i < quantity.length; i++) {
 			receive_detailService.insertReceive_detail(new 
 					Receive_detailVo(receiveVo.getReceiveCode(), productCode[i], quantity[i]));
@@ -67,8 +76,7 @@ public class WareHouseController {
 	@RequestMapping(path="/deleteReceive")
 	public String deleteReceive(String[] receiveCode){
 		for (int i = 0; i < receiveCode.length; i++) {
-			logger.debug("ㅎㅎ: {}",receiveCode[i]);
-//			receiveService.deleteReceive(receiveCode[i]);
+			receiveService.deleteReceive(receiveCode[i]);
 		}
 		return "redirect:/wareHouse/getAllReceive";
 	}
@@ -84,6 +92,21 @@ public class WareHouseController {
 	public String updateWareHouse(WareHouseVo wareHouseVo){
 		wareHouseService.updateWarehouse(wareHouseVo);
 		return "redirect:/wareHouse/getAllWareHouse";
+	}
+	
+	@RequestMapping(path="/selectModal")
+	@ResponseBody
+	public Map<String, Object> selectModal(String check){
+		Map<String, Object> map = new HashMap<>();
+		switch (check) {
+			case "0":
+				map.put("orderList", ordersService.searchByName(new OrdersVo()));
+				break;
+			default:
+				map.put("wareHouseList", wareHouseService.getAllWarehouse());
+				break;
+		}
+		return map;
 	}
 	
 	@RequestMapping(path="/getAllReceive")
@@ -102,7 +125,7 @@ public class WareHouseController {
 	public Map<String,Object> findReceive(String receiveCode){
 		Map<String,Object> map = new HashMap<>();
 		map.put("receiveCode", receiveCode);
-		map.put("receiveVo", receiveService.getAllReceive(map).get(0));
+		map.put("receiveVo", receiveService.selectReceive(map).get(0));
 		map.put("receiveDetailList", receive_detailService.getReceive_detail(receiveCode));
 		return map;
 	}

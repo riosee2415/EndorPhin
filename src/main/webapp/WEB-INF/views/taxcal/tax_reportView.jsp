@@ -13,7 +13,7 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<td colspan="4">구분</td>
+					<td colspan="4">구분2</td>
 					<td>금액</td>
 					<td>세액</td>
 				</tr>
@@ -27,7 +27,7 @@
 					<td>1</td>
 					<!-- 금액/ 세액 -->
 					<td><fmt:formatNumber value="${map51.get(1).get('SUPPLYVALUE') }" pattern="#,###" /></td>
-					<td><fmt:formatNumber value="${map51.get(1).get('SURTAX') }" pattern="#,###" /></td>
+					<td class="sell"><fmt:formatNumber value="${map51.get(1).get('SURTAX') }" pattern="#,###" /></td>
 				</tr>
 
 				<tr>
@@ -35,7 +35,7 @@
 					<td>2</td>
 					<!-- 금액/ 세액 -->
 					<td></td>
-					<td></td>
+					<td class="sell"></td>
 				</tr>
 
 				<tr>
@@ -43,7 +43,7 @@
 					<td>3</td>
 					<!-- 금액/ 세액 -->
 					<td></td>
-					<td></td>
+					<td class="sell"></td>
 				</tr>
 
 				<tr>
@@ -51,7 +51,7 @@
 					<td>4</td>
 					<!-- 금액/ 세액 -->
 					<td></td>
-					<td></td>
+					<td class="sell"></td>
 				</tr>
 
 				<tr>
@@ -60,7 +60,7 @@
 					<td>5</td>
 					<!-- 금액/ 세액 -->
 					<td><fmt:formatNumber value="${map51.get(3).get('SUPPLYVALUE') }" pattern="#,###" /></td>
-					<td><fmt:formatNumber value="${map51.get(3).get('SURTAX') }" pattern="#,###" /></td>
+					<td class="sell"><fmt:formatNumber value="${map51.get(3).get('SURTAX') }" pattern="#,###" /></td>
 				</tr>
 
 				<tr>
@@ -68,7 +68,7 @@
 					<td>6</td>
 					<!-- 금액/ 세액 -->
 					<td></td>
-					<td></td>
+					<td class="sell"></td>
 				</tr>
 
 				<tr>
@@ -76,7 +76,7 @@
 					<td>7</td>
 					<!-- 금액/ 세액 -->
 					<td></td>
-					<td></td>
+					<td class="sell"></td>
 				</tr>
 
 				<tr>
@@ -84,7 +84,7 @@
 					<td>8</td>
 					<!-- 금액/ 세액 -->
 					<td></td>
-					<td></td>
+					<td class="sell"></td>
 				</tr>
 
 				<tr>
@@ -92,7 +92,7 @@
 					<td>9</td>
 					<!-- 금액/ 세액 -->
 					<td></td>
-					<td></td>
+					<td style="font-weight: bold; font-size: medium;" id="sellSum"></td>
 				</tr>
 
 
@@ -105,14 +105,14 @@
 					<td rowspan="2">10</td>
 					<!-- 금액/ 세액 -->
 					<td><fmt:formatNumber value="${map51.get(0).get('SUPPLYVALUE') }" pattern="#,###" /></td>
-					<td><fmt:formatNumber value="${map51.get(0).get('SURTAX') }" pattern="#,###" /></td>
+					<td class="purchase"><fmt:formatNumber value="${map51.get(0).get('SURTAX') }" pattern="#,###" /></td>
 				</tr>
 
 				<tr>
 					<td>수출기업수입분납유예</td>
 					<!-- 금액/ 세액 -->
 					<td></td>
-					<td></td>
+					<td class="purchase"></td>
 				</tr>
 
 				<tr>
@@ -128,7 +128,7 @@
 					<td>12</td>
 					<!-- 금액/ 세액 -->
 					<td></td>
-					<td></td>
+					<td class="purchase"></td>
 				</tr>
 
 				<tr>
@@ -136,7 +136,7 @@
 					<td>13</td>
 					<!-- 금액/ 세액 -->
 					<td></td>
-					<td></td>
+					<td class="purchase"></td>
 				</tr>
 
 				<tr>
@@ -144,7 +144,7 @@
 					<td>14</td>
 					<!-- 금액/ 세액 -->
 					<td></td>
-					<td></td>
+					<td class="purchase"></td>
 				</tr>
 
 				<tr>
@@ -160,7 +160,7 @@
 					<td>16</td>
 					<!-- 금액/ 세액 -->
 					<td><fmt:formatNumber value="${map51.get(2).get('SUPPLYVALUE') }" pattern="#,###" /></td>
-					<td><fmt:formatNumber value="${map51.get(2).get('SURTAX') }" pattern="#,###" /></td>
+					<td id="subPurchase"><fmt:formatNumber value="${map51.get(2).get('SURTAX') }" pattern="#,###" /></td>
 				</tr>
 
 				<tr>
@@ -168,13 +168,13 @@
 					<td>17</td>
 					<!-- 금액/ 세액 -->
 					<td></td>
-					<td></td>
+					<td style="font-weight: bold; font-size: medium;" id="purchaseSum"></td>
 				</tr>
 
 				<tr>
 					<td colspan="4">납부(환급)세액(매출세액-매입세액)</td>
 					<!-- 세액 -->
-					<td>1230000123</td>
+					<td style="font-weight: bold; font-size: medium;" id="resultTax"></td>
 				</tr>
 
 
@@ -183,84 +183,85 @@
 					<td colspan="2">그밖의경감공제새액</td>
 					<td>18</td>
 					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
+					<td></td>
+					<td id="etc1"></td>
 				</tr>
 
 				<tr>
 					<td colspan="2">신용카드매출전표등발행공제</td>
 					<td>19</td>
 					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
+					<td></td>
+					<td id="etc2"></td>
+					
 				</tr>
 
 				<tr>
 					<td colspan="2">합계</td>
 					<td>20</td>
 					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
+					<td></td>
+					<td id="resultTax2"></td>
 				</tr>
 
 				<tr>
 					<td colspan="3">예정신고미홥금세액</td>
 					<td>21</td>
 					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
+					<td></td>
+					<td></td>
 				</tr>
 
 				<tr>
 					<td colspan="3">예정고지세액</td>
 					<td>22</td>
 					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
+					<td></td>
+					<td></td>
 				</tr>
 
 				<tr>
 					<td colspan="3">사업양수자의대리납부기납부세액</td>
 					<td>23</td>
 					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
+					<td></td>
+					<td></td>
 				</tr>
 
 				<tr>
 					<td colspan="3">매입자납부특례기납부세액</td>
 					<td>24</td>
 					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
+					<td></td>
+					<td></td>
 				</tr>
 
 				<tr>
 					<td colspan="3">신용카드업자의대리납부기납부세액</td>
 					<td>25</td>
 					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
+					<td></td>
+					<td></td>
 				</tr>
 
 				<tr>
 					<td colspan="3">가산세액계</td>
 					<td>26</td>
 					<!-- 금액/ 세액 -->
-					<td>1230000123</td>
-					<td>1230000123</td>
+					<td></td>
+					<td></td>
 				</tr>
 
 				<tr>
 					<td colspan="5">차감,가감하여납부할세액(환급받을세액)</td>
 					<!-- 세액 -->
-					<td>1230000123</td>
+					<td></td>
 				</tr>
 
 				<tr>
 					<td colspan="5">총괄납부사업자가납부할세액(환급받을세액)</td>
 					<!-- 세액 -->
-					<td>1230000123</td>
+					<td id="resultTax3"></td>
 				</tr>
 			</tbody>
 
@@ -272,4 +273,86 @@
 
 	</div>
 </div>
+
+
+<script>
+
+
+	var sumValue = 0;
+	var sumValue2 = 0;
+	
+	$("ducument").ready(function(){
+		
+		
+		// 매출 합계 출력
+		$(".sell").each(function(){
+			
+			var value = $(this).text().replace(/[^\d]+/g, '');
+				if(value == ""){
+					
+				}		
+				else {	
+					sumValue += parseInt(value);
+				}
+			
+		});
+		sumValue = numberWithCommas(sumValue+"");
+		$("#sellSum").text(sumValue);
+		
+
+	
+		// 매입 합계 출력	
+		$(".purchase").each(function(){
+			
+			var value = $(this).text().replace(/[^\d]+/g, '');
+				if(value == ""){
+					
+				}		
+				else {	
+					sumValue2 += parseInt(value);
+				}
+			
+		});
+	
+	var sub = $("#subPurchase").text().replace(/[^\d]+/g, '');
+	sumValue2 = sumValue2 - sub;
+	
+	sumValue2 = numberWithCommas(sumValue2+"");
+	$("#purchaseSum").text(sumValue2);
+	
+	
+		//차감계 출력
+		var sell = parseInt($("#sellSum").text().replace(/[^\d]+/g, ''));
+		var pur = parseInt($("#purchaseSum").text().replace(/[^\d]+/g, ''));
+		
+		var result = sell - pur;
+		result = numberWithCommas(result + "");
+		
+		$("#resultTax").text(result);
+		
+		//경감공제세액을 포함한 합계 출력
+		
+
+		$("#resultTax2").text(result);
+		$("#resultTax3").text(result);
+	});
+	
+	
+	
+	
+
+	// function 
+	function numberWithCommas(x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+	
+	
+	
+	
+</script>
+
+
+
+
+
 

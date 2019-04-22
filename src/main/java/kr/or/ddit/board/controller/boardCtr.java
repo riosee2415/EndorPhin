@@ -109,6 +109,7 @@ public class boardCtr {
         }
 
 		model.addAttribute("boardTypeCode", boardTypeCode);
+		model.addAttribute("boardNo", boardNo);
 		logger.debug("boardTypeCode : {}",boardTypeCode);
 	    return "boardForm";
 	}
@@ -125,7 +126,7 @@ public class boardCtr {
 	 */
 	@RequestMapping(value = "/boardSave")
 	public String boardSave(@ModelAttribute Board_detailVo boardInfo, HttpServletRequest request
-					, String boardTypeCode,String attachCode, Model model, MultipartRequest multipart, String[] removeList) throws Exception {
+					, String boardTypeCode, String attachCode, Model model, MultipartRequest multipart, String[] removeList, String boardNo) throws Exception {
 		HttpSession session = request.getSession();
 		EmployeeVo employeeVo = (EmployeeVo) session.getAttribute("employeeVo");
 		boardInfo.setUserId(employeeVo.getUserId());
@@ -155,6 +156,7 @@ public class boardCtr {
 				multipartFile.transferTo(new File(attachRealname));
 				
 				Attach_boardVo attachVo = new Attach_boardVo();
+				attachVo.setBoardNo(boardNo);
 				attachVo.setAttachName(attachName);
 				attachVo.setAttachRealname(attachRealname);
 				attachVo.setAttachRealpath(attachRealpath);
@@ -177,7 +179,7 @@ public class boardCtr {
 					String path = application.getRealPath("/upload");
 
 					String attachName = multipartFile.getOriginalFilename();
-					String attachRealname = UPLOAD_PATH + File.separator + UUID.randomUUID().toString();
+					String attachRealname = path + File.separator + UUID.randomUUID().toString();
 					String attachRealpath = path;
 
 					multipartFile.transferTo(new File(attachRealname));
@@ -185,7 +187,7 @@ public class boardCtr {
 					Attach_boardVo attachVo = new Attach_boardVo();
 					attachVo.setAttachCode(attachCode);
 					attachVo.setAttachName(attachName);
-					attachVo.setAttachRealname(path + File.separator + attachRealname);
+					attachVo.setAttachRealname(attachRealname);
 					attachVo.setAttachRealpath(attachRealpath);
 
 					attachList.add(attachVo);

@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import kr.or.ddit.board.dao.IAttach_boardDao;
@@ -19,6 +21,8 @@ import kr.or.ddit.util.model.PageVo;
 @Service("board_detailService")
 public class Board_detailService implements IBoard_detailService{
 
+	private static final Logger logger = LoggerFactory.getLogger(Board_detailService.class);
+	
 	@Resource(name="board_detailDao")
 	private IBoard_detailDao board_detailDao;
 	
@@ -197,7 +201,7 @@ public class Board_detailService implements IBoard_detailService{
 			return insertBoard;
 		}
 		for (Attach_boardVo attach : attachList) {
-			attach.setBoardNo(param.getBoardNo());
+//			attach.setBoardNo(param.getBoardNo());
 			insertBoard = attach_boardDao.attachInsert(attach);
 			if(insertBoard == 0) {
 				return insertBoard;
@@ -233,15 +237,15 @@ public class Board_detailService implements IBoard_detailService{
 	@Override
 	public int updateBoard(Board_detailVo param, List<Attach_boardVo> attachList, String[] removeList) {
 		int updateBoard = board_detailDao.updateBoard(param);
-		
+		logger.debug("dsa9f-a9sd-f9a-9sd-f9a {}:", updateBoard);
 		if(updateBoard == 0){
 			return updateBoard;
 		}
 		if(attachList !=null){
 			for (Attach_boardVo attach : attachList) {
-				attach.setBoardNo(param.getBoardNo());
+//				attach.setBoardNo(param.getBoardNo());
 				updateBoard = attach_boardDao.attachInsert(attach);
-				
+				logger.debug("===================:{}", attach);
 				if(updateBoard == 0) {
 					return updateBoard;
 				}

@@ -37,11 +37,11 @@
                             <td>첨부파일</td>
                             <td>
                                 <c:forEach var="listview" items="${listview}" varStatus="attachCnt">
-                                    <input type="checkbox" name="attachCode" value="${listview.attachCode}">
+                                    <input type="checkbox" name="removeList" value="${listview.attachCode}">
                                     <a href="download?attachCode=${listview.attachCode }">${listview.attachName }</a>
                                 </c:forEach>
 
-                                <input type="file" name="attachFile" multiple="" />
+<!--                                 <input type="file" name="attachFile" multiple="" /> -->
                             </td>
                         </tr>
                     </tbody>
@@ -49,7 +49,7 @@
                 
                 <div id="fileDiv">
                 	<p>
-                		<input type="file" id="attachFile" name="attachFile_0"><a href="#this" class="btn" id="delete" name="delete">삭제</a>
+                		<input type="file" id="attachFile" name="attachFile" multiple="" ><a href="#this" id="gfv_count" class="btn" id="delete" name="delete">삭제</a>
                 	</p>
                 </div>
                 <br>
@@ -75,16 +75,16 @@
 //     function fn_formSubmit() {
 //         var form = document.form;
 
-//         //     if (form.title.value=="") {
-//         //         alert("글 제목을 입력해주세요.");
-//         //         form.title.focus();
-//         //         return;
-//         //     }
-//         //     if (form.contents.value=="") {
-//         //         alert("글 내용을 입력해주세요.");
-//         //         form.contents.focus();
-//         //         return;
-//         //     }
+//             if (form.title.value=="") {
+//                 alert("글 제목을 입력해주세요.");
+//                 form.title.focus();
+//                 return;
+//             }
+//             if (form.contents.value=="") {
+//                 alert("글 내용을 입력해주세요.");
+//                 form.contents.focus();
+//                 return;
+//             }
 
 //         // 게시글 
 //         if ($("#title").val().trim() == "") {
@@ -105,16 +105,23 @@
     var gfv_count = 1;
     var max_count = 5;
 
-    function fn_addFile(){ 
-    	var str = "<p><input type='file' name='attachFile_"+(gfv_count++)+"'><a href='#this' id='" + (gfv_count) + "'class='btn' name='delete'>삭제</a></p>";
+    function fn_addFile(){
+    	var str = "<p><input type='file' name='attachFile' ><a href='#this' id='"+ (gfv_count++) +"' class='deletebtn' name='delete'>삭제</a></p>";
     		
     	$("#fileDiv").append(str);
     	
-    	$("#"+gfv_count).on("click", function(e){ //삭제 버튼 
+    	$("#"+(gfv_count-1)).on("click", function(e){ //삭제 버튼 
     		e.preventDefault();
     		fn_deleteFile($(this));
-    		
+    		alert("삭제");
     	});
+// 	    $(".deletebtn").on("click", function(){  //파일 삭제 버튼
+// 	    	console.log('delete');
+// 	    	gfv_count--;
+// 	    	console.log(gfv_count);
+// 	    	$(this).parent().remove();
+	
+// 	    });
    	 }
     
     $("#addFile").on("click", function(e){ //파일 추가 버튼
@@ -128,6 +135,8 @@
 	    }
     });
     
+    
+    //삭제 실행
     function fn_deleteFile(obj){
     	gfv_count--;
     	obj.parent().remove();
@@ -135,13 +144,14 @@
     }
     
     var oEditors = []; // 개발되어 있는 소스에 맞추느라, 전역변수로 사용하였지만, 지역변수로 사용해도 전혀 무관 함.
-
+    var contextPath = "${pageContext.request.contextPath }";
+    
     $(document).ready(function() {
     	// Editor Setting
     	nhn.husky.EZCreator.createInIFrame({
     		oAppRef : oEditors, // 전역변수 명과 동일해야 함.
     		elPlaceHolder : "smarteditor", // 에디터가 그려질 textarea ID 값과 동일 해야 함.
-    		sSkinURI : "/SE2/SmartEditor2Skin.html", // Editor HTML
+    		sSkinURI : contextPath + "/SE2/SmartEditor2Skin.html", // Editor HTML
     		fCreator : "createSEditor2", // SE2BasicCreator.js 메소드명이니 변경 금지 X
     		htParams : {
     			// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
@@ -175,7 +185,7 @@
     		oEditors.getById['smarteditor'].exec('FOCUS');
     		return false;
     	} 
-    	if ($("#title").val().trim() == "") {
+    	if($("#title").val().trim() == "") {
 	        alert("글 제목을 입력해주세요.");
 	        $("#title").focus();
 	        return false;

@@ -18,17 +18,27 @@
    		  		   #{attachName, jdbcType=NULL},
 	 			   #{attachRealpath, jdbcType=NULL},
 	 			   #{attachRealname, jdbcType=NULL},
-	 	  		   nvl(#{boardNo, jdbcType=VARCHAR}, BOARDNO_SEQ.currval)
+<!-- 	 			   #{boardNo} -->
+	 	  		   boardNo_seq.currval
 	 	  		   )
 	</insert>
 	
 	<!-- 	파일정보 수정 -->
 	<update id="attachUpdate" parameterType="attach_boardVo">
-		update attach_board
-		   set attachName = #{attachName},
-		   	   attachRealpath = #{attachRealpath},
-			   attachRealname = #{attachRealname}
-		 where attachCode = #{attachCode}
+		insert into attach_board
+		 		 (attachcode,
+				  attachname,
+				  attachrealpath,
+				  attachrealname,
+				  boardno)
+										  
+		    values (
+		           attachcode_seq.nextval,
+   		  		   #{attachName, jdbcType=NULL},
+	 			   #{attachRealpath, jdbcType=NULL},
+	 			   #{attachRealname, jdbcType=NULL},
+	 	  		   #{boardNo}
+	 	  		   )
 	</update>
 	
 	<!-- 게시글 번호 별 첨부파일 조회 -->

@@ -65,18 +65,6 @@ public class SlipController {
 	@RequestMapping("/getSlipInsertBtn")
 	public String getSlipInsertBtn(Model model) {
 		
-		// 임시데이터 저장(무결성 위배 회피)
-		SlipVo slipVo = new SlipVo();
-		slipVo.setTotal("000");
-		slipVo.setDepartmentName("미등록");
-		slipVo.setJukyo("미등록");
-		slipVo.setStatus("0");
-		
-		slipService.insertSlip(slipVo);
-		
-
-		String currval = slipService.currvalSeq();
-		model.addAttribute("currval", currval);
 		
 		List<DeptVo> deptList = deptService.getAllDept();
 		model.addAttribute("deptList", deptList);

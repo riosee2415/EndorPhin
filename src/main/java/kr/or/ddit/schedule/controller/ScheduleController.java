@@ -1,9 +1,12 @@
 package kr.or.ddit.schedule.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.ddit.employee.controller.EmployeeController;
+import kr.or.ddit.employee.model.EmployeeVo;
 import kr.or.ddit.schedule.model.ScheduleVo;
 import kr.or.ddit.schedule.service.IScheduleService;
 
@@ -39,17 +43,18 @@ public class ScheduleController {
 
 	@RequestMapping(path="/scheduleInsertAjax", method=RequestMethod.GET)
 	@ResponseBody
-	public List<ScheduleVo> scheduleInsertAjax(String title, String start,String end,String allDay) {
+	public List<ScheduleVo> scheduleInsertAjax(String title, String start,String end,String allDay,HttpServletRequest request) {
 		
+		EmployeeVo attribute = (EmployeeVo) request.getSession().getAttribute("employeeVo");
 		
 		if(title != null && start != null && end != null){
 		ScheduleVo vo = new ScheduleVo();
 		vo.setSchedule_title(title);
 		vo.setSchedule_start(start);
 		vo.setSchedule_end(end);
+		vo.setUserid(attribute.getUserId());
 		scheduleService.insertSchedule(vo);
 		}
-		
 		
 		return getAllSchedule();
 	}

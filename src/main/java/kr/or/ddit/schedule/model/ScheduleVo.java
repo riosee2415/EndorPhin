@@ -5,8 +5,17 @@ public class ScheduleVo {
 	String schedule_title;
 	String schedule_start;
 	String schedule_end;
+	String userid;
 	
 	
+	
+	
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 	public String getSchedule_no() {
 		return schedule_no;
 	}
@@ -34,7 +43,7 @@ public class ScheduleVo {
 	@Override
 	public String toString() {
 		return "ScheduleVo [schedule_no=" + schedule_no + ", schedule_title=" + schedule_title + ", schedule_start="
-				+ schedule_start + ", schedule_end=" + schedule_end + "]";
+				+ schedule_start + ", schedule_end=" + schedule_end + ", userid=" + userid + "]";
 	}
 	
 	

@@ -7,18 +7,17 @@
 
 	<insert id="insertSchedule" parameterType="scheduleVo">
 		insert into schedule
-		(schedule_no, schedule_title, schedule_start, schedule_end)
+		(schedule_no, schedule_title, schedule_start, schedule_end,userid)
 		values
-		(schedule_seq.nextval,#{schedule_title},to_date(#{schedule_start},'yyyy-mm-dd'),to_date(#{schedule_end},'yyyy-mm-dd'))
+		(schedule_seq.nextval,#{schedule_title},to_date(#{schedule_start},'yyyy-mm-dd'),to_date(#{schedule_end},'yyyy-mm-dd'),#{userid})
 	</insert>
 
 	
 	<select id="getAllSchedule" resultType="scheduleVo">
 		select
-		schedule_no, schedule_title, to_char(schedule_start,'yyyy-mm-dd') schedule_start, to_char(schedule_end,'yyyy-mm-dd') schedule_end
+		schedule_no, schedule_title, to_char(schedule_start,'yyyy-mm-dd') schedule_start, to_char(schedule_end,'yyyy-mm-dd') schedule_end,userid
 		from schedule
 	</select>
-
 
 
 	<delete id="deleteSchedule" parameterType="String">

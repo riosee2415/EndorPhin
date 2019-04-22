@@ -35,6 +35,8 @@ public class LoginController {
 		if(dbEmployeeVo.getUserId().equals(employeeVo.getUserId())&&
 				dbEmployeeVo.getPassword().equals(employeeVo.getPassword())){
 			session.setAttribute("employeeVo", dbEmployeeVo);
+			
+			//session.getServletContext().setAttribute("employeeVo", dbEmployeeVo);
 			return "redirect:/helloTiles";
 		}
 		else

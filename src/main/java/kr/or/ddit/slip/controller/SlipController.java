@@ -128,5 +128,29 @@ public class SlipController {
 	}
 	
 	
+	@RequestMapping("/insertSlip")
+	@ResponseBody
+	public String insertSlip(	@RequestParam("total")String total
+							,	@RequestParam("slipDate")String slipDate
+							,	@RequestParam("departmentName")String departmentName
+							,	@RequestParam("jukyo")String jukyo) throws ParseException {
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	Date date = sdf.parse(slipDate);
+
+	SlipVo slipVo = new SlipVo();
+	slipVo.setSlipDate(date);
+	slipVo.setTotal(total);
+	slipVo.setDepartmentName(departmentName);
+	slipVo.setJukyo(jukyo);
+	
+	slipService.insertSlip(slipVo);
+	
+		
+		
+		return "";
+	}
+	
+	
 	
 }

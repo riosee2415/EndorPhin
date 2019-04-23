@@ -5,11 +5,11 @@
 
 	
 		<tr>
-			<td><input type="text" value="${slipDate }" readonly/></td>
+			<td><input class="slipdate" type="text" value="${slipDate }" readonly/></td>
 			<td style="width: 50px;">
 				<c:choose>
 					<c:when test="${status == 0 }">
-						<input  type="text" value="차변" readonly />
+						<input type="text" value="차변" readonly />
 					</c:when>
 					<c:otherwise>
 						<input type="text" value="대변" readonly />
@@ -19,8 +19,8 @@
 			
 				<td><input type="text" value="${establish }" readonly/></td>
 				<td><input type="text" value="${client }" readonly/></td>
-				<td><input type="text" value="${dept }" readonly/></td>
-				<td><input type="text" value="${juckyo }" readonly/></td>
+				<td><input class="departmentName" type="text" value="${dept }" readonly/></td>
+				<td><input class="slipJukyo" type="text" value="${juckyo }" readonly/></td>
 			
 			<td>
 				<c:choose>

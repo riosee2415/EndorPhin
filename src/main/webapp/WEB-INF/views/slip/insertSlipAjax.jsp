@@ -362,13 +362,22 @@
   		le = le.split(":");
   		ri = ri.split(":");
   		
-  		alert(le[1]);
-  		alert(ri[1]);
   		
   		if(le[1] != ri[1]){
   			alert("차변/대변 금액이 일치하지 않습니다.");
   		} else {
-  			alert("작성 실행");
+  			// 전표 입력 실행
+  			$.ajax({
+  	  			url :  "${pageContext.request.contextPath }/insertSlip",
+  				data : "total=" + ri[1] + "&slipDate=" + $(".slipdate").val()
+  					+ "&jukyo=" + $(".slipJukyo").val() + "&departmentName=" + $(".departmentName").val(),
+  				success : function(data){
+  					location.reload();
+  				} 
+  	  			
+  	  		});
+  			
+  			
   		}
   	});
 

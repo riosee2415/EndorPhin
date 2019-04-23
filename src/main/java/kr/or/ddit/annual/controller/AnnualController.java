@@ -49,17 +49,14 @@ public class AnnualController {
 	
 	
 	
+	
 	@RequestMapping(path = "/annualInsert", method = RequestMethod.POST)
 	public String annualInsert_POST(Model model, AnnualVo vo ,RedirectAttributes ra) {
-		
-		
 		
 		
 		String[] tempUser =  vo.getUserid().split(",");
 		String[] tempAnnualdate =  vo.getAnnualdate().split(",");
 		String[] tempUserdate =  vo.getUserdate().split(",");
-		
-		
 		
 		AnnualVo annualvo = new AnnualVo();
 		
@@ -180,154 +177,17 @@ public class AnnualController {
 	
 	
 	
-	
-	
-	/*@RequestMapping(path = "/attitudeRecordInsert", method = RequestMethod.GET)
+	@RequestMapping(path = "/getAllannualAjax", method = RequestMethod.GET)
 	@ResponseBody
-	public List<EmployeeVo> attitudeRecordInsert_GET(Model model, String[] userId) {
+	public List<AnnualVo> getAllannualAjax(Model model,String userId) {
 		
+		AnnualVo vo = new AnnualVo();
+		vo.setUserid(userId);
 		
+		List<AnnualVo> searchAnnual = annualService.SearchAnnual(vo);
 		
-		List<String> check = new  ArrayList<String>();
-		
-		
-		List<EmployeeVo> allAttitude_recordInsert = new  ArrayList<EmployeeVo>();
-		
-		
-		for(String chk : userId){
-			check.add(chk);
-			EmployeeVo selectEmployee = employeeService.selectEmployee(chk);
-			allAttitude_recordInsert.add(selectEmployee);
-		}
-		
-		
-			
-		
-		return allAttitude_recordInsert;
-	
-	
+		return searchAnnual;
 	}
-	
-	
-	@RequestMapping(path = "/attitudeRecordInsert", method = RequestMethod.POST)
-	public String attitudeRecordInsert_POST(Model model, Attitude_recordVo vo ,RedirectAttributes ra) {
-		
-		
-		String[] tempUser =  vo.getUserid().split(",");
-		String[] tempMemo =  vo.getAttitudememo().split(",");
-		
-		
-		
-		Attitude_recordVo userVo = new Attitude_recordVo();
-		
-		
-		for (int i = 0; i < tempUser.length; i++) {
-			userVo.setUserid(tempUser[i]);
-			userVo.setStartday(vo.getStartday());
-			userVo.setEndday(vo.getEndday());
-			userVo.setStatus("승인");
-			userVo.setAttitudememo(tempMemo[i]);
-			userVo.setAttitudecode(vo.getAttitudecode());
-			
-			attitude_recordService.insertAttitude_record(userVo);
-			
-		}
-			
-			ra.addFlashAttribute("msg", "정상 등록 되었습니다");
-			return "redirect:/attitudeRecord/getAllattitudeRecord";
-		
-	}
-	
-	
-	@RequestMapping(path = "/SearchattitudeRecord", method = RequestMethod.GET)
-	public String SearchattitudeRecord(Model model, String search
-			, String startDate, String endDate) {
-		
-		
-		Attitude_recordVo Vo = new Attitude_recordVo();
-		Vo.setUsernm(search);
-		Vo.setStartday(startDate);
-		Vo.setEndday(endDate);
-		
-		
-		List<Attitude_recordVo> allAttitude_record = attitude_recordService.SearchAttitude_record(Vo);
-		
-		
-		model.addAttribute("allAttitude_record",allAttitude_record);
-		
-		return "Attitude_recordListTiles";
-	}
-	
-	
-	@RequestMapping(path = "/deleteAttitudeRecord", method = RequestMethod.GET)
-	public String deleteAttitudeRecord(Model model,RedirectAttributes ra, HttpServletRequest req) {
-		Attitude_recordVo vo = new Attitude_recordVo();
-		String index = "";
-		
-		String[] temps = req.getParameterValues("delete_no");
-		
-		           
-		
-		for(String temp : temps){
-			
-			 index = temp;
-		}
-		
-		String[] deleteArray = index.split(","); 	
-		
-		
-		for (int i = 0; i < deleteArray.length; i+=2) {
-			vo.setUserid(deleteArray[i]);
-			vo.setStartday(deleteArray[i +1]);
-			
-			
-			attitude_recordService.deleteAttitude_record(vo);
-			
-		}
-		
-		ra.addFlashAttribute("msg", "정상 삭제 되었습니다");
-		return "redirect:/attitudeRecord/getAllattitudeRecord";
-	}
-	
-	
-	
-	
-	
-	
-	@RequestMapping(path = "/attitudeRecordUpdate", method = RequestMethod.GET)
-	@ResponseBody
-	public Attitude_recordVo attitudeRecordUpdate_GET(Model model,String userid, String startday) {
-		
-		Attitude_recordVo vo = new Attitude_recordVo();
-		vo.setUserid(userid);
-		vo.setStartday(startday);
-		
-		Attitude_recordVo selectAttitude_record = attitude_recordService.SelectAttitude_record(vo);
-		
-		
-		return selectAttitude_record;
-	
-	}
-	
-	
-	
-	
-	
-	@RequestMapping(path = "/attitudeRecordUpdate", method = RequestMethod.POST)
-	public String attitudeRecordUpdate_POST(Model model,Attitude_recordVo vo,RedirectAttributes ra) {
-		
-		vo.setStatus("승인");
-		
-		System.out.println("기존 날짜 :" + vo.getStartday());
-		System.out.println("변경 날짜 :" +vo.getAfterStartday());
-		
-		attitude_recordService.updateAttitude_record(vo);
-		
-		ra.addFlashAttribute("msg", "정상 수정 되었습니다");
-		return "redirect:/attitudeRecord/getAllattitudeRecord";
-		
-	}
-	*/
 	
 	
 	

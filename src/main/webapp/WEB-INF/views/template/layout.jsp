@@ -126,8 +126,10 @@ to {
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" />
 
-<!--달력css  -->
 
+
+<!--달력css  -->
+<!--  <link id="attitude" href="/css/bootstrap2.css" rel="stylesheet">  -->
 <!--formden.js communicates with FormDen server to validate fields and submit via AJAX -->
 <script type="text/javascript" src="https://formden.com/static/cdn/formden.js"></script>
 

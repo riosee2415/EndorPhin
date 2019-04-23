@@ -39,8 +39,32 @@ public class EmployeeVo {
 	String marryStatus;
 	String imagecode;
 	
+	//연차 테이블
+	
+	String occurannual;
+	String userdate;
+	String residual;
 	
 	
+	
+	public String getOccurannual() {
+		return occurannual;
+	}
+	public void setOccurannual(String occurannual) {
+		this.occurannual = occurannual;
+	}
+	public String getUserdate() {
+		return userdate;
+	}
+	public void setUserdate(String userdate) {
+		this.userdate = userdate;
+	}
+	public String getResidual() {
+		return residual;
+	}
+	public void setResidual(String residual) {
+		this.residual = residual;
+	}
 	public String getAddressDetail() {
 		return addressDetail;
 	}
@@ -171,6 +195,9 @@ public class EmployeeVo {
 	public void setBirthDate(String birthDate) {
 		BirthDate = birthDate;
 	}
+	
+	
+	
 	@Override
 	public String toString() {
 		return "EmployeeVo [userId=" + userId + ", userNm=" + userNm + ", deptCode=" + deptCode + ", positionCode="
@@ -178,8 +205,11 @@ public class EmployeeVo {
 				+ ", joinCompany=" + joinCompany + ", BirthDate=" + BirthDate + ", password=" + password
 				+ ", positionname=" + positionname + ", rankname=" + rankname + ", deptname=" + deptname
 				+ ", finalschool=" + finalschool + ", email=" + email + ", phonenumber=" + phonenumber + ", address="
-				+ address + ", marryStatus=" + marryStatus + "]";
+				+ address + ", addressDetail=" + addressDetail + ", marryStatus=" + marryStatus + ", imagecode="
+				+ imagecode + ", occurannual=" + occurannual + ", userdate=" + userdate + ", residual=" + residual
+				+ "]";
 	}
+	
 	
 	
 	

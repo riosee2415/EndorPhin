@@ -9,7 +9,9 @@
 		select
 		deptcode, deptname, businessname, usestatus, parentcode, companycode
 		from dept
+		order by deptcode desc
 	</select>
+
 
 	<!-- 부서 입력 -->
 	<insert id="insertDept" parameterType="deptVo">

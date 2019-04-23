@@ -106,9 +106,9 @@ public class AnnualTest extends LogicConfig{
 	public void searchAnnualTest() {
 		
 		AnnualVo vo = new AnnualVo();
-		
+		vo.setUserid("2");
 		//vo.setUsernm("윤상호");
-		vo.setAnnualdate("2018");
+		//vo.setAnnualdate("2018");
 		List<AnnualVo> searchAnnual = annualService.SearchAnnual(vo);
 		
 		System.out.println("감자 : " + searchAnnual);
@@ -117,10 +117,6 @@ public class AnnualTest extends LogicConfig{
 		
 		
 	}
-	
-	
-	
-	
 	
 	
 	

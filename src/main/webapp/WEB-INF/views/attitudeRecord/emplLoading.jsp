@@ -5,12 +5,11 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-
-			 <div class="modal" id="myModal2" aria-hidden="true" style="display: none; z-index: 1060;">
+			 <div class="modal fade" id="myModal2" aria-hidden="true" style="display: none; z-index: 1060;">
        <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Modal 2</h4>
+              <h4 class="modal-title">사원 불러오기</h4>
             </div><div class="container"></div>
             <div class="modal-body">
 
@@ -18,11 +17,7 @@
 
 				<div class="row-0">
 					<div class="col-0-0">
-						부서명 <select id="paidStatus" name="paidStatus">
-							<option value="">전체</option>
-							<option value="2">인사팀</option>
-							<option value="3">회계팀</option>
-							<option value="3">물류팀</option>
+						부서명 <select id="paidStatusEmpl" name="paidStatus" onchange="seleEmpl()">
 						</select>
 					</div>
 				</div>
@@ -57,23 +52,13 @@
 
 				<!-- 불러온 사원 목록창 종료 -->
 
-				<div class="row-1" style="margin-top: 50px">
-					<div class="col-1-0">
-
-
-						<button type="button"  id="emplLoadingCheck" 
-							class="btn btn-secondary btn-lg" data-dismiss="modal">선택</button>
-							
-					</div>
-				</div>
-
-
 
 
             </div>
             <div class="modal-footer">
-              <a href="#"  data-dismiss="modal" class="btn">Close</a>
-              <a href="#" class="btn btn-primary">Save changes</a>
+             <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">취소</button>
+              <button type="button"  id="emplLoadingCheck" 
+							class="btn btn-secondary btn-lg" data-dismiss="modal">선택</button>
             </div>
           </div>
         </div>
@@ -87,11 +72,59 @@
 			
 			
 			
+			
 <script>
+function seleEmpl() {
+	var deptcodeselect  = $('#paidStatusEmpl option:selected').val();
+	
+	$.ajax({
+		url			: "${pageContext.request.contextPath }/employee/SearchEmployeeAjax" ,
+		method		: "get",
+		data		: {"deptcodeselect":deptcodeselect},
+		success		: function(data) {
+			
+			console.log(data);
+			
+			makeUserList(data);
+		
+		} 
+	});
+	
+}
+	
+	
+	
+	
 
 
 $("#attitudeRecordInsert").on("click", function(){
-			console.log("클릭");
+	
+	
+	 $.ajax({
+         url         : "${pageContext.request.contextPath }/employee/getSelectBox" ,
+         method      : "get",
+         //data      : "userId="+$(this).data().userid,
+         success      : function(data) {
+        	 var deptCode_html = "";
+        	 for(var i = 0; i < data.allDept.length; i++){
+                 var dept = data.allDept[i];
+                 
+                 deptCode_html += "<option value='" +dept.deptCode+"'> "+dept.deptName +"</option>";
+                 
+              }
+                                     
+              $("#paidStatusEmpl").html(deptCode_html);
+        	 
+            
+         } 
+      });
+	
+	
+	 
+	 
+	
+
+	
 
 	//사원 전체 불러오기
 	$.ajax({
@@ -126,7 +159,6 @@ function makeUserList(allEmployee) {
 	
 }
 
-
 function recordUserList(allAttitude_recordInsert) {
 	var html = "";
 	
@@ -140,6 +172,7 @@ function recordUserList(allAttitude_recordInsert) {
 		html += "	<input type='hidden' name='userid' value='" + user.userId + "'>";
 		html += "	<td>"+user.deptname+"</td>";
 		html += "	<td><input type='text' name='attitudememo'/></td>";
+		html += "	<td>"+user.residual+" 일" +"</td>";
 		html += "</tr>";
 	}
 	$("#recordUserList").html(html);
@@ -148,6 +181,9 @@ function recordUserList(allAttitude_recordInsert) {
 
 //사용자 tr 태그 클릭시 이벤트 핸들러
 $("#emplLoadingCheck").click(function() {
+	
+	
+	
 	
 	var checked = new Array();
 	
@@ -166,7 +202,6 @@ $("#emplLoadingCheck").click(function() {
 			success		: function(data) {
 				
 				
-				console.log("케익 :" + data);
 				
 				recordUserList(data);
 			} 

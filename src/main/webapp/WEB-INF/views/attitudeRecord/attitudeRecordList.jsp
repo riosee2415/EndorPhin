@@ -3,28 +3,24 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+                    
+                
+                
 
 
-
-
-<!-- Bootstrap core CSS -->
-<!--    <link id="attitude" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet"> -->
-
-<link id="attitude" href="/css/bootstrap2.css" rel="stylesheet">
-
-<style>
+ <style>
 select {
 	width: 200px;
 }
 
-#tdtd {
+ #tdtd {
 	margin-left: 30px !important;
-}
+} 
 
-img.ui-datepicker-trigger {
+ img.ui-datepicker-trigger {
 	width: 30px;
 	margin-bottom: 5px;
-}
+} 
 
 th {
 	vertical-align: middle !important;
@@ -37,7 +33,7 @@ th {
 
 <div class="row">
 	<div class="col-md-1"></div>
-	<div class="col-md-8" style="width: 100%">
+	<div class="col-md-10">
 
 		<div class="form-group">
 			<h2>
@@ -75,12 +71,12 @@ th {
 
 <!--  목록 출력 -->
 
-
+                           
 
 
 <div class="row">
 	<div class="col-md-1"></div>
-	<div class="col-md-8" style="width: 100%">
+	<div class="col-md-10">
 		<div class="form-group">
 			<table class="table table-striped" style="text-align: center;"
 				border="1">
@@ -127,23 +123,25 @@ th {
 		</div>
 	</div>
 </div>
-
+                      
 
 <div class="row">
 	<div class="col-md-1"></div>
-	<div class="col-md-7">
+	<div class="col-md-9">
 		<button style="background-color: #6E6867;" class="btn btn-info"
 			id="cancleBtn">근태이력삭제</button>
 	</div>
+	<div class="col-md-1" style="text-align: right;">
 	<a data-toggle="modal" href="#myModal"
 		class="btn btn-primary">신규등록</a>
+		</div>
 </div>
 
 
 
 <!--  근태 항목 등록 모달창 실행  -->
 
-<div class="contain_box">
+ <div class="contain_box">
 	<div class="container">
 
 		<%@ include file="attitudeRecordInsert.jsp"%>
@@ -159,7 +157,7 @@ th {
 </div>
 
 
-
+              
 
 <script>
 	
@@ -219,9 +217,10 @@ th {
 		});
 
 		
+	
 		
 	
-	$(function() {
+	 $(function() {
         $("#startDate").datepicker(   // inputbox 의 id 가 startDate 이겠죠.
                 {dateFormat:'yy-mm-dd' // 만약 2011년 4월 29일 선택하면  inputbox 에 '2011/04/29' 로표시
                  , buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif"  // 우측 달력 icon 의 이미지 패스 
@@ -241,7 +240,7 @@ th {
         $('#endDate').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)  
 
   
-	});
+	}); 
 	                     
 	
 	</script>
@@ -252,3 +251,4 @@ th {
 	<input type="hidden" id="delete_no" name="delete_no" />
 </form>
 
+ 

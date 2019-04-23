@@ -95,7 +95,48 @@ width: 100px;
     </div>
 
 
+<script>
 
+$('#attitudeRecordInsert').click(function(){
+	 $.ajax({
+         url         : "${pageContext.request.contextPath }/employee/getSelectBox" ,
+         method      : "get",
+         //data      : "userId="+$(this).data().userid,
+         success      : function(data) {
+        	 var deptCode_html = "";
+        	 for(var i = 0; i < data.allDept.length; i++){
+                 var dept = data.allDept[i];
+                 
+                 deptCode_html += "<option value='" +dept.deptCode+"'> "+dept.deptName +"</option>";
+                 
+              }
+                                     
+              $("#deptcodeselect").html(deptCode_html);
+        	 
+            
+         } 
+      });
+	                   
+	 $.ajax({
+			url			: "${pageContext.request.contextPath }/employee/getAllEmployeeAjax" ,
+			method		: "get",
+			success		: function(data) {
+				
+				console.log(data);
+				
+				makeUserList(data);
+			
+			} 
+		});
+	 
+	
+});
+
+
+
+                         
+
+</script>
 
 
 

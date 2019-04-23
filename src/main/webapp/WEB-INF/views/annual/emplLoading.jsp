@@ -17,12 +17,7 @@
 
 				<div class="row-0">
 					<div class="col-0-0">
-						부서명 <select id="deptselect" name="paidStatus" onchange="deptcall()">
-							<option>선택하세요</option>
-							<option value="">전체</option>
-							<option value="인사">인사팀</option>
-							<option value="회계">회계팀</option>
-							<option value="물류">물류팀</option>
+						부서명 <select id="deptcodeselect" name="paidStatus" onchange="deptcall()">
 						</select>
 					</div>
 				</div>
@@ -56,23 +51,14 @@
 
 				<!-- 불러온 사원 목록창 종료 -->
 
-				<div class="row-1" style="margin-top: 50px">
-					<div class="col-1-0">
-
-
-						<button type="button"  id="emplLoadingCheck" 
-							class="btn btn-secondary btn-lg" data-dismiss="modal">선택</button>
-							
-					</div>
-				</div>
-
 
 
 
             </div>
             <div class="modal-footer">
-              <a href="#"  data-dismiss="modal" class="btn">Close</a>
-              <a href="#" class="btn btn-primary">Save changes</a>
+              <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">취소</button>
+              <button type="button"  id="emplLoadingCheck" 
+							class="btn btn-secondary btn-lg" data-dismiss="modal">선택</button>
             </div>
           </div>
         </div>
@@ -83,22 +69,21 @@
 			
 			
 			
-			
-			
-			
 <script>
+
+
 
 
 
 function deptcall() {
 	
 	
-	var deptselect = $("#deptselect option:selected").val();
+var deptcodeselect  = $('#deptcodeselect option:selected').val();
 	
 	$.ajax({
 		url			: "${pageContext.request.contextPath }/employee/SearchEmployeeAjax" ,
 		method		: "get",
-		data		: {deptselect : deptselect},
+		data		: {"deptcodeselect":deptcodeselect},
 		success		: function(data) {
 			
 			console.log(data);

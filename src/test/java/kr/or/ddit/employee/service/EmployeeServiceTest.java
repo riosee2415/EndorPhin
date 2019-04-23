@@ -127,7 +127,8 @@ public class EmployeeServiceTest extends LogicConfig{
 	@Test
 	public void searchEmployeeTest() {
 		EmployeeVo vo = new EmployeeVo();
-		vo.setUserNm("임");
+		//vo.setUserNm("임");
+		vo.setDeptCode("");
 		
 		List<EmployeeVo> allEmployee = employeeService.SearchEmployee(vo);
 		
@@ -165,6 +166,7 @@ public class EmployeeServiceTest extends LogicConfig{
 		assertNotNull(list);
 		System.out.println("list----------"+list);
 	}	
+	
 	
 	
 
